@@ -1,0 +1,45 @@
+/*made with <3 in san francisco & bangkok / (c) 2046 jj mois*/
+body {
+	background: url('http://jjmois.com/semiitalic/background.gif') repeat;
+}
+div {
+	margin-bottom: 80px;
+}
+a {
+	font-size: 44px;
+	line-height: 42px;
+	letter-spacing: -1px;
+}
+#rapper, #hypeman {
+	float: left;
+	margin: 100px;
+}
+#footer {
+	margin-top: 200px;
+}
+#bottom {
+	margin-bottom: 0;
+}
+/*rwd*/
+@media screen and (max-width: 600px) {
+	div {
+		margin-bottom: 40px;
+	}
+	a {
+		font-size: 28px;
+		line-height: 26px;
+		letter-spacing: normal;
+	}
+	#rapper {
+		margin: 120px 50px 40px 50px;
+	}
+	#hypeman {
+		margin: 50px;
+	}
+	#footer {
+		margin-top: 130px;
+	}
+	#bottom {
+		margin-bottom: 65px;
+	}
+}

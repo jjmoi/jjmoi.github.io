@@ -1,0 +1,64 @@
+/*made with <3 in san francisco & bangkok / (c) 2046 jj mois*/
+body {
+  -webkit-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+  background-color: black;
+}
+div {
+	margin: 40px 60px;
+}
+a {
+	font-size: 120px;
+	line-height: 90px;
+	letter-spacing: -4px;
+}
+a:link, a:hover, a:visited {
+	text-decoration: none;
+	color: white;
+	-webkit-text-fill-color: transparent;
+	-moz-text-fill-color: transparent;
+	-o-text-fill-color: transparent;
+	text-fill-color: transparent;
+	-webkit-text-stroke-width: 1px;
+	-moz-text-stroke-width: 1px;
+	-o-text-stroke-width: 1px;
+	text-stroke-width: 1px;
+	-webkit-text-stroke-color: white;
+	-moz-text-stroke-color: white;
+	-o-text-stroke-color: white;
+	text-stroke-color: white;
+}
+a:hover {
+	text-decoration: underline;
+}
+#rapper {
+	margin-top: 70px;
+}
+#hypeman, #footer {
+	margin-top: 120px;
+}
+#bottom {
+	margin-bottom: 65px;
+}
+/*rwd*/
+@media screen and (max-width: 600px) {
+	html, body {
+		letter-spacing: normal;
+	}
+	div {
+		margin: 25px 15px;
+	}
+	a {
+		font-size: 40px;
+		line-height: 30px;
+		letter-spacing: -1px;
+	}
+	#rapper {
+		margin-top: 70px;
+	}
+	#hypeman, #footer {
+		margin-top: 60px;
+	}
+}

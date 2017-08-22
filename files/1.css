@@ -1,0 +1,41 @@
+/*made with <3 in san francisco & bangkok / (c) 2046 jj mois*/
+a:link, a:hover, a:visited {
+	text-decoration: none;
+	color: blue;
+}
+a:hover {
+	text-decoration: underline;
+}
+div {
+	margin: 0 0 80px 0;
+	display: block;
+}
+#rapper, #hypeman {
+	margin-left: 400px;
+}
+a {
+	font-size: 40px;
+	line-height: 32px;
+	letter-spacing: -1px;
+	display: inline-block;
+}
+#top {
+	margin-top: -15px;
+}
+#bottom {
+	margin-bottom: 120px;
+}
+/*rwd*/
+@media screen and (max-width: 600px) {
+	a {
+		font-size: 32px;
+		line-height: 28px;
+		letter-spacing: normal;
+	}
+	#rapper, #hypeman {
+		margin-left: 60px;
+	}
+	#top {
+		margin-top: -10px;
+	}
+}

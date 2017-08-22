@@ -1,0 +1,48 @@
+div {
+	margin: 0 0 33px 0;
+	display: block;
+}
+#rapper, #hypeman {
+	margin-left: 35px;
+}
+a {
+	font-size: 150px;
+	line-height: 100px;
+	letter-spacing: -10px;
+	display: inline-block;
+}
+a:link, a:hover, a:visited {
+	color: red;
+	-webkit-text-fill-color: transparent;
+	-moz-text-fill-color: transparent;
+	-o-text-fill-color: transparent;
+	text-fill-color: transparent;
+	-webkit-text-stroke-width: 1px;
+	-moz-text-stroke-width: 1px;
+	-o-text-stroke-width: 1px;
+	text-stroke-width: 1px;
+	-webkit-text-stroke-color: red;
+	-moz-text-stroke-color: red;
+	-o-text-stroke-color: red;
+	text-stroke-color: red;
+}
+#top {
+	margin-top: 35px;
+}
+/*rwd*/
+@media screen and (max-width: 600px) {
+	div {
+		margin: 0 0 13px 0;
+	}
+	a {
+		font-size: 42px;
+		line-height: 28px;
+		letter-spacing: -2px;
+	}
+	#rapper, #hypeman {
+		margin-left: 15px;
+	}
+	#top {
+		margin-top: 20px;
+	}
+}

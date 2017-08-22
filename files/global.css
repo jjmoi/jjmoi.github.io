@@ -1,0 +1,46 @@
+/*global*/
+html, body {
+	font-family: "HelveticaNeueRegular", "Helvetica Neue Regular", "HelveticaNeue-Regular", "Helvetica Neue-Regular", "HelveticaNeue", "Helvetica Neue", "HelveticaNeueRoman", "Helvetica Neue Roman", Helvetica, Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	text-transform: uppercase;
+}
+a {
+	margin: 0;
+	padding: 0;
+	cursor: url('mick-point3.png'), default;
+}
+a:link, a:hover, a:visited {
+	text-decoration: none;
+	color: black;
+}
+a:hover {
+	text-decoration: underline;
+}
+#top a {
+	cursor: url('mick-move2.png'), move;
+}
+::selection {
+	background: #1bffd2;
+}
+::-moz-selection {
+	background: #1bffd2;
+}
+/*typography*/
+.light {
+	font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeueLight", Helvetica, Arial, sans-serif;
+	font-weight: lighter;
+}
+.normal {
+	font-family: "HelveticaNeue", "HelveticaNeue", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
+	font-weight: normal;
+}
+.bold {
+	font-family: "HelveticaNeueBold", "HelveticaNeue-Bold", "Helvetica Neue Bold", "HelveticaNeueBold", "ArialBold", "Arial-Bold", "Arial Bold", Helvetica, Arial, sans-serif;
+	font-weight: bold;
+}
+.blacxxx {
+	font-family: "HelveticaNeueBlack", "HelveticaNeue-Black", "Helvetica Neue Black", "HelveticaNeueBlack", "ArialBlack", "Arial-Black", "Arial Black", Helvetica, Arial, sans-serif;
+	font-weight: bolder;
+}

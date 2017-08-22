@@ -1,0 +1,31 @@
+/*made with <3 in san francisco & bangkok / (c) 2046 jj mois*/
+div {
+	margin-bottom: 5px;
+}
+a {
+	font-size: 11px;
+	line-height: 10px;
+}
+#rapper {
+	margin: 129px 0 0 399px;
+}
+#hypeman {
+	position: absolute;
+	top: 299px;
+}
+#footer {
+	margin-top: 49px;
+}
+#bottom {
+	margin-bottom: 199px;
+}
+/*rwd*/
+@media screen and (max-width: 600px) {
+	div {
+	}
+	a {
+	}
+	#rapper {
+		margin: 129px 0 0 249px;
+	}
+}
