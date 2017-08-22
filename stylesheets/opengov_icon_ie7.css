@@ -1,0 +1,92 @@
+/* OpenGov Icons for IE7 */
+[class*="opengov-"] {
+  font-family: "opengovicon";
+  font-weight: normal;
+  font-style: normal;
+}
+
+.opengovicon-settings {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf000;");}
+.opengovicon-heart {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf001;");}
+.opengovicon-star {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf002;");}
+.opengovicon-add {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf003;");}
+.opengovicon-minus {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf004;");}
+.opengovicon-checkmark {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf005;");}
+.opengovicon-remove {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf006;");}
+.opengovicon-mail {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf007;");}
+.opengovicon-calendar {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf008;");}
+.opengovicon-page {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf009;");}
+.opengovicon-tools {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf00a;");}
+.opengovicon-globe {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf00b;");}
+.opengovicon-home {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf00c;");}
+.opengovicon-quote {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf00d;");}
+.opengovicon-people {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf00e;");}
+.opengovicon-monitor {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf00f;");}
+.opengovicon-laptop {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf010;");}
+.opengovicon-phone {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf011;");}
+.opengovicon-cloud {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf012;");}
+.opengovicon-error {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf013;");}
+.opengovicon-right-arrow {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf014;");}
+.opengovicon-left-arrow {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf015;");}
+.opengovicon-up-arrow {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf016;");}
+.opengovicon-down-arrow {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf017;");}
+.opengovicon-trash {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf018;");}
+.opengovicon-add-doc {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf019;");}
+.opengovicon-edit {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf01a;");}
+.opengovicon-lock {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf01b;");}
+.opengovicon-unlock {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf01c;");}
+.opengovicon-refresh {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf01d;");}
+.opengovicon-paper-clip {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf01e;");}
+.opengovicon-video {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf01f;");}
+.opengovicon-photo {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf020;");}
+.opengovicon-graph {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf021;");}
+.opengovicon-idea {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf022;");}
+.opengovicon-mic {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf023;");}
+.opengovicon-cart {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf024;");}
+.opengovicon-address-book {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf025;");}
+.opengovicon-compass {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf026;");}
+.opengovicon-flag {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf027;");}
+.opengovicon-location {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf028;");}
+.opengovicon-clock {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf029;");}
+.opengovicon-folder {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf02a;");}
+.opengovicon-inbox {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf02b;");}
+.opengovicon-website {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf02c;");}
+.opengovicon-smiley {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf02d;");}
+.opengovicon-search {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf02e;");}
+.opengovicon-datasheet {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf02f;");}
+.opengovicon-bundles {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf030;");}
+.opengovicon-ledger {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf031;");}
+.opengovicon-plus {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf032;");}
+.opengovicon-close {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf033;");}
+.opengovicon-view {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf034;");}
+.opengovicon-question {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf035;");}
+.opengovicon-user {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf036;");}
+.opengovicon-font-size {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf037;");}
+.opengovicon-data {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf038;");}
+.opengovicon-opengov1 {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf039;");}
+.opengovicon-opengov2 {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf03a;");}
+.opengovicon-funnel {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf03b;");}
+.opengovicon-info {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf03c;");}
+.opengovicon-download {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf03d;");}
+.opengovicon-share {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf03e;");}
+.opengovicon-ask {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf03f;");}
+.opengovicon-facebook {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf040;");}
+.opengovicon-google-plus {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf041;");}
+.opengovicon-twitter {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf042;");}
+.opengovicon-email {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf043;");}
+.opengovicon-table2 {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf044;");}
+.opengovicon-bar-graph2 {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf045;");}
+.opengovicon-pie2 {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf046;");}
+.opengovicon-stack2 {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf047;");}
+.opengovicon-line2 {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf048;");}
+.opengovicon-stack-pct2 {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf049;");}
+.opengovicon-stack-pct {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf04a;");}
+.opengovicon-stack {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf04b;");}
+.opengovicon-line {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf04c;");}
+/* there is no f04d */
+.opengovicon-pie {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf04e;");}
+.opengovicon-bar-graph {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf04f;");}
+.opengovicon-table {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf050;");}
+.opengovicon-tables {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf051;");}
+.opengovicon-img {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf052;");}
+.opengovicon-pdf-document {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf053;");}
+.opengovicon-upload {*zoom: expression(this.runtimeStyle['zoom'] = "1", this.innerHTML = "&#xf054;");}
