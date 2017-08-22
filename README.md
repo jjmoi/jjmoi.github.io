@@ -34,7 +34,7 @@ http://goodnightjj.github.io
 ## License
 
 All icons and images are licensed under
-[Creative Commons Attribution - No Derivatives 4.0](https://creativecommons.org/licenses/by-nd/4.0/)
+[Creative Commons Attribution - No Derivatives 4.0](https://creativecommons.org/licenses/by-nd/4.0)
 
 1. **Bullet 1** one 
 2. **Bullet 2:** two
