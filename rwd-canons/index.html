@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>RWD Canons</title>
+		<link href="fluid.css" media="screen" rel="stylesheet" type="text/css" />
+		<link href='http://fonts.googleapis.com/css?family=EB+Garamond' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Alfa+Slab+One' rel='stylesheet' type='text/css'>
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				$("button").click(function(){
+					$(".bgimg").toggleClass("hide");
+				});
+			});
+		</script>
+
+		<style type="text/css">
+			*:focus {outline: 0;}
+			html, body {height: 100%; background-color: AntiqueWhite;}
+			#grid {width: 100%; height: 100%; z-index: 10; position: absolute; /*display: none;*/}
+			#grid2 {width: 100%; height: 100%; z-index: 10; position: absolute; display: none;}
+			.hide {display: none;}
+
+			button {
+				cursor: pointer;
+				opacity: 1 ; font-family: arial;
+				position: fixed; top: 20px; right: 20px; z-index: 999;
+				background-color: white; color: #333; border: none; padding: 10px 20px; border-radius: 5px;
+			}
+			button:hover {opacity: 0.75;}
+
+			span {font-size: 16px; font-family: 'Alfa Slab One', serif; color: #444;}
+			p {font-family: 'EB Garamond', serif; font-size: 13px; padding-bottom: 40px;}
+
+			.sep1 {height: 11%; width: 20px;}
+			.sep {margin: 20px 0;}
+			.imgbig {width: 100%; padding-bottom: 6px; display: none; padding-bottom: 10px;}
+			.imgsmall {margin: 0; float: right; clear: right; width: 100%; padding-bottom: 10px;}
+			.col_7 p {float: right; display:block; padding-top: 10px; clear: right;}
+			.col_7 p:first-child, .col_67 p:last-child {padding-top: 20px;}
+			.col_7 p:last-child {float: left;}
+			
+			.three-col {
+			-moz-column-count: 2; -moz-column-gap: 35px;
+			-webkit-column-count: 2; -webkit-column-gap: 35px
+			}
+			
+			/*Desktop+*/
+			@media screen and (max-width: 1207px) {
+				.three-col {-moz-column-count: 1; -webkit-column-count: 1;}
+				img {margin-bottom: 20px;}
+			}
+			@media screen and (max-width: 1024px) {
+				#grid {width: 100%; height: 100%; z-index: 10; position: absolute; display: none;}
+				#grid2 {width: 100%; height: 100%; z-index: 10; position: absolute; display: block;}
+				
+				.container_8 .col_1 {width:19%;}
+				.container_8 .col_2 {width:23%;}
+				.container_8 .col_3 {width:49%;}
+				.container_8 .col_4 {width:9%;}
+				.right {display: none;}
+				.three-col {
+					-moz-column-count: 2; -moz-column-gap: 30px;
+					-webkit-column-count: 2; -webkit-column-gap: 30px;
+				}
+				.imgbig {display: block;}
+				.imgsmall {display: none;}
+			}
+			@media screen and (max-width: 768px) {
+				.three-col {-moz-column-count: 1; -webkit-column-count: 1;}
+			}
+			@media screen and (max-width: 480px) {
+				.container_8 .col_2 {display: none;}
+				.container_8 .col_3 {width: 72%;}
+				p {font-size: 14px;}
+			}
+			@media screen and (max-width: 320px) {
+				p {font-size: 15px;}
+			}
+			/*iphone retina*/
+			@media only screen and (min-width: 560px) and (max-device-width: 1136px) {
+				.three-col {-moz-column-count: 1; -webkit-column-count: 1;}
+				.container_8 .col_2 {display: none;}
+				.container_8 .col_3 {width: 72%;}
+				p {font-size: 28px;}				
+			}
+		</style>
+	</head>
+	<body>
+
+		<button>Grid</button>
+
+		<div class="hide bgimg">
+			<img id="grid" src="grid.png">
+			<img id="grid2" src="grid2.png">
+		</div>
+
+		<div class="sep1"></div>
+
+		<div class="container container_8">
+			<div class="left">
+				<div class='col_1'><p>&nbsp;</p></div>
+				<div class='col_2'><p>&nbsp;</p></div>
+				<div class='col_3'>
+					<img class="imgbig" src="dio12.jpg" />
+					<p class="three-col">
+					<span>Responsive Canons of Page Construction</span><br /><br />
+					Resize the browser window and toggle the grid to see a golden experiment layout which has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents.<br /><br />
+					I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now.<br /><br />
+					When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but a few stray gleams steal into the inner sanctuary, I throw myself down among the tall grass by the trickling stream; and, as I lie close to the earth, a thousand unknown plants are noticed by me: when I hear the buzz of the little world among the stalks, and grow familiar with the countless indescribable forms of the insects and flies.<br /><br />
+					Then I feel the presence of the Almighty, who formed us in his own image, and the breath of that universal love which bears and sustains us, as it floats around us in an eternity of bliss; and then, my friend, when darkness overspreads my eyes, and heaven and earth seem to dwell in my soul and absorb its power, like the form of a beloved mistress, then I often think with longing, Oh, would I could describe these conceptions, could impress upon paper all that is living so full and warm within me, that it might be the mirror of my soul, as my soul is the mirror of the infinite God! O my friend.</p>
+				</div>
+				<div class='col_4'><p>&nbsp;</p></div>
+			</div>
+			<div class="right">
+				<div class='col_5'><p>&nbsp;</p></div>
+				<div class='col_67'>
+					<img class="imgsmall" src="dio12.jpg" />
+				</div>
+				<div class='col_8'><p>&nbsp;</p></div>
+				<div class='clear'>&nbsp;</div>
+			</div>
+		</div>
+	</body>
+</html>
