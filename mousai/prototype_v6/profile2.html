@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+
+<link rel="stylesheet" href="plangular.css"/>
+<link rel="stylesheet" href="profile2.css"/>
+<link rel="stylesheet" href="plangular2.css"/>
+<link rel="Shortcut Icon" href="http://www.semiitalic.com/favicon.ico" type="image/x-icon" />
+
+<title>Mousai</title>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://d3js.org/d3.v2.js"></script>
+<script type="text/javascript" src="http://connect.soundcloud.com/sdk.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+<script type="text/javascript" src="plangular.js"></script>
+<script type="text/javascript" src="Chart.js"></script>
+<script type="text/javascript" src="modernizr.js"></script>
+<script type="text/javascript" src="effects.js"></script>
+
+<style type="text/css">
+
+/*///////////////////////////////////////////////////////////////////
+   Author:                    Jj Moi
+   Version:                   6.0.1
+///////////////////////////////////////////////////////////////////*/
+
+/*///////////////////////////////////////////////////////////////////
+   Teddy Bear-First Approach
+///////////////////////////////////////////////////////////////////*/
+
+/*
+                                (c).-.(c)    (c).-.(c)
+                                 / ^_^ \      / >_< \
+                               __\( Y )/__  __\( O )/__
+                              (_.-/'-'\-._)(_.-/'-'\-._)
+                                 || J ||      || j ||
+                               _.' `-' '._  _.' `-' '._
+                              (.-./`-'\.-.)(.-./`-'\.-.)
+                               `-'     `-'  `-'     `-'
+*/
+
+</style>
+<script type="text/javascript">
+
+$(document).ready(function(){
+    $('#heart').click(function(){
+        $(this).toggleClass('clicked');
+    });
+});
+
+</script>
+</head>
+
+<body ng-app="plangular">
+
+  <div id="header">
+    <a href="http://www.semiitalic.com/mousai/prototype_v6"><img id="nav" src="nav.png" /></a>
+    <a href="#"><img id="login" src="login.png" /></a>
+  </div>
+  
+  <div id="masthead">
+    <img class="bigimg" src="walrus_big.png" />
+    <img class="smallimg" src="walrus_small.png" />
+  </div>
+
+<!-- start wrapper div -->
+  <div id="contentwrapper">
+
+    <article plangular data-src="'https://soundcloud.com/lorem-ipsum-dolor/sets/electronic-1'" class="grid-2 bd rounded" id="musicplayer">
+      <h1>
+        <a href="profile2.html">{{ playlist.user.username }}</a>
+        <i class="fl icon-heart" id="heart"></i>
+      </h1>
+      <h2 class="">San Francisco</h2>
+
+      <div class="bd">
+        <progress value="{{ currentTime / duration }}" ng-click="seekTo($event)" class="progress progress-gray progress-gray-alt rounded musicplayerprogress">{{ currentTime / duration}}</progress>
+      </div>
+
+      <div class="pad1 bd">
+        <div class="center">
+          <div class="dib">
+            <a href="" ng-click="player.previous(playlist)" class="fl white"><i class="icon-previous tappad"></i></a>
+            <a href="" ng-click="player.playPlaylist(playlist)" ng-hide="player.tracks == playlist.tracks && player.playing" class="fl white"><i class="icon-play tappad"></i></a>
+            <a href="" ng-click="player.pause()" ng-show="player.tracks == playlist.tracks && player.playing" class="fl white"><i class="icon-pause tappad"></i></a>
+            <a href="" ng-click="player.next(playlist)" class="fl white"><i class="icon-skip tappad"></i></a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article id="donut">
+		  <canvas id="doughnutChart" width="200" height="160"></canvas>
+		  <p id="donuttext1">35%</p>
+		  <p id="donuttext2">$6,000 Goal</p>
+		  <canvas id="introChart" width="200" height="160"></canvas>
+		  <p id="linetext0">Contribution Stream</p>
+		  <p id="linetext1"><span id="greenline">•</span> Total<span id="grayline">•</span> Daily</p>
+	 </article>
+
+    <div id="contribute">
+      <h3>Please select:</h3>
+      <div id="cashamount">
+        <span>$1</span><span>$10</span><span>$25</span><span>Custom</span>
+      </div>
+      <div id="contributebutton">
+        <a href="#">Contribute</a>
+      </div>
+    </div>
+
+    <div id="detail">
+      <h3>Update #4: Two weeks to Go!</h3>
+      <h2>April 22, 2013</h2>
+      <p>Just a week into our project, and we almost reaching the 50% funded mark! This is way ahead of what we expected. We are moved by all the support -- Thanks a Bunch!</p>
+      <a href="#" id="link">See previous updates</a>
+
+      <h3>Rewards for all backers</h3>
+      <ul>
+        <li>Full album (MP3)</li>
+        <li>2 hidden tracks (MP3)</li>
+        <li>3 music videos</li>
+      </ul>
+
+      <h3>Extra rewards for $25+ backers</h3>
+      <ul>
+        <li>Behind the scene videos</li>
+        <li>Remix version album (MP3)</li>
+        <li>Director’s cut music video</li>
+      </ul>
+
+      <h3>About the project</h3>
+      <p>We are a Swedish ambient band and we have been active since 1994. Formed in San Francisco, we consist of Lynn Bishop (vocal, ukulele), Joseph Lauden (bass), Olga Van Nulrson (DJ, synth) and Boyd Thana (drums, keyboard).</p>
+      <p>We are collaborating with the finest artists in the Bay Area and we’ve produced about 70% of our album. We are looking forward to finish the album production and music videos editing.</p>
+
+      <h3>How your money can help us</h3>
+      <ul>
+        <li>Film for three music videos and complete the studio recordings</li>
+        <li>Edit the videos to the highest standard, including mixing the music so it sounds just great</li>
+        <li>All the legal work to ensure rights to all the featured musicians</li>
+      </ul>
+
+      <h3>FAQ</h3>
+      <p>Have a question? Ask us directly.</p>
+      <a id="link" href="#">Ask a question</a>
+    </div>
+
+    <div id="similar">
+      <hr />
+      <h4>Similar artists</h4>
+      <a class="bigimg" href="#"><img src="similar.png" /></a>
+      <a class="smallimg" href="#"><img src="similar_mobile.png" /></a>
+    </div>
+
+  </div>
+<!-- end wrapper div -->
+
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+
+<link rel="stylesheet" href="plangular.css"/>
+<link rel="stylesheet" href="mousai.css"/>
+
+<title>Mousai</title>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://d3js.org/d3.v2.js"></script>
+<script type="text/javascript" src="http://connect.soundcloud.com/sdk.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+<script type="text/javascript" src="plangular.js"></script>
+<script type="text/javascript" src="Chart.js"></script>
+<script type="text/javascript" src="modernizr.js"></script>
+<script type="text/javascript" src="effects.js"></script>
+
+<style type="text/css">
+
+/*///////////////////////////////////////////////////////////////////
+   Author:                    Jj Moi
+   Version:                   6.0.1
+///////////////////////////////////////////////////////////////////*/
+
+/*///////////////////////////////////////////////////////////////////
+   Teddy Bear-First Approach
+///////////////////////////////////////////////////////////////////*/
+
+/*
+                                (c).-.(c)    (c).-.(c)
+                                 / ^_^ \      / >_< \
+                               __\( Y )/__  __\( O )/__
+                              (_.-/'-'\-._)(_.-/'-'\-._)
+                                 || J ||      || j ||
+                               _.' `-' '._  _.' `-' '._
+                              (.-./`-'\.-.)(.-./`-'\.-.)
+                               `-'     `-'  `-'     `-'
+*/
+
+body {background:}
+
+#desc {text-align: center; color: white;}
+#desc img {margin: 100px auto 0;}
+#homep {font-size: 16px; width: 260px; margin: 24px auto -40px; padding: 0;}
+
+</style>
+</head>
+
+<body>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+    $('#heart').click(function(){
+        $(this).toggleClass('clicked');
+    });
+});
+
+$(function() {  
+    $("#btn").click(function() {  
+        $(".rightpanel").toggleClass("rightpanel-move");
+    });
+});
+
+$(function() {  
+    $("#btn2").click(function() {  
+        $(".rightpanel").toggleClass("rightpanel-move");
+    });
+});
+
+var w = window.innerWidth - 446,
+    h = window.innerHeight - 5;
+
+    if (window.innerWidth < 981){
+        w = window.innerWidth - 5;
+    }
+
+var vis = d3.select("body").append("svg:svg")
+    .attr("width", w)
+    .attr("height", h);
+
+d3.json("indie.json", function(json) {
+    var force = d3.layout.force()
+        .nodes(json.nodes)
+        .links(json.links)
+        .gravity(.05)
+        .distance(140)
+        .charge(-150)
+        .size([w, h])
+        .start();
+
+    var link = vis.selectAll("line.link")
+        .data(json.links)
+        .enter().append("svg:line")
+        .attr("class", "link");
+
+    var node = vis.selectAll("g.node")
+        .data(json.nodes)
+        .enter().append("svg:g")
+        .attr("class", "node")
+        .call(force.drag);
+
+    force.on("tick", function() {
+        link.attr("x1", function(d) {return d.source.x;})
+            .attr("y1", function(d) {return d.source.y;})
+            .attr("x2", function(d) {return d.target.x;})
+            .attr("y2", function(d) {return d.target.y;});
+
+        node.attr("transform", function(d) {
+            return "translate(" + d.x + "," + d.y + ")";
+        });
+    });
+
+    node.append("a")
+        .append("rect")
+        .attr("class", "nodetextbox")
+        .attr("x", 6)
+        .attr("y", -30)
+        .attr("width", 140)
+        .attr("height", 24)
+        .style("fill", "#222222")
+        .style("fill-opacity", .8)
+        .style("stroke-opacity", 1e-6);
+        
+    node.append("svg:text")
+        .attr("class", "nodetext")
+        .attr("dx", 12)
+        .attr("dy", -14)
+        .text(function(d) {return d.name});
+
+    node.append("svg:image")
+        .attr("class", "nodeimg")
+        .attr("xlink:href", "node2.png")
+        .attr("x", -8)
+        .attr("y", -8)
+        .attr("width", 16)
+        .attr("height", 16);
+
+    node.append("a")
+        .attr("xlink:href", function(d) {return "#";})
+        .append("circle")
+        .attr("cx", 0)
+        .attr("cy", 0)
+        .attr("r", 10)
+        .style("fill", "lightsteelblue")
+        .style("fill-opacity", 1e-6);
+
+});
+</script>
+
+  <div id="header">
+    <a href="#"><img id="nav" src="nav.png" /></a>
+    <a href="#"><img id="login" src="homelogin.png" /></a>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,300 @@
+html, body {margin: 0; padding: 0; width: 100%;}
+
+/*header*/
+#header {
+  margin: 0; padding: 0; background: #333; height: 68px; width: 100%;
+  position: fixed; top: 0; right: 0; z-index: 9;
+}
+#nav {margin: 20px 0 0 20px;}
+#login {margin: 20px 20px 0 0; float: right;}
+
+#headimg {width: 100%;}
+h1 {opacity: 0.8;}
+.icon-heart {padding-left: 10px;}
+
+.pos-rel {position: relative;}
+.pos-abs {position: absolute;}
+.fill {top:0; right:0; bottom:0; left:0; margin: auto;}
+.img {float: left;}
+.sq64 {width: 64px; height: 32px;}
+.sq64-text {text-align: center; line-height: 32px;}
+
+.db  {display: block;}
+.btn-green {color: #fff; background-color: #0e6;}
+.btn-green:hover {color: #fff; background-color: #0d5;}
+.btn-green:active {box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);}
+
+.bd {overflow: hidden;}
+.hi64 {height: 32px;}
+/*used to be white*/
+.white {color: #444;}
+.bg-dark-gray {background-color: #444;}
+
+/*music player*/
+#musicplayer {text-align: center; width: auto; z-index: 9; margin: 10px 20px 20px;}
+.musicplayerprogress {width: 100%; margin-top: 30px;}
+.pad1 {margin-top: 20px; margin-bottom: 10px;}
+
+.bg-light-gray {background-color: #eee;}
+.progress {-webkit-appearance: none; height: 2px;}
+.progress::-webkit-progress-bar {-webkit-appearance: none; background-color: #eee;}
+.progress::-webkit-progress-value {-webkit-appearance: none;}
+.progress-gray::-webkit-progress-value {background-color: #0e6;}
+.progress-gray-alt::-webkit-progress-bar {background-color: #eee;}
+
+.dib {display: inline-block;}
+.dark-gray {color: #444;}
+
+.tappad {
+  font-size: 20px;
+  /*min-height: 48px;*/
+  line-height: 48px; padding: 0 20px;
+}
+
+#heart {color: #444;}
+#heart.clicked {color: #FC4A50;}
+
+@media screen and (min-width: 1024px) {
+  .grid-1 {width: 390px;}
+  .grid-2 {width: 446px;}
+}
+
+/*animation*/
+h1:hover, h3:hover {
+  opacity: 1;
+  -webkit-transition: opacity 0.3s ease-in 0.2s;
+  -moz-transition: opacity 0.3s ease-in 0.2s;
+  transition: opacity 0.3s ease-in 0.2s;
+}
+#contributebutton:hover {
+  background: #FC4A50;
+  -webkit-transition: background 0.3s ease-in 0.2s;
+  -moz-transition: background 0.3s ease-in 0.2s;
+  transition: background 0.3s ease-in 0.2s;
+}
+#cashamount span:hover {
+  color: #111;
+  -webkit-transition: color 0.3s ease-in 0.2s;
+  -moz-transition: color 0.3s ease-in 0.2s;
+  transition: color 0.3s ease-in 0.2s;
+  background: White;
+  -webkit-transition: background 0.3s ease-in 0.2s;
+  -moz-transition: background 0.3s ease-in 0.2s;
+  transition: background 0.3s ease-in 0.2s;
+}
+
+/* of profile2*/
+/*masthead*/
+#masthead {clear: both;}
+#masthead img {margin: 0; padding: 0; width: 100%; position: relative; top: 68px; z-index: -1; background: #333;}
+
+/*content*/
+#contentwrapper {margin: 100px auto; width: 760px;}
+
+h1 a {margin: 0; padding: 0; color: #333; font: 32px/120% Arial, Helvetica, sans-serif;}
+h2 {margin: 2px 0 0 0; color: #999; font: normal 16px/100% Arial, Helvetica, sans-serif;}
+h3 {margin-top: 50px; color: #333; font: 22px/80% Arial, Helvetica, sans-serif;}
+h4 {margin: 50px 0 30px 0; color: #666; font: 18px/120% Arial, Helvetica, sans-serif;}
+a {text-decoration :none;}
+
+#songlist {margin-top: 40px;}
+ul {margin: 20px 0 0 0; padding: 0 0 0 1.5em; list-style-position: outside; list-style-type: disc;}
+ul li {margin: 0 0 10px 0; font: 16px/150% Arial, Helvetica, sans-serif; color: #333;}
+#songlist ul {margin: 0 0 0 -1.5em;}
+#songlist li {list-style: none;}
+#play {margin: 0 10px 0 0;}
+#addto {margin: 0; float: right;}
+
+/*chart*/
+#chart {clear: both; margin: 50px 0 50px 50px;}
+#chart1 {display: inline; margin: 0 auto; width: 50%; height: auto;}
+#chart2 {display: inline; margin: 10px auto; width: 50%; height: auto; float: right;}
+#charta {margin-left: 80px;}
+#chartb {margin:0;}
+
+/*contribute*/
+#contribute {clear: both;}
+#cashamount {margin-top: 30px;}
+#cashamount span {
+  margin: 0 10px 0 0; padding: 10px 30px; border: solid 1px #666;
+  font: 16px/150% Arial, Helvetica, sans-serif; color: #666; background: #EEE;
+}
+#contributebutton {margin-top: 30px; padding: 15px; background: #FA4242; text-align: center; border-radius: 5px;}
+#contributebutton a {color: white; text-decoration: none; font: 20px/150% Arial, Helvetica, sans-serif;}
+
+/*detail*/
+#detail {margin-top: 80px;}
+p {font: normal 16px/150% Arial, Helvetica, sans-serif; color: #333;}
+#detail a {color: #FA4242; text-decoration: none; font: 16px/150% Arial, Helvetica, sans-serif;}
+
+/*footer*/
+#similar {margin-top: 100px;}
+#similar img {width: 100%;}
+.bigimg {display: block;}
+.smallimg {display: none;}
+
+/*music player*/
+#musicplayer img {display: block; margin: 0 auto; position: fixed; clear: both; bottom: 0; right: 0;}
+
+/*///////////////////////////////////////////////////////////////////
+   Animation
+///////////////////////////////////////////////////////////////////*/
+
+#link:hover {
+  color: #F97578;
+  -webkit-transition: color 0.3s ease-in 0.2s;
+  -moz-transition: color 0.3s ease-in 0.2s;
+  transition: color 0.3s ease-in 0.2s;
+}
+#contributebutton:hover {
+  background: #FC4A50;
+  -webkit-transition: background 0.3s ease-in 0.2s;
+  -moz-transition: background 0.3s ease-in 0.2s;
+  transition: background 0.3s ease-in 0.2s;
+}
+#cashamount span:hover {
+  color: #111;
+  -webkit-transition: color 0.3s ease-in 0.2s;
+  -moz-transition: color 0.3s ease-in 0.2s;
+  transition: color 0.3s ease-in 0.2s;
+  background: White;
+  -webkit-transition: background 0.3s ease-in 0.2s;
+  -moz-transition: background 0.3s ease-in 0.2s;
+  transition: background 0.3s ease-in 0.2s;
+}
+
+/*///////////////////////////////////////////////////////////////////
+   Media Query
+///////////////////////////////////////////////////////////////////*/
+
+/*iphone5*/
+@media only screen and (device-height: 568px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {
+  #header {height: 136px;}
+  #nav {margin-top: 34px; width: 228px;}
+  #login {margin-top: 34px; width: 266px;}
+
+  /*content*/
+  #contentwrapper {margin: 100px auto; width: 86%;}
+
+  h1 {font-size: 78px;}
+  h2 {font-size: 42px;}
+  h3 {font-size: 54px;}
+  h4 {font-size: 48px;}
+
+  /*chart*/
+  #chart {margin: 50px 0 50px 0;}
+  #chart1 {margin: 0 auto; width: 100%;}
+  #chart2 {margin: 0 auto; width: 100%;}
+  #charta {margin: 20px auto; display: block; width: 600px;}
+  #chartb {margin: 20px auto; display: block; width: 600px;}
+
+  /*contribute*/
+  #contribute {margin-top: 230px;}
+  #cashamount {margin-top: 30px;}
+  #cashamount span {margin: 0 5px 0 0; padding: 10px 18px; font-size: 48px;}
+  #contributebutton {}
+  #button a {font-size: 60px;}
+
+  /*detail*/
+  #detail {margin-top: 80px;}
+  p {font-size: 42px;}
+  #detail a {font-size: 42px;}
+
+  /*footer*/
+  #similar {margin-top: 60px;}
+  #similar img {width: 100%;}
+  .bigimg {display: none;}
+  .smallimg {display: block;}
+
+  /*music player*/
+  #musicplayer img {width: 888px;}
+}
+
+/*Tablet Portrait*/
+@media screen and (max-width: 768px) and (min-width: 641px) {
+  /*content*/
+  #contentwrapper {margin: 100px auto; width: 640px;}
+
+  /*chart*/
+  #chart {margin: 50px 0 50px 0;}
+}
+
+/*Mobile Landscape*/
+@media screen and (max-width: 640px) and (min-width: 525px) {
+  /*content*/
+  #contentwrapper {margin: 100px auto; width: 524px;}
+
+  /*chart*/
+  #chart {margin: 50px 0 50px 0;}
+  #charta {margin-left: 20px;}
+  .bigimg {display: none;}
+  .smallimg {display: block;}
+  }
+
+/*Mobile Portrait*/
+@media screen and (max-width: 524px) {
+  /*content*/
+  #contentwrapper {margin: 100px auto; width: 280px;}
+
+  h1 {font-size: 26px;}
+  h2 {font-size: 14px;}
+  h3 {font-size: 18px;}
+  h4 {font-size: 16px;}
+
+  #songlist {margin-top: 40px;}
+  ul {margin-top: 20px;}
+  ul li {margin-bottom: 10px; font-size: 14px;}
+  #play {margin: 0 10px 0 0;}
+  #addto {margin: 0;}
+
+  /*chart*/
+  #chart {margin: 50px 0 50px 0;}
+  #chart1 {margin: 0 auto; width: 100%;}
+  #chart2 {margin: 0 auto; width: 100%;}
+  #charta {margin: 20px auto; display: block;}
+  #chartb {margin: 20px auto; display: block;}
+
+  /*contribute*/
+  #contribute {margin-top: 230px;}
+  #cashamount {margin-top: 30px;}
+  #cashamount span {margin: 0 5px 0 0; padding: 10px 18px; font-size: 14px;}
+  #contributebutton {}
+  #contributebutton a {}
+
+  /*detail*/
+  #detail {margin-top: 80px;}
+  p {font-size: 14px;}
+  #detail a {font-size: 14px;}
+
+  /*footer*/
+  #similar {margin-top: 60px;}
+  #similar img {width: 100%;}
+  .bigimg {display: none;}
+  .smallimg {display: block;}
+}
+
+/*Mini Mobile*/
+@media screen and (max-width: 444px) {
+  #musicplayer img {width: 100%;}
+}
+
+/*chart.js*/
+#donut {width: 428px; margin: -10px auto 0;}
+#donuttext1 {font-size: 22px; position: absolute; margin: -100px 0 0 50px; text-align: center; width: 100px;}
+#donuttext2 {font-size: 14px; position: absolute; margin: 10px 0 0 50px; text-align: center; width: 100px;}
+#linetext0 {font-size: 13px; position: absolute; margin: -155px 0 0 200px; text-align: center; width: 150px;}
+#linetext1 {font-size: 14px; position: absolute; margin: 10px 0 0 225px; text-align: center; width: 150px;}
+
+#greenline {font-size: 26px; vertical-align: bottom; color: rgba(29,182,135,1);}
+#grayline {font-size: 26px; vertical-align: bottom; padding-left: 20px; color: rgba(181,181,181,1);}
+
+@media screen and (max-width: 445px) {
+  #donut {width: 100%; margin: 0 auto; text-align: center;}
+  #donuttext1 {width: 80px; margin: -95px 0 0 102px;}
+  #donuttext2 {display: none;}
+  #linetext0 {width: 120px; margin: -120px 0 0 50px; text-align: left;}
+  #linetext1 {width: 180px; margin: 10px 0 0 45px;}
+  #doughnutChart {display: block; margin: 0 auto; padding: 0;}
+  #introChart {display: block; margin: 0 auto; padding: 0;}
+  #contribute {margin-top: 100px;}
+}
