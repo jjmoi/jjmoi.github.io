@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>jj moi's</title>
+		<meta name="title" content="jj moi" />
+		<meta name="description" content="jj moi" />
+		<meta property="og:locale" content="en_US"/>
+		<meta property="og:url" content="http://www.jjmoi.com" />
+		<meta property="og:title" content="jj moi" />
+		<meta property="og:description" content="a website" />
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="jjmoi"/>
+		<!-- refresh page -->
+		<!--<meta http-equiv="refresh" content="14" />-->
+		<link rel="shortcut icon" href="http://www.jjmoi.com/favicon.ico">
+		<link rel="stylesheet" type="text/css" href="files/global.css">
+		<style>
+			/*/////////////////////////////////////////////////////////////////////////
+			Author:				Me
+			Version:			5.822.901457.127A
+			Updated:			2 hours ago
+							(c).--.(c)
+							 / ●__● \
+					       __\( __ )/__
+					      (_.-/'--'\-._)
+							 || Jj ||
+					       _.' `--' '._
+					      (.-./`--'\.-.)
+					       `-'      `-'
+			/////////////////////////////////////////////////////////////////////////*/
+		</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script src="files/lettering-0.6.1.min.js"></script>
+		<script type="text/javascript">
+			var randomcss = {
+				cssfiles : ['1.css','2.css','3.css','4.css','5.css','6.css','7.css','8.css','9.css','10.css',
+					    '11.css','12.css','13.css','14.css','15.css','16.css','17.css','18.css','19.css','20.css',
+					    '21.css','22.css','23.css','24.css','25.css','26.css','27.css','28.css','29.css','30.css',
+					    '31.css'],
+				pathtocss : 'files/',
+				getrandomcss : function() {
+					return this.cssfiles[Math.floor(Math.random()*this.cssfiles.length)];
+				},
+				getlinktag : function() {
+					return '<link rel="stylesheet" type="text/css" href="'+this.pathtocss+this.getrandomcss()+'" />';
+				},
+				printlinktag : function() {
+					document.write(this.getlinktag());
+				}
+			};
+			randomcss.printlinktag();
+			$(document).ready(function() {
+				$(".fancy_title").lettering();
+			});
+		</script>
+	</head>
+	<body>
+		<div id="rapper">
+			<!--<a href="#" onclick="freestylin()">-->
+			<div id="top"><a class="fancy_title labs draggable" href="http://jjmoi.com">jj moi</a></div>
+			<div><a class="fancy_title labs draggable" href="http://jjmoi.com">stuff designer</a></div>
+		</div>
+		<div id="hypeman">
+			<div id="next-top"><a class="fancy_title labs draggable" href="https://standards.usa.gov">us design standards</a></div>
+			<div><a class="fancy_title labs draggable" href="https://pages.18f.gov/brand">18f visual identity</a></div>
+			<div><a class="fancy_title labs draggable" href="https://cloud.gov">cloud.gov</a></div>
+			<div><a class="fancy_title labs draggable" href="https://federalist.fr.cloud.gov">federalist</a></div>
+			<div><a class="fancy_title labs draggable" href="http://www.tachyus.com/solutions">tachyus</a></div>
+			<div><a class="fancy_title labs draggable" href="https://paloalto.opengov.com">opengov transparency</a></div>
+			<div><a class="fancy_title labs draggable" href="/solidus">solidus style</a></div>
+			<div><a class="fancy_title labs draggable" href="/opengovicons">opengovicons</a></div>
+			<!--<div><a class="fancy_title labs draggable" href="/mousai/prototype_v6/Innervisions" target="_blank">mousai</a></div>-->
+			<div><a class="fancy_title labs draggable" href="/typefoundry">tremolo</a></div>
+			<div><a class="fancy_title labs draggable" href="/latype">latype</a></div>
+			<div><a class="fancy_title labs draggable" href="https://www.kickstarter.com/projects/753619488/all-together-now-women-in-music">women in music</a></div>
+			<!--<div><a class="fancy_title labs draggable" href="/detroit" target="_blank">detroit</a></div>-->
+			<!--<div><a class="fancy_title labs draggable" href="/rwd-canons" target="_blank">rwd canons</a></div>-->
+			<!-- footer -->
+			<div id="footer"><a class="fancy_title labs draggable" href="/about">about</a></div>
+			<!--<div><a class="fancy_title labs draggable" href="https://dribbble.com/jjmoi">dribbble</a></div>-->
+			<!--<div><a class="fancy_title labs draggable" href="https://www.instagram.com/goodnightjj">instagram</a></div>-->
+			<!--<div><a class="fancy_title labs draggable" href="https://twitter.com/goodnightjj" target="_blank">twitter</a></div>-->
+			<!--<div><a class="fancy_title labs draggable" href="https://www.linkedin.com/in/jjmoi" target="_blank">linkedin</a></div>-->
+			<div id="bottom"><a class="fancy_title labs draggable" href="mailto:heyheyjjmoi@gmail.com?Subject=hey%20hey%20jj!">contact</a></div>
+		</div>
+		<script>
+			$( function() {
+				$( ".draggable" ).draggable();
+			} );
+		</script>
+	</body>
+	<script src="files/bold.js"></script>
+</html>
