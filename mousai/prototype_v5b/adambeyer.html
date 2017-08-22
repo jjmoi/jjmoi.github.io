@@ -38,19 +38,10 @@
                                `-'     `-'  `-'     `-'
 */
 
-body {background: url(bg.jpg) no-repeat top left fixed;}
-
-#desc {text-align: center; color: white;}
-#homeh1 {font-size: 24px; margin: 30% 0 0 0;}
-#homeh2 {font-size: 38px; margin: -7px 0 0 0;}
-#homep {font-size: 15px; width: 260px; margin: 15px auto -40px; padding: 0;}
-
-#contributebutton {width: 150px; margin: 0 auto;}
-#contributebutton a {font-size: 16px;}
 </style>
 </head>
 
-<body>
+<body ng-app="plangular">
 
 <script type="text/javascript">
 
@@ -141,7 +132,7 @@ d3.json("indie.json", function(json) {
         .attr("height", 16);
 
     node.append("a")
-        .attr("xlink:href", function(d) {return "http://www.jjmoi.com/mousai/prototype_v6/" + d.name;})
+        .attr("xlink:href", function(d) {return "http://www.jjmoi.com/mousai/prototype_v6/" + d.name + ".html";})
         .append("circle")
         .attr("cx", 0)
         .attr("cy", 0)
@@ -165,42 +156,58 @@ d3.json("indie.json", function(json) {
 
   <div id="header">
     <a href="#"><img id="nav" src="nav.png" /></a>
+    <a href="#"><img id="login" src="login.png" /></a>
   </div>
 
   <input type="button" value="" id="btn2"></input>
 
   <div class="rightpanel">
     <input type="button" value="" id="btn"></input>
+    <a href="profile2.html"><img id="headimg" src="pepsi.png" /></a>
 
-    <article>
+    <article plangular data-src="'https://soundcloud.com/adambeyer/sets/adam-beyer-sets'" class="grid-2 bd rounded" id="musicplayer">
+      <h1>
+        <a href="profile2.html">{{ playlist.user.username }}</a>
+        <i class="fl icon-heart" id="heart"></i>
+      </h1>
+      <h2 class="">San Francisco</h2>
       <div id="desc">
-        <h2 id="homeh1">Welcome to</h2>
-        <h3 id="homeh2">Mousai</h3>
-        <p id="homep">Discover fresh new indie bands<br />and support the industry</p>
+        <p>We are collaborating with the finest artists in the Bay and we’re at 70% of our album. We are looking forward to finish the album production and music videos editing.</p>
       </div>
+
+      <div class="bd">
+        <progress value="{{ currentTime / duration }}" ng-click="seekTo($event)" class="progress progress-gray progress-gray-alt rounded musicplayerprogress">{{ currentTime / duration}}</progress>
+      </div>
+
+      <div class="pad1 bd">
+        <div class="center">
+          <div class="dib">
+            <a href="" ng-click="player.previous(playlist)" class="fl white"><i class="icon-previous tappad"></i></a>
+            <a href="" ng-click="player.playPlaylist(playlist)" ng-hide="player.tracks == playlist.tracks && player.playing" class="fl white"><i class="icon-play tappad"></i></a>
+            <a href="" ng-click="player.pause()" ng-show="player.tracks == playlist.tracks && player.playing" class="fl white"><i class="icon-pause tappad"></i></a>
+            <a href="" ng-click="player.next(playlist)" class="fl white"><i class="icon-skip tappad"></i></a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article id="donut">
+		  <canvas id="doughnutChart" width="200" height="160"></canvas>
+		  <p id="donuttext1">$2,130</p>
+		  <p id="donuttext2">of $6,000 goal</p>
+		  <canvas id="introChart" width="200" height="160"></canvas>
+		  <p id="linetext0">Contribution Stream</p>
+		  <p id="linetext1"><span id="greenline">•</span> Total<span id="grayline">•</span> Daily</p>
+	 </article>
 
     <div id="contribute">
       <div id="contributebutton">
-        <a href="http://www.jjmoi.com/mousai/prototype_v6/Innervisions">Join Mousai</a>
+        <a href="#">Contribute</a>
       </div>
     </div>
 
     <div id="blank"></div>
   </div>
-
-<script type="text/javascript">
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-37840158-1']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
-
+  
 </body>
 </html>
