@@ -193,7 +193,7 @@
 		},
 		{
 			"type": "Feature", "geometry": {"type": "Point", "coordinates": [-0.127758, 51.507351]},
-			"properties": {"mass": "3","name": "London, England","year": "1994","recclass": "1994, 2009, 2013"
+			"properties": {"mass": "1","name": "London, England","year": "1994","recclass": "1994, 2009, 2013"
 			}
 		},
 		{
