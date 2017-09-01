@@ -373,7 +373,7 @@
 		},
 		{
 			"type": "Feature", "geometry": {"type": "Point", "coordinates": [-74.005941, 40.712784]},
-			"properties": {"mass": "2","name": "New York City, NY","year": "2012","recclass": "2012, 2015"
+			"properties": {"mass": "3","name": "New York City, NY","year": "2012","recclass": "2012, 2015, 2018"
 			}
 		},
 		{
@@ -383,7 +383,7 @@
 		},
 		{
 			"type": "Feature", "geometry": {"type": "Point", "coordinates": [-115.139830, 36.169941]},
-			"properties": {"mass": "2","name": "Las Vegas, NV","year": "2012","recclass": "2012, 2014"
+			"properties": {"mass": "3","name": "Las Vegas, NV","year": "2012","recclass": "2012, 2014, 2015"
 			}
 		},
 		{
