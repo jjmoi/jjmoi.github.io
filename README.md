@@ -16,7 +16,7 @@ http://davidensinger.com/2013/03/setting-the-dns-for-github-pages-on-namecheap
 ### google domain
 http://www.curtismlarson.com/blog/2015/04/12/github-pages-google-domains
 
-github ip:
+### github ip
 192.30.252.153 and 192.30.252.154
 
 ----
@@ -30,11 +30,11 @@ http://goodnightjj.github.io
 
 ----
 
-## License
+## license
 
-All icons and images are licensed under
-[Creative Commons Attribution - No Derivatives 4.0](https://creativecommons.org/licenses/by-nd/4.0)
+all icons and images are licensed under
+[creative commons attribution - no derivatives 4.0](https://creativecommons.org/licenses/by-nd/4.0)
 
-1. **Bullet 1** one 
-2. **Bullet 2:** two
-3. **Bullet 3:** three
+1. **bullet 1** apple
+2. **bullet 2:** orange
+3. **bullet 3:** banana
