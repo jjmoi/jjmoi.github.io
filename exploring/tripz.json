@@ -203,12 +203,12 @@
 		},
 		{
 			"type": "Feature", "geometry": {"type": "Point", "coordinates": [-2.960830, 53.430829]},
-			"properties": {"mass": "3","name": "Liverpool, England","year": "2013","recclass": "2013"
+			"properties": {"mass": "1","name": "Liverpool, England","year": "2013","recclass": "2013"
 			}
 		},
 		{
 			"type": "Feature", "geometry": {"type": "Point", "coordinates": [103.819836, 1.352083]},
-			"properties": {"mass": "3","name": "Singapore","year": "2013","recclass": "2013, 2014, 2015"
+			"properties": {"mass": "4","name": "Singapore","year": "2013","recclass": "2013, 2014, 2015, 2017"
 			}
 		},
 		{
@@ -358,7 +358,7 @@
 		},
 		{
 			"type": "Feature", "geometry": {"type": "Point", "coordinates": [98.338088, 7.951933]},
-			"properties": {"mass": "5","name": "Phuket, Thailand","year": "1992","recclass": "1992, 2001, 2006, 2011, 2015"
+			"properties": {"mass": "7","name": "Phuket, Thailand","year": "1992","recclass": "1992, 2001, 2006, 2011, 2015, 2016, 2017"
 			}
 		},
 		{
