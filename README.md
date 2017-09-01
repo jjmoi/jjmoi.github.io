@@ -17,8 +17,7 @@ http://davidensinger.com/2013/03/setting-the-dns-for-github-pages-on-namecheap
 http://www.curtismlarson.com/blog/2015/04/12/github-pages-google-domains
 
 github ip:
-192.30.252.153
-192.30.252.154
+192.30.252.153 and 192.30.252.154
 
 ----
 
