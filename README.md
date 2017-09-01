@@ -1,4 +1,4 @@
-## branch
+# branch
 
 - if username.github.io, use master
 - if custom domain url, use gh-pages
