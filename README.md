@@ -5,7 +5,7 @@
 
 ----
 
-## dns settings
+# dns settings
 
 ### bluehost
 http://bryancshepherd.com/Setting-up-Bluehost-DNS-for-a-GitHub-Jekyll-blog
@@ -21,7 +21,7 @@ http://www.curtismlarson.com/blog/2015/04/12/github-pages-google-domains
 
 ----
 
-## backup
+# backup
 http://goodnightjj.github.io
 
 ----
@@ -30,7 +30,7 @@ http://goodnightjj.github.io
 
 ----
 
-## license
+# license
 
 all icons and images are licensed under
 [creative commons attribution - no derivatives 4.0](https://creativecommons.org/licenses/by-nd/4.0)
