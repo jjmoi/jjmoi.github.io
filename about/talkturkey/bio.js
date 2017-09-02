@@ -1,7 +1,7 @@
 // source: http://lab.sulko.co/designer-bio
 
 (function(){
-	var mundanes = ['Kinda feminist, ', 'Not vegan, ', 'Furniture maker, ', 'Zombie aficionado, ', 'Type designer, ', 'Illustrator, ', 'Dad of 2 dogs, ', 'Creator of stuff, ', 'Flamin’ hot Cheetos connoisseur, ', 'Nature enthusiast, ', 'Civil servant, ', 'Ska band member, ', 'Fiber artist, '];
+	var mundanes = ['Half feminist, ', 'Not vegan, ', 'Furniture maker, ', 'Zombie aficionado, ', 'Type designer, ', 'Illustrator, ', 'Dad of 2 dogs, ', 'Creator of stuff, ', 'Flamin’ Hot Cheetos connoisseur, ', 'Nature enthusiast, ', 'Civil servant, ', 'Ska band member, ', 'Fiber artist, '];
 	var vintages = ['drummer, ', 'ukulelist, ', 'hand letterer, ', 'graffiti writer, ', 'capoeirista, ', 'skateboarder, ', 'Liverpool fan, ', 'DJ, '];
 	var pros = ['unicorn. ', 'double-stack designer. ', 'teacher. ', 'experience artist. ', 'visual poet. ', 'enjoys poetry, sunshine, and carbs. '];
 	var ops = ['Working on stuff ', 'Designing stuff ', 'Developing stuff ', 'Producing stuff ', 'Building stuff ', 'Crafting stuff ', 'Making stuff '];
