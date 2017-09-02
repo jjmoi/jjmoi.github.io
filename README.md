@@ -35,6 +35,26 @@ http://goodnightjj.github.io
 all icons and images are licensed under
 [creative commons attribution - no derivatives 4.0](https://creativecommons.org/licenses/by-nd/4.0)
 
-1. **bullet 1** apple
-2. **bullet 2:** orange
-3. **bullet 3:** banana
+----
+
+# github accounts
+
+heyheyjjmoi@gmail.com - current version
+jjmoi.com (chrome goodnightjj)
+ 
+heyjjmoimoi@gmail.com - to do
+jjmoi.moi
+
+goodnightjj@gmail.com - tachyus and #ttjjxoxo
+ttjj.us (chrome tachyus)
+
+heyjjmois@gmail.com - retired
+jjmois.com (under construction)
+
+----
+
+# to do
+
+1. **bullet 1** transfer from encirca to ggl domain
+2. **bullet 2:** sign up new github:jjmoimoi
+3. **bullet 3:** clone repo
