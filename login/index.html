@@ -21,7 +21,7 @@
 			font-family: 'futurama_alien_alphabet_oneRg', monospace;
 			text-shadow: 0 0 2px rgba(0, 255, 205, 1), 0 0 4px rgba(0, 255, 205, 0.3);
 		}
-		/* vertigo */
+		/* horuz & vertigo */
 		#horuz {
 			position: fixed;
 			z-index: 9;
@@ -40,6 +40,55 @@
 			40% {top: 15%;}
 			70% {top: 70%;}
 			100% {top: 100%;}
+		}
+		@-moz-keyframes horuzmove {
+			0% {top: 0;}
+			25% {top: 25%;}
+			40% {top: 15%;}
+			70% {top: 70%;}
+			100% {top: 100%;}
+		}
+		@-o-keyframes horuzmove {
+			0% {top: 0;}
+			25% {top: 25%;}
+			40% {top: 15%;}
+			70% {top: 70%;}
+			100% {top: 100%;}
+		}
+		@keyframes horuzmove {
+			0% {top: 0;}
+			25% {top: 25%;}
+			40% {top: 15%;}
+			70% {top: 70%;}
+			100% {top: 100%;}
+		}
+		#vertigo {
+			position: fixed;
+			z-index: 9;
+			margin: 0;
+			padding: 0;
+			top: 0;
+			left: 0;
+			-webkit-animation: vertigomove 16s infinite;
+			-moz-animation: vertigomove 16s infinite;
+			-o-animation: vertigomove 16s infinite;
+			animation: vertigomove 16s infinite;
+		}
+		@-webkit-keyframes vertigomove {
+			0% {top: -40%;}
+			100% {top: 150%;}
+		}
+		@-moz-keyframes vertigomove {
+			0% {top: -40%;}
+			100% {top: 150%;}
+		}
+		@-o-keyframes vertigomove {
+			0% {top: -40%;}
+			100% {top: 150%;}
+		}
+		@keyframes vertigomove {
+			0% {top: -40%;}
+			100% {top: 150%;}
 		}
 		/* keyboard */
 		#keyboard img:hover {
