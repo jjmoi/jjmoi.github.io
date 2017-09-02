@@ -193,7 +193,7 @@
 		},
 		{
 			"type": "Feature", "geometry": {"type": "Point", "coordinates": [-0.127758, 51.507351]},
-			"properties": {"mass": "1","name": "London, England","year": "1994","recclass": "1994, 2009, 2013"
+			"properties": {"mass": "3","name": "London, England","year": "1994","recclass": "1994, 2009, 2013"
 			}
 		},
 		{
@@ -443,7 +443,7 @@
 		},
 		{
 			"type": "Feature", "geometry": {"type": "Point", "coordinates": [-95.369803, 29.760427]},
-			"properties": {"mass": "2","name": "Houston, TX","year": "2016","recclass": "2016, 2017"
+			"properties": {"mass": "1","name": "Houston, TX","year": "2016","recclass": "Third Home"
 			}
 		},
 		{
