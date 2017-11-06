@@ -277,6 +277,11 @@
 			}
 		},
 		{
+			"type": "Feature", "geometry": {"type": "Point", "coordinates": [85.300140, 27.700769]},
+			"properties": {"mass": "1","name": "Bangalore, India","year": "2008","recclass": "2008"
+			}
+		},
+		{
 			"type": "Feature", "geometry": {"type": "Point", "coordinates": [72.993164, 19.038752]},
 			"properties": {"mass": "1","name": "Mumbai, India","year": "2008","recclass": "2008"
 			}
