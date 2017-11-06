@@ -168,7 +168,7 @@
 		},
 		{
 			"type": "Feature", "geometry": {"type": "Point", "coordinates": [-77.396280, 25.034280]},
-			"properties": {"mass": "1","name": "The Bahamas","year": "2016","recclass": "2016"
+			"properties": {"mass": "1","name": "Marsh Harbour, The Bahamas","year": "2016","recclass": "2016"
 			}
 		},
 		{
