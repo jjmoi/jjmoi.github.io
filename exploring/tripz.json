@@ -472,6 +472,11 @@
 			}
 		},
 		{
+			"type": "Feature", "geometry": {"type": "Point", "coordinates": [138.5986, -34.9286]},
+			"properties": {"mass": "1","name": "Adelaide, Australia","year": "2018","recclass": "2018"
+			}
+		},
+		{
 			"type": "Feature", "geometry": {"type": "Point", "coordinates": [151.2099, -33.8651]},
 			"properties": {"mass": "1","name": "Sydney, Australia","year": "2018","recclass": "2018"
 			}
