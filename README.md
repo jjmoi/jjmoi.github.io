@@ -39,22 +39,18 @@ all icons and images are licensed under
 
 # github accounts
 
-heyheyjjmoi@gmail.com - current version
-jjmoi.com (chrome goodnightjj)
- 
-heyjjmoimoi@gmail.com - to do
-jjmoi.moi
+heyheyjjmoi@gmail.com - jjmoi.com
 
-goodnightjj@gmail.com - tachyus and #ttjjxoxo
-ttjj.us (chrome tachyus)
+heyjjmoimoi@gmail.com - jjmoi.moi (to do)
 
-heyjjmois@gmail.com - retired
-jjmois.com (under construction)
+goodnightjj@gmail.com - ttjj.us & tachyus (chrome jj@tachyus)
+
+heyjjmois@gmail.com repo: jjmois.com & gabby (retired)
 
 ----
 
 # to do
 
-1. **bullet 1** transfer from encirca to ggl domain
-2. **bullet 2:** sign up new github:jjmoimoi
-3. **bullet 3:** clone repo
+1. **bullet 1:** transfer from encirca to ggl domain
+2. **bullet 2:** clone repo
+3. **bullet 3:** update everywhere
