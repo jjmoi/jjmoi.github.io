@@ -462,17 +462,17 @@
 			}
 		},
 		{
-			"type": "Feature", "geometry": {"type": "Point", "coordinates": [-41.4545, 145.9707]},
+			"type": "Feature", "geometry": {"type": "Point", "coordinates": [145.9707, -41.4545]},
 			"properties": {"mass": "1","name": "Tasmania, Australia","year": "2017","recclass": "2017"
 			}
 		},
 		{
-			"type": "Feature", "geometry": {"type": "Point", "coordinates": [-37.8141, 144.9633]},
+			"type": "Feature", "geometry": {"type": "Point", "coordinates": [144.9633, -37.8141]},
 			"properties": {"mass": "2","name": "Melbourne, Australia","year": "2017","recclass": "2017, 2018"
 			}
 		},
 		{
-			"type": "Feature", "geometry": {"type": "Point", "coordinates": [-33.8651, 151.2099]},
+			"type": "Feature", "geometry": {"type": "Point", "coordinates": [151.2099, -33.8651]},
 			"properties": {"mass": "1","name": "Sydney, Australia","year": "2018","recclass": "2018"
 			}
 		},
