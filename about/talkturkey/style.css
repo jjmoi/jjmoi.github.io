@@ -1924,7 +1924,7 @@ hr {
 	padding: 0 150px;
 	line-height: 1.2;
 	max-width: 1050px;
-	margin: 0 auto;
+	margin: 42px auto 0;
 }
 
 .email-rapper #utilities {
@@ -1977,7 +1977,7 @@ hr {
 }
 
 .icon {
-	width: 80px;
+	width: 40px;
 	margin-right: 150px;
 }
 
