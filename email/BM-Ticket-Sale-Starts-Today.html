@@ -11,9 +11,12 @@
 		.chat-thread a {color: #404040; text-decoration: underline; text-decoration-color: #29e5ac;}
 		.chat-thread a:hover {color: #29e5ac;}
 		.chat-thread a, .chat-thread a:hover, .chat-thread a:active, .chat-thread a:focus {outline: none;}
-		.filetype {}
-		.filename {}
-		.filesize {}
+		.email-attachment {max-width: 1050px; padding: 0 150px; position: relative; margin-top: 40px;}
+		.filetype {text-transform: uppercase; border: 1px #404040 solid; padding: 15px 10px; border-radius: 5px; color: #404040; font-size: 14px;}
+		.filename {color: #404040; font-size: 14px; position: absolute; top: -7px; padding-left: 10px;}
+		.filesize {color: #404040; font-size: 11px; position: absolute; top: 13px; padding-left: 10px;}
+		.email-attachment a {text-decoration: none;}
+		.email-attachment a:hover > span {text-decoration: underline; text-decoration-color: #29e5ac; color: #29e5ac;}
 	</style>
 </head>
 <body class="single single-post postid-234 single-format-standard group-blog">
@@ -156,8 +159,14 @@
 					<p class="sender">Styles <span>to Frisky, cc Campmaster, Flirt Camp</span><span class="email-date">2 hours ago</span></p>
 					<p>Guys, I will not be joining this year but I’ll register and try to get a set of tickets for us.</p>
 					<p>Styles</p>
-					<div><span class="filetype">PDF</span><span class="filename">brief.pdf</span><span class="filesize">892 KB</span></div>
-					<!--<p class="email-attachment">brief.pdf</p>-->
+					<div class="email-attachment">
+						<span class="filetype">PDF</span>
+						<a href="" class="file-rapper">
+							<span class="filename">brief.pdf</span>
+							<span class="filesize">892 KB</span>
+						</a>
+						</span>
+					</div>
 				</div>
 				<script>
 					function toggleChats() {
