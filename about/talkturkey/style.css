@@ -1993,3 +1993,30 @@ p.email-attachment {
 #parent {height: 100%; width: 100%; overflow: hidden;}
 #child {width: 100%; height: 100%; overflow-y: scroll;}
 */
+
+.email-attachment-file {
+	max-width: 1050px;
+	padding: 0 150px;
+	margin-top: 40px;
+}
+
+.email-attachment-file a {
+	text-decoration: none;
+	color: #404040;
+	font-size: 14px;
+}
+
+.email-attachment-file a:hover {
+	text-decoration: underline;
+	text-decoration-color:#29e5ac;
+	color: #29e5ac;
+}
+
+/*
+.email-attachment {max-width: 1050px; padding: 0 150px; position: relative; margin-top: 40px;}
+.email-attachment a {text-decoration: none;}
+.email-attachment a:hover > span {text-decoration: underline; text-decoration-color: #29e5ac; color: #29e5ac;}
+.filetype {margin-left: 0; padding: 15px 10px; font-size: 14px; text-transform: uppercase; color: #bbb; border: 1px #bbb solid; border-radius: 5px;}
+.filename {color: #404040; font-size: 14px; position: absolute; top: -7px; padding-left: 10px;}
+.filesize {color: #bbb; font-size: 11px; position: absolute; top: 13px; padding-left: 10px;}
+*/		
