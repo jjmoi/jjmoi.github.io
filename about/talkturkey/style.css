@@ -39,7 +39,7 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css
 html {
 	font-family: sans-serif;
 	-webkit-text-size-adjust: 100%;
-	-ms-text-size-adjust:     100%;
+	-ms-text-size-adjust:	 100%;
 }
 
 body {
@@ -905,18 +905,17 @@ body {
 */
 
 .header {
-    box-sizing: border-box;
-    position: fixed;
-    text-align: center;
-    padding: 0;
-    height: 50px;
-    width: 100%;
-    z-index: 99;
-    display: flex;
+	box-sizing: border-box;
+	position: fixed;
+	text-align: center;
+	padding: 0;
+	height: 50px;
+	width: 100%;
+	z-index: 99;
+	display: flex;
 }
 
 /* LEFT TITLE */
-
 
 .left-title {
 	float: left;
@@ -924,27 +923,25 @@ body {
 	min-width: 320px;
 	box-sizing: border-box;
 	position: relative;
-    border-right: 1px solid rgba(0, 0, 0, .10);
-    border-bottom: 1px solid rgba(0, 0, 0, .10);
+	border-right: 1px solid rgba(0, 0, 0, .10);
+	border-bottom: 1px solid rgba(0, 0, 0, .10);
 	background-color: rgba(255, 255, 255, .95);
 }
 
 .left-title h1 {
 	line-height: 0;
 	font-size: 18px;
-	font-weight: 500;	
-	margin-top: 26px;
+	font-weight: 400;	
+	margin-top: 25px;
 }
 
-
 /* RIGHT TITLE */
-
 
 .right-title {
 	float: left;
 	text-align: center;
 	box-sizing: border-box;
-    border-bottom: 1px solid rgba(0, 0, 0, .10);
+	border-bottom: 1px solid rgba(0, 0, 0, .10);
 	background-color: rgba(255, 255, 255, .95);
 	width: 100%;
 	height: 100%;
@@ -1018,7 +1015,6 @@ body {
 }
 
 
-
 /* BUDDY LIST */
 
 .buddy-list {
@@ -1027,8 +1023,8 @@ body {
 	position: relative;
 	min-width: 320px;
 	overflow: auto;
-    border-right: 1px solid rgba(0, 0, 0, .10);
-    margin-top: 50px;
+	border-right: 1px solid rgba(0, 0, 0, .10);
+	margin-top: 50px;
 	-webkit-overflow-scrolling: touch;
 }
 
@@ -1041,10 +1037,9 @@ body {
 	box-sizing: border-box;
 	overflow: auto;
 	display: block;
-    border-bottom: 1px solid rgba(0, 0, 0, .10);
-    text-decoration: none;
+	border-bottom: 1px solid rgba(0, 0, 0, .10);
+	text-decoration: none;
 }
-
 
 .buddy:hover {
 	background-color: rgba(225,225,225,0.3);
@@ -1162,11 +1157,10 @@ body {
 	background-color: #0084FF;
 }
 
-
 /* CHAT THREAD */
 
 textarea:focus, input:focus{
-    outline: none;
+	outline: none;
 }
 
 .chat-thread {
@@ -1187,9 +1181,9 @@ textarea:focus, input:focus{
 
 .input-field {
 	font-family: -apple-system, BlinkMacSystemFont,"Segoe UI",SF UI Text, Roboto,"Helvetica Neue",Helvetica,sans-serif;
-    height: 50px;
-    width: 100%;
-    position: fixed;
+	height: 50px;
+	width: 100%;
+	position: fixed;
 	bottom:0;
 	background-color: white;
 	border: none;
@@ -1344,9 +1338,9 @@ textarea:focus, input:focus{
 	min-width: 260px;
 	overflow: auto;
 	background-color: #fff;
-    border-left: 1px solid rgba(0, 0, 0, .10);
-    margin-top: 50px;
-    font-size: 14px;
+	border-left: 1px solid rgba(0, 0, 0, .10);
+	margin-top: 50px;
+	font-size: 14px;
 	-webkit-overflow-scrolling: touch;
 }
 
@@ -1678,7 +1672,7 @@ div.onesignal-bell-launcher-dialog.onesignal-bell-launcher-dialog-opened {
 		display: none;
 		width: 100%;
 	}
-	.home .chat-thread {
+	.home .chat-thread, .home .email-thread {
 		display: none;
 	}
 	.home #info-button {
@@ -1784,7 +1778,7 @@ a {
 	border: none;
 }
 
-.chat-thread {
+.chat-thread, .email-thread {
 	background-color: white;
 }
 
@@ -1890,6 +1884,9 @@ img.screenshot {
 hr {
 	margin: 0;
 	padding: 0;
+	background-color: #eee;
+	height: 1px;
+	border: 0;
 }
 
 #bio-wild a {
@@ -1915,3 +1912,103 @@ hr {
 .bubble p {
 	margin: 0;
 }
+
+/* email */
+
+.chat-thread.email-rapper {
+	margin-bottom: 80px;
+}
+
+.email-rapper #email-subject {
+	font-size: 42px;
+	padding: 0 150px;
+	line-height: 1.2;
+	max-width: 1050px;
+	margin: 0 auto;
+}
+
+.email-rapper #utilities {
+	float: right;
+	margin-top: -30px;
+}
+
+.email-rapper a:hover {
+	color: #29e5ac;
+	opacity: 0.8;
+}
+
+.email-rapper p {
+	padding: 0 150px;
+	max-width: 1050px;
+	margin: 20px auto;
+	font-size: 17px;
+	line-height: 1.4;
+}
+
+.email-rapper hr {
+	padding: 0 150px;
+	width: 50%;
+	margin: 50px auto;
+	background-color: #eee;
+	height: 1px;
+	border: 0;
+}
+
+.email-rapper .sender {
+	margin-top: 5px;
+	margin-bottom: 40px;
+	font-size: 13px;
+	font-weight: 500;
+}
+
+.sender span {
+	color: #bbb;
+	font-weight: 500;
+}
+
+.email-date {
+	color: #666;
+	float: right;
+}
+
+#utility {
+	float: right;
+	margin-top: -44px;
+}
+
+.icon {
+	width: 80px;
+	margin-right: 150px;
+}
+
+p.email-attachment {
+	padding: 0;
+	margin-left: 160px;
+	background-color: white;
+	border: 1px #ccc solid;
+	border-radius: 5px;
+}
+
+#nav-chatlist {
+	margin-right: 25px;
+	color: #29e5ac;
+}
+
+#nav-emaillist {
+	margin-left: 25px;
+	color: #bbb;
+}
+
+/* hide scrollbar
+#parent {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+
+#child {
+	width: 100%;
+	height: 100%;
+	overflow-y: scroll;
+}
+*/
