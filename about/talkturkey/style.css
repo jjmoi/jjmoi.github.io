@@ -1941,16 +1941,19 @@ hr {
 	border: 0;
 }
 
-.email-rapper .sender {
+.email-rapper .from-to {
 	margin-top: 5px;
 	margin-bottom: 40px;
-	font-size: 13px;
 	font-weight: 500;
+	font-size: 13px;
 }
 
-.sender span {
+.email-rapper span {
 	color: #bbb;
-	font-weight: 500;
+}
+
+.email-rapper .sender {
+	color: #404040;
 }
 
 .email-date {
