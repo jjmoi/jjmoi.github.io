@@ -1998,7 +1998,7 @@ p.email-attachment {
 	margin-top: 40px;
 }
 
-.email-attachment-file span {
+.email-attachment-filesize {
 	color: #bbb;
 	margin-left: 15px;
 }
