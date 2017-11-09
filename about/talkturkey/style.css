@@ -1166,16 +1166,14 @@ textarea:focus, input:focus{
 .chat-thread {
 	position: relative;
 	float: left;
-	margin: 0 auto;
 	overflow-y: scroll;
 	-webkit-overflow-scrolling: touch;
 	z-index: 8;
 	min-width: 260px;
 	width: 100%;
-	margin-top: 50px;
-	margin-bottom: 50px;
-	padding-bottom: 10px;
+	margin: 50px auto;
 	padding-top: 10px;
+	padding-bottom: 100px;
 	background-color: rgba(240,240,240,.6);
 }
 
@@ -1195,7 +1193,6 @@ textarea:focus, input:focus{
 
 .bubble-wrapper {
 	clear: both;
-
 	opacity: 0;
 	-moz-transition: all 500ms ease-out;
 	-webkit-transition: all 500ms ease-out;
@@ -1235,7 +1232,6 @@ textarea:focus, input:focus{
 	margin-right: 12px;
 	font-size: 12px;
 	color: gray;
-
 	opacity: 0;
 	-moz-transition: all 500ms ease-out;
 	-webkit-transition: all 500ms ease-out;
@@ -1454,6 +1450,7 @@ textarea:focus, input:focus{
 	box-sizing: border-box;
 	padding: 20px;
 }
+
 .wrapper a {
 	text-decoration: none !important;
 }
@@ -1583,6 +1580,7 @@ div.onesignal-bell-launcher-dialog.onesignal-bell-launcher-dialog-opened {
 	.buddy:hover {
 		background-color: #fff;
 	}
+
 	/* 404 */
 	.wrapper {
 		background-image: url(../../../img/);
@@ -1678,15 +1676,12 @@ div.onesignal-bell-launcher-dialog.onesignal-bell-launcher-dialog-opened {
 	.home #info-button {
 		display: none;
 	}
-
 	.home .selected {
 		background-color: #fff;
 	}
-
 	.home .selected h1, .home .selected h2 {
 		font-weight: 400;
 	}
-
 	.back {
 		display: block;
 		position: absolute;
@@ -1697,20 +1692,16 @@ div.onesignal-bell-launcher-dialog.onesignal-bell-launcher-dialog-opened {
 		box-sizing: border-box;
 		padding: 14px 0px 14px 14px;
 	}
-
 	.title {
 		width: 80%;
 	}
-
 	.left-title {
 		display: none;
 		width: 100%;
 	}
-
 	.right-title {
 		display: block;
 	}
-
 	.info {
 		display: block;
 	}
@@ -1996,15 +1987,6 @@ p.email-attachment {
 }
 
 /* hide scrollbar
-#parent {
-	height: 100%;
-	width: 100%;
-	overflow: hidden;
-}
-
-#child {
-	width: 100%;
-	height: 100%;
-	overflow-y: scroll;
-}
+#parent {height: 100%; width: 100%; overflow: hidden;}
+#child {width: 100%; height: 100%; overflow-y: scroll;}
 */
