@@ -2000,6 +2000,7 @@ p.email-attachment {
 
 .email-attachment-file span {
 	color: #404040;
+	padding-left: 10px;
 }
 
 /*
