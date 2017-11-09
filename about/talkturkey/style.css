@@ -1995,21 +1995,11 @@ p.email-attachment {
 */
 
 .email-attachment-file {
-	max-width: 1050px;
-	padding: 0 150px;
 	margin-top: 40px;
 }
 
-.email-attachment-file a {
-	text-decoration: none;
+.email-attachment-file span {
 	color: #404040;
-	font-size: 14px;
-}
-
-.email-attachment-file a:hover {
-	text-decoration: underline;
-	text-decoration-color:#29e5ac;
-	color: #29e5ac;
 }
 
 /*
