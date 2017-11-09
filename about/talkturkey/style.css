@@ -1915,10 +1915,6 @@ hr {
 
 /* email */
 
-.chat-thread.email-rapper {
-	margin-bottom: 80px;
-}
-
 .email-rapper #email-subject {
 	font-size: 42px;
 	padding: 0 150px;
