@@ -2,9 +2,7 @@
 Theme Name: chats
 Author: Underscores.me
 License: GNU General Public License v2 or later
-
 chats is based on Underscores http://underscores.me, Automattic
-
 Normalizing styles have been helped along thanks to the fine work of
 Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css
 */
@@ -1996,11 +1994,17 @@ p.email-attachment {
 
 .email-attachment-file {
 	margin-top: 40px;
+	font-size: 13px;
 }
 
 .email-attachment-filesize {
 	color: #bbb;
 	margin-left: 20px;
+	font-size: 13px;
+}
+
+.email-attachment-icon {
+	font-size: 13px;
 }
 
 /*
@@ -2010,4 +2014,28 @@ p.email-attachment {
 .filetype {margin-left: 0; padding: 15px 10px; font-size: 14px; text-transform: uppercase; color: #bbb; border: 1px #bbb solid; border-radius: 5px;}
 .filename {color: #404040; font-size: 14px; position: absolute; top: -7px; padding-left: 10px;}
 .filesize {color: #bbb; font-size: 11px; position: absolute; top: 13px; padding-left: 10px;}
-*/		
+*/
+
+#emaillist-icon {
+	text-align: center;
+}
+
+#emaillist-icon a {
+	margin: 0 25px 0;
+	position: relative;
+	top: 10px;
+	font-size: 16px;
+}
+
+.nav-title a {
+	text-decoration: none;
+}
+
+.nav-title a:hover {
+	opacity: 0.7;
+}
+
+.email-rapper .email-signature {
+	color: #bbb;
+	font-size: 13px;
+}
