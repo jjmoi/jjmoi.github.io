@@ -2040,7 +2040,7 @@ p.email-attachment {
 	font-size: 13px;
 }
 
-/* doesn't work when switched tabs
+/* bug: work onload but doesn't work when switched tabs
 #emaillist-icon .selected-tab {
 	font-size: 20px;
 	top: 11px;
