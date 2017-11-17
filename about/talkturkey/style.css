@@ -2040,7 +2040,7 @@ p.email-attachment {
 	font-size: 13px;
 }
 
-#emaillist-icon #selected-tab {
+#emaillist-icon #selected-tab, #emaillist-icon .selected-tab {
 	font-size: 20px;
 	top: 11px;
 }
