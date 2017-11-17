@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Email — Waiting For Your Response</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<link rel="stylesheet" id="chats-style-css" href="./talkturkey/style.css" type="text/css" media="all">
+	<link href="https://fonts.googleapis.com/css?family=Eczar:700|Roboto:700" rel="stylesheet">
+	<style>
+		.chat-thread {margin-bottom: 0;}
+		hr {margin: 0; padding: 0;}
+		.chat-thread a, .chat-thread a:hover, .chat-thread a:active, .chat-thread a:focus {outline: none;}
+		/* email global */
+		#junk p, #junk a {font-family: Arial, sans-serif; font-size: 20px; max-width: 900px; padding: 0;}
+		#junk .eczar {font-family: 'Eczar', Georgia, serif; font-size: 64px; color: #3333ff; line-height: 0.7; font-weight: bold;}
+		#junk .roboto {font-family: 'Roboto', sans-serif;}
+		/* email content */
+		#finance-table {width: 900px; margin: 0 auto; z-index: 999;}
+		#finance-table a {font-family: 'Roboto', sans-serif; font-size: 15px;}
+		#finance-table a:hover {color: red;}
+		.email-outline {
+			color: blue;
+			-webkit-text-fill-color: transparent; -moz-text-fill-color: transparent; -o-text-fill-color: transparent; text-fill-color: transparent;
+			-webkit-text-stroke-width: 1px; -moz-text-stroke-width: 1px; -o-text-stroke-width: 1px; text-stroke-width: 1px;
+			-webkit-text-stroke-color: blue; -moz-text-stroke-color: blue; -o-text-stroke-color: blue; text-stroke-color: blue;
+		}
+		/* #junk {height: 460px;} */
+		/* #junk #finance-unsub-left {text-align: center; -ms-transform: rotate(-90deg); -webkit-transform: rotate(-90deg); transform: rotate(-90deg); width: 150px; margin-top: -155px; /* -(460/4) left: 0; position: absolute; font-size: 13px;} */
+		/* #junk #finance-unsub-right {text-align: center; -ms-transform: rotate(90deg); -webkit-transform: rotate(90deg); transform: rotate(90deg); width: 150px; margin-top: -155px; /* -(460/4) right: 0; position: absolute; font-size: 13px;} */
+	</style>
+</head>
+<body class="single single-post postid-234 single-format-standard group-blog">
+	<div id="page" class="site">
+		<div id="content" class="site-content">
+			<div class="header">
+				<div class="left-title" id="left-title"><h1>About</h1></div>
+				<div class="back"><a href="http://jjmoi.com/about/#" id="back-button" onclick="toggleChats();return false;"><img src="./bbb_files/back.png"></a></div>
+				<div class="right-title" id="right-title">
+					<h1>Emailing</h1><h2>Active 2 hours ago</h2>
+				</div>
+				<a href="http://www.jjmoi.com/login" id="login">Log In</a>
+			</div>
+			<!-- CONTAINER -->
+			<div class="chat-container">
+				<!-- BUDDY LIST -->
+				<div class="buddy-list" id="buddy-list">
+					<a class="buddy buddy-no" href="http://jjmoi.com/about/blurbing.html">
+						<div class="avatar-no" style="background-image: url('img/profile-item.png') "></div>
+						<h1>🗯 Blurbing</h1><h2>Bio</h2>
+					</a>
+					<a class="buddy buddy-no" href="http://jjmoi.com/about/sprinting.html">
+						<div class="avatar-no" style="background-image: url('img/profile-item.png') "></div>
+						<h1>💃 Sprinting</h1><h2>Show critical metadata for each plan</h2>
+					</a>
+					<a class="buddy buddy-no" href="http://jjmoi.com/about/meeting.html">
+						<div class="avatar-no" style="background-image: url('img/profile-item.png') "></div>
+						<h1>📆 Meeting</h1><h2>7pm Chris @Koja</h2>
+					</a>
+					<a class="buddy buddy-no" href="http://jjmoi.com/about/reading.html">
+						<div class="avatar-no" style="background-image: url('img/profile-item.png') "></div>
+						<h1>📖 Reading</h1><h2>Kintsugi</h2>
+					</a>
+					<a class="buddy buddy-no" href="http://jjmoi.com/about/listening.html">
+						<div class="avatar-no" style="background-image: url('img/profile-item.png') "></div>
+						<h1>🎧 Listening</h1><h2>Yelle - Tu Es Beau</h2>
+					</a>
+					<a class="buddy buddy-no" href="http://jjmoi.com/about/spending.html">
+						<div class="avatar-no" style="background-image: url('img/profile-item.png') "></div>
+						<h1>💸 Spending</h1><h2>Cajun Crab</h2>
+					</a>
+					<a class="buddy buddy-no" href="http://jjmoi.com/about/exploring.html">
+						<div class="avatar-no" style="background-image: url('img/profile-item.png') "></div>
+						<h1>🚀 Exploring</h1><h2>Oslo</h2>
+					</a>
+					<hr>
+					<!-- recent chats -->
+					<p class="nav-title" id="emaillist-icon">
+						<a title="Chat" id="nav-chatlist" onclick="openSublist1('chatlist')">💬</a>
+						<a title="Inbox" id="nav-inboxlist" onclick="openSublist2('inboxlist')">📬</a>
+						<a title="Trash" class="selected-tab" id="nav-trashlist" onclick="openSublist3('trashlist')">🗑️</a>
+						<a title="Compose" id="nav-compose" href="mailto:heyheyjjmoi@gmail.com?Subject=hey hey jj!">📝</a>
+					</p>
+					<div class="togglelist" id="chatlist" style="display: none;">
+						<a class="buddy" href="mommy.html#207087522">
+							<div class="avatar" style="background-image: url('img/profile-mommy.jpg') "></div>
+							<h1>Mommy<span class="buddydate">Sun</span></h1><h2>miss you</h2>
+						</a>
+						<a class="buddy" href="ant.html#9812414562">
+							<div class="avatar" style="background-image: url('img/profile-ant.jpg') "></div>
+							<h1>Ant<span class="buddydate">Sun</span></h1><h2>You: jaa</h2>
+						</a>
+						<a class="buddy" href="tiip.html#1461356322">
+							<div class="avatar" style="background-image: url('img/profile-tiip.jpg')"></div>
+							<h1>Tiip<span class="buddydate">Thu</span></h1><h2>gntt mnjj</h2>
+						</a>
+						<a class="buddy" href="adam.html#8428109071">
+							<div class="avatar" style="background-image: url('img/profile-adam.jpg') "></div>
+							<h1>Adam<span class="buddydate">Wed</span></h1><h2>wtf?</h2>
+						</a>
+						<a class="buddy" href="zach.html#825702271">
+							<div class="avatar" style="background-image: url('img/profile-zach.jpg') "></div>
+							<h1>Zach<span class="buddydate">Wed</span></h1><h2>You: hi to everyone og!</h2>
+						</a>
+						<a class="buddy" href="dooj.html#0817927825">
+							<div class="avatar" style="background-image: url('img/profile-dooj.jpg') "></div>
+							<h1>DOoj<span class="buddydate">Nov 30</span></h1><h2>👌</h2>
+						</a>
+						<a class="buddy" href="johnorland.html#1734591033">
+							<div class="avatar" style="background-image: url('img/profile-johnorland.jpg') "></div>
+							<h1>John Orland<span class="buddydate">Sep 16</span></h1><h2>👍</h2>
+						</a>
+						<a class="buddy" href="dd.html#07075982114">
+							<div class="avatar" style="background-image: url('img/profile-dd.jpg') "></div>
+							<h1>Dd<span class="buddydate">Jul 7</span></h1><h2>You: though i dont really know...</h2>
+						</a>
+					</div>
+					<div class="togglelist" id="inboxlist" style="display: none;">
+						<a class="buddy buddy-no" href="hey.html">
+							<div class="avatar-no"></div>
+							<h1 title="nicksanta@gmail.com">Nick<span class="buddydate">Today</span></h1><h2>Hey!<span class="buddydate">🌟</span></h2>
+						</a>
+						<a class="buddy buddy-no" href="meet-peristyle-a-new-sans-serif.html">
+							<div class="avatar-no"></div>
+							<h1 title="mail@typography.com">Hoefler&Co.<span class="buddydate">Today</span></h1><h2>Meet Peristyle, a new sans serif<span class="buddydate"></span></h2>
+						</a>
+						<a class="buddy buddy-no" href="secrets-of-the-playa.html">
+							<div class="avatar-no"></div>
+							<h1 title="mfoxy@gmail.com">M Foxy<span class="buddydate">Today</span></h1><h2>Secrets of the Playa<span class="buddydate">🔥</span></h2>
+						</a>
+						<a class="buddy buddy-no" href="accept-katt's-invitation-to-melbourne.html">
+							<div class="avatar-no"></div>
+							<h1 title="noreply@airbnb.com">Airbnb<span class="buddydate">Yesterday</span></h1><h2>Accept Katt's Invitation to Melbourne<span class="buddydate"></span></h2>
+						</a>
+					</div>
+					<div class="togglelist" id="trashlist">
+						<a class="buddy buddy-no" href="make-over-8614-working-at-home.html">
+							<div class="avatar-no"></div>
+							<h1 title="info@online-success-plan.com">Online Success Plan<span class="buddydate">Today</span></h1><h2>Make over $8,614 working at home<span class="buddydate">🚮</span></h2>
+						</a>
+						<a class="buddy buddy-no" href="new_private_message_from-jeannette.html">
+							<div class="avatar-no"></div>
+							<h1 title="mail@loop.com">RussianGirl_For-U<span class="buddydate">Yesterday</span></h1><h2>New_Private_Message_from Jeannette<span class="buddydate">🚮</span></h2>
+						</a>
+						<a class="buddy buddy-no" href="get-the-latest-from-the-weeknd.html">
+							<div class="avatar-no"></div>
+							<h1 title="email@email-puma.com">PUMA<span class="buddydate">Yesterday</span></h1><h2>Get the Latest from The Weeknd<span class="buddydate">🗑</span></h2>
+						</a>
+						<a class="buddy buddy-no" href="stop-living-in-fear.html">
+							<div class="avatar-no"></div>
+							<h1 title="information@noreply-optimal.com">Optimal Tax Relief<span class="buddydate">Wed</span></h1><h2>Stop living in Fear!<span class="buddydate">🚮</span></h2>
+						</a>
+						<a class="buddy buddy-no" href="hey-heyheyjjmoi.html">
+							<div class="avatar-no"></div>
+							<h1 title="Carole@o8ueybkfy1t0.8z415080.zisco.com">Amanda<span class="buddydate">Wed</span></h1><h2>Hey heyheyjjmoi !!<span class="buddydate">🚮</span></h2>
+						</a>
+						<a class="buddy buddy-no selected" href="waiting-for-your-response.html">
+							<div class="avatar-no"></div>
+							<h1 title="us@badloans.monthlytopoffers-center.com">Finance Department<span class="buddydate">Tue</span></h1><h2>Waiting For Your Response<span class="buddydate">🚮</span></h2>
+						</a>
+						<a class="buddy buddy-no" href="classic-cases-for-iphone-x.html">
+							<div class="avatar-no"></div>
+							<h1 title="hello@grovemade.com">Grovemade<span class="buddydate">Tue</span></h1><h2>Classic Cases for iPhone X<span class="buddydate">🗑</span></h2>
+						</a>
+						<a class="buddy buddy-no" href="someone_is_waiting_for_you.html">
+							<div class="avatar-no"></div>
+							<h1 title="LUMFUDFEWQPU@someoneiswaitingforyou.com">Ava Bride<span class="buddydate">Mon</span></h1><h2>Someone_Is_Waiting_For_You<span class="buddydate">🚮</span></h2>
+						</a>
+					</div>
+				</div>
+				<!-- end BUDDY LIST -->
+				<!-- start chat thread -->
+				<div class="chat-thread email-rapper">
+					<p id="email-subject">Waiting For Your Response<span class="email-date">🚮</span></p>
+					<p class="from-to"><span class="sender" title="us@badloans.monthlytopoffers-center.com">Finance Department</span> <span>to</span> <span title="heyheyjjmoi@gmail.com">me</span><span class="email-date">Wed</span></p>
+					<div id="junk" style="background-color: #fcedbb; padding: 30px;">
+						<table id="finance-table" style="font-family: 'Roboto', sans-serif; font-size: 15px;">
+							<tbody>
+								<tr>
+									<td width="150"><a>Unsubscribe</a></td>
+									<td width="150"><a>here</a></td>
+									<td width="150"></td>
+									<td width="150"></td>
+									<td width="150"></td>
+									<td width="150"></td>
+								</tr>
+								<tr>
+									<td width="150"><a>Unsubscribe</a></td>
+									<td width="150"><a>here</a></td>
+									<td width="150"></td>
+									<td width="150"></td>
+									<td width="150"></td>
+									<td width="150"></td>
+								</tr>
+								<tr>
+									<td width="150"><a>Unsubscribe</a></td>
+									<td width="150"><a>here</a></td>
+									<td width="150"></td>
+									<td width="150"></td>
+									<td width="150"></td>
+									<td width="150"></td>
+								</tr>
+								<tr>
+									<td width="150"><a>Unsubscribe</a></td>
+									<td width="150"><a>here</a></td>
+									<td width="150"></td>
+									<td width="150"></td>
+									<td width="150"></td>
+									<td width="150"></td>
+								</tr>
+								<tr>
+									<td width="150"><a>Unsubscribe</a></td>
+									<td width="150"><a>here</a></td>
+									<td width="150"></td>
+									<td width="150"></td>
+									<td width="150"></td>
+									<td width="150"></td>
+								</tr>
+							</tbody>
+						</table>
+						<div style="position: relative; top: -50px; z-index: 1;">
+							<p class="eczar" style="text-align: right;">Up to $35,000</p>
+							<p class="eczar email-outline" style="text-align: left;">Available Without</p>
+							<p class="eczar email-outline" style="text-align: center;">Collateral</p>
+							<p class="eczar" style="text-align: right;">Fast + Secure</p>
+							<p class="eczar" style="text-align: right;">All Online</p>
+						</div>
+						<!--<p class="roboto" id="finance-unsub-left">Unsubscribe</p>
+						<p class="roboto" id="finance-unsub-right">Unsubscribe</p>-->
+						<table id="finance-table" style="font-family: 'Roboto', sans-serif; font-size: 15px; margin-top: 30px;">
+							<tbody>
+								<tr>
+									<td width="150">Confirmation</td>
+									<td width="150">is</td>
+									<td width="150">needed</td>
+									<td width="150"></td>
+									<td width="150"></td>
+									<td width="150"></td>
+								</tr>
+								<tr>
+									<td width="150"></td>
+									<td width="150"><a>Request</a></td>
+									<td width="150"><a>Now</a></td>
+									<td width="150"><a>!!!</a></td>
+									<td width="150"></td>
+									<td width="150"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<script>
+					function toggleChats() {
+						document.getElementById("buddy-list").style.display = "block";
+						document.getElementById("chat-thread").style.display = "none";
+						document.getElementById("back-button").style.display = "none";
+						document.getElementById('right-title').className += 'mobile-hide';
+						document.getElementById('left-title').className += 'mobile-show';
+					}
+					function openSublist1(listName) {
+						var x = document.getElementsByClassName("togglelist");
+						document.getElementById("chatlist").style.display = "block";
+						document.getElementById("inboxlist").style.display = "none";
+						document.getElementById("trashlist").style.display = "none";
+						document.getElementById("nav-chatlist").style.opacity = "0.7";
+						document.getElementById("nav-inboxlist").style.opacity = "1";
+						document.getElementById("nav-trashlist").style.opacity = "1";
+					}
+					function openSublist2(listName) {
+						var x = document.getElementsByClassName("togglelist");
+						document.getElementById("chatlist").style.display = "none";
+						document.getElementById("inboxlist").style.display = "block";
+						document.getElementById("trashlist").style.display = "none";
+						document.getElementById("nav-chatlist").style.opacity = "1";
+						document.getElementById("nav-inboxlist").style.opacity = "0.7";
+						document.getElementById("nav-trashlist").style.opacity = "1";
+					}
+					function openSublist3(listName) {
+						var x = document.getElementsByClassName("togglelist");
+						document.getElementById("chatlist").style.display = "none";
+						document.getElementById("inboxlist").style.display = "none";
+						document.getElementById("trashlist").style.display = "block";
+						document.getElementById("nav-chatlist").style.opacity = "1";
+						document.getElementById("nav-inboxlist").style.opacity = "1";
+						document.getElementById("nav-trashlist").style.opacity = "0.7";
+					}			
+				</script>
+			</div>
+			<script src="./talkturkey/jquery.js"></script>
+		</div>
+		<script type="text/javascript" src="./talkturkey/navigation.js"></script>
+		<script type="text/javascript" src="./talkturkey/skip-link-focus-fix.js"></script>
+		<script type="text/javascript" src="./talkturkey/comment-reply.min.js"></script>
+		<script type="text/javascript" src="./talkturkey/wp-embed.min.js"></script>
+	</div>
+</body>
+</html>
