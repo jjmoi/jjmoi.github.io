@@ -2039,3 +2039,7 @@ p.email-attachment {
 	color: #bbb;
 	font-size: 13px;
 }
+
+#selected-tab {
+	font-size: 26px;
+}
