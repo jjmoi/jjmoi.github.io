@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Email — Go back in time with Sublime</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<link rel="stylesheet" id="chats-style-css" href="./talkturkey/style.css" type="text/css" media="all">
+	<style>
+		.chat-thread {margin-bottom: 0;}
+		hr {margin: 0; padding: 0;}
+		.chat-thread a {color: #404040; text-decoration: underline; text-decoration-color: #29e5ac;}
+		.chat-thread a:hover {color: #29e5ac;}
+		.chat-thread a, .chat-thread a:hover, .chat-thread a:active, .chat-thread a:focus {outline: none;}
+		.text-decoration-none, .text-decoration-none:hover, .text-decoration-none a, .text-decoration-none a:hover {text-decoration: none;}
+		.email-rapper p {padding: 0;}
+	</style>
+</head>
+<body class="single single-post postid-234 single-format-standard group-blog">
+	<div id="page" class="site">
+		<div id="content" class="site-content">
+			<div class="header">
+				<div class="left-title" id="left-title"><h1>About</h1></div>
+				<div class="back"><a href="http://jjmoi.com/about/#" id="back-button" onclick="toggleChats();return false;"><img src="./bbb_files/back.png"></a></div>
+				<div class="right-title" id="right-title">
+					<h1>Emailing</h1><h2>Active 2 hours ago</h2>
+				</div>
+				<a href="http://www.jjmoi.com/login" id="login">Log In</a>
+			</div>
+			<!-- CONTAINER -->
+			<div class="chat-container">
+				<!-- BUDDY LIST -->
+				<div class="buddy-list" id="buddy-list">
+					<a class="buddy buddy-no" href="http://jjmoi.com/about/blurbing.html">
+						<div class="avatar-no" style="background-image: url('img/profile-item.png') "></div>
+						<h1>🗯 Blurbing</h1><h2>Bio</h2>
+					</a>
+					<a class="buddy buddy-no" href="http://jjmoi.com/about/sprinting.html">
+						<div class="avatar-no" style="background-image: url('img/profile-item.png') "></div>
+						<h1>💃 Sprinting</h1><h2>Show critical metadata for each plan</h2>
+					</a>
+					<a class="buddy buddy-no" href="http://jjmoi.com/about/meeting.html">
+						<div class="avatar-no" style="background-image: url('img/profile-item.png') "></div>
+						<h1>📆 Meeting</h1><h2>7pm Chris @Koja</h2>
+					</a>
+					<a class="buddy buddy-no" href="http://jjmoi.com/about/reading.html">
+						<div class="avatar-no" style="background-image: url('img/profile-item.png') "></div>
+						<h1>📖 Reading</h1><h2>Kintsugi</h2>
+					</a>
+					<a class="buddy buddy-no" href="http://jjmoi.com/about/listening.html">
+						<div class="avatar-no" style="background-image: url('img/profile-item.png') "></div>
+						<h1>🎧 Listening</h1><h2>Yelle - Tu Es Beau</h2>
+					</a>
+					<a class="buddy buddy-no" href="http://jjmoi.com/about/spending.html">
+						<div class="avatar-no" style="background-image: url('img/profile-item.png') "></div>
+						<h1>💸 Spending</h1><h2>Cajun Crab</h2>
+					</a>
+					<a class="buddy buddy-no" href="http://jjmoi.com/about/exploring.html">
+						<div class="avatar-no" style="background-image: url('img/profile-item.png') "></div>
+						<h1>🚀 Exploring</h1><h2>Oslo</h2>
+					</a>
+					<hr>
+					<!-- recent chats -->
+					<p class="nav-title" id="emaillist-icon">
+						<a title="Chat" id="nav-chatlist" onclick="openSublist1('chatlist')">💬</a>
+						<a title="Inbox" class="selected-tab" id="nav-inboxlist" onclick="openSublist2('inboxlist')">📬</a>
+						<a title="Trash" id="nav-trashlist" onclick="openSublist3('trashlist')">🗑️</a>
+						<a title="Compose" id="nav-compose" href="mailto:heyheyjjmoi@gmail.com?Subject=hey hey jj!">📝</a>
+					</p>
+					<div class="togglelist" id="chatlist" style="display: none;">
+						<a class="buddy" href="mommy.html#207087522">
+							<div class="avatar" style="background-image: url('img/profile-mommy.jpg') "></div>
+							<h1>Mommy<span class="buddydate">Sun</span></h1><h2>miss you</h2>
+						</a>
+						<a class="buddy" href="ant.html#9812414562">
+							<div class="avatar" style="background-image: url('img/profile-ant.jpg') "></div>
+							<h1>Ant<span class="buddydate">Sun</span></h1><h2>You: jaa</h2>
+						</a>
+						<a class="buddy" href="tiip.html#1461356322">
+							<div class="avatar" style="background-image: url('img/profile-tiip.jpg')"></div>
+							<h1>Tiip<span class="buddydate">Thu</span></h1><h2>gntt mnjj</h2>
+						</a>
+						<a class="buddy" href="adam.html#8428109071">
+							<div class="avatar" style="background-image: url('img/profile-adam.jpg') "></div>
+							<h1>Adam<span class="buddydate">Wed</span></h1><h2>wtf?</h2>
+						</a>
+						<a class="buddy" href="zach.html#825702271">
+							<div class="avatar" style="background-image: url('img/profile-zach.jpg') "></div>
+							<h1>Zach<span class="buddydate">Wed</span></h1><h2>You: hi to everyone og!</h2>
+						</a>
+						<a class="buddy" href="dooj.html#0817927825">
+							<div class="avatar" style="background-image: url('img/profile-dooj.jpg') "></div>
+							<h1>DOoj<span class="buddydate">Nov 30</span></h1><h2>👌</h2>
+						</a>
+						<a class="buddy" href="johnorland.html#1734591033">
+							<div class="avatar" style="background-image: url('img/profile-johnorland.jpg') "></div>
+							<h1>John Orland<span class="buddydate">Sep 16</span></h1><h2>👍</h2>
+						</a>
+						<a class="buddy" href="dd.html#07075982114">
+							<div class="avatar" style="background-image: url('img/profile-dd.jpg') "></div>
+							<h1>Dd<span class="buddydate">Jul 7</span></h1><h2>You: though i dont really know...</h2>
+						</a>
+					</div>
+					<div class="togglelist" id="inboxlist">
+						<a class="buddy buddy-no" href="hey.html">
+							<div class="avatar-no"></div>
+							<h1 title="nicksanta@gmail.com">Nick<span class="buddydate">Today</span></h1><h2>Hey!<span class="buddydate">🌟</span></h2>
+						</a>
+						<a class="buddy buddy-no selected" href="meet-peristyle-a-new-sans-serif.html">
+							<div class="avatar-no"></div>
+							<h1 title="mail@typography.com">Hoefler&Co.<span class="buddydate">Today</span></h1><h2>Meet Peristyle, a new sans serif<span class="buddydate"></span></h2>
+						</a>
+						<a class="buddy buddy-no" href="secrets-of-the-playa.html">
+							<div class="avatar-no"></div>
+							<h1 title="mfoxy@gmail.com">M Foxy<span class="buddydate">Today</span></h1><h2>Secrets of the Playa<span class="buddydate">🔥</span></h2>
+						</a>
+						<a class="buddy buddy-no" href="accept-katt's-invitation-to-melbourne.html">
+							<div class="avatar-no"></div>
+							<h1 title="noreply@airbnb.com">Airbnb<span class="buddydate">Yesterday</span></h1><h2>Accept Katt's Invitation to Melbourne<span class="buddydate"></span></h2>
+						</a>
+					</div>
+					<div class="togglelist" id="trashlist" style="display: none;">
+						<a class="buddy buddy-no" href="make-over-8614-working-at-home.html">
+							<div class="avatar-no"></div>
+							<h1 title="info@online-success-plan.com">Online Success Plan<span class="buddydate">Today</span></h1><h2>Make over $8,614 working at home<span class="buddydate">🚮</span></h2>
+						</a>
+						<a class="buddy buddy-no" href="new_private_message_from-jeannette.html">
+							<div class="avatar-no"></div>
+							<h1 title="mail@loop.com">RussianGirl_For-U<span class="buddydate">Yesterday</span></h1><h2>New_Private_Message_from Jeannette<span class="buddydate">🚮</span></h2>
+						</a>
+						<a class="buddy buddy-no" href="get-the-latest-from-the-weeknd.html">
+							<div class="avatar-no"></div>
+							<h1 title="email@email-puma.com">PUMA<span class="buddydate">Yesterday</span></h1><h2>Get the Latest from The Weeknd<span class="buddydate">🗑</span></h2>
+						</a>
+						<a class="buddy buddy-no" href="stop-living-in-fear.html">
+							<div class="avatar-no"></div>
+							<h1 title="information@noreply-optimal.com">Optimal Tax Relief<span class="buddydate">Wed</span></h1><h2>Stop living in Fear!<span class="buddydate">🚮</span></h2>
+						</a>
+						<a class="buddy buddy-no" href="hey-heyheyjjmoi.html">
+							<div class="avatar-no"></div>
+							<h1 title="Carole@o8ueybkfy1t0.8z415080.zisco.com">Amanda<span class="buddydate">Wed</span></h1><h2>Hey heyheyjjmoi !!<span class="buddydate">🚮</span></h2>
+						</a>
+						<a class="buddy buddy-no" href="waiting-for-your-response.html">
+							<div class="avatar-no"></div>
+							<h1 title="us@badloans.monthlytopoffers-center.com">Finance Department<span class="buddydate">Tue</span></h1><h2>Waiting For Your Response<span class="buddydate">🚮</span></h2>
+						</a>
+						<a class="buddy buddy-no" href="classic-cases-for-iphone-x.html">
+							<div class="avatar-no"></div>
+							<h1 title="hello@grovemade.com">Grovemade<span class="buddydate">Tue</span></h1><h2>Classic Cases for iPhone X<span class="buddydate">🗑</span></h2>
+						</a>
+						<a class="buddy buddy-no" href="someone_is_waiting_for_you.html">
+							<div class="avatar-no"></div>
+							<h1 title="LUMFUDFEWQPU@someoneiswaitingforyou.com">Ava Bride<span class="buddydate">Mon</span></h1><h2>Someone_Is_Waiting_For_You<span class="buddydate">🚮</span></h2>
+						</a>
+					</div>
+				</div>
+				<!-- end BUDDY LIST -->
+				<!-- start chat thread -->
+				<div class="chat-thread email-rapper">
+					<p id="email-subject">Go back in time with Sublime<span class="email-date"></span></p>
+					<p class="from-to" style="padding: 0 150px;"><span class="sender" title="mail@typography.com">Hoefler&Co.</span> <span>to</span> <span title="heyheyjjmoi@gmail.com">me</span><span class="email-date">Wed</span></p>
+          <table cellpadding="0" cellspacing="0" border="0" valign="top" width="100%" align="center"
+          style="width:100%; max-width:480px; background-color:#1a2656; margin: 30px auto; padding: 0px;">
+            <tr>
+              <td valign="top" align="left" style=" word-break:normal; border-collapse:collapse; font-family:'Circular', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:12px; line-height:18px; color:#555555;">
+                <center>
+                  <div id="main">
+                    <table class="hero-image-root" width="100%" cellpadding="0" cellspacing="0" style="border: none; margin: 0px; border-collapse: collapse; padding: 0px; width: 100%;">
+                      <tbody valign="middle" style="border: none; margin: 0px; padding: 0px;">
+                        <tr valign="middle" style="border: none; margin: 0px; padding: 0px;">
+                          <td valign="middle" style="border: none; margin: 0px; padding: 0px;">
+                            <center style="border: none; margin: 0px; padding: 0px;">
+                              <a href="https://open.spotify.com/user/spotify/playlist/37i9dQZF1E4Xk0JcVGlpl8"
+                              style="border: none; margin: 0px; padding: 0px; text-decoration: none;">
+                                <!--[if mso]>
+                                  <img style="width: 480px; display: block" width="480" src="http://aro.scdn.co/newsletters/785b3cf1c20ba7f14edd483cb80aa43e.gif"
+                                  />
+                                <![endif]-->
+                                <!--[if mso]>
+                                  <div style="mso-hide: all">
+                                  <![endif]-->
+                                  <img class="hero-image-image" src="http://aro.scdn.co/newsletters/785b3cf1c20ba7f14edd483cb80aa43e.gif"
+                                  width="100%" align="center" alt="" style="border: none; padding: 0px; display: block; max-width: 100%; margin: 0px auto; text-align: center; width: 100%;">
+                                  <!--[if mso]>
+                                  </div>
+                                <![endif]-->
+                              </a>
+                            </center>
+                          </td>
+                        </tr>
+                        <tr class="hero-image-padding" height="30" valign="middle" style="border: none; margin: 0px; padding: 0px; height: 30px;">
+                          <td class="hero-image-padding" height="30" valign="middle" style="border: none; margin: 0px; padding: 0px; height: 30px;"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <table class="text-root" width="100%" cellpadding="0" cellspacing="0" style="border: none; margin: 0px; border-collapse: collapse; padding: 0px; width: 100%;">
+                      <tbody valign="middle" style="border: none; margin: 0px; padding: 0px;">
+                        <tr valign="middle" style="border: none; margin: 0px; padding: 0px;">
+                          <td class="table-separator" width="6.25%" valign="middle" style="width: 6.25%; border: none; margin: 0px; padding: 0px;"></td>
+                          <td valign="middle" style="border: none; margin: 0px; padding: 0px;">
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 0px; padding: 0px">
+                              <tbody>
+                                <tr>
+                                  <td class="font text-paragraph" align="left" style="border: none; margin: 0px; padding: 0px 0px 5px; font-family: Circular, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-weight: 200; text-align: left; text-decoration: none; color: #ffffff; font-size: 16px; line-height: 22px;">
+                                    <center style="border: none; margin: 0px; padding: 0px;">Your Time Capsule is a new personalized playlist, packed with iconic tracks to
+                                      take you back in time. Enjoy 2 hours of the most memorable tracks from your teenage
+                                      years, like <span class="font text-paragraph" align="left" style="border: none; margin: 0px; padding: 0px 0px 5px; font-family: Circular, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-weight: 200; text-align: left; text-decoration: none; color: #f037a5; font-size: 16px; line-height: 22px;">Santeria</span> by
+                                      <span
+                                      class="font text-paragraph" align="left" style="border: none; margin: 0px; padding: 0px 0px 5px; font-family: Circular, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-weight: 200; text-align: left; text-decoration: none; color:#f037a5; font-size: 16px; line-height: 22px;">Sublime</span> and <span class="font text-paragraph" align="left" style="border: none; margin: 0px; padding: 0px 0px 5px; font-family: Circular, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-weight: 200; text-align: left; text-decoration: none; color: #f037a5; font-size: 16px; line-height: 22px;">Black Hole Sun</span> by
+                                        <span
+                                        class="font text-paragraph" align="left" style="border: none; margin: 0px; padding: 0px 0px 5px; font-family: Circular, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-weight: 200; text-align: left; text-decoration: none; color:#f037a5; font-size: 16px; line-height: 22px;">Soundgarden</span>, and&nbsp;more.</center>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                          <td class="table-separator" width="6.25%" valign="middle" style="width: 6.25%; border: none; margin: 0px; padding: 0px;"></td>
+                        </tr>
+                        <tr valign="middle" style="border: none; margin: 0px; padding: 0px;">
+                          <td colspan="3" class="text-padding" height="20" valign="middle" style="border: none; margin: 0px; padding: 0px; height: 20px;"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <table class="call-to-action-root" width="100%" cellpadding="0" cellspacing="0"
+                    style="border: none; margin: 0px; border-collapse: collapse; padding: 0px; width: 100%;">
+                      <tbody valign="middle" style="border: none; margin: 0px; padding: 0px;">
+                        <tr valign="middle" style="border: none; margin: 0px; padding: 0px;">
+                          <td class="table-separator" width="6.25%" valign="middle" style="width: 6.25%; border: none; margin: 0px; padding: 0px;"></td>
+                          <td class="font" valign="middle" align="left" style="border: none; margin: 0px; padding: 0px; font-family: Circular, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-weight: 200; text-align: left; text-decoration: none; font-size: 14px; line-height: 1.1em;">
+                            <center style="border: none; margin: 0px; padding: 0px;">
+                              <!--[if mso]>
+                                <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word"
+                                href="http://links.spotify.com/u/click?_t=1090098043a54e4ca3e92096868a66e3&_m=f93f254848c34f549b3c21724a0c55bb&_e=6Bmn92q-MTo0xob87Qc2hO93ErOJJdL7-lZDVbKUB0Y_oZS4TcEGF1XZm6UH8i-5tcQizHj_ZTg-WQXJ4ahSdNto5IzAgyJwQcdXSvqGx1h341kGTHgc12_tY8DPIonSXwjgeJHtiK9BmcQz27SZX4HCOza1BgGOEkAxL15266t5tPetCEADqNuVfGn3DREAx4mcGKXDq4NLEPQoUBY8ydTzI38a3vArO0oZSfXTQtBiPfjYnXek3Lvg5yjJ4sU4yubKcS8h0FxMThnDrLV_P57DxLuuA-qA95K28e65sOqaX_UVPN7u5xmsiDCpnlkyO2kGVStVgl4Sdkow470Ueg%3D%3D"
+                                style="v-text-anchor: middle; width: 240px; height: 44px; text-decoration: none; color: #FFFFFF; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif; font-size: 13px; font-weight: bold; line-height: 44px"
+                                arcsize="50%" fillcolor="#f037a5" strokecolor="#f037a5">
+                                  <w:anchorlock/>
+                                  <center style="color: #FFFFFF; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif; font-size: 13px; font-weight: bold; line-height: 16px; text-transform:uppercase">Listen Now</center>
+                                </v:roundrect>
+                              <![endif]-->
+                              <!--[if mso]>
+                                <div style="mso-hide: all">
+                                <![endif]-->
+                                <a href="https://open.spotify.com/user/spotify/playlist/37i9dQZF1E4Xk0JcVGlpl8"
+                                class="call-to-action-button" bgcolor="#1ED760" style="border: none; margin: 0px; padding: 0px; text-decoration: none; width: 240px; height: 44px; background-color: #f037a5; border-radius: 22px; color: rgb(255, 255, 255); display: block;">
+                                  <table class="call-to-action-container" width="240" height="44" cellpadding="0"
+                                  cellspacing="0" style="border: none; margin: 0px; border-collapse: collapse; padding: 0px; width: 240px; height: 44px;">
+                                    <tbody valign="middle" style="border: none; margin: 0px; padding: 0px;">
+                                      <tr valign="middle" style="border: none; margin: 0px; padding: 0px;">
+                                        <td class="call-to-action-inner-padding" width="22" valign="middle" style="border: none; margin: 0px; padding: 0px; width: 22px;"></td>
+                                        <td class="font call-to-action-cell" height="100%" valign="middle" align="center"
+                                        style="border: none; margin: 0px; padding: 0px; font-family: Circular, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; text-decoration: none; border-radius: 22px; color: rgb(255, 255, 255); font-size: 13px; font-weight: bold; height: 100%; line-height: 16px; text-align: center; text-transform: uppercase;">Listen Now</td>
+                                        <td class="call-to-action-inner-padding" width="22" valign="middle"
+                                        style="border: none; margin: 0px; padding: 0px; width: 22px;"></td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </a>
+                                <!--[if mso]>
+                                </div>
+                              <![endif]-->
+                            </center>
+                          </td>
+                          <td class="table-separator" width="6.25%" valign="middle" style="width: 6.25%; border: none; margin: 0px; padding: 0px;"></td>
+                        </tr>
+                        <tr class="call-to-action-padding" height="35" valign="middle" style="border: none; margin: 0px; padding: 0px; height: 35px;">
+                          <td colspan="3" class="call-to-action-padding" height="35" valign="middle" style="border: none; margin: 0px; padding: 0px; height: 35px;"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <style style="border: none; margin: 0px; padding: 0px;">
+                      .footer-root a.footer-link{color:#6d6d6d;text-decoration:none;font-weight:bold}
+                    </style>
+                    <table class="footer-padding-root" width="100%" cellpadding="0" cellspacing="0"
+                    style="border: none; margin: 0px; border-collapse: collapse; padding: 0px; width: 100%;">
+                      <tbody valign="middle" style="border: none; margin: 0px; padding: 0px;">
+                        <tr class="footer-padding" height="22" valign="middle" style="border: none; margin: 0px; padding: 0px; height: 22px;">
+                          <td colspan="3" class="footer-padding" height="22" valign="middle" style="border: none; margin: 0px; padding: 0px; height: 22px;"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <table class="footer-root" width="100%" cellpadding="0" cellspacing="0" bgcolor="#F7F7F7"
+                    style="border: none; margin: 0px; border-collapse: collapse; padding: 0px; background-color: rgb(247, 247, 247); width: 100%;">
+                      <tbody valign="middle" style="border: none; margin: 0px; padding: 0px;">
+                        <tr class="footer-bottom-padding" height="25" valign="middle" style="border: none; margin: 0px; padding: 0px; height: 25px;">
+                          <td colspan="3" class="footer-bottom-padding" height="25" valign="middle" style="border: none; margin: 0px; padding: 0px; height: 25px;"></td>
+                        </tr>
+                        <tr valign="middle" style="border: none; margin: 0px; padding: 0px;">
+                          <td width="6.25%" valign="middle" style="border: none; margin: 0px; padding: 0px; width: 6.25%;"></td>
+                          <td valign="middle" style="border: none; margin: 0px; padding: 0px;">
+                            <img class="footer-logo" src="http://aro.spotify.s3.amazonaws.com/newsletter/images/logo_footer.png"
+                            width="77" height="23" alt="" style="border: none; margin: 0px; padding: 0px; display: block; max-width: 100%; width: 77px; height: 23px;">
+                          </td>
+                          <td width="6.25%" valign="middle" style="border: none; margin: 0px; padding: 0px; width: 6.25%;"></td>
+                        </tr>
+                        <tr class="footer-bottom-padding" height="25" valign="middle" style="border: none; margin: 0px; padding: 0px; height: 25px;">
+                          <td colspan="3" class="footer-bottom-padding" height="25" valign="middle" style="border: none; margin: 0px; padding: 0px; height: 25px;"></td>
+                        </tr>
+                        <tr valign="middle" style="border: none; margin: 0px; padding: 0px;">
+                          <td width="6.25%" valign="middle" style="border: none; margin: 0px; padding: 0px; width: 6.25%;"></td>
+                          <td valign="middle" style="border: none; margin: 0px; padding: 0px;">
+                            <hr bgcolor="#D1D5D9" style="border: none; margin: 0px; padding: 0px; background-color: rgb(209, 213, 217); height: 1px;">
+                          </td>
+                          <td width="6.25%" valign="middle" style="border: none; margin: 0px; padding: 0px; width: 6.25%;"></td>
+                        </tr>
+                        <tr class="footer-top-padding" height="12" valign="middle" style="border: none; margin: 0px; padding: 0px; height: 12px;">
+                          <td colspan="3" class="footer-top-padding" height="12" valign="middle" style="border: none; margin: 0px; padding: 0px; height: 12px;"></td>
+                        </tr>
+                        <tr valign="middle" style="border: none; margin: 0px; padding: 0px;">
+                          <td width="6.25%" valign="middle" style="border: none; margin: 0px; padding: 0px; width: 6.25%;"></td>
+                          <td class="font" valign="middle" align="left" style="border: none; margin: 0px; padding: 0px; font-family: Circular, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-weight: 200; text-align: left; text-decoration: none; color: rgb(136, 137, 140); font-size: 11px; line-height: 1.65em;">Get Spotify for: &nbsp;
+                            <a class="footer-separated-text" href="https://itunes.apple.com/app/spotify-music/id324684580"
+                            style="border-top: none; border-bottom: none; border-image: initial; margin: 0px; text-decoration: none; border-right: 1px solid rgb(195, 195, 195); display: inline-block; padding: 0px 7px 0px 0px; border-left: none; color: rgb(109, 109, 109); font-weight: bold;">iPhone</a>
+                            <a class="footer-separated-text" href="https://itunes.apple.com/app/spotify-music/id324684580"
+                            style="border-top: none; border-bottom: none; border-image: initial; margin: 0px; text-decoration: none; border-right: 1px solid rgb(195, 195, 195); border-left: 1px solid transparent; display: inline-block; padding: 0px 7px; color: rgb(109, 109, 109); font-weight: bold;">iPad</a>
+                            <a class="footer-separated-text" href="https://play.google.com/store/apps/details?id=com.spotify.music"
+                            style="border-top: none; border-bottom: none; border-image: initial; margin: 0px; text-decoration: none; border-right: 1px solid rgb(195, 195, 195); border-left: 1px solid transparent; display: inline-block; padding: 0px 7px; color: rgb(109, 109, 109); font-weight: bold;">Android</a>
+                            <a class="footer-separated-text" href="https://www.spotify.com/download/"
+                            style="border-top: none; border-bottom: none; border-image: initial; margin: 0px; text-decoration: none; border-left: 1px solid transparent; display: inline-block; padding: 0px 0px 0px 7px; border-right: none; color: rgb(109, 109, 109); font-weight: bold;">Other</a>
+                          </td>
+                          <td width="6.25%" valign="middle" style="border: none; margin: 0px; padding: 0px; width: 6.25%;"></td>
+                        </tr>
+                        <tr class="footer-top-padding" height="12" valign="middle" style="border: none; margin: 0px; padding: 0px; height: 12px;">
+                          <td colspan="3" class="footer-top-padding" height="12" valign="middle" style="border: none; margin: 0px; padding: 0px; height: 12px;"></td>
+                        </tr>
+                        <tr valign="middle" style="border: none; margin: 0px; padding: 0px;">
+                          <td width="6.25%" valign="middle" style="border: none; margin: 0px; padding: 0px; width: 6.25%;"></td>
+                          <td valign="middle" style="border: none; margin: 0px; padding: 0px;">
+                            <hr bgcolor="#D1D5D9" style="border: none; margin: 0px; padding: 0px; background-color: rgb(209, 213, 217); height: 1px;">
+                          </td>
+                          <td width="6.25%" valign="middle" style="border: none; margin: 0px; padding: 0px; width: 6.25%;"></td>
+                        </tr>
+                        <tr class="footer-bottom-padding" height="25" valign="middle" style="border: none; margin: 0px; padding: 0px; height: 25px;">
+                          <td colspan="3" class="footer-bottom-padding" height="25" valign="middle" style="border: none; margin: 0px; padding: 0px; height: 25px;"></td>
+                        </tr>
+                        <tr valign="middle" style="border: none; margin: 0px; padding: 0px;">
+                          <td width="6.25%" valign="middle" style="border: none; margin: 0px; padding: 0px; width: 6.25%;"></td>
+                          <td class="font" valign="middle" align="left" style="border: none; margin: 0px; padding: 0px; font-family: Circular, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-weight: 200; text-align: left; text-decoration: none; color: rgb(136, 137, 140); font-size: 11px; line-height: 1.65em;">This message was sent to mike.nelson@lonelyplanet.com. If you don't want to receive
+                            these emails from Spotify in the future, you can
+                            <a class="footer-link" href="#"
+                            style="border: none; margin: 0px; padding: 0px; font-family: Circular, &quot; HelveticaNeue&quot;,Helvetica,Arial,sans-serif;text-align: left; color: rgb(109, 109, 109); text-decoration: none; font-weight: bold;"
+                               align="left">edit your profile</a> or
+                            <a class="footer-link" href="#"
+                            style="border: none; margin: 0px; padding: 0px; font-family: Circular, &quot; HelveticaNeue&quot;,Helvetica,Arial,sans-serif;text-align: left; color: rgb(109, 109, 109); text-decoration: none; font-weight: bold;"
+                            align="left">unsubscribe</a>.</td>
+                          <td width="6.25%" valign="middle" style="border: none; margin: 0px; padding: 0px; width: 6.25%;"></td>
+                        </tr>
+                        <tr class="footer-middle-padding" height="33" valign="middle" style="border: none; margin: 0px; padding: 0px; height: 33px;">
+                          <td colspan="3" class="footer-middle-padding" height="33" valign="middle" style="border: none; margin: 0px; padding: 0px; height: 33px;"></td>
+                        </tr>
+                        <tr valign="middle" style="border: none; margin: 0px; padding: 0px;">
+                          <td width="6.25%" valign="middle" style="border: none; margin: 0px; padding: 0px; width: 6.25%;"></td>
+                          <td class="font font-small" valign="middle" align="left" style="border: none; margin: 0px; padding: 0px; font-family: Circular, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-weight: 200; text-align: left; text-decoration: none; color: rgb(136, 137, 140); line-height: 1.65em; font-size: 11px;">
+                            <a class="footer-separated-text" href="https://www.spotify.com/legal/end-user-agreement/"
+                            style="border-top: none; border-bottom: none; border-image: initial; margin: 0px; text-decoration: none; border-right: 1px solid rgb(195, 195, 195); display: inline-block; padding: 0px 7px 0px 0px; border-left: none; color: rgb(109, 109, 109); font-weight: bold;">Terms of Use</a>
+                            <a class="footer-separated-text" href="https://www.spotify.com/legal/privacy-policy/"
+                            style="border-top: none; border-bottom: none; border-image: initial; margin: 0px; text-decoration: none; border-right: 1px solid rgb(195, 195, 195); border-left: 1px solid transparent; display: inline-block; padding: 0px 7px; color: rgb(109, 109, 109); font-weight: bold;">Privacy Policy</a>
+                            <a class="footer-separated-text" href="https://www.spotify.com/about-us/contact/"
+                            style="border-top: none; border-bottom: none; border-image: initial; margin: 0px; text-decoration: none; border-left: 1px solid transparent; display: inline-block; padding: 0px 0px 0px 7px; border-right: none; color: rgb(109, 109, 109); font-weight: bold;">Contact Us</a>
+                          </td>
+                          <td width="6.25%" valign="middle" style="border: none; margin: 0px; padding: 0px; width: 6.25%;"></td>
+                        </tr>
+                        <tr valign="middle" style="border: none; margin: 0px; padding: 0px;">
+                          <td colspan="3" class="footer-top-padding" height="12" valign="middle" style="border: none; margin: 0px; padding: 0px; height: 12px;"></td>
+                        </tr>
+                        <tr valign="middle" style="border: none; margin: 0px; padding: 0px;">
+                          <td width="6.25%" valign="middle" style="border: none; margin: 0px; padding: 0px; width: 6.25%;"></td>
+                          <td class="font font-small" valign="middle" align="left" style="border: none; margin: 0px; padding: 0px; font-family: Circular, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-weight: 200; text-align: left; text-decoration: none; color: rgb(136, 137, 140); line-height: 1.65em; font-size: 11px;">
+                            <!---->Spotify USA Inc, 45 W. 18th Street, 7th Floor, New York, NY 10011, USA
+                            <!---->
+                          </td>
+                          <td width="6.25%" valign="middle" style="border: none; margin: 0px; padding: 0px; width: 6.25%;"></td>
+                        </tr>
+                        <tr height="20" valign="middle" style="border: none; margin: 0px; padding: 0px; height: 20px;">
+                          <td colspan="3" class="footer-bottom-padding" height="25" valign="middle" style="border: none; margin: 0px; padding: 0px; height: 25px;"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </center>
+              </td>
+            </tr>
+          </table>
+				</div>
+				<script>
+					function toggleChats() {
+						document.getElementById("buddy-list").style.display = "block";
+						document.getElementById("chat-thread").style.display = "none";
+						document.getElementById("back-button").style.display = "none";
+						document.getElementById('right-title').className += 'mobile-hide';
+						document.getElementById('left-title').className += 'mobile-show';
+					}
+					function openSublist1(listName) {
+						var x = document.getElementsByClassName("togglelist");
+						document.getElementById("chatlist").style.display = "block";
+						document.getElementById("inboxlist").style.display = "none";
+						document.getElementById("trashlist").style.display = "none";
+						document.getElementById("nav-chatlist").style.opacity = "0.7";
+						document.getElementById("nav-inboxlist").style.opacity = "1";
+						document.getElementById("nav-trashlist").style.opacity = "1";
+					}
+					function openSublist2(listName) {
+						var x = document.getElementsByClassName("togglelist");
+						document.getElementById("chatlist").style.display = "none";
+						document.getElementById("inboxlist").style.display = "block";
+						document.getElementById("trashlist").style.display = "none";
+						document.getElementById("nav-chatlist").style.opacity = "1";
+						document.getElementById("nav-inboxlist").style.opacity = "0.7";
+						document.getElementById("nav-trashlist").style.opacity = "1";
+					}
+					function openSublist3(listName) {
+						var x = document.getElementsByClassName("togglelist");
+						document.getElementById("chatlist").style.display = "none";
+						document.getElementById("inboxlist").style.display = "none";
+						document.getElementById("trashlist").style.display = "block";
+						document.getElementById("nav-chatlist").style.opacity = "1";
+						document.getElementById("nav-inboxlist").style.opacity = "1";
+						document.getElementById("nav-trashlist").style.opacity = "0.7";
+					}			
+				</script>
+			</div>
+			<script src="./talkturkey/jquery.js"></script>
+		</div>
+		<script type="text/javascript" src="./talkturkey/navigation.js"></script>
+		<script type="text/javascript" src="./talkturkey/skip-link-focus-fix.js"></script>
+		<script type="text/javascript" src="./talkturkey/comment-reply.min.js"></script>
+		<script type="text/javascript" src="./talkturkey/wp-embed.min.js"></script>
+	</div>
+</body>
+</html>
