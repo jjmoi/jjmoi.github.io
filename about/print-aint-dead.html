@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Email — Print Ain't Dead</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<link rel="stylesheet" id="chats-style-css" href="./talkturkey/style.css" type="text/css" media="all">
+	<style>
+		.chat-thread {margin-bottom: 0;}
+		hr {margin: 0; padding: 0;}
+		.chat-thread a {color: #404040; text-decoration: underline; text-decoration-color: #29e5ac;}
+		.chat-thread a:hover {color: #29e5ac;}
+		.chat-thread a, .chat-thread a:hover, .chat-thread a:active, .chat-thread a:focus {outline: none;}
+		.text-decoration-none, .text-decoration-none:hover, .text-decoration-none a, .text-decoration-none a:hover {text-decoration: none;}
+		.email-rapper p {padding: 0;}
+	</style>
+</head>
+<body class="single single-post postid-234 single-format-standard group-blog">
+	<div id="page" class="site">
+		<div id="content" class="site-content">
+			<div class="header">
+				<div class="left-title" id="left-title"><h1>About</h1></div>
+				<div class="back"><a href="http://jjmoi.com/about/#" id="back-button" onclick="toggleChats();return false;"><img src="./bbb_files/back.png"></a></div>
+				<div class="right-title" id="right-title">
+					<h1>Emailing</h1><h2>Active 2 hours ago</h2>
+				</div>
+				<a href="http://www.jjmoi.com/login" id="login">Log In</a>
+			</div>
+			<!-- CONTAINER -->
+			<div class="chat-container">
+				<!-- BUDDY LIST -->
+				<div class="buddy-list" id="buddy-list">
+					<a class="buddy buddy-no" href="http://jjmoi.com/about/blurbing.html">
+						<div class="avatar-no" style="background-image: url('img/profile-item.png') "></div>
+						<h1>🗯 Blurbing</h1><h2>Bio</h2>
+					</a>
+					<a class="buddy buddy-no" href="http://jjmoi.com/about/sprinting.html">
+						<div class="avatar-no" style="background-image: url('img/profile-item.png') "></div>
+						<h1>💃 Sprinting</h1><h2>Show critical metadata for each plan</h2>
+					</a>
+					<a class="buddy buddy-no" href="http://jjmoi.com/about/meeting.html">
+						<div class="avatar-no" style="background-image: url('img/profile-item.png') "></div>
+						<h1>📆 Meeting</h1><h2>7pm Chris @Koja</h2>
+					</a>
+					<a class="buddy buddy-no" href="http://jjmoi.com/about/reading.html">
+						<div class="avatar-no" style="background-image: url('img/profile-item.png') "></div>
+						<h1>📖 Reading</h1><h2>Kintsugi</h2>
+					</a>
+					<a class="buddy buddy-no" href="http://jjmoi.com/about/listening.html">
+						<div class="avatar-no" style="background-image: url('img/profile-item.png') "></div>
+						<h1>🎧 Listening</h1><h2>Yelle - Tu Es Beau</h2>
+					</a>
+					<a class="buddy buddy-no" href="http://jjmoi.com/about/spending.html">
+						<div class="avatar-no" style="background-image: url('img/profile-item.png') "></div>
+						<h1>💸 Spending</h1><h2>Cajun Crab</h2>
+					</a>
+					<a class="buddy buddy-no" href="http://jjmoi.com/about/exploring.html">
+						<div class="avatar-no" style="background-image: url('img/profile-item.png') "></div>
+						<h1>🚀 Exploring</h1><h2>Oslo</h2>
+					</a>
+					<hr>
+					<!-- recent chats -->
+					<p class="nav-title" id="emaillist-icon">
+						<a title="Chat" id="nav-chatlist" onclick="openSublist1('chatlist')">💬</a>
+						<a title="Inbox" class="selected-tab" id="nav-inboxlist" onclick="openSublist2('inboxlist')">📬</a>
+						<a title="Trash" id="nav-trashlist" onclick="openSublist3('trashlist')">🗑️</a>
+						<a title="Compose" id="nav-compose" href="mailto:heyheyjjmoi@gmail.com?Subject=hey hey jj!">📝</a>
+					</p>
+					<div class="togglelist" id="chatlist" style="display: none;">
+						<a class="buddy" href="mommy.html#207087522">
+							<div class="avatar" style="background-image: url('img/profile-mommy.jpg') "></div>
+							<h1>Mommy<span class="buddydate">Sun</span></h1><h2>miss you</h2>
+						</a>
+						<a class="buddy" href="ant.html#9812414562">
+							<div class="avatar" style="background-image: url('img/profile-ant.jpg') "></div>
+							<h1>Ant<span class="buddydate">Sun</span></h1><h2>You: jaa</h2>
+						</a>
+						<a class="buddy" href="tiip.html#1461356322">
+							<div class="avatar" style="background-image: url('img/profile-tiip.jpg')"></div>
+							<h1>Tiip<span class="buddydate">Thu</span></h1><h2>gntt mnjj</h2>
+						</a>
+						<a class="buddy" href="adam.html#8428109071">
+							<div class="avatar" style="background-image: url('img/profile-adam.jpg') "></div>
+							<h1>Adam<span class="buddydate">Wed</span></h1><h2>wtf?</h2>
+						</a>
+						<a class="buddy" href="zach.html#825702271">
+							<div class="avatar" style="background-image: url('img/profile-zach.jpg') "></div>
+							<h1>Zach<span class="buddydate">Wed</span></h1><h2>You: hi to everyone og!</h2>
+						</a>
+						<a class="buddy" href="dooj.html#0817927825">
+							<div class="avatar" style="background-image: url('img/profile-dooj.jpg') "></div>
+							<h1>DOoj<span class="buddydate">Nov 30</span></h1><h2>👌</h2>
+						</a>
+						<a class="buddy" href="johnorland.html#1734591033">
+							<div class="avatar" style="background-image: url('img/profile-johnorland.jpg') "></div>
+							<h1>John Orland<span class="buddydate">Sep 16</span></h1><h2>👍</h2>
+						</a>
+						<a class="buddy" href="dd.html#07075982114">
+							<div class="avatar" style="background-image: url('img/profile-dd.jpg') "></div>
+							<h1>Dd<span class="buddydate">Jul 7</span></h1><h2>You: though i dont really know...</h2>
+						</a>
+					</div>
+					<div class="togglelist" id="inboxlist">
+						<a class="buddy buddy-no" href="hey.html">
+							<div class="avatar-no"></div>
+							<h1 title="nicksanta@gmail.com">Nick<span class="buddydate">Today</span></h1><h2>Hey!<span class="buddydate">🌟</span></h2>
+						</a>
+						<a class="buddy buddy-no selected" href="meet-peristyle-a-new-sans-serif.html">
+							<div class="avatar-no"></div>
+							<h1 title="mail@typography.com">Hoefler&Co.<span class="buddydate">Today</span></h1><h2>Meet Peristyle, a new sans serif<span class="buddydate"></span></h2>
+						</a>
+						<a class="buddy buddy-no" href="secrets-of-the-playa.html">
+							<div class="avatar-no"></div>
+							<h1 title="mfoxy@gmail.com">M Foxy<span class="buddydate">Today</span></h1><h2>Secrets of the Playa<span class="buddydate">🔥</span></h2>
+						</a>
+						<a class="buddy buddy-no" href="3-360.html">
+							<div class="avatar-no"></div>
+							<h1 title="supply@lot2046.com">LOT<span class="buddydate">Yesterday</span></h1><h2>3/360<span class="buddydate"></span></h2>
+						</a>
+						<a class="buddy buddy-no" href="go-back-in-time-with-sublime.html">
+							<div class="avatar-no"></div>
+							<h1 title="timecapsule@spotify.com">Spotify<span class="buddydate">Yesterday</span></h1><h2>Go back in time with Sublime<span class="buddydate"></span></h2>
+						</a>
+						<a class="buddy buddy-no" href="accept-katt's-invitation-to-melbourne.html">
+							<div class="avatar-no"></div>
+							<h1 title="noreply@airbnb.com">Airbnb<span class="buddydate">Yesterday</span></h1><h2>Accept Katt's Invitation to Melbourne<span class="buddydate"></span></h2>
+						</a>
+					</div>
+					<div class="togglelist" id="trashlist" style="display: none;">
+						<a class="buddy buddy-no" href="make-over-8614-working-at-home.html">
+							<div class="avatar-no"></div>
+							<h1 title="info@online-success-plan.com">Online Success Plan<span class="buddydate">Today</span></h1><h2>Make over $8,614 working at home<span class="buddydate">🚮</span></h2>
+						</a>
+						<a class="buddy buddy-no" href="new_private_message_from-jeannette.html">
+							<div class="avatar-no"></div>
+							<h1 title="mail@loop.com">RussianGirl_For-U<span class="buddydate">Yesterday</span></h1><h2>New_Private_Message_from Jeannette<span class="buddydate">🚮</span></h2>
+						</a>
+						<a class="buddy buddy-no" href="get-the-latest-from-the-weeknd.html">
+							<div class="avatar-no"></div>
+							<h1 title="email@email-puma.com">PUMA<span class="buddydate">Yesterday</span></h1><h2>Get the Latest from The Weeknd<span class="buddydate">🗑</span></h2>
+						</a>
+						<a class="buddy buddy-no" href="stop-living-in-fear.html">
+							<div class="avatar-no"></div>
+							<h1 title="information@noreply-optimal.com">Optimal Tax Relief<span class="buddydate">Wed</span></h1><h2>Stop living in Fear!<span class="buddydate">🚮</span></h2>
+						</a>
+						<a class="buddy buddy-no" href="hey-heyheyjjmoi.html">
+							<div class="avatar-no"></div>
+							<h1 title="Carole@o8ueybkfy1t0.8z415080.zisco.com">Amanda<span class="buddydate">Wed</span></h1><h2>Hey heyheyjjmoi !!<span class="buddydate">🚮</span></h2>
+						</a>
+						<a class="buddy buddy-no" href="waiting-for-your-response.html">
+							<div class="avatar-no"></div>
+							<h1 title="us@badloans.monthlytopoffers-center.com">Finance Department<span class="buddydate">Tue</span></h1><h2>Waiting For Your Response<span class="buddydate">🚮</span></h2>
+						</a>
+						<a class="buddy buddy-no" href="classic-cases-for-iphone-x.html">
+							<div class="avatar-no"></div>
+							<h1 title="hello@grovemade.com">Grovemade<span class="buddydate">Tue</span></h1><h2>Classic Cases for iPhone X<span class="buddydate">🗑</span></h2>
+						</a>
+						<a class="buddy buddy-no" href="someone_is_waiting_for_you.html">
+							<div class="avatar-no"></div>
+							<h1 title="LUMFUDFEWQPU@someoneiswaitingforyou.com">Ava Bride<span class="buddydate">Mon</span></h1><h2>Someone_Is_Waiting_For_You<span class="buddydate">🚮</span></h2>
+						</a>
+					</div>
+				</div>
+				<!-- end BUDDY LIST -->
+				<!-- start chat thread -->
+				<div class="chat-thread email-rapper">
+					<p id="email-subject">Print Ain't Dead<span class="email-date"></span></p>
+					<p class="from-to" style="padding: 0 150px;"><span class="sender" title="mail@99u.com">99U</span> <span>to</span> <span title="heyheyjjmoi@gmail.com">me</span><span class="email-date">Mon</span></p>
+					<table cellpadding="0" cellspacing="0" border="0" width="100%" class="wrapper"
+        bgcolor="#f5f5f5">
+          <tr>
+            <td valign="top" bgcolor="#f5f5f5" width="100%">
+              <table width="100%" role="content-container" class="outer" align="center" cellpadding="0"
+              cellspacing="0" border="0">
+                <tr>
+                  <td width="100%">
+                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                      <tr>
+                        <td>
+                          <!--[if mso]>
+                            <center>
+                              <table>
+                                <tr>
+                                  <td width="768">
+                                  <![endif]-->
+                                  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; max-width:768px;"
+                                  align="center">
+                                    <tr>
+                                      <td role="modules-container" style="padding: 0px 0px 0px 0px; color: #000000; text-align: left;"
+                                      bgcolor="#ffffff" width="100%" align="left">
+                                        <table class="module preheader preheader-hide" role="module" data-type="preheader"
+                                        border="0" cellpadding="0" cellspacing="0" width="100%" style="display: none !important; mso-hide: all; visibility: hidden; opacity: 0; color: transparent; height: 0; width: 0;">
+                                          <tr>
+                                            <td role="module-content">
+                                              <p></p>
+                                            </td>
+                                          </tr>
+                                        </table>
+                                        <table class="module" role="module" data-type="text" border="0" cellpadding="0"
+                                        cellspacing="0" width="100%" style="table-layout: fixed;">
+                                          <tr>
+                                            <td style="padding:0px 0px 0px 0px;" height="100%" valign="top" bgcolor="">
+                                              <table class="h-u" role="module" data-type="Text" width="100%" cellspacing="0"
+                                              cellpadding="0">
+                                                <tbody>
+                                                  <tr>
+                                                    <td class="b-f" style="padding:22px; font:13px/24px Arial, Helvetica, sans-serif, Circular Std Book; color:#000;"
+                                                    bgcolor="#f5f5f5" align="center">
+                                                      <a clicktracking=off style="color:#000; text-decoration:none;" href="#">View email in browser</a>
+                                                    </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </td>
+                                          </tr>
+                                        </table>
+                                        <table class="module" role="module" data-type="text" border="0" cellpadding="0"
+                                        cellspacing="0" width="100%" style="table-layout: fixed;">
+                                          <tr>
+                                            <td style="padding:0px 0px 0px 0px;" height="100%" valign="top" bgcolor="">
+                                              <table role="module" data-type="Image &amp; Text" width="100%" cellspacing="0"
+                                              cellpadding="0">
+                                                <tbody>
+                                                  <tr>
+                                                    <td class="pt-0" style="padding:0px 0 0;" bgcolor="#f5f5f5">
+                                                      <table width="100%" cellspacing="0" cellpadding="0">
+                                                        <tbody>
+                                                          <tr>
+                                                            <td style="padding:17px 23px 18px;" bgcolor="#030eff">
+                                                              <table width="100%" cellspacing="0" cellpadding="0">
+                                                                <tbody>
+                                                                  <tr>
+                                                                    <td style="font-size:1px; line-height:1px; mso-line-height-rule:at-least;">
+                                                                      <a style="text-decoration:none;" href="http://99u.com/">
+                                                                        <img src="https://marketing-image-production.s3.amazonaws.com/uploads/b50a865eb46e41e47598c6512b6aa6b799ac1bbcdf03705bec4248a973a9c1c9ab65ff1381102d6cfb1a05a8e8ba2639309af06e085da1f8c31420070583a3a6.png"
+                                                                        style="width:43px; font:bold 16px/16px Arial, Helvetica, sans-serif, Circular Std Book; color:#fff; vertical-align:top;"
+                                                                        alt="99U" width="43">
+                                                                      </a>
+                                                                    </td>
+                                                                    <td style="font-size:0; line-height:0;" width="10"></td>
+                                                                    <td style="font-size:1px; line-height:1px; mso-line-height-rule:at-least;"
+                                                                    align="right">
+                                                                      <a style="text-decoration:none;" href="http://www.adobe.com/">
+                                                                        <img src="https://marketing-image-production.s3.amazonaws.com/uploads/3c536cf76aa39e436c722d308fc94f62008434f3577871659cf95de47618b0667575c2f5600223de8a00116f2dfc1e1eb745e46411cbef3c607b898f1dbf0e7d.png"
+                                                                        alt="Adobe" width="81">
+                                                                      </a>
+                                                                    </td>
+                                                                  </tr>
+                                                                </tbody>
+                                                              </table>
+                                                            </td>
+                                                          </tr>
+                                                        </tbody>
+                                                      </table>
+                                                    </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </td>
+                                          </tr>
+                                        </table>
+                                        <table class="module" role="module" data-type="text" border="0" cellpadding="0"
+                                        cellspacing="0" width="100%" style="table-layout: fixed;">
+                                          <tr>
+                                            <td style="padding:37px 20px 46px;background-color:#ffffff;" height="100%" valign="top"
+                                            bgcolor="#ffffff">
+                                              <table align="center" cellpadding="0" cellspacing="0" style="width:100% !important; max-width:600px; margin:0 auto;"
+                                              width="600">
+                                                <tbody>
+                                                  <tr>
+                                                    <td align="center" class="pb-11" role="module-content" style="padding:0 0 30px; font:44px/46px Times New Roman, Times, serif, GT Sectra Fine Book; color:#000;">A funny thing has happened on the way to print&#39;s funeral. Magazines have evolved
+                                                      and keep on ticking in a digital age.&nbsp;</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td align="center" class="plr-10" role="module-content" style="font:18px/24px Times New Roman, Times, serif, GT Sectra Fine Regular; color:#000;">Sure, mass market pubs have suffered, but digital media has created a new space
+                                                      for indie mags to grow and thrive over the past decade, reports Madeleine Morley.
+                                                      This week she explores the digital versus print content battle and realizes that
+                                                      the yin and yang of digital and print actually compliment one another in a co-dependent
+                                                      relationship. Amid the sweeping statements that print is dead, Morley offers a
+                                                      deeply reported, thoughtful counterpoint worth the read.&nbsp;&nbsp;</td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </td>
+                                          </tr>
+                                        </table>
+                                        <table class="module" role="module" data-type="text" border="0" cellpadding="0"
+                                        cellspacing="0" width="100%" style="table-layout: fixed;">
+                                          <tr>
+                                            <td style="padding:0 20px;text-align:center;font:bold 64px/40px Arial, Helvetica, sans-serif;color:#0000ff;background-color:#ffffff;"
+                                            height="100%" valign="top" bgcolor="#ffffff">•</td>
+                                          </tr>
+                                        </table>
+                                        <table class="module" role="module" data-type="text" border="0" cellpadding="0"
+                                        cellspacing="0" width="100%" style="table-layout: fixed;">
+                                          <tr>
+                                            <td style="padding:0px 0px 0px 0px;" height="100%" valign="top" bgcolor="">
+                                              <table cellpadding="0" cellspacing="0" data-type="Image &amp; Text" role="module"
+                                              width="100%">
+                                                <tbody>
+                                                  <tr>
+                                                    <td bgcolor="#ffffff" style="padding:28px 20px 25px;">
+                                                      <table align="center" cellpadding="0" cellspacing="0" style="width:100% !important; max-width:600px; margin:0 auto;"
+                                                      width="600">
+                                                        <tbody>
+                                                          <tr>
+                                                            <td align="center" class="wi-100p-700" role="module-content"><span class="sg-image" data-imagelibrary="%7B%22alignment%22%3A%22%22%2C%22link%22%3A%22http%3A//99u.com/articles/56147/print-aint-dead%22%2C%22src%22%3A%22https%3A//marketing-image-production.s3.amazonaws.com/uploads/8eabe5224c8905b73e9c6ba8bd61dd19d6480509ceddf526a4d63ba794ccd5b4c6972f535ffdc79742e22da2c2ce014469ee0dcac6b9d1616d25495d438026c4.jpg%22%2C%22alt_text%22%3A%22%22%2C%22height%22%3A445%2C%22width%22%3A%22600%22%2C%22widthPercent%22%3A100%2C%22isResponsive%22%3Afalse%2C%22classes%22%3A%7B%22sg-image%22%3A1%7D%7D"><a href="http://99u.com/articles/56147/print-aint-dead"><img alt="" border="0" class="max-width" height="445" src="https://marketing-image-production.s3.amazonaws.com/uploads/8eabe5224c8905b73e9c6ba8bd61dd19d6480509ceddf526a4d63ba794ccd5b4c6972f535ffdc79742e22da2c2ce014469ee0dcac6b9d1616d25495d438026c4.jpg" style="color: rgb(0, 0, 0); text-decoration: none; font-family: Helvetica, arial, sans-serif; font-size: 16px;" width="600"></a></span>
+                                                            </td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td class="pt-16" style="padding:30px 10px 0;">
+                                                              <table cellpadding="0" cellspacing="0" width="100%">
+                                                                <tbody>
+                                                                  <tr>
+                                                                    <td align="center" class="pb-10 fs-26 lh-28" role="module-content" style="padding:0 0 14px; font:bold 29px/32px Helvetica, Arial, sans-serif, Circular Std Bold; color:#000; letter-spacing:-.5px;">
+                                                                      <a href="http://99u.com/articles/56147/print-aint-dead" style="color:#000; text-decoration:none;">Print Ain't Dead</a>!</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                    <td align="center" class="pb-11" role="module-content" style="padding:0 0 15px; font:16px/22px Arial, Helvetica, sans-serif, Circular Std Book; color:#000;">Magazines have recently been pitted against all things digital in a bloody battle
+                                                                      to the death. But, as Madeleine Morley discovers, the reality isn't a zero sum
+                                                                      contest. Here's how designers have embraced technology to usher an old school craft
+                                                                      into its next chapter.</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                    <td align="center" class="h-u" role="module-content" style="font:16px/20px Arial, Helvetica, sans-serif, Circular Std Book; color:#0433ff;">
+                                                                      <a href="http://99u.com/articles/56147/print-aint-dead" style="color:#0433ff; text-decoration:none;">Read Article</a>→</td>
+                                                                  </tr>
+                                                                </tbody>
+                                                              </table>
+                                                            </td>
+                                                          </tr>
+                                                        </tbody>
+                                                      </table>
+                                                    </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </td>
+                                          </tr>
+                                        </table>
+                                        <table class="module" role="module" data-type="text" border="0" cellpadding="0"
+                                        cellspacing="0" width="100%" style="table-layout: fixed;">
+                                          <tr>
+                                            <td style="padding:0 20px;text-align:center;font:bold 64px/40px Arial, Helvetica, sans-serif;color:#0000ff;background-color:#ffffff;"
+                                            height="100%" valign="top" bgcolor="#ffffff">•</td>
+                                          </tr>
+                                        </table>
+                                        <table class="module" role="module" data-type="text" border="0" cellpadding="0"
+                                        cellspacing="0" width="100%" style="table-layout: fixed;">
+                                          <tr>
+                                            <td style="padding:0px 0px 0px 0px;" height="100%" valign="top" bgcolor="">
+                                              <table cellpadding="0" cellspacing="0" data-type="Image &amp; Text" role="module"
+                                              width="100%">
+                                                <tbody>
+                                                  <tr>
+                                                    <td bgcolor="#ffffff" style="padding:28px 20px 30px;">
+                                                      <table align="center" cellpadding="0" cellspacing="0" style="width:100% !important; max-width:600px; margin:0 auto;"
+                                                      width="600">
+                                                        <tbody>
+                                                          <tr>
+                                                            <td align="center" class="wi-100p-700" role="module-content" style="padding:0 0 30px;"><span class="sg-image" data-imagelibrary="%7B%22alignment%22%3A%22%22%2C%22link%22%3A%22http%3A//conference.99u.com/%22%2C%22src%22%3A%22https%3A//marketing-image-production.s3.amazonaws.com/uploads/115b03cce3945ca5d7e758b3711ab62d0fbac1eaa9edd40a6e7ad03a07f4a52ac48a7b2d6d6c076bbdb177c9b4c804d818a9d2f37e06ba02f4d541ee7d79934b.jpg%22%2C%22alt_text%22%3A%22%22%2C%22height%22%3A%22300%22%2C%22width%22%3A%22600%22%2C%22widthPercent%22%3A100%2C%22isResponsive%22%3Afalse%2C%22classes%22%3A%7B%22sg-image%22%3A1%7D%7D"><a href="http://conference.99u.com/"><img alt="" border="0" class="max-width" height="300" src="https://marketing-image-production.s3.amazonaws.com/uploads/115b03cce3945ca5d7e758b3711ab62d0fbac1eaa9edd40a6e7ad03a07f4a52ac48a7b2d6d6c076bbdb177c9b4c804d818a9d2f37e06ba02f4d541ee7d79934b.jpg" style="color: rgb(0, 0, 0); text-decoration: none; font-family: Helvetica, arial, sans-serif; font-size: 16px;" width="600"></a></span>
+                                                            </td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>
+                                                              <table align="center" cellpadding="0" cellspacing="0" style="margin:0 auto;">
+                                                                <tbody>
+                                                                  <tr>
+                                                                    <td align="center" bgcolor="#0000ff" class="active-t" role="module-content" style="mso-padding-alt:8px 15px; font:21px/26px Arial, Helvetica, sans-serif, Circular Std Bold;">
+                                                                      <a href="http://conference.99u.com/" style="padding:8px 17px; color:#fff; text-decoration:none; display:block;">Register&nbsp;</a>
+                                                                    </td>
+                                                                  </tr>
+                                                                </tbody>
+                                                              </table>
+                                                            </td>
+                                                          </tr>
+                                                        </tbody>
+                                                      </table>
+                                                    </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </td>
+                                          </tr>
+                                        </table>
+                                        <table class="module" role="module" data-type="text" border="0" cellpadding="0"
+                                        cellspacing="0" width="100%" style="table-layout: fixed;">
+                                          <tr>
+                                            <td style="padding:0 20px;text-align:center;font:bold 64px/40px Arial, Helvetica, sans-serif;color:#0000ff;background-color:#ffffff;"
+                                            height="100%" valign="top" bgcolor="#ffffff">•</td>
+                                          </tr>
+                                        </table>
+                                        <table class="module" role="module" data-type="text" border="0" cellpadding="0"
+                                        cellspacing="0" width="100%" style="table-layout: fixed;">
+                                          <tr>
+                                            <td style="padding:0px 0px 0px 0px;" height="100%" valign="top" bgcolor="">
+                                              <table cellpadding="0" cellspacing="0" data-type="Image &amp; Text" role="module"
+                                              width="100%">
+                                                <tbody>
+                                                  <tr>
+                                                    <td bgcolor="#ffffff" style="padding:28px 20px 25px;">
+                                                      <table align="center" cellpadding="0" cellspacing="0" style="width:100% !important; max-width:600px; margin:0 auto;"
+                                                      width="600">
+                                                        <tbody>
+                                                          <tr>
+                                                            <th align="left" class="flex-475 w-50p" style="vertical-align:top;" width="285">
+                                                              <table cellpadding="0" cellspacing="0" width="100%">
+                                                                <tbody>
+                                                                  <tr>
+                                                                    <td align="center" class="wi-100p" role="module-content"><span class="sg-image" data-imagelibrary="%7B%22alignment%22%3A%22%22%2C%22link%22%3A%22http%3A//99u.com/articles/55337/floyd-norman-its-not-over-until-you-say-its-over%22%2C%22src%22%3A%22https%3A//marketing-image-production.s3.amazonaws.com/uploads/04608e5bf721f56a0c963fbd30a360c51759d2c33738ca781a77908755b53d66d3bc1a76dd44c23511b2c9c467fe7a728a66add2a56ff274e4f82c4ace5ae32f.jpg%22%2C%22alt_text%22%3A%22%22%2C%22height%22%3A212%2C%22width%22%3A%22285%22%2C%22widthPercent%22%3A100%2C%22isResponsive%22%3Afalse%2C%22classes%22%3A%7B%22sg-image%22%3A1%7D%7D"><a href="http://99u.com/articles/55337/floyd-norman-its-not-over-until-you-say-its-over"><img alt="" border="0" class="max-width" height="212" src="https://marketing-image-production.s3.amazonaws.com/uploads/04608e5bf721f56a0c963fbd30a360c51759d2c33738ca781a77908755b53d66d3bc1a76dd44c23511b2c9c467fe7a728a66add2a56ff274e4f82c4ace5ae32f.jpg" style="color: rgb(0, 0, 0); text-decoration: none; font-family: Helvetica, arial, sans-serif; font-size: 16px;" width="285" /></a></span>
+                                                                    </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                    <td class="pt-15" style="padding:26px 0 0;">
+                                                                      <table cellpadding="0" cellspacing="0" width="100%">
+                                                                        <tbody>
+                                                                          <tr>
+                                                                            <td align="center" class="fs-26 lh-28 pb-16" role="module-content" style="padding:0 0 11px; font:bold 20px/25px Helvetica, Arial, sans-serif, Circular Std Bold; color:#000;">
+                                                                              <a href="http://99u.com/articles/55337/floyd-norman-its-not-over-until-you-say-its-over"
+                                                                              style="color:#000; text-decoration:none;">Floyd Norman: It&#39;s Not Over Until You Say So</a>
+                                                                            </td>
+                                                                          </tr>
+                                                                          <tr>
+                                                                            <td align="center" class="lh-22" role="module-content" style="padding:0 0 11px; font:16px/20px Arial, Helvetica, sans-serif, Circular Std Book; color:#000;">Disney&#39;s first African-American animator is still creating at age 81.</td>
+                                                                          </tr>
+                                                                          <tr>
+                                                                            <td align="center" class="h-u" role="module-content" style="font:16px/20px Arial, Helvetica, sans-serif, Circular Std Book; color:#0433ff;">
+                                                                              <a href="http://99u.com/articles/55337/floyd-norman-its-not-over-until-you-say-its-over"
+                                                                              style="color:#0433ff; text-decoration:none;">Read Article</a>&rarr;</td>
+                                                                          </tr>
+                                                                        </tbody>
+                                                                      </table>
+                                                                    </td>
+                                                                  </tr>
+                                                                </tbody>
+                                                              </table>
+                                                            </th>
+                                                            <th class="flex-475" height="49" style="min-width:15px;" width="30">&nbsp;</th>
+                                                            <th align="left" class="flex-475 w-50p" style="vertical-align:top;"
+                                                            width="285">
+                                                              <table cellpadding="0" cellspacing="0" width="100%">
+                                                                <tbody>
+                                                                  <tr>
+                                                                    <td align="center" class="wi-100p" role="module-content"><span class="sg-image" data-imagelibrary="%7B%22alignment%22%3A%22%22%2C%22link%22%3A%22http%3A//99u.com/articles/55179/a-brief-history-of-the-pencil-as-told-by-a-pencil-aficionado%22%2C%22src%22%3A%22https%3A//marketing-image-production.s3.amazonaws.com/uploads/763cfe6e24414eab532ea3b239d8721f783b73d60545d37233a99b5b483333863e4ee421a7bbe86ef4a51736d503c4e782b843e4027ad21781f3f59d781b9bf5.jpg%22%2C%22alt_text%22%3A%22%22%2C%22height%22%3A212%2C%22width%22%3A%22285%22%2C%22widthPercent%22%3A100%2C%22isResponsive%22%3Afalse%2C%22classes%22%3A%7B%22sg-image%22%3A1%7D%7D"><a href="http://99u.com/articles/55179/a-brief-history-of-the-pencil-as-told-by-a-pencil-aficionado"><img alt="" border="0" class="max-width" height="212" src="https://marketing-image-production.s3.amazonaws.com/uploads/763cfe6e24414eab532ea3b239d8721f783b73d60545d37233a99b5b483333863e4ee421a7bbe86ef4a51736d503c4e782b843e4027ad21781f3f59d781b9bf5.jpg" style="color: rgb(0, 0, 0); text-decoration: none; font-family: Helvetica, arial, sans-serif; font-size: 16px;" width="285" /></a></span>
+                                                                    </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                    <td class="pt-15" style="padding:26px 0 0;">
+                                                                      <table cellpadding="0" cellspacing="0" width="100%">
+                                                                        <tbody>
+                                                                          <tr>
+                                                                            <td align="center" class="fs-26 lh-28 pb-16" role="module-content" style="padding:0 0 11px; font:bold 20px/25px Helvetica, Arial, sans-serif, Circular Std Bold; color:#000;">
+                                                                              <a href="http://99u.com/articles/55179/a-brief-history-of-the-pencil-as-told-by-a-pencil-aficionado"
+                                                                              style="color:#000; text-decoration:none;">A Brief History of the Pencil</a>
+                                                                            </td>
+                                                                          </tr>
+                                                                          <tr>
+                                                                            <td align="center" class="lh-22" role="module-content" style="padding:0 0 11px; font:16px/20px Arial, Helvetica, sans-serif, Circular Std Book; color:#000;">As told by a pencil aficionado.</td>
+                                                                          </tr>
+                                                                          <tr>
+                                                                            <td align="center" class="h-u" role="module-content" style="font:16px/20px Arial, Helvetica, sans-serif, Circular Std Book; color:#0433ff;">
+                                                                              <a href="http://99u.com/articles/55179/a-brief-history-of-the-pencil-as-told-by-a-pencil-aficionado"
+                                                                              style="color:#0433ff; text-decoration:none;">Read Article</a>&rarr;</td>
+                                                                          </tr>
+                                                                        </tbody>
+                                                                      </table>
+                                                                    </td>
+                                                                  </tr>
+                                                                </tbody>
+                                                              </table>
+                                                            </th>
+                                                          </tr>
+                                                        </tbody>
+                                                      </table>
+                                                    </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </td>
+                                          </tr>
+                                        </table>
+                                        <table class="module" role="module" data-type="text" border="0" cellpadding="0"
+                                        cellspacing="0" width="100%" style="table-layout: fixed;">
+                                          <tr>
+                                            <td style="padding:0 20px;text-align:center;font:bold 64px/40px Arial, Helvetica, sans-serif;color:#0000ff;background-color:#ffffff;"
+                                            height="100%" valign="top" bgcolor="#ffffff">•</td>
+                                          </tr>
+                                        </table>
+                                        <table class="module" role="module" data-type="text" border="0" cellpadding="0"
+                                        cellspacing="0" width="100%" style="table-layout: fixed;">
+                                          <tr>
+                                            <td style="padding:0px 0px 0px 0px;" height="100%" valign="top" bgcolor="">
+                                              <table cellpadding="0" cellspacing="0" data-type="Image &amp; Text" role="module"
+                                              width="100%">
+                                                <tbody>
+                                                  <tr>
+                                                    <td bgcolor="#ffffff" style="padding:28px 20px 25px;">
+                                                      <table align="center" cellpadding="0" cellspacing="0" style="width:100% !important; max-width:600px; margin:0 auto;"
+                                                      width="600">
+                                                        <tbody>
+                                                          <tr>
+                                                            <td align="center" class="wi-100p-700" role="module-content"><span class="sg-image" data-imagelibrary="%7B%22alignment%22%3A%22%22%2C%22link%22%3A%22https%3A//magazine.99u.com/%22%2C%22src%22%3A%22https%3A//marketing-image-production.s3.amazonaws.com/uploads/6cad37904789e23df42a4749121bd8c448bee43a36a7239b9b097444ce77cdf0fe81a5f3fcc6b8ce430ad5c3d76bccdc5c82f0ac9f02c38a44dd673a513c75ff.gif%22%2C%22alt_text%22%3A%22%22%2C%22height%22%3A445%2C%22width%22%3A%22600%22%2C%22widthPercent%22%3A100%2C%22isResponsive%22%3Afalse%2C%22classes%22%3A%7B%22sg-image%22%3A1%7D%7D"><a href="https://magazine.99u.com/"><img alt="" border="0" class="max-width" height="445" src="https://marketing-image-production.s3.amazonaws.com/uploads/6cad37904789e23df42a4749121bd8c448bee43a36a7239b9b097444ce77cdf0fe81a5f3fcc6b8ce430ad5c3d76bccdc5c82f0ac9f02c38a44dd673a513c75ff.gif" style="color: rgb(0, 0, 0); text-decoration: none; font-family: Helvetica, arial, sans-serif; font-size: 16px;" width="600" /></a></span>
+                                                            </td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td class="pt-15 plr-15" style="padding:35px 10px 0;">
+                                                              <table cellpadding="0" cellspacing="0" width="100%">
+                                                                <tbody>
+                                                                  <tr>
+                                                                    <td align="center" class="fs-26 lh-28" role="module-content" style="padding:0 0 12px; font:bold 29px/32px Helvetica, Arial, sans-serif, Circular Std Bold; color:#000; letter-spacing:-.5px;">
+                                                                      <a href="https://magazine.99u.com/" style="color:#000; text-decoration:none;">Call us biased, but we make a good-looking magazine.</a>
+                                                                    </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                    <td align="center" class="pb-10" role="module-content" style="padding:0 0 17px; font:16px/22px Arial, Helvetica, sans-serif, Circular Std Book; color:#000;">And so it&#39;s time to give our publication its due, which is why we&#39;ve redesigned
+                                                                      its webpage. We now showcase all of the back issues since our 2016 brand refresh,
+                                                                      as well as offer visual tours of each issue. We&#39;ve begun this newsletter waving
+                                                                      the flag for the print and that&#39;s also where we&#39;ll end it. Enjoy!</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                    <td align="center" class="h-u" role="module-content" style="font:16px/20px Arial, Helvetica, sans-serif, Circular Std Book; color:#0433ff;">
+                                                                      <a href="https://magazine.99u.com/">Cool kids this way &rarr;</a>
+                                                                    </td>
+                                                                  </tr>
+                                                                </tbody>
+                                                              </table>
+                                                            </td>
+                                                          </tr>
+                                                        </tbody>
+                                                      </table>
+                                                    </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </td>
+                                          </tr>
+                                        </table>
+                                        <table class="module" role="module" data-type="text" border="0" cellpadding="0"
+                                        cellspacing="0" width="100%" style="table-layout: fixed;">
+                                          <tr>
+                                            <td style="padding:0 20px;text-align:center;font:bold 64px/40px Arial, Helvetica, sans-serif;color:#0000ff;background-color:#ffffff;"
+                                            height="100%" valign="top" bgcolor="#ffffff">•</td>
+                                          </tr>
+                                        </table>
+                                        <table class="module" role="module" data-type="text" border="0" cellpadding="0"
+                                        cellspacing="0" width="100%" style="table-layout: fixed;">
+                                          <tr>
+                                            <td style="padding:0px 0px 0px 0px;" height="100%" valign="top" bgcolor="">
+                                              <table role="module" data-type="Image &amp; Text" width="100%" cellspacing="0"
+                                              cellpadding="0">
+                                                <tbody>
+                                                  <tr>
+                                                    <td style="padding:0 20px;" bgcolor="#ffffff">
+                                                      <table style="width:100% !important; max-width:600px; margin:0 auto;" width="600"
+                                                      cellspacing="0" cellpadding="0" align="center">
+                                                        <tbody>
+                                                          <tr>
+                                                            <td class="pt-80" style="padding:145px 0 73px;">
+                                                              <table width="100%" cellspacing="0" cellpadding="0">
+                                                                <tbody>
+                                                                  <tr>
+                                                                    <td style="padding:0 0 13px;">
+                                                                      <table style="margin:0 auto;" cellspacing="0" cellpadding="0" align="center">
+                                                                        <tbody>
+                                                                          <tr>
+                                                                            <td role="module-content" class="active-i" style="font-size:1px; line-height:1px; mso-line-height-rule:at-least;">
+                                                                              <a style="text-decoration:none;" href="https://www.facebook.com/99u">
+                                                                                <img src="https://marketing-image-production.s3.amazonaws.com/uploads/b67953457d439292551e29d66f4cc66a7a65c59ad69d795375f82b69f7a508354c1ae48a57b07812670cec64ba0668318088b873912c690007a029b6439652d4.png"
+                                                                                style="width:10px; font:14px/14px Arial, Helvetica, sans-serif, Circular Std Book; color:#000; vertical-align:top;"
+                                                                                alt="facebook" width="10">
+                                                                              </a>
+                                                                            </td>
+                                                                            <td style="font-size:0; line-height:0;" width="16"></td>
+                                                                            <td role="module-content" class="active-i" style="font-size:1px; line-height:1px; mso-line-height-rule:at-least;">
+                                                                              <a style="text-decoration:none;" href="https://twitter.com/99u">
+                                                                                <img src="https://marketing-image-production.s3.amazonaws.com/uploads/0eec637bd5e970bfdb5d443a92f6d0cba224b3f9bcf2efbf34eda5ed6dcc214aec3e93722acee039a7064efa1ab51154d92f35a2c894bced1ff83db236d30125.png"
+                                                                                style="width:17px; font:14px/14px Arial, Helvetica, sans-serif, Circular Std Book; color:#000; vertical-align:top;"
+                                                                                alt="Twitter" width="17">
+                                                                              </a>
+                                                                            </td>
+                                                                            <td style="font-size:0; line-height:0;" width="12"></td>
+                                                                            <td role="module-content" class="active-i" style="font-size:1px; line-height:1px; mso-line-height-rule:at-least;">
+                                                                              <a style="text-decoration:none;" href="https://www.instagram.com/99u/">
+                                                                                <img src="https://marketing-image-production.s3.amazonaws.com/uploads/8f667d8b48c504d351c9c33f189552b5d4ec50b46d05bb2000c18211042bab0e2b0ba67b0655863314ac192ed1ccb97cc0b16e8cd18bff2e441c1726479e14de.png"
+                                                                                style="width:17px; font:14px/14px Arial, Helvetica, sans-serif, Circular Std Book; color:#000; vertical-align:top;"
+                                                                                alt="Instagram" width="17">
+                                                                              </a>
+                                                                            </td>
+                                                                            <td style="font-size:0; line-height:0;" width="12"></td>
+                                                                            <td role="module-content" class="active-i" style="font-size:1px; line-height:1px; mso-line-height-rule:at-least;">
+                                                                              <a style="text-decoration:none;" href="http://99u.com/feed/">
+                                                                                <img src="https://marketing-image-production.s3.amazonaws.com/uploads/57d578bf81f2c8c4b081c0297da99f0fe306be36ecfa2e2d5a179c319bfda093615573d6d0bc47a0a750399d86b44ab1a1a73d5b4f5cc0912401aa7946cb6917.png"
+                                                                                style="width:16px; font:14px/14px Arial, Helvetica, sans-serif, Circular Std Book; color:#000; vertical-align:top;"
+                                                                                alt="Rss" width="16">
+                                                                              </a>
+                                                                            </td>
+                                                                          </tr>
+                                                                        </tbody>
+                                                                      </table>
+                                                                    </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                    <td role="module-content" style="font:16px/20px Arial, Helvetica, sans-serif, Circular Std Book; color:#000;"
+                                                                    align="center">Connect and share your thoughts.</td>
+                                                                  </tr>
+                                                                </tbody>
+                                                              </table>
+                                                            </td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td role="module-content" class="pb-30" style="padding:0 0 60px;" align="center">
+                                                              <a style="text-decoration:none;" href="http://www.adobe.com/">
+                                                                <img src="https://marketing-image-production.s3.amazonaws.com/uploads/685ab993d7dec6b595194058c4aae5f3ef9bd1c576013e38e3add21a8acf6403dbe8b036ee62a282872e388e3900b6fd67cfb3ea7e5c60234e6af492ae49354d.png"
+                                                                style="width:130px; font:24px/24px Arial, Helvetica, sans-serif, Circular Std Book; color:#000; vertical-align:top;"
+                                                                alt="Adobe" width="130">
+                                                              </a>
+                                                            </td>
+                                                          </tr>
+                                                        </tbody>
+                                                      </table>
+                                                    </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </td>
+                                          </tr>
+                                        </table>
+                                        <table class="module" role="module" data-type="text" border="0" cellpadding="0"
+                                        cellspacing="0" width="100%" style="table-layout: fixed;">
+                                          <tr>
+                                            <td style="padding:0px 0px 0px 0px;" height="100%" valign="top" bgcolor="">
+                                              <table role="module" data-type="Text" width="100%" cellspacing="0" cellpadding="0">
+                                                <tbody>
+                                                  <tr>
+                                                    <td class="pt-44 pb-44 ns h-u b-f" style="padding:22px; font:13px/24px Arial, Helvetica, sans-serif, Circular Std Book; color:#000;"
+                                                    bgcolor="#f5f5f5" align="center">© Copyright 2017 Adobe Systems Incorporated. All Rights Reserved.
+                                                      <br>
+                                                      <a style="color:#000; text-decoration:none;" href="#">Unsubscribe</a>&nbsp;| &nbsp;
+                                                      <a style="color:#000; text-decoration:none;" href="#">Email preferences</a>&nbsp;| &nbsp;
+                                                      <a style="color:#000; text-decoration:none;"
+                                                      href="https://www.adobe.com/privacy.html" target="_blank">Privacy Policy</a>
+                                                    </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </td>
+                                          </tr>
+                                        </table>
+                                      </td>
+                                    </tr>
+                                  </table>
+                                  <!--[if mso]>
+                                  </td>
+                                </tr>
+                              </table>
+                            </center>
+                          <![endif]-->
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+
+				</div>
+				<script>
+					function toggleChats() {
+						document.getElementById("buddy-list").style.display = "block";
+						document.getElementById("chat-thread").style.display = "none";
+						document.getElementById("back-button").style.display = "none";
+						document.getElementById('right-title').className += 'mobile-hide';
+						document.getElementById('left-title').className += 'mobile-show';
+					}
+					function openSublist1(listName) {
+						var x = document.getElementsByClassName("togglelist");
+						document.getElementById("chatlist").style.display = "block";
+						document.getElementById("inboxlist").style.display = "none";
+						document.getElementById("trashlist").style.display = "none";
+						document.getElementById("nav-chatlist").style.opacity = "0.7";
+						document.getElementById("nav-inboxlist").style.opacity = "1";
+						document.getElementById("nav-trashlist").style.opacity = "1";
+					}
+					function openSublist2(listName) {
+						var x = document.getElementsByClassName("togglelist");
+						document.getElementById("chatlist").style.display = "none";
+						document.getElementById("inboxlist").style.display = "block";
+						document.getElementById("trashlist").style.display = "none";
+						document.getElementById("nav-chatlist").style.opacity = "1";
+						document.getElementById("nav-inboxlist").style.opacity = "0.7";
+						document.getElementById("nav-trashlist").style.opacity = "1";
+					}
+					function openSublist3(listName) {
+						var x = document.getElementsByClassName("togglelist");
+						document.getElementById("chatlist").style.display = "none";
+						document.getElementById("inboxlist").style.display = "none";
+						document.getElementById("trashlist").style.display = "block";
+						document.getElementById("nav-chatlist").style.opacity = "1";
+						document.getElementById("nav-inboxlist").style.opacity = "1";
+						document.getElementById("nav-trashlist").style.opacity = "0.7";
+					}			
+				</script>
+			</div>
+			<script src="./talkturkey/jquery.js"></script>
+		</div>
+		<script type="text/javascript" src="./talkturkey/navigation.js"></script>
+		<script type="text/javascript" src="./talkturkey/skip-link-focus-fix.js"></script>
+		<script type="text/javascript" src="./talkturkey/comment-reply.min.js"></script>
+		<script type="text/javascript" src="./talkturkey/wp-embed.min.js"></script>
+	</div>
+</body>
+</html>
