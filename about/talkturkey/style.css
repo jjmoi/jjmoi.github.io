@@ -2041,8 +2041,14 @@ p.email-attachment {
 }
 
 /* bug: work onload but doesn't work when switched tabs
+have to use .js for active tabs
 #emaillist-icon .selected-tab {
 	font-size: 20px;
 	top: 11px;
 }
 */
+
+/* email RWD */
+@media screen and (max-width: 1200px) {
+	.email-rapper #email-subject, .email-rapper p, .email-rapper hr {padding: 0 30px;}
+}
