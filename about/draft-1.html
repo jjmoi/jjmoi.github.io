@@ -139,6 +139,10 @@
 							<div class="avatar-no"></div>
 							<h1 title="mail@discoverer.com">Discoverer<span class="buddydate">Fri</span></h1><h2>Sink into Helsinki<span class="buddydate"></span></h2>
 						</a>
+						<a class="buddy buddy-no" href="sneak-peeks.html">
+							<div class="avatar-no"></div>
+							<h1 title="laurent@helenaandlaurent.com">Laurent Martin<span class="buddydate">Thu</span></h1><h2>Sneak Peeks<span class="buddydate">❤️</span></h2>
+						</a>
 						<a class="buddy buddy-no" href="seeking-life-advice.html">
 							<div class="avatar-no"></div>
 							<h1 title="hunter.ok@gmail.com">Hunter<span class="buddydate">Thu</span></h1><h2>Seeking Life Advice<span class="buddydate">🌈</span></h2>
@@ -225,48 +229,10 @@
 					<p>reasonable open discussion is always good. I like to think I'm a reasonable person.</p>
 					<p>even if the company has a strict zero feedback policy, but after all that effort of getting through to the final stages, would have been nice to know where are the missteps</p>
 				</div>
-				<script>
-					function toggleChats() {
-						document.getElementById("buddy-list").style.display = "block";
-						document.getElementById("chat-thread").style.display = "none";
-						document.getElementById("back-button").style.display = "none";
-						document.getElementById('right-title').className += 'mobile-hide';
-						document.getElementById('left-title').className += 'mobile-show';
-					}
-					function openSublist1(listName) {
-						var x = document.getElementsByClassName("togglelist");
-						document.getElementById("chatlist").style.display = "block";
-						document.getElementById("inboxlist").style.display = "none";
-						document.getElementById("trashlist").style.display = "none";
-						document.getElementById("nav-chatlist").style.opacity = "1";
-						document.getElementById("nav-inboxlist").style.opacity = "0.6";
-						document.getElementById("nav-trashlist").style.opacity = "0.6";
-						document.getElementById("nav-compose").style.opacity = "0.6";
-					}
-					function openSublist2(listName) {
-						var x = document.getElementsByClassName("togglelist");
-						document.getElementById("chatlist").style.display = "none";
-						document.getElementById("inboxlist").style.display = "block";
-						document.getElementById("trashlist").style.display = "none";
-						document.getElementById("nav-chatlist").style.opacity = "0.6";
-						document.getElementById("nav-inboxlist").style.opacity = "1";
-						document.getElementById("nav-trashlist").style.opacity = "0.6";
-						document.getElementById("nav-compose").style.opacity = "0.6";
-					}
-					function openSublist3(listName) {
-						var x = document.getElementsByClassName("togglelist");
-						document.getElementById("chatlist").style.display = "none";
-						document.getElementById("inboxlist").style.display = "none";
-						document.getElementById("trashlist").style.display = "block";
-						document.getElementById("nav-chatlist").style.opacity = "0.6";
-						document.getElementById("nav-inboxlist").style.opacity = "0.6";
-						document.getElementById("nav-trashlist").style.opacity = "1";
-						document.getElementById("nav-compose").style.opacity = "0.6";
-					}			
-				</script>
 			</div>
-			<script src="./talkturkey/jquery.js"></script>
 		</div>
+		<script type="text/javascript" src="./talkturkey/jquery.js"></script>
+		<script type="text/javascript" src="./talkturkey/toggles.js"></script>
 		<script type="text/javascript" src="./talkturkey/navigation.js"></script>
 		<script type="text/javascript" src="./talkturkey/skip-link-focus-fix.js"></script>
 		<script type="text/javascript" src="./talkturkey/comment-reply.min.js"></script>
