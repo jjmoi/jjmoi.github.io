@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Email — Your ride with Ben</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<link rel="stylesheet" id="chats-style-css" href="./talkturkey/style.css" type="text/css" media="all">
+	<style>
+		.chat-thread {margin-bottom: 0;}
+		hr {margin: 0; padding: 0;}
+		.chat-thread a {color: #404040; text-decoration: underline; text-decoration-color: #29e5ac;}
+		.chat-thread a:hover {color: #29e5ac;}
+		.chat-thread a, .chat-thread a:hover, .chat-thread a:active, .chat-thread a:focus {outline: none;}
+		.text-decoration-none, .text-decoration-none:hover, .text-decoration-none a, .text-decoration-none a:hover {text-decoration: none;}
+		.email-rapper p {padding: 0;}
+		/* lyft */
+		.wrapper {height: 0; background-color: white; padding: 0;}
+		table {margin: 0;}
+  </style>
+</head>
+<body class="single single-post postid-234 single-format-standard group-blog">
+	<div id="page" class="site">
+		<div id="content" class="site-content">
+			<div class="header">
+				<div class="left-title" id="left-title"><h1>About</h1></div>
+				<div class="back"><a href="http://jjmoi.com/about/#" id="back-button" onclick="toggleChats();return false;"><img src="./bbb_files/back.png"></a></div>
+				<div class="right-title" id="right-title">
+					<h1>Emailing</h1><h2>Active 2 hours ago</h2>
+				</div>
+				<a href="http://www.jjmoi.com/login" id="login">Log In</a>
+			</div>
+			<!-- CONTAINER -->
+			<div class="chat-container">
+				<!-- BUDDY LIST -->
+				<div class="buddy-list" id="buddy-list">
+					<a class="buddy buddy-no" href="http://jjmoi.com/about/blurbing.html">
+						<div class="avatar-no" style="background-image: url('img/profile-item.png') "></div>
+						<h1>🗯 Blurbing</h1><h2>Bio</h2>
+					</a>
+					<a class="buddy buddy-no" href="http://jjmoi.com/about/sprinting.html">
+						<div class="avatar-no" style="background-image: url('img/profile-item.png') "></div>
+						<h1>💃 Sprinting</h1><h2>Show critical metadata for each plan</h2>
+					</a>
+					<a class="buddy buddy-no" href="http://jjmoi.com/about/meeting.html">
+						<div class="avatar-no" style="background-image: url('img/profile-item.png') "></div>
+						<h1>📆 Meeting</h1><h2>7pm Chris @Koja</h2>
+					</a>
+					<a class="buddy buddy-no" href="http://jjmoi.com/about/reading.html">
+						<div class="avatar-no" style="background-image: url('img/profile-item.png') "></div>
+						<h1>📖 Reading</h1><h2>Kintsugi</h2>
+					</a>
+					<a class="buddy buddy-no" href="http://jjmoi.com/about/listening.html">
+						<div class="avatar-no" style="background-image: url('img/profile-item.png') "></div>
+						<h1>🎧 Listening</h1><h2>Yelle - Tu Es Beau</h2>
+					</a>
+					<a class="buddy buddy-no" href="http://jjmoi.com/about/spending.html">
+						<div class="avatar-no" style="background-image: url('img/profile-item.png') "></div>
+						<h1>💸 Spending</h1><h2>Cajun Crab</h2>
+					</a>
+					<a class="buddy buddy-no" href="http://jjmoi.com/about/exploring.html">
+						<div class="avatar-no" style="background-image: url('img/profile-item.png') "></div>
+						<h1>🚀 Exploring</h1><h2>Oslo</h2>
+					</a>
+					<hr>
+					<!-- recent chats -->
+					<p class="nav-title" id="emaillist-icon">
+						<a title="Chat" id="nav-chatlist" onclick="openSublist1('chatlist')">💬</a>
+						<a title="Inbox" class="selected-tab" id="nav-inboxlist" onclick="openSublist2('inboxlist')">📬</a>
+						<a title="Trash" id="nav-trashlist" onclick="openSublist3('trashlist')">🗑️</a>
+						<a title="Compose" id="nav-compose" href="mailto:heyheyjjmoi@gmail.com?Subject=hey hey jj!">📝</a>
+					</p>
+					<div class="togglelist" id="chatlist" style="display: none;">
+						<a class="buddy" href="mommy.html#207087522">
+							<div class="avatar" style="background-image: url('img/profile-mommy.jpg') "></div>
+							<h1>Mommy<span class="buddydate">Sun</span></h1><h2>miss you</h2>
+						</a>
+						<a class="buddy" href="ant.html#9812414562">
+							<div class="avatar" style="background-image: url('img/profile-ant.jpg') "></div>
+							<h1>Ant<span class="buddydate">Sun</span></h1><h2>You: jaa</h2>
+						</a>
+						<a class="buddy" href="tiip.html#1461356322">
+							<div class="avatar" style="background-image: url('img/profile-tiip.jpg')"></div>
+							<h1>Tiip<span class="buddydate">Thu</span></h1><h2>gntt mnjj</h2>
+						</a>
+						<a class="buddy" href="adam.html#8428109071">
+							<div class="avatar" style="background-image: url('img/profile-adam.jpg') "></div>
+							<h1>Adam<span class="buddydate">Wed</span></h1><h2>wtf?</h2>
+						</a>
+						<a class="buddy" href="zach.html#825702271">
+							<div class="avatar" style="background-image: url('img/profile-zach.jpg') "></div>
+							<h1>Zach<span class="buddydate">Wed</span></h1><h2>You: hi to everyone og!</h2>
+						</a>
+						<a class="buddy" href="dooj.html#0817927825">
+							<div class="avatar" style="background-image: url('img/profile-dooj.jpg') "></div>
+							<h1>DOoj<span class="buddydate">Nov 30</span></h1><h2>👌</h2>
+						</a>
+						<a class="buddy" href="johnorland.html#1734591033">
+							<div class="avatar" style="background-image: url('img/profile-johnorland.jpg') "></div>
+							<h1>John Orland<span class="buddydate">Sep 16</span></h1><h2>👍</h2>
+						</a>
+						<a class="buddy" href="dd.html#07075982114">
+							<div class="avatar" style="background-image: url('img/profile-dd.jpg') "></div>
+							<h1>Dd<span class="buddydate">Jul 7</span></h1><h2>You: though i dont really know...</h2>
+						</a>
+					</div>
+					<div class="togglelist" id="inboxlist">
+						<a class="buddy buddy-no" href="hey.html">
+							<div class="avatar-no"></div>
+							<h1 title="nicksanta@gmail.com">Nick<span class="buddydate">Today</span></h1><h2>Hey!<span class="buddydate">🌟</span></h2>
+						</a>
+						<a class="buddy buddy-no selected" href="meet-peristyle-a-new-sans-serif.html">
+							<div class="avatar-no"></div>
+							<h1 title="mail@typography.com">Hoefler&Co.<span class="buddydate">Today</span></h1><h2>Meet Peristyle, a new sans serif<span class="buddydate"></span></h2>
+						</a>
+						<a class="buddy buddy-no" href="secrets-of-the-playa.html">
+							<div class="avatar-no"></div>
+							<h1 title="mfoxy@gmail.com">M Foxy<span class="buddydate">Today</span></h1><h2>Secrets of the Playa<span class="buddydate">🔥</span></h2>
+						</a>
+						<a class="buddy buddy-no" href="3-360.html">
+							<div class="avatar-no"></div>
+							<h1 title="supply@lot2046.com">LOT<span class="buddydate">Yesterday</span></h1><h2>3/360<span class="buddydate"></span></h2>
+						</a>
+						<a class="buddy buddy-no" href="go-back-in-time-with-sublime.html">
+							<div class="avatar-no"></div>
+							<h1 title="timecapsule@spotify.com">Spotify<span class="buddydate">Yesterday</span></h1><h2>Go back in time with Sublime<span class="buddydate"></span></h2>
+						</a>
+						<a class="buddy buddy-no" href="accept-katt's-invitation-to-melbourne.html">
+							<div class="avatar-no"></div>
+							<h1 title="noreply@airbnb.com">Airbnb<span class="buddydate">Yesterday</span></h1><h2>Accept Katt's Invitation to Melbourne<span class="buddydate"></span></h2>
+						</a>
+					</div>
+					<div class="togglelist" id="trashlist" style="display: none;">
+						<a class="buddy buddy-no" href="make-over-8614-working-at-home.html">
+							<div class="avatar-no"></div>
+							<h1 title="info@online-success-plan.com">Online Success Plan<span class="buddydate">Today</span></h1><h2>Make over $8,614 working at home<span class="buddydate">🚮</span></h2>
+						</a>
+						<a class="buddy buddy-no" href="new_private_message_from-jeannette.html">
+							<div class="avatar-no"></div>
+							<h1 title="mail@loop.com">RussianGirl_For-U<span class="buddydate">Yesterday</span></h1><h2>New_Private_Message_from Jeannette<span class="buddydate">🚮</span></h2>
+						</a>
+						<a class="buddy buddy-no" href="get-the-latest-from-the-weeknd.html">
+							<div class="avatar-no"></div>
+							<h1 title="email@email-puma.com">PUMA<span class="buddydate">Yesterday</span></h1><h2>Get the Latest from The Weeknd<span class="buddydate">🗑</span></h2>
+						</a>
+						<a class="buddy buddy-no" href="stop-living-in-fear.html">
+							<div class="avatar-no"></div>
+							<h1 title="information@noreply-optimal.com">Optimal Tax Relief<span class="buddydate">Wed</span></h1><h2>Stop living in Fear!<span class="buddydate">🚮</span></h2>
+						</a>
+						<a class="buddy buddy-no" href="hey-heyheyjjmoi.html">
+							<div class="avatar-no"></div>
+							<h1 title="Carole@o8ueybkfy1t0.8z415080.zisco.com">Amanda<span class="buddydate">Wed</span></h1><h2>Hey heyheyjjmoi !!<span class="buddydate">🚮</span></h2>
+						</a>
+						<a class="buddy buddy-no" href="waiting-for-your-response.html">
+							<div class="avatar-no"></div>
+							<h1 title="us@badloans.monthlytopoffers-center.com">Finance Department<span class="buddydate">Tue</span></h1><h2>Waiting For Your Response<span class="buddydate">🚮</span></h2>
+						</a>
+						<a class="buddy buddy-no" href="classic-cases-for-iphone-x.html">
+							<div class="avatar-no"></div>
+							<h1 title="hello@grovemade.com">Grovemade<span class="buddydate">Tue</span></h1><h2>Classic Cases for iPhone X<span class="buddydate">🗑</span></h2>
+						</a>
+						<a class="buddy buddy-no" href="someone_is_waiting_for_you.html">
+							<div class="avatar-no"></div>
+							<h1 title="LUMFUDFEWQPU@someoneiswaitingforyou.com">Ava Bride<span class="buddydate">Mon</span></h1><h2>Someone_Is_Waiting_For_You<span class="buddydate">🚮</span></h2>
+						</a>
+					</div>
+				</div>
+				<!-- end BUDDY LIST -->
+				<!-- start chat thread -->
+				<div class="chat-thread email-rapper">
+					<p id="email-subject">Your ride with Vanessa<span class="email-date"></span></p>
+					<p class="from-to" style="padding: 0 150px;"><span class="sender" title="no-reply@lyftmail.com">Lyft Ride Receipt</span> <span>to</span> <span title="heyheyjjmoi@gmail.com">me</span><span class="email-date">Yesterday</span></p>
+          <table width="100%" cellspacing="0" cellpadding="0" class="lyft-email" style="margin:0 auto; mso-table-lspace:0; mso-table-rspace:0; table-layout:fixed; padding:20px; min-width:520px">
+      <tr>
+        <td style="mso-line-height-rule:exactly">
+                <table class="lyft-email-wrapper" border="0" cellspacing="0" cellpadding="0" align="center" style="margin:0 auto; mso-table-lspace:0; mso-table-rspace:0; table-layout:fixed; font-size:16px; width:480px; max-width:480px !important"
+                width="480">
+                  <tr>
+                    <td valign="top" align="center" style="mso-line-height-rule:exactly">
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center"
+                      style="margin:0 auto; mso-table-lspace:0; mso-table-rspace:0; table-layout:fixed">
+                        <tr>
+                          <td valign="top" style="mso-line-height-rule:exactly">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center"
+                            style="margin:0 auto; mso-table-lspace:0; mso-table-rspace:0; table-layout:fixed">
+                              <tr>
+                                <td style="mso-line-height-rule:exactly">
+                                  <table width="100%" cellspacing="0" cellpadding="0" align="center" style="margin:0 auto; mso-table-lspace:0; mso-table-rspace:0; table-layout:fixed">
+                                    <tr>
+                                      <td class="top-curved-border" style="mso-line-height-rule:exactly; border-top-left-radius:2px; border-top-right-radius:2px">
+                                        <table width="100%" cellspacing="0" cellpadding="0" align="center" class="content"
+                                        style="margin:0 auto; mso-table-lspace:0; mso-table-rspace:0; table-layout:fixed">
+                                          <tr>
+                                            <td style="mso-line-height-rule:exactly">
+                                              <!-- Automatically generated by make_email v0.7.1. Do not edit this file. -->
+                                              <div>
+                                                <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center"
+                                                height="60" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0">
+                                                  <tr>
+                                                    <td style="mso-line-height-rule:exactly; border-collapse:collapse !important">
+                                                      <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0">
+                                                        <tr>
+                                                          <td height="15" style="mso-line-height-rule:exactly; border-collapse:collapse !important; height:15px"></td>
+                                                        </tr>
+                                                      </table>
+                                                    </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td align="center" style="mso-line-height-rule:exactly; border-collapse:collapse !important">
+                                                      <img src="http://s3.amazonaws.com/lyft.zimride.com/images/emails/logo/v2/logo_44@2x.png"
+                                                      alt="Lyft" border="0" height="30" width="42" style="display:block">
+                                                    </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td style="mso-line-height-rule:exactly; border-collapse:collapse !important">
+                                                      <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0">
+                                                        <tr>
+                                                          <td height="15" style="mso-line-height-rule:exactly; border-collapse:collapse !important; height:15px"></td>
+                                                        </tr>
+                                                      </table>
+                                                    </td>
+                                                  </tr>
+                                                </table>
+                                              </div>
+                                              <!-- Ride Summary Card -->
+                                              <table class="lyft-email-card receipt-body top-card" bgcolor="#FFFFFF" width="100%"
+                                              cellspacing="0" cellpadding="0" style='border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; border-top:3px solid #FF00BF; -moz-border-radius:2px; -moz-box-shadow:0 0 3px rgba(0, 0, 0, 0.1); -webkit-border-radius:2px; -webkit-box-shadow:0 0 3px rgba(0, 0, 0, 0.1); background-color:#FFF; border-radius:2px; box-shadow:0 0 3px rgba(0, 0, 0, 0.1); color:#333447; font-size:16px; padding:0 !important'>
+                                                <tr>
+                                                  <td style="mso-line-height-rule:exactly; border-collapse:collapse !important">
+                                                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0">
+                                                      <tr>
+                                                        <td height="32" style="mso-line-height-rule:exactly; border-collapse:collapse !important; height:32px"></td>
+                                                      </tr>
+                                                    </table>
+                                                  </td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="mso-line-height-rule:exactly; border-collapse:collapse !important">
+                                                    <table width="100%" cellspacing="0" cellpadding="0" class="receipt-wrapper mobile-padding-sides-lg"
+                                                    align="center" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0; padding-left:40px; padding-right:40px">
+                                                      <tr>
+                                                        <td align="center" class="center" style="mso-line-height-rule:exactly; text-align:center; border-collapse:collapse !important">
+                                                          <table width="100%" cellspacing="0" cellpadding="0" align="center" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0">
+                                                            <tr>
+                                                              <td class="center" align="center" style="mso-line-height-rule:exactly; text-align:center; border-collapse:collapse !important">
+                                                                <img class="center driver-photo-circle" src="https://ci6.googleusercontent.com/proxy/u_xnDg2VSUsueLHvxpn-lOBiaKOo1AwVAePLggmKId8RAigoEL4-S4hKu2SORtwKrjKYCtmjr_N7mEUwWHKQtPnRwnUsqnFvIjZ34-mYDL9-l9RMg0UwCDk1wdX7Y6EfG2jS5LL0IU8j_lAACETO84_i9bWHk8ICjmEkFJlGBDlIR0oikU7_NMaBbshEPnM7kad7xfWH--gPH55iy-aS9uCLTFdUVjM_kt19RjXfb7JDW4NNNpN256E5=s0-d-e1-ft#https://d3rlubkewr7oe0.cloudfront.net/production/photos/320x200/789186010482467714_driver.jpg?w=100&h=100&dpr=2&fit=crop&mask=ellipse&crop=faces&faceindex=1&fm=png" style="display:inline-block; height:100px; text-align:center; width:100px; margin:0 auto"
+                                                                height="100" align="center" width="100">
+                                                              </td>
+                                                            </tr>
+                                                          </table>
+                                                        </td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td style="mso-line-height-rule:exactly; border-collapse:collapse !important">
+                                                          <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0">
+                                                            <tr>
+                                                              <td height="16" style="mso-line-height-rule:exactly; border-collapse:collapse !important; height:16px"></td>
+                                                            </tr>
+                                                          </table>
+                                                        </td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td align="center" class="center" style="mso-line-height-rule:exactly; text-align:center; border-collapse:collapse !important">
+                                                           <h1 class="center" style='color:#333447; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:400; text-align:center; font-size:24px; margin:0; padding:0'
+                                                          align="center">Thanks for riding with Ben!</h1>
+
+                                                          <p class="receipt-subtitle center" style='color:#728099; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; font-size:16px; font-weight:400; line-height:25px; margin-bottom:0; margin-top:0; text-align:center; padding-bottom:5px; padding-top:5px'
+                                                          align="center">2:19 AM</p>
+                                                        </td>
+                                                      </tr>
+                                                    </table>
+                                                  </td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="mso-line-height-rule:exactly; border-collapse:collapse !important">
+                                                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0">
+                                                      <tr>
+                                                        <td height="24" style="mso-line-height-rule:exactly; border-collapse:collapse !important; height:24px"></td>
+                                                      </tr>
+                                                    </table>
+                                                  </td>
+                                                </tr>
+                                                <!-- Rate route -->
+                                                <tr>
+                                                  <td style="mso-line-height-rule:exactly; border-collapse:collapse !important">
+                                                    <table width="100%" class="big-card-divide" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0; border-color:#7d9aa7; border-top:1px solid rgba(177, 194, 202, 0.25)">
+                                                      <tr>
+                                                        <td style="mso-line-height-rule:exactly; border-collapse:collapse !important">&nbsp;</td>
+                                                      </tr>
+                                                    </table>
+                                                  </td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="mso-line-height-rule:exactly; border-collapse:collapse !important">
+                                                    <table class="receipt-wrapper mobile-padding-sides-lg" width="100%" cellspacing="0"
+                                                    cellpadding="0" align="center" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0; padding-left:40px; padding-right:40px">
+                                                      <tr>
+                                                        <td style="mso-line-height-rule:exactly; border-collapse:collapse !important">
+                                                          <table width="100%" cellspacing="0" cellpadding="0" align="center" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0">
+                                                            <tr>
+                                                              <td style="mso-line-height-rule:exactly; border-collapse:collapse !important">
+                                                                <table width="100%" cellspacing="0" cellpadding="0" class="line-items-heading"
+                                                                align="left" style='border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; margin:0; padding:0 0 8px'>
+                                                                  <tr>
+                                                                    <td style="mso-line-height-rule:exactly; border-collapse:collapse !important">
+                                                                      <table width="100%" class="wrapper" border="0" cellspacing="0" cellpadding="0"
+                                                                      align="left" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0">
+                                                                        <tr>
+                                                                          <td class="center mobile-text-center" style="mso-line-height-rule:exactly; text-align:center; border-collapse:collapse !important"
+                                                                          align="center">
+                                                                             <h3 class="bold center mobile-text-center" style='color:#333447; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:bold; text-align:center; font-size:16px; margin:0; padding:0'
+                                                                            align="center">Ride Details</h3>
+
+                                                                          </td>
+                                                                        </tr>
+                                                                      </table>
+                                                                    </td>
+                                                                  </tr>
+                                                                </table>
+                                                              </td>
+                                                            </tr>
+                                                            <tr>
+                                                              <td style="mso-line-height-rule:exactly; border-collapse:collapse !important">
+                                                                <table width="100%" cellspacing="0" cellpadding="0" class="line-items" align="left"
+                                                                style='border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif'>
+                                                                  <tr>
+                                                                    <td style='mso-line-height-rule:exactly; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; font-size:16px; line-height:20px; padding:3px 0; border-collapse:collapse !important'></td>
+                                                                    <td style='mso-line-height-rule:exactly; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; font-size:16px; line-height:20px; padding:3px 0; border-collapse:collapse !important'></td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                    <td style='mso-line-height-rule:exactly; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; font-size:16px; line-height:20px; padding:3px 0; border-collapse:collapse !important'>Line Ride (1.81mi, 12m 9s)</td>
+                                                                    <td class="value" style='mso-line-height-rule:exactly; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; font-size:16px; line-height:20px; padding:3px 0; min-width:60px; text-align:right; white-space:nowrap; border-collapse:collapse !important'
+                                                                    align="right">$7.82</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                    <td style='mso-line-height-rule:exactly; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; font-size:16px; line-height:20px; padding:3px 0; border-collapse:collapse !important'>Prime Time +25%</td>
+                                                                    <td class="value" style='mso-line-height-rule:exactly; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; font-size:16px; line-height:20px; padding:3px 0; min-width:60px; text-align:right; white-space:nowrap; border-collapse:collapse !important'
+                                                                    align="right">$1.54</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                    <td style='mso-line-height-rule:exactly; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; font-size:16px; line-height:20px; padding:3px 0; border-collapse:collapse !important'>Lyft Line Discount</td>
+                                                                    <td class="value" style='mso-line-height-rule:exactly; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; font-size:16px; line-height:20px; padding:3px 0; min-width:60px; text-align:right; white-space:nowrap; border-collapse:collapse !important'
+                                                                    align="right">-$4.61</td>
+                                                                  </tr>
+                                                                </table>
+                                                              </td>
+                                                            </tr>
+                                                            <tr>
+                                                              <td style="mso-line-height-rule:exactly; border-collapse:collapse !important"></td>
+                                                            </tr>
+                                                            <tr>
+                                                              <td style="mso-line-height-rule:exactly; border-collapse:collapse !important">
+                                                                <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0">
+                                                                  <tr>
+                                                                    <td height="8" style="mso-line-height-rule:exactly; border-collapse:collapse !important; height:8px"></td>
+                                                                  </tr>
+                                                                </table>
+                                                                <table width="100%" cellspacing="0" cellpadding="0" class="big-border-divide"
+                                                                align="left" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0; border-top:1px solid #000; font-size:1px; height:1px"
+                                                                height="1">
+                                                                  <tr>
+                                                                    <td style="mso-line-height-rule:exactly; border-collapse:collapse !important">&nbsp;</td>
+                                                                  </tr>
+                                                                </table>
+                                                              </td>
+                                                            </tr>
+                                                            <tr>
+                                                              <td style="mso-line-height-rule:exactly; border-collapse:collapse !important">
+                                                                <table width="100%" cellspacing="0" cellpadding="0" class="line-items" align="left"
+                                                                style='border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif'>
+                                                                  <tr>
+                                                                    <td valign="bottom" style='mso-line-height-rule:exactly; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; font-size:16px; line-height:20px; padding:3px 0; border-collapse:collapse !important'>
+                                                                      <img class="cc-icon" src="https://s3.amazonaws.com/lyft.zimride.com/images/emails/credit_icons/cc_amex.png"
+                                                                      style="display:inline-block; -moz-border-radius:2px; -webkit-border-radius:2px; border:1px solid #B1C2CA; border-radius:2px; height:20px; vertical-align:bottom; width:32px"
+                                                                      height="20" valign="bottom" width="32">&nbsp;&nbsp;American Express *6505</td>
+                                                                    <td class="value charge-total" valign="bottom" style='mso-line-height-rule:exactly; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; font-size:20px; line-height:20px; padding:3px 0; min-width:60px; text-align:right; white-space:nowrap; border-collapse:collapse !important'
+                                                                    align="right"> <strong>$5.75</strong>
+
+                                                                    </td>
+                                                                  </tr>
+                                                                </table>
+                                                              </td>
+                                                            </tr>
+                                                          </table>
+                                                        </td>
+                                                      </tr>
+                                                    </table>
+                                                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0">
+                                                      <tr>
+                                                        <td height="24" style="mso-line-height-rule:exactly; border-collapse:collapse !important; height:24px"></td>
+                                                      </tr>
+                                                    </table>
+                                                  </td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="mso-line-height-rule:exactly; border-collapse:collapse !important">
+                                                    <table class="receipt-wrapper mobile-remove-padding" width="100%" cellspacing="0"
+                                                    cellpadding="0" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0; padding-left:40px; padding-right:40px">
+                                                      <tr>
+                                                        <td class="center" style="mso-line-height-rule:exactly; text-align:center; border-collapse:collapse !important"
+                                                        align="center">
+                                                          <img class="center ride-map" src="https://ci6.googleusercontent.com/proxy/Ys9G3C8-5atg5Bp7OpOYqKSMDz1Ab2DKaKC8CRqSq5dBazcJKGNcfVQ4HbP1psoKi7fEMdjPCNDvNJ8HV2hZx6yfPDcmxKGMt2_ygmxHCaKhWdL8uX5xthi4Yh81_Gn9TKqW8a4clD4gP58atnOTqNwb3jvRH1SCTHICcpwvGSxFuOe57jx1IalEB6ul61jok4_EzmF6e2kTbc16gDlmPNnVW9-k4ul4Ays2verKeBu7VOhROrD-xPad5Ddpa78NJwuaVDz5PIp8jERIx6J8GiDSpwDCYXihBiOE92cK9p8nkCN9u8Mg9XAaFwGPd7brupwHRoDopGCRmtPhi1Jh8BZHVP7GGcEXkfA2S_Bam4VD1X1tkvwh3fZ8UAUX5fYWVXjuJuvxamgEvXO-iwxW-iSmrECw1qDxPKf0Yy0nyoh8-L77SeiT4JlmiBzXzQHdoluaF5L5UJNbblHAAcvubEkRx-47g_5p5_SrcTYoYiRoJ1gvlg1URM22rGGLGxHnCRkQ27ZO-WW9R_uFrYRV6OUltg2muZT6oOq6AJlMKT0LlKnvxhJU67D6mpgYQ6rdkuQhZXWPxx2UJrU968CBN4Nq_sT1DAkCXQ8T4LQB0EX35IInHsY1UnOfaamCrtpI-4ZcZFGXUpFFsaL4lCXbsQlx_7O4m2IBYhhmpMSA1rJgxvM1pMZA7kqJAaWsZpnw1-d6i7rBHiUft4lL7y-zwQovfz_LDKT7cjjWDDSGZZY7_2HHGyLo9XynKuanJCHyj0NaNZ6gs6wxkLSJeTQbVeFjObvbN5WHt0H_kwRJJ5vxbTB9eEfaCrfKssVM5nk_YGZGfspWvEXnAltRg14Y7bX9UTQVsqP31z77K519HyaH25jSGnLUGaKCcLBYj7vLSJFTwkP1CTUemJp-ARa90-_ApA5G0qLp8GWhNNNXPsisIZDx8rBd6oX1uuqsI7hxkTPc8yHuHVRhnXqSgX9rdnkSGtVo-WhleGZx_r3xXEJimDPXvQ6YzE588qKz2Ywietgw0blkyOpcUa0txVwiTRCo4l-BhzIpiI23aJHym6bflw=s0-d-e1-ft#https://api.tiles.mapbox.com/v4/teknolog.nj85np4a/url-https%3A%2F%2Fs3.amazonaws.com%2Flyft-assets%2Fride-history%2Fv2%2Fpickup_pin%25402x.png(-122.40811,37.78372),url-https%3A%2F%2Fs3.amazonaws.com%2Flyft-assets%2Fride-history%2Fv2%2Fdropoff_pin%25402x.png(-122.3898,37.77317),path-5+728099-.7(atreFtzbjV_%40g%40U%5BKOgAyAEI%7B%40iA_AoABBe%40q%40a%40k%40II%40%40EEU%5D%3FI%40G%3FGBGFGNSv%40eA%60%40i%40d%40o%40%5Eg%40v%40eAHK%7E%40qA%3F%3FFIt%40aADIhBaCxByCd%40m%40%60%40i%40p%40_AvAmBf%40q%40f%40o%40lAcB%7EIzLtAiB%5Ei%40j%40u%40rAiB_J%7DLtAiBjAaBRW%7E%40oAzByCz%40kA%5Cg%40NSPSLU%7E%40mAj%40w%40LQHAJENMPS%60%40g%40d%40q%40HMhAiBBUPWDG%60AoA%5Eg%40HMV%5BRWHO%40QKqEEcBJ%3FlCMbAE)/auto/520x300.png?access_token=pk.eyJ1IjoidGVrbm9sb2ciLCJhIjoiSThJdmhyRSJ9.zq2xC8EwFXLPixOdVza98A"
+                                                          alt="Ride Map" style="display:block; width:100%; text-align:center; margin:0 auto"
+                                                          width="100%" align="center">
+                                                        </td>
+                                                      </tr>
+                                                    </table>
+                                                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0">
+                                                      <tr>
+                                                        <td height="8" style="mso-line-height-rule:exactly; border-collapse:collapse !important; height:8px"></td>
+                                                      </tr>
+                                                    </table>
+                                                  </td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="mso-line-height-rule:exactly; border-collapse:collapse !important">
+                                                    <table class="receipt-wrapper mobile-padding-sides-lg" width="100%" cellspacing="0"
+                                                    cellpadding="0" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0; padding-left:40px; padding-right:40px">
+                                                      <tr>
+                                                        <td width="100%" cellspacing="0" cellpadding="0" style="mso-line-height-rule:exactly; border-collapse:collapse !important">
+                                                          <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0">
+                                                            <tr>
+                                                              <td class="mso-remove-padding" style="mso-line-height-rule:exactly; border-collapse:collapse !important">
+                                                                <table align="left" width="100%" class="mobile-table-full ride-location collapse-border"
+                                                                border="0" cellspacing="0" cellpadding="0" style='border-collapse:collapse !important; mso-table-lspace:0; mso-table-rspace:0; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; padding-top:16px'>
+                                                                  <tr>
+                                                                    <td style='mso-line-height-rule:exactly; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; line-height:20px; border-collapse:collapse !important'>
+                                                                      <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0">
+                                                                        <tr>
+                                                                          <td height="16" style='mso-line-height-rule:exactly; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; line-height:20px; border-collapse:collapse !important; height:16px'></td>
+                                                                        </tr>
+                                                                      </table>
+                                                                    </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                    <td class="location-marker" style='mso-line-height-rule:exactly; width:20px; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; line-height:20px; border-collapse:collapse !important'
+                                                                    width="20">
+                                                                      <img src="https://s3.amazonaws.com/lyft.zimride.com/images/emails/markers/v2/pickup.png"
+                                                                      style="display:block; height:10px; width:10px" height="10" width="10">
+                                                                    </td>
+                                                                    <td style='mso-line-height-rule:exactly; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; line-height:20px; border-collapse:collapse !important'>
+                                                                      <table class="ride-location-heading" width="100%" border="0" cellspacing="0" cellpadding="0"
+                                                                      style='border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif'>
+                                                                        <tr>
+                                                                          <td align="left" width="70" valign="bottom" style='mso-line-height-rule:exactly; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; line-height:20px; border-collapse:collapse !important'>Pickup</td>
+                                                                          <td class="left mobile-text-right" valign="bottom" style='mso-line-height-rule:exactly; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; line-height:20px; border-collapse:collapse !important'> <span class="state-time" style='mso-line-height-rule:exactly; color:#728099; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; font-size:14px'>1:35 PM</span>
+
+                                                                          </td>
+                                                                        </tr>
+                                                                      </table>
+                                                                    </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                    <td style='mso-line-height-rule:exactly; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; line-height:20px; border-collapse:collapse !important'>&nbsp;</td>
+                                                                    <td style='mso-line-height-rule:exactly; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; line-height:20px; border-collapse:collapse !important'>18 Taylor St, New York, NY</td>
+                                                                  </tr>
+                                                                </table>
+                                                              </td>
+                                                            </tr>
+                                                            <tr>
+                                                              <td class="mso-remove-padding" style="mso-line-height-rule:exactly; border-collapse:collapse !important">
+                                                                <table align="left" width="100%" class="mobile-table-full ride-location collapse-border"
+                                                                border="0" cellspacing="0" cellpadding="0" style='border-collapse:collapse !important; mso-table-lspace:0; mso-table-rspace:0; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; padding-top:16px'>
+                                                                  <tr>
+                                                                    <td style='mso-line-height-rule:exactly; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; line-height:20px; border-collapse:collapse !important'>
+                                                                      <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0">
+                                                                        <tr>
+                                                                          <td height="16" style='mso-line-height-rule:exactly; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; line-height:20px; border-collapse:collapse !important; height:16px'></td>
+                                                                        </tr>
+                                                                      </table>
+                                                                    </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                    <td class="location-marker" style='mso-line-height-rule:exactly; width:20px; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; line-height:20px; border-collapse:collapse !important'
+                                                                    width="20">
+                                                                      <img src="https://s3.amazonaws.com/lyft.zimride.com/images/emails/markers/v2/dropoff.png"
+                                                                      style="display:block; height:10px; width:10px" height="10" width="10">
+                                                                    </td>
+                                                                    <td style='mso-line-height-rule:exactly; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; line-height:20px; border-collapse:collapse !important'>
+                                                                      <table class="ride-location-heading" width="100%" border="0" cellspacing="0" cellpadding="0"
+                                                                      style='border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif'>
+                                                                        <tr>
+                                                                          <td align="left" width="70" valign="bottom" style='mso-line-height-rule:exactly; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; line-height:20px; border-collapse:collapse !important'>Dropoff</td>
+                                                                          <td class="left mobile-text-right" valign="bottom" style='mso-line-height-rule:exactly; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; line-height:20px; border-collapse:collapse !important'> <span class="state-time" style='mso-line-height-rule:exactly; color:#728099; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; font-size:14px'>1:55 PM</span>
+
+                                                                          </td>
+                                                                        </tr>
+                                                                      </table>
+                                                                    </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                    <td style='mso-line-height-rule:exactly; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; line-height:20px; border-collapse:collapse !important'>&nbsp;</td>
+                                                                    <td style='mso-line-height-rule:exactly; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; line-height:20px; border-collapse:collapse !important'>Marine Terminal Rd, New York, NY</td>
+                                                                  </tr>
+                                                                </table>
+                                                              </td>
+                                                            </tr>
+                                                          </table>
+                                                        </td>
+                                                      </tr>
+                                                    </table>
+                                                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0">
+                                                      <tr>
+                                                        <td height="24" style="mso-line-height-rule:exactly; border-collapse:collapse !important; height:24px"></td>
+                                                      </tr>
+                                                    </table>
+                                                  </td>
+                                                </tr>
+                                                <tr>
+                                                  <td style="mso-line-height-rule:exactly; border-collapse:collapse !important">
+                                                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0">
+                                                      <tr>
+                                                        <td height="8" style="mso-line-height-rule:exactly; border-collapse:collapse !important; height:8px"></td>
+                                                      </tr>
+                                                    </table>
+                                                  </td>
+                                                </tr>
+                                              </table>
+                                              <!-- Marketing Widget -->
+                                              <!-- End Marketing Widget -->
+                                              <!-- Get Business Profile CTA -->
+                                              <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0">
+                                                <tr>
+                                                  <td height="8" style="mso-line-height-rule:exactly; border-collapse:collapse !important; height:8px"></td>
+                                                </tr>
+                                              </table>
+                                              <table border="0" cellpadding="0" cellspacing="0" width="100%" class="lyft-email-card"
+                                              style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0; -moz-border-radius:2px; -moz-box-shadow:0 0 3px rgba(0, 0, 0, 0.1); -webkit-border-radius:2px; -webkit-box-shadow:0 0 3px rgba(0, 0, 0, 0.1); background-color:#FFF; border-radius:2px; box-shadow:0 0 3px rgba(0, 0, 0, 0.1); color:#333447; font-size:16px"
+                                              bgcolor="#FFFFFF">
+                                                <tr>
+                                                  <td style="mso-line-height-rule:exactly; border-collapse:collapse !important">
+                                                    <table width="100%" cellspacing="0" cellpadding="0" class="receipt-wrapper mobile-padding-sides-lg"
+                                                    align="center" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0; padding-left:40px; padding-right:40px">
+                                                      <tr>
+                                                        <td style="mso-line-height-rule:exactly; border-collapse:collapse !important">
+                                                          <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0">
+                                                            <tr>
+                                                              <td height="30" style="mso-line-height-rule:exactly; border-collapse:collapse !important; height:30px"></td>
+                                                            </tr>
+                                                          </table>
+                                                        </td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td align="center" style="mso-line-height-rule:exactly; border-collapse:collapse !important">
+                                                          <img src="https://s3.amazonaws.com/lyft.zimride.com/images/emails/enterprise/briefcase_dark_large.png"
+                                                          style="display:block; max-height:50px; max-width:50px">
+                                                        </td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td style="mso-line-height-rule:exactly; border-collapse:collapse !important">
+                                                          <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0">
+                                                            <tr>
+                                                              <td height="20" style="mso-line-height-rule:exactly; border-collapse:collapse !important; height:20px"></td>
+                                                            </tr>
+                                                          </table>
+                                                        </td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td align="center" style="mso-line-height-rule:exactly; border-collapse:collapse !important">
+                                                          <table class="max-width-300" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0; display:block; max-width:300px">
+                                                            <tr>
+                                                              <td align="center" class="business-profile-header" style='mso-line-height-rule:exactly; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; font-size:24px; font-weight:400; line-height:28px; border-collapse:collapse !important'>Make expensing business rides easy</td>
+                                                            </tr>
+                                                          </table>
+                                                        </td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td style="mso-line-height-rule:exactly; border-collapse:collapse !important">
+                                                          <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0">
+                                                            <tr>
+                                                              <td height="8" style="mso-line-height-rule:exactly; border-collapse:collapse !important; height:8px"></td>
+                                                            </tr>
+                                                          </table>
+                                                        </td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td align="center" style="mso-line-height-rule:exactly; border-collapse:collapse !important">
+                                                          <table class="max-width-350" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0; display:block; max-width:350px">
+                                                            <tr>
+                                                              <td align="center" class="business-profile-body" style='mso-line-height-rule:exactly; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; font-size:16px; padding-bottom: 40px; font-weight:400; line-height:20px; border-collapse:collapse !important'>Enable business profile on Lyft to make expensing rides quick and easy.</td>
+                                                            </tr>
+                                                          </table>
+                                                        </td>
+                                                      </tr>
+                                                    </table>
+                                                  </td>
+                                                </tr>
+                                              </table>
+                                              <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0">
+                                                <tr>
+                                                  <td height="24" style="mso-line-height-rule:exactly; border-collapse:collapse !important; height:24px"></td>
+                                                </tr>
+                                              </table>
+                                              <!-- End Get Business Profile CTA -->
+                                              <!-- Actionable Buttons -->
+                                              <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0">
+                                                <tr>
+                                                  <td height="10" style="mso-line-height-rule:exactly; border-collapse:collapse !important; height:10px"></td>
+                                                </tr>
+                                              </table>
+                                              <table width="100%" cellspacing="0" cellpadding="0" align="center" class="wrapper helpful-links mobile-padding-sides-md"
+                                              style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0">
+                                                <tr>
+                                                  <td align="center" style="mso-line-height-rule:exactly; border-collapse:collapse !important">
+                                                    <table class="helpful-button" cellpadding="0" cellspacing="1" align="center" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0; width:32.99%"
+                                                    width="32.99%">
+                                                      <tr>
+                                                        <td align="center" style="mso-line-height-rule:exactly; border-collapse:collapse !important">
+                                                          <table class="helpful-button-td" bgcolor="#F7F9F9" cellpadding="0" cellspacing="0"
+                                                          border="0" align="right" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0; -moz-border-radius:2px; -webkit-border-radius:2px; border:1px solid #D8DFE6; border-radius:2px; color:black; font-size:14px; width:230px"
+                                                          width="230">
+                                                            <tr>
+                                                              <td align="center" class="center" style="mso-line-height-rule:exactly; text-align:center; border-collapse:collapse !important">
+                                                                <a style='mso-line-height-rule:exactly; color:#333d47; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; text-decoration:none; display:block; padding:10px'>
+                                                                  <img src="https://s3.amazonaws.com/lyft.zimride.com/images/emails/social/v2/add@2x.png"
+                                                                  alt="Add a tip" style="display:inline; border:0; height:11px; width:11px" height="11"
+                                                                  width="11">&nbsp;Tip driver</a>
+                                                              </td>
+                                                            </tr>
+                                                          </table>
+                                                        </td>
+                                                      </tr>
+                                                    </table>
+                                                  </td>
+                                                </tr>
+                                              </table>
+                                              <!-- Receipt Footer -->
+                                              <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0">
+                                                <tr>
+                                                  <td height="20" style="mso-line-height-rule:exactly; border-collapse:collapse !important; height:20px"></td>
+                                                </tr>
+                                              </table>
+                                              <table width="100%" cellspacing="0" cellpadding="0" align="center" class="wrapper"
+                                              style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0">
+                                                <tr>
+                                                  <td class="footer-tiny-text center" style='mso-line-height-rule:exactly; text-align:center; color:#728099; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; font-size:12px; line-height:15px; border-collapse:collapse !important'
+                                                  align="center">Dispatching Base: Tri-City (B91251). Affiliated Base: (B126211)</td>
+                                                </tr>
+                                                <tr>
+                                                  <td class="footer-tiny-text center" style='mso-line-height-rule:exactly; text-align:center; color:#728099; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; font-size:12px; line-height:15px; border-collapse:collapse !important'
+                                                  align="center">Driver's License Plate: U414W09. FHV License: 6328821.</td>
+                                                </tr>
+                                                <tr>
+                                                  <td class="footer-tiny-text center" style='mso-line-height-rule:exactly; text-align:center; color:#728099; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; font-size:12px; line-height:15px; border-collapse:collapse !important'
+                                                  align="center">To submit a complaint to the NYC TLC, please call 311.</td>
+                                                </tr>
+                                              </table>
+                                              <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0">
+                                                <tr>
+                                                  <td height="30" style="mso-line-height-rule:exactly; border-collapse:collapse !important; height:30px"></td>
+                                                </tr>
+                                              </table>
+                                  
+                                              <table width="100%" cellspacing="0" cellpadding="0" align="center" class="wrapper mobile-padding-sides-md receipt-footer-text"
+                                              style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0">
+                                                <tr style="height:18px" height="18">
+                                                  <td class="footer-tiny-text center" style='mso-line-height-rule:exactly; text-align:center; color:#728099; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; font-size:12px; line-height:15px; border-collapse:collapse !important'
+                                                  align="center">Receipt #74784390409212510</td>
+                                                </tr>
+                                                <tr style="height:18px" height="18">
+                                                  <td class="footer-tiny-text center" style='mso-line-height-rule:exactly; text-align:center; color:#728099; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; font-size:12px; line-height:15px; border-collapse:collapse !important'
+                                                  align="center">Map data ©
+                                                    <a href="https://www.mapbox.com/about/maps/" target="_blank" style='mso-line-height-rule:exactly; color:#00ADEF; font-family:"Gotham Book", Gotham, "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; text-decoration:none'>OpenStreetMap</a> contributors</td>
+                                                </tr>
+                                              </table>
+                                              <img src="https://www.lyft.com/api/track?source=receipt&email_id=ecb54702-81b7-5330-a70e-ff136c6acf45&email_address=hello%40matthewsmith.cc&pixel=1&user_id=1047842924403747886&_sig=ZjMzMmQ5ZWJhYTAzNTg0ZDNkMmU1MGQ1NGNiOTUwMmI3ZTAzMWI5NA%3D%3D&_exp=20180925T175556Z&_ver=2"
+                                              style="display:block; float:left" align="left">
+                                            </td>
+                                          </tr>
+                                        </table>
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+        </td>
+      </tr>
+    </table>
+
+        </div>
+				<script>
+					function toggleChats() {
+						document.getElementById("buddy-list").style.display = "block";
+						document.getElementById("chat-thread").style.display = "none";
+						document.getElementById("back-button").style.display = "none";
+						document.getElementById('right-title').className += 'mobile-hide';
+						document.getElementById('left-title').className += 'mobile-show';
+					}
+					function openSublist1(listName) {
+						var x = document.getElementsByClassName("togglelist");
+						document.getElementById("chatlist").style.display = "block";
+						document.getElementById("inboxlist").style.display = "none";
+						document.getElementById("trashlist").style.display = "none";
+						document.getElementById("nav-chatlist").style.opacity = "0.7";
+						document.getElementById("nav-inboxlist").style.opacity = "1";
+						document.getElementById("nav-trashlist").style.opacity = "1";
+					}
+					function openSublist2(listName) {
+						var x = document.getElementsByClassName("togglelist");
+						document.getElementById("chatlist").style.display = "none";
+						document.getElementById("inboxlist").style.display = "block";
+						document.getElementById("trashlist").style.display = "none";
+						document.getElementById("nav-chatlist").style.opacity = "1";
+						document.getElementById("nav-inboxlist").style.opacity = "0.7";
+						document.getElementById("nav-trashlist").style.opacity = "1";
+					}
+					function openSublist3(listName) {
+						var x = document.getElementsByClassName("togglelist");
+						document.getElementById("chatlist").style.display = "none";
+						document.getElementById("inboxlist").style.display = "none";
+						document.getElementById("trashlist").style.display = "block";
+						document.getElementById("nav-chatlist").style.opacity = "1";
+						document.getElementById("nav-inboxlist").style.opacity = "1";
+						document.getElementById("nav-trashlist").style.opacity = "0.7";
+					}			
+				</script>
+			</div>
+			<script src="./talkturkey/jquery.js"></script>
+		</div>
+		<script type="text/javascript" src="./talkturkey/navigation.js"></script>
+		<script type="text/javascript" src="./talkturkey/skip-link-focus-fix.js"></script>
+		<script type="text/javascript" src="./talkturkey/comment-reply.min.js"></script>
+		<script type="text/javascript" src="./talkturkey/wp-embed.min.js"></script>
+	</div>
+</body>
+</html>
