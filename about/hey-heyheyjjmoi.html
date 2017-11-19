@@ -172,45 +172,10 @@
 						<p style="padding-top: 30px; text-align: right; font-family: georgia, serif; color: gray; font-size: 12px; ">Amanda<br />—Sent from my iPhone</p>
 					</div>
 				</div>
-				<script>
-					function toggleChats() {
-						document.getElementById("buddy-list").style.display = "block";
-						document.getElementById("chat-thread").style.display = "none";
-						document.getElementById("back-button").style.display = "none";
-						document.getElementById('right-title').className += 'mobile-hide';
-						document.getElementById('left-title').className += 'mobile-show';
-					}
-					function openSublist1(listName) {
-						var x = document.getElementsByClassName("togglelist");
-						document.getElementById("chatlist").style.display = "block";
-						document.getElementById("inboxlist").style.display = "none";
-						document.getElementById("trashlist").style.display = "none";
-						document.getElementById("nav-chatlist").style.opacity = "0.7";
-						document.getElementById("nav-inboxlist").style.opacity = "1";
-						document.getElementById("nav-trashlist").style.opacity = "1";
-					}
-					function openSublist2(listName) {
-						var x = document.getElementsByClassName("togglelist");
-						document.getElementById("chatlist").style.display = "none";
-						document.getElementById("inboxlist").style.display = "block";
-						document.getElementById("trashlist").style.display = "none";
-						document.getElementById("nav-chatlist").style.opacity = "1";
-						document.getElementById("nav-inboxlist").style.opacity = "0.7";
-						document.getElementById("nav-trashlist").style.opacity = "1";
-					}
-					function openSublist3(listName) {
-						var x = document.getElementsByClassName("togglelist");
-						document.getElementById("chatlist").style.display = "none";
-						document.getElementById("inboxlist").style.display = "none";
-						document.getElementById("trashlist").style.display = "block";
-						document.getElementById("nav-chatlist").style.opacity = "1";
-						document.getElementById("nav-inboxlist").style.opacity = "1";
-						document.getElementById("nav-trashlist").style.opacity = "0.7";
-					}			
-				</script>
 			</div>
-			<script src="./talkturkey/jquery.js"></script>
 		</div>
+		<script type="text/javascript" src="./talkturkey/jquery.js"></script>
+		<script type="text/javascript" src="./talkturkey/toggles.js"></script>
 		<script type="text/javascript" src="./talkturkey/navigation.js"></script>
 		<script type="text/javascript" src="./talkturkey/skip-link-focus-fix.js"></script>
 		<script type="text/javascript" src="./talkturkey/comment-reply.min.js"></script>
