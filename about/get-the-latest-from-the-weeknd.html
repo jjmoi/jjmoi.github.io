@@ -37,6 +37,7 @@
 		<div id="content" class="site-content">
 			<div class="header">
 				<div class="left-title" id="left-title"><h1>Jj Moi</h1></div>
+				<div id="mobile-left" style="display: none;"><p>Jj Moi</p></div>
 				<div class="back"><a href="#" id="back-button" onclick="toggleChats();return false;"><img src="./talkturkey/back.png"></a></div>
 				<div class="right-title" id="right-title">
 					<h1>Emailing</h1><h2>Active 2 hours ago</h2>
@@ -220,7 +221,7 @@
 				</div>
 				<!-- end BUDDY LIST -->
 				<!-- start chat thread -->
-				<div class="chat-thread email-rapper">
+				<div class="chat-thread email-rapper" id="chat-thread">
 					<p id="email-subject">Get the Latest from The Weeknd<span class="email-date">🔥</span></p>
 					<p class="from-to"><span class="sender" title="email@email-puma.com">PUMA</span> <span>to</span> <span title="heyheyjjmoi@gmail.com">me</span><span class="email-date">Yesterday</span></p>
 					<p id="puma-free-shipping"><a href="http://click.email-puma.com/?qs=68404c44c2ae116acd98c5e96a1e2d6f928e52f8ab62f75bd7aed1b11751ccbd82eb55360bf79a5f6faad1760602ceb75709443d9a13f7aa0ba601e8b72f0f5a">FREE SHIPPING ON ORDERS OVER $75* PLUS: FREE RETURNS, ALWAYS.</a></p>
