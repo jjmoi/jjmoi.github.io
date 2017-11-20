@@ -2048,7 +2048,7 @@ have to use .js for active tabs
 }
 */
 
-#mobile-left {
+#mobile-left p {
 	font-size: 18px;
 	font-weight: 400;
 	line-height: 0;
