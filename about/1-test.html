@@ -11,7 +11,6 @@
 		.chat-thread a {color: #404040; text-decoration: underline; text-decoration-color: #29e5ac;}
 		.chat-thread a:hover {color: #29e5ac;}
 		.chat-thread a, .chat-thread a:hover, .chat-thread a:active, .chat-thread a:focus {outline: none;}
-		#mobile-left-title {line-height: 0; font-size: 18px; font-weight: 400; text-align: center; margin: 25px auto 0;}
 	</style>
 </head>
 <body class="single single-post postid-234 single-format-standard group-blog">
@@ -19,7 +18,7 @@
 		<div id="content" class="site-content">
 			<div class="header">
 				<div class="left-title" id="left-title"><h1>Jj Moi</h1></div>
-				<p id="mobile-left-title" style="display: none;">Jj Moi</p>
+				<p id="mobile-left" style="display: none;">Jj Moi</p>
 				<div class="back"><a href="#" id="back-button" onclick="toggleChats();return false;"><img src="./talkturkey/back.png"></a></div>
 				<div class="right-title" id="right-title">
 					<h1>Emailing</h1><h2>Active 2 hours ago</h2>
@@ -81,7 +80,8 @@
 				document.getElementById("back-button").style.display = "none";
 				document.getElementById("right-title").style.display = "none";
 				document.getElementById("left-title").style.display = "none";
-				document.getElementById("mobile-left-title").style.display = "block";
+				document.getElementById("mobile-left").style.display = "block";
+				document.getElementById("login").style.display = "block";
 			}
 			function openSublist1(listName) {
 				var x = document.getElementsByClassName("togglelist");
