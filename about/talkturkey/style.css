@@ -2048,6 +2048,14 @@ have to use .js for active tabs
 }
 */
 
+#mobile-left-title {
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 0;
+	text-align: center;
+	margin: 25px auto 0;
+}
+
 /* email RWD */
 @media screen and (max-width: 1200px) {
 	.email-rapper #email-subject, .email-rapper p, .email-rapper hr {padding: 0 30px;}
