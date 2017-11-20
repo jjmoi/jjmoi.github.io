@@ -2049,19 +2049,19 @@ have to use .js for active tabs
 */
 
 #mobile-left p {
-    line-height: 0;
-    font-size: 18px;
-    font-weight: 400;
-    margin-top: 25px;
+	line-height: 0;
+	font-size: 18px;
+	font-weight: 400;
+	margin-top: 25px;
 }
 
 #mobile-left {
-    float: left;
-    height: 100%;
-    min-width: 320px;
-    box-sizing: border-box;
-    position: relative;
-    border-bottom: 1px solid rgba(0, 0, 0, .10);
+	height: 100%;
+	min-width: 320px;
+	width: 100%;
+	box-sizing: border-box;
+	position: relative;
+	border-bottom: 1px solid rgba(0, 0, 0, .10);
 }
 
 /* email RWD */
