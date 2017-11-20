@@ -2,8 +2,10 @@ function toggleChats() {
 	document.getElementById("buddy-list").style.display = "block";
 	document.getElementById("chat-thread").style.display = "none";
 	document.getElementById("back-button").style.display = "none";
-	document.getElementById("right-title").className += "mobile-hide";
-	document.getElementById("left-title").className += "mobile-show";
+	document.getElementById("right-title").style.display = "none";
+	document.getElementById("left-title").style.display = "none";
+	document.getElementById("mobile-left").style.display = "block";
+	document.getElementById("login").style.display = "none";
 }
 function openSublist1(listName) {
 	var x = document.getElementsByClassName("togglelist");
