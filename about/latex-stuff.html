@@ -18,6 +18,7 @@
 		<div id="content" class="site-content">
 			<div class="header">
 				<div class="left-title" id="left-title"><h1>Jj Moi</h1></div>
+				<div id="mobile-left" style="display: none;"><p>Jj Moi</p></div>
 				<div class="back"><a href="#" id="back-button" onclick="toggleChats();return false;"><img src="./talkturkey/back.png"></a></div>
 				<div class="right-title" id="right-title">
 					<h1>Emailing</h1><h2>Active 2 hours ago</h2>
@@ -201,7 +202,7 @@
 				</div>
 				<!-- end BUDDY LIST -->
 				<!-- start chat thread -->
-				<div class="chat-thread email-rapper">
+				<div class="chat-thread email-rapper" id="chat-thread">
 					<p id="email-subject">latex stuff<span class="email-date"></span></p>
 					<p class="from-to"><span class="sender" title="scottm@gmail.com">Scott M</span> <span>to</span> <span title="heyheyjjmoi@gmail.com">me</span><span class="email-date">Thu</span></p>
 					<p>Uploaded a relatively complete version of the latex gui to github. I'm still making some changes, but the basic components should stay basically the same on my end. There's a README that explains most of the features, but I suspect you'll get more out of me giving a short walk-through, so let me know when and if you want me to do that. Also, nothing is set in stone. Not even the core components, so let me know about UX changes you think should be made that would involve changes to the actual code (I suspect there'll be a few). Also attached is the latex reference I told you the other day.</p>
