@@ -2049,6 +2049,11 @@ have to use .js for active tabs
 */
 
 #mobile-left {
+	border-bottom: 1px solid rgba(0, 0, 0, .10);
+	background-color: rgba(255, 255, 255, .95);
+}
+
+#mobile-left p {
 	font-size: 18px;
 	font-weight: 400;
 	line-height: 0;
