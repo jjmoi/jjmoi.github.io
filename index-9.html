@@ -19,6 +19,8 @@
 		#bio-wild a, #left-title a, #mobile-left a {text-decoration: none;}
 		#left-title :hover, #mobile-left a:hover {text-decoration: none; color: #29e5ac;}
 		#bio-wild a:hover {text-decoration: underline;}
+		#target {color: #29e5ac;}
+		#target:hover {color: #29e5ac; text-decoration: underline; opacity: 0.7;}
 		@media screen and (max-width: 1200px) {
 			#bio, #bio-short, .bio-normal, #bio-wild {padding: 0 30px;}
 			.bio-normal {padding-bottom: 20px;}
@@ -216,27 +218,31 @@
 				<!-- start chat thread -->
 				<div class="chat-thread" id="chat-thread">
 					<p id="bio-short">Jj Moi, Designer</p>
-					<p>Crashing at my friend’s place in <a href="https://www.google.com/maps/@37.796992,-122.4227844,15z">San Francisco</a></p>
-					<p>Working at <a href="http://www.tachyus.com">Tachyus</a></p>
-					<p>Drinking too much <a href="http://www.jjmoi.com/drinking">caffeine and margaritas</a></p>
-					<p>Previously, I designed for <a href="https://en.m.wikipedia.org/wiki/Americans"><em>The People</em></a> at <a href="https://18f.gsa.gov">18F</a>, making <a href="https://standards.usa.gov">US Design Standards</a>, <a href="https://pages.18f.gov/brand">18F Visual Identity</a>, and <a href="https://cloud.gov">cloud.gov</a>.</p>
-					<p>Before that at <a href="https://www.opengov.com">OpenGov</a>, working on <a href="https://paloalto.opengov.com">Transparency</a> and <a href="/solidus">Solidus Design System</a>.</p>
-					<p>I also design several typefaces, a few books, and mentor aspiring designers at DesignLab.</p>
-					<p>In past lives, I’ve been a furniture designer, an art & design teacher, and a turtle.</p>
-					<p>I post random work in progress on Dribbble, mostly cats.</p>
-					<p>I Instagram the shit out of my life on a daily basis.</p>
-					<p>I tweet once a year.</p>
-					<p>Questions? Just ask.</p>
-					<!--
 					<p class="bio-normal">Currently I’m designing stuff at <a href="http://www.tachyus.com">Tachyus</a>, crashing at my friend’s place in <a href="https://www.google.com/maps/@37.796992,-122.4227844,15z">San Francisco</a>, and drinking too much <a href="http://www.jjmoi.com/drinking">caffeine and margaritas</a>. Before that, I designed for <a href="https://en.m.wikipedia.org/wiki/Americans"><em>The People</em></a> at <a href="https://18f.gsa.gov">18F</a>, making <a href="https://standards.usa.gov">US Design Standards</a>, <a href="https://pages.18f.gov/brand">18F Visual Identity</a>, and <a href="https://cloud.gov">cloud.gov</a>. And before that at <a href="https://www.opengov.com">OpenGov</a>, working on <a href="https://paloalto.opengov.com">Transparency</a> and <a href="/solidus">Solidus Design System</a>.</p>
 					<p class="bio-normal">I also design <a href="/latype">several</a> <a href="/typefoundry">typefaces</a>, <a href="https://www.kickstarter.com/projects/753619488/all-together-now-women-in-music">a few books</a>, and mentor aspiring designers at <a href="http://trydesignlab.com/JjMoi">DesignLab</a>. In past lives, I’ve been a <a href="/img/altakk.png">furniture designer</a>, an <a href="https://www.facebook.com/pg/artelement/photos/?tab=album&album_id=121849237880080">art & design teacher</a>, and a <a href="https://www.google.com/search?q=turtle&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjP0sCEidnTAhXmyVQKHWfbDiMQ_AUICigB&biw=1440&bih=776#q=turtle&tbs=isz:l,ic:specific,isc:teal,itp:photo&tbm=isch&tbas=0">turtle</a>.</p>
 					<p class="bio-normal">I post <a href="https://dribbble.com/shots/1489706-Mazzy-Star-Fade-Into-You">random</a> <a href="https://dribbble.com/shots/1556619-Angela-Lansbury">work in progress</a> on <a href="https://dribbble.com/jjmoi">Dribbble</a>, <a href="https://dribbble.com/shots/1700769-equality">mostly</a> <a href="https://dribbble.com/shots/1518937-result-of-a-sleepless-week">cats</a>. I <a href="https://www.instagram.com/goodnightjj">Instagram</a> <a href="https://www.instagram.com/p/BPAbtkhA6eT">the shit</a> <a href="https://www.instagram.com/p/9nCkAnKv7B">out of</a> <a href="https://www.instagram.com/p/BLn1r-Igu8G">my</a> <a href="https://www.instagram.com/p/BKPqLrghuzR">life</a> <a href="https://www.instagram.com/p/BMY7gF7gtbB">on a</a> <a href="https://www.instagram.com/p/BNzVSaogLXj">daily</a> <a href="https://www.instagram.com/p/7VkHlRKv00">basis</a>. I <a href="https://twitter.com/goodnightjj">tweet</a> once a year.</p>
-					-->
 					<p class="bio-normal">Questions? <a href="http://www.jjmoi.com/contact">Just ask</a>.</p>
-					<p id="bio-wild"></p>
+					<p onclick="newTitle()" id="target"></p>
 				</div>
 			</div>
 		</div>
+		<script>
+			var target = document.getElementById('target');
+			var titles = [
+				'One',
+				'Two',
+				'Three',
+				'Four',
+				'Five'
+			];
+
+			function newTitle () {
+				var i = (Math.random() * titles.length) | 0;
+				target.innerText = titles[i];
+			}
+
+			newTitle();
+		</script>
 		<script type="text/javascript" src="about/talkturkey/jquery.js"></script>
 		<script type="text/javascript" src="about/talkturkey/toggles.js"></script>
 		<script type="text/javascript" src="about/talkturkey/navigation.js"></script>
