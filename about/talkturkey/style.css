@@ -1864,18 +1864,19 @@ img.screenshot {
 }
 
 #login {
-	color: #aaa;
-	font-size: 12px;
+	/* color: #aaa; */
+	font-size: 16px;
 	text-decoration: none;
 	line-height: 0;
 	position: absolute;
-	top: 25px;
+	top: 26px;
 	right: 20px;
 }
 
 #login:hover {
-	color: #29e5ac;
-	opacity: 0.8;
+	/* color: #29e5ac; */
+	text-decoration: none;
+	opacity: 0.7;
 }
 
 hr {
