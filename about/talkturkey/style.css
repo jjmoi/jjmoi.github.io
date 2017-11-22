@@ -2065,6 +2065,15 @@ have to use .js for active tabs
 	border-bottom: 1px solid rgba(0, 0, 0, .10);
 }
 
+#left-title a, #mobile-left a {
+	text-decoration: none;
+}
+
+#left-title :hover, #mobile-left a:hover {
+	text-decoration: none;
+	color: #29e5ac;
+}
+
 /* email RWD */
 @media screen and (max-width: 1200px) {
 	.email-rapper #email-subject, .email-rapper p, .email-rapper hr {padding: 0 30px;}
