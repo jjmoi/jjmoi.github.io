@@ -2,6 +2,7 @@ function toggleChats() {
 	document.getElementById("buddy-list").style.display = "block";
 	document.getElementById("chat-thread").style.display = "none";
 	document.getElementById("back-button").style.display = "none";
+	document.getElementById("mobile-back").style.display = "block";
 	document.getElementById("right-title").style.display = "none";
 	document.getElementById("left-title").style.display = "none";
 	document.getElementById("mobile-left").style.display = "block";
