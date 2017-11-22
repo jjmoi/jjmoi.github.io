@@ -1944,6 +1944,7 @@ hr {
 	margin-bottom: 40px;
 	font-weight: 500;
 	font-size: 13px;
+	padding: 0 150px;
 }
 
 .email-rapper span {
@@ -2068,4 +2069,5 @@ have to use .js for active tabs
 @media screen and (max-width: 1200px) {
 	.email-rapper #email-subject, .email-rapper p, .email-rapper hr {padding: 0 30px;}
 	.email-rapper hr {width: 75%;}
+	.email-rapper .from-to {padding: 0 30px;}
 }
