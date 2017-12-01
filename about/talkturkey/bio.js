@@ -52,6 +52,7 @@
 		'Making the world a better place better than any one else.'.link('javascript:window.location.reload(true)'),
 		'Turtle is my spirit animal.'.link('javascript:window.location.reload(true)'),
 		'Enter the Void.'.link('javascript:window.location.reload(true)'),
+		'I tweet once a year.'.link('javascript:window.location.reload(true)'),
 		'Lefty, Colorblind'.link('javascript:window.location.reload(true)'),
 		'Don’t try to be original. Just try to be nice.'.link('javascript:window.location.reload(true)'),
 		'Not minimalist. Purist.'.link('javascript:window.location.reload(true)'),
