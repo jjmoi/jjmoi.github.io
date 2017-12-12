@@ -90,7 +90,6 @@ var titles = [
 		'🐳'.link('javascript:window.location.reload(true)')
 	];
 
-
 function newTitle() {
     var i = (Math.random() * titles.length) | 0;
     target.innerText = titles[i];
