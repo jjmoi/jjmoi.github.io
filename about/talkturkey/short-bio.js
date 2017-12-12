@@ -61,7 +61,7 @@ var titles = [
 				'Next',
 				'Kombucha',
 				'Sriracha',
-				'Helvetica',
+				'Cooper Black',
 				'Restart',
 				'Continue',
 				'More',
