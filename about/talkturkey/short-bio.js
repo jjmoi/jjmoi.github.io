@@ -65,7 +65,7 @@ var titles = [
 				'Restart',
 				'Continue',
 				'More',
-				'Call me.',
+				'Text me.',
 				'Advance',
 				'Optimize',
 				'Random',
