@@ -438,7 +438,7 @@
 		},
 		{
 			"type": "Feature", "geometry": {"type": "Point", "coordinates": [-97.743061, 30.267153]},
-			"properties": {"mass": "1","name": "Austin, TX","year": "2016","recclass": "2016"
+			"properties": {"mass": "2","name": "Austin, TX","year": "2016","recclass": "2016, 2018"
 			}
 		},
 		{
@@ -468,7 +468,7 @@
 		},
 		{
 			"type": "Feature", "geometry": {"type": "Point", "coordinates": [144.9633, -37.8141]},
-			"properties": {"mass": "2","name": "Melbourne, Australia","year": "2017","recclass": "2017, 2018"
+			"properties": {"mass": "2","name": "Melbourne, Australia","year": "2009","recclass": "2009, 2018"
 			}
 		},
 		{
