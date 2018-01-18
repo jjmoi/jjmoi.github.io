@@ -482,16 +482,6 @@
 			}
 		},
 		{
-			"type": "Feature", "geometry": {"type": "Point", "coordinates": [101.6868, 3.1390]},
-			"properties": {"mass": "1","name": "Kuala Lumpur, Malaysia","year": "2018","recclass": "2018"
-			}
-		},
-		{
-			"type": "Feature", "geometry": {"type": "Point", "coordinates": [114.9398, 4.9030]},
-			"properties": {"mass": "1","name": "Bandar Seri Begawan, Brunei","year": "2018","recclass": "2018"
-			}
-		},
-		{
 			"type": "Feature", "geometry": {"type": "Point", "coordinates": [-73.567256, 45.501689]},
 			"properties": {"mass": "1","name": "Montreal, Canada","year": "2013","recclass": "2013"
 			}
