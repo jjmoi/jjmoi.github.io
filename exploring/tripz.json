@@ -482,12 +482,12 @@
 			}
 		},
 		{
-			"type": "Feature", "geometry": {"type": "Point", "coordinates": [3.139003, 101.686855]},
+			"type": "Feature", "geometry": {"type": "Point", "coordinates": [101.6868, 3.1390]},
 			"properties": {"mass": "1","name": "Kuala Lumpur, Malaysia","year": "2018","recclass": "2018"
 			}
 		},
 		{
-			"type": "Feature", "geometry": {"type": "Point", "coordinates": [4.903052, 114.939821]},
+			"type": "Feature", "geometry": {"type": "Point", "coordinates": [114.9398, 4.9030]},
 			"properties": {"mass": "1","name": "Bandar Seri Begawan, Brunei","year": "2018","recclass": "2018"
 			}
 		},
