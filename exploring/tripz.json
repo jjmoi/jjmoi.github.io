@@ -378,7 +378,7 @@
 		},
 		{
 			"type": "Feature", "geometry": {"type": "Point", "coordinates": [-122.332071, 47.606209]},
-			"properties": {"mass": "2","name": "Seattle, WA","year": "2010","recclass": "2010, 2017"
+			"properties": {"mass": "3","name": "Seattle, WA","year": "2010","recclass": "2010, 2017, 2018"
 			}
 		},
 		{
@@ -398,7 +398,7 @@
 		},
 		{
 			"type": "Feature", "geometry": {"type": "Point", "coordinates": [-122.676482, 45.523062]},
-			"properties": {"mass": "1","name": "Portland, OR","year": "2015","recclass": "2015"
+			"properties": {"mass": "2","name": "Portland, OR","year": "2015","recclass": "2015, 2018"
 			}
 		},
 		{
@@ -479,6 +479,16 @@
 		{
 			"type": "Feature", "geometry": {"type": "Point", "coordinates": [151.2099, -33.8651]},
 			"properties": {"mass": "1","name": "Sydney, Australia","year": "2018","recclass": "2018"
+			}
+		},
+		{
+			"type": "Feature", "geometry": {"type": "Point", "coordinates": [101.6868, 3.1390]},
+			"properties": {"mass": "1","name": "Kuala Lumpur, Malaysia","year": "2018","recclass": "2018"
+			}
+		},
+		{
+			"type": "Feature", "geometry": {"type": "Point", "coordinates": [114.9398, 4.9030]},
+			"properties": {"mass": "1","name": "Bandar Seri Begawan, Brunei","year": "2018","recclass": "2018"
 			}
 		},
 		{
