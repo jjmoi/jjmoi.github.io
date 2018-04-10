@@ -6,6 +6,9 @@
 	<title>JJ Moi</title>
 	<link href="https://fonts.googleapis.com/css?family=Questrial" rel="stylesheet">
 	<style>
+		html {
+			background-color: black;
+		}
 		::-moz-selection {
 			background: MediumSpringGreen;
 		}
@@ -13,6 +16,7 @@
 			background: MediumSpringGreen;
 		}
 		body {
+			background-color: white;
 			padding-top: 100px;
 			margin: 0;
 		}
@@ -29,7 +33,7 @@
 			margin: 0;
 			padding: 0;
 		}
-		h2, #mc, #dj {
+		h2, #mc {
 			padding-top: 50px;
 		}
 		h2, h3, p {
@@ -40,6 +44,7 @@
 			background-color: white;
 			cursor: url(http://www.jjmoi.com/files/mick-point3.png), default;
 		}
+		/*hover to show span text*/
 		/*span {
 			visibility: hidden;
 		}
@@ -66,18 +71,22 @@
 			z-index: -1;
 		}
 		@media only screen and (max-width: 900px) {
+			body {
+				padding-top: 50px;
+			}
 			h1, h2, h3, p, a {
 				font-size: 25px;
 			}
 			.rapper {
-			padding: 0 75px 50px 75px;
+				padding: 0 50px 50px 50px;
 			}
-			h2, #mc, #dj {
-			padding-top: 25px;
+			h2, #mc {
+				padding-top: 25px;
 			}
 			h2, h3, p {
 				margin-bottom: 25px;
 			}
+		}
 	</style>
 </head>
 <body>
