@@ -23,15 +23,13 @@
 		}
 		::-moz-selection {
 			background: MediumSpringGreen;
+			color: white;
+			text-decoration: underline wavy white;
 		}
 		::selection {
 			background: MediumSpringGreen;
-		}
-		::-moz-selection:hover {
 			color: white;
-		}
-		::selection:hover {
-			color: white;
+			text-decoration: underline wavy white;
 		}
 		.rapper {
 			margin: 0 auto;
@@ -52,9 +50,12 @@
 		h2, h3, p {
 			margin-bottom: 50px;
 		}
+		a {
+			text-decoration-style: underline solid black;
+		}
 		a:hover {
 			color: MediumSpringGreen;
-			background-color: white;
+			text-decoration-style: underline wavy MediumSpringGreen;
 			cursor: url(http://www.jjmoi.com/files/mick-point3.png), default;
 		}
 		/*hover to show span text*/
