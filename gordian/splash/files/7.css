@@ -1,5 +1,5 @@
 body {
-	background: #096f50 url("gordian-topo-07.png") no-repeat center center fixed;
+	background: url("gordian-topo-07.png") no-repeat center center fixed, linear-gradient(to bottom right, #005040 0%, #75e9b3 100%);
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
