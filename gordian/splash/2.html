@@ -1,6 +1,3 @@
-
-
-
 <!doctype html>
 <html>
 	<head>
@@ -20,10 +17,6 @@
 		<link rel="icon" type="image/x-icon" href="favicon.ico">
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 		<style>
-			html {
-				background: #096f50;
-				font-family: 'Montserrat', sans-serif;
-			}
 			body {
 				background: #096f50 url("background-01.png") no-repeat bottom center fixed;
 				-webkit-background-size: cover;
@@ -34,30 +27,28 @@
 			#content {
 				width: 600px;
 				margin: 100px;
-				text-align: center;
-				color: white;
-			}
-			#logo {
-				width: 260px;
-				margin-top: 100px;
 			}
 			h1#tagline {
 				margin-top: 20px;
-				font-weight: 600;
-				font-size: 1.75em;
 			}
-			#email a {
-				font-size: 1.125em;
+			#email {font-size: 24px;
 				margin-top: 50px;
 				margin-bottom: 40px;
-				font-weight: 400;
-				color: white;
+			}
+			#email a {
+				color: #2e6be8;
 				text-decoration: none;
 				-webkit-transition: opacity 0.35s;
 				transition: opacity 0.35s;
 			}
 			#email a:hover {
 				opacity: 0.6;
+			}
+			img {
+				width: 150px;
+			}
+			@media only screen and (max-width: 720px) {
+				#content {width: 90%;}
 			}
 		</style>
 		<!--[if lt IE 9]>
@@ -67,7 +58,7 @@
 	<body>
 		<div id="bg">
 			<div id="content">
-				<a href="http://www.gordian.bio"><img id="logo" src="gordian-knot.svg" /></a>
+				<a href="http://www.gordian.bio"><img src="gordian-knot.svg" /></a>
 				<h1 id="tagline">Untangling Complex Disease</h1>
 				<p id="email"><a href="mailto:contact@gordian.bio">contact@gordian.bio</a></p>
 			</div>
