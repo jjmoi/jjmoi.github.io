@@ -26,7 +26,7 @@
 				margin-top: 150px;
 				margin-left: 100px;
 			}
-			#logo {
+			#dynamic {
 				width: 260px;
 				margin-top: 100px;
 			}
@@ -50,33 +50,39 @@
 			}
 			@media only screen and (max-width: 900px) {
 				body {background: #096f50 url("background-04.png") no-repeat bottom right fixed;}
+				#content {margin-left: 30px;}
 			}
 		</style>
 		<!--[if lt IE 9]>
 		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-		<script type="text/javascript">
-			var randomcss = {
-				cssfiles : ['1.css','2.css','3.css','4.css','5.css','6.css','7.css','8.css','9.css','10.css',
-					    '11.css','12.css'],
-				pathtocss : 'files/',
-				getrandomcss : function() {
-					return this.cssfiles[Math.floor(Math.random()*this.cssfiles.length)];
-				},
-				getlinktag : function() {
-					return '<link rel="stylesheet" type="text/css" href="'+this.pathtocss+this.getrandomcss()+'" />';
-				},
-				printlinktag : function() {
-					document.write(this.getlinktag());
-				}
-			};
-		</script>
 	</head>
 	<body>
 		<div id="content">
-			<a href="http://www.gordian.bio"><img id="logo" src="gordian-topo-01.png" /></a>
+			<a href="http://www.gordian.bio"><id="dynamic"></a>
 			<h1 id="tagline">Untangling Complex Disease</h1>
 			<p id="email"><a href="mailto:contact@gordian.bio">contact@gordian.bio</a></p>
 		</div>
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script>
+			var image = new Array ();
+			image[0] = "gordian-topo-01.png";
+			image[1] = "gordian-topo-01.png";
+			image[2] = "gordian-topo-02.png";
+			image[3] = "gordian-topo-03.png";
+			image[4] = "gordian-topo-04.png";
+			image[5] = "gordian-topo-05.png";
+			image[6] = "gordian-topo-06.png";
+			image[7] = "gordian-topo-07.png";
+			image[8] = "gordian-topo-08.png";
+			image[9] = "gordian-topo-09.png";
+			image[10] = "gordian-topo-10.png";
+			image[11] = "gordian-topo-11.png";
+			image[12] = "gordian-topo-12.png";
+			var size = image.length
+			var x = Math.floor(size*Math.random())
+
+			$('#random').attr('src',image[x]);
+		</script>
 	</body>
 </html>
