@@ -62,6 +62,22 @@
 		<!--[if lt IE 9]>
 		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
+		<script type="text/javascript">
+			var randomcss = {
+				cssfiles : ['1.css','2.css','3.css','4.css','5.css','6.css','7.css','8.css','9.css','10.css',
+					    '11.css','12.css'],
+				pathtocss : 'files/',
+				getrandomcss : function() {
+					return this.cssfiles[Math.floor(Math.random()*this.cssfiles.length)];
+				},
+				getlinktag : function() {
+					return '<link rel="stylesheet" type="text/css" href="'+this.pathtocss+this.getrandomcss()+'" />';
+				},
+				printlinktag : function() {
+					document.write(this.getlinktag());
+				}
+			};
+		</script>
 	</head>
 	<body>
 		<div id="content">
