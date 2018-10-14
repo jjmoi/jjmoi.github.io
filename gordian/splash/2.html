@@ -28,6 +28,9 @@
 				width: 600px;
 				margin: 100px;
 			}
+			#logo {
+				width: 280px;
+			}
 			h1#tagline {
 				margin-top: 20px;
 			}
@@ -44,12 +47,6 @@
 			#email a:hover {
 				opacity: 0.6;
 			}
-			img {
-				width: 150px;
-			}
-			@media only screen and (max-width: 720px) {
-				#content {width: 90%;}
-			}
 		</style>
 		<!--[if lt IE 9]>
 		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -58,7 +55,7 @@
 	<body>
 		<div id="bg">
 			<div id="content">
-				<a href="http://www.gordian.bio"><img src="gordian-knot.svg" /></a>
+				<a href="http://www.gordian.bio"><img id="logo" src="gordian-knot.svg" /></a>
 				<h1 id="tagline">Untangling Complex Disease</h1>
 				<p id="email"><a href="mailto:contact@gordian.bio">contact@gordian.bio</a></p>
 			</div>
