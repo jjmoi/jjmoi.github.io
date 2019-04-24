@@ -5,7 +5,7 @@ html, body, h1, h2, h3, h4, h5, h6, p {height: 100%; width: 100%; margin: 0; pad
 
 /* roots */
 p, a, h1, h2, h3, h4, h5, h6 {
-	font-family: Helvetica Neue, Helvetica, Arial, Sans-Serif;
+	font-family: "Helvetica Neue", Helvetica, Arial, Sans-Serif;
 	-moz-font-feature-settings:'aalt=0,case=0,frac=0,liga=0,lnum=0,locl=0,onum=0,ordn=0,pnum=0,ss01=0,ss02=0,ss03=0,ss04=0,ss05=0,ss06=0,ss08=0,tnum=0,zero=0';
 	font-weight: normal;
 	line-height: 1.4;
