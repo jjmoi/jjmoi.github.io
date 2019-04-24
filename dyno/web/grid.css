@@ -1,0 +1,124 @@
+/* font-face */
+@font-face {
+	font-family: 'Gordita-Bold'; font-weight: bold; font-style: normal;
+	src: url('/fonts/gordita-bold.eot');
+	src: url('/fonts/gordita-bold.eot?#iefix') format('embedded-opentype'), url('/fonts/gordita-bold.woff2') format('woff2'), url('/fonts/gordita-bold.woff') format('woff'), url('/fonts/gordita-bold.ttf') format('truetype'), url('/fonts/gordita-bold.svg#youworkforthem') format('svg');
+}
+
+@font-face {
+	font-family: 'Gordita-Regular'; font-weight: normal; font-style: normal;
+	src: url('/fonts/gordita-regular.eot');
+	src: url('/fonts/gordita-regular.eot?#iefix') format('embedded-opentype'), url('/fonts/gordita-regular.woff2') format('woff2'), url('/fonts/gordita-regular.woff') format('woff'), url('/fonts/gordita-regular.ttf') format('truetype'), url('/fonts/gordita-regular.svg#youworkforthem') format('svg');
+}
+
+@font-face {
+	font-family: 'Gordita-BoldItalic'; font-weight: bold; font-style: italic;
+	src: url('/fonts/gordita-bold-italic.eot');
+	src: url('/fonts/gordita-bold-italic.eot?#iefix') format('embedded-opentype'), url('/fonts/gordita-bold-italic.woff2') format('woff2'), url('/fonts/gordita-bold-italic.woff') format('woff'), url('/fonts/gordita-bold-italic.ttf') format('truetype'), url('/fonts/gordita-bold-italic.svg#youworkforthem') format('svg');
+}
+
+@font-face {
+	font-family: 'Gordita-RegularItalic'; font-weight: normal; font-style: italic;
+	src: url('/fonts/gordita-regular-italic.eot');
+	src: url('/fonts/gordita-regular-italic.eot?#iefix') format('embedded-opentype'), url('/fonts/gordita-regular-italic.woff2') format('woff2'), url('/fonts/gordita-regular-italic.woff') format('woff'), url('/fonts/gordita-regular-italic.ttf') format('truetype'), url('/fonts/gordita-regular-italic.svg#youworkforthem') format('svg');
+}
+
+/* start simple grid - zach cole */
+
+/* multiversal */
+html, body, h1, h2, h3, h4, h5, h6, p {height: 100%; width: 100%; margin: 0; padding: 0; left: 0; top: 0; font-size: 100%;}
+
+/* roots */
+p, a, h6 {
+	font-family: 'Gordita-Regular', Helvetica, Arial, Sans-Serif;
+	-moz-font-feature-settings:'aalt=0,case=0,frac=0,liga=0,lnum=0,locl=0,onum=0,ordn=0,pnum=0,ss01=0,ss02=0,ss03=0,ss04=0,ss05=0,ss06=0,ss08=0,tnum=0,zero=0';
+	font-weight: normal;
+	line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5 {
+	font-family: 'Gordita-Bold', Helvetica, Arial, Sans-Serif;
+	-moz-font-feature-settings:'aalt=0,case=0,frac=0,liga=0,lnum=0,locl=0,onum=0,ordn=0,pnum=0,ss01=0,ss02=0,ss03=0,ss04=0,ss05=0,ss06=0,ss08=0,tnum=0,zero=0';
+	font-weight: bold;
+	line-height: 1.3;
+}
+
+.bolditalic {
+	font-family: 'Gordita-BoldItalic', Helvetica, Arial, Sans-Serif;
+	-moz-font-feature-settings:'aalt=0,frac=0,lnum=0,locl=0,onum=0,ordn=0,pnum=0,tnum=0';
+}
+
+i, .italic { 
+	font-family: 'Gordita-RegularItalic', Helvetica, Arial, Sans-Serif;
+	-moz-font-feature-settings:'aalt=0,case=0,frac=0,liga=0,lnum=0,locl=0,onum=0,ordn=0,pnum=0,ss01=0,ss02=0,ss03=0,ss04=0,ss05=0,ss06=0,ss08=0,tnum=0,zero=0';
+}
+
+/* type */
+h1 {font-size: 3rem;}
+h2 {font-size: 2.375rem;}
+h3 {font-size: 1.375rem;}
+h4 {font-size: 1.125rem;}
+h5 {font-size: 1rem;}
+h6 {font-size: 0.875rem;}
+p, a {font-size: 1rem;}
+
+.font-light {font-weight: 300;}
+.font-regular {font-weight: 400;}
+.font-heavy {font-weight: 700;}
+
+/* alignment */
+.left {text-align: left;}
+.right {text-align: right;}
+.center {text-align: center; margin-left: auto; margin-right: auto;}
+.vh-center {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);}
+
+/* grid column */
+.container {width: 90%; margin-left: auto; margin-right: auto;}
+.row {position: relative; width: 100%;}
+.row [class^="col"] {float: left; margin: 8px 2%; min-height: 2px;}
+
+.col-05, .col-1, .col-2, .col-3, .col-4, .col-5, .col-6,
+.col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {width: 96%;}
+
+.col-05-sm {width: 2.16%;}
+.col-1-sm {width: 4.33%;}
+.col-2-sm {width: 12.66%;}
+.col-3-sm {width: 21%;}
+.col-4-sm {width: 29.33%;}
+.col-5-sm {width: 37.66%;}
+.col-6-sm {width: 46%;}
+.col-7-sm {width: 54.33%;}
+.col-8-sm {width: 62.66%;}
+.col-9-sm {width: 71%;}
+.col-10-sm {width: 79.33%;}
+.col-11-sm {width: 87.66%;}
+.col-12-sm {width: 96%;}
+
+.row::after {content: ""; display: table; clear: both;}
+.hidden-sm {display: none;}
+
+@media only screen and (min-width: 540px) {	/* 540px */
+	.container {width: 80%;}
+}
+
+@media only screen and (min-width: 720px) {	/* 720px */
+	.col-05 {width: 2.16%;}
+	.col-1 {width: 4.33%;}
+	.col-2 {width: 12.66%;}
+	.col-3 {width: 21%;}
+	.col-4 {width: 29.33%;}
+	.col-5 {width: 37.66%;}
+	.col-6 {width: 46%;}
+	.col-7 {width: 54.33%;}
+	.col-8 {width: 62.66%;}
+	.col-9 {width: 71%;}
+	.col-10 {width: 79.33%;}
+	.col-11 {width: 87.66%;}
+	.col-12 {width: 96%;}
+	.hidden-sm {display: block;}
+}
+
+@media only screen and (min-width: 960px) { /* 960px */
+	.container {width: 75%;}
+}
+/* end simple grid */
