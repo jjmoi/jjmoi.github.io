@@ -35,7 +35,7 @@ p + p {padding-top: 15px;}
 .bio p {font-size: 0.875rem;}
 
 #privacypolicy-intro {margin-top: 50px; margin-bottom: 0;}
-.privacypolicy-subtitle {margin-top: 50px; font-family: Helvetica Neue, Helvetica, Arial, Sans-Serif; font-weight: bold;}
+.privacypolicy-subtitle {margin-top: 50px; font-family: "Helvetica Neue", Helvetica, Arial, Sans-Serif; font-weight: bold;}
 
 /* action */
 
@@ -57,7 +57,7 @@ p + p {padding-top: 15px;}
 	margin-top: 50px;
 	padding-bottom: 10px;
 	color: black;
-	font-family: Helvetica Neue, Helvetica, Arial, Sans-Serif;
+	font-family: "Helvetica Neue", Helvetica, Arial, Sans-Serif;
 	-moz-font-feature-settings:'aalt=0,case=0,frac=0,liga=0,lnum=0,locl=0,onum=0,ordn=0,pnum=0,ss01=0,ss02=0,ss03=0,ss04=0,ss05=0,ss06=0,ss08=0,tnum=0,zero=0';
 	font-weight: bold;
 	line-height: 1.5;
@@ -70,7 +70,7 @@ p + p {padding-top: 15px;}
 	color: white;
 	opacity: 0.7;
 	display: block;
-	font-family: Helvetica Neue, Helvetica, Arial, Sans-Serif;
+	font-family: "Helvetica Neue", Helvetica, Arial, Sans-Serif;
 	-moz-font-feature-settings:'aalt=0,case=0,frac=0,liga=0,lnum=0,locl=0,onum=0,ordn=0,pnum=0,ss01=0,ss02=0,ss03=0,ss04=0,ss05=0,ss06=0,ss08=0,tnum=0,zero=0';
 	font-weight: bold;
 	max-width: 300px;
@@ -80,7 +80,7 @@ p + p {padding-top: 15px;}
 .overlay-content a:hover {opacity: 1; transition: opacity 0.2s ease-in 0.1s;}
 
 .media-category a {
-	font-family: Helvetica Neue, Helvetica, Arial, Sans-Serif;
+	font-family: "Helvetica Neue", Helvetica, Arial, Sans-Serif;
 	font-weight: normal;
 }
 
