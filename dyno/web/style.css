@@ -1,6 +1,7 @@
 /* global */
 
 sub {font-size: 60%;}
+body {background: #eee;}
 
 /* nav */
 
@@ -10,29 +11,54 @@ sub {font-size: 60%;}
 .overlay {height: 100%; width: 100%; display: none; position: fixed; z-index: 99; top: 0; left: 0; background-color: rgba(0,0,0,0.93);}
 .overlay-content {position: fixed; top: 25%; left: 0; width: 100%; text-align: center;} /* used to be position: relative */
 
-/* header hero */
+/* content */
 
 header {height: 100vh; padding-top: 40px; box-sizing: border-box; background-position: center; background-repeat: no-repeat; background-size: cover; border: 0; color: white;}
 #header-home {background-image: url('header-geo.png');}
-header h1 {margin-top: 50px; line-height: 1.2; font-weight: bold;}
-header p {padding-top: 20px; font-size: 0.9rem;}
-p + p {padding-top: 15px;}
+#header-home-mt {background-image: url('header-mt.png');}
+header h1 {margin-top: 50px; font-weight: bold;}
+header p {padding-top: 20px;}
+#dyno-definition p {font-size: 0.8rem; margin-top: 50px;}
+.content-home h2, .content-home h3 {font-weight: bold;}
 
-#home h2 {
-	background: linear-gradient(to right, #f9ad8b 0%, #a786f9 100%);
-	-webkit-background-clip: text; background-clip: text;
-	-webkit-text-fill-color: transparent; text-fill-color: transparent;
-	padding: 150px 0;
+#job-desc .row [class^="col"] {
+	margin: 8px 1%;
 }
 
-/* content */
+#job-desc p {font-size: 0.75rem; color: #aaa;}
 
-.content-home img, .content-solutions img, .content-whoweare img, .content-product img {width: 100%;}
-.content-home, .content-solutions, .content-whoweare, .content-product, .content-joinus {margin-top: 50px;}
-.content-home h2 {padding-top: 150px; padding-bottom: 20px;}
+#job-desc #job-row1 {
+	border: 1px solid transparent;
+	border-collapse: collapse;
+	background-clip: padding-box, border-box;
+	background-origin: padding-box, border-box;
+	background-image: linear-gradient(#eee, #eee), linear-gradient(-45deg, #f8c4a0, #ed2040);
+	cursor: pointer;
+	min-height: 330px;
+}
 
+#job-desc #job-row2 {
+	border: 1px solid transparent;
+	border-collapse: collapse;
+	background-clip: padding-box, border-box;
+	background-origin: padding-box, border-box;
+	background-image: linear-gradient(#eee, #eee), linear-gradient(-45deg, #75cdea, #f8c4a0);
+	cursor: pointer;
+	min-height: 330px;
+}
+
+
+#job-desc #job-row1:hover {box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.15); background-image: linear-gradient(#eee, #eee), linear-gradient(-45deg, #f8c4a0, #ed2040);}
+#job-desc #job-row2:hover {box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.15); background-image: linear-gradient(#eee, #eee), linear-gradient(-45deg, #75cdea, #f8c4a0);}
+
+.col-4 h3, .col-4 p {padding: 35px;}
+
+.content-home img {width: 100%;}
+.content-home {margin-top: 200px;}
+.content-home p {padding-top: 50px;}
+.col-4 p {padding-top: 120px;}
 .content-home + .content-home {margin-top: 150px;}
-.bio p {font-size: 0.875rem;}
+#job-desc .row + .row {margin-top: 50px;}
 
 #privacypolicy-intro {margin-top: 50px; margin-bottom: 0;}
 .privacypolicy-subtitle {margin-top: 50px; font-family: "Helvetica Neue", Helvetica, Arial, Sans-Serif; font-weight: bold;}
@@ -108,7 +134,7 @@ p + p {padding-top: 15px;}
 #footer-rwd {display: none;}
 
 footer {
-	background: black;
+	background: #222;
 	padding-top: 150px;
 	padding-bottom: 150px;
 	margin-top: 200px;	
@@ -121,31 +147,7 @@ footer .footer-logo {
 	opacity: 0.7;
 }
 
-footer .link-h1 {
-	font-size: 0.875rem;
-	color: white;
-	opacity: 0.4;
-	padding-bottom: 10px;
-	font-weight: bold;
-	line-height: 1.5;
-}
-
-footer a {
-	display: block;
-	font-size: 0.75rem;
-	color: white;
-	text-decoration: none;
-	line-height: 1.5;
-	opacity: 0.7;
-	padding-top: 10px;
-	padding-bottom: 10px;
-}
-
-footer a:hover {
-	opacity: 1;
-	-webkit-transition: opacity 0.2s ease-in 0.1s;
-	transition: opacity 0.2s ease-in 0.1s;
-}
+#footer-desktop p, #footer-rwd p {color: #aaa; font-size: 0.25rem; margin-top: 2px;}
 
 /* responsive 960, 720, 540 */
 
