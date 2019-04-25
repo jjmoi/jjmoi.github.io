@@ -8,13 +8,13 @@ p, a, h1, h2, h3, h4, h5, h6 {
 	font-family: "Helvetica Neue", Helvetica, Arial, Sans-Serif;
 	-moz-font-feature-settings:'aalt=0,case=0,frac=0,liga=0,lnum=0,locl=0,onum=0,ordn=0,pnum=0,ss01=0,ss02=0,ss03=0,ss04=0,ss05=0,ss06=0,ss08=0,tnum=0,zero=0';
 	font-weight: normal;
-	line-height: 1.4;
+	line-height: 1.5;
 }
 
 /* type */
-h1 {font-size: 3rem;}
-h2 {font-size: 2.375rem;}
-h3 {font-size: 1.375rem;}
+h1 {font-size: 2.75rem; line-height: 1.2;}
+h2 {font-size: 2.75rem; line-height: 1.2;}
+h3 {font-size: 2rem; line-height: 1.2;}
 h4 {font-size: 1.125rem;}
 h5 {font-size: 1rem;}
 h6 {font-size: 0.875rem;}
@@ -40,6 +40,7 @@ p, a {font-size: 1rem;}
 
 .col-05-sm {width: 2.16%;}
 .col-1-sm {width: 4.33%;}
+.col-15-sm {width: 6.5%;}
 .col-2-sm {width: 12.66%;}
 .col-3-sm {width: 21%;}
 .col-4-sm {width: 29.33%;}
@@ -62,6 +63,7 @@ p, a {font-size: 1rem;}
 @media only screen and (min-width: 720px) {	/* 720px */
 	.col-05 {width: 2.16%;}
 	.col-1 {width: 4.33%;}
+	.col-15 {width: 6.5%;}
 	.col-2 {width: 12.66%;}
 	.col-3 {width: 21%;}
 	.col-4 {width: 29.33%;}
@@ -77,6 +79,6 @@ p, a {font-size: 1rem;}
 }
 
 @media only screen and (min-width: 960px) { /* 960px */
-	.container {width: 75%;}
+	.container {width: 80%;}
 }
 /* end simple grid */
