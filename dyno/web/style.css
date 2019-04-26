@@ -126,7 +126,7 @@ header p {padding-top: 20px;}
 	transform: scaleX(1);
 }
 
-#job-desc a {color: black;}
+#job-desc a, #job-desc a:visited {color: black;}
 
 /* footer */
 
