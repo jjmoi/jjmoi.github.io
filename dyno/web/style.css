@@ -21,9 +21,7 @@ header p {padding-top: 20px;}
 #dyno-definition p {font-size: 0.8rem; margin-top: 50px;}
 .content-home h2, .content-home h3 {font-weight: bold;}
 
-#job-desc .row [class^="col"] {
-	margin: 8px 1%;
-}
+#job-desc .row [class^="col"] {margin: 8px 1%;}
 
 #job-desc p {font-size: 0.75rem; color: #aaa;}
 
@@ -55,7 +53,7 @@ header p {padding-top: 20px;}
 
 .content-home img {width: 100%;}
 .content-home {margin-top: 200px;}
-/* .content-home p {padding-top: 50px;} */
+.content-home p {padding-top: 25px;}
 .col-4 p {padding-top: 120px;}
 .content-home + .content-home {margin-top: 150px;}
 #job-desc .row + .row {margin-top: 50px;}
@@ -127,6 +125,8 @@ header p {padding-top: 20px;}
 	transform-origin: bottom left;
 	transform: scaleX(1);
 }
+
+#job-desc a {color: black;}
 
 /* footer */
 
