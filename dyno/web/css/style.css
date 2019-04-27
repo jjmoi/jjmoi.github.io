@@ -14,8 +14,8 @@ body {background: #eee;}
 /* content */
 
 header {height: 100vh; padding-top: 40px; box-sizing: border-box; background-position: center; background-repeat: no-repeat; background-size: cover; border: 0; color: white;}
-#header-home {background-image: url('header-geo.png');}
-#header-home-mt {background-image: url('header-mt.png');}
+#header-home {background-image: url('/img/header-geo.png');}
+#header-home-mt {background-image: url('/img/header-mt.png');}
 header h1 {margin-top: 50px; font-weight: bold;}
 p.dyno-definition {font-size: 0.65rem; margin-top: 60px;}
 
