@@ -1,7 +1,7 @@
 /* simple grid - zach cole */
 
 /* multiversal */
-html, body, h1, h2, h3, h4, h5, h6, p {height: 100%; width: 100%; margin: 0; padding: 0; left: 0; top: 0; font-size: 100%;}
+html, body {height: 100%; width: 100%; margin: 0; padding: 0; left: 0; top: 0; font-size: 100%;}
 
 /* roots */
 p, a, h1, h2, h3, h4, h5, h6 {
