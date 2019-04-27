@@ -18,7 +18,7 @@ header {height: 100vh; padding-top: 40px; box-sizing: border-box; background-pos
 #header-home-mt {background-image: url('header-mt.png');}
 header h1 {margin-top: 50px; font-weight: bold;}
 header p {padding-top: 20px;}
-#dyno-definition p {font-size: 0.8rem; margin-top: 50px;}
+#dyno-definition p {font-size: 0.65rem; margin-top: 40px;}
 .content-home h2, .content-home h3 {font-weight: bold;}
 
 #job-desc .row [class^="col"] {margin: 8px 1%;}
