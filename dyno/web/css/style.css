@@ -1,21 +1,12 @@
 /* global */
 
-sub {font-size: 60%;}
 body {background: #eee;}
-
-/* nav */
-
-#nav {margin-top: 50px;}
-#nav #nav-icon {position: absolute; right: 0;}
-.overlay #nav-icon {margin-top: 85px; opacity: 0.7;}
-.overlay {height: 100%; width: 100%; display: none; position: fixed; z-index: 99; top: 0; left: 0; background-color: rgba(0,0,0,0.93);}
-.overlay-content {position: fixed; top: 25%; left: 0; width: 100%; text-align: center;} /* used to be position: relative */
 
 /* content */
 
 header {height: 100vh; padding-top: 40px; box-sizing: border-box; background-position: center; background-repeat: no-repeat; background-size: cover; border: 0; color: white;}
-#header-home {background-image: url('/img/header-geo.png');}
-#header-home-mt {background-image: url('/img/header-mt.png');}
+#header-home {background-image: url('../img/header-geo.png');}
+#header-home-mt {background-image: url('../img/header-mt.png');}
 header h1 {margin-top: 50px; font-weight: bold;}
 p.dyno-definition {font-size: 0.65rem; margin-top: 60px;}
 
