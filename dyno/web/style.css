@@ -28,7 +28,7 @@ p.dyno-definition {font-size: 0.65rem; margin-top: 60px;}
 #job-desc .row [class^="col"] {margin: 8px 1%;}
 #job-desc .row + .row {margin-top: 50px;}
 #job-desc h3 {margin: 0; padding: 35px;}
-#job-desc p {font-size: 0.75rem; color: #aaa; padding: 125px 35px 0 35px;}
+#job-desc p {font-size: 0.75rem; color: #aaa; padding: 125px 35px 20px 35px;}
 
 #job-desc #job-row1 {
 	border: 1px solid transparent;
