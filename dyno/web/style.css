@@ -19,8 +19,17 @@ header {height: 100vh; padding-top: 40px; box-sizing: border-box; background-pos
 header h1 {margin-top: 50px; font-weight: bold;}
 p.dyno-definition {font-size: 0.65rem; margin-top: 60px;}
 
+.content-home {margin-top: 200px;}
+.content-home h2, .content-home h3 {font-weight: bold;}
+.content-home p {padding-top: 20px;}
+.content-home p + p {padding-top: 25px;}
+.content-home + .content-home {margin-top: 150px;}
+
 #job-desc .row [class^="col"] {margin: 8px 1%;}
 #job-desc p {font-size: 0.75rem; color: #aaa;}
+#job-desc h3 {padding: 35px;}
+#job-desc p {padding: 120px 35px 0 35px;}
+#job-desc .row + .row {margin-top: 50px;}
 
 #job-desc #job-row1 {
 	border: 1px solid transparent;
@@ -42,21 +51,8 @@ p.dyno-definition {font-size: 0.65rem; margin-top: 60px;}
 	min-height: 330px;
 }
 
-
 #job-desc #job-row1:hover {box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.15); background-image: linear-gradient(#eee, #eee), linear-gradient(-45deg, #f8c4a0, #ed2040);}
 #job-desc #job-row2:hover {box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.15); background-image: linear-gradient(#eee, #eee), linear-gradient(-45deg, #75cdea, #f8c4a0);}
-
-.col-4 h3 {padding: 35px;}
-.col-4 p {padding-top: 120px;}
-.content-home {margin-top: 200px;}
-.content-home h2, .content-home h3 {font-weight: bold;}
-.content-home p {padding-top: 20px;}
-.content-home p + p {padding-top: 25px;}
-.content-home + .content-home {margin-top: 150px;}
-#job-desc .row + .row {margin-top: 50px;}
-
-#privacypolicy-intro {margin-top: 50px; margin-bottom: 0;}
-.privacypolicy-subtitle {margin-top: 50px; font-family: "Helvetica Neue", Helvetica, Arial, Sans-Serif; font-weight: bold;}
 
 /* action */
 
