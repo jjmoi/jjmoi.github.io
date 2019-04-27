@@ -28,7 +28,7 @@ p.dyno-definition {font-size: 0.65rem; margin-top: 60px;}
 #job-desc .row [class^="col"] {margin: 8px 1%;}
 #job-desc .row + .row {margin-top: 50px;}
 #job-desc h3 {margin: 0; padding: 35px;}
-#job-desc p {font-size: 0.75rem; color: #aaa; padding: 155px 35px 20px 35px;}
+#job-desc p {font-size: 0.7rem; color: #9f9f9f; padding: 155px 35px 20px 35px;}
 
 #job-desc #job-row1 {
 	border: 1px solid transparent;
@@ -120,8 +120,8 @@ p.dyno-definition {font-size: 0.65rem; margin-top: 60px;}
 
 /* footer */
 
-#footer-desktop {display: block;}
-#footer-rwd {display: none;}
+#footer-desktop, .dyno-definition-desktop {display: block;}
+#footer-rwd, .dyno-definition-rwd {display: none;}
 
 footer {
 	background: #222;
@@ -144,25 +144,21 @@ footer .footer-logo {
 @media only screen and (max-width: 1200px) {
 	#header-home-mt h1 {font-size: 2rem;}
 	.content-home h2 {font-size: 1.5rem; margin-top: 0; padding-top: 32px;}
+	#job-desc .row [class^="col"] {margin: 8px 2%;}
 	#job-desc .col-4 {width: 96%;}
-	#job-desc h3 {font-size: 1.125rem; padding: 30px;}
+	#job-desc h3 {font-size: 1.125rem; padding: 30px 30px 0 30px;}
 	#job-desc p {padding: 0 30px 10px 30px;}
 	#job-desc .row + .row {margin-top: 0;}
 }
 
 @media only screen and (max-width: 960px) {
-	#header-home-mt h1 {font-size: 2rem;}
-	.content-home h2 {font-size: 1.5rem; margin-top: 0; padding-top: 32px;}
-	#job-desc h3 {font-size: 1.125rem; padding: 30px;}
-	#job-desc p {padding: 55px 30px 10px 30px;}
 }
 
 @media only screen and (max-width: 720px) {
-	h1, h2 {font-size: 2rem;}
-	#footer-desktop {display: none;}
+	#footer-desktop, .dyno-definition-desktop {display: none;}
 	#footer-rwd {display: block; text-align: center;}
+	.dyno-definition-rwd {display: block;}
 	#footer-rwd .link-h1 {margin-top: 50px;}
 	#footer-rwd .link-h1 {margin-top: 0; font-size: 0.875rem;}
 	#footer-rwd .footer-logo {margin-top: 0; margin-bottom : 30px;}
-	.overlay a {font-size: 1.5rem;}
 }
