@@ -26,9 +26,8 @@ p.dyno-definition {font-size: 0.65rem; margin-top: 60px;}
 .content-home + .content-home {margin-top: 150px;}
 
 #job-desc .row [class^="col"] {margin: 8px 1%;}
-#job-desc p {font-size: 0.75rem; color: #aaa;}
-#job-desc h3 {padding: 35px;}
-#job-desc p {padding: 120px 35px 0 35px;}
+#job-desc h3 {margin: 0; padding: 35px;}
+#job-desc p {font-size: 0.75rem; color: #aaa; padding: 120px 35px 0 35px;}
 #job-desc .row + .row {margin-top: 50px;}
 
 #job-desc #job-row1 {
