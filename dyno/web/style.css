@@ -37,7 +37,6 @@ p.dyno-definition {font-size: 0.65rem; margin-top: 60px;}
 	background-origin: padding-box, border-box;
 	background-image: linear-gradient(#eee, #eee), linear-gradient(-45deg, #f8c4a0, #ed2040);
 	cursor: pointer;
-	min-height: 330px;
 }
 
 #job-desc #job-row2 {
@@ -47,7 +46,6 @@ p.dyno-definition {font-size: 0.65rem; margin-top: 60px;}
 	background-origin: padding-box, border-box;
 	background-image: linear-gradient(#eee, #eee), linear-gradient(-45deg, #75cdea, #f8c4a0);
 	cursor: pointer;
-	min-height: 330px;
 }
 
 #job-desc #job-row1:hover {box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.15); background-image: linear-gradient(#eee, #eee), linear-gradient(-45deg, #f8c4a0, #ed2040);}
@@ -144,9 +142,10 @@ footer .footer-logo {
 /* responsive 960, 720, 540 */
 
 @media only screen and (max-width: 960px) {
-	.header-home h1 {font-size: 2rem;}
-	.content-home h2 {margin-top: 0; padding-top: 0;}
-	.content-home p {font-size: 0.75rem;}
+	#header-home-mt h1 {font-size: 2rem;}
+	.content-home h2 {font-size: 1.5rem; margin-top: 0; padding-top: 32px;}
+	#job-desc h3 {font-size: 1.125rem; padding: 30px;}
+	#job-desc p {padding: 55px 30px 10px 30px;}
 }
 
 @media only screen and (max-width: 720px) {
