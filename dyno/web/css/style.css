@@ -84,11 +84,6 @@ p.dyno-definition {font-size: 0.65rem; margin-top: 60px;}
 
 .overlay-content a:hover {opacity: 1; transition: opacity 0.2s ease-in 0.1s;}
 
-.media-category a {
-	font-family: "Helvetica Neue", Helvetica, Arial, Sans-Serif;
-	font-weight: normal;
-}
-
 .action a:after, .content-solutions a:after,  #whoweare a:after, .content-product a:after, .prev-next a:after, .media-inactive a:after {
 	content: '';
 	position: absolute;
@@ -108,6 +103,7 @@ p.dyno-definition {font-size: 0.65rem; margin-top: 60px;}
 }
 
 .content-home a, .content-home a:visited {color: black;}
+.content-home #email-link:hover {opacity: 0.5;}
 
 /* footer */
 
