@@ -53,7 +53,7 @@ header p {padding-top: 20px;}
 
 .content-home img {width: 100%;}
 .content-home {margin-top: 200px;}
-.content-home p {padding-top: 25px;}
+.content-home p + p {padding-top: 25px;}
 .col-4 p {padding-top: 120px;}
 .content-home + .content-home {margin-top: 150px;}
 #job-desc .row + .row {margin-top: 50px;}
