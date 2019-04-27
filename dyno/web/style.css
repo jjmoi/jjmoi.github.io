@@ -28,7 +28,7 @@ p.dyno-definition {font-size: 0.65rem; margin-top: 60px;}
 #job-desc .row [class^="col"] {margin: 8px 1%;}
 #job-desc .row + .row {margin-top: 50px;}
 #job-desc h3 {margin: 0; padding: 35px;}
-#job-desc p {font-size: 0.75rem; color: #aaa; padding: 125px 35px 20px 35px;}
+#job-desc p {font-size: 0.75rem; color: #aaa; padding: 155px 35px 20px 35px;}
 
 #job-desc #job-row1 {
 	border: 1px solid transparent;
@@ -139,7 +139,16 @@ footer .footer-logo {
 
 #footer-desktop p, #footer-rwd p {color: #aaa; font-size: 0.25rem; margin-top: 2px;}
 
-/* responsive 960, 720, 540 */
+/* responsive 1200, 960, 720, 540 */
+
+@media only screen and (max-width: 1200px) {
+	#header-home-mt h1 {font-size: 2rem;}
+	.content-home h2 {font-size: 1.5rem; margin-top: 0; padding-top: 32px;}
+	#job-desc .col-4 {width: 96%;}
+	#job-desc h3 {font-size: 1.125rem; padding: 30px;}
+	#job-desc p {padding: 0 30px 10px 30px;}
+	#job-desc .row + .row {margin-top: 0;}
+}
 
 @media only screen and (max-width: 960px) {
 	#header-home-mt h1 {font-size: 2rem;}
