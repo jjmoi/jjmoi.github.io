@@ -24,5 +24,6 @@ footer p {color: #aaa; font-size: 0.75rem; text-align: center; margin-top: 20px;
 }
 
 @media only screen and (max-width: 720px) {
+	header h1 {line-height: 1.4;}
 	.content-home img {width: 50%;}
 }
