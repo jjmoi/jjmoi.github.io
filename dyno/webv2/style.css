@@ -14,7 +14,7 @@ header h1 {font-weight: bold; text-align: center; font-size: 3.5rem;}
 #intro-h1 {margin-top: 90px;}
 
 #hero-science {z-index: -1; width: 100%;}
-#science-intro {margin-top: 100px;}
+#science-intro, #team-intro {margin-top: 100px;}
 
 .content-home h2, .content-home h3 {font-weight: bold;}
 .content-home p {padding-top: 17px;}
