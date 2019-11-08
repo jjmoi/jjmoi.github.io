@@ -6,7 +6,8 @@ body {background: #eee;}
 
 #header-home {height: 100vh; box-sizing: border-box; border: 0; color :#222;}
 #nav {padding-top: 40px;}
-#nav .col-1 {font-size: 0.875rem; text-align: right; cursor: pointer; padding-top: 15px;}
+#nav .col-1 {text-align: right; cursor: pointer; padding-top: 15px;}
+/* #nav a {font-size: 0.875rem;} */
 #hero {z-index: -1; position: absolute; top: 60px; width: 100%;}
 /* #header-home {background-image: url('gradient-mesh-mt.png'); background-position: 0 50px; background-repeat: no-repeat; background-size: cover;} */
 header h1 {font-weight: bold; text-align: center; font-size: 3.5rem;}
