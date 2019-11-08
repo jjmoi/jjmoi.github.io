@@ -54,6 +54,8 @@ header h1 {font-weight: bold; text-align: center; font-size: 3.5rem;}
 #eric {position: relative; width: 100%;}
 #eric:hover {opacity: 0.8;}
 #bio-desc .bio-content {position: absolute; top: 0;}
+.bio-content h3 {}
+.bio-content p {}
 
 /* action */
 
