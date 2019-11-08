@@ -22,12 +22,13 @@ header h1 {font-weight: bold; text-align: center; font-size: 3.5rem;}
 .content-home + .content-home {margin-top: 150px;}
 .sequence {width: 100%; padding-top: 30px;}
 
-#job-desc .row [class^="col"] {margin: 8px 1%;}
-#job-desc .row + .row {margin-top: 50px;}
-#job-desc h3 {margin: 0; padding: 35px;}
+#job-desc .row, #bio-desc .row [class^="col"] {margin: 8px 1%;}
+#job-desc .row + .row, #bio-desc .row + .row {margin-top: 50px;}
+#job-desc h3, #bio-desc h3 {margin: 0; padding: 35px;}
 #job-desc p {font-size: 1rem; color: #9f9f9f; padding: 155px 35px 20px 35px;}
+#bio-desc p {font-size: 1rem; color: #9f9f9f; padding: 35px 35px 20px 35px;}
 
-#job-desc #job-row1 {
+#job-desc #job-row1, #bio-desc #bio-row1 {
 	border: 1px solid transparent;
 	border-collapse: collapse;
 	background-clip: padding-box, border-box;
@@ -36,7 +37,7 @@ header h1 {font-weight: bold; text-align: center; font-size: 3.5rem;}
 	cursor: pointer;
 }
 
-#job-desc #job-row2 {
+#job-desc #job-row2, #bio-desc #bio-row2 {
 	border: 1px solid transparent;
 	border-collapse: collapse;
 	background-clip: padding-box, border-box;
@@ -45,8 +46,8 @@ header h1 {font-weight: bold; text-align: center; font-size: 3.5rem;}
 	cursor: pointer;
 }
 
-#job-desc #job-row1:hover {box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.15); background-image: linear-gradient(#eee, #eee), linear-gradient(-45deg, #f8c4a0, #ed2040);}
-#job-desc #job-row2:hover {box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.15); background-image: linear-gradient(#eee, #eee), linear-gradient(-45deg, #75cdea, #f8c4a0);}
+#job-desc #job-row1:hover, #bio-desc #bio-row1:hover {box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.15); background-image: linear-gradient(#eee, #eee), linear-gradient(-45deg, #f8c4a0, #ed2040);}
+#job-desc #job-row2:hover, #bio-desc #bio-row2:hover {box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.15); background-image: linear-gradient(#eee, #eee), linear-gradient(-45deg, #75cdea, #f8c4a0);}
 
 /* action */
 
@@ -137,11 +138,11 @@ footer .footer-logo {
 @media only screen and (max-width: 1200px) {
 	#header-home-mt h1 {font-size: 2rem;}
 	.content-home h2 {font-size: 1.5rem; margin-top: 0; padding-top: 32px;}
-	#job-desc .row [class^="col"] {margin: 8px 2%;}
-	#job-desc .col-4 {width: 96%;}
-	#job-desc h3 {font-size: 1.125rem; padding: 30px 30px 0 30px;}
-	#job-desc p {padding: 0 30px 10px 30px;}
-	#job-desc .row + .row {margin-top: 0;}
+	#job-desc .row, #bio-desc .row [class^="col"] {margin: 8px 2%;}
+	#job-desc .col-4, #bio-desc .col-4 {width: 96%;}
+	#job-desc h3, #bio-desc h3 {font-size: 1.125rem; padding: 30px 30px 0 30px;}
+	#job-desc p, #bio-desc p {padding: 0 30px 10px 30px;}
+	#job-desc .row + .row, #bio-desc .row + .row {margin-top: 0;}
 }
 
 @media only screen and (max-width: 720px) {
