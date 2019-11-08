@@ -50,8 +50,10 @@ header h1 {font-weight: bold; text-align: center; font-size: 3.5rem;}
 #job-desc #job-row2:hover, #bio-desc #bio-row2:hover {box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.15); background-image: linear-gradient(#eee, #eee), linear-gradient(-45deg, #75cdea, #f8c4a0);}
 
 /* team */
-#eric-kelsic, #bio-desc #bio-row1 #eric-kelsic {background-image: url('https://jjmoi.com/dyno/webv2/eric-bw.jpg'); background-position: center; background-repeat: no-repeat; min-height: 400px;}
-#eric {position: absolute;}
+#eric-kelsic {background-image: url('https://jjmoi.com/dyno/webv2/eric-bw.jpg'); background-position: center; background-repeat: no-repeat; min-height: 400px;}
+#eric {position: relative; width: 100%;}
+#eric:hover {opacity: 0.8;}
+#bio-desc .bio-content {position: absolute; top: 0;}
 
 /* action */
 
