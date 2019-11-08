@@ -49,6 +49,9 @@ header h1 {font-weight: bold; text-align: center; font-size: 3.5rem;}
 #job-desc #job-row1:hover, #bio-desc #bio-row1:hover {box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.15); background-image: linear-gradient(#eee, #eee), linear-gradient(-45deg, #f8c4a0, #ed2040);}
 #job-desc #job-row2:hover, #bio-desc #bio-row2:hover {box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.15); background-image: linear-gradient(#eee, #eee), linear-gradient(-45deg, #75cdea, #f8c4a0);}
 
+/* team */
+#eric-kelsic {background-image: url('eric-bw.png'); background-position: 0 0; background-repeat: no-repeat; background-size: cover;}
+
 /* action */
 
 .action {margin-top: 50px;}
