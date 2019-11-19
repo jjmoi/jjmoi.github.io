@@ -14,7 +14,7 @@ a, a:visited {text-decoration: none;}
 /* #nav a {font-size: 0.875rem;} */
 #hero {z-index: -1; position: absolute; top: 60px; width: 100%;}
 /* #header-home {background-image: url('gradient-mesh-mt.png'); background-position: 0 50px; background-repeat: no-repeat; background-size: cover;} */
-header h1 {font-weight: bold; text-align: center; font-size: 3.5rem;}
+header h1 {font-weight: bold; font-size: 3.5rem;}
 #intro-h1 {margin-top: 90px;}
 
 #hero-science {z-index: -1; width: 100%;}
