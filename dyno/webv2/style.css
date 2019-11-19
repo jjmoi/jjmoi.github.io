@@ -2,11 +2,12 @@
 
 body {background: #eee;}
 a, a:visited {text-decoration: none;}
-#nav a:visited {color: black;}
+#nav a, #nav a:visited {color: black;}
 
 /* content */
 
 #header-home {height: 100vh; box-sizing: border-box; border: 0; color :#222;}
+#header-careers {margin-bottom: 100px;}
 #nav {padding-top: 40px;}
 #nav .col-1 {text-align: right; cursor: pointer; padding-top: 15px;}
 #nav a:hover {text-decoration: underline;}
