@@ -1,7 +1,8 @@
 /* global */
 
 body {background: #eee;}
-a {text-decoration: none;}
+a, a:visited {text-decoration: none;}
+#nav a:visited {color: black;}
 
 /* content */
 
