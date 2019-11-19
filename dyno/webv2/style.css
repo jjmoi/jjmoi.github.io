@@ -188,3 +188,29 @@ footer .footer-logo {
 	#footer-rwd .link-h1 {margin-top: 0; font-size: 0.875rem;}
 	#footer-rwd .footer-logo {margin-top: 0; margin-bottom : 30px;}
 }
+
+/* modals */
+.modal-body {
+	position: fixed;
+	height:100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	background: #111;
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity 0.5s, visibility 0s 0.5s;
+	z-index: 1;
+}
+
+.modal-body img {width: 100%; display: block; margin: 0 auto; padding: 100px 0 0 35px;}
+
+.modal-1.active, .modal-2.active, .modal-3.active, .modal-4.active {
+	opacity: 1;
+	visibility: visible;
+	transition: opacity 0.5s;
+}
+
+#modal-bio-desc h3 {font-size: 1.5rem; padding: 140px 0 0 70px; font-weight: bold;}
+#modal-bio-desc p {font-size: 1rem; padding: 0 0 0 70px;}
+#modal-bio-desc p.long-bio {padding: 15px 0 0 70px;}
