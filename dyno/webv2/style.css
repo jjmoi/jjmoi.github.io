@@ -1,12 +1,14 @@
 /* global */
 
 body {background: #eee;}
+a {text-decoration: none;}
 
 /* content */
 
 #header-home {height: 100vh; box-sizing: border-box; border: 0; color :#222;}
 #nav {padding-top: 40px;}
 #nav .col-1 {text-align: right; cursor: pointer; padding-top: 15px;}
+#nav a:hover {text-decoration: underline;}
 /* #nav a {font-size: 0.875rem;} */
 #hero {z-index: -1; position: absolute; top: 60px; width: 100%;}
 /* #header-home {background-image: url('gradient-mesh-mt.png'); background-position: 0 50px; background-repeat: no-repeat; background-size: cover;} */
@@ -24,11 +26,10 @@ header h1 {font-weight: bold; text-align: center; font-size: 3.5rem;}
 
 #job-desc .row, #bio-desc .row [class^="col"] {margin: 8px 1%;}
 #job-desc .row + .row, #bio-desc .row + .row {margin-top: 50px;}
-#job-desc h3, #bio-desc h3 {margin: 0; padding: 35px;}
+#job-desc h3 {margin: 0; padding: 35px;}
 #job-desc p {font-size: 1rem; color: #9f9f9f; padding: 155px 35px 20px 35px;}
-#bio-desc p {font-size: 1rem; color: #9f9f9f; padding: 35px 35px 20px 35px;}
 
-#job-desc #job-row1, #bio-desc #bio-row1 {
+#job-desc #job-row1 {
 	border: 1px solid transparent;
 	border-collapse: collapse;
 	background-clip: padding-box, border-box;
@@ -37,7 +38,7 @@ header h1 {font-weight: bold; text-align: center; font-size: 3.5rem;}
 	cursor: pointer;
 }
 
-#job-desc #job-row2, #bio-desc #bio-row2 {
+#job-desc #job-row2 {
 	border: 1px solid transparent;
 	border-collapse: collapse;
 	background-clip: padding-box, border-box;
@@ -46,16 +47,8 @@ header h1 {font-weight: bold; text-align: center; font-size: 3.5rem;}
 	cursor: pointer;
 }
 
-#job-desc #job-row1:hover, #bio-desc #bio-row1:hover {box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.15); background-image: linear-gradient(#eee, #eee), linear-gradient(-45deg, #f8c4a0, #ed2040);}
-#job-desc #job-row2:hover, #bio-desc #bio-row2:hover {box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.15); background-image: linear-gradient(#eee, #eee), linear-gradient(-45deg, #75cdea, #f8c4a0);}
-
-/* team */
-#eric-kelsic {background-image: url('https://jjmoi.com/dyno/webv2/eric-bw.jpg'); background-position: center; background-repeat: no-repeat; min-height: 400px;}
-#eric {position: relative; width: 100%;}
-#eric:hover {opacity: 0.8;}
-#bio-desc .bio-content {position: absolute; top: 0;}
-.bio-content h3 {}
-.bio-content p {}
+#job-desc #job-row1:hover {box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.15); background-image: linear-gradient(#eee, #eee), linear-gradient(-45deg, #f8c4a0, #ed2040);}
+#job-desc #job-row2:hover {box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.15); background-image: linear-gradient(#eee, #eee), linear-gradient(-45deg, #75cdea, #f8c4a0);}
 
 /* action */
 
@@ -99,7 +92,7 @@ header h1 {font-weight: bold; text-align: center; font-size: 3.5rem;}
 
 .overlay-content a:hover {opacity: 1; transition: opacity 0.2s ease-in 0.1s;}
 
-.action a:after, .content-solutions a:after,  #whoweare a:after, .content-product a:after, .prev-next a:after, .media-inactive a:after {
+.action a:after, .content-solutions a:after,	#whoweare a:after, .content-product a:after, .prev-next a:after, .media-inactive a:after {
 	content: '';
 	position: absolute;
 	width: 100%;
@@ -119,6 +112,32 @@ header h1 {font-weight: bold; text-align: center; font-size: 3.5rem;}
 
 .content-home a, .content-home a:visited {color: black;}
 .content-home #email-link:hover {opacity: 0.5;}
+
+/* team */
+
+.content-home #active-link {text-decoration: underline;}
+.content-home #inactive-link {opacity: 0.6;}
+.content-home #inactive-link:hover {opacity: 1; text-decoration: underline;}
+#bio-desc .bio-content {position: absolute; top: 0;}
+.row-bio .col-4 {min-height: 350px; cursor: pointer;}
+#bio-desc h3 {margin: 0; padding: 35px 30px 0 30px; color: white;}
+#bio-desc p {font-size: 1rem; margin-top: 0; padding: 5px 30px 150px 30px; color: white;}
+#bio-desc .read-more {font-size: 1rem; padding: 0 30px 0 30px; color: white;}
+
+.row-bio .col-4 {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+#eric {background-image: url('img/eric-g.jpg');}
+#eric:hover {background-image: url('img/eric-c.jpg');}
+#shimyn {background-image: url('img/shimyn-g.jpg');}
+#shimyn:hover {background-image: url('img/shimyn-c.jpg');}
+#sam {background-image: url('img/sam-g.jpg');}
+#sam:hover {background-image: url('img/sam-c.jpg');}
+#adrian {background-image: url('img/adrian-g.jpg');}
+#adrian:hover {background-image: url('img/adrian-c.jpg');}
 
 /* footer */
 
