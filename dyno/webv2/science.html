@@ -26,6 +26,7 @@
 		<style>
 			.width-100 {width: 100%;}
 			#hero-science img {display: block;}
+			.go-second {position:absolute; top:750px; margin:0 auto;}
 		</style>
 	</head>
 	<body>
@@ -62,9 +63,9 @@
 				<div class="row width-100">
 					<div class="col-12" class="width-100" id="hero-science">
 						<img src="img/science-1.png" />
-						<img class="to-sec-2" src="img/arrow-down.gif" />
+						<img class="go-second" src="img/arrow-down.gif" />
 						<img src="img/science-2.png" />
-						<img class="to-sec-3" src="img/arrow-down.gif" />
+						<img class="go-third" src="img/arrow-down.gif" />
 						<img src="img/science-3.png" />
 					</div>
 				</div>
@@ -90,5 +91,25 @@
 				</div>
 			</div>
 		</footer>
+					<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		<script>
+
+
+	$(window).scroll(function(){
+    var top = $(".go-second");
+        if ($('body').height() <= (
+					$(window).height() + $(window).scrollTop() + 200 )){
+					top.animate({"margin-left": "0px"},1500);
+				} else{
+					top.animate({"margin-left":"-100%"},1500);
+				}
+    });
+
+    $(".go-second").on('click', function(){
+			$("html, body").animate({scrollTop: 1200}, 600);
+		});
+});
+
+		</script>
 	</body>
 </html>
