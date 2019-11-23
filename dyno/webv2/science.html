@@ -28,7 +28,7 @@
 			.width-100 {width: 100%; margin: 0;}
 			#hero-science .sci {display: block; width: 100%;}
 			.go-second {position: absolute; top: 750px; margin: 0 auto;}
-			.arrow-icon {width: 50px; margin-left: 720px; z-index: 99;}
+			.arrow-icon {width: 50px; margin: 0 auto; display: block;}
 			#footer-desktop {margin-top: 0;}
 		</style>
 	</head>
@@ -97,22 +97,36 @@
 		</footer>
 							<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 		<script>
-$(document).ready(function(){
+			$(document).ready(function(){
 
-	$(window).scroll(function(){
-		var top = $(".go-second");
-		if ($('body').height() <= (
-			$(window).height() + $(window).scrollTop() + 200 )){
-			top.animate({"margin-left": "0px"},1500);
-		} else{
-			top.animate({"margin-left":"-100%"},1500);
-		}
-	});
+				$(window).scroll(function(){
+					var top = $(".go-second");
+					if ($('body').height() <= (
+						$(window).height() + $(window).scrollTop() + 200 )){
+						top.animate({"margin-left": "0px"},1500);
+					} else{
+						top.animate({"margin-left":"-100%"},1500);
+					}
+				});
 
-	$(".go-second").on('click', function(){
-		$("html, body").animate({scrollTop: 1400}, 400);
-	});
-});
+				$(".go-second").on('click', function(){
+					$("html, body").animate({scrollTop: 300}, 400);
+				});
+
+				$(window).scroll(function(){
+					var top = $(".go-third");
+					if ($('body').height() <= (
+						$(window).height() + $(window).scrollTop() + 200 )){
+						top.animate({"margin-left": "0px"},1500);
+				} else{
+					top.animate({"margin-left":"-100%"},1500);
+				}
+				});
+
+				$(".go-third").on('click', function(){
+					$("html, body").animate({scrollTop: 0}, 400);
+				});
+			});
 		</script>
 	</body>
 </html>
