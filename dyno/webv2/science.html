@@ -25,7 +25,7 @@
 		<link rel="stylesheet" href="style.css" />
 		<style>
 			.width-100 {width: 100%; margin: 0;}
-			#hero-science img {display: block; width: 100%;}
+			#hero-science .sci {display: block; width: 100%;}
 			.go-second {position: absolute; top: 750px; margin: 0 auto;}
 			.arrow-icon {width: 50px; position: absolute; margin-left: 720px; margin-top: -25px;}
 		</style>
@@ -63,11 +63,11 @@
 			<div class="container width-100">
 				<div class="row width-100">
 					<div class="col-12" class="width-100" id="hero-science">
-						<img src="img/science-1.png" />
+						<img class="sci" src="img/science-1.png" />
 						<img class="go-second arrow-icon" src="img/arrow-down.gif" />
-						<img src="img/science-2.png" />
+						<img class="sci" src="img/science-2.png" />
 						<img class="go-third arrow-icon" src="img/arrow-down.gif" />
-						<img src="img/science-3.png" />
+						<img class="sci" src="img/science-3.png" />
 					</div>
 				</div>
 			</div>
@@ -101,7 +101,7 @@
         if ($('body').height() <= (
 					$(window).height() + $(window).scrollTop() + 200 )){
 					top.animate({"margin-left": "0px"},1500);
-				} else{
+				} else {
 					top.animate({"margin-left":"-100%"},1500);
 				}
     });
