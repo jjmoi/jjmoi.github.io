@@ -28,7 +28,7 @@
 			.width-100 {width: 100%; margin: 0;}
 			#hero-science .sci {display: block; width: 100%;}
 			.go-second {position: absolute; top: 750px; margin: 0 auto;}
-			.arrow-icon {width: 50px; position: absolute; margin-left: 720px; margin-top: -25px; z-index: 99;}
+			.arrow-icon {width: 50px; margin-left: 720px; z-index: 99;}
 		</style>
 	</head>
 	<body>
@@ -65,7 +65,8 @@
 				<div class="row width-100">
 					<div class="col-12" class="width-100" id="hero-science">
 						<img class="sci" src="img/science-1.png" />
-						<img class="go-second arrow-icon" src="img/arrow-down.gif" />
+						<!--<img class="go-second arrow-icon" src="img/arrow-down.gif" />-->
+						<p class="go-second">go to next section</p>
 						<img class="sci" src="img/science-2.png" />
 						<img class="go-third arrow-icon" src="img/arrow-down.gif" />
 						<img class="sci" src="img/science-3.png" />
@@ -108,7 +109,7 @@
     });
 
     $(".go-second").on('click', function(){
-			$("html, body").animate({scrollTop: 1200}, 600);
+			$("html, body").animate({scrollTop: 1600}, 400);
 		});
 });
 
