@@ -18,35 +18,53 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 	<style>
-		html {background-color: MediumSpringGreen;}
+		/* BACKGROUND */
+		html {background-color: red;}
 		body {background-color: white; padding-top: 100px; margin: 0;}
 		::-moz-selection {background: #001;}
 		::selection {background: #001;}
-		.rapper {margin: 0 auto; padding: 150px 400px;}
-		/* h1, h2, h3, p, a {font-family: 'Questrial', -apple-system, BlinkMacSystemFont, "Segoe UI", SF UI Text, Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;} */
+
+		/* TYPOGRAPHY */
+		/* h1, h2, h3, p, a {font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;} */
 		h1, h2, h3, p, a {font-family: 'Inter', sans-serif; font-weight: normal; margin: 0; padding: 0; color: black;}
 		h1 {font-size: 24px; font-weight: 300; line-height: 1.35;}
-		h2 {font-size: 60px; font-weight: 400; line-height: 1.2;}
+		h2 {font-size: 82px; font-weight: 400; line-height: 1.2;}
 		h3 {font-size: 48px; font-weight: 300; line-height: 1.35;}
 		p {font-size: 24px; font-weight:400; line-height: 1.45;}
+		.boom {font-size: 82px; font-weight: 400; line-height: 1.2;}
 		/* .dj, .dj a {font-size: 25px;} */
 		a {font-size: 24px;}
+		a:hover {color: red; cursor: url(http://www.jjmoi.com/files/mick-point3.png), default;}
+		#scratch {text-decoration: line-through;}
+
+		/* GRID */
+		#nav {padding-top: 0;}
+		#jjmoi {float: left;}
+		#info {float: right;}
+		.rapper {margin: 0 auto; padding: 5% 20%;}
+		h1 {padding-top: 0;}
 		h2, #beat {padding-top: 40px;}
-		.boom {padding-top: 400px; padding-bottom: 300px;}
 		h2, h3, p {margin-bottom: 50px;}
-		a:hover {color: MediumSpringGreen; cursor: url(http://www.jjmoi.com/files/mick-point3.png), default;}
+		.boom {padding-top: 400px; padding-bottom: 300px;} /* quote */
 		.verse a {position: relative;}
-		.verse a img {position: absolute;display: none;}
+		.verse a img {position: absolute; display: none;}
 		.verse a:hover img {display: block;}
 		.hook {position: fixed; top: 50%; left: 50%; z-index: -1; margin-top: -300px; margin-left: -450px;} /* img = h600 x w900 */
-		.dj {max-width: 900px;}
-		
-		#scratch {text-decoration: line-through;}
-		img {width: 100%; display: block; margin: 0 auto;}
-		@media only screen and (max-width: 900px) {
+		.dj {max-width: 800px;}
+		img {width: 100%; display: block; margin: 0 auto;padding-bottom: 80px;}
+
+		/* RESPONSIVE */
+		@media only screen and (max-width: 1400px) {
 			body {padding-top: 50px;}
 			h1, h2, h3, p, a {font-size: 24px;}
-			.rapper {padding: 30px 50px;}
+			.rapper {padding: 5% 10%;}
+			h2, #beat {padding-top: 25px;}
+			h2, h3, p {margin-bottom: 25px;}
+		}
+		@media only screen and (max-width: 900px) {
+			body {padding-top: 50px;}
+			h1, h2, h3, p, a {font-size: 20px;}
+			.rapper {padding: 5%;}
 			h2, #beat {padding-top: 25px;}
 			h2, h3, p {margin-bottom: 25px;}
 		}
