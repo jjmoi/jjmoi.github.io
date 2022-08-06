@@ -33,7 +33,7 @@ h2, h3, p {margin-bottom: 50px;}
 .verse a:hover img {display: block;}
 .hook {position: fixed; top: 50%; left: 50%; z-index: -1; margin-top: -300px; margin-left: -450px;} /* img = h600 x w900 */
 .dj {max-width: 800px;}
-img {width: 100%; display: block; margin: 0 auto;padding-bottom: 80px;}
+img {width: 100%; display: block; margin: 0 auto; padding-bottom: 80px;}
 
 /* RESPONSIVE */
 @media only screen and (max-width: 1400px) {
