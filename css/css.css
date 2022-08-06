@@ -8,13 +8,10 @@
 body {background-color: white; padding-top: 100px; margin: 0;}
 
 /* TYPOGRAPHY */
-/* h1, h2, h3, p, a {font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;} */
 h1, h2, h3, p, a {font-family: 'suisse-intl', sans-serif; font-weight: normal; margin: 0; padding: 0; color: black;}
-h1 {font-size: 24px; line-height: 1.45;}
-h2 {font-size: 82px; line-height: 1.2;}
-h3 {font-size: 48px; line-height: 1.35;}
-p {font-size: 24px; line-height: 1.45;}
-a, h3 a {font-size: 24px; line-height: 1.45; text-decoration: none;}
+h1, h2, p, a {font-size: 24px; line-height: 1.45;}
+h3, h3 a {font-size: 54px; line-height: 1.2;}
+a, h3 a {text-decoration: none;}
 a:hover, h3 a:hover {color: black; cursor: url(http://www.jjmoi.com/files/mick-point3.png), default; text-decoration: underline;}
 .boom {font-size: 82px; font-weight: 400; line-height: 1.2;} /* quotes */
 #scratch {text-decoration: line-through;}
@@ -38,7 +35,7 @@ img {width: 100%; display: block; margin: 0 auto; padding-bottom: 80px;}
 /* RESPONSIVE */
 @media only screen and (max-width: 1400px) {
 	body {padding-top: 50px;}
-	h1, h2, h3, p, a {font-size: 24px;}
+	h1, h2, h3, p, a, h3 a {font-size: 24px;}
 	.rapper {padding: 5% 10%;}
 	h2, #beat {padding-top: 25px;}
 	h2, h3, p {margin-bottom: 25px;}
@@ -46,7 +43,7 @@ img {width: 100%; display: block; margin: 0 auto; padding-bottom: 80px;}
 
 @media only screen and (max-width: 900px) {
 	body {padding-top: 50px;}
-	h1, h2, h3, p, a {font-size: 20px;}
+	h1, h2, h3, p, a, h3 a {font-size: 20px;}
 	.rapper {padding: 5%;}
 	h2, #beat {padding-top: 25px;}
 	h2, h3, p {margin-bottom: 25px;}
