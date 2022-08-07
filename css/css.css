@@ -43,7 +43,7 @@ img {width: 100%; display: block; margin: 0 auto; padding-bottom: 80px;}
 
 @media only screen and (max-width: 900px) {
 	body {padding-top: 50px;}
-	h1, h2, h3, p, a, h3 a {font-size: 20px;}
+	h1, h2, h3, p, a, h3 a {font-size: 18px;}
 	.rapper {padding: 5%;}
 	h2, #beat {padding-top: 25px;}
 	h2, h3, p {margin-bottom: 25px;}
