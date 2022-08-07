@@ -26,9 +26,6 @@ h2, .beat {padding-top: 40px;}
 .kicks {padding-top: 10%;}
 h2, h3, p {margin-bottom: 50px;}
 .boom {padding-top: 400px; padding-bottom: 300px;} /* quote */
-.verse a {position: relative;}
-.verse a img {position: absolute; display: none;}
-.verse a:hover img {display: block;}
 .hook {position: fixed; top: 50%; left: 50%; z-index: -1; margin-top: -300px; margin-left: -450px;} /* img = h600 x w900 */
 .dj {max-width: 800px;}
 img {width: 100%; display: block; margin: 0 auto; padding-bottom: 80px;}
