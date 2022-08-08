@@ -21,6 +21,7 @@ a:hover, h3 a:hover {color: black; cursor: url(http://www.jjmoi.com/files/mick-p
 #jjmoi {float: left;}
 #info {float: right;}
 .rapper {margin: 0 auto; padding: 5% 20%;}
+#first {padding-top: 0;}
 .tag {padding-top: 10px;}
 h2, .beat {padding-top: 40px;}
 .kicks {padding-top: 10%;}
