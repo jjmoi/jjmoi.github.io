@@ -9,7 +9,7 @@ h1, h2, h3, p, a {font-family: Standard, sans-serif; font-weight: normal; margin
 a {text-decoration: none;}
 a:hover, h3 a:hover {color: black; cursor: url(http://www.jjmoi.com/files/mick-point3.png), default; text-decoration: underline;}
 a:visited {color: black;}
-#up {text-transform: uppercase;}
+#uppercase {text-transform: uppercase;}
 
 /* GRID */
 #nav {padding-top: 0;}
@@ -17,20 +17,18 @@ a:visited {color: black;}
 #info {float: right;}
 .rapper {margin: 0 auto; padding: 5% 10%;}
 #first {padding-top: 2%;}
-.tag {padding-top: 10px;}
 h2, .beat {padding-top: 40px;}
 h2, h3, p {margin-bottom: 50px;}
 h3 {padding-top: 30px;}
 .kicks {padding-top: 10%;}
 .boom {padding-top: 400px; padding-bottom: 300px;} /* quote */
-.hook {position: fixed; top: 50%; left: 50%; z-index: -1; margin-top: -300px; margin-left: -450px;} /* img = h600 x w900 */
 .dj {max-width: 900px;}
 img {width: 100%; display: block; margin: 0 auto; padding-bottom: 80px;}
+.tag {padding-top: 10px;}
 
 /* RESPONSIVE */
 @media only screen and (max-width: 1350px) {
 	body {padding-top: 50px;}
-	.tag {padding-top: 5px;}
 	.rapper {padding: 5% 10%;}
 	#first {padding-top: 20%}
 	h2, #beat {padding-top: 24px;}
@@ -39,7 +37,6 @@ img {width: 100%; display: block; margin: 0 auto; padding-bottom: 80px;}
 
 @media only screen and (max-width: 900px) {
 	body {padding-top: 50px;}
-	.tag {padding-top: 0px;}
 	.rapper {padding: 5%;}
 	#first {padding-top: 25%}
 	h2, #beat {padding-top: 24px;}
