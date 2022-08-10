@@ -25,7 +25,7 @@ h3 {padding-top: 30px;}
 .kicks {padding-top: 10%;}
 .boom {padding-top: 400px; padding-bottom: 300px;} /* quote */
 .hook {position: fixed; top: 50%; left: 50%; z-index: -1; margin-top: -300px; margin-left: -450px;} /* img = h600 x w900 */
-.dj {max-width: 800px;}
+.dj {max-width: 900px;}
 img {width: 100%; display: block; margin: 0 auto; padding-bottom: 80px;}
 
 /* RESPONSIVE */
