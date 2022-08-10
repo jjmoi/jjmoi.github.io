@@ -10,6 +10,7 @@ h3 a, .boom {font-size: 88px; line-height: 1.2; letter-spacing: -1px;}
 a {text-decoration: none;}
 a:hover, h3 a:hover {color: black; cursor: url(http://www.jjmoi.com/files/mick-point3.png), default; text-decoration: underline;}
 a:visited {color: black;}
+#up {text-transform: uppercase;}
 
 /* GRID */
 #nav {padding-top: 0;}
