@@ -1,12 +1,11 @@
 /* GLOBAL */
 @charset "UTF-8";
-@font-face {font-family: "suisse-intl"; src:url("fonts/suisse-intl.woff2") format("woff2"); font-weight: normal; font-style: normal;}
+@font-face {font-display: block; font-family: "Standard"; src: url("https://jjmoi.com/fonts/standard-book.woff") format("woff"); font-style: normal; font-weight: normal;}
+@font-face {font-display: block; font-family: "Standard"; src: url("https://jjmoi.com/fonts/standard-bold.woff") format("woff"); font-style: normal; font-weight: bold;}
 body {background-color: white; padding-top: 100px; margin: 0;}
 
 /* TYPOGRAPHY */
-h1, h2, h3, p, a {font-family: 'suisse-intl', sans-serif; font-weight: normal; margin: 0; padding: 0; color: black;}
-h1, h2, p, a {font-size: 24px; line-height: 1.2;}
-h3 a, .boom {font-size: 24px; line-height: 1.2;}
+h1, h2, h3, p, a {font-family: Standard, sans-serif; font-weight: normal; margin: 0; padding: 0; color: black; font-size: 24px; line-height: 1.2;}
 a {text-decoration: none;}
 a:hover, h3 a:hover {color: black; cursor: url(http://www.jjmoi.com/files/mick-point3.png), default; text-decoration: underline;}
 a:visited {color: black;}
