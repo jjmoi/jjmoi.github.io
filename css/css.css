@@ -19,8 +19,8 @@ a:visited {color: black;}
 #first {padding-top: 2%;}
 .tag {padding-top: 8px;}
 h2, .beat {padding-top: 40px;}
-h2, h3, p {margin-bottom: 50px;}
-h3 {padding-top: 30px;}
+h2, p {padding-bottom: 50px;}
+h3 {padding-bottom: 30px;}
 .kicks {padding-top: 10%;}
 .boom {padding-top: 400px; padding-bottom: 300px;} /* quote */
 .dj {max-width: 900px;}
