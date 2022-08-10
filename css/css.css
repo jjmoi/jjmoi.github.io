@@ -17,6 +17,7 @@ a:visited {color: black;}
 #info {float: right;}
 .rapper {margin: 0 auto; padding: 5% 10%;}
 #first {padding-top: 2%;}
+.tag {padding-top: 8px;}
 h2, .beat {padding-top: 40px;}
 h2, h3, p {margin-bottom: 50px;}
 h3 {padding-top: 30px;}
@@ -24,7 +25,6 @@ h3 {padding-top: 30px;}
 .boom {padding-top: 400px; padding-bottom: 300px;} /* quote */
 .dj {max-width: 900px;}
 img {width: 100%; display: block; margin: 0 auto; padding-bottom: 80px;}
-.tag {padding-top: 10px;}
 
 /* RESPONSIVE */
 @media only screen and (max-width: 1350px) {
