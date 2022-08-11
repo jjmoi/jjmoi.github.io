@@ -25,17 +25,11 @@ h3 {padding-bottom: 30px;}
 .dj {max-width: 900px;}
 img {width: 100%; display: block; margin: 0 auto; padding-bottom: 80px;}
 
-/* RESPONSIVE */
-@media only screen and (max-width: 1350px) {
-	body {padding-top: 50px;}
-	.rapper {padding: 5% 10%;}
-	#first {padding-top: 20%}
-	h2, #beat {padding-top: 24px;}
-	h2, h3, p {padding-bottom: 24px;}
-}
+/* RESPONSIVE 1350px */
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 990px) {
 	body {padding-top: 50px;}
+	h1, h2, h3, p, a {font-size: 18px; line-height: 1.4;}
 	.rapper {padding: 5%;}
 	#first {padding-top: 25%}
 	h2, #beat {padding-top: 24px;}
