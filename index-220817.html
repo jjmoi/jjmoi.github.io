@@ -20,10 +20,11 @@
 		::-moz-selection {background: #001;}
 		::selection {background: #001;}
 
-		.container {padding: 0 1rem; margin: 0 auto;}
-		@media screen and (min-width: 992px) {
+		#header {padding-bottom: 990px;}
+		.container {margin: 0 auto;} /* padding: 0 1rem; */
+		@media screen and (min-width: 990px) {
 		/* .container {max-width: 1140px;} */
-			.grid-wrapper {display: grid; grid-gap: 0 2rem; grid-template-columns: repeat(12, 1fr); margin: 0 auto; width: 100%;}
+			.grid-wrapper {display: grid; grid-template-columns: repeat(12, 1fr); margin: 0 auto; width: 100%;} /* grid-gap: 0 2rem; */
 			.col-1 { grid-column: span 1;}
 			.col-2 {grid-column: span 2;}
 			.col-3 {grid-column: span 3;}
@@ -43,22 +44,22 @@
 </head>
 <body>
 	<div class="container">
-		<div class="grid-wrapper">
-			<div class="col-4"><a href="/">JJ Moi</a></div>
-			<div class="col-4"></div>
+		<div class="grid-wrapper" id="header">
+			<div class="col-6"><a href="/">JJ Moi</a></div>
+			<div class="col-2"></div>
 			<div class="col-2"></div>
 			<div class="col-2"><a href="/info">Info</a></div>
 		</div>
 		<div class="grid-wrapper table">
-			<div class="col-4">
+			<div class="col-6">
 				<p>Improving open data to rebuild trust</p>
 				<p>Creating design systems for the people</p>
-				<p>Empowering oil & gas producers to make data-driven decisions</p>
+				<p>Empowering oil producers to make data-driven decisions</p>
 				<p>Helping governments launch services the public deserves</p>
 				<p>Designing heavy serif typeface for bold headlines</p>
 				<p>Telling stories of women making music</p>
 			</div>
-			<div class="col-4">
+			<div class="col-2">
 				<p>OpenGov</p>
 				<p>18F</p>
 				<p>Tachyus</p>
@@ -75,11 +76,11 @@
 				<p>Publication</p>
 			</div>
 			<div class="col-2">
-				<p>Live site ↗</p>
-				<p>Case study ↗</p>
+				<p>Live site →</p>
 				<p>Case study →</p>
 				<p>Case study →</p>
-				<p>Live site ↗</p>
+				<p>Case study →</p>
+				<p>Live site →</p>
 				<p>Live site →</p>
 			</div>
 		</div>
