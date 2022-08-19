@@ -10,16 +10,16 @@ html, body {height: 100%; width: 100%; margin: 0; padding: 0; left: 0; top: 0;}
 .row [class^="col"] {float: left; min-height: 0.125rem;}
 .row::after {content: ""; display: table; clear: both;}
 
-.col-1-sm {width: 10%;}
-.col-2-sm {width: 20%;}
-.col-3-sm {width: 30%;}
-.col-4-sm {width: 40%;}
-.col-5-sm {width: 50%;}
-.col-6-sm {width: 60%;}
-.col-7-sm {width: 70%;}
-.col-8-sm {width: 80%;}
-.col-9-sm {width: 90%;}
-.col-10-sm {width: 100%;}
+.col-1, .col-1-sm {width: 10%;}
+.col-2, .col-2-sm {width: 20%;}
+.col-3, .col-3-sm {width: 30%;}
+.col-4, .col-4-sm {width: 40%;}
+.col-5, .col-5-sm {width: 50%;}
+.col-6, .col-6-sm {width: 60%;}
+.col-7, .col-7-sm {width: 70%;}
+.col-8, .col-8-sm {width: 80%;}
+.col-9, .col-9-sm {width: 90%;}
+.col-10, .col-10-sm {width: 100%;}
 
 /* CUSTOM */
 
@@ -35,6 +35,7 @@ html, body {height: 100%; width: 100%; margin: 0; padding: 0; left: 0; top: 0;}
 @media only screen and (max-width: 1111px) {
 	.desktop {display: none;}
 	.rwd {display: block;}
+	.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {width: 100%;}
 	.index .row {bottom: 0;}
 	.index p, .index a {padding: 25px 0; border-top: 1px black solid;}
 	.index p:last-child, .index a:last-child {border-bottom: 1px black solid;}
