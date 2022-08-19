@@ -23,10 +23,10 @@ html, body {height: 100%; width: 100%; margin: 0; padding: 0; left: 0; top: 0;}
 
 /* CUSTOM */
 
+.index .row {position: absolute; bottom: 60px; margin: 0 auto; width: 90%;}
 .nav p {padding-top: 60px; line-height: 0;}
-.index .row {position: absolute; bottom: 0; margin: 0 auto; width: 90%;}
-.index p {padding: 35px 0; border-bottom: 1px black solid; margin: 0; line-height: 0;}
-.index p:first-child {border-top: 1px black solid;}
+.index p {padding: 35px 0; border-top: 1px black solid; margin: 0; line-height: 0;}
+.index p:last-child {border-bottom: 1px black solid;}
 .right {text-align: right;}
 
 .desktop {display: block;}
