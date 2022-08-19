@@ -6,12 +6,9 @@ html, body {height: 100%; width: 100%; margin: 0; padding: 0; left: 0; top: 0;}
 /* ==== GRID SYSTEM ==== */
 
 .container {width: 90%; margin-left: auto; margin-right: auto;}
-
 .row {position: relative; width: 100%;}
-
 .row [class^="col"] {float: left; min-height: 0.125rem;}
-
-.right {text-align: right;}
+.row::after {content: ""; display: table; clear: both;}
 
 .col-1-sm {width: 10%;}
 .col-2-sm {width: 20%;}
@@ -24,15 +21,12 @@ html, body {height: 100%; width: 100%; margin: 0; padding: 0; left: 0; top: 0;}
 .col-9-sm {width: 90%;}
 .col-10-sm {width: 100%;}
 
-.row::after {content: ""; display: table; clear: both;}
-.rwd {display: block;}
+.right {text-align: right;}
 
-@media only screen and (min-width: 33.75em) { /* 540px */
-	.container {width: 90%;}
-	.rwd {display: none;}
-}
+.desktop {display: block;}
+.rwd {display: none;}
 
-@media only screen and (min-width: 60em) { /* 960px */
-	.container {width: 90%;}
-	.rwd {display: none;}
+@media only screen and (max-width: 1111px) {
+	.desktop {display: none;}
+	.rwd {display: block;}
 }
