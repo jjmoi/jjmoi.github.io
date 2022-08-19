@@ -1,16 +1,18 @@
-/* SIMPLE GRID (C) ZACH COLE */
-
 /* UNIVERSAL */
+@charset "UTF-8";
+@font-face {font-display: block; font-family: "Suisse"; src: url("https://jjmoi.com/fonts/suisse-intl.woff2") format("woff2"); font-style: normal; font-weight: normal;}
+body {background-color: white; padding-top: 100px; margin: 0;}
 html, body {height: 100%; width: 100%;}
 a {display: block;}
 
-/* GRID */
+/* TYPOGRAPHY */
+h1, h2, h3, p, a {font-family: "Suisse", sans-serif; font-weight: normal; margin: 0; padding: 0; color: black; font-size: 24px; line-height: 1.3;}
 
+/* GRID */
 .container {width: 90%; margin-left: auto; margin-right: auto;}
 .row {position: relative; width: 100%;}
 .row [class^="col"] {float: left; min-height: 0.125rem;}
 .row::after {content: ""; display: table; clear: both;}
-
 .col-1, .col-1-sm {width: 10%;}
 .col-2, .col-2-sm {width: 20%;}
 .col-3, .col-3-sm {width: 30%;}
@@ -23,16 +25,15 @@ a {display: block;}
 .col-10, .col-10-sm {width: 100%;}
 
 /* CUSTOM */
-
 .index .row {position: absolute; bottom: 60px; margin: 0 auto; width: 90%;}
 .nav p, .nav a {padding-top: 60px; line-height: 0;}
 .index p, .index a {margin: 0; padding: 35px 0; border-top: 2px black solid; line-height: 0;}
 .index p:last-child, .index a:last-child {border-bottom: 2px black solid;}
 .right {text-align: right;}
-
 .desktop {display: block;}
 .rwd {display: none;}
 
+/* RWD */
 @media only screen and (max-width: 1111px) {
 	.desktop {display: none;}
 	.rwd {display: block;}
