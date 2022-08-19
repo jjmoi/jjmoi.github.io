@@ -6,7 +6,10 @@ html, body {height: 100%; width: 100%;}
 a {display: block;}
 
 /* TYPOGRAPHY */
-h1, h2, h3, p, a {font-family: "Suisse", sans-serif; font-weight: normal; margin: 0; padding: 0; color: black; font-size: 24px; line-height: 1.3;}
+h1, h2, h3, p, a {font-family: "Suisse", sans-serif; font-weight: normal; margin: 0; padding: 0; color: black; font-size: 20px; line-height: 1.3;}
+a {text-decoration: none;}
+a:hover {color: black; cursor: url(http://www.jjmoi.com/files/mick-point3.png), default; text-decoration: underline;}
+a:visited {color: black;}
 
 /* GRID */
 .container {width: 90%; margin-left: auto; margin-right: auto;}
