@@ -1,96 +1,38 @@
 /* SIMPLE GRID (C) ZACH COLE */
 
 /* UNIVERSAL */
-
-html,
-body {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  left: 0;
-  top: 0;
-  font-size: 100%;
-}
+html, body {height: 100%; width: 100%; margin: 0; padding: 0; left: 0; top: 0;}
 
 /* ==== GRID SYSTEM ==== */
 
-.container {
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-}
+.container {width: 90%; margin-left: auto; margin-right: auto;}
 
-.row {
-  position: relative;
-  width: 100%;
-}
+.row {position: relative; width: 100%;}
 
-.row [class^="col"] {
-  float: left;
-  min-height: 0.125rem;
-}
+.row [class^="col"] {float: left; min-height: 0.125rem;}
 
 .right {text-align: right;}
 
-.col-1-sm {
-  width: 10%;
-}
+.col-1-sm {width: 10%;}
+.col-2-sm {width: 20%;}
+.col-3-sm {width: 30%;}
+.col-4-sm {width: 40%;}
+.col-5-sm {width: 50%;}
+.col-6-sm {width: 60%;}
+.col-7-sm {width: 70%;}
+.col-8-sm {width: 80%;}
+.col-9-sm {width: 90%;}
+.col-10-sm {width: 100%;}
 
-.col-2-sm {
-  width: 20%;
-}
+.row::after {content: ""; display: table; clear: both;}
+.rwd {display: block;}
 
-.col-3-sm {
-  width: 30%;
-}
-
-.col-4-sm {
-  width: 40%;
-}
-
-.col-5-sm {
-  width: 50%;
-}
-
-.col-6-sm {
-  width: 60%;
-}
-
-.col-7-sm {
-  width: 70%;
-}
-
-.col-8-sm {
-  width: 80%;
-}
-
-.col-9-sm {
-  width: 90%;
-}
-
-.col-10-sm {
-  width: 100%;
-}
-
-.row::after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.hidden-sm {
-  display: none;
-}
-
-@media only screen and (min-width: 33.75em) {  /* 540px */
-  .container {
-    width: 90%;
-  }
+@media only screen and (min-width: 33.75em) { /* 540px */
+	.container {width: 90%;}
+	.rwd {display: none;}
 }
 
 @media only screen and (min-width: 60em) { /* 960px */
-  .container {
-    width: 90%;
-  }
+	.container {width: 90%;}
+	.rwd {display: none;}
 }
