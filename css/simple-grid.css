@@ -3,7 +3,7 @@
 /* UNIVERSAL */
 html, body {height: 100%; width: 100%; margin: 0; padding: 0; left: 0; top: 0;}
 
-/* ==== GRID SYSTEM ==== */
+/* GRID SYSTEM */
 
 .container {width: 90%; margin-left: auto; margin-right: auto;}
 .row {position: relative; width: 100%;}
@@ -21,6 +21,12 @@ html, body {height: 100%; width: 100%; margin: 0; padding: 0; left: 0; top: 0;}
 .col-9-sm {width: 90%;}
 .col-10-sm {width: 100%;}
 
+/* CUSTOM */
+
+.nav p {padding-top: 60px; line-height: 0;}
+.index .row {position: absolute; bottom: 0; margin: 0 auto; width: 90%;}
+.index p {padding: 35px 0; border-bottom: 1px black solid; margin: 0; line-height: 0;}
+.index p:first-child {border-top: 1px black solid;}
 .right {text-align: right;}
 
 .desktop {display: block;}
