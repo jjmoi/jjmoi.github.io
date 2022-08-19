@@ -32,7 +32,7 @@ a:visited {color: black;}
 .index p:last-child, .index a:last-child {border-bottom: 2px black solid;}
 .right {text-align: right;}
 .desktop {display: block;}
-.rwd-content {display: inline-block;}
+.rwd-content {display: inline;}
 .rwd {display: none;}
 
 /* RWD */
