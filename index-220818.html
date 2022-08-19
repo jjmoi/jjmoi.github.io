@@ -20,21 +20,32 @@
 		html {background-color: #001;}
 		::-moz-selection {background: #001;}
 		::selection {background: #001;}
-		.table {position: absolute; bottom: 0;}
-		.table p:first-child {border-top: 1px black solid;}
-		.table p {padding: 25px 0; border-bottom: 1px black solid;}
+
+		.index .row {position: absolute; bottom: 0; margin: 0 auto; width: 90%;}
+		.index p:first-child {border-top: 1px black solid;}
+		.index p {padding: 30px 0; border-bottom: 1px black solid; margin: 0; line-height: 0;}
 	</style>
 </head>
 <body>
 	<div class="container">
-		<div class="grid-wrapper" id="header">
-			<div class="col-6"><a href="/">JJ Moi</a></div>
-			<div class="col-2"></div>
-			<div class="col-2"></div>
-			<div class="col-2"><a href="/info">Info</a></div>
+		<div class="row">
+			<div class="col-4-sm">
+				<p>JJ Moi</p>
+			</div>
+			<div class="col-4-sm rwd">
+				<p></p>
+			</div>
+			<div class="col-1-sm rwd">
+				<p></p>
+			</div>
+			<div class="col-1-sm">
+				<p class="right">Info</p>
+			</div>
 		</div>
-		<div class="grid-wrapper table">
-			<div class="col-6">
+	</div>
+	<div class="container index">
+		<div class="row">
+			<div class="col-4-sm">
 				<p>Improving open data to rebuild trust</p>
 				<p>Creating design systems for the people</p>
 				<p>Empowering oil producers to make data-driven decisions</p>
@@ -42,7 +53,7 @@
 				<p>Designing heavy serif typeface for bold headlines</p>
 				<p>Telling stories of women making music</p>
 			</div>
-			<div class="col-2">
+			<div class="col-4-sm rwd">
 				<p>OpenGov</p>
 				<p>18F</p>
 				<p>Tachyus</p>
@@ -50,22 +61,23 @@
 				<p>Tremolo</p>
 				<p>All Together Now</p>
 			</div>
-			<div class="col-2">
-				<p>UX, Identity</p>
-				<p>UX, Identity</p>
-				<p>UX, Identity</p>
-				<p>UX, Identity</p>
-				<p>Typeface</p>
-				<p>Publication</p>
+			<div class="col-1-sm rwd">
+				<p>UX, Ident</p>
+				<p>Ident</p>
+				<p>UX</p>
+				<p>UX, Ident, Strategy</p>
+				<p>Ident</p>
+				<p>UX</p>
 			</div>
-			<div class="col-2">
-				<p>Live site →</p>
-				<p>Case study →</p>
-				<p>Case study →</p>
-				<p>Case study →</p>
-				<p>Live site →</p>
-				<p>Live site →</p>
+			<div class="col-1-sm">
+				<p class="right">Case study →</p>
+				<p class="right">Case study →</p>
+				<p class="right">Case study →</p>
+				<p class="right">Case study →</p>
+				<p class="right">Live site →</p>
+				<p class="right">Case study →</p>
 			</div>
+		</div>
 		</div>
 	</div>
 </body>
