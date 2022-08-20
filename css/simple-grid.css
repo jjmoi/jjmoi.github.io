@@ -28,7 +28,7 @@ a:visited {color: black;}
 /* CUSTOM */
 .index .row {position: absolute; bottom: 60px; margin: 0 auto; width: 90%;}
 .nav p, .nav a {padding-top: 60px; line-height: 0;}
-.index p, .index a {margin: 0; padding: 35px 0; border-top: 2px black solid; line-height: 0;}
+.index p, .index a {margin: 0; padding: 32px 0; border-top: 2px black solid; line-height: 0;}
 .index p:last-child, .index a:last-child {border-bottom: 2px black solid;}
 .right {text-align: right;}
 .desktop {display: block;}
@@ -47,6 +47,6 @@ a:visited {color: black;}
 	.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10 {width: 100%;}
 	.nav p, .nav a {padding-top: 30px;}
 	.index .row {bottom: 0;}
-	.index p, .index a {padding: 25px 0; border-top: 1.5px black solid;}
+	.index p, .index a {padding: 24px 0; border-top: 1.5px black solid;}
 	.index p:last-child, .index a:last-child {border-bottom: none;}
 }
