@@ -53,6 +53,7 @@ p+p {padding-top: 30px;}
 	/* CASE STUDY */
 	#title, .quote p {font-size: 32px;}
 	#subtitle {font-size: 16px; padding-bottom: 30px;}
+	#launch {padding-top: 2px;}
 }
 
 @media only screen and (max-width: 1111px) {
@@ -73,6 +74,6 @@ p+p {padding-top: 30px;}
 	#title, .quote p {font-size: 24px;}
 	#subtitle {padding-bottom: 30px;}
 	.parasection .right {text-align: left;}
-	#launch {padding-top: 30px; padding-bottom: 30px;}
+	#launch {padding-top: 0x; padding-bottom: 30px;}
 	#endsection {padding-bottom: 180px;}
 }
