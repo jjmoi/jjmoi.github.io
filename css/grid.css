@@ -39,7 +39,8 @@ p+p {padding-top: 30px;}
 #subtitle {font-size: 22px; padding-top: 10px; padding-bottom: 75px;}
 #launch a {padding-top: 10px; text-align: right;}
 /* img {padding-top: 60px;} */
-#endsection {padding-bottom: 300px;}
+#endsection {padding-bottom: 100px;}
+#credits {padding-bottom: 300px;}
 
 /* RWD */
 .desktop {display: block;}
@@ -75,6 +76,6 @@ p+p {padding-top: 30px;}
 	#subtitle {padding-bottom: 30px;}
 	#launch {text-align: left;}
 	#launch a {padding-top: 0x; padding-bottom: 30px;}
-	#stackcolumn {padding-top: 24x;}
+	#stackcolumn {padding-top: 36x;}
 	#endsection {padding-bottom: 180px;}
 }
