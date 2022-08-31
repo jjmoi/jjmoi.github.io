@@ -73,7 +73,8 @@ p+p {padding-top: 30px;}
 	/* CASE STUDY */
 	#title, .quote p {font-size: 24px;}
 	#subtitle {padding-bottom: 30px;}
-	.parasection .right {text-align: left;}
 	#launch {padding-top: 0x; padding-bottom: 30px;}
+	#launch a {text-align: left;}
+	#stackcolumn {padding-top: 24x;}
 	#endsection {padding-bottom: 180px;}
 }
