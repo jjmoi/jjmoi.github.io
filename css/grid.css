@@ -74,7 +74,7 @@ p+p {padding-top: 30px;}
 	.parasection {margin-top: 60px;}
 	/* CASE STUDY */
 	#title, .quote p {font-size: 24px;}
-	#subtitle {padding-bottom: 30px;}
+	#subtitle {padding-top: 10px; padding-bottom: 30px;}
 	#launch {text-align: left;}
 	#launch a {padding-top: 0x; padding-bottom: 30px;}
 	#endsection {padding-bottom: 60px;}
