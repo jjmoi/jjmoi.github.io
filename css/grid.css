@@ -37,7 +37,7 @@ p+p {padding-top: 30px;}
 /* CASE STUDY */
 #title, .quote p {font-size: 42px; line-height: 1.3;}
 #subtitle {font-size: 22px; padding-top: 10px; padding-bottom: 75px;}
-#launch a {padding-top: 10px;}
+#launch a {padding-top: 10px; text-align: right;}
 /* img {padding-top: 60px;} */
 #endsection {padding-bottom: 300px;}
 
