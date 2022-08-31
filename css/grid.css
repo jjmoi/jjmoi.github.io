@@ -77,7 +77,7 @@ p+p {padding-top: 30px;}
 	#subtitle {padding-bottom: 30px;}
 	#launch {text-align: left;}
 	#launch a {padding-top: 0x; padding-bottom: 30px;}
-	#stackcolumn {padding-top: 50x;}
 	#endsection {padding-bottom: 60px;}
 	#credits {padding-bottom: 180px;}
+	#credits #stackcolumn {padding-top: 50x;}
 }
