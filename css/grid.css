@@ -45,8 +45,8 @@ p+p {padding-top: 30px;}
 
 /* RWD */
 .desktop {display: block;}
-.rwd-content {display: inline;}
 .rwd {display: none;}
+.rwd-content {display: inline;}
 
 @media only screen and (max-width: 1500px) {
 	.rwd-content {display: none;}
