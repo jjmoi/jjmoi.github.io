@@ -26,7 +26,7 @@ a:visited {color: black;}
 /* STUFF */
 .index .row {position: absolute; bottom: 60px; margin: 0 auto; width: 90%;}
 .nav p, .nav a {padding-top: 60px; line-height: 0;}
-.index p, .index a {margin: 0; padding: 32px 0; border-top: 2px black solid; line-height: 0;}
+.index p, .index a {margin: 0; padding: 30px 0; border-top: 2px black solid; line-height: 0;}
 .index p:last-child, .index a:last-child {border-bottom: 2px black solid;}
 .right {text-align: right;}
 p+p {padding-top: 30px;}
