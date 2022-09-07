@@ -30,12 +30,15 @@ a:visited {color: black;}
 .index p:last-child, .index a:last-child {border-bottom: 2px black solid;}
 .right {text-align: right;}
 p+p {padding-top: 30px;}
+
 /* INFO */
-.parasection {margin-top: 100px; margin-bottom: 100px;}
+.parasection {margin-top: 100px; margin-bottom: 200px;}
 .parasection img {width: 100%;}
 .parasection a {display: inline-block;}
+
 /* CASE STUDY */
-#title, .quote p {font-size: 42px; line-height: 1.3;}
+.quote {margin-bottom: 0;}
+#title, .quote p {font-size: 42px; line-height: 1.3; margin-top: 100px;}
 #subtitle {font-size: 22px; padding-top: 10px; padding-bottom: 75px;}
 #launch {text-align: right;}
 #launch a {padding-top: 4px;}
