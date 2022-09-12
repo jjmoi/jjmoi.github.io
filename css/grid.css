@@ -57,7 +57,8 @@ p+p {padding-top: 30px;}
 	h1, h2, h3, p, a {font-size: 16px;}
 	p+p {padding-top: 24px; padding-bottom: 24px;}
 	/* CASE STUDY */
-	#title, .quote p {font-size: 28px;}
+	#title {font-size: 46px; letter-spacing: -1px;}
+	.quote p {font-size: 28px;}
 	#subtitle {font-size: 16px; padding-top: 4px; padding-bottom: 30px;} 
 	#launch a {padding-top: 2px;}
 }
@@ -75,13 +76,14 @@ p+p {padding-top: 30px;}
 	.index p, .index a {padding: 23px 0; border-top: 1.5px black solid;}
 	.index p:last-child, .index a:last-child {border-bottom: none;}
 	/* INFO */
-	.parasection {margin-top: 60px;}
+	.parasection {margin-top: 60px; margin-bottom: 120px;}
 	/* CASE STUDY */
-	#title, .quote p {font-size: 24px;}
+	#title {font-size: 40px; letter-spacing: -0.5px;}
+	.quote p {font-size: 24px;}
 	#subtitle {padding-top: 10px; padding-bottom: 30px;}
 	#launch {text-align: left;}
 	#launch a {padding-top: 0x; padding-bottom: 30px;}
 	#endsection {padding-bottom: 60px;}
-	#credits {padding-bottom: 180px;}
+	#credits {padding-bottom: 199px;}
 	#credits .stackcolumn {margin-top: 50px;}
 }
