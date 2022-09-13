@@ -55,7 +55,7 @@ p+p {padding-top: 30px;}
 @media only screen and (max-width: 1500px) {
 	.rwd-content {display: none;}
 	h1, h2, h3, p, a {font-size: 16px;}
-	p+p {padding-top: 24px; padding-bottom: 24px;}
+	p+p {padding-top: 24px;}
 	/* CASE STUDY */
 	#title {font-size: 46px; letter-spacing: -1px;}
 	.quote p {font-size: 28px;}
@@ -70,7 +70,7 @@ p+p {padding-top: 30px;}
 	h1, h2, h3, p, a {line-height: 1.45;}
 	.nav p, .nav a {padding-top: 30px;}
 	/* img {padding-top: 36px;} */
-	p+p {padding-top: 20px; padding-bottom: 20px;}
+	p+p {padding-top: 20px;}
 	/* HOME INDEX */
 	.index .row {bottom: 0;}
 	.index p, .index a {padding: 23px 0; border-top: 1.5px black solid;}
