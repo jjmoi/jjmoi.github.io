@@ -46,6 +46,7 @@ p+p {padding-top: 30px;}
 /* img {padding-top: 60px;} */
 #endsection {padding-bottom: 100px;}
 #credits {padding-bottom: 300px;}
+#credits p+p {padding-top: 50px;}
 
 /* RWD */
 .desktop {display: block;}
