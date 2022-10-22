@@ -57,6 +57,7 @@ p+p {padding-top: 30px;}
 	.rwd-content {display: none;}
 	h1, h2, h3, p, a {font-size: 16px;}
 	p+p {padding-top: 24px;}
+	.index p, .index a {padding: 24px 0;}
 
 	/* CASE */
 	#subtitle {font-size: 16px; padding-bottom: 3px;}
