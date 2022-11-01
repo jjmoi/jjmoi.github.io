@@ -21,6 +21,9 @@
 		body {background-color: white;}
 		::-moz-selection {background: #001;}
 		::selection {background: #001;}
+		.item:hover {background: red;}
+		.item:hover > a {color: white;}
+		.item:hover a {color: white;}
 	</style>
 </head>
 <body>
@@ -38,7 +41,7 @@
 	</div>
 	<!-- desktop -->
 	<div class="container index desktop">
-		<div class="row">
+		<div class="row item">
 			<div class="col-4-sm">
 				<a href="/18f">Creating design system for the people</a>
 			</div>
