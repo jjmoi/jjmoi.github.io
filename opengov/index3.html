@@ -21,11 +21,19 @@
 		::-moz-selection {background: blue; color: #0100ff;}
 		::selection {background: blue; color: #0100ff;}
 		.desktop {padding-bottom: 60px;}
-		.rwd {padding-bottom: 0px;}
 		.desktop p {margin: 0; padding: 30px 0; line-height: 0; display: block;}
 		.desktop a {margin: 0; padding: 30px 0; border-top: 2px black solid; line-height: 0; display: block;}
 		.desktop a:last-child {border-bottom: 2px black solid;}
-		.rwd a:last-child {border-bottom: none;}
+		@media only screen and (max-width: 1500px) {
+			.desktop p, .desktop a {padding: 24px 0;}
+		}
+
+		@media only screen and (max-width: 1111px) {
+			.rwd {padding-bottom: 0px;}
+			.rwd p {padding: 23px 0;}
+			.rwd a {padding: 23px 0; border-top: 1.5px black solid;}
+			.rwd a:last-child {border-bottom: none;}
+		}
 	</style>
 </head>
 <body>
