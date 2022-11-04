@@ -23,7 +23,7 @@
 		::selection {background: #001;}
 		
 		.index {position: absolute; bottom: 0px; width: 100%; margin: 0 auto;}
-		.index .row {position: relative; bottom: 60px;}
+		.index {position: relative; bottom: 60px;}
 		.index p, .index a {padding: 16px 0;}
 
 		.index p, .index a, .index p:last-child, .index a:last-child {border: none;}
@@ -48,6 +48,7 @@
 		}
 
 		@media only screen and (max-width: 1111px) {
+			.index, .index .row {bottom: 0;}
 			.index p, .index a {padding: 12px 0;}
 			.index a {border-bottom: 1px black solid;}
 			.index a:first-child {border-top: 1px black solid;}
