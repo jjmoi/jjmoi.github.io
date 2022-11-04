@@ -12,7 +12,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="description" content="JJ Moi">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<link rel="stylesheet" href="css/grid.css">
+	<link rel="stylesheet" href="https://jjmoi.com/css/grid.css">
 	<link rel="shortcut icon" type="image/x-icon" href="shit.png">
 	<title>JJ Moi</title>
 	<style>
@@ -21,9 +21,38 @@
 		body {background-color: white;}
 		::-moz-selection {background: #001;}
 		::selection {background: #001;}
-		@media only screen and (max-width: 1111px) {
-			.index .row {bottom: 23px;}
+		
+		.index {position: absolute; bottom: 0px; width: 100%; margin: 0 auto;}
+		.index .row {position: relative;}
+		.index p, .index a {padding: 18px 0;}
+
+		.index p, .index a, .index p:last-child, .index a:last-child {border: none;}
+		.index a {border-bottom: 2px black solid;}
+		.index a:first-child {border-top: 2px black solid;}
+		.index a:last-child {border-bottom: 2px black solid;}		
+		
+		a:hover {text-decoration: none;}
+		a#cloudgov:hover p {color: blue;}
+		a#tachyus:hover p {color: coral;}
+		a#opengov:hover p {color: limegreen;}
+		a#elicit:hover p {color: magenta;}
+		a#mi6:hover p {color: red;}
+		a#together:hover p {color: blue;}
+
+		@media only screen and (max-width: 1500px) {
+			.index {bottom: -12px;}
+			.index p, .index a {padding: 14px 0;}
+			.index a {border-bottom: 1.5px black solid;}
+			.index a:first-child {border-top: 1.5px black solid;}
 			.index a:last-child {border-bottom: 1.5px black solid;}
+		}
+
+		@media only screen and (max-width: 1111px) {
+			.index {bottom: 0;}
+			.index p, .index a {padding: 12px 0;}
+			.index a {border-bottom: 1px black solid;}
+			.index a:first-child {border-top: 1px black solid;}
+			.index a:last-child {border-bottom: none;}
 		}
 	</style>
 </head>
@@ -42,7 +71,7 @@
 	</div>
 	<!-- desktop -->
 	<div class="container index desktop">
-		<a href="/18f" class="row">
+		<a href="/18f" class="row" id="cloudgov">
 			<div class="col-4-sm">
 				<p>Creating design system for the people</p>
 			</div>
@@ -56,43 +85,127 @@
 				<p>Case Study →</p>
 			</div>
 		</a>
-		<a href="/18f" class="row">
+		<a href="/18f" class="row" id="tachyus">
 			<div class="col-4-sm">
-				<p>Creating design system for the people</p>
+				<p>Optimizing oil & gas production</p>
 			</div>
 			<div class="col-1-sm">
-				<p>cloud.gov</p>
+				<p>Tachyus</p>
 			</div>
 			<div class="col-3-sm">
-				<p>Product Design, Design System</p>
+				<p>Product Design, GIS</p>
 			</div>
 			<div class="col-2-sm right">
 				<p>Case Study →</p>
+			</div>
+		</a>
+		<a href="/18f" class="row" id="opengov">
+			<div class="col-4-sm">
+				<p>Rebuilding public trust in open data</p>
+			</div>
+			<div class="col-1-sm">
+				<p>OpenGov</p>
+			</div>
+			<div class="col-3-sm">
+				<p>Product Design, DataViz</p>
+			</div>
+			<div class="col-2-sm right">
+				<p>Case Study →</p>
+			</div>
+		</a>
+		<a href="/18f" class="row" id="elicit">
+			<div class="col-4-sm">
+				<p>Automating research workflows</p>
+			</div>
+			<div class="col-1-sm">
+				<p>Elicit</p>
+			</div>
+			<div class="col-3-sm">
+				<p>Product Design, DataViz</p>
+			</div>
+			<div class="col-2-sm right">
+				<p>Website →</p>
+			</div>
+		</a>
+		<a href="/18f" class="row" id="mi6">
+			<div class="col-4-sm">
+				<p>Helping students realize their dreams</p>
+			</div>
+			<div class="col-1-sm">
+				<p>10016</p>
+			</div>
+			<div class="col-3-sm">
+				<p>Teaching</p>
+			</div>
+			<div class="col-2-sm right">
+				<p>Presentation →</p>
+			</div>
+		</a>
+		<a href="/18f" class="row" id="together">
+			<div class="col-4-sm">
+				<p>Telling stories of women making music</p>
+			</div>
+			<div class="col-1-sm">
+				<p>Together</p>
+			</div>
+			<div class="col-3-sm">
+				<p>Art Direction</p>
+			</div>
+			<div class="col-2-sm right">
+				<p>Website →</p>
 			</div>
 		</a>
 	</div>
 	<!-- rwd -->
 	<div class="container index rwd">
-		<div class="row">
-			<div class="col-9-sm">
-				<a href="/18f">Creating design system for the people</a>
-				<a href="/tachyus">Optimizing oil & gas production</a>
-				<a href="/opengov">Rebuilding public trust in open data</a>
-				<a href="https://elicit.org" target="_blank">Automating research workflows</a>
-				<a href="https://docs.google.com/presentation/d/1kS1Ajrl0b6OJU_DDU23Zz2bc7txosOfdrutVpqwQe8E" target="_blank">Helping students realize their dreams</a>
-				<!-- <a href="https://jjmoi.com/typefoundry" target="_blank">Making heavy serifs for bold headlines</a> -->
-				<a href="https://www.kickstarter.com/projects/753619488/all-together-now-women-in-music" target="_blank">Telling stories of women in music</a>
+		<a href="/18f" class="row" id="cloudgov">
+			<div class="col-8-sm">
+				<p>Creating design system for the people</p>
 			</div>
-			<div class="col-1-sm right">
-				<a href="/18f">→</a>
-				<a href="/tachyus">→</a>
-				<a href="/opengov">→</a>
-				<a href="https://elicit.org" target="_blank">→</a>
-				<a href="https://docs.google.com/presentation/d/1kS1Ajrl0b6OJU_DDU23Zz2bc7txosOfdrutVpqwQe8E" target="_blank">→</a>
-				<!-- <a href="https://jjmoi.com/typefoundry" target="_blank">→</a> -->
-				<a href="https://www.kickstarter.com/projects/753619488/all-together-now-women-in-music" target="_blank">→</a>
+			<div class="col-2-sm right">
+				<p>Case →</p>
 			</div>
-		</div>
+		</a>
+		<a href="/18f" class="row" id="tachyus">
+			<div class="col-8-sm">
+				<p>Optimizing oil & gas production</p>
+			</div>
+			<div class="col-2-sm right">
+				<p>Case →</p>
+			</div>
+		</a>
+		<a href="/18f" class="row" id="opengov">
+			<div class="col-8-sm">
+				<p>Rebuilding public trust in open data</p>
+			</div>
+			<div class="col-2-sm right">
+				<p>Case →</p>
+			</div>
+		</a>
+		<a href="/18f" class="row" id="elicit">
+			<div class="col-8-sm">
+				<p>Automating research workflows</p>
+			</div>
+			<div class="col-2-sm right">
+				<p>Web →</p>
+			</div>
+		</a>
+		<a href="/18f" class="row" id="mi6">
+			<div class="col-8-sm">
+				<p>Helping students realize their dreams</p>
+			</div>
+			<div class="col-2-sm right">
+				<p>Prezo →</p>
+			</div>
+		</a>
+		<a href="/18f" class="row" id="together">
+			<div class="col-8-sm">
+				<p>Telling stories of women making music</p>
+			</div>
+			<div class="col-2-sm right">
+				<p>Web →</p>
+			</div>
+		</a>
 	</div>
 </body>
 </html>
