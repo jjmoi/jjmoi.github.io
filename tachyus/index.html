@@ -16,23 +16,44 @@
 	<title>Tachyus — JJ Moi</title>
 	<style>
 		/* BACKGROUND */
-		html {background-color: coral;}
+		html {background-color: aqua;}
 		body {height: auto; background-color: white;}
-		::-moz-selection {background: coral; color: #ff7f49;}
-		::selection {background: coral; color: #ff7f49;}
-		.desktop {padding-bottom: 60px;}
-		.desktop p, .desktop a {margin: 0; padding: 30px 0; border-top: 2px black solid; line-height: 0; display: block;}
-		.desktop p:last-child, .desktop a:last-child {border-bottom: 2px black solid;}
-		.desktop p.moreprojects, .rwd p.moreprojects {border-top: none;}
+		::-moz-selection {background: aqua; color: #01ffff;}
+		::selection {background: aqua; color: #01ffff;}
+		.index .row {position: relative; width: 100%;}
+		.desktop {padding-bottom: 60px; bottom: 0;}
+		.index p, .index a, .index p:last-child, .index a:last-child {border: none;}
+		.index a {border-bottom: 2px black solid;}
+		.index a:first-child {border-top: 2px black solid;}
+		.index a:last-child {border-bottom: 2px black solid;}
+		.index .row {bottom: 0px;}
+		.index p, .index a {padding: 16px 0;}
+		.moreprojects {border-bottom: 2px black solid; padding: 12px 0;}
+		
+		a:hover {text-decoration: none;}
+		a#cloudgov:hover p {color: dodgerblue;}
+		a#tachyus:hover p {color: coral;}
+		a#opengov:hover p {color: limegreen;}
+		a#elicit:hover p {color: hotpink;}
+		a#mi6:hover p {color: mediumslateblue;}
+		a#together:hover p {color: tomato;}
+
 		@media only screen and (max-width: 1500px) {
-			.desktop {padding-bottom: 42px;}
-			.desktop p, .desktop a {padding: 24px 0;}
+			.index .row {bottom: -10px;}
+			.index p, .index a {padding: 14px 0;}
+			.index a {border-bottom: 1.5px black solid;}
+			.index a:first-child {border-top: 1.5px black solid;}
+			.index a:last-child {border-bottom: 1.5px black solid;}
+			.moreprojects {border-bottom: 1.5px black solid; padding: 12px 0;}
 		}
+
 		@media only screen and (max-width: 1111px) {
-			.rwd {padding-bottom: 46px;}
-			.rwd p.moreprojects {padding: 24px 0; line-height: 0; display: block;}
-			.rwd a {padding: 24px 0; border-top: 1.5px black solid; line-height: 0; display: block;}
-			.rwd a:last-child {border-bottom: 1.5px black solid;}
+			.index, .index .row {bottom: 48px;}
+			.index p, .index a {padding: 12px 0;}
+			.index a {border-bottom: 1px black solid;}
+			.index a:first-child {border-top: 1px black solid;}
+			.index a:last-child {border-bottom: 1px black solid;}
+			.moreprojects {border-bottom: 1px black solid; padding: 12px 0;}
 		}
 	</style>
 </head>
@@ -215,68 +236,130 @@
 		</div>
 	</div>
 	<!-- desktop -->
-	<div class="container parasection desktop">
-		<div class="row">
+	<div class="container index desktop">
+		<div class="row moreprojects">
+			<div class="col-10-sm">
+				<p>More Projects</p>
+			</div>
+		</div>
+		<a href="/18f" class="row" id="cloudgov">
 			<div class="col-4-sm">
-				<p class="moreprojects">More Projects</p>
-				<a href="/18f">Creating design system for the people</a>
-				<a href="/opengov">Rebuilding public trust in open data</a>
-				<a href="https://elicit.org" target="_blank">Automating research workflows</a>
-				<a href="https://docs.google.com/presentation/d/1kS1Ajrl0b6OJU_DDU23Zz2bc7txosOfdrutVpqwQe8E" target="_blank">Helping students realize their dreams</a>
-				<!-- <a href="https://jjmoi.com/typefoundry" target="_blank">Making heavy serifs for bold headlines</a> -->
-				<a href="https://www.kickstarter.com/projects/753619488/all-together-now-women-in-music" target="_blank">Telling stories of women making music</a>
+				<p>Creating design system for the people</p>
 			</div>
 			<div class="col-1-sm">
-				<p class="moreprojects"></p>
-				<a href="/18f">18F</a>
-				<a href="/opengov">OpenGov</a>
-				<a href="https://elicit.org" target="_blank">Elicit</a>
-				<a href="https://docs.google.com/presentation/d/1kS1Ajrl0b6OJU_DDU23Zz2bc7txosOfdrutVpqwQe8E" target="_blank">10016</a>
-				<!-- <a href="https://jjmoi.com/typefoundry" target="_blank">Tremolo</a> -->
-				<a href="https://www.kickstarter.com/projects/753619488/all-together-now-women-in-music" target="_blank">Together</a>
+				<p>18F</p>
 			</div>
 			<div class="col-3-sm">
-				<p class="moreprojects"></p>
 				<p>Product Design, Design System</p>
+			</div>
+			<div class="col-2-sm right">
+				<p>Case Study →</p>
+			</div>
+		</a>
+		<a href="/opengov" class="row" id="opengov">
+			<div class="col-4-sm">
+				<p>Rebuilding public trust in open data</p>
+			</div>
+			<div class="col-1-sm">
+				<p>OpenGov</p>
+			</div>
+			<div class="col-3-sm">
 				<p>Product Design, DataViz</p>
+			</div>
+			<div class="col-2-sm right">
+				<p>Case Study →</p>
+			</div>
+		</a>
+		<a href="https://elicit.org" target="_blank" class="row" id="elicit">
+			<div class="col-4-sm">
+				<p>Automating research workflows</p>
+			</div>
+			<div class="col-1-sm">
+				<p>Elicit</p>
+			</div>
+			<div class="col-3-sm">
 				<p>Product Design, DataViz</p>
+			</div>
+			<div class="col-2-sm right">
+				<p>Website →</p>
+			</div>
+		</a>
+		<a href="https://docs.google.com/presentation/d/1kS1Ajrl0b6OJU_DDU23Zz2bc7txosOfdrutVpqwQe8E" target="_blank" class="row" id="mi6">
+			<div class="col-4-sm">
+				<p>Helping students realize their dreams</p>
+			</div>
+			<div class="col-1-sm">
+				<p>10016</p>
+			</div>
+			<div class="col-3-sm">
 				<p>Teaching</p>
-				<!-- <p>Type Design</p> -->
+			</div>
+			<div class="col-2-sm right">
+				<p>Presentation →</p>
+			</div>
+		</a>
+		<a href="https://www.kickstarter.com/projects/753619488/all-together-now-women-in-music" target="_blank" class="row" id="together">
+			<div class="col-4-sm">
+				<p>Telling stories of women making music</p>
+			</div>
+			<div class="col-1-sm">
+				<p>Together</p>
+			</div>
+			<div class="col-3-sm">
 				<p>Art Direction</p>
 			</div>
 			<div class="col-2-sm right">
-				<p class="moreprojects"></p>
-				<a href="/18f">Case Study →</a>
-				<a href="/opengov">Case Study →</a>
-				<a href="https://elicit.org" target="_blank">Website →</a>
-				<a href="https://docs.google.com/presentation/d/1kS1Ajrl0b6OJU_DDU23Zz2bc7txosOfdrutVpqwQe8E" target="_blank">Presentation →</a>
-				<!-- <a href="https://jjmoi.com/typefoundry" target="_blank"><span class="rwd-content">Live Site</span> →</a> -->
-				<a href="https://www.kickstarter.com/projects/753619488/all-together-now-women-in-music" target="_blank">Website →</a>
+				<p>Website →</p>
 			</div>
-		</div>
+		</a>
 	</div>
 	<!-- rwd -->
-	<div class="container parasection rwd">
-		<div class="row">
-			<div class="col-9-sm">
-				<p class="moreprojects">More Projects</p>
-				<a href="/18f">Creating design system for the people</a>
-				<a href="/opengov">Rebuilding public trust in open data</a>
-				<a href="https://elicit.org" target="_blank">Automating research workflows</a>
-				<a href="https://docs.google.com/presentation/d/1kS1Ajrl0b6OJU_DDU23Zz2bc7txosOfdrutVpqwQe8E" target="_blank">Helping students realize their dreams</a>
-				<!-- <a href="https://jjmoi.com/typefoundry" target="_blank">Making heavy serifs for bold headlines</a> -->
-				<a href="https://www.kickstarter.com/projects/753619488/all-together-now-women-in-music" target="_blank">Telling stories of women in music</a>
-			</div>
-			<div class="col-1-sm right">
-				<p class="moreprojects"> </p>
-				<a href="/18f">→</a>
-				<a href="/opengov">→</a>
-				<a href="https://elicit.org" target="_blank">→</a>
-				<a href="https://docs.google.com/presentation/d/1kS1Ajrl0b6OJU_DDU23Zz2bc7txosOfdrutVpqwQe8E" target="_blank">→</a>
-				<!-- <a href="https://jjmoi.com/typefoundry" target="_blank">→</a> -->
-				<a href="https://www.kickstarter.com/projects/753619488/all-together-now-women-in-music" target="_blank">→</a>
+	<div class="container index rwd">
+		<div class="row moreprojects">
+			<div class="col-10-sm">
+				<p>More Projects</p>
 			</div>
 		</div>
+		<a href="/18f" class="row" id="cloudgov">
+			<div class="col-9-sm">
+				<p>Creating design system for the people</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>→</p>
+			</div>
+		</a>
+		<a href="/opengov" class="row" id="opengov">
+			<div class="col-9-sm">
+				<p>Rebuilding public trust in open data</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>→</p>
+			</div>
+		</a>
+		<a href="https://elicit.org" target="_blank" class="row" id="elicit">
+			<div class="col-9-sm">
+				<p>Automating research workflows</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>→</p>
+			</div>
+		</a>
+		<a href="https://docs.google.com/presentation/d/1kS1Ajrl0b6OJU_DDU23Zz2bc7txosOfdrutVpqwQe8E" target="_blank" class="row" id="mi6">
+			<div class="col-9-sm">
+				<p>Helping students realize their dreams</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>→</p>
+			</div>
+		</a>
+		<a href="https://www.kickstarter.com/projects/753619488/all-together-now-women-in-music" target="_blank" class="row" id="together">
+			<div class="col-9-sm">
+				<p>Telling stories of women making music</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>→</p>
+			</div>
+		</a>
 	</div>
 </body>
 </html>
