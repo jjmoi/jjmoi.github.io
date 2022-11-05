@@ -20,12 +20,15 @@
 		body {height: auto; background-color: white;}
 		::-moz-selection {background: aqua; color: #01ffff;}
 		::selection {background: aqua; color: #01ffff;}
-		.index .row {position: relative;}
+		.index .row {position: relative; width: 100%;}
 		.desktop {padding-bottom: 60px; bottom: 0;}
 		.index p, .index a, .index p:last-child, .index a:last-child {border: none;}
 		.index a {border-bottom: 2px black solid;}
 		.index a:first-child {border-top: 2px black solid;}
 		.index a:last-child {border-bottom: 2px black solid;}
+		.index .row {bottom: 0px;}
+		.index p, .index a {padding: 16px 0;}
+		.moreprojects {border-bottom: 2px black solid; padding: 12px 0;}
 		
 		a:hover {text-decoration: none;}
 		a#cloudgov:hover p {color: dodgerblue;}
@@ -36,19 +39,21 @@
 		a#together:hover p {color: tomato;}
 
 		@media only screen and (max-width: 1500px) {
-			.index .row {bottom: 48px;}
+			.index .row {bottom: -10px;}
 			.index p, .index a {padding: 14px 0;}
 			.index a {border-bottom: 1.5px black solid;}
 			.index a:first-child {border-top: 1.5px black solid;}
 			.index a:last-child {border-bottom: 1.5px black solid;}
+			.moreprojects {border-bottom: 1.5px black solid; padding: 12px 0;}
 		}
 
 		@media only screen and (max-width: 1111px) {
-			.index, .index .row {bottom: 0;}
+			.index, .index .row {bottom: 48px;}
 			.index p, .index a {padding: 12px 0;}
 			.index a {border-bottom: 1px black solid;}
 			.index a:first-child {border-top: 1px black solid;}
-			.index a:last-child {border-bottom: none;}
+			.index a:last-child {border-bottom: 1px black solid;}
+			.moreprojects {border-bottom: 1px black solid; padding: 12px 0;}
 		}
 	</style>
 </head>
