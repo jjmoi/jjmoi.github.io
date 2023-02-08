@@ -19,16 +19,20 @@
 		html {background-color: white;}
 		body {background-color: black; height: auto;}
 		.nav p {padding-top: 120px;}
-		p, a, a:hover, a:visited {color: white; font-size: 18px;}
+		p {color: white; font-size: 10px;}
+		a, a:hover, a:visited {color: white; font-size: 10px;}
 		::-moz-selection {background: white; color: #fffffe;}
 		::selection {background: white; color: #fffffe;}
 		.parasection {margin-top: 100px;}
 		.parasection a {display: inline-block;}
-		.last {padding-bottom: 200px;}
+		.first {padding-bottom: 180px;}
+		#last {padding-top: 120px;}
 		@media only screen and (max-width: 1111px) {
-			.first {padding-top: 60px;}
+			.first {padding-top: 60px; padding-bottom: 0;}
 			.parasection {margin-top: 60px;}
-			.last {padding-bottom: 120px;}
+			#last {padding-top: 120px; padding-bottom: 120px;}
+			#sides {margin-top: 120px;}
+			.sides-text p, .sides-text a {font-size: 14px;}
 		}
 	</style>
 </head>
@@ -37,31 +41,154 @@
 	<div class="container nav">
 		<div class="row">
 			<div class="col-2-sm">
-				<p>JJ Moi</p>
+				<p style="font-size:16px;">JJ Moi</p>
 			</div>
 			<div class="col-7-sm"></div>
 			<div class="col-1-sm">
-				<p class="right">🦄</p>
+				<p class="right" style="font-size:16px;">🦄</p>
 			</div>
 		</div>
 	</div>
 	<div class="container parasection first">
 		<div class="row">
-			<div class="col-4">
-				<p>Based in the deep woods of the Pacific Northwest, bringing design sense to deep tech, working with breakthrough scientific companies transforming billions of lives at the intersection of 126th Ave and Broadway.</p>
-				<p>Design Partner at Prime Movers Lab, a venture capital fund with over $1b under management, reinventing climate tech, in-space transportation, quantum computing, robotics, nanomaterials, AI, and longevity. Before that, designing digital services for the people as Innovation Specialist at 18F and building the world's leading open data platforms as Founding Designer at Tachyus and OpenGov. In a past life, art historian, graffiti artist, capoeirista, and turtle. Spirit animal, mermaid. Allergic to cats.</p>
-				<p>My work has been to space, got recognized by the Smithsonian and the World Economic Forum, and got featured in NYT, CNN, BBC, WSJ, WaPo, PopSci, and a couple other media acronyms. Maybe one day, NPR. Selected clients & collabs included Heliogen, Boom Supersonic, Oceanix, US Innovative Tech Fund, Google, Toyota, Shell, Mini, Space Perspective, Vaxxinity, Focused Energy, Upward Farms, Idealab, Unlimited Tomorrow, Ought, and 64x Bio.</p>
-				<p>Continuing to mentor aspiring designers as they navigate through their education and careers. Teaching at Pratt Institute and advising students at University of Washington, Carnegie Mellon University, and Oregon State University. Also co-founded The Intersection, a design apprenticeship program fostering the next generation of designer entrepreneurs committed to making the world a more inclusive place.</p>
+			<div class="col-3">
+				<p style="font-size:32px; line-height:1.3;">Based in the deep woods of the Pacific Northwest, bringing design sense to deep tech, working with breakthrough scientific companies transforming billions of lives at the intersection of 126th Ave and Broadway.</p>
+				<p style="font-size:18px; padding-top:60px;">Design Partner at Prime Movers Lab, a venture capital fund with over $1b under management, reinventing climate tech, in-space transportation, quantum computing, robotics, nanomaterials, AI, and longevity. Before that, designing digital services for the people as Innovation Specialist at 18F and building the world's leading open data platforms as Founding Designer at Tachyus and OpenGov. In a past life, art historian, graffiti artist, capoeirista, and turtle. Spirit animal, mermaid. Allergic to cats.</p>
+				<p style="font-size:18px;">My work has been to space, got recognized by the Smithsonian and the World Economic Forum, and got featured in NYT, CNN, BBC, WSJ, WaPo, PopSci, and a couple other media acronyms. Maybe one day, NPR. Continuing to mentor aspiring designers as they navigate through their education and careers. Teaching at Pratt Institute and advising students at University of Washington, Carnegie Mellon University, and Oregon State University. Also co-founded The Intersection, a design apprenticeship program fostering the next generation of designer entrepreneurs committed to making the world a more inclusive place.</p>
+			</div>
+			<div class="col-3"></div>
+			<div class="col-1 sides-text desktop" id="sides">
+				<p>
+					Capability<br><br>
+					Design Strategy<br>
+					Art Direction<br>
+					Brand Identity<br>
+					User Research<br>
+					UX Design<br>
+					Inclusive Design<br>
+					Accessibility<br>
+					Design Systems<br>
+					Industrial Design<br>
+					Wayfinding Systems<br>
+					Exhibition Design<br>
+					Interactive Media<br>
+					Editorial Design<br>
+					Packaging Design<br>
+					Illustration<br>
+					Type Design<br>
+					Data Visualization<br>
+					Calligraphy<br>
+					Lettering<br>
+					Lift 50 lbs<br><br><br><br><br>
+					Tools<br><br>
+					Figma<br>
+					Adobe CC<br>
+					Word<br>
+					Excel<br>
+					Google Slides<br>
+					Webflow<br>
+					Miro<br>
+					Pencil & Paper<br>
+					Hammer<br>
+					Duct Tape<br>
+					DW40<br>
+					Coffee
+				</p>
+			</div>
+			<div class="col-1 sides-text desktop">
+				<p>
+					Recognition<br><br>
+					World Economic Forum<br>Technology Pioneer<br><br>
+					Oil & Gas Awards<br>Industry Service Award<br><br>
+					What is UX<br>Design in VC<br><br>
+					Mesa<br>Best Dad Ever<br><br>
+					iDesign Sustainable<br>Outstanding Prize<br><br>
+					Singha Graffiti Battle<br>Finalist<br><br>
+					Branding Asia<br>Featured Designer<br><br>
+					TFace: Typeface<br>Best Design<br><br>
+					O:IC Station<br>Interview<br><br>
+					Siam Today<br>Interview: Siam Showcase<br><br>
+					Design Picnic<br>Design Challenge<br><br>
+					Designlab<br>Mentor Spotlight<br><br>
+					Sketch-U<br>Work Hard Play Hard<br><br>
+					Rawmat Journal<br>Showcase
+				</p>
+			</div>
+			<div class="col-1 sides-text desktop">
+				<p>
+					Experience<br><br>
+					Prime Movers Lab<br>Design Partner<br><br>
+					Pratt Institute<br>Guest Lecturer<br><br>
+					Tachyus<br>Principal Designer<br><br>
+					18F<br>Innovation Specialist<br><br>
+					OpenGov<br>Creative Director<br><br>
+					TBWA\Hakuhodo<br>Designer<br><br>
+					Sterling Cooper & Partners<br>Art Director<br><br><br><br><br>
+
+					Education<br><br>
+					UC Berkeley, Postbac<br>
+					Cognitive Science<br><br>
+					Academy of Art, MFA (ABT)<br>
+					Interaction Design<br><br>
+					Rangsit University, BFA<br>
+					Industrial Design<br><br>
+					King Mongkut's University of Technology<br>
+					Architecture<br><br><br><br><br>
+
+					Volunteering<br>
+					AIGA SF & PDX<br>
+					UXPA International<br>
+					Techstars<br>
+					First Round Fast Track<br>
+					ADPList<br>
+					Tech for Campaigns					
+				</p>
+			</div>
+			<div class="col-1 sides-text desktop">
+				<p>
+					Selected Clients<br><br>
+					Heliogen<br>
+					Boom Supersonic<br>
+					Oceanix<br>
+					Space Perspective<br>
+					US Innovative Tech Fund<br>
+					Zelda Ventures<br>
+					Vaxxinity<br>
+					Momentus<br>
+					Upward Farms<br>
+					Halo Industries<br>
+					Idealab<br>
+					Google<br>
+					Mini<br>
+					Toyota<br>
+					Focused Energy<br>
+					ConocoPhillips<br>
+					Shell<br>
+					Procter & Gamble<br>
+					Idealab<br>
+					Ought<br>
+					Unlimited Tomorrow<br>
+					Paradromics<br>
+					Gordian Biotechnology<br>
+					Dyno Therapeutics<br>
+					64x Bio<br><br><br><br><br>
+
+					Contact<br><br>
+					<a href="mailto:heyheyjjmoi@gmail.com?subject=Hey%20Hey%20JJ!" target="_blank">Email</a><br>
+					<a href="https://www.linkedin.com/in/jjmoi" target="_blank">LinkedIn</a><br>
+					<a href="https://twitter.com/goodnightjj" target="_blank">Twitter</a><br>
+					<a href="https://www.instagram.com/goodnightjj" target="_blank">Instagram</a>
+				</p>
 			</div>
 		</div>
 	</div>
-	<div class="container parasection last">
+	<div class="container parasection rwd" id="last">
 		<div class="row">
 			<div class="col-4">
-				<a href="mailto:heyheyjjmoi@gmail.com?subject=Hey%20Hey%20JJ!" target="_blank">Email</a><br>
-				<a href="https://www.linkedin.com/in/jjmoi" target="_blank">LinkedIn</a><br>
-				<a href="https://twitter.com/goodnightjj" target="_blank">Twitter</a><br>
-				<a href="https://www.instagram.com/goodnightjj" target="_blank">Instagram</a>
+				<a style="font-size:16px;" href="mailto:heyheyjjmoi@gmail.com?subject=Hey%20Hey%20JJ!" target="_blank">Email</a><br>
+				<a style="font-size:16px;" href="https://www.linkedin.com/in/jjmoi" target="_blank">LinkedIn</a><br>
+				<a style="font-size:16px;" href="https://twitter.com/goodnightjj" target="_blank">Twitter</a><br>
+				<a style="font-size:16px;" href="https://www.instagram.com/goodnightjj" target="_blank">Instagram</a>
 			</div>
 		</div>
 	</div>
