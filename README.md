@@ -39,8 +39,11 @@ all icons and images are licensed under
 
 # github accounts
 heyheyjjmoi@gmail.com - jjmoi.com (this)
+
 goodnightjj@gmail.com - ttjj.us (retired)
+
 heyjjmoimoi@gmail.com - jjmoi.moi (later)
+
 heyjjmois@gmail.com repo: jjmois.com (retired)
 
 ---
