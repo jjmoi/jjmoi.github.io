@@ -32,7 +32,7 @@ http://goodnightjj.github.io
 ---
 
 # license
-all icons and images are licensed under
+all things licensed under
 [creative commons attribution - no derivatives 4.0](https://creativecommons.org/licenses/by-nd/4.0)
 
 ---
