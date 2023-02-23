@@ -2,7 +2,7 @@
 @charset "UTF-8";
 @font-face {font-display: block; font-family: "Standard"; src: url("https://jjmoi.com/fonts/standard-book.woff") format("woff"); font-style: normal; font-weight: normal;}
 html, body {height: 100%; width: 100%; margin: 0; padding: 0;}
-h1, h2, h3, p, a {font-family: Standard, sans-serif; font-weight: normal; margin: 0; padding: 0; color: black; font-size: 20px; line-height: 1.45;}
+h1, h2, h3, p, a {font-family: Standard, sans-serif; font-weight: normal; margin: 0; padding: 0; color: black; font-size: 18px; line-height: 1.45;}
 a {text-decoration: none; display: block;}
 a:hover, a span:hover {color: black; cursor: url(http://www.jjmoi.com/files/mick-point3.png), default; text-decoration: underline;}
 a:visited {color: black;}
