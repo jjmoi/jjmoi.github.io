@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<!-- ver 9.300164 -->
+	<!-- ver 8.100164 -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-122843739-1"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
@@ -10,39 +10,47 @@
 		gtag('config', 'UA-122843739-1');
 	</script>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="description" content="JJ Moi">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<link rel="stylesheet" href="/css/grid.css">
-	<link rel="shortcut icon" type="image/x-icon" href="/shit.png">
-	<title>JJ</title>
-	<style>		
-		/* stuff */
-		html {background-color: lime;}
-		body {background-color: black; height: 100%;}
-		.nav p {padding-top: 90px;}
-		p, a, a:hover, a:visited {color: white; font-size: 9px;}
-		::-moz-selection {background: white; color: #fffffe;}
-		::selection {background: white; color: #fffffe;}
-		.parasection {margin-top: 60px;}
-		.parasection a {display: inline-block;}
-		.nav p, #intro p, #last a, #intro #areas, #space, #edu {font-size: 24px; line-height: 1.325;}
-		/* #edu {padding-bottom: 180px;} */
-		.first {padding-top: 30px; margin-bottom: 0;}
-		#last {padding-top: 120px;}
+	<link rel="stylesheet" href="https://jjmoi.com/css/grid.css">
+	<link rel="shortcut icon" type="image/x-icon" href="shit.png">
+	<title>JJ Moi</title>
+	<style>
+		/* BACKGROUND */
+		html {background-color: #001;}
+		body {background-color: white;}
+		::-moz-selection {background: #001;}
+		::selection {background: #001;}
+		a#cloudgov:hover p {color: dodgerblue;}
+		a#tachyus:hover p {color: coral;}
+		a#opengov:hover p {color: limegreen;}
+		a#elicit:hover p {color: hotpink;}
+		a#mi6:hover p {color: mediumslateblue;}
+		a#together:hover p {color: tomato;}
 
-		/* rwd */
-		@media only screen and (max-width: 1497px) {
-			body {height: auto;}
-			.nav p {padding-top: 60px;}
-			.first #edu {padding-bottom: 120px;}
-			#last {padding-top: 120px; padding-bottom: 120px;}
+		a:hover {text-decoration: none;}
+		.index {position: absolute; bottom: 0; width: 100%; margin: 0 auto;}
+		.index .row {position: relative;}
+		.index p, .index a {padding: 16px 0;}
+		.index p, .index a, .index p:last-child, .index a:last-child {border: none;}
+		.index a {border-bottom: 2px black solid;}
+		.index a:first-child {border-top: 2px black solid;}
+		.index a:last-child {border-bottom: 2px black solid;}		
+
+		@media only screen and (max-width: 1500px) {
+			.index .row {bottom: 48px;}
+			.index p, .index a {padding: 14px 0;}
+			.index a {border-bottom: 1.5px black solid;}
+			.index a:first-child {border-top: 1.5px black solid;}
+			.index a:last-child {border-bottom: 1.5px black solid;}
 		}
-		@media only screen and (max-width: 1101px) {
-			.col-4 {width: 80%;}
-		}
-		@media only screen and (max-width: 789px) {
-			.col-4 {width: 100%;}
-			.first {padding-top: 60px;}
-p+p {padding-top: 40px;}
+
+		@media only screen and (max-width: 1111px) {
+			.index, .index .row {bottom: 0;}
+			.index p, .index a {padding: 12px 0;}
+			.index a {border-bottom: 1px black solid;}
+			.index a:first-child {border-top: 1px black solid;}
+			.index a:last-child {border-bottom: none;}
 		}
 	</style>
 </head>
@@ -50,145 +58,152 @@ p+p {padding-top: 40px;}
 	<!-- nav -->
 	<div class="container nav">
 		<div class="row">
-			<div class="col-10">
-				<p>JJ</p>
+			<div class="col-2-sm">
+				<a href="#">JJ Moi</a>
+			</div>
+			<div class="col-7-sm"></div>
+			<div class="col-1-sm">
+				<a href="/info" class="right">Info</a>
 			</div>
 		</div>
 	</div>
-	<div class="container parasection first">
-		<div class="row">
-			<div class="col-4" id="intro">
-				<p id="areas">Designer, educator, VC, and advisor to deep tech startups reinventing climate tech, smart cities, aerospace, AI, robotics, nanomaterials, and life science.</p>
-				<p id="space">My work has been to space, recognized by the Smithsonian and the World Economic Forum, and appeared in NYT, CNN, BBC, WSJ, WaPo, PopSci, and a few other acronyms. Founding designer at Spring Discovery, Vaxxinity, Focused Energy, Upward Farms, Gordian Bio, Tachyus, and OpenGov among other exciting startups solving complex problems.</p>
-				<p id="edu">Studied interaction design, industrial design, cognitive science, and architecture. Lecturer at Pratt, advisor and mentor at UW, CMU, Brandeis, and OSU. In a past life, art historian, graffiti artist, capoeirista, and turtle. Spirit animal, mermaid. Originally from San Francisco, grew up in Hong Kong and Thailand, speaking three languages. Currently based in the deepest woods of the Pacific Northwest. Allergic to cats.</p>
-				<!--
-				<p>Also co-founded The Intersection, a design apprenticeship program fostering the next generation of creative entrepreneurs committed to making the world a more inclusive place.</p>
-				-->
+	<!-- desktop -->
+	<div class="container index desktop">
+		<a href="/18f" class="row" id="cloudgov">
+			<div class="col-3-sm">
+				<p>Creating design system for the people</p>
 			</div>
-			<div class="col-2"></div>
-			
-			<div class="col-1 sides-text desktop" id="sides">
-				<p>
-					Experience<br><br>
-					Spring Discovery<br>Design Lead<br><br>
-					Prime Movers Lab<br>Design Partner<br><br>
-					Pratt Institute<br>Guest Lecturer<br><br>
-					Tachyus<br>Principal Designer<br><br>
-					18F<br>Innovation Specialist<br><br>
-					OpenGov<br>Creative Director<br><br><br><br><br>
-					<!-- Sterling Cooper & Partners<br>Art Director -->
-
-					Education<br><br>
-					UC Berkeley, Postbac<br>
-					Cognitive Science<br><br>
-					Academy of Art, MFA (ABT)<br>
-					Interaction Design<br><br>
-					Rangsit University, BFA<br>
-					Industrial Design<br><br>
-					King Mongkut's University of Technology<br>
-					Architecture
-				</p>
+			<div class="col-1-sm">
+				<p>18F</p>
 			</div>
-			<div class="col-1 sides-text desktop">
-				<p>
-					Capabilities<br><br>
-					Design Strategy<br>
-					Art Direction<br>
-					Brand Identity<br>
-					User Research<br>
-					UX Design<br>
-					Inclusive Design<br>
-					Accessibility<br>
-					Design Systems<br>
-					Wayfinding Systems<br>
-					Exhibition Design<br>
-					Interactive Media<br>
-					Editorial Design<br>
-					Packaging Design<br>
-					Illustration<br>
-					Type Design<br>
-					Data Visualization<br>
-					Calligraphy<br>
-					Lettering<br>
-					Lift 50 lbs<br><br><br><br><br>
-
-					Tools<br><br>
-					Figma<br>
-					Adobe CC<br>
-					Docs & Slides<br>
-					Word & Excel<br>
-					Pencil & Paper<br>
-					Hammer<br>
-					Duct Tape<br>
-					HTML/CSS<br>
-					JavaScript<br>
-					Coffee
-				</p>
+			<div class="col-5-sm">
+				<p>Product Design, Art Direction, Design System</p>
 			</div>
-			<div class="col-1 sides-text desktop">
-				<p>
-					Recognition<br><br>
-					World Economic Forum<br>Technology Pioneer<br><br>
-					Oil & Gas Awards<br>Industry Service Award<br><br>
-					What is UX<br>Design in VC<br><br>
-					iDesign Sustainable<br>Outstanding Prize<br><br>
-					Branding Asia<br>Featured Designer<br><br>
-					Singha Graffiti Battle<br>Finalist<br><br>
-					TFace: Typeface<br>Best Design<br><br>
-					O:IC Station<br>Interview<br><br>
-					Siam Today<br>Interview: Showcase<br><br>
-					Sketch-U<br>Work Hard Play Hard<br><br>
-					Rawmat Journal<br>Showcase<br><br>
-					Mesa<br>Best Dad Ever
-				</p>
+			<div class="col-1-sm right">
+				<p>Case →</p>
 			</div>
-			<div class="col-1 sides-text desktop">
-				<p>
-					Selected Clients<br><br>
-					Heliogen<br>
-					Boom Supersonic<br>
-					Oceanix<br>
-					Space Perspective<br>
-					US Innovative Tech Fund<br>
-					Zelda Ventures<br>
-					Vaxxinity<br>
-					Momentus<br>
-					Upward Farms<br>
-					Halo Industries<br>
-					Idealab<br>
-					Google<br>
-					Mini<br>
-					Toyota<br>
-					Focused Energy<br>
-					ConocoPhillips<br>
-					Shell<br>
-					Procter & Gamble<br>
-					Idealab<br>
-					Ought<br>
-					Unlimited Tomorrow<br>
-					Paradromics<br>
-					Gordian Biotechnology<br>
-					Dyno Therapeutics<br>
-					64x Bio<br><br><br><br><br>
-
-					Contact<br><br>
-					<a href="mailto:heyheyjjmoi@gmail.com?subject=Hey%20Hey%20JJ!" target="_blank">Email</a><br>
-					<a href="https://www.linkedin.com/in/jjmoi" target="_blank">LinkedIn</a><br>
-					<a href="https://twitter.com/goodnightjj" target="_blank">Twitter</a><br>
-					<a href="https://www.instagram.com/goodnightjj" target="_blank">Instagram</a>
-				</p>
+		</a>
+		<a href="/tachyus" class="row" id="tachyus">
+			<div class="col-3-sm">
+				<p>Optimizing oil & gas production</p>
 			</div>
-		</div>
+			<div class="col-1-sm">
+				<p>Tachyus</p>
+			</div>
+			<div class="col-5-sm">
+				<p>Brand Identity, Art Direction, Product Design, DataViz, GIS</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>Case →</p>
+			</div>
+		</a>
+		<a href="/opengov" class="row" id="opengov">
+			<div class="col-3-sm">
+				<p>Rebuilding public trust in open data</p>
+			</div>
+			<div class="col-1-sm">
+				<p>OpenGov</p>
+			</div>
+			<div class="col-5-sm">
+				<p>Brand Identity, Art Direction, Product Design, DataViz</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>Case →</p>
+			</div>
+		</a>
+		<a href="https://elicit.org" target="_blank" class="row" id="elicit">
+			<div class="col-3-sm">
+				<p>Automating research workflows</p>
+			</div>
+			<div class="col-1-sm">
+				<p>Elicit</p>
+			</div>
+			<div class="col-5-sm">
+				<p>Art Direction, Product Design, DataViz</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>Web →</p>
+			</div>
+		</a>
+		<a href="https://docs.google.com/presentation/d/1kS1Ajrl0b6OJU_DDU23Zz2bc7txosOfdrutVpqwQe8E" target="_blank" class="row" id="mi6">
+			<div class="col-3-sm">
+				<p>Helping students realize their dreams</p>
+			</div>
+			<div class="col-1-sm">
+				<p>10016</p>
+			</div>
+			<div class="col-5-sm">
+				<p>Teaching, Workshop</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>Case →</p>
+			</div>
+		</a>
+		<a href="https://www.kickstarter.com/projects/753619488/all-together-now-women-in-music" target="_blank" class="row" id="together">
+			<div class="col-3-sm">
+				<p>Telling stories of women making music</p>
+			</div>
+			<div class="col-1-sm">
+				<p>Together</p>
+			</div>
+			<div class="col-5-sm">
+				<p>Art Direction, Publication Design</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>Web →</p>
+			</div>
+		</a>
 	</div>
-	<div class="container parasection rwd" id="last">
-		<div class="row">
-			<div class="col-3">
-				<a href="mailto:heyheyjjmoi@gmail.com?subject=Hey%20Hey%20JJ!" target="_blank">Email</a><br>
-				<a href="https://www.linkedin.com/in/jjmoi" target="_blank">LinkedIn</a><br>
-				<a href="https://twitter.com/goodnightjj" target="_blank">Twitter</a><br>
-				<a href="https://www.instagram.com/goodnightjj" target="_blank">Instagram</a>
+	<!-- rwd -->
+	<div class="container index rwd">
+		<a href="/18f" class="row" id="cloudgov">
+			<div class="col-9-sm">
+				<p>Creating design system for the people</p>
 			</div>
-		</div>
+			<div class="col-1-sm right">
+				<p>→</p>
+			</div>
+		</a>
+		<a href="/tachyus" class="row" id="tachyus">
+			<div class="col-9-sm">
+				<p>Optimizing oil & gas production</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>→</p>
+			</div>
+		</a>
+		<a href="/opengov" class="row" id="opengov">
+			<div class="col-9-sm">
+				<p>Rebuilding public trust in open data</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>→</p>
+			</div>
+		</a>
+		<a href="https://elicit.org" target="_blank" class="row" id="elicit">
+			<div class="col-9-sm">
+				<p>Automating research workflows</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>→</p>
+			</div>
+		</a>
+		<a href="https://docs.google.com/presentation/d/1kS1Ajrl0b6OJU_DDU23Zz2bc7txosOfdrutVpqwQe8E" target="_blank" class="row" id="mi6">
+			<div class="col-9-sm">
+				<p>Helping students realize their dreams</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>→</p>
+			</div>
+		</a>
+		<a href="https://www.kickstarter.com/projects/753619488/all-together-now-women-in-music" target="_blank" class="row" id="together">
+			<div class="col-9-sm">
+				<p>Telling stories of women making music</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>→</p>
+			</div>
+		</a>
 	</div>
 </body>
 </html>
