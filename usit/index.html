@@ -26,12 +26,13 @@
 			text-decoration: none;
 			line-height: 1;
 		}
-		p {
+		.usit {
 			position: fixed;
 			font-weight: 700;
 		}
 		a {
 			font-weight: 300;
+			line-height: 1.3;
 		}
 
 		div {
@@ -41,76 +42,55 @@
 			-webkit-transform: translate(-50%, -50%);
 			transform: translate(-50%, -50%);
 		}
-		p#text {
+		div p {
+			font-weight: 300;
 			line-height: 1.3;
-			max-width: 900px;
 		}
 		@media only screen and (max-width: 2000px) {
 			p {font-size: 100px;}
+			div p, a {font-size: 18px;}
 			#u {top: 50px; left: 50px;}
 			#s {top: 50px; right: 50px;}
 			#i {bottom: 50px; left: 50px;}
 			#t {bottom: 50px; right: 50px;}
-			a {font-size: 18px;}
-		}
-		@media only screen and (max-width: 1750px) {
-			p {font-size: 87.5px;}
-			#u {top: 43.75px; left: 43.75px;}
-			#s {top: 43.75px; right: 43.75px;}
-			#i {bottom: 43.75px; left: 43.75px;}
-			#t {bottom: 43.75px; right: 43.75px;}
-			a {font-size: 17px;}
+			div {width: 700px;}
 		}
 		@media only screen and (max-width: 1500px) {
 			p {font-size: 75px;}
+			div p, a {font-size: 16px;}
 			#u {top: 37.5px; left: 37.5px;}
 			#s {top: 37.5px; right: 37.5px;}
 			#i {bottom: 37.5px; left: 37.5px;}
 			#t {bottom: 37.5px; right: 37.5px;}
-			a {font-size: 16px;}
-		}
-		@media only screen and (max-width: 1250px) {
-			p {font-size: 62.5px;}
-			#u {top: 31.25px; left: 31.25px;}
-			#s {top: 31.25px; right: 31.25px;}
-			#i {bottom: 31.25px; left: 31.25px;}
-			#t {bottom: 31.25px; right: 31.25px;}
-			a {font-size: 15px;}
+			div {width: 600px;}
 		}
 		@media only screen and (max-width: 1000px) {
 			p {font-size: 50px;}
+			div p, a {font-size: 14px;}
 			#u {top: 25px; left: 25px;}
 			#s {top: 25px; right: 25px;}
 			#i {bottom: 25px; left: 25px;}
 			#t {bottom: 25px; right: 25px;}
-			a {font-size: 14px;}
-		}
-		@media only screen and (max-width: 750px) {
-			p {font-size: 37.5px;}
-			#u {top: 18.75px; left: 18.75px;}
-			#s {top: 18.75px; right: 18.75px;}
-			#i {bottom: 18.75px; left: 18.75px;}
-			#t {bottom: 18.75px; right: 18.75px;}
-			a {font-size: 13px;}
+			div {width: 500px;}
 		}
 		@media only screen and (max-width: 500px) {
 			p {font-size: 25px;}
+			div p, a {font-size: 12px;}
 			#u {top: 12.5px; left: 12.5px;}
 			#s {top: 12.5px; right: 12.5px;}
 			#i {bottom: 12.5px; left: 12.5px;}
 			#t {bottom: 12.5px; right: 12.5px;}
-			a {font-size: 12px;}
+			div {width: 400px;}
 		}
 	</style>
 </head>
 <body>
-	<p id="u">U</p>
-	<p id="s">S</p>
-	<p id="i">I</p>
-	<p id="t">T</p>
+	<p class="usit" id="u">U</p>
+	<p class="usit" id="s">S</p>
+	<p class="usit" id="i">I</p>
+	<p class="usit" id="t">T</p>
 	<div>
-		<p id="text">United States Innovative Technology invests in critical technology companies with dual-use applications to the commercial sector and the defense industry.</p>
-		<a href="mailto:info@usitfund.com" target="_blank">info@usitfund.com</a>
+		<p>United States Innovative Technology invests in critical technology companies with dual-use applications to the commercial sector and the defense industry. <br><br><br><a href="mailto:info@usitfund.com" target="_blank">info@usitfund.com</a></p>
 	</div>
 </body>
 </html>
