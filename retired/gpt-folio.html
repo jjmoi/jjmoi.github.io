@@ -55,7 +55,38 @@ h1, h2, h3 {
 
 .hero-content {
   max-width: 800px;
-  margin: 100px;
+  margin: 0 auto;
+}
+
+.hero-content h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+  #hero {
+    padding: 120px 0;
+  }
+  
+  .hero-content {
+    max-width: 90%;
+  }
+  
+  .hero-content h1 {
+    font-size: 36px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  section {
+    padding: 40px;
+  }
+  
+  .hero-content h1 {
+    font-size: 24px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -90,12 +121,12 @@ h1, h2, h3 {
     <div class="project">
       <h3>Project Title</h3>
       <p>Description of the project goes here.</p>
-      <img src="https://jjmoi.com/18f/18f-15.webp" alt="Project Image">
+      <img src="https://jjmoi.com/opengov/opengov-15.webp" alt="Project Image">
     </div>
     <div class="project">
       <h3>Project Title</h3>
       <p>Description of the project goes here.</p>
-      <img src="https://jjmoi.com/intersection/intersection-15.webp" alt="Project Image">
+      <img src="https://jjmoi.com/opengov/opengov-15.webp" alt="Project Image">
     </div>
     <div class="project">
       <h3>Project Title</h3>
