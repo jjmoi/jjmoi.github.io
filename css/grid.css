@@ -7,6 +7,17 @@ a {text-decoration: none; display: block;}
 a:hover, a span:hover {color: black; cursor: url(http://www.jjmoi.com/files/mick-point3.png), default; text-decoration: underline;}
 a:visited {color: black;}
 
+/* NAV */
+a:hover {text-decoration: none;}
+a#cloudgov:hover p {color: dodgerblue;}
+a#tachyus:hover p {color: coral;}
+a#intersection:hover p {color: cornflowerblue;}
+a#opengov:hover p {color: limegreen;}
+a#raytheon:hover p {color: crimson;}
+a#spring:hover p {color: blueviolet;}
+a#elicit:hover p {color: hotpink;}
+a#together:hover p {color: tomato;}
+
 /* GRID */
 .container {width: 90%; margin-left: auto; margin-right: auto;}
 .row {position: relative; width: 100%;}
