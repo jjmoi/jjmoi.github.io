@@ -18,8 +18,8 @@
 	<style>
 		/* NEW */
 		.container {width: 98%;}
-		#title {font-size: 77px; padding-top: 0; margin-top: -10px;}
-		.tiny-caption, .tiny-caption a {font-size: 12px; line-height: 1.375; padding-right: 15px;}
+		#title {font-size: 77px;}
+		.tiny-caption, .tiny-caption p, .tiny-caption a {font-size: 12px; line-height: 1.375; padding-right: 15px;}
 		.index p {font-size: 12px;}
 		@media only screen and (max-width: 1111px) {
 			.container .tags {width: 50%;}
@@ -30,6 +30,7 @@
 		body {height: auto; background-color: white;}
 		::-moz-selection {background: dodgerblue; color: #1e90fe;}
 		::selection {background: dodgerblue; color: #1e90fe;}
+		.container {width: 98%;}
 
 		.index .row {position: relative; width: 100%;}
 		.desktop {padding-bottom: 60px; bottom: 0;}
@@ -62,7 +63,7 @@
 </head>
 <body>
 	<!-- nav -->
-	<div class="container nav">
+	<div class="container nav" style="position: relative; z-index: 99;">
 		<div class="row">
 			<div class="col-5-sm">
 				<a href="/folio">JJ Moi</a>
@@ -72,71 +73,56 @@
 			</div>
 		</div>
 	</div>
-
-	<div class="container parasection">
-		<div class="row">
-			<div class="col-10">
-				<p id="title">18F</p>
-			</div>
-		</div>
+	<div class="container parasection" style="position: relative; width: 100%; margin-top: 0; top: 0;">
 		<div class="row">
 			<div class="col-10"><img src="18f-15.webp"></div>
 		</div>
 	</div>
-	<div class="container parasection index">
-		<div class="row">
+	<div class="container parasection">
+		<div class="row tiny-caption">
 			<div class="col-5">
-				<p id="title">Creating design systems for the people</p>
+				<p id="title" style="padding-top: 0; margin-top: -10px;">Creating design systems for the people</p>
 			</div>
 		</div>
-		<a class="row tiny-caption">
-			<div class="col-1-sm">
-				<p>Client</p>
+		<div class="row tiny-caption">
+			<div class="col-1 tags">
+				<p>
+					18F Cloud.gov<br>
+					2018–2019<br><br>
+
+					Sector<br>
+					Government<br>
+					Editorial<br>
+					Fashion<br>
+					Lifestyle</p>
 			</div>
-			<div class="col-4-sm">
-				<p>18F</p>
+			<div class="col-1 tags">
+				<p>
+					Role<br>
+					Art Direction<br>
+					Design strategy<br>
+					Concept development<br>
+					User Research<br>
+					Interaction Design<br>
+					Data Visualization<br>
+					Inclusive Design<br>
+					Accessibility<br>
+					Design Systems</p>
 			</div>
-		</a>
-		<a class="row tiny-caption">
-			<div class="col-1-sm">
-				<p>Year</p>
-			</div>
-			<div class="col-4-sm">
-				<p>2018–2019</p>
-			</div>
-		</a>
-		<a class="row tiny-caption">
-			<div class="col-1-sm">
-				<p>Sector</p>
-			</div>
-			<div class="col-4-sm">
-				<p>Government, Publishing, CMS</p>
-			</div>
-		</a>
-		<a class="row tiny-caption">
-			<div class="col-1-sm">
-				<p>Role</p>
-			</div>
-			<div class="col-4-sm">
-				<p>Design strategy, Brand identity, Art direction, User research, Interaction design, Inclusive design, Accessibilty</p>
-			</div>
-		</a>
-	</div>
-	<div class="container parasection">
-		<div class="row">
-			<div class="col-2">
-				<p class="tiny-caption">As part of a widespread federal effort to improve public’s experience of government digital services, 18F needed a secure and compliant platform that helps federal agencies deliver services the public deserves in a faster and user-centered way.<br><br>Expanding the design systems capabilities to include an interactive web builder allowed users to easily create compelling layouts that can be previewed within minutes, which was unheard of in the government world, until now.</p>
-			</div>
-			<div class="col-2">
-				<p class="tiny-caption">After a year of the beta run, we had hundreds of federal agencies using cloud.gov to create products and services with rich content and intricate data visualizations. Over 100 million people were exposed to those services created every day by notable partner agencies, including Treasury, Education, the White House, Defense, NASA, and Homeland Security.<br><br>We continued to see more agencies begin relying on cloud.gov to build accessible products in record time.</p>
-			</div>
-			<div class="col-2">
-				<p class="tiny-caption">Further Reading<br><br>
+			<div class="col-4 tags">
+				<p>
+					Further Reading
 					<a href="https://www.fastcompany.com/3046756/obama-and-his-geeks" target="_blank">Inside Obama’s stealth startup →</a><br>
 					<a href="https://www.theatlantic.com/technology/archive/2015/07/the-secret-startup-saved-healthcare-gov-the-worst-website-in-america/397784" target="_blank">The secret startup that saved America →</a><br>
 					<a href="https://18f.gsa.gov/2017/06/06/fractal-and-federalist-join-the-us-web-design-standards" target="_blank">Federalist join the US Web Design Standards →</a><br>
 					<a href="https://18f.gsa.gov/2019/04/08/uswds2-launch-post" target="_blank">Reinvent the experience, not the wheel →</a><br>
 					<a href="https://18f.gsa.gov/2016/03/22/what-was-your-path-to-18f" target="_blank">Path to 18F →</a></p>
+			</div>
+			<div class="col-2">
+				<p>As part of a widespread federal efforts to improve public’s experience of government digital services, 18F needed a secure and compliant platform that helps federal agencies deliver services the public deserves in a faster and user-centered way.<br><br>Expanding the design systems capabilities to include an interactive web builder allowed users to easily create compelling layouts that can be previewed within minutes, which was unheard of in the government world, until now.</p>
+			</div>
+			<div class="col-2">
+				<p>After a year of the beta run, we had hundreds of federal agencies using cloud.gov to build products and services with rich content and intricate data visualizations in record time. Over 100 million people were exposed to those services created every day by notable partner agencies, including Treasury, Education, Justice, Defense, NASA, and Homeland Security.</p>
 			</div>
 		</div>
 	</div>
