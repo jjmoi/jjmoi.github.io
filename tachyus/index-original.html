@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- ver 0.190118 -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-122843739-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'UA-122843739-1');
+	</script>
+	<meta name="robots" content="noindex"> <!-- No bots indexing -->
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="shortcut icon" type="image/x-icon" href="/img/tachyus.png">
+	<link rel="stylesheet" href="/css/grid.css">
+	<title>Tachyus — JJ Moi</title>
+	<style>
+		/* BACKGROUND */
+		html {background-color: coral;}
+		body {height: auto; background-color: white;}
+		::-moz-selection {background: coral; color: #ff7f49;}
+		::selection {background: coral; color: #ff7f49;}
+
+		.index .row {position: relative; width: 100%;}
+		.desktop {padding-bottom: 60px; bottom: 0;}
+		.index p, .index a, .index p:last-child, .index a:last-child {border: none;}
+		.index a {border-bottom: 1.5px black solid;}
+		.index a:first-child {border-top: 1.5px black solid;}
+		.index a:last-child {border-bottom: 1.5px black solid;}
+		.index .row {bottom: 0px;}
+		.index p, .index a {padding: 16px 0;}
+		.moreprojects {border-bottom: 1.5px black solid; padding: 12px 0;}
+
+		@media only screen and (max-width: 1500px) {
+			.index .row {bottom: -10px;}
+			.index p, .index a {padding: 14px 0;}
+			.index a {border-bottom: 1.25px black solid;}
+			.index a:first-child {border-top: 1.25px black solid;}
+			.index a:last-child {border-bottom: 1.25px black solid;}
+			.moreprojects {border-bottom: 1.25px black solid; padding: 12px 0;}
+		}
+
+		@media only screen and (max-width: 1111px) {
+			.index, .index .row {bottom: 48px;}
+			.index p, .index a {padding: 12px 0;}
+			.index a {border-bottom: 1px black solid;}
+			.index a:first-child {border-top: 1px black solid;}
+			.index a:last-child {border-bottom: 1px black solid;}
+			.moreprojects {border-bottom: 1px black solid; padding: 12px 0;}
+		}
+	</style>
+</head>
+<body>
+	<!-- nav -->
+	<div class="container nav">
+		<div class="row">
+			<div class="col-2-sm">
+				<a href="/folio">JJ Moi</a>
+			</div>
+			<div class="col-7-sm"></div>
+			<div class="col-1-sm">
+				<a href="/info" class="right">Info</a>
+			</div>
+		</div>
+	</div>
+	<div class="container parasection">
+		<div class="row">
+			<div class="col-10">
+				<p id="subtitle">Tachyus</p>
+				<p id="title">Optimizing oil & gas production</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-10"><img src="tachyus-24.webp"></div>
+		</div>
+	</div>
+	<div class="container parasection">
+		<div class="row">
+			<div class="col-5"></div>
+			<div class="col-5 quote">
+				<p>The oil and gas industry is one of the most critical industries on the planet. It’s the reason most of us can go places, it’s the reason most of us can get our food. Tachyus creates technology to optimize oil and gas production with machine learning and physics.</p>
+			</div>
+		</div>
+	</div>
+	<div class="container parasection">
+		<div class="row">
+			<div class="col-5"></div>
+			<div class="col-5"><img src="tachyus-14.webp"></div>
+		</div>
+	</div>
+	<div class="container parasection">
+		<div class="row">
+			<div class="col-5"></div>
+			<div class="col-4">
+				<p>The plot of Back to the Future Part II is helpful as an analogy to understand how Tachyus' products work. The movie was about this high school kid and his friend, who's a disgraced nuclear physicist who built a time machine, flew to the (to be) future 2015, messed things up, and tried to correct their mistakes.</p>
+				<p>Minor spoiler alert in case you haven't watched this 30-year-old film: their nemesis from present-day was also there in the future and stole the time machine and took a sports almanac back to his former self back in 1955. With the sports almanac, the nemesis was able to bet profitably for the next 50 years and became a gambling tycoon.</p>
+				<p>The common thesis of the movie and Tachyus is that if we can predict the future, we can make profitable decisions today. We might not have the sports almanac, but there are plenty other ways to predict the future using data. As the first and only designer for 6 years, I've designed processes and executed end-to-end projects too many times to count, working alongside a small but nimble team of brilliant software engineers and product managers to connect the centuries-old industry with future technology to empower oil & gas producers to make data-driven decisions.</p>
+			</div>
+			<div class="col-1"></div>
+		</div>
+	</div>
+	<div class="container parasection">
+		<div class="row">
+			<div class="col-5"><img src="tachyus-02.webp"></div>
+			<div class="col-5"><img src="tachyus-06.webp"></div>
+		</div>
+	</div>
+	<div class="container parasection">
+		<div class="row">
+			<div class="col-5"></div>
+			<div class="col-4">
+				<p>The predictive engine has two big components. One is a model to understand what’s going on underground. Some people picture an oil reservoir as a sea of oil, but it’s more like a sponge. So we built a model for that physical system that’s part machine learning and part physics, and that’s our secret sauce to help us predict the future of an oil reservoir. The second piece is an optimization engine that measures long-term value vs short-term production. By combining these two paradigms, our predictive engine ran the data model millions of times in parallel in just hours to help clients take the most optimal path for decades out.</p>
+				<p>The prediction model was given the moniker of Hypercube, named for its four data dimensions: time, schema, version, and geolocation. At each single point in time in the history of an oil reservoir, there are thousands of data versions, and all of these outcomes stack up to one metric of risk/reward and cost. Multiplying that by the well’s decades of life span and you get a colossal amount of data to analyze.</p>
+				<p>It not only suggested just one best future but multiple best possible futures, because a stakeholder might define what’s best for them differently. Think Doctor Strange, who saw all 14 million scenarios, but there were the best picks for every single universe in the multiverse. With the most optimal plans in hand, you'd be more confident knowing the best scenario to implement now and over the next 50 years.</p>
+			</div>
+			<div class="col-1"></div>
+		</div>
+	</div>
+	<div class="container parasection">
+		<div class="row">
+			<div class="col-5"><img src="tachyus-04.webp"></div>
+			<div class="col-5"><img src="tachyus-05.webp"></div>
+		</div>
+	</div>
+	<div class="container parasection">
+		<div class="row">
+			<div class="col-5"></div>
+			<div class="col-4">
+				<p>User research in enterprises has always been limited, especially in the oil & gas industry, where there are only a handful of major companies globally. For users to be able to easily make sense of the massive data, we decided to make our product flow in a similar fashion as the existing tools they normally use to cut down on learning curve, so they would get a good head start at navigating the product and focusing on the actual analysis work. We would progressively improve the user experience to be consumer-grade down the road.</p>
+			</div>
+			<div class="col-1"></div>
+		</div>
+	</div>
+	<div class="container parasection">
+		<div class="row">
+			<div class="col-5"></div>
+			<div class="col-5"><img src="tachyus-26.webp"></div>
+		</div>
+	</div>
+	<div class="container parasection">
+		<div class="row">
+			<div class="col-5"></div>
+			<div class="col-4">
+				<p>To empathize with users when we couldn’t be immersed in their life and work context, I initiated several programs of UX training and workshop to equip our local sales engineers with the ability to conduct user research when they meet with prospective customers.</p>
+				<p>We also looked into secondary sources to run research with and connected with petroleum engineering programs at several universities. We conducted empathy workshops with the students using role-playing to allow us in the challenges faced by petroleum engineers in which they were provided a set of personas to get into character to embody the professional’s experiences. Based on the persona and scenario, the students would re-enact the scene where the essence of the structural problems was manifested. Through the workshops, we gained a close to first hand immersive learning of the various types of users, including field operators, drilling engineers, data scientists, reservoir engineers, and project managers.</p>
+			</div>
+			<div class="col-1"></div>
+		</div>
+	</div>
+	<div class="container parasection">
+		<div class="row">
+			<div class="col-5"><img src="tachyus-18.webp"></div>
+			<div class="col-5"><img src="tachyus-15.webp"></div>
+		</div>
+		<div class="row">
+			<div class="col-5"><img src="tachyus-17.webp"></div>
+			<div class="col-5"><img src="tachyus-07.webp"></div>
+		</div>
+		<div class="row">
+			<div class="col-10"><img src="tachyus-20.webp"></div>
+		</div>
+		<div class="row">
+			<div class="col-10"><img src="tachyus-13.webp"></div>
+		</div>
+	</div>
+	<div class="container parasection">
+		<div class="row">
+			<div class="col-5"></div>
+			<div class="col-4">
+				<p>Since we worked with all of the supermajors who fill up your tanks from day one, localization for people in non-English speaking countries was essential. We’ve more recently worked with NOCs (national oil companies) outside of North America. Most of the world’s production is nationalized, so we’ve worked with companies in Latin America, Asia, and Europe. It was challenging to say the least, to design the user interface to provide bidirectional text support (BiDi) so that the software can combine script from right to left (RTL) and left to right (LTR) writing systems on top of supporting multiple languages.</p>
+				<p>For the following iterations, I created a design system with North Star design principles and UI components to speed up the development. Based on Atomic Design, I named it <a href= “https://en.wikipedia.org/wiki/Standard_Model”>Standard Model</a>, borrowed from the particle physics theory, and subsequently renamed the system stages to Atoms, Molecules, Compounds, Substances, and Matters to make the convention easier to grasp.</p>
+				<p>I also created a system to automate different shades and tints that can expand a given color to be a set of 10 colors total for data visualizations. I probably had too much fun naming the colors inspired by fictional elements such as Mithril Gray, Rearden Blue, Adamantium Lime, Element-99 orange, Orichalcum Salmon, and Kryptonite Green. This helped developers make informed design decisions and freed me to further polish the visual design and jump in to help with frontend code where needed.</p>
+			</div>
+			<div class="col-1"></div>
+		</div>
+	</div>
+	<div class="container parasection">
+		<div class="row">
+			<div class="col-10"><img src="tachyus-09.webp"></div>
+		</div>
+		<div class="row">
+			<div class="col-5"><img src="tachyus-08.webp"></div>
+			<div class="col-5"><img src="tachyus-21.webp"></div>
+		</div>
+		<div class="row">
+			<div class="col-5"><img src="tachyus-10.webp"></div>
+			<div class="col-5"><img src="tachyus-16.webp"></div>
+		</div>
+	</div>
+	<div class="container parasection">
+		<div class="row">
+			<div class="col-5"></div>
+			<div class="col-4">
+				<p>The response from customers has been overwhelmingly positive. The buzz in the oil and gas industry has sparked conversations around machine learning and the value of our product. Operators of varying sizes have leveraged our products and services across 25,000 oil wells to achieve up to 20% increase in production and up to 40% decrease in water injection cost, especially in complex reservoirs.</p>
+				<!--<p>One of the most memorable quotes from Back To The Future II is that the future is whatever you make, so you should make it a good one. I had the opportunity to use digital and technology to transform one of the most traditional industries for the better, and I was glad to see we really have never lived in a time like now where we can embrace technology, embrace the changes, and use it for good. The future is today, and I'm making it a good one.</p>-->
+			</div>
+			<div class="col-1"></div>
+		</div>
+	</div>
+	<div class="container parasection" id="endsection">
+		<div class="row">
+			<div class="col-10"><img src="tachyus-25.webp"></div>
+		</div>
+		<div class="row">
+			<div class="col-10"><img src="tachyus-19.webp"></div>
+		</div>
+		<div class="row">
+			<div class="col-10"><img src="tachyus-11.webp"></div>
+		</div>
+		<div class="row">
+			<div class="col-10"><img src="tachyus-12.webp"></div>
+		</div>
+	</div>
+	<div class="container parasection" id="credits">
+		<div class="row">
+			<div class="col-5"></div>
+			<div class="col-4">
+				<p>Scope<br><br>
+					Brand Identity, Creative Direction, User Experience Design, User Research, Information Architecture, Data Visualization, Cartography & GIS, Accessibility, Localization, Visual Design, Illustration, Iconography</p>
+				<p>Design<br><br>
+					JJ Moi</p>
+				<p>Development<br><br>
+					Paul Orland, Dmitry Morozov, Ryan Riley, Jack Fox, Adam Jensen, Karlkim Suwanmongkol, Cameron Taggart, Will Smith, Chris Gervang, John Orland, Sumit Mitra, Ryan Hilliard, Lanny Wang, Kim Reardon</p>
+				<p>Further Reading<br><br>
+					<a href="https://jpt.spe.org/prescriptive-analytics-modeling-technology-captures-reservoir-physics" target="_blank">Prescriptive analytics modeling technology captures reservoir physics – Journal of Petroleum Technology →</a><br>
+					<a href="https://www.oilandgasawards.com/winner/west-coast-2014-general-industry-service-award-tachyus" target="_blank">Oil & Gas Industry Service Award →</a><br>
+					<a href="https://www.chron.com/business/article/Houston-AI-startup-focused-on-oil-gas-to-grow-13909947.php">AI startup focused on oil & gas to grow with $15M in funding – Chron →</a><br>
+					<a href="https://fortune.com/2015/06/01/tachyus-funding-founders-fund/">Data startup for oil industry, raises $6 million from Founders Fund – The New York Times →</a>
+				</p>
+			</div>
+			<div class="col-1"></div>
+		</div>
+	</div>
+	<!-- desktop -->
+	<div class="container index desktop">
+		<div class="row moreprojects">
+			<div class="col-10-sm">
+				<p>More Projects</p>
+			</div>
+		</div>
+		<a href="/18f" class="row" id="cloudgov">
+			<div class="col-4-sm">
+				<p>Creating design systems for the people</p>
+			</div>
+			<div class="col-1-sm">
+				<p>18F</p>
+			</div>
+			<div class="col-4-sm">
+				<p>Product Design, Brand Identity, Design Systems</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>Case →</p>
+			</div>
+		</a>
+		<a href="/intersection" class="row" id="intersection">
+			<div class="col-4-sm">
+				<p>Designing for a more inclusive tomorrow</p>
+			</div>
+			<div class="col-1-sm">
+				<p>Intersection</p>
+			</div>
+			<div class="col-4-sm">
+				<p>Accelerator Program, Community</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>Case →</p>
+			</div>
+		</a>
+		<a href="/opengov" class="row" id="opengov">
+			<div class="col-4-sm">
+				<p>Rebuilding public trust in open data</p>
+			</div>
+			<div class="col-1-sm">
+				<p>OpenGov</p>
+			</div>
+			<div class="col-4-sm">
+				<p>Product Design, Brand Identity, DataViz</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>Case →</p>
+			</div>
+		</a>
+		<a href="https://www.rtx.com" target="_blank" class="row" id="raytheon">
+			<div class="col-4-sm">
+				<p>Advancing space and defense systems</p>
+			</div>
+			<div class="col-1-sm">
+				<p>Raytheon</p>  
+			</div>
+			<div class="col-4-sm">
+				<p>Product Design, DataViz, Design Systems</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>Web →</p>
+			</div>
+		</a>
+		<a href="https://www.springdiscovery.com/technology" target="_blank" class="row" id="spring">
+			<div class="col-4-sm">
+				<p>Accelerating drug discovery research</p>
+			</div>
+			<div class="col-1-sm">
+				<p>Spring</p>
+			</div>
+			<div class="col-4-sm">
+				<p>Product Design, DataViz, Design Systems</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>Web →</p>
+			</div>
+		</a>
+		<!--
+		<a href="https://satchitananda.foundation" target="_blank" class="row" id="ananda">
+			<div class="col-4-sm">
+				<p>Manifesting an awakened and abundant future</p>
+			</div>
+			<div class="col-1-sm">
+				<p>Ananda</p>
+			</div>
+			<div class="col-4-sm">
+				<p>Brand Identity, Art Direction</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>Web →</p>
+			</div>
+		</a>
+		<a href="https://elicit.org" target="_blank" class="row" id="elicit">
+			<div class="col-4-sm">
+				<p>Pioneering research workflow automation</p>
+			</div>
+			<div class="col-1-sm">
+				<p>Elicit</p>
+			</div>
+			<div class="col-4-sm">
+				<p>Product Design, DataViz</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>Web →</p>
+			</div>
+		</a>
+		-->
+		<a href="https://www.kickstarter.com/projects/753619488/all-together-now-women-in-music" target="_blank" class="row" id="together">
+			<div class="col-4-sm">
+				<p>Telling stories of women in music</p>
+			</div>
+			<div class="col-1-sm">
+				<p>Together</p>
+			</div>
+			<div class="col-4-sm">
+				<p>Art Direction, Publication Design</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>Web →</p>
+			</div>
+		</a>
+	</div>
+	<!-- rwd -->
+	<div class="container index rwd">
+		<div class="row moreprojects">
+			<div class="col-10-sm">
+				<p>More Projects</p>
+			</div>
+		</div>
+		<a href="/18f" class="row" id="cloudgov">
+			<div class="col-9-sm">
+				<p>Creating design systems for the people</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>→</p>
+			</div>
+		</a>
+		<a href="/intersection" class="row" id="intersection">
+			<div class="col-9-sm">
+				<p>Designing for a more inclusive tomorrow</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>→</p>
+			</div>
+		</a>
+		<a href="/opengov" class="row" id="opengov">
+			<div class="col-9-sm">
+				<p>Rebuilding public trust in open data</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>→</p>
+			</div>
+		</a>
+		<a href="https://www.rtx.com" target="_blank" class="row" id="raytheon">
+			<div class="col-9-sm">
+				<p>Advancing space and defense systems</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>→</p>
+			</div>
+		</a>
+		<a href="https://www.springdiscovery.com/technology" target="_blank" class="row" id="spring">
+			<div class="col-9-sm">
+				<p>Accelerating drug discovery research</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>→</p>
+			</div>
+		</a>
+		<!--
+		<a href="https://satchitananda.foundation" target="_blank" class="row" id="ananda">
+			<div class="col-9-sm">
+				<p>Manifesting an awakened and abundant future</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>→</p>
+			</div>
+		</a>
+		<a href="https://elicit.org" target="_blank" class="row" id="elicit">
+			<div class="col-9-sm">
+				<p>Pioneering automated research workflows</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>→</p>
+			</div>
+		</a>
+		-->
+		<a href="https://www.kickstarter.com/projects/753619488/all-together-now-women-in-music" target="_blank" class="row" id="together">
+			<div class="col-9-sm">
+				<p>Telling stories of women in music</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>→</p>
+			</div>
+		</a>
+	</div>
+</body>
+</html>
