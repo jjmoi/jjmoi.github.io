@@ -18,17 +18,19 @@
 	<style>
 		/* NEW */
 		.container {width: 98%;}
-		#title {font-size: 120px;}
-		.nav a, #subtitle, .index p {font-size: 17px;}
-		#subtitle {margin-top: 0;}
-		.tiny-caption, .tiny-caption p, .tiny-caption a {font-size: 12px; line-height: 1.375;}
-		.endsection {padding-bottom: 100px;}
+		#title {font-size: 77px;}
+		.tiny-caption, .tiny-caption p, .tiny-caption a {font-size: 12px; line-height: 1.375; padding-right: 15px;}
+		.index p {font-size: 12px;}
+		@media only screen and (max-width: 1111px) {
+			.container .tags {width: 50%;}
+		}
 
 		/* BACKGROUND */
 		html {background-color: dodgerblue;}
 		body {height: auto; background-color: white;}
 		::-moz-selection {background: dodgerblue; color: #1e90fe;}
 		::selection {background: dodgerblue; color: #1e90fe;}
+		.container {width: 98%;}
 
 		.index .row {position: relative; width: 100%;}
 		.desktop {padding-bottom: 60px; bottom: 0;}
@@ -72,32 +74,56 @@
 			</div>
 		</div>
 	</div>
-	<div class="container parasection endsection">
-		<div class="row" style="padding-top: 50px; padding-bottom: 15px;">
-			<div class="col-10">
-				<p id="title">18F</p>
-			</div>
-		</div>
+	<div class="container parasection">
 		<div class="row">
 			<div class="col-10"><img src="18f-15.webp"></div>
 		</div>
-		<div class="row" style="padding-top: 50px;">
-			<div class="col-2">
-				<p id="subtitle">Creating design systems for the people</p>
+	</div>
+	<div class="container parasection">
+		<div class="row tiny-caption">
+			<div class="col-5">
+				<p id="title" style="padding-top: 0; margin-top: -10px;">Creating design systems for the people</p>
 			</div>
 		</div>
-		<div class="row" style="padding-top: 10px;">
-			<div class="col-2 tiny-caption">
+		<div class="row tiny-caption">
+			<div class="col-1 tags">
 				<p>
-					18F<br>
-					2018–2019<br>
-					Art Direction, Design strategy, Inclusive Design, Concept Development, User Research, Interaction Design, Accessibility, Design Systems, Data Visualization</p>
+					18F Cloud.gov<br>
+					2018–2019<br><br>
+
+					Sector<br>
+					Government<br>
+					Editorial<br>
+					Fashion<br>
+					Lifestyle</p>
 			</div>
-		</div>
-		<div class="row" style="padding-top: 10px;">
-			<div class="col-2 tiny-caption">
-				<p>As part of a widespread federal effort to improve public’s experience of government digital services, 18F needed a secure and compliant platform that helps federal agencies deliver services the public deserves in a faster and user-centered way. Expanding the design systems capabilities to include an interactive web builder allowed users to easily create compelling layouts that can be previewed within minutes, which was unheard of in the government world.<br><br>
-				After a year of the beta run, we had hundreds of federal agencies using cloud.gov to build products and services with rich content and intricate data visualizations in record time. Over 100 million people were exposed to those services created every day by notable partner agencies, including Treasury, Education, Justice, Defense, NASA, and Homeland Security.</p>
+			<div class="col-1 tags">
+				<p>
+					Scope<br>
+					Art Direction<br>
+					Design strategy<br>
+					Concept development<br>
+					User Research<br>
+					Interaction Design<br>
+					Data Visualization<br>
+					Inclusive Design<br>
+					Accessibility<br>
+					Design Systems</p>
+			</div>
+			<div class="col-4 tags">
+				<p>
+					Further Readings<br>
+					<a href="https://www.fastcompany.com/3046756/obama-and-his-geeks" target="_blank">Inside Obama’s stealth startup →</a><br>
+					<a href="https://www.theatlantic.com/technology/archive/2015/07/the-secret-startup-saved-healthcare-gov-the-worst-website-in-america/397784" target="_blank">The secret startup that saved America →</a><br>
+					<a href="https://18f.gsa.gov/2017/06/06/fractal-and-federalist-join-the-us-web-design-standards" target="_blank">Federalist join the US Web Design Standards →</a><br>
+					<a href="https://18f.gsa.gov/2019/04/08/uswds2-launch-post" target="_blank">Reinvent the experience, not the wheel →</a><br>
+					<a href="https://18f.gsa.gov/2016/03/22/what-was-your-path-to-18f" target="_blank">Path to 18F →</a></p>
+			</div>
+			<div class="col-2">
+				<p>As part of a widespread federal efforts to improve public’s experience of government digital services, 18F needed a secure and compliant platform that helps federal agencies deliver services the public deserves in a faster and user-centered way.<br><br>Expanding the design systems capabilities to include an interactive web builder allowed users to easily create compelling layouts that can be previewed within minutes, which was unheard of in the government world, until now.</p>
+			</div>
+			<div class="col-2">
+				<p>After a year of the beta run, we had hundreds of federal agencies using cloud.gov to build products and services with rich content and intricate data visualizations in record time. Over 100 million people were exposed to those services created every day by notable partner agencies, including Treasury, Education, Justice, Defense, NASA, and Homeland Security.</p>
 			</div>
 		</div>
 	</div>
@@ -133,23 +159,6 @@
 		</div>
 		<div class="row">
 			<div class="col-10"><img src="18f-29.webp"></div>
-		</div>
-	</div>
-	<div class="container parasection endsection">
-		<div class="row">
-			<div class="col-2 tiny-caption">
-				<p>Team<br>
-					Gail, Marco, Jermiah, Magdana, Dave, Ryan, Eric</p>
-			</div>
-		</div>
-		<div class="row" style="padding-top: 20px;">
-			<div class="col-2 tiny-caption">
-				<p>Further Readings<br>
-					<a href="https://www.fastcompany.com/3046756/obama-and-his-geeks" target="_blank">Inside Obama’s stealth startup →</a><br>
-					<a href="https://www.theatlantic.com/technology/archive/2015/07/the-secret-startup-saved-healthcare-gov-the-worst-website-in-america/397784" target="_blank">The secret startup that saved America →</a><br>
-					<a href="https://18f.gsa.gov/2019/04/08/uswds2-launch-post" target="_blank">Reinvent the experience, not the wheel →</a><br>
-					<a href="https://18f.gsa.gov/2016/03/22/what-was-your-path-to-18f" target="_blank">Path to 18F →</a></p>
-			</div>
 		</div>
 	</div>
 	<!-- desktop -->
@@ -229,6 +238,22 @@
 				<p>Web →</p>
 			</div>
 		</a>
+		<!--
+		<a href="https://elicit.org" target="_blank" class="row" id="elicit">
+			<div class="col-4-sm">
+				<p>Pioneering research workflow automation</p>
+			</div>
+			<div class="col-1-sm">
+				<p>Elicit</p>
+			</div>
+			<div class="col-4-sm">
+				<p>Product Design, DataViz</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>Web →</p>
+			</div>
+		</a>
+		-->
 		<a href="https://www.kickstarter.com/projects/753619488/all-together-now-women-in-music" target="_blank" class="row" id="together">
 			<div class="col-4-sm">
 				<p>Telling stories of women in music</p>
@@ -291,6 +316,16 @@
 				<p>→</p>
 			</div>
 		</a>
+		<!--
+		<a href="https://elicit.org" target="_blank" class="row" id="elicit">
+			<div class="col-9-sm">
+				<p>Pioneering automated research workflows</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>→</p>
+			</div>
+		</a>
+		-->
 		<a href="https://www.kickstarter.com/projects/753619488/all-together-now-women-in-music" target="_blank" class="row" id="together">
 			<div class="col-9-sm">
 				<p>Telling stories of women in music</p>
