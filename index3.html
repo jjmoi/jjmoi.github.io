@@ -10,17 +10,16 @@
 		gtag('config', 'UA-122843739-1');
 	</script>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name="description" content="JJ Moi">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<link rel="stylesheet" href="/css/grid.css">
 	<link rel="shortcut icon" type="image/x-icon" href="/img/unicorn.png">
+	<link rel="stylesheet" href="/css/grid.css">
 	<title>JJ Moi</title>
 	<style>
 		/* BACKGROUND */
-		html {background-color: #001;}
-		body {background-color: white;}
-		::-moz-selection {background: #001;}
-		::selection {background: #001;}
+		html {background-color: black;}
+		body {height: auto; background-color: white;}
+		::-moz-selection {background: black; color: #001;}
+		::selection {background: black; color: #001;}
 
 		.index .row {position: relative; width: 100%;}
 		.desktop {padding-bottom: 60px; bottom: 0;}
@@ -52,74 +51,195 @@
 	</style>
 </head>
 <body>
-	<!-- nav -->
-	<div class="container nav">
+	<!-- nav desktop -->
+	<div class="container nav desktop">
 		<div class="row">
 			<div class="col-2-sm">
-				<a href="/folio">JJ Moi</a>
+				<a href="/">JJ Moi</a>
 			</div>
 			<div class="col-6-sm">
-				<p>Design Leader, VC, and Educator</p>
+				<a href="/">Design Leader, VC, and Educator</a>
 			</div>
 			<div class="col-1-sm">
 				<a href="https://www.google.com/maps/place/Portland,+OR/@45.5161077,-122.7368012,12z">45°N 122°W</a>
 			</div>
+			<div class="col-1-sm right">
+				<a href="/info">Info</a>
+			</div>
+		</div>
+	</div>
+	<!-- nav rwd -->
+	<div class="container nav rwd">
+		<div class="row">
+			<div class="col-9-sm">
+				<a href="/">JJ Moi</a>
+			</div>
+			<div class="col-1-sm right">
+				<a href="/info">Info</a>
+			</div>
+		</div>
+	</div>
+	<!-- content -->
+	<div class="container parasection" style="padding-top: 300px;">
+		<div class="row">
+			<div class="col-10">
+				<img src="opengov-14.webp">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-10">
+				<p id="subtitle">OpenGov</p>
+				<p id="title">Rebuilding public trust in open data</p>
+			</div>
+		</div>
+	</div>
+	<!-- desktop -->
+	<div class="container index desktop">
+		<div class="row moreprojects">
+			<div class="col-10-sm">
+				<p>More Projects</p>
+			</div>
+		</div>
+		<a href="/primemovers" class="row" id="primemovers">
+			<div class="col-2-sm">
+				<p>Prime Movers</p>
+			</div>
+			<div class="col-6-sm">
+				<p>Designing for a more inclusive tomorrow</p>
+			</div>
 			<div class="col-1-sm">
-				<a href="/info" class="right">Info</a>
+				<p>2023</p>
 			</div>
-		</div>
+			<div class="col-1-sm right">
+				<p>Case →</p>
+			</div>
+		</a>
+		<a href="/rtx" class="row" id="raytheon">
+			<div class="col-2-sm">
+				<p>Raytheon</p>  
+			</div>
+			<div class="col-6-sm">
+				<p>Advancing aerospace and defense</p>
+			</div>
+			<div class="col-1-sm">
+				<p>2023</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>Case →</p>
+			</div>
+		</a>
+		<a href="https://www.springdiscovery.com/technology" target="_blank" class="row" id="spring">
+			<div class="col-2-sm">
+				<p>Spring</p>
+			</div>
+			<div class="col-6-sm">
+				<p>Accelerating drug discovery research</p>
+			</div>
+			<div class="col-1-sm">
+				<p>2022</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>Web →</p>
+			</div>
+		</a>
+		<a href="/18f" class="row" id="cloudgov">
+			<div class="col-2-sm">
+				<p>18F</p>
+			</div>
+			<div class="col-6-sm">
+				<p>Creating design systems for the people</p>
+			</div>
+			<div class="col-1-sm">
+				<p>2016</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>Case →</p>
+			</div>
+		</a>
+		<a href="/tachyus" class="row" id="tachyus">
+			<div class="col-2-sm">
+				<p>Tachyus</p>
+			</div>
+			<div class="col-6-sm">
+				<p>Optimizing oil and gas production</p>
+			</div>
+			<div class="col-1-sm">
+				<p>2016</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>Case →</p>
+			</div>
+		</a>
+		<a href="https://www.kickstarter.com/projects/753619488/all-together-now-women-in-music" target="_blank" class="row" id="together">
+			<div class="col-2-sm">
+				<p>Together</p>
+			</div>
+			<div class="col-6-sm">
+				<p>Telling stories of women in music</p>
+			</div>
+			<div class="col-1-sm">
+				<p>2013</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>Web →</p>
+			</div>
+		</a>
 	</div>
-	<div class="container parasection">
-		<div class="row">
-			<div class="col-10">
-				<img src="/primemovers/primemovers-99.webp">
+	<!-- rwd -->
+	<div class="container index rwd">
+		<div class="row moreprojects">
+			<div class="col-10-sm">
+				<p>More Projects</p>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-10">
-				<p id="subtitle">Prime Movers</p>
-				<p id="title">Designing for a more inclusive tomorrow</p>
+		<a href="/primemovers" class="row" id="primemovers">
+			<div class="col-9-sm">
+				<p>Designing for a more inclusive tomorrow</p>
 			</div>
-		</div>
-	</div>
-	<div class="container parasection">
-		<div class="row">
-			<div class="col-10">
-				<img src="/rtx/rtx-03.webp">
+			<div class="col-1-sm right">
+				<p>→</p>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-10">
-				<p id="subtitle">Raytheon</p>
-				<p id="title">Advancing aerospace and defense</p>
+		</a>
+		<a href="/rtx" class="row" id="raytheon">
+			<div class="col-9-sm">
+				<p>Advancing aerospace and defense</p>
 			</div>
-		</div>
-	</div>
-	<div class="container parasection">
-		<div class="row">
-			<div class="col-10">
-				<img src="/18f/18f-15.webp">
+			<div class="col-1-sm right">
+				<p>→</p>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-10">
-				<p id="subtitle">18F</p>
-				<p id="title">Creating design systems for the people</p>
+		</a>
+		<a href="https://www.springdiscovery.com/technology" target="_blank" class="row" id="spring">
+			<div class="col-9-sm">
+				<p>Accelerating drug discovery research</p>
 			</div>
-		</div>
-	</div>
-	<div class="container parasection">
-		<div class="row">
-			<div class="col-10">
-				<img src="/tachyus/tachyus-24.webp">
+			<div class="col-1-sm right">
+				<p>→</p>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-10">
-				<p id="subtitle">Tachyus</p>
-				<p id="title">Optimizing oil and gas production</p>
+		</a>
+		<a href="/18f" class="row" id="cloudgov">
+			<div class="col-9-sm">
+				<p>Creating design systems for the people</p>
 			</div>
-		</div>
+			<div class="col-1-sm right">
+				<p>→</p>
+			</div>
+		</a>
+		<a href="/tachyus" class="row" id="tachyus">
+			<div class="col-9-sm">
+				<p>Optimizing oil and gas production</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>→</p>
+			</div>
+		</a>
+		<a href="https://www.kickstarter.com/projects/753619488/all-together-now-women-in-music" target="_blank" class="row" id="together">
+			<div class="col-9-sm">
+				<p>Telling stories of women in music</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>→</p>
+			</div>
+		</a>
 	</div>
 </body>
 </html>
