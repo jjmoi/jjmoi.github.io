@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<!-- ver 8.100164 -->
+	<!-- ver 0.640118 -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-122843739-1"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
@@ -10,52 +10,57 @@
 		gtag('config', 'UA-122843739-1');
 	</script>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name="description" content="JJ Moi">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<link rel="stylesheet" href="/css/grid.css">
 	<link rel="shortcut icon" type="image/x-icon" href="/img/unicorn.png">
+	<link rel="stylesheet" href="/css/grid.css">
 	<title>JJ Moi</title>
 	<style>
 		/* BACKGROUND */
-		html {background-color: #001;}
-		body {background-color: white;}
-		::-moz-selection {background: #001;}
-		::selection {background: #001;}
+		html {background-color: black;}
+		body {height: auto; background-color: white;}
+		::-moz-selection {background: black; color: #001;}
+		::selection {background: black; color: #001;}
 
-		.index {position: absolute; bottom: 0; width: 100%; margin: 0 auto;}
-		.index .row {position: relative;}
-		.index p, .index a {padding: 16px 0;}
+		.index .row {position: relative; width: 100%;}
+		.desktop {padding-bottom: 60px; bottom: 0;}
 		.index p, .index a, .index p:last-child, .index a:last-child {border: none;}
 		.index a {border-bottom: 1.5px black solid;}
 		.index a:first-child {border-top: 1.5px black solid;}
-		.index a:last-child {border-bottom: 1.5px black solid;}		
+		.index a:last-child {border-bottom: 1.5px black solid;}
+		.index .row {bottom: 0px;}
+		.index p, .index a {padding: 16px 0;}
+		.moreprojects {border-bottom: 1.5px black solid; padding: 12px 0;}
 
 		@media only screen and (max-width: 1500px) {
-			.index .row {bottom: 48px;}
+			.index .row {bottom: -10px;}
 			.index p, .index a {padding: 14px 0;}
 			.index a {border-bottom: 1.25px black solid;}
 			.index a:first-child {border-top: 1.25px black solid;}
 			.index a:last-child {border-bottom: 1.25px black solid;}
+			.moreprojects {border-bottom: 1.25px black solid; padding: 12px 0;}
 		}
 
 		@media only screen and (max-width: 1111px) {
-			.index, .index .row {bottom: 0;}
+			.index, .index .row {bottom: 48px;}
 			.index p, .index a {padding: 12px 0;}
 			.index a {border-bottom: 1px black solid;}
 			.index a:first-child {border-top: 1px black solid;}
-			.index a:last-child {border-bottom: none;}
+			.index a:last-child {border-bottom: 1px black solid;}
+			.moreprojects {border-bottom: 1px black solid; padding: 12px 0;}
 		}
+		/* temp */
+		.parasection {margin-top: 50px; margin-bottom: 50px;}
 	</style>
 </head>
 <body>
 	<!-- nav desktop -->
 	<div class="container nav desktop">
 		<div class="row">
-			<div class="col-5-sm">
-				<a href="/">JJ</a>
-			</div>
 			<div class="col-4-sm">
-				<a href="/">Design Leader, VC, and Educator</a>
+				<a href="/">JJ Moi</a>
+			</div>
+			<div class="col-5-sm">
+				<a href="/">Deep Tech / Design Leader / VC / Educator</a>
 			</div>
 			<div class="col-1-sm right">
 				<a href="/info">Info</a>
@@ -73,144 +78,87 @@
 			</div>
 		</div>
 	</div>
-	<!-- desktop -->
-	<div class="container index desktop">
-		<a href="/primemovers" class="row" id="primemovers">
-			<div class="col-5-sm">
-				<p>Prime Movers</p>
+	<!-- content -->
+	<div class="container parasection">
+		<div class="row">
+			<div class="col-4"></div>
+			<div class="col-6">
+				<img src="/rtx/rtx-99.webp">
 			</div>
-			<div class="col-4-sm">
-				<p>Designing for a more inclusive tomorrow</p>
-			</div>
-			<div class="col-1-sm right">
-				<p>2023</p>
-			</div>
-		</a>
+		</div>
 		<a href="/rtx" class="row" id="raytheon">
-			<div class="col-5-sm">
-				<p>Raytheon</p>  
+			<div class="col-4"></div>
+			<div class="col-2-sm">
+				<p>Raytheon</p>
 			</div>
-			<div class="col-4-sm">
+			<div class="col-3-sm">
 				<p>Advancing aerospace and defense</p>
 			</div>
 			<div class="col-1-sm right">
 				<p>2023</p>
 			</div>
 		</a>
-		<a href="https://www.springdiscovery.com/technology" target="_blank" class="row" id="spring">
-			<div class="col-5-sm">
-				<p>Spring</p>
+	</div>
+	<div class="container parasection">
+		<div class="row">
+			<div class="col-4"></div>
+			<div class="col-6">
+				<img src="/tachyus/tachyus-99.webp">
 			</div>
-			<div class="col-4-sm">
-				<p>Accelerating drug discovery research</p>
-			</div>
-			<div class="col-1-sm right">
-				<p>2022</p>
-			</div>
-		</a>
-		<a href="/18f" class="row" id="cloudgov">
-			<div class="col-5-sm">
-				<p>18F</p>
-			</div>
-			<div class="col-4-sm">
-				<p>Scaling design systems for the people</p>
-			</div>
-			<div class="col-1-sm right">
-				<p>2016</p>
-			</div>
-		</a>
+		</div>
 		<a href="/tachyus" class="row" id="tachyus">
-			<div class="col-5-sm">
+			<div class="col-4"></div>
+			<div class="col-2-sm">
 				<p>Tachyus</p>
 			</div>
-			<div class="col-4-sm">
+			<div class="col-3-sm">
 				<p>Optimizing oil and gas production</p>
 			</div>
 			<div class="col-1-sm right">
+				<p>2018</p>
+			</div>
+		</a>
+	</div>
+	<div class="container parasection">
+		<div class="row">
+			<div class="col-4"></div>
+			<div class="col-6">
+				<img src="/18f/18f-99.webp">
+			</div>
+		</div>
+		<a href="/18f" class="row" id="18f">
+			<div class="col-4"></div>
+			<div class="col-2-sm">
+				<p>18F</p>
+			</div>
+			<div class="col-3-sm">
+				<p>Creating design systems for the people</p>
+			</div>
+			<div class="col-1-sm right">
 				<p>2016</p>
 			</div>
 		</a>
+	</div>
+	<div class="container parasection" style="padding-bottom: 300px;">
+		<div class="row">
+			<div class="col-4"></div>
+			<div class="col-6">
+				<img src="/opengov/opengov-99.webp">
+			</div>
+		</div>
 		<a href="/opengov" class="row" id="opengov">
-			<div class="col-5-sm">
+			<div class="col-4"></div>
+			<div class="col-2-sm">
 				<p>OpenGov</p>
 			</div>
-			<div class="col-4-sm">
+			<div class="col-3-sm">
 				<p>Rebuilding public trust in open data</p>
 			</div>
 			<div class="col-1-sm right">
 				<p>2015</p>
 			</div>
 		</a>
-		<a href="https://www.kickstarter.com/projects/753619488/all-together-now-women-in-music" target="_blank" class="row" id="together">
-			<div class="col-5-sm">
-				<p>Together</p>
-			</div>
-			<div class="col-4-sm">
-				<p>Telling stories of women making music</p>
-			</div>
-			<div class="col-1-sm right">
-				<p>2013</p>
-			</div>
-		</a>
 	</div>
-	<!-- rwd -->
-	<div class="container index rwd">		
-		<a href="/primemovers" class="row" id="primemovers">
-			<div class="col-9-sm">
-				<p>Designing for a more inclusive tomorrow</p>
-			</div>
-			<div class="col-1-sm right">
-				<p>→</p>
-			</div>
-		</a>
-		<a href="/rtx" class="row" id="raytheon">
-			<div class="col-9-sm">
-				<p>Advancing aerospace and defense</p>
-			</div>
-			<div class="col-1-sm right">
-				<p>→</p>
-			</div>
-		</a>
-		<a href="https://www.springdiscovery.com/technology" target="_blank" class="row" id="spring">
-			<div class="col-9-sm">
-				<p>Accelerating drug discovery research</p>
-			</div>
-			<div class="col-1-sm right">
-				<p>→</p>
-			</div>
-		</a>
-		<a href="/18f" class="row" id="cloudgov">
-			<div class="col-9-sm">
-				<p>Scaling design systems for the people</p>
-			</div>
-			<div class="col-1-sm right">
-				<p>→</p>
-			</div>
-		</a>
-		<a href="/tachyus" class="row" id="tachyus">
-			<div class="col-9-sm">
-				<p>Optimizing oil and gas production</p>
-			</div>
-			<div class="col-1-sm right">
-				<p>→</p>
-			</div>
-		</a>
-		<a href="/opengov" class="row" id="opengov">
-			<div class="col-9-sm">
-				<p>Rebuilding public trust in open data</p>
-			</div>
-			<div class="col-1-sm right">
-				<p>→</p>
-			</div>
-		</a>
-		<a href="https://www.kickstarter.com/projects/753619488/all-together-now-women-in-music" target="_blank" class="row" id="together">
-			<div class="col-9-sm">
-				<p>Telling stories of women making music</p>
-			</div>
-			<div class="col-1-sm right">
-				<p>→</p>
-			</div>
-		</a>
-	</div>
+	<!-- end content -->
 </body>
 </html>
