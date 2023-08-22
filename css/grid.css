@@ -9,11 +9,11 @@ a:visited {color: black;}
 
 /* NAV */
 a:hover {text-decoration: none;}
-a#cloudgov:hover p {color: dodgerblue;}
+a#gsa18f:hover p {color: dodgerblue;}
 a#tachyus:hover p {color: coral;}
 a#primemovers:hover p {color: cornflowerblue;}
 a#opengov:hover p {color: limegreen;}
-a#raytheon:hover p {color: crimson;}
+a#rtx:hover p {color: crimson;}
 a#spring:hover p {color: blueviolet;}
 a#elicit:hover p {color: hotpink;}
 a#together:hover p {color: tomato;}
