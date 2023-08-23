@@ -18,8 +18,8 @@ a#spring:hover p {color: blueviolet;}
 a#elicit:hover p {color: hotpink;}
 a#together:hover p {color: tomato;}
 
-/* GRID 97% */
-.container {width: 90%; margin-left: auto; margin-right: auto;}
+/* GRID */
+.container {width: 90%; margin-left: auto; margin-right: auto;} /* 97% */
 .row {position: relative; width: 100%;}
 .row [class^="col"] {float: left; min-height: 0.125rem;}
 .row::after {content: ""; display: table; clear: both;}
@@ -44,7 +44,7 @@ p+p {padding-top: 30px;}
 
 /* INFO */
 .parasection {margin-top: 100px; margin-bottom: 200px;}
-.parasection img {width: 100%;}
+.parasection img {width: 100%; margin-top: -4px;}
 .parasection a {display: inline-block;}
 
 /* CASE */
