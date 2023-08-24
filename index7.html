@@ -50,13 +50,14 @@
 		}
 
 		/* TEMP */
-		.parasection {margin-top: 75px; margin-bottom: 75px;}
+		.parasection {margin-top: 75px; margin-bottom: 75px; padding-bottom: 100px;}
 		p:hover, a:hover, span:hover, p:hover span {text-decoration: none;}
+		.container {width: 100%; margin-left: auto; margin-right: auto;}
 	</style>
 </head>
 <body>
 	<!-- NAV DESKTOP -->
-	<div class="container nav desktop">
+	<div class="container nav desktop" style="width:97%;">
 		<div class="row">
 			<div class="col-5-sm">
 				<a href="/">JJ Moi</a>
@@ -70,7 +71,7 @@
 		</div>
 	</div>
 	<!-- NAV RWD -->
-	<div class="container nav rwd">
+	<div class="container nav rwd" style="width:97%;">
 		<div class="row">
 			<div class="col-9-sm">
 				<a href="/">JJ Moi</a>
@@ -83,52 +84,202 @@
 	<!-- CONTENT -->
 	<div class="container parasection">
 		<div class="row">
-			<a href="/rtx" id="rtx" class="col-5">
+			<a href="/rtx" id="rtx" class="col-10">
 				<img src="/rtx/rtx-99.webp">
-				<p>Raytheon <span style="color:#999;">Advancing aerospace and defense</span></p>
-			</a>
-			<a href="/tachyus" id="tachyus" class="col-5">
-				<img src="/tachyus/tachyus-99.webp">
-				<p>Tachyus <span style="color:#999;">Optimizing oil and gas production</span></p>
 			</a>
 		</div>
-	</div>
-	<div class="container parasection">
-		<a href="/gsa18f" class="row" id="gsa18f">
-			<div class="col-10">
-				<img src="/gsa18f/gsa18f-99.webp">
-				<p>18F <span style="color:#999;">Creating design systems for the people</span></p>
-			</div>
-		</a>
-	</div>
-	<div class="container parasection">
-		<a href="/primemovers" class="row" id="primemovers">
-			<div class="col-10">
-				<img src="/primemovers/primemovers-99.webp">
-				<p>Prime Movers <span style="color:#999;">Designing for a more inclusive tomorrow</span></p>
-			</div>
-		</a>
+		<div class="row">
+			<a href="/rtx" id="rtx" class="col-1"></a>
+			<a href="/rtx" id="rtx" class="col-9">
+				<p>Raytheon<br>Advancing aerospace and defense<br>2023</p>
+			</a>
+		</div>
 	</div>
 	<div class="container parasection">
 		<div class="row">
-			<a href="/rtx" id="raytheon" class="col-5">
-				<img src="/rtx/rtx-99.webp">
-				<p>Together Now <span style="color:#999;">Telling stories of women making music</span></p>
+			<a href="/primemovers" id="primemovers" class="col-10">
+				<img src="/primemovers/primemovers-99.webp">
 			</a>
-			<a href="/tachyus" id="tachyus" class="col-5">
-				<img src="/tachyus/tachyus-99.webp">
-				<p>Spring <span style="color:#999;">Accelerating drug discovery research</span></p>
+		</div>
+		<div class="row">
+			<a href="/gsa18f" id="rtx" class="col-1"></a>
+			<a href="/gsa18f" id="rtx" class="col-9"></a>
+				<p>Prime Movers<br>Designing for a more inclusive tomorrow<br>2023</p>
 			</a>
 		</div>
 	</div>
+	<div class="container parasection">
+		<div class="row">
+			<a href="/gsa18f" id="gsa18f" class="col-10">
+				<img src="/gsa18f/gsa18f-99.webp">
+			</a>
+		</div>
+		<div class="row">
+			<a href="/gsa18f" id="rtx" class="col-1"></a>
+			<a href="/gsa18f" id="rtx" class="col-9"></a>
+				<p>18F<br>Scaling design systems for the people<br>2018</p>
+			</a>
+		</div>
+	</div>
+	<!-- TEST 97% -->
+	<div class="container parasection">
+		<div class="row">
+			<a href="/tachyus" id="tachyus" class="col-10">
+				<img src="/tachyus/tachyus-99.webp">
+			</a>
+		</div>
+		<div class="row" style="width:97%; margin:0 auto;">
+			<a href="/rtx" id="rtx" class="col-10">
+				<p>97% Tachyus<br>Optimizing oil and gas production<br>2016</p>
+			</a>
+		</div>
+	</div>
+	<!-- CASE -->
 	<div class="container parasection" style="padding-bottom: 300px;">
-		<a href="/opengov" class="row" id="opengov">
-			<div class="col-10">
+		<div class="row">
+			<a href="/opengov" id="opengov" class="col-10">
 				<img src="/opengov/opengov-99.webp">
-				<p>OpenGov <span style="color:#999;">Rebuilding public trust in open data</span></p>
+			</a>
+		</div>
+		<div class="row">
+			<a href="/rtx" id="rtx" class="col-1"></a>
+			<a href="/rtx" id="rtx" class="col-9"></a>
+				<p>OpenGov<br>Rebuilding public trust in open data<br>2014</p>
+			</a>
+		</div>
+	</div>
+	<!-- END CONTENT -->
+	<!-- INDEX DESKTOP -->
+	<div class="container index desktop" style="width:97%;">
+		<div class="row moreprojects">
+			<div class="col-10-sm">
+				<p>More Projects</p>
+			</div>
+		</div>
+		<a href="https://www.springdiscovery.com/technology" target="_blank" class="row" id="spring">
+			<div class="col-2-sm">
+				<p>Spring</p>
+			</div>
+			<div class="col-6-sm">
+				<p>Accelerating drug discovery research</p>
+			</div>
+			<div class="col-1-sm">
+				<p>2022</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>Web →</p>
+			</div>
+		</a>
+		<a href="" class="row" id="elicit">
+			<div class="col-2-sm">
+				<p>Elicit</p>
+			</div>
+			<div class="col-6-sm">
+				<p>Boosting lit research with AI</p>
+			</div>
+			<div class="col-1-sm">
+				<p>2016</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>Case →</p>
+			</div>
+		</a>
+		<a href="https://www.kickstarter.com/projects/753619488/all-together-now-women-in-music" target="_blank" class="row" id="together">
+			<div class="col-2-sm">
+				<p>Together</p>
+			</div>
+			<div class="col-6-sm">
+				<p>Telling stories of women making music</p>
+			</div>
+			<div class="col-1-sm">
+				<p>2013</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>Web →</p>
+			</div>
+		</a>
+		<a href="https://www.springdiscovery.com/technology" target="_blank" class="row" id="spring">
+			<div class="col-2-sm">
+				<p>Spring</p>
+			</div>
+			<div class="col-6-sm">
+				<p>Accelerating drug discovery research</p>
+			</div>
+			<div class="col-1-sm">
+				<p>2022</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>Web →</p>
+			</div>
+		</a>
+		<a href="" class="row" id="elicit">
+			<div class="col-2-sm">
+				<p>Elicit</p>
+			</div>
+			<div class="col-6-sm">
+				<p>Boosting lit research with AI</p>
+			</div>
+			<div class="col-1-sm">
+				<p>2016</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>Case →</p>
+			</div>
+		</a>
+		<a href="https://www.kickstarter.com/projects/753619488/all-together-now-women-in-music" target="_blank" class="row" id="together">
+			<div class="col-2-sm">
+				<p>Together</p>
+			</div>
+			<div class="col-6-sm">
+				<p>Telling stories of women making music</p>
+			</div>
+			<div class="col-1-sm">
+				<p>2013</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>Web →</p>
 			</div>
 		</a>
 	</div>
-	<!-- END CONTENT -->
+	<!-- INDEX RWD -->
+	<div class="container index rwd" style="width:97%;">
+		<div class="row moreprojects">
+			<div class="col-10-sm">
+				<p>More Projects</p>
+			</div>
+		</div>
+		<a href="https://www.springdiscovery.com/technology" target="_blank" class="row" id="spring">
+			<div class="col-9-sm">
+				<p>Accelerating drug discovery research</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>→</p>
+			</div>
+		</a>
+		<a href="/gsa18f" class="row" id="gsa18f">
+			<div class="col-9-sm">
+				<p>Scaling design systems for the people</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>→</p>
+			</div>
+		</a>
+		<a href="/opengov" class="row" id="opengov">
+			<div class="col-9-sm">
+				<p>Rebuilding public trust in open data</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>→</p>
+			</div>
+		</a>
+		<a href="https://www.kickstarter.com/projects/753619488/all-together-now-women-in-music" target="_blank" class="row" id="together">
+			<div class="col-9-sm">
+				<p>Telling stories of women making music</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>→</p>
+			</div>
+		</a>
+	</div>
 </body>
 </html>
