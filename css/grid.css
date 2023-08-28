@@ -4,17 +4,18 @@
 html, body {height: 100%; width: 100%; margin: 0; padding: 0;}
 h1, h2, h3, p, a {font-family: Standard, sans-serif; font-weight: normal; margin: 0; padding: 0; color: black; font-size: 18px; line-height: 1.45;}
 a {text-decoration: none; display: block;}
-a:hover, a span:hover {color: black; cursor: url(https://jjmoi.com/files/mick-point3.png), default; text-decoration: underline;}
+a:hover, a span:hover {color: black; cursor: url(https://jjmoi.com/files/mick-point3.png), default; text-decoration: none;}
 a:visited {color: black;}
 
 /* NAV */
-a:hover {text-decoration: none;}
+a#primemovers:hover p {color: cornflowerblue;}
+a#rtx:hover p {color: crimson;}
 a#gsa18f:hover p {color: dodgerblue;}
 a#tachyus:hover p {color: coral;}
-a#primemovers:hover p {color: cornflowerblue;}
 a#opengov:hover p {color: limegreen;}
-a#rtx:hover p {color: crimson;}
+
 a#spring:hover p {color: blueviolet;}
+a#teaching:hover p {color: cornflowerblue;}
 a#elicit:hover p {color: hotpink;}
 a#together:hover p {color: tomato;}
 
