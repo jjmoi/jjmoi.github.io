@@ -19,7 +19,8 @@ a#elicit:hover p {color: hotpink;}
 a#together:hover p {color: tomato;}
 
 /* GRID */
-.container {width: 90%; margin-left: auto; margin-right: auto;} /* 97% */
+.container {width: 98%; margin-left: auto; margin-right: auto;}
+.container.rwd {width: 92%;}
 .row {position: relative; width: 100%;}
 .row [class^="col"] {float: left; min-height: 0.125rem;}
 .row::after {content: ""; display: table; clear: both;}
