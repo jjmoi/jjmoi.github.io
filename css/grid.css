@@ -46,7 +46,7 @@ p+p {padding-top: 30px;}
 
 /* INFO */
 .parasection {margin-top: 100px; margin-bottom: 200px;}
-.parasection img {width: 100%; margin-top: -6px;}
+.parasection img {width: 100%; margin-top: -4px; border-radius: 2rem;}
 .parasection a {display: inline-block;}
 
 /* CASE */
@@ -106,4 +106,5 @@ p+p {padding-top: 30px;}
 	#credits {padding-bottom: 275px;}
 	#credits .stackcolumn {margin-top: 50px;}
 	.all-device {width: 92%;}
+	.parasection img {border-radius: 1.375rem;}
 }
