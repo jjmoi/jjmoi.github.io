@@ -106,5 +106,5 @@ p+p {padding-top: 30px;}
 	#credits {padding-bottom: 275px;}
 	#credits .stackcolumn {margin-top: 50px;}
 	.all-device {width: 92%;}
-	.parasection img {border-radius: 1.375rem;}
+	.parasection img {margin-top: -5px; border-radius: 1.375rem;}
 }
