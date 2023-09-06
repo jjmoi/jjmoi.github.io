@@ -42,7 +42,7 @@ a#together:hover p {color: tomato;}
 .index p:last-child, .index a:last-child {border-bottom: 2px black solid;}
 .right {text-align: right;}
 p+p {padding-top: 30px;}
-/* .nav a, .index p, .home p, #subtitle, #title {text-transform: uppercase;} */
+.nav a, .index p, .home p, #subtitle, #title {text-transform: uppercase;}
 
 /* INFO */
 .parasection {margin-top: 100px; margin-bottom: 200px;}
