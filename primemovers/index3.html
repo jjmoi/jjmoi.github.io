@@ -51,7 +51,12 @@
 		}
 
 		/* TEMP */
-		#subtitle, #title {margin-top: 0; padding-top: 0;}
+		@media only screen and (max-width: 1111px) {
+			#case-title p {
+				padding-bottom: 100px;
+				margin-top: -40px;
+			}
+		}
 	</style>
 </head>
 <body>
@@ -89,9 +94,8 @@
 			<div class="col-10"><img src="primemovers-99.webp"></div>
 		</div>
 		<div class="row" style="padding-top:80px;">
-			<div class="col-4">
-				<p id="subtitle" style="font-size:18px;">Prime Movers</p>
-				<p id="title" style="font-size:62px;">Designing a more inclusive tomorrow</p>
+			<div class="col-4" id="case-title">
+				<p style="font-size:24px;">Prime Movers<br>Designing a more inclusive tomorrow<br>2023</p>
 			</div>
 			<div class="col-1"></div>
 			<div class="col-4">
