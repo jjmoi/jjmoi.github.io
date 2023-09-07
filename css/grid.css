@@ -110,5 +110,5 @@ p+p {padding-top: 30px;}
 	
 	/* TEMP */
 	h1, h2, h3, p, a {font-size: 13px;}
-	#credits span, .sides-text span {text-transform: uppercase;}
+	#case-title p, #credits span, .sides-text span {text-transform: uppercase;}
 }
