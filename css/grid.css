@@ -107,4 +107,7 @@ p+p {padding-top: 30px;}
 	#credits .stackcolumn {margin-top: 50px;}
 	.all-device {width: 92%;}
 	.parasection img {margin-top: -5px; border-radius: 1.375rem;}
+	
+	/* TEMP */
+	h1, h2, h3, p, a {font-size: 13px;}
 }
