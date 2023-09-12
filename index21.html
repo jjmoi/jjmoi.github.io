@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<!-- v0.790118 -->
+	<!-- v8.100164 -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-122843739-1"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
@@ -10,67 +10,57 @@
 		gtag('config', 'UA-122843739-1');
 	</script>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="description" content="JJ Moi">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<link rel="shortcut icon" type="image/x-icon" href="/img/unicorn.png">
 	<link rel="stylesheet" href="/css/grid.css">
+	<link rel="shortcut icon" type="image/x-icon" href="/img/unicorn.png">
 	<title>JJ Moi</title>
 	<style>
 		/* BACKGROUND */
-		html {background-color: black;}
-		body {height: auto; background-color: white;}
-		::-moz-selection {background: black; color: #001;}
-		::selection {background: black; color: #001;}
+		html {background-color: #001;}
+		body {background-color: white;}
+		::-moz-selection {background: #001;}
+		::selection {background: #001;}
 
-		.index .row {position: relative; width: 100%;}
-		.desktop {padding-bottom: 60px; bottom: 0;}
+		.index {position: absolute; bottom: 0; width: 100%; margin: 0 auto;}
+		.index .row {position: relative;}
+		.index p, .index a {padding: 16px 0;}
 		.index p, .index a, .index p:last-child, .index a:last-child {border: none;}
 		.index a {border-bottom: 1.5px black solid;}
 		.index a:first-child {border-top: 1.5px black solid;}
-		.index a:last-child {border-bottom: 1.5px black solid;}
-		.index .row {bottom: 0px;}
-		.index p, .index a {padding: 16px 0;}
-		.moreprojects {border-bottom: 1.5px black solid; padding: 12px 0;}
+		.index a:last-child {border-bottom: 1.5px black solid;}		
 
 		@media only screen and (max-width: 1500px) {
-			.index .row {bottom: -10px;}
+			.index .row {bottom: 48px;}
 			.index p, .index a {padding: 14px 0;}
 			.index a {border-bottom: 1.25px black solid;}
 			.index a:first-child {border-top: 1.25px black solid;}
 			.index a:last-child {border-bottom: 1.25px black solid;}
-			.moreprojects {border-bottom: 1.25px black solid; padding: 12px 0;}
 		}
 
 		@media only screen and (max-width: 1111px) {
-			.index, .index .row {bottom: 48px;}
+			.index, .index .row {bottom: 0;}
 			.index p, .index a {padding: 12px 0;}
 			.index a {border-bottom: 1px black solid;}
 			.index a:first-child {border-top: 1px black solid;}
-			.index a:last-child {border-bottom: 1px black solid;}
-			.moreprojects {border-bottom: 1px black solid; padding: 12px 0;}
+			.index a:last-child {border-bottom: none;}
 		}
-
-		/* TEMP */
-		.parasection {margin-top: 75px; margin-bottom: 75px; padding-bottom: 42px;}
-		.parasection.rwd {margin-top: 75px; margin-bottom: -15px; padding-bottom: 0px;}
-		.parasection p {padding-top: 12px;}
-		#desktop-lastcase {padding-bottom: 800px;}
-		#rwd-lastcase {padding-bottom: 725px;}
 	</style>
 </head>
 <body>
 	<!-- NAV DESKTOP -->
 	<div class="container nav desktop">
 		<div class="row">
-			<div class="col-2">
+			<div class="col-2-sm">
 				<a href="/">JJ Moi</a>
 			</div>
-			<div class="col-6">
+			<div class="col-6-sm">
 				<a href="/">Design Leader, VC, and Educator</a>
 			</div>
-			<div class="col-1">
+			<div class="col-1-sm">
 				<a href="https://www.google.com/maps/place/Portland,+OR/@45.5161077,-122.7368012,12z">45°N 122°W</a>
 			</div>
-			<div class="col-1 right">
+			<div class="col-1-sm right">
 				<a href="/info">Info</a>
 			</div>
 		</div>
@@ -86,119 +76,109 @@
 			</div>
 		</div>
 	</div>
-	<!-- CASE DESKTOP -->
-	<div class="container parasection desktop">
-		<a href="/primemovers" class="row">
-			<div class="col-10">
-				<img src="/primemovers/primemovers-99.webp">
-			</div>
-		</a>
+	<!-- INDEX DESKTOP -->
+	<div class="container index desktop">
 		<a href="/primemovers" class="row" id="primemovers">
-			<div class="col-2">
+			<div class="col-2-sm">
 				<p>Prime Movers</p>
 			</div>
-			<div class="col-6">
+			<div class="col-6-sm">
 				<p>Designing for a more inclusive tomorrow</p>
 			</div>
-			<div class="col-1">
+			<div class="col-1-sm">
 				<p>2023</p>
 			</div>
-			<div class="col-1 right">
+			<div class="col-1-sm right">
 				<p>Case →</p>
-			</div>
-		</a>
-	</div>
-	<div class="container parasection desktop">
-		<a href="/rtx" class="row">
-			<div class="col-10">
-				<img src="/rtx/rtx-99.webp">
 			</div>
 		</a>
 		<a href="/rtx" class="row" id="rtx">
-			<div class="col-2">
-				<p>Raytheon</p>
+			<div class="col-2-sm">
+				<p>Raytheon</p>  
 			</div>
-			<div class="col-6">
+			<div class="col-6-sm">
 				<p>Advancing aerospace and defense</p>
 			</div>
-			<div class="col-1">
+			<div class="col-1-sm">
 				<p>2023</p>
 			</div>
-			<div class="col-1 right">
+			<div class="col-1-sm right">
 				<p>Case →</p>
 			</div>
 		</a>
-	</div>
-	<div class="container parasection desktop">
-		<a href="/gsa18f" class="row">
-			<div class="col-10">
-				<img src="/gsa18f/gsa18f-99.webp">
+		<a href="https://www.springdiscovery.com/technology" target="_blank" class="row" id="spring">
+			<div class="col-2-sm">
+				<p>Spring</p>
+			</div>
+			<div class="col-6-sm">
+				<p>Accelerating drug discovery research</p>
+			</div>
+			<div class="col-1-sm">
+				<p>2022</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>Web →</p>
 			</div>
 		</a>
 		<a href="/gsa18f" class="row" id="gsa18f">
-			<div class="col-2">
+			<div class="col-2-sm">
 				<p>18F</p>
 			</div>
-			<div class="col-6">
+			<div class="col-6-sm">
 				<p>Scaling design systems for the people</p>
 			</div>
-			<div class="col-1">
+			<div class="col-1-sm">
 				<p>2016</p>
 			</div>
-			<div class="col-1 right">
+			<div class="col-1-sm right">
 				<p>Case →</p>
-			</div>
-		</a>
-	</div>
-	<div class="container parasection desktop">
-		<a href="/tachyus" class="row">
-			<div class="col-10">
-				<img src="/tachyus/tachyus-99.webp">
 			</div>
 		</a>
 		<a href="/tachyus" class="row" id="tachyus">
-			<div class="col-2">
+			<div class="col-2-sm">
 				<p>Tachyus</p>
 			</div>
-			<div class="col-6">
+			<div class="col-6-sm">
 				<p>Optimizing oil and gas production</p>
 			</div>
-			<div class="col-1">
-				<p>2018</p>
+			<div class="col-1-sm">
+				<p>2016</p>
 			</div>
-			<div class="col-1 right">
+			<div class="col-1-sm right">
 				<p>Case →</p>
-			</div>
-		</a>
-	</div>
-	<div class="container parasection desktop" id="desktop-lastcase">
-		<a href="/opengov" class="row">
-			<div class="col-10">
-				<img src="/opengov/opengov-99.webp">
 			</div>
 		</a>
 		<a href="/opengov" class="row" id="opengov">
-			<div class="col-2">
+			<div class="col-2-sm">
 				<p>OpenGov</p>
 			</div>
-			<div class="col-6">
+			<div class="col-6-sm">
 				<p>Rebuilding public trust in open data</p>
 			</div>
-			<div class="col-1">
+			<div class="col-1-sm">
 				<p>2015</p>
 			</div>
-			<div class="col-1 right">
+			<div class="col-1-sm right">
 				<p>Case →</p>
 			</div>
 		</a>
-	</div>
-	<!-- CASE RWD -->
-	<div class="container parasection rwd">
-		<a href="/primemovers" class="row">
-			<div class="col-10-sm">
-				<img src="/primemovers/primemovers-99.webp">
+		<a href="https://www.kickstarter.com/projects/753619488/all-together-now-women-in-music" target="_blank" class="row" id="together">
+			<div class="col-2-sm">
+				<p>Together</p>
+			</div>
+			<div class="col-6-sm">
+				<p>Telling stories of women making music</p>
+			</div>
+			<div class="col-1-sm">
+				<p>2013</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>Web →</p>
 			</div>
 		</a>
+	</div>
+	<!-- INDEX RWD -->
+	<div class="container index rwd">		
 		<a href="/primemovers" class="row" id="primemovers">
 			<div class="col-9-sm">
 				<p>Designing for a more inclusive tomorrow</p>
@@ -207,13 +187,6 @@
 				<p>→</p>
 			</div>
 		</a>
-	</div>
-	<div class="container parasection rwd">
-		<a href="/rtx" class="row">
-			<div class="col-10-sm">
-				<img src="/rtx/rtx-99.webp">
-			</div>
-		</a>
 		<a href="/rtx" class="row" id="rtx">
 			<div class="col-9-sm">
 				<p>Advancing aerospace and defense</p>
@@ -222,11 +195,12 @@
 				<p>→</p>
 			</div>
 		</a>
-	</div>
-	<div class="container parasection rwd">
-		<a href="/gsa18f" class="row">
-			<div class="col-10-sm">
-				<img src="/gsa18f/gsa18f-99.webp">
+		<a href="https://www.springdiscovery.com/technology" target="_blank" class="row" id="spring">
+			<div class="col-9-sm">
+				<p>Accelerating drug discovery research</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>→</p>
 			</div>
 		</a>
 		<a href="/gsa18f" class="row" id="gsa18f">
@@ -237,26 +211,12 @@
 				<p>→</p>
 			</div>
 		</a>
-	</div>
-	<div class="container parasection rwd">
-		<a href="/tachyus" class="row">
-			<div class="col-10-sm">
-				<img src="/tachyus/tachyus-99.webp">
-			</div>
-		</a>
 		<a href="/tachyus" class="row" id="tachyus">
 			<div class="col-9-sm">
 				<p>Optimizing oil and gas production</p>
 			</div>
 			<div class="col-1-sm right">
 				<p>→</p>
-			</div>
-		</a>
-	</div>
-	<div class="container parasection rwd" id="rwd-lastcase">
-		<a href="/opengov" class="row">
-			<div class="col-10-sm">
-				<img src="/opengov/opengov-99.webp">
 			</div>
 		</a>
 		<a href="/opengov" class="row" id="opengov">
@@ -267,22 +227,14 @@
 				<p>→</p>
 			</div>
 		</a>
-	</div>
-	<!-- FOOTER DESKTOP -->
-	<div class="container index desktop">
-		<div class="row">
-			<div class="col-10">
-				<p>©20XX</p>
+		<a href="https://www.kickstarter.com/projects/753619488/all-together-now-women-in-music" target="_blank" class="row" id="together">
+			<div class="col-9-sm">
+				<p>Telling stories of women making music</p>
 			</div>
-		</div>
-	</div>
-	<!-- FOOTER RWD -->
-	<div class="container index rwd">
-		<div class="row">
-			<div class="col-10-sm">
-				<p>©20XX</p>
+			<div class="col-1-sm right">
+				<p>→</p>
 			</div>
-		</div>
+		</a>
 	</div>
 </body>
 </html>
