@@ -2,13 +2,16 @@
 @charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@200;300;700&display=swap');
 
+html, body {height: 100%; width: 100%; margin: 0; padding: 0;}
 html {background-color: #268BFF;}
 body {height: auto; background-color: white;}
-html, body {height: 100%; width: 100%; margin: 0; padding: 0;}
 h1, h2, h3, h4, p, a {font-family: 'League Spartan', sans-serif; font-weight: normal; margin: 0; padding: 0; color: black; font-size: 16px; line-height: 1.45;}
 a {text-decoration: none; display: block;}
 a:hover, a span:hover {color: black; text-decoration: none;}
 a:visited {color: black;}
+
+/* NAV */
+.nav {padding-top: 50px; padding-bottom: 50px;}
 
 /* TYPOGRAPHY */
 .center {text-align: center;}
@@ -21,6 +24,7 @@ a {font-weight: 700;}
 
 .col-33 {background-color: white; box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px; transition: 0.35s;}
 .col-33:hover {background-color: #268BFF;}
+.col-33:hover svg {fill: red;}
 .right {text-align: right;}
 
 /* GRID */
