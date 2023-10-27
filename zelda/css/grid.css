@@ -1,0 +1,127 @@
+/* UNIVERSAL */
+@charset "UTF-8";
+@font-face {font-display: block; font-family: "Standard"; src: url("https://jjmoi.com/fonts/standard-book.woff") format("woff"); font-style: normal; font-weight: normal;}
+html, body {height: 100%; width: 100%; margin: 0; padding: 0;}
+h1, h2, h3, p, a {font-family: Standard, sans-serif; font-weight: normal; margin: 0; padding: 0; color: black; font-size: 18px; line-height: 1.45;}
+a {text-decoration: none; display: block;}
+a:hover, a span:hover {color: black; cursor: url(https://jjmoi.com/files/mick-point3.png), default; text-decoration: none;}
+a:visited {color: black;}
+
+/* NAV */
+a#primemovers:hover p {color: cornflowerblue;}
+a#rtx:hover p {color: crimson;}
+a#gsa18f:hover p {color: dodgerblue;}
+a#tachyus:hover p {color: coral;}
+a#opengov:hover p {color: limegreen;}
+a#spring:hover p {color: blueviolet;}
+a#intersection:hover p {color: lightseagreen;}
+a#elicit:hover p {color: hotpink;}
+a#together:hover p {color: tomato;}
+
+/* GRID */
+.container, .all-device {width: 98%; margin-left: auto; margin-right: auto;}
+.container.rwd {width: 92%;}
+.row {position: relative; width: 100%;}
+.row [class^="col"] {float: left; min-height: 0.125rem;}
+.row::after {content: ""; display: table; clear: both;}
+.col-1, .col-1-sm {width: 5%;}
+.col-2, .col-2-sm {width: 10%;}
+.col-3, .col-3-sm {width: 15%;}
+.col-4, .col-4-sm {width: 20%;}
+.col-5, .col-5-sm {width: 25%;}
+.col-6, .col-6-sm {width: 30%;}
+.col-7, .col-7-sm {width: 35%;}
+.col-8, .col-8-sm {width: 40%;}
+.col-9, .col-9-sm {width: 45%;}
+.col-10, .col-10-sm {width: 50%;}
+.col-11, .col-11-sm {width: 55%;}
+.col-12, .col-12-sm {width: 60%;}
+.col-13, .col-13-sm {width: 65%;}
+.col-14, .col-14-sm {width: 70%;}
+.col-15, .col-15-sm {width: 75%;}
+.col-16, .col-16-sm {width: 80%;}
+.col-17, .col-17-sm {width: 85%;}
+.col-18, .col-18-sm {width: 90%;}
+.col-19, .col-19-sm {width: 95%;}
+.col-20, .col-20-sm {width: 100%;}
+
+.col-66, .col-66-sm {width: 1.83%}
+.col-33, .col-33-sm {width: 4.66%}
+
+/* STUFF */
+.index .row {position: absolute; bottom: 60px; margin: 0 auto; width: 90%;}
+.nav p, .nav a {padding-top: 60px; line-height: 0;}
+.index p, .index a {margin: 0; padding: 30px 0; border-top: 2px black solid; line-height: 0;}
+.index p:last-child, .index a:last-child {border-bottom: 2px black solid;}
+.right {text-align: right;}
+p+p {padding-top: 30px;}
+.nav a, .index p, .home p, #subtitle, #title, #case-title p, #credits span, .sides-text span {text-transform: uppercase;}
+
+/* INFO */
+.parasection {margin-top: 75px; margin-bottom: 200px;}
+.parasection img {width: 100%; margin-top: -4px; border-radius: 2rem;}
+.parasection a {display: inline-block;}
+
+/* CASE */
+#subtitle {font-size: 22px; margin-top: 40px; padding-bottom: 5px;}
+#title {font-size: 77px; line-height: 1.1; letter-spacing: -2px; padding-top: 10px; padding-bottom: 75px;}    
+.quote {margin-bottom: 0;}
+.quote p {font-size: 42px; line-height: 1.3; margin-top: 100px;}
+#launch {text-align: right;}
+#launch a {padding-top: 4px;}
+/* img {padding-top: 60px;} */
+#endsection {padding-bottom: 100px;}
+#credits {padding-bottom: 275px;}
+#credits p+p {padding-top: 70px;}
+
+/* RWD */
+.desktop {display: block;}
+.rwd {display: none;}
+.rwd-content {display: inline;}
+
+@media only screen and (max-width: 1500px) {
+	.rwd-content {display: none;}
+	/* h1, h2, h3, p, a {font-size: 14px;} */
+	p+p {padding-top: 24px;}
+	.index p, .index a {padding: 24px 0;}
+
+	/* CASE */
+	#subtitle {font-size: 15px; padding-bottom: 3px;}
+	#title {font-size: 46px; letter-spacing: -1.5px; padding-top: 4px; padding-bottom: 30px;}
+	.quote p {font-size: 28px;}
+	#launch a {padding-top: 2px;}
+}
+
+@media only screen and (max-width: 1111px) {
+	.desktop {display: none;}
+	.rwd {display: block;}
+	.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col-13, .col-14, .col-15, .col-16, .col-17, .col-18, .col-19, .col-20, .col-33 {width: 100%;}
+	h1, h2, h3, p, a {line-height: 1.45;}
+	.nav p, .nav a {padding-top: 30px;}
+	/* img {padding-top: 36px;} */
+	p+p {padding-top: 20px;}
+
+	/* HOME */
+	.index .row {bottom: 0;}
+	.index p, .index a {padding: 23px 0; border-top: 1.5px black solid;}
+	.index p:last-child, .index a:last-child {border-bottom: none;}
+
+	/* INFO */
+	.parasection {margin-top: 60px; margin-bottom: 120px;}
+
+	/* CASE */
+	#subtitle {padding-bottom: 0;}
+	#title {font-size: 40px; letter-spacing: -1px; padding-top: 10px; padding-bottom: 30px;}
+	.quote p {font-size: 24px;}
+	#launch {text-align: left;}
+	#launch a {padding-top: 0x; padding-bottom: 30px;}
+	#endsection {padding-bottom: 60px;}
+	#credits {padding-bottom: 275px;}
+	#credits .stackcolumn {margin-top: 50px;}
+	.all-device {width: 92%;}
+	.parasection img {margin-top: -5px; border-radius: 1.375rem;}
+	
+	/* TEMP */
+	h1, h2, h3, p, a {font-size: 13px;}
+	#case-title p {margin-top: -75px; padding-top: 2px; padding-bottom: 40px;}
+}
