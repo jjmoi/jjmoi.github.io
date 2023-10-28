@@ -15,16 +15,19 @@
 	<link rel="stylesheet" href="css/grid.css">
 	<title>Zelda Ventures</title>
 	<style>
-		/* VALUES */
+		/* SECTIONS */
 		/* 0.04 0px 8px 24px or 0.04 0px 3px 5px */
 		.col-33 {background-color: white; box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; transition: 0.35s;}
-		.col-33:hover {background-color: #268BFF; color: white;}
+		.col-33:hover {background-color: #268BFF;}
+		.col-33:hover svg {fill: white;}
+		.col-33:hover p {color: white;}
+
 		.parasection {margin-top: 100px;}
-		#home-values {margin-top: 100px;}
-		#home-values img {padding: 50px 25px;}
-		#home-values h2 {padding: 0 25px;}
-		#home-values p {padding: 50px 25px;}
-		#home-values a {padding: 50px 25px;}
+		#home-sections {margin-top: 100px;}
+		#home-sections img {padding: 50px 25px;}
+		#home-sections h2 {padding: 0 25px;}
+		#home-sections p {padding: 50px 25px;}
+		#home-sections .sections-btn {font-weight: 700;}
 		#home-portfolio-intro p, #home-network-intro p {font-size: 24px;}
 	</style>
 </head>
@@ -68,20 +71,20 @@
 			</div>
 			<div class="col-2"></div>
 		</div>
-		<div class="row" id="home-values">
+		<div class="row" id="home-sections">
 			<div class="col-2"></div>
 			<a href="/portfolio">
 				<div class="col-33">
-					<img src="img/values/experienced.png" width="90">
+					<img src="img/sections/experienced.png" width="90">
 					<h2>Experienced</h2>
 					<p>With a track record of success spanning years, we understand the incredible potential that exists within the entrepreneurial ecosystem.</p>
-					<a href="/portfolio">Portfolio →</a>
+					<p class="sections-btn">Portfolio →</p>
 				</div>
 			</a>
 			<div class="col-1"></div>
 			<a href="/team">
 				<div class="col-33">
-					<img src="img/values/personable.png" width="90">
+					<img src="img/sections/personable.png" width="90">
 					<h2>Personable</h2>
 					<p>Trust and familiarity matter. That's why we take pride in the fact that most of the people we are going to invest in already know us.</p>
 					<a href="/team">Team →</a>
@@ -90,7 +93,7 @@
 			<div class="col-1"></div>
 			<a href="/network">
 				<div class="col-33">
-					<img src="img/values/community.png" width="90">
+					<img src="img/sections/community.png" width="90">
 					<h2>Community</h2>
 					<p>Highly networked and dedicated to backing serial entrepreneurs, our extensive network of innovators formed a strong community.</p>
 					<a href="/network">Network →</a>
