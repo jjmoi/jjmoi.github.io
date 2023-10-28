@@ -17,7 +17,7 @@
 	<style>
 		/* SECTIONS */
 		/* 0.04 0px 8px 24px or 0.04 0px 3px 5px */
-		.sections-icon {background-color: white; box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; transition: 0.35s;}
+		.sections-icon {background-color: white; box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; transition: 0.5s;}
 		.sections-icon:hover {background-color: #268BFF;}
 		.sections-icon:hover img {filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(1000%) contrast(100%);}
 		.sections-icon:hover h2, .sections-icon:hover p {color: white;}
@@ -26,7 +26,8 @@
 		#home-sections img {padding: 50px 20px;}
 		#home-sections h2 {padding: 0 20px;}
 		#home-sections p.home-sections-para {min-height: 100px;}
-		#home-sections p {padding: 20px; font-weight: 600;}
+		#home-sections p {padding: 20px;}
+		#home-sections p.home-sections-btn {font-weight: 300;}
 		#home-portfolio-intro, #home-network-intro {margin-top: 250px; margin-bottom: 50px;}
 		#home-portfolio-intro p, #home-network-intro p {font-size: 24px;}
 		#home-portfolio-company {margin-top: 50px;}
@@ -51,15 +52,15 @@
 				</a>
 			</div>
 			<div class="col-1 right">
-				<a href="/portfolio">Portfolio</a>
+				<a href="/portfolio">PORTFOLIO</a>
 			</div>
 			<div class="col-1"></div>
 			<div class="col-1 right">
-				<a href="/team">Team</a>
+				<a href="/team">TEAM</a>
 			</div>
 			<div class="col-1"></div>
 			<div class="col-1 right">
-				<a href="/network">Network</a>
+				<a href="/network">NETWORK</a>
 			</div>
 			<div class="col-2"></div>
 		</div>
@@ -74,15 +75,15 @@
 				</a>
 			</div>
 			<div class="col-2-sm right">
-				<a href="/portfolio">Portfolio</a>
+				<a href="/portfolio">PORTFOLIO</a>
 			</div>
 			<div class="col-1-sm"></div>
 			<div class="col-2-sm right">
-				<a href="/team">Team</a>
+				<a href="/team">TEAM</a>
 			</div>
 			<div class="col-1-sm"></div>
 			<div class="col-2-sm right">
-				<a href="/network">Network</a>
+				<a href="/network">NETWORK</a>
 			</div>
 			<div class="col-1-sm"></div>
 		</div>
@@ -102,21 +103,21 @@
 				<img src="img/sections/experienced.svg" width="90">
 				<h2>Experienced</h2>
 				<p class="home-sections-para">With a track record of success spanning years, we understand the incredible potential that exists within the entrepreneurial ecosystem.</p>
-				<p>Portfolio →</p>
+				<p class="home-sections-btn">PORTFOLIO →</p>
 			</div>
 			<div class="col-1"></div>
 			<div class="col-33 sections-icon rwd-5" style="cursor: pointer;" onclick="window.location='https://www.jjmoi.com/zelda/team';">
 				<img src="img/sections/personable.svg" width="90">
 				<h2>Personable</h2>
 				<p class="home-sections-para">Trust and familiarity matter. That's why we take pride in the fact that most of the people we are going to invest in already know us.</p>
-				<p>Team →</p>
+				<p class="home-sections-btn">TEAM →</p>
 			</div>
 			<div class="col-1"></div>
 			<div class="col-33 sections-icon rwd-5" style="cursor: pointer;" onclick="window.location='https://www.jjmoi.com/zelda/network';">
 				<img src="img/sections/community.svg" width="90">
 				<h2>Community</h2>
 				<p class="home-sections-para">Highly networked and dedicated to backing serial entrepreneurs, our extensive network of innovators formed a strong community.</p>
-				<p>Network →</p>
+				<p class="home-sections-btn">NETWORK →</p>
 			</div>
 			<div class="col-2"></div>
 		</div>
@@ -220,7 +221,7 @@
 		</div>
 		<div class="row" id="home-portfolio-more">
 			<div class="col-20 center rwd-5">
-				<a href="/portfolio" id="portfolio-btn">See our portfolio →</a>
+				<a href="/portfolio" id="portfolio-btn">PORTFOLIO →</a>
 			</div>
 		</div>
 	</div>
@@ -316,11 +317,11 @@
 		</div>
 		<div class="row" id="home-network-more">
 			<div class="col-20 center rwd-5">
-				<a href="/network" id="network-btn">See our network →</a>
+				<a href="/network" id="network-btn">NETWORK →</a>
 			</div>
 		</div>
 	</div>
-	<!-- FOOTER -->
+	<!-- FOOTER DESKTOP -->
 	<div class="container parasection footer desktop">
 		<div class="row">
 			<div class="col-2"></div>
@@ -328,11 +329,11 @@
 				<p>©2023 Zelda Ventures</p>
 			</div>
 			<div class="col-1 right">
-				<a href="mailto:info@zeldaventures.com" target="_blank">Email</a>
+				<a href="mailto:info@zeldaventures.com" target="_blank">EMAIL</a>
 			</div>
 			<div class="col-1"></div>
 			<div class="col-1 right">
-				<a href="https://www.linkedin.com/in/zeldaventures" target="_blank">LinkedIn</a>
+				<a href="https://www.linkedin.com/in/zeldaventures" target="_blank">LINKEDIN</a>
 			</div>
 			<div class="col-1"></div>
 			<div class="col-1 right">
@@ -341,7 +342,13 @@
 			<div class="col-2"></div>
 		</div>
 	</div>
+	<!-- FOOTER RWD -->
 	<div class="container parasection footer rwd">
+		<div class="row">
+			<div class="col-20 rwd-5">
+				<p>© 2023 Zelda Ventures. All rights reserved.</p>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-20 rwd-5">
 				<a href="mailto:info@zeldaventures.com" target="_blank">Email</a>
@@ -350,16 +357,6 @@
 		<div class="row">
 			<div class="col-20 rwd-5">
 				<a href="https://www.linkedin.com/in/zeldaventures" target="_blank">LinkedIn</a>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-20 rwd-5">
-				<a href="https://x.com/zeldaventures" target="_blank">X</a>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-20 rwd-5">
-				<p>© 2023 Zelda Ventures. All rights reserved.</p>
 			</div>
 		</div>
 	</div>
