@@ -20,21 +20,17 @@
 		.sections-icon {background-color: white; box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; transition: 0.35s;}
 		.sections-icon:hover {background-color: #268BFF;}
 		.sections-icon:hover img {filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(1000%) contrast(100%);}
-		.sections-icon:hover h2, .sections-icon:hover p, .sections-icon:hover .sections-btn {color: white;}
+		.sections-icon:hover h2, .sections-icon:hover p {color: white;}
 
-		.parasection {margin-top: 100px;}
 		#home-sections {margin-top: 100px;}
 		#home-sections img {padding: 50px 20px;}
 		#home-sections h2 {padding: 0 20px;}
 		#home-sections p.home-sections-para {min-height: 100px;}
-		#home-sections p {padding: 20px;}
-		#home-sections p.sections-btn {font-weight: 600;}
-		#home-portfolio-intro {margin-top: 250px; margin-bottom: 50px;}
+		#home-sections p {padding: 20px; font-weight: 600;}
+		#home-portfolio-intro, #home-network-intro {margin-top: 250px; margin-bottom: 50px;}
 		#home-portfolio-intro p, #home-network-intro p {font-size: 24px;}
 		#home-portfolio-company {margin-top: 50px;}
 		#portfolio-btn, #network-btn {margin-top: 50px;}
-		.footer {margin-top: 200px; padding-bottom: 100px;}
-		.footer p {font-weight: 300;}
 
 		/* RWD */
 		@media only screen and (max-width: 1111px) {
@@ -89,21 +85,21 @@
 				<img src="img/sections/experienced.svg" width="90">
 				<h2>Experienced</h2>
 				<p class="home-sections-para">With a track record of success spanning years, we understand the incredible potential that exists within the entrepreneurial ecosystem.</p>
-				<p class="sections-btn">Portfolio →</p>
+				<p>Portfolio →</p>
 			</div>
 			<div class="col-1"></div>
 			<div class="col-33 sections-icon rwd-5" style="cursor: pointer;" onclick="window.location='https://www.jjmoi.com/zelda/team';">
 				<img src="img/sections/personable.svg" width="90">
 				<h2>Personable</h2>
 				<p class="home-sections-para">Trust and familiarity matter. That's why we take pride in the fact that most of the people we are going to invest in already know us.</p>
-				<p class="sections-btn">Team →</p>
+				<p>Team →</p>
 			</div>
 			<div class="col-1"></div>
 			<div class="col-33 sections-icon rwd-5" style="cursor: pointer;" onclick="window.location='https://www.jjmoi.com/zelda/network';">
 				<img src="img/sections/community.svg" width="90">
 				<h2>Community</h2>
 				<p class="home-sections-para">Highly networked and dedicated to backing serial entrepreneurs, our extensive network of innovators formed a strong community.</p>
-				<p class="sections-btn">Network →</p>
+				<p>Network →</p>
 			</div>
 			<div class="col-2"></div>
 		</div>
@@ -159,6 +155,36 @@
 				</a>
 			</div>
 			<div class="col-2"></div>
+		</div>
+		<div class="row rwd" id="home-portfolio-company">
+			<div class="col-1-sm"></div>
+			<div class="col-22-sm">
+				<a href="https://www.alchemy.com">
+					<img src="img/portco/alchemy.png" width="100%">
+				</a>
+			</div>
+			<div class="col-1-sm"></div>
+			<div class="col-22-sm">
+				<a href="https://www.alchemy.com">
+					<img src="img/portco/alchemy.png" width="100%">
+				</a>
+			</div>
+			<div class="col-1-sm"></div>
+		</div>
+		<div class="row rwd" id="home-portfolio-company">
+			<div class="col-1-sm"></div>
+			<div class="col-22-sm">
+				<a href="https://www.alchemy.com">
+					<img src="img/portco/alchemy.png" width="100%">
+				</a>
+			</div>
+			<div class="col-1-sm"></div>
+			<div class="col-22-sm">
+				<a href="https://www.alchemy.com">
+					<img src="img/portco/alchemy.png" width="100%">
+				</a>
+			</div>
+			<div class="col-1-sm"></div>
 		</div>
 		<div class="row rwd" id="home-portfolio-company">
 			<div class="col-1-sm"></div>
@@ -250,7 +276,7 @@
 			</div>
 			<div class="col-2-sm"></div>
 		</div>
-		<div class="row rwd" id="home-network-founders">
+		<div class="row rwd" id="home-network-founders" style="margin-top:30px;">
 			<div class="col-2-sm"></div>
 			<div class="col-33-sm">
 				<img src="img/network/nathan-mintz.png" width="100%">

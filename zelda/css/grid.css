@@ -14,17 +14,13 @@ a:visited {color: black;}
 .nav {padding-top: 50px; padding-bottom: 50px;}
 
 /* TYPOGRAPHY */
-.center {text-align: center;}
 h1 {font-size: 62px; font-weight: 200; line-height: 1.2;}
 h2 {font-size: 34px; font-weight: 200;}
 h3 {font-weight: 600;}
 h4 {font-weight: 600;}
 p {font-size: 17px; font-weight: 300;}
 a {font-weight: 600;}
-
-.col-33 {background-color: white; box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px; transition: 0.35s;}
-.col-33:hover {background-color: #268BFF;}
-.col-33:hover svg {fill: red;}
+.center {text-align: center;}
 .right {text-align: right;}
 
 /* GRID */
@@ -64,6 +60,10 @@ a {font-weight: 600;}
 /* INFO */
 .parasection {margin-top: 100px; margin-bottom: 100px;}
 .parasection a {display: inline-block;}
+
+/* FOOTER */
+.footer {margin-top: 200px; padding-bottom: 100px;}
+.footer p {font-weight: 300;}
 
 /* RWD */
 .desktop {display: block;}
