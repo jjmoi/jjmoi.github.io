@@ -33,11 +33,15 @@
 		#home-portfolio-intro p, #home-network-intro p {font-size: 24px;}
 		#home-portfolio-company {margin-top: 50px;}
 		#portfolio-btn, #network-btn {margin-top: 50px;}
+		.footer {margin-top: 200px; padding-bottom: 100px;}
+		.footer p {font-weight: 300;}
 
 		/* RWD */
-		.rwd-5 {margin-left: 5%;}
-		#home-portfolio-intro p {margin-bottom: 50px;}
-		.rwd#home-portfolio-company {margin-top: 0;}
+		@media only screen and (max-width: 1111px) {
+			.rwd-5 {margin-left: 5%;}
+			#home-portfolio-intro p {margin-bottom: 50px;}
+			.rwd#home-portfolio-company {margin-top: 0;}
+		}
 	</style>
 </head>
 <body>
@@ -159,13 +163,13 @@
 		</div>
 		<div class="row rwd" id="home-portfolio-company">
 			<div class="col-2-sm"></div>
-			<div class="col-22">
+			<div class="col-22-sm">
 				<a href="https://www.alchemy.com">
 					<img src="img/portco/alchemy.png" width="100%">
 				</a>
 			</div>
-			<div class="col-1"></div>
-			<div class="col-22">
+			<div class="col-1-sm"></div>
+			<div class="col-22-sm">
 				<a href="https://www.alchemy.com">
 					<img src="img/portco/alchemy.png" width="100%">
 				</a>
@@ -174,13 +178,13 @@
 		</div>
 		<div class="row rwd" id="home-portfolio-company">
 			<div class="col-2-sm"></div>
-			<div class="col-22">
+			<div class="col-22-sm">
 				<a href="https://www.alchemy.com">
 					<img src="img/portco/alchemy.png" width="100%">
 				</a>
 			</div>
-			<div class="col-1"></div>
-			<div class="col-22">
+			<div class="col-1-sm"></div>
+			<div class="col-22-sm">
 				<a href="https://www.alchemy.com">
 					<img src="img/portco/alchemy.png" width="100%">
 				</a>
@@ -196,7 +200,7 @@
 	<div class="container parasection">
 		<div class="row" id="home-network-intro">
 			<div class="col-2"></div>
-			<div class="col-16">
+			<div class="col-12 rwd-5">
 				<h1>Network</h1>
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
 			</div>
@@ -269,7 +273,7 @@
 		</div>
 	</div>
 	<!-- FOOTER -->
-	<div class="container parasection">
+	<div class="container parasection footer">
 		<div class="row">
 			<div class="col-2"></div>
 			<div class="col-11">
