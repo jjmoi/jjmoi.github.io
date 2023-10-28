@@ -17,10 +17,10 @@
 	<style>
 		/* SECTIONS */
 		/* 0.04 0px 8px 24px or 0.04 0px 3px 5px */
-		.col-33 {background-color: white; box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; transition: 0.35s;}
-		.col-33:hover {background-color: #268BFF;}
-		.col-33:hover img {filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(1000%) contrast(100%);}
-		.col-33:hover h2, .col-33:hover p, .col-33:hover p.sections-btn {color: white;}
+		.sections-icon {background-color: white; box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; transition: 0.35s;}
+		.sections-icon:hover {background-color: #268BFF;}
+		.sections-icon:hover img {filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(1000%) contrast(100%);}
+		.sections-icon:hover h2, .sections-icon:hover p, .sections-icon:hover .sections-btn {color: white;}
 
 		.parasection {margin-top: 100px;}
 		#home-sections {margin-top: 100px;}
@@ -29,8 +29,10 @@
 		#home-sections p.home-sections-para {min-height: 100px;}
 		#home-sections p {padding: 20px;}
 		#home-sections p.sections-btn {font-weight: 600;}
-		#home-portfolio-intro {margin-top: 250px;}
+		#home-portfolio-intro {margin-top: 250px; margin-bottom: 50px;}
 		#home-portfolio-intro p, #home-network-intro p {font-size: 24px;}
+		#home-portfolio-company {margin-top: 50px;}
+		#portfolio-btn, #network-btn {margin-top: 50px;}
 	</style>
 </head>
 <body>
@@ -75,24 +77,24 @@
 		</div>
 		<div class="row" id="home-sections">
 			<div class="col-2"></div>
-			<div class="col-33" style="cursor: pointer;" onclick="window.location='https://www.jjmoi.com/zelda/portfolio';">
+			<div class="col-33 sections-icon" style="cursor: pointer;" onclick="window.location='https://www.jjmoi.com/zelda/portfolio';">
 				<img src="img/sections/experienced.svg" width="90">
 				<h2>Experienced</h2>
 				<p class="home-sections-para">With a track record of success spanning years, we understand the incredible potential that exists within the entrepreneurial ecosystem.</p>
 				<p class="sections-btn">Portfolio →</p>
 			</div>
 			<div class="col-1"></div>
-			<div class="col-33" style="cursor: pointer;" onclick="window.location='https://www.jjmoi.com/zelda/team';">
+			<div class="col-33 sections-icon" style="cursor: pointer;" onclick="window.location='https://www.jjmoi.com/zelda/team';">
 				<img src="img/sections/personable.svg" width="90">
 				<h2>Personable</h2>
-				<p>Trust and familiarity matter. That's why we take pride in the fact that most of the people we are going to invest in already know us.</p>
+				<p class="home-sections-para">Trust and familiarity matter. That's why we take pride in the fact that most of the people we are going to invest in already know us.</p>
 				<p class="sections-btn">Team →</p>
 			</div>
 			<div class="col-1"></div>
-			<div class="col-33" style="cursor: pointer;" onclick="window.location='https://www.jjmoi.com/zelda/network';">
+			<div class="col-33 sections-icon" style="cursor: pointer;" onclick="window.location='https://www.jjmoi.com/zelda/network';">
 				<img src="img/sections/community.svg" width="90">
 				<h2>Community</h2>
-				<p>Highly networked and dedicated to backing serial entrepreneurs, our extensive network of innovators formed a strong community.</p>
+				<p class="home-sections-para">Highly networked and dedicated to backing serial entrepreneurs, our extensive network of innovators formed a strong community.</p>
 				<p class="sections-btn">Network →</p>
 			</div>
 			<div class="col-2"></div>
@@ -140,7 +142,7 @@
 		</div>
 		<div class="row" id="home-portfolio-more">
 			<div class="col-20 center">
-				<a href="/portfolio" class="btn">See our portfolio →</a>
+				<a href="/portfolio" id="portfolio-btn">See our portfolio →</a>
 			</div>
 		</div>
 	</div>
@@ -239,7 +241,7 @@
 		</div>
 		<div class="row" id="home-network-more">
 			<div class="col-20 center">
-				<a href="/network" class="btn">See our network →</a>
+				<a href="/network" id="network-btn">See our network →</a>
 			</div>
 		</div>
 	</div>
