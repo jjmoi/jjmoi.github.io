@@ -57,6 +57,7 @@ a {font-weight: 600;}
 
 .col-66, .col-66-sm {width: 9.165%} /* 1.83col  */
 .col-33, .col-33-sm {width: 23.333%} /* 4.66col */
+.col-22, .col-22-sm {width: 37.500%;} /* 7.50col */
 
 /* STUFF */
 
@@ -74,6 +75,6 @@ a {font-weight: 600;}
 @media only screen and (max-width: 1111px) {
 	.desktop {display: none;}
 	.rwd {display: block;}
-	.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col-13, .col-14, .col-15, .col-16, .col-17, .col-18, .col-19, .col-20, .col-66, .col-33 {width: 90%;}
+	.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col-13, .col-14, .col-15, .col-16, .col-17, .col-18, .col-19, .col-20, .col-66, .col-33 {width: 90%; margin: 0 auto;}
 	.col-33 {float: none; margin: 0 auto;}
 }

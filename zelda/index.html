@@ -33,6 +33,11 @@
 		#home-portfolio-intro p, #home-network-intro p {font-size: 24px;}
 		#home-portfolio-company {margin-top: 50px;}
 		#portfolio-btn, #network-btn {margin-top: 50px;}
+
+		/* RWD */
+		.rwd-5 {margin-left: 5%;}
+		#home-portfolio-intro p {margin-bottom: 50px;}
+		.rwd#home-portfolio-company {margin-top: 0;}
 	</style>
 </head>
 <body>
@@ -77,21 +82,21 @@
 		</div>
 		<div class="row" id="home-sections">
 			<div class="col-2"></div>
-			<div class="col-33 sections-icon" style="cursor: pointer;" onclick="window.location='https://www.jjmoi.com/zelda/portfolio';">
+			<div class="col-33 sections-icon rwd-5" style="cursor: pointer;" onclick="window.location='https://www.jjmoi.com/zelda/portfolio';">
 				<img src="img/sections/experienced.svg" width="90">
 				<h2>Experienced</h2>
 				<p class="home-sections-para">With a track record of success spanning years, we understand the incredible potential that exists within the entrepreneurial ecosystem.</p>
 				<p class="sections-btn">Portfolio →</p>
 			</div>
 			<div class="col-1"></div>
-			<div class="col-33 sections-icon" style="cursor: pointer;" onclick="window.location='https://www.jjmoi.com/zelda/team';">
+			<div class="col-33 sections-icon rwd-5" style="cursor: pointer;" onclick="window.location='https://www.jjmoi.com/zelda/team';">
 				<img src="img/sections/personable.svg" width="90">
 				<h2>Personable</h2>
 				<p class="home-sections-para">Trust and familiarity matter. That's why we take pride in the fact that most of the people we are going to invest in already know us.</p>
 				<p class="sections-btn">Team →</p>
 			</div>
 			<div class="col-1"></div>
-			<div class="col-33 sections-icon" style="cursor: pointer;" onclick="window.location='https://www.jjmoi.com/zelda/network';">
+			<div class="col-33 sections-icon rwd-5" style="cursor: pointer;" onclick="window.location='https://www.jjmoi.com/zelda/network';">
 				<img src="img/sections/community.svg" width="90">
 				<h2>Community</h2>
 				<p class="home-sections-para">Highly networked and dedicated to backing serial entrepreneurs, our extensive network of innovators formed a strong community.</p>
@@ -103,14 +108,14 @@
 	<div class="container parasection">
 		<div class="row" id="home-portfolio-intro">
 			<div class="col-2"></div>
-			<div class="col-12">
+			<div class="col-12 rwd-5">
 				<h1>Portfolio</h1>
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
 				<div class="col-6"></div>
 			</div>
 			<div class="col-2"></div>
 		</div>
-		<div class="row" id="home-portfolio-company">
+		<div class="row desktop" id="home-portfolio-company">
 			<div class="col-2"></div>
 			<div class="col-33">
 				<a href="https://www.alchemy.com">
@@ -131,7 +136,7 @@
 			</div>
 			<div class="col-2"></div>
 		</div>
-		<div class="row" id="home-portfolio-company">
+		<div class="row desktop" id="home-portfolio-company">
 			<div class="col-2"></div>
 			<div class="col-33">
 				<a href="https://www.alchemy.com">
@@ -151,6 +156,36 @@
 				</a>
 			</div>
 			<div class="col-2"></div>
+		</div>
+		<div class="row rwd" id="home-portfolio-company">
+			<div class="col-2-sm"></div>
+			<div class="col-22">
+				<a href="https://www.alchemy.com">
+					<img src="img/portco/alchemy.png" width="100%">
+				</a>
+			</div>
+			<div class="col-1"></div>
+			<div class="col-22">
+				<a href="https://www.alchemy.com">
+					<img src="img/portco/alchemy.png" width="100%">
+				</a>
+			</div>
+			<div class="col-2-sm"></div>
+		</div>
+		<div class="row rwd" id="home-portfolio-company">
+			<div class="col-2-sm"></div>
+			<div class="col-22">
+				<a href="https://www.alchemy.com">
+					<img src="img/portco/alchemy.png" width="100%">
+				</a>
+			</div>
+			<div class="col-1"></div>
+			<div class="col-22">
+				<a href="https://www.alchemy.com">
+					<img src="img/portco/alchemy.png" width="100%">
+				</a>
+			</div>
+			<div class="col-2-sm"></div>
 		</div>
 		<div class="row" id="home-portfolio-more">
 			<div class="col-20 center">
@@ -207,25 +242,25 @@
 			<div class="col-2"></div>
 		</div>
 		<div class="row rwd" id="home-network-founders">
-			<div class="col-2"></div>
+			<div class="col-2-sm"></div>
 			<div class="col-33-sm">
 				<img src="img/network/nathan-mintz.png" width="100%">
 				<h3>Nathan Mintz</h3>
 				<p>Spartan</p>
 			</div>
-			<div class="col-1"></div>
+			<div class="col-1-sm"></div>
 			<div class="col-33-sm">
 				<img src="img/network/nathan-mintz.png" width="100%">
 				<h3>Nathan Mintz</h3>
 				<p>Spartan</p>
 			</div>
-			<div class="col-1"></div>
+			<div class="col-1-sm"></div>
 			<div class="col-33-sm">
 				<img src="img/network/nathan-mintz.png" width="100%">
 				<h3>Nathan Mintz</h3>
 				<p>Spartan</p>
 			</div>
-			<div class="col-2"></div>
+			<div class="col-2-sm"></div>
 		</div>
 		<div class="row" id="home-network-more">
 			<div class="col-20 center">
