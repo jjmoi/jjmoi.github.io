@@ -28,8 +28,8 @@
 		#home-sections p.home-sections-para {min-height: 100px;}
 		#home-sections p {padding: 20px;}
 		#home-sections p.home-sections-btn {font-weight: 300;}
-		#home-portfolio-intro, #home-network-intro {margin-top: 250px; margin-bottom: 50px;}
-		#home-portfolio-intro p, #home-network-intro p {font-size: 24px; padding-top: 20px;}
+		#home-portfolio-intro, #home-team-intro, #home-network-intro {margin-top: 250px; margin-bottom: 50px;}
+		#home-portfolio-intro p, #home-team-intro p, #home-network-intro p {font-size: 24px; padding-top: 20px;}
 		#home-portfolio-company {margin-top: 50px;}
 		#portfolio-btn, #network-btn {margin-top: 50px;}
 		.previous-companies {font-size: 15px;}
@@ -38,7 +38,7 @@
 		@media only screen and (max-width: 1111px) {
 			.rwd-5 {margin-left: 5%;}
 			#home-intro h1 {font-size: 46px;}
-			.rwd#home-portfolio-company, .rwd#home-network-founders {margin-top: 0;}
+			.rwd#home-portfolio-company, .rwd#home-team-foudners, .rwd#home-network-founders {margin-top: 0;}
 			.sections-icon {margin-bottom: 50px;}
 		}
 	</style>
@@ -84,7 +84,7 @@
 			</div>
 			<div class="col-1-sm"></div>
 			<div class="col-3-sm right">
-				<a href="/network">NETWORK</a>
+				<a href="#home-network-intro">NETWORK</a>
 			</div>
 		</div>
 	</div>
@@ -103,21 +103,21 @@
 				<img src="img/sections/experienced.svg" width="90">
 				<h2>Experienced</h2>
 				<p class="home-sections-para">With a track record of success spanning decades, we understand the incredible potential that exists within well developed entrepreneurial ecosystems.</p>
-				<p class="home-sections-btn">PORTFOLIO →</p>
+				<a href="#home-portfolio-intro" class="home-sections-btn">PORTFOLIO →</a>
 			</div>
 			<div class="col-1"></div>
 			<div class="col-33 sections-icon rwd-5" style="cursor: pointer;" onclick="window.location='https://www.jjmoi.com/zelda/team';">
 				<img src="img/sections/personable.svg" width="90">
 				<h2>Personable</h2>
 				<p class="home-sections-para">Trust and familiarity matter. That's why we take pride in the fact that the majority of our Zelda Ventures portfolio company founders have known us for years.</p>
-				<p class="home-sections-btn">TEAM →</p>
+				<a href="#home-team-intro" class="home-sections-btn">TEAM →</a>
 			</div>
 			<div class="col-1"></div>
 			<div class="col-33 sections-icon rwd-5" style="cursor: pointer;" onclick="window.location='https://www.jjmoi.com/zelda/network';">
 				<img src="img/sections/community.svg" width="90">
 				<h2>Community</h2>
 				<p class="home-sections-para">Highly networked and dedicated to backing serial entrepreneurs, our extensive network of innovators has formed a strong community.</p>
-				<p class="home-sections-btn">NETWORK →</p>
+				<a href="home-network-intro" class="home-sections-btn">NETWORK →</a>
 			</div>
 			<div class="col-2"></div>
 		</div>
@@ -219,11 +219,57 @@
 			</div>
 			<div class="col-1-sm"></div>
 		</div>
+		<!--
 		<div class="row" id="home-portfolio-more">
 			<div class="col-20 center rwd-5">
 				<a href="/portfolio" id="portfolio-btn">PORTFOLIO →</a>
 			</div>
 		</div>
+		-->
+	</div>
+	<div class="container parasection">
+		<div class="row" id="home-team-intro">
+			<div class="col-2"></div>
+			<div class="col-12 rwd-5">
+				<h1>Team</h1>
+				<p>Leading Zelda Ventures is its founder and Managing Partner, Suzanne Fletcher, an experienced venture capitalist, joined by Fermi, the Chief Canine Officer, who adds joy and humor to the office. Together, they create a welcoming atmosphere, supported by our extended team of skilled functional specialists.</p>
+			</div>
+			<div class="col-2"></div>
+		</div>
+		<div class="row desktop" id="home-team-founders">
+			<div class="col-2"></div>
+			<div class="col-3">
+				<img src="img/team/suzanne-fletcher.png" width="100%">
+				<h3>Suzanne Fletcher</h3>
+				<p class="previous-companies">Founder and Managing Partner</p>
+			</div>
+			<div class="col-2"></div>
+			<div class="col-11">
+				<p>Suzanne Fletcher is a well-known investor with a career that spans over two decades. Prior to founding Zelda Ventures, she amassed nine years of hands-on experience in the venture capital landscape as an angel, co-investor, and lead investor. A pivotal chapter of her career involved managing the co-investment vehicle at StartX, a prestigious startup accelerator dedicated to supporting Stanford University alumni, professors and students. There, she honed her skills and built a phenomenal network over the course of five years. Suzanne's journey then took her to Prime Movers Lab, where she served as a general partner before setting out to create her own firm. Her prior investment portfolio is extensive and noteworthy, encompassing over 350 companies and 900 founders. In addition to her exceptional founder network, she possesses an equally remarkable network among top-tier venture capital funds, with whom she has co-invested. Suzanne began her career in the Technology Investment Banking Group at Morgan Stanley.</p>
+				<p>She earned an MBA from Stanford University and a BS in Finance and Information Systems from the Wharton School at the University of Pennsylvania. Suzanne lives in the Bay Area, she is happily married to an entrepreneur, and is a mom to human twins and a lot of pets!</p>
+			</div>
+			<div class="col-2"></div>
+		</div>
+		<div class="row desktop" id="home-team-founders">
+			<div class="col-2"></div>
+			<div class="col-3">
+				<img src="img/team/suzanne-fletcher.png" width="100%">
+				<h3>Fermi</h3>
+				<p class="previous-companies">Chief Canine Officer</p>
+			</div>
+			<div class="col-2"></div>
+			<div class="col-11">
+				<p>Office dog!</p>
+			</div>
+			<div class="col-2"></div>
+		</div>
+		<!--
+		<div class="row" id="home-network-more">
+			<div class="col-20 center rwd-5">
+				<a href="/network" id="network-btn">Team →</a>
+			</div>
+		</div>
+		-->
 	</div>
 	<div class="container parasection">
 		<div class="row" id="home-network-intro">
@@ -315,11 +361,13 @@
 			</div>
 			<div class="col-2-sm"></div>
 		</div>
+		<!--
 		<div class="row" id="home-network-more">
 			<div class="col-20 center rwd-5">
 				<a href="/network" id="network-btn">NETWORK →</a>
 			</div>
 		</div>
+		-->
 	</div>
 	<!-- FOOTER DESKTOP -->
 	<div class="container parasection footer desktop">
