@@ -38,17 +38,6 @@ all things licensed under
 
 ---
 
-# github accounts
-heyheyjjmoi@gmail.com - jjmoi.com (this)
-
-goodnightjj@gmail.com - ttjj.us (retired)
-
-heyjjmoimoi@gmail.com - jjmoi.moi (later)
-
-heyjjmois@gmail.com repo: jjmois.com (retired)
-
----
-
 # to do
 1. transfer from encirca to ggl domain
 2. clone repo
