@@ -22,23 +22,6 @@ http://www.curtismlarson.com/blog/2015/04/12/github-pages-google-domains
 
 ---
 
-# backup
-http://goodnightjj.github.io
-
----
-
 [![cat preview](http://www.jjmoi.com/img/cat.png)](http://www.jjmoi.com/img/cat.png)
 
----
-
-# license
-all things licensed under
-
 [creative commons attribution - no derivatives 4.0](https://creativecommons.org/licenses/by-nd/4.0)
-
----
-
-# to do
-1. transfer from encirca to ggl domain
-2. clone repo
-3. update everywhere
