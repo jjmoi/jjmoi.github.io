@@ -104,6 +104,7 @@ p+p {padding-top: 30px;}
 	#launch {text-align: left;}
 	#launch a {padding-top: 0x; padding-bottom: 30px;}
 	#endsection {padding-bottom: 60px;}
+	#last {padding-top: 300px; padding-bottom: 50px;}
 	#credits {padding-bottom: 275px;}
 	#credits .stackcolumn {margin-top: 50px;}
 	.all-device {width: 92%;}
