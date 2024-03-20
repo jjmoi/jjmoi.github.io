@@ -1,8 +1,24 @@
+/* NAV */
+a#tachyus:hover p {color: coral;}
+a#gsa18f:hover p {color: dodgerblue;}
+a#primemovers:hover p {color: cornflowerblue;}
+a#rtx:hover p {color: crimson;}
+a#spring:hover p {color: blueviolet;}
+a#intersection:hover p {color: lightseagreen;}
+a#opengov:hover p {color: limegreen;}
+
+a#oceanix:hover p {color: cyan;}
+a#vaxxinity:hover p {color: yellow;}
+a#spaceperspective:hover p {color: blue;}
+a#elicit:hover p {color: hotpink;}
+a#together:hover p {color: tomato;}
+
+/* STUFF */
+.next-project {margin-bottom: 200px;}
+.moreprojects {border-bottom: 1.5px black solid; padding: 12px 0;}
 .index .row {position: absolute; bottom: 60px; margin: 0 auto; width: 90%;}
 .index p, .index a {margin: 0; padding: 16px 0; border-top: 1.5px black solid; line-height: 0;}
 .index p:last-child, .index a:last-child {border-bottom: 1.5px black solid;}
-.next-project {margin-bottom: 200px;}
-.moreprojects {border-bottom: 1.5px black solid; padding: 12px 0;}
 .index {padding-bottom: 60px;}
 .index .row {position: relative; width: 100%; bottom: 0px;}
 .index p, .index a, .index p:last-child, .index a:last-child {border: none;}
