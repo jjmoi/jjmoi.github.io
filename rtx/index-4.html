@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 <head>
 	<!-- ver 0.190118 -->
@@ -22,34 +22,6 @@
 		body {height: auto; background-color: white;}
 		::-moz-selection {background: crimson; color: #dc143d;}
 		::selection {background: crimson; color: #dc143d;}
-
-		.index .row {position: relative; width: 100%;}
-		.desktop {padding-bottom: 60px; bottom: 0;}
-		.index p, .index a, .index p:last-child, .index a:last-child {border: none;}
-		.index a {border-bottom: 1.5px black solid;}
-		.index a:first-child {border-top: 1.5px black solid;}
-		.index a:last-child {border-bottom: 1.5px black solid;}
-		.index .row {bottom: 0px;}
-		.index p, .index a {padding: 16px 0;}
-		.moreprojects {border-bottom: 1.5px black solid; padding: 12px 0;}
-
-		@media only screen and (max-width: 1500px) {
-			.index .row {bottom: -10px;}
-			.index p, .index a {padding: 14px 0;}
-			.index a {border-bottom: 1.25px black solid;}
-			.index a:first-child {border-top: 1.25px black solid;}
-			.index a:last-child {border-bottom: 1.25px black solid;}
-			.moreprojects {border-bottom: 1.25px black solid; padding: 12px 0;}
-		}
-
-		@media only screen and (max-width: 1111px) {
-			.index, .index .row {bottom: 48px;}
-			.index p, .index a {padding: 12px 0;}
-			.index a {border-bottom: 1px black solid;}
-			.index a:first-child {border-top: 1px black solid;}
-			.index a:last-child {border-bottom: 1px black solid;}
-			.moreprojects {border-bottom: 1px black solid; padding: 12px 0;}
-		}
 	</style>
 </head>
 <body>
@@ -126,15 +98,52 @@
 				<p><span>User Research & Design</span><br>
 					JJ Moi, Diego Rioja, Anthony Besada, Jenny Lam, Anne Cho, Jon Turner, Bipin Saxena, Chris Wilson, Stan Grinapol</p>
 				<p><span>Further Readings</span><br>
-					<a href="https://tsdr.uspto.gov/#caseNumber=98128989&caseSearchType=US_APPLICATION&caseType=DEFAULT&searchType=statusSearch">USPTO Trademark Case →</a><br>
+					<a href="https://www.rtx.com/raytheon/news/2023/02/22/inside-the-space-factory" target="_blank">Inside the space factory →</a><br>
 					<a href="https://www.rtx.com/news/news-center/2023/08/10/darpa-taps-rtx-to-attune-ai-decisions-to-human-values" target="_blank">DARPA taps RTX to attune AI decisions to human values →</a><br>
-					<a href="https://www.rtx.com/raytheon/news/2023/02/22/inside-the-space-factory" target="_blank">Inside the space factory →</a></p>
+					<a href="https://tsdr.uspto.gov/#caseNumber=98128989&caseSearchType=US_APPLICATION&caseType=DEFAULT&searchType=statusSearch">USPTO Trademark Case →</a>
+					</p>
 			</div>
 			<div class="col-1"></div>
 		</div>
 	</div>
+	<!-- NEXT PROJECT v3 -->
+	<!-- DESKTOP -->
+	<div class="container parasection home desktop" id="desktop-lastcase" style="padding-top:500px;">
+		<a href="/opengov" class="row">
+			<div class="col-10">
+				<img src="/opengov/opengov-99.webp">
+			</div>
+		</a>
+		<a href="/opengov" class="row" id="opengov">
+			<div class="col-5">
+				<p>OpenGov</p>
+			</div>
+			<div class="col-4">
+				<p>Rebuilding public trust in open data</p>
+			</div>
+			<div class="col-1 right">
+				<p>Case →</p>
+			</div>
+		</a>
+	</div>
+	<!-- RWD -->
+	<div class="container parasection home rwd" id="rwd-lastcase" style="padding-top:500px;">
+		<a href="/opengov" class="row">
+			<div class="col-10-sm">
+				<img src="/opengov/opengov-cover.webp">
+			</div>
+		</a>
+		<a href="/opengov" class="row" id="opengov">
+			<div class="col-9-sm">
+				<p>OpenGov<br>Rebuilding public trust in open data</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>→</p>
+			</div>
+		</a>
+	</div>
 	<!-- FOOTER NAV -->
-	<div class="container index">
+	<div class="container index" style="padding-top:500px;">
 		<div class="row moreprojects">
 			<div class="col-10">
 				<p>More Projects</p>
