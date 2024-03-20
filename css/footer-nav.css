@@ -26,6 +26,7 @@ a#together:hover p {color: tomato;}
 .index a:first-child {border-top: 1.5px black solid;}
 .index a:last-child {border-bottom: 1.5px black solid;}
 .index p, .index a {padding: 16px 0;}
+#footer-all-devices {padding-bottom: 60px;}
 
 @media only screen and (max-width: 1500px) {
 	.index .row {bottom: -10px;}
@@ -43,4 +44,5 @@ a#together:hover p {color: tomato;}
 	.index a:first-child {border-top: 1px black solid;}
 	.index a:last-child {border-bottom: 1px black solid;}
 	.moreprojects {border-bottom: 1px black solid; padding: 12px 0;}
+	#footer-all-devices {padding-bottom: 50px;}
 }
