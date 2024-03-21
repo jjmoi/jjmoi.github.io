@@ -7,6 +7,21 @@ a {text-decoration: none; display: block;}
 a:hover, a span:hover {color: black; cursor: url(https://jjmoi.com/files/mick-point3.png), default; text-decoration: none;}
 a:visited {color: black;}
 
+/* NAV HOVER */
+a#tachyus:hover p {color: coral;}
+a#gsa18f:hover p {color: dodgerblue;}
+a#primemovers:hover p {color: cornflowerblue;}
+a#rtx:hover p {color: crimson;}
+a#spring:hover p {color: blueviolet;}
+a#intersection:hover p {color: lightseagreen;}
+a#opengov:hover p {color: limegreen;}
+
+a#oceanix:hover p {color: cyan;}
+a#vaxxinity:hover p {color: yellow;}
+a#spaceperspective:hover p {color: blue;}
+a#elicit:hover p {color: hotpink;}
+a#together:hover p {color: tomato;}
+
 /* GRID */
 .container, .all-device {width: 98%; margin-left: auto; margin-right: auto;}
 .container.rwd {width: 92%;}
@@ -15,6 +30,7 @@ a:visited {color: black;}
 .row::after {content: ""; display: table; clear: both;}
 .col-1, .col-1-sm {width: 10%;}
 .col-2, .col-2-sm {width: 20%;}
+.col-25, .col-25-sm {width: ;}
 .col-3, .col-3-sm {width: 30%;}
 .col-4, .col-4-sm {width: 40%;}
 .col-5, .col-5-sm {width: 50%;}
