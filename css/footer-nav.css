@@ -1,6 +1,4 @@
 .index .desktop {padding-bottom: 60px; bottom: 0;}
-.next-project {margin-bottom: 200px;}
-.moreprojects {border-bottom: 1.5px black solid; padding: 12px 0;}
 .index .row {position: absolute; bottom: 60px; margin: 0 auto; width: 90%;}
 .index p, .index a {margin: 0; padding: 16px 0; border-top: 1.5px black solid; line-height: 0;}
 .index p:last-child, .index a:last-child {border-bottom: 1.5px black solid;}
@@ -11,6 +9,8 @@
 .index a:first-child {border-top: 1.5px black solid;}
 .index a:last-child {border-bottom: 1.5px black solid;}
 .index p, .index a {padding: 16px 0;}
+.next-project {margin-bottom: 200px;}
+.moreprojects {border-bottom: 1.5px black solid; padding: 12px 0;}
 #footer-all-devices {padding-bottom: 60px;}
 
 @media only screen and (max-width: 1500px) {
@@ -20,6 +20,7 @@
 	.index a:first-child {border-top: 1.25px black solid;}
 	.index a:last-child {border-bottom: 1.25px black solid;}
 	.moreprojects {border-bottom: 1.25px black solid; padding: 12px 0;}
+	#footer-all-devices {padding-bottom: 45px;}
 }
 
 @media only screen and (max-width: 1111px) {

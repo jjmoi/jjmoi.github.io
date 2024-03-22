@@ -45,7 +45,6 @@ a#together:hover p {color: tomato;}
 .right {text-align: right;}
 p+p {padding-top: 30px;}
 .nav a, .index p, .home p, #subtitle, #title, #case-title span, #credits span, .sides-text span, .next-project span {text-transform: uppercase;}
-
 .col-25 p {padding-right: 25px;}
 
 /* INFO */
