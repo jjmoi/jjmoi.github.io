@@ -42,7 +42,7 @@ a#together:hover p {color: tomato;}
 
 /* STUFF */
 .first {margin-top: 86px; margin-bottom: 0; padding-top: 40px;}
-.first p, .small-col p, .cats p {padding-right: 10px;}
+.first p, .small-col p, .cats p {padding-right: 30px;}
 .nav p, .nav a {padding-top: 60px; line-height: 0;}
 .right {text-align: right;}
 p+p {padding-top: 30px;}
