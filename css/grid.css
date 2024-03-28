@@ -41,7 +41,7 @@ a#together:hover p {color: tomato;}
 .col-10, .col-10-sm {width: 100%;}
 
 /* STUFF */
-.first {margin-top: 86px; margin-bottom: 0; padding-top: 40px;}
+.first {padding-top: 54px;}
 .first p, .small-col p, .cats p {padding-right: 30px;}
 .nav p, .nav a {padding-top: 60px; line-height: 0;}
 .right {text-align: right;}
