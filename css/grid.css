@@ -67,6 +67,9 @@ p+p {padding-top: 30px;}
 #credits {padding-bottom: 275px;}
 #credits p+p {padding-top: 70px;}
 
+/* TEMP */
+#rwd-intropara {padding-top: 200px;}
+
 /* RWD */
 .desktop {display: block;}
 .rwd {display: none;}
@@ -113,5 +116,5 @@ p+p {padding-top: 30px;}
 	
 	/* TEMP */
 	h1, h2, h3, p, a, .nav a, #intro p, #last a, #last p {font-size: 13px; line-height: 1.45;}
-	#rwd-intropara {padding-top: 200px;}
+	#rwd-intropara {padding-top: 100px;}
 }
