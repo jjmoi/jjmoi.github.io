@@ -72,6 +72,9 @@ p+p {padding-top: 30px;}
 #credits {padding-bottom: 275px;}
 #credits p+p {padding-top: 70px;}
 
+/* FOOTER  */
+#footer-all-devices {padding-bottom: 60px;}
+
 /* RWD */
 .desktop {display: block;}
 .rwd {display: none;}
@@ -81,13 +84,12 @@ p+p {padding-top: 30px;}
 	.rwd-content {display: none;}
 	/* h1, h2, h3, p, a {font-size: 14px;} */
 	p+p {padding-top: 24px;}
-
-	/* CASE */
 	.first {padding-bottom: 200px;}
 	#subtitle {font-size: 15px; padding-bottom: 3px;}
 	#title {font-size: 46px; letter-spacing: -1.5px; padding-top: 4px; padding-bottom: 30px;}
 	.quote p {font-size: 28px;}
 	#launch a {padding-top: 2px;}
+	#footer-all-devices {padding-bottom: 45px;}
 }
 
 @media only screen and (max-width: 1111px) {
@@ -120,4 +122,5 @@ p+p {padding-top: 30px;}
 	*, h1, h2, h3, p, a, span {font-size: 14px; line-height: 1.3;}
 	#rwd-intro {padding-top: 200px;}
 	#tags-role, #tags-scope, #tags-sector, #tags-industry {padding-top: 20px;}
+	#footer-all-devices {padding-bottom: 50px;}
 }
