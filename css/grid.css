@@ -66,6 +66,7 @@ p+p {padding-top: 30px;}
 .quote p {font-size: 42px; line-height: 1.3; margin-top: 100px;}
 #launch {text-align: right;}
 #launch a {padding-top: 4px;}
+.section-padtop {padding-top: 200px;}
 
 /* img {padding-top: 60px;} */
 #endsection {padding-bottom: 100px;}
@@ -74,6 +75,7 @@ p+p {padding-top: 30px;}
 
 /* FOOTER  */
 #footer-all-devices {padding-bottom: 60px;}
+#copyrights {position: relative; top: 2px; left: 4px;}
 
 /* RWD */
 .desktop {display: block;}
@@ -90,6 +92,7 @@ p+p {padding-top: 30px;}
 	.quote p {font-size: 28px;}
 	#launch a {padding-top: 2px;}
 	#footer-all-devices {padding-bottom: 45px;}
+	.section-padtop {padding-top: 175px;}
 }
 
 @media only screen and (max-width: 1111px) {
@@ -112,6 +115,7 @@ p+p {padding-top: 30px;}
 	#launch {text-align: left;}
 	#launch a {padding-top: 0x; padding-bottom: 30px;}
 	#endsection {padding-bottom: 60px;}
+	.section-padtop {padding-top: 150px;}
 	#last {padding-top: 325px; padding-bottom: 50px;}
 	#credits {padding-bottom: 350px;}
 	#credits .stackcolumn {margin-top: 50px;}
