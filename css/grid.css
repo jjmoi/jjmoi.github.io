@@ -10,7 +10,7 @@ html, body {height: 100%; width: 100%; margin: 0; padding: 0;}
 *, h1, h2, h3, p, a, span {font-family: "Fragment Mono", monospace; font-weight: 400; font-style: normal; margin: 0; padding: 0; font-size: 16px; line-height: 1.25; text-transform: uppercase; color: black;}
 a {text-decoration: none; display: inline-block;}
 a:hover, a span:hover {color: black; cursor: url(https://jjmoi.com/files/mick-point3.png), default; text-decoration: none;}
-a:visited {color: black;}
+p, a, a:hover, a:visited {color: black;}
 
 /* NAV HOVER */
 a#tachyus:hover p {color: coral;}
