@@ -1,10 +1,12 @@
 /* UNIVERSAL */
 
 /*
-@charset "UTF-8";
 @font-face {font-display: block; font-family: "Standard"; src: url("https://jjmoi.com/fonts/standard-book.woff") format("woff"); font-style: normal; font-weight: normal;}
 h1, h2, h3, p, a {font-family: Standard, sans-serif; font-weight: normal; margin: 0; padding: 0; color: black; font-size: 18px; line-height: 1.45;}
 */
+
+@charset "UTF-8";
+@font-face {font-family: "Fragment Mono"; src: url("/fonts/FragmentMono-Regular.woff2");}
 
 html, body {height: 100%; width: 100%; margin: 0; padding: 0;}
 *, h1, h2, h3, p, a, span {font-family: "Fragment Mono", monospace; font-weight: 400; font-style: normal; margin: 0; padding: 0; font-size: 16px; line-height: 1.25; text-transform: uppercase; color: black;}
