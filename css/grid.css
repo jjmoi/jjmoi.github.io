@@ -6,7 +6,7 @@ h1, h2, h3, p, a {font-family: Standard, sans-serif; font-weight: normal; margin
 */
 
 @charset "UTF-8";
-@font-face {font-family: "Fragment Mono"; src: url("/fonts/FragmentMono-Regular.woff2");}
+@font-face {font-family: "Fragment Mono"; src: url("/fonts/fragment-mono.woff2");}
 
 html, body {height: 100%; width: 100%; margin: 0; padding: 0;}
 *, h1, h2, h3, p, a, span {font-family: "Fragment Mono", monospace; font-weight: 400; font-style: normal; margin: 0; padding: 0; font-size: 16px; line-height: 1.25; text-transform: uppercase; color: black;}
