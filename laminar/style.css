@@ -86,6 +86,27 @@ h1, h2, h3, h4, p, a {
 	max-width: 120px;
 }
 
+#logo-ai {
+	opacity: 1;
+}
+
+.logo-container:hover #logo-ai {
+	opacity: 0;
+	cursor: pointer;
+}
+
+#logo-laminar {
+	opacity: 0;
+	display: block;
+	margin-top: -40px;
+}
+
+.logo-container:hover #logo-laminar {
+	opacity: 1;
+	cursor: pointer;
+	transition: opacity 1.6s ease-out;
+}
+
 /*-----------------------------------------------------------------------------*/
 /*  hero video
 /*-----------------------------------------------------------------------------*/
@@ -308,4 +329,3 @@ footer a, footer a:hover, footer a:visited {
 	.col-1, .col-2, .col-25, .col-3, .col-33, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10 {width: 100%;}
 	.props-container {margin-top: -200px;}
 }
-
