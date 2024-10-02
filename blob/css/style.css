@@ -24,14 +24,14 @@
 	cursor: pointer;
 }
 
-#logo-laminar {
+#logo-blob {
 	opacity: 0;
 	display: block;
 	margin-top: -40px;
 	transition: opacity 0.4s ease-in;
 }
 
-.logo-container:hover #logo-laminar {
+.logo-container:hover #logo-blob {
 	opacity: 1;
 	cursor: pointer;
 }
