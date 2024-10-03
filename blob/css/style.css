@@ -232,7 +232,7 @@ nav {
 }
 
 @media only screen and (min-width: 768px) {
-	.order-will-be-flipped{
+	.order-flip{
 		flex: 1;
 		order: 10;
 	}
