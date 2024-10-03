@@ -305,12 +305,12 @@ nav {
 	padding: 2rem;
 	display: flex;
 	justify-content: center;
+	border-top: solid black 1px;
+	border-bottom: solid black 1px;
 }
 
 .investor-first, .investor-last {
-	border-top: solid black 1px;
 	border-right: none;
-	border-bottom: solid black 1px;
 	border-left: none;
 }
 
@@ -320,9 +320,6 @@ nav {
 }
 
 @media only screen and (min-width: 768px){
-	.investor-row {
-		flex-wrap: nowrap;
-	}
 	.investor-card {
 		height: 15rem;
 		padding: 5rem;
