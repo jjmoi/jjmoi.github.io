@@ -2,11 +2,11 @@
 /*  house keeping
 /*-----------------------------------------------------------------------------*/
 
-*{
+* {
 	box-sizing: border-box;
 }
 
-img{
+img {
 	width: 100%
 }
 
@@ -56,7 +56,7 @@ nav {
 /*  hero
 /*-----------------------------------------------------------------------------*/
 
-:root{
+:root {
 	--hero-height: 100vh; /* 70vh to display value props too */
 }
 
@@ -102,7 +102,6 @@ nav {
 
 #today {
 	align-self: flex-end;
-
 }
 
 /* @media only screen and (min-width: 768px){
@@ -119,7 +118,7 @@ nav {
 /*  value props
 /*-----------------------------------------------------------------------------*/
 
-:root{
+:root {
 	--card-height: 30vh;
 }
 
@@ -151,19 +150,27 @@ nav {
 	border-left: solid black 1px;
 }
 
-.value-card-content-wrapper{
+.value-card-content-wrapper {
 	max-width: 23rem;
 	display: flex;
 	flex-direction: column;
 	gap: 1.5rem;
 }
 
-@media only screen and (min-width: 768px) {
-	.value-propositions{
+@media only screen and (min-width: 768px){
+	.value-propositions {
 		flex-direction: row;
 	}
-	.value-card{
+	.value-card {
 		padding: 2%;
+	}
+	.value-first {
+		border-right: none;
+		border-bottom: none;
+	}
+	.value-last {
+		border-bottom: none;
+		border-left: none;
 	}
 }
 
@@ -197,7 +204,7 @@ nav {
 	align-self: flex-end;
 }
 
-.no-underline{
+.no-underline {
 	border: none;
 }
 
@@ -230,36 +237,36 @@ nav {
 	margin-bottom: 1rem;
 }
 
-.member-bio{
+.member-bio {
 	padding-left: 8%;
 	padding-right: 4%rem;
 }
 
-.team-bio-follow {
+.team-bio-lead, .team-bio-follow {
 	padding-top: 12px;
 }
 
-@media only screen and (min-width: 768px) {
-	.order-flip{
+@media only screen and (min-width: 768px){
+	.order-flip {
 		flex: 1;
 		order: 10;
 	}
-	.team-member{
+	.team-member {
 		flex-direction: row;
 		padding-top: 3rem;
 		padding-bottom: 3rem;
 	}
-	.member-portrait{
+	.member-portrait {
 		width: 50%;
 		max-width: 25rem ;
 	}
-	.member-info{
+	.member-info {
 		width: 50%;
 		max-width: 35rem;
 	}
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 1024px){
 	.team-member {
 		gap: 5rem;
 		padding-top: 5rem;
@@ -270,8 +277,8 @@ nav {
 	}
 }
 
-@media only screen and (min-width: 1440px) {
-	.team-member{
+@media only screen and (min-width: 1440px){
+	.team-member {
 		padding-top: 8rem;
 		padding-bottom: 8rem;
 		gap: 8rem;
@@ -313,10 +320,17 @@ nav {
 }
 
 @media only screen and (min-width: 768px){
-
-	.investor-card{
+	.investor-card {
 		height: 15rem;
 		padding: 5rem;
+	}
+	.investor-first {
+		border-right: none;
+		border-bottom: none;
+	}
+	.investor-last {
+		border-bottom: none;
+		border-left: none;
 	}
 }
 
@@ -398,7 +412,7 @@ form #submit:hover {
 /*  footer
 /*-----------------------------------------------------------------------------*/
 
-footer{
+footer {
 	padding: 1.5rem;
 	display: flex;
 	flex-direction: column;
