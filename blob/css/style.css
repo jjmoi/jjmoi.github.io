@@ -140,13 +140,10 @@ nav {
 	align-items: center;
 }
 
-.value-first {
+.value-first, .value-last {
+	border-top: solid black 1px;
 	border-right: none;
-	border-bottom: none;
-}
-
-.value-last {
-	border-bottom: none;
+	border-bottom: solid black 1px;
 	border-left: none;
 }
 
@@ -242,6 +239,10 @@ nav {
 	padding-right: 4%rem;
 }
 
+.card-title, .member-title, h2 {
+	font-size: 1.125rem
+}
+
 .team-bio-lead, .team-bio-follow {
 	padding-top: 12px;
 }
@@ -306,12 +307,11 @@ nav {
 	justify-content: center;
 }
 
-.investor-first {
-	border-right: solid black 1px;
-}
-
-.investor-last {
-	border-left: solid black 1px;
+.investor-first, .investor-last {
+	border-top: solid black 1px;
+	border-right: none;
+	border-bottom: solid black 1px;
+	border-left: none;
 }
 
 .investor-card img {
@@ -325,12 +325,10 @@ nav {
 		padding: 5rem;
 	}
 	.investor-first {
-		border-right: none;
-		border-bottom: none;
+		border-right: solid black 1px;
 	}
 	.investor-last {
-		border-bottom: none;
-		border-left: none;
+		border-left: solid black 1px;
 	}
 }
 
