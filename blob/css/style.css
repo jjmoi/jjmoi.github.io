@@ -298,8 +298,8 @@ nav {
 
 .investor-card {
 	height: 7rem;
-	border-top: solid black 1px;
-	border-bottom: solid black 1px;
+	border-top: none;
+	border-bottom: none;
 	flex: 1;
 	flex-grow: 1;
 	padding: 2rem;
