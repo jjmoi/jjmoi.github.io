@@ -228,7 +228,10 @@ nav {
 .member-bio{
 	padding-left: 8%;
 	padding-right: 4%rem;
+}
 
+.team-bio-follow {
+	padding-top: 12px;
 }
 
 @media only screen and (min-width: 768px) {
