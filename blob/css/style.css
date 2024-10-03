@@ -320,6 +320,9 @@ nav {
 }
 
 @media only screen and (min-width: 768px){
+	.investor-row {
+		flex-wrap: nowrap;
+	}
 	.investor-card {
 		height: 15rem;
 		padding: 5rem;
