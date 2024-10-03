@@ -438,6 +438,14 @@ footer {
 	gap: 1rem;
 }
 
+footer #footer-logo {
+	width: 70%;
+}
+
+footer #footer-email {
+	width: 30%;
+}
+
 footer img {
 	max-width: 7rem;
 	margin-top: 40px;
@@ -450,7 +458,6 @@ footer a {
 	transition: background 0.4s ease-out;
 	margin-top: -45px;
 	margin-bottom: 45px;
-	margin-left: 200px;
 }
 
 footer a:hover {
