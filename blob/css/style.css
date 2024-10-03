@@ -27,10 +27,7 @@ nav {
 
 .logo {
 	width: 7rem;
-}
-
-.logo:hover {
-	cursor: pointer;
+	z-index: 100;
 }
 
 #logo-ai {
@@ -46,6 +43,7 @@ nav {
 #logo-laminar {
 	opacity: 0;
 	display: block;
+	margin-top: -40px;
 	transition: opacity 0.4s ease-in;
 }
 
