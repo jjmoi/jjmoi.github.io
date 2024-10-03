@@ -450,7 +450,7 @@ footer a {
 	transition: background 0.4s ease-out;
 	margin-top: -45px;
 	margin-bottom: 45px;
-	z-index: -1;
+	margin-left: 200px;
 }
 
 footer a:hover {
