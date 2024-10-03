@@ -138,16 +138,16 @@ nav {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	border-top: solid black 1px;
-	border-bottom: solid black 1px;
 }
 
 .value-first {
-	border-right: solid black 1px;
+	border-right: none;
+	border-bottom: none;
 }
 
 .value-last {
-	border-left: solid black 1px;
+	border-bottom: none;
+	border-left: none;
 }
 
 .value-card-content-wrapper {
@@ -163,14 +163,14 @@ nav {
 	}
 	.value-card {
 		padding: 2%;
+		border-top: solid black 1px;
+		border-bottom: solid black 1px;
 	}
 	.value-first {
-		border-right: none;
-		border-bottom: none;
+		border-right: solid black 1px;
 	}
 	.value-last {
-		border-bottom: none;
-		border-left: none;
+		border-left: solid black 1px;
 	}
 }
 
