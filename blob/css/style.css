@@ -39,12 +39,13 @@ nav {
 	cursor: pointer;
 }
 
-#logo-blob {
+#logo-laminar {
 	opacity: 0;
+	display: block;
 	transition: opacity 0.4s ease-in;
 }
 
-.logo:hover #logo-blob {
+.logo:hover #logo-laminar {
 	opacity: 1;
 	cursor: pointer;
 }
@@ -54,7 +55,7 @@ nav {
 /*-----------------------------------------------------------------------------*/
 
 :root{
-	--hero-height: 70vh;
+	--hero-height: 100vh; /* 70vh to display value props too */
 }
 
 .hero {
@@ -62,7 +63,6 @@ nav {
 	height: var(--hero-height);
 	overflow: hidden;
 }
-
 
 #fullscreen-video {
 	width: 100%;
