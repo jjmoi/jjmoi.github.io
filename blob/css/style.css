@@ -294,6 +294,7 @@ nav {
 	width: 100%;
 	display: flex;
 	flex-wrap: wrap;
+	flex-direction: column;
 }
 
 .investor-card {
@@ -307,6 +308,7 @@ nav {
 	justify-content: center;
 	border-top: solid black 1px;
 	border-bottom: solid black 1px;
+	flex-direction: column;
 }
 
 .investor-first, .investor-last {
@@ -320,6 +322,9 @@ nav {
 }
 
 @media only screen and (min-width: 768px){
+	.investor-row {
+		flex-direction: row;
+	}
 	.investor-card {
 		height: 15rem;
 		padding: 5rem;
