@@ -116,7 +116,7 @@ nav {
 } */
 
 /*-----------------------------------------------------------------------------*/
-/*  value props
+/*  value props 286
 /*-----------------------------------------------------------------------------*/
 
 :root{
@@ -134,12 +134,21 @@ nav {
 	flex-grow: 1;
 	height: var(--card-height);
 	max-height: 25rem;
-	border: solid black 1px;
 	padding: 0 10% 0 10%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	border-top: solid black 1px;
+	border-bottom: solid black 1px;
+}
+
+.value-first {
+	border-right: solid black 1px;
+}
+
+.value-last {
+	border-left: solid black 1px;
 }
 
 .value-card-content-wrapper{
@@ -150,11 +159,9 @@ nav {
 }
 
 @media only screen and (min-width: 768px) {
-
 	.value-propositions{
 		flex-direction: row;
 	}
-
 	.value-card{
 		padding: 2%;
 	}
