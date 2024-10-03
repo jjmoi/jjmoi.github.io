@@ -313,10 +313,18 @@ nav {
 
 .investor-first, .investor-last {
 	border-right: none;
+	border-bottom: none;
+	border-left: none;
+}
+
+.investor-last {
+	border-top: none;
+	border-right: none;
 	border-left: none;
 }
 
 .investor-card img {
+	height: auto;
 	width: 100%;
 }
 
