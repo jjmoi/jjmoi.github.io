@@ -312,6 +312,13 @@ nav {
 }
 
 .investor-first, .investor-last {
+	border-top: solid black 1px;
+	border-right: none;
+	border-bottom: solid black 1px;
+	border-left: none;
+}
+
+.investor-first {
 	border-right: none;
 	border-bottom: none;
 	border-left: none;
@@ -335,6 +342,8 @@ nav {
 	.investor-card {
 		height: 15rem;
 		padding: 5rem;
+		border-top: solid black 1px;
+		border-bottom: solid black 1px;
 	}
 	.investor-first {
 		border-right: solid black 1px;
