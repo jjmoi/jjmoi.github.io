@@ -1,0 +1,134 @@
+
+/* TYPOGRAPHY */
+
+h1 {font-size: 4.5rem; line-height: 1.05; font-weight: 200;}
+h3 {font-size: 1.375rem;}
+h4 {font-size: 1.125rem; line-height: 1.4; letter-spacing: 0.5px; font-weight: 300;}
+p {font-size: 1.25rem; line-height: 1.4; letter-spacing: 0.5px; margin: 0;}
+p.small, a.small {font-size: 0.875rem;}
+
+a {
+	font-size: 1.25rem;
+	line-height: 1.5;
+	letter-spacing: 0.5px;
+	text-decoration: none;
+	border-bottom: 1px transparent solid;
+	opacity: 0.7;
+	-webkit-transition: opacity, border-bottom 1s ease-out;
+	-moz-transition: opacity, border-bottom 1s ease-out;
+	-o-transition: opacity, border-bottom 1s ease-out;
+	transition: opacity, border-bottom 1s ease-out;
+	color: black;
+}
+a:hover {opacity: 1;}
+h1, p, a, a:hover; a:visited {color: black;}
+strong {font-weight: bold; color: white; font-size: 1.25rem;}
+em {font-family: 'SuperLightItalic', Georgia, serif; font-weight: 100; font-style: italic; color: white; font-size: 1.25rem;}
+/* em {font-family: 'SuperBoldItalic', Georgia, serif; font-weight: 700; font-style: italic; color: white; font-size: 1.25rem;} */
+
+#nav {padding-top: 50px;}
+#nav span {font-family: Helvetica, sans-serif; font-size: 1rem; opacity: 0.7; position: relative; top: 20px;}
+#nav span:hover {opacity: 1;}
+#imlogo img {width: 216px;}
+
+#home-intro {padding-top: 50px; height: 400px; min-height: 800px;}
+#home-intro h1 {font-size: 2.5rem; line-height: 1.2; margin-bottom: 100px; margin-top: 200px;}
+#home-intro a, #events-intro a {font-size: 1.125rem; border: 1px black solid; padding: 20px 50px; border-radius: 50px;}
+#home-intro img {margin-top: -10px; max-width: 900px;}
+
+#home-pillars-intro h2 {font-size: 4.5rem; margin-top: 200px; margin-bottom: -15px;}
+#home-pillars-intro p {font-size: 1.25rem; margin-top: 60px; margin-bottom: 120px;}
+
+#home-pillars {margin-right: 0; margin-right: 0;}
+#home-pillars img {margin-top: 180px; max-width: 150px;}
+#home-pillars h3 {font-size: 3.5rem; margin-top: 40px; color: white; padding-left: 75px; padding-right: 75px;}
+#home-pillars p {margin-top: 40px; color: white; padding-left: 75px; padding-right: 75px; padding-bottom: 150px; height: 150px;}
+#home-pillars a {font-size: 1.125rem; border: 1px white solid; padding: 20px 50px; border-radius: 50px; color: white;}
+.pillar-1 {background-color: #386ea9;}
+.pillar-2 {background-color: #c88b56;}
+.pillar-3 {background-color: #4c6e62;}
+#home-pillars .col-4 {padding-bottom: 170px;}
+
+#home-news, #home-blog {background-color: white;}
+#home-news h2, #home-blog h2 {font-size: 4.5rem; margin-top: 250px;}
+#about-mission h2, #pillars-mission-text h2 {font-size: 4.5rem; margin-top: 100px;}
+#home-news .news-source, #home-blog .blog-source {font-size: 1.25rem; margin-top: 60px;}
+#home-news .news-title, #home-blog .blog-title {font-size: 3rem;}
+p.news-title, .news-source {padding: 0 50px; margin: 0;}
+p.news-title {font-size: 2.5rem; line-height: 1.1;}
+.news-title a {font-size: 2.5rem; line-height: 1.1;}
+#home-news .news-source, #home-blog .blog-source {color: gray; margin-top: 15px; font-size: 1rem;}
+.news-border, .blog-border {border-bottom: 1px black solid; margin-top: 40px; margin-bottom: -20px;}
+#home-news, #home-blog {margin-top: 100px;}
+.news-border-container {padding-top: 100px; padding-bottom: 50px;}
+
+.footer {margin-top: 300px; height: 350px;}
+.footer img {padding-top: 150px; width: 52px;}
+
+#about-intro {padding-top: 100px;}
+#about-intro h1 {font-size: 2.5rem; margin-top: 50px;}
+.about-outcomes {margin-top: 200px;}
+.about-outcomes h2 {font-size: 4.5rem;}
+.about-outcomes h3 {font-family: 'SuperLight', Georgia, serif; font-size: 2rem;}
+.about-outcomes p {margin-top: 20px; margin-bottom: 120px; font-size: 1.125rem;}
+
+.team h2 {font-size: 4.5rem; padding-bottom: 100px;}
+.team h3 {font-size: 2.5rem; padding-bottom: 0; margin-bottom: 20px;}
+.team .offset-left {position: relative; right: 50px;}
+#about-intro-text p, .team p {font-size: 1.125rem;}
+.team p+p {margin-top: 20px;}
+
+/* NAV */
+
+.overlay {height: 100%; width: 100%; display: none; position: fixed; z-index: 1; top: 0; left: 0; background: #c88b56; opacity: 0.96;}
+.overlay-content {position: relative; top: 15%; width: 100%; text-align: center;}
+.overlay a {padding: 10px; text-decoration: none; font-size: 3rem; color: white; display: block; transition: 0.3s; font-family: 'SuperLight', Georgia, serif; font-weight: 100;}
+.overlay a:hover, .overlay a:focus {color: #f1f1f1;}
+.overlay .closebtn {position: absolute; top: 25px; right: 160px; font-size: 4rem;}
+
+#values-icons img {max-width: 120px;}
+#values-icons p {padding-bottom: 0px;}
+#quotes p {color: gray;}
+.partners-logos img {margin: 0 50px; display: inline-block; max-width: 200px;}
+
+.rwd-desk {display: block;}
+.rwd-mobi {display: none;}
+.overlay .closebtn {right: 150px; opacity: 0.4;}
+
+/* RWD	*/
+@media screen and (max-height: 450px) {
+	.overlay a {font-size: 2rem;}
+	.overlay .closebtn {font-size: 40px; top: 15px; right: 35px;}
+}
+
+@media screen and (max-width: 1200px) {
+	.overlay .closebtn {right: 75px;}
+	#home-pillars h3 {font-size: 2rem; padding-left: 30px; padding-right: 30px;}
+	#home-pillars p {font-size: 1rem; padding-left: 30px; padding-right: 30px;}
+}
+
+@media screen and (max-width: 900px) {
+	#home-intro img {margin-top: 50px;}
+	#home-intro h1 {margin-top: 100px;}
+	#nav span {top: 10px;}
+	.rwd-desk {display: none;}
+	.rwd-mobi {display: block;}
+	#pillars-mission-text p {padding-left: 50px; padding-right: 50px;}
+	#imlogo img {width: 144px;}
+	.footer img {width: 34px;}
+	.overlay a {font-size: 20px;}
+}
+
+@media screen and (max-width: 720px) {
+	.overlay .closebtn {right: 50px;}
+	#nav span {top: -40px; margin-right: 50px;}
+	span#hamburger {margin-right: 0;}
+	.news-source {padding-top: 50px;}
+	#home-intro h1 {margin-top: 50px;}
+	#nav a, #home-intro h1 {padding: 0 50px;}
+	#home-intro a {margin-left: 50px;}
+	#about-intro-text p, .about-outcomes h3, .about-outcomes p, .team h2, .team h3, .team p {padding-left: 50px; padding-right: 50px;}
+	.team .offset-left {right: 0;}
+	#home-pillars h3 {font-size: 3rem; padding-left: 75px; padding-right: 75px;}
+	#home-pillars p {font-size: 1.25rem; padding-left: 75px; padding-right: 75px;}
+}
