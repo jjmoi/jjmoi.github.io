@@ -15,11 +15,11 @@ a:hover, a span:hover {color: black; cursor: url(https://jjmoi.com/files/mick-po
 p, a, a:hover, a:visited {color: black;}
 
 /* NAV HOVER */
+a#spring:hover p {color: blueviolet;}
 a#tachyus:hover p {color: coral;}
 a#usds18f:hover p {color: dodgerblue;}
 a#primemovers:hover p {color: cornflowerblue;}
 a#rtx:hover p {color: crimson;}
-a#spring:hover p {color: blueviolet;}
 a#intersection:hover p {color: lightseagreen;}
 a#opengov:hover p {color: limegreen;}
 
