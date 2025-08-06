@@ -15,8 +15,8 @@ a:hover, a span:hover {color: black; cursor: url(https://jjmoi.com/files/mick-po
 p, a, a:hover, a:visited {color: black;}
 
 /* NAV HOVER */
-a#spring:hover p {color: blueviolet;}
 a#lumiflow:hover p {color: hotpink;}
+a#spring:hover p {color: blueviolet;}
 a#tachyus:hover p {color: coral;}
 a#usds18f:hover p {color: dodgerblue;}
 a#primemovers:hover p {color: cornflowerblue;}
