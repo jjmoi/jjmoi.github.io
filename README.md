@@ -25,7 +25,3 @@ http://www.curtismlarson.com/blog/2015/04/12/github-pages-google-domains
 [![cat preview](http://www.jjmoi.com/img/cat.png)](http://www.jjmoi.com/img/cat.png)
 
 [creative commons attribution - no derivatives 4.0](https://creativecommons.org/licenses/by-nd/4.0)
-
----
-
-repo owner: heyheyjjmoi@gmail.com
