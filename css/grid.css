@@ -75,6 +75,9 @@ p+p {padding-top: 30px;}
 #endsection {padding-bottom: 100px;}
 #credits {padding-bottom: 275px;}
 #credits p+p {padding-top: 70px;}
+.resize {overflow: hidden; border-radius: 2rem;}
+.resize img {width: 100%; border-radius: 2rem; transition: transform 0.3s ease; display: block; transform-origin: center center;}
+.resize img:hover {transform: scale(1.1);}
 
 /* FOOTER  */
 #footer-all-devices {margin-bottom: 0; padding-top:90px; padding-bottom: 60px;}
