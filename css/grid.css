@@ -9,7 +9,7 @@ h1, h2, h3, p, a {font-family: Standard, sans-serif; font-weight: normal; margin
 @font-face {font-family: "Fragment Mono"; src: url("/fonts/fragment-mono.woff2");}
 
 html, body {height: 100%; width: 100%; margin: 0; padding: 0;}
-*, h1, h2, h3, p, a, span {font-family: "Fragment Mono", monospace; font-weight: 400; font-style: normal; margin: 0; padding: 0; font-size: 16px; line-height: 1.25; text-transform: uppercase; color: black;}
+*, h1, h2, h3, p, a, span {font-family: "Fragment Mono", monospace; font-weight: 400; font-style: normal; margin: 0; padding: 0; font-size: 14px; line-height: 1.25; text-transform: uppercase; color: black;}
 a {text-decoration: none; display: inline-block;}
 a:hover, a span:hover {color: black; cursor: url(https://jjmoi.com/files/mick-point3.png), default; text-decoration: none;}
 p, a, a:hover, a:visited {color: black;}
@@ -95,7 +95,7 @@ p+p {padding-top: 30px;}
 	/* h1, h2, h3, p, a {font-size: 14px;} */
 	p+p {padding-top: 24px;}
 	.first {padding-bottom: 200px;}
-	#subtitle {font-size: 15px; padding-bottom: 3px;}
+	#subtitle {font-size: 14px; padding-bottom: 3px;}
 	#title {font-size: 46px; letter-spacing: -1.5px; padding-top: 4px; padding-bottom: 30px;}
 	.quote p {font-size: 28px;}
 	#launch a {padding-top: 2px;}
