@@ -21,8 +21,19 @@
 		body {height: auto; background-color: white;}
 		::-moz-selection {background: blueviolet; color: #8a2be4;}
 		::selection {background: blueviolet; color: #8a2be4;}
-		.thoughts {margin-top: 40px;}
+		/* TEMP */
+		.desktop {padding-bottom: 60px; bottom: 0;}
+		.parasection {margin-top: 75px; margin-bottom: 75px; padding-bottom: 42px;}
+		.parasection.rwd {margin-top: 60px; margin-bottom: -15px; padding-bottom: 0;}
+		.parasection p {padding-top: 6px;}
+		#desktop-lastcase {padding-bottom: 818px;}
+		#rwd-lastcase {padding-bottom: 350px;}
+		#last {margin-bottom: 0;}
 
+		@media only screen and (max-width: 1111px) {
+			.parasection p {padding-top: 2px;}
+			#rwd-lastcase {padding-bottom: 560px;}
+		}
 	</style>
 </head>
 <body>
@@ -75,8 +86,8 @@
 				<p>→</p>
 			</a>
 			<div class="col-1"></div>
-			<a class="col-5">
-				<img src="lami-01.webp">
+			<a class="col-5 resize">
+				<img src="/lami/lami-04.webp">
 			</a>
 		</div>
 		<div class="row section-padtop">
@@ -87,8 +98,8 @@
 				<p>→</p>
 			</a>
 			<div class="col-1"></div>
-			<a class="col-5">
-				<img src="lami-01.webp">
+			<a class="col-5 resize">
+				<img src="/lami/lami-01.webp">
 			</a>
 		</div>
 		<div class="row section-padtop">
@@ -99,8 +110,8 @@
 				<p>→</p>
 			</a>
 			<div class="col-1"></div>
-			<a class="col-5">
-				<img src="lami-01.webp">
+			<a class="col-5 resize">
+				<img src="/lami/lami-02.webp">
 			</a>
 		</div>
 		<div class="row section-padtop" id="desktop-lastcase">
@@ -111,8 +122,8 @@
 				<p>→</p>
 			</a>
 			<div class="col-1"></div>
-			<a class="col-5">
-				<img src="lami-01.webp">
+			<a class="col-5 resize">
+				<img src="/lami/lami-03.webp">
 			</a>
 		</div>
 	</div>
