@@ -17,10 +17,10 @@
 	<title>THOUGHTS</title>
 	<style>
 		/* BACKGROUND */
-		html {background-color: blueviolet;}
+		html {background-color: slategrey;}
 		body {height: auto; background-color: white;}
-		::-moz-selection {background: blueviolet; color: #8a2be4;}
-		::selection {background: blueviolet; color: #8a2be4;}
+		::-moz-selection {background: slategrey; color: #708091;}
+		::selection {background: slategrey; color: #708091;}
 	</style>
 </head>
 <body>
@@ -63,10 +63,23 @@
 				250712</p>
 			</div>
 			<div class="col-4" id="rwd-intro">
-				<p>Artificial intelligence is not missing raw horsepower. It is missing the right steering. Too often, founders put AI through the wrong kind of validation, asking non-experts to test-drive systems meant for domains that run on decades of training and judgment. It feels democratic, but it is actually negligent. As Plato wrote, “a good decision is based on knowledge and not on numbers.” When startups substitute generic user counts for domain wisdom, they confuse popularity with truth.</p>
-				<p>The real power of AI is unlocked through what some have called the Human Multiplier effect. AI on its own can surface patterns. Domain experts on their own can interpret complexity. Put them together and the output is not incremental but exponential. A radiologist with AI support detects cancers earlier than either could alone. A financial auditor armed with AI can flag fraud at scales impossible for a human team. This is not human-in-the-loop (HiTL) in the generic sense. This is expert-in-the-loop (EiTL), and it makes the difference between tools that impress in demo day slide decks and tools that truly transform billions of lives.</p>
+				<p>AI systems are non-deterministic and uncertain. They guess, assign likelihoods, and generate outputs that feel certain even when the underlying model is not. Most AI products stumble in the gray zones of ambiguity. The real work of design is to make that ambiguity visible, actionable, and trustworthy.</p>
+				<p>Models are confident even when dead wrong. Their fluency is easily mistaken for accuracy, which can mislead even skilled professionals. Uncertainty is not noise to be hidden, it is a signal for decision-making. In highly regulated industry like legal work, ignoring uncertainty undermines trust and heightens liability. If an AI tool flags a contract clause as compliant with high confidence, but is actually drawing from a narrow training set, the mistake can cascade into regulatory exposure. Designing for uncertainty has to be core of the product integrity.</p>
 			</div>
 			<div class="col-1"></div>
+		</div>
+		<div class="row section-padtop">
+			<div class="col-5"></div>
+			<div class="col-5">
+				<img src="img-03.png">
+			</div>
+		</div>
+		<div class="row section-padtop">
+			<div class="col-5"></div>
+			<div class="col-4">
+				<p>Disclose uncertainty in a way users can interpret with quantitative patterns like confidence bands, likelihood ranges, and probability scores or the qualitative ones like contextual disclaimers. Progressive disclosure keeps interfaces clean while leaving depth available. When a system highlights a potentially risky contract clause, it may first show a simple confidence score. If the user expands, the system reveals rationale, sources, or precedents. Interaction nudges are critical here. A legal AI assistant should not only present its output but also steer the user toward verification when uncertainty is high, suggesting human review and encouraging cross-checks against external sources.</p>
+				<p>Note that whether the confidence score actually corresponds to reliability or truth is a deeper issue and is a story for another time. For now we should treat them as communication tools, not ground truth. The accuracy and calibration of these scores is a technical challenge that deserves its own exploration.</p>
+			</div>
 		</div>
 		<div class="row section-padtop">
 			<div class="col-5"></div>
@@ -77,8 +90,8 @@
 		<div class="row section-padtop">
 			<div class="col-5"></div>
 			<div class="col-4">
-				<p>Consider how many AI dashboards today collapse into noise. They flood clinicians, traders, or analysts with alerts without context, hoping that visualization alone creates value. Chris Lovejoy has pointed out that dashboards without a domain-specific frame do not aid decision-making. They create cognitive overload, forcing experts to sift signal from noise. Domain framing is what transforms an alert into insight. Without it, your “intelligent system” becomes another inbox of false positives.</p>
-				<p>Domain experts are not beta testers or just stakeholders, as Daniel Ruiz-Riquelme plainly put. They are the primary users. Treating them as afterthoughts or edge cases ensures misalignment from day one. This mirrors the design paradox of AI. If you flatten interfaces into consumer-grade simplicity, you strip away the nuance experts rely on. A cardiologist does not want a pastel graph that says “high risk.” They want decision support aligned with the exact diagnostic protocols they use daily. Yet if you lean only into complexity, adoption stalls. Balancing this paradox is only possible if experts are there from inception, guiding what simplicity and complexity should mean in context.</p>
+				<p>Legal work by definition requires traceability. The user interfaces should support reversibility at multiple levels. Undo and rollback are the simplest safeguards. Provenance trails go further, showing why a model reached a conclusion and which sources influenced it. Decision history should not be a thin log but a navigable record of how the system evolved its recommendations. When an attorney challenges a risk assessment, the system should allow exploration of prior states, making reversibility a functional safety net rather than a superficial control.</p>
+				<p>When models lack confidence, the worst outcome is false authority. AI-native products must be able to say: “I don’t know.” This means it must defer to human expertise rather than producing speculative interpretations presented as fact. Escalation can take many forms: routing a clause for partner review, pausing workflow until confirmation, or labeling outputs explicitly as draft. Just as a junior associate knows when to escalate an issue, an AI assistant that defers is more credible than one that speculates.</p>
 			</div>
 		</div>
 		<div class="row section-padtop">
@@ -90,21 +103,8 @@
 		<div class="row section-padtop">
 			<div class="col-5"></div>
 			<div class="col-4">
-				<p>The problem is startups often mistake any “human feedback” as sufficient. The Expert-in-the-Loop framing is sharper. A soccer mom can tell you if last week is a few day ago, but she cannot tell you if your AI diagnostic missed an early-stage melanoma. A baseball dad can say whether the chart looks confusing and the numberes don’t add up, but he cannot validate whether your compliance AI reflects the realities of regulatory audits. Human-in-the-loop without expertise risks creating false confidence. You end up with AI that feels polished but breaks under real-world pressure.</p>
-				<p>History proves this point. The Renaissance did not rise because average citizens gave feedback on Da Vinci’s sketches. It was because painters worked with anatomists, mathematicians studied alongside philosophers, astronomers debated theologians in a townsquare. Cross-pollination of mastery created acceleration. The same is true now. Industry expertise is the multiplier that gives AI its edge.</p>
-				<p>Builders who know how important this matter is but do not know where to begin, the principle is simple: the domain expert is the baseline and requirement. Map their workflows before you design anything. Mirror their heuristics before you visualize and embed their language before you fine-tune your model. Your goal is not to design AI that anyone could use but is to design AI that the people who bear the consequences of failure cannot live without.</p>
-			</div>
-		</div>
-		<div class="row section-padtop">
-			<div class="col-5"></div>
-			<div class="col-5">
-				<img src="img-01.png">
-			</div>
-		</div>
-		<div class="row section-padtop">
-			<div class="col-5"></div>
-			<div class="col-4">
-				<p>The future of AI adoption hinges on trust, and trust is won by respecting expertise. Soccer moms and baseball dads bring value to many conversations, but not enough here. If you are building AI for medicine, law, finance, or government, look at cardiologists, prosecutors, auditors, and mayors as your co-designers. The next wave of AI will not be defined by how clever the models are or how sleek the interfaces look. It will be defined by whether we have the humility to center expertise. To build AI that matters, stop designing for hypothetical averages and start designing with the people who hold the burden of consequence, and you build the future.</p>
+				<p>Static interfaces are inadequate for probabilistic systems. Adaptive UIs adjust to context, showing concise risk summaries when confidence is high and expanding with reasoning and citations when it drops. Adaptation should also operate across roles, offering detailed references and risks to lawyers, but simplified the explanations to clients. However, it is important to distinguish adaptive design from personalization. Personalized UIs shape content based on a user’s history or preferences. Adaptive UIs adjust based on role and situational stakes. In legal AI, this distinction is critical.</p>
+				<p>Designing AI-native products isn’t about making systems appear flawless. It’s all about surfacing the edges of competence. Adaptive interfaces that disclose uncertainty, support reversibility, and escalate responsibly build resilience into workflows. Law is one of the clearest domains where this matters, but the principle extends across every field where outcomes are consequential. Designing for uncertainty is the foundation of trust in AI.</p>
 			</div>
 		</div>
 		<!-- TOPICS -->
@@ -112,7 +112,7 @@
 			<div class="col-5"></div>
 			<div class="col-4">
 				<p><span>Topics / </span><br>
-					Evals / Observability / Domain Experts / In the Loop
+					Adaptive UI / Legal Tech / Non-Deterministic
 				</p>
 			</div>
 			<div class="col-1"></div>
