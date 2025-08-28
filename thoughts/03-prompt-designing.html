@@ -81,18 +81,22 @@
 				<p>Case Study: AI Medical Scribe</p>
 				<p>Take for example, a summary that is AI generated from a doctor’s note.</p>
 				<p>An engineering-driven prompt might be:</p>
-				<code>Prompt<br>
-					"Summarize the note in plain English for the patient."<br><br>
-					Output:<br>
-					"The patient is recovering well from appendix surgery. Chest pain and breathing are better, but she still has a headache. The vital signs are normal and the incision looks clean and improving."
+				<code>
+					<p>Prompt:<br>
+						"Summarize the note in plain English for the patient."<br><br>
+						Output:<br>
+						"The patient is recovering well from appendix surgery. Chest pain and breathing are better, but she still has a headache. The vital signs are normal and the incision looks clean and improving."
+					</p>
 				</code>
 				<p>While it’s quick to read, but there is no uncertainty, missing data, or risk checks.</p>
 				<p>A design-style prompt might be:</p>
-				<code>Prompt<br>
-					"Role: Clinical documentation assistant. Audience: patient and care team. Provide a plain summary for the patient in a structured format for clinicians, and flag risks."<br><br>
-					Output:<br>
-					"Patient summary with disclaimer: The patient is recovering well after appendix surgery. Breathing and chest discomfort have improved. Stomach tenderness is improving. The incision looks clean and your vital signs are stable. He still has a headache and your care team should review it.<br><br>
-					Questions and gaps: Severity, duration, and response to medication not documented. Possible omission of allergy status."
+				<code>
+					<p>Prompt<br>
+						"Role: Clinical documentation assistant. Audience: patient and care team. Provide a plain summary for the patient in a structured format for clinicians, and flag risks."<br><br>
+						Output:<br>
+						"Patient summary with disclaimer: The patient is recovering well after appendix surgery. Breathing and chest discomfort have improved. Stomach tenderness is improving. The incision looks clean and your vital signs are stable. He still has a headache and your care team should review it.<br><br>
+						Questions and gaps: Severity, duration, and response to medication not documented. Possible omission of allergy status."
+					</p>
 				</code>
 				<p>Longer but structured, auditable, and usable by both humans and systems. This also highlights omissions, which are just as important for doctors to assess a case efficiently.</p>
 			</div>
