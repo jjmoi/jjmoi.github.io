@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- v0.190118 -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-122843739-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'UA-122843739-1');
+	</script>
+	<meta name="robots" content="noindex"> <!-- No bots indexing -->
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="shortcut icon" type="image/x-icon" href="/img/spring.png">
+	<link rel="stylesheet" href="/css/grid.css">
+	<title>THOUGHTS</title>
+	<style>
+		/* BACKGROUND */
+		html {background-color: blueviolet;}
+		body {height: auto; background-color: white;}
+		::-moz-selection {background: blueviolet; color: #8a2be4;}
+		::selection {background: blueviolet; color: #8a2be4;}
+		code {background-color: lightgrey; padding: 20px;}
+	</style>
+</head>
+<body>
+	<!-- NAV DESKTOP -->
+	<div class="container nav desktop">
+		<div class="row">
+			<div class="col-5-sm">
+				<a href="/folio">JJ</a>
+			</div>
+			<div class="col-2-sm">
+				<a href="/folio">0→1 Designer / Educator</a>
+			</div>
+			<div class="col-1-sm right">
+				<a href="https://www.google.com/maps/place/Portland,+OR/@45.5161077,-122.7368012,12z">45°N 122°W</a>
+			</div>
+			<div class="col-1-sm right">
+				<a href="/thoughts">Thoughts</a>
+			</div>
+			<div class="col-1-sm right">
+				<a href="/info">Info</a>
+			</div>
+		</div>
+	</div>
+	<!-- NAV RWD -->
+	<div class="container nav rwd">
+		<div class="row">
+			<div class="col-9-sm">
+				<a href="/folio">JJ</a>
+			</div>
+			<div class="col-1-sm right">
+				<a href="/info">Info</a>
+			</div>
+		</div>
+	</div>
+	<!-- CONTENT -->
+	<div class="container parasection first all-device">
+		<div class="row">
+			<div class="col-5">
+				<p>The Future of Design Is Prompt Designing</p>
+				<p id="tags-role">250420</p>
+			</div>
+			<div class="col-4" id="rwd-intro">
+				<p>Prompt engineering emerged to make large language models perform better on benchmarks. It focuses on phrasing, token order, and scaffolding to gain accuracy. These methods help in prototyping and experimentation, but they treat the model’s output as the product. The assumption is that tuning the input string will yield a better single answer.</p>
+				<p>Prompt design takes a different view as it treats model output as part of a larger workflow, where human cognition, organizational risk, and system integration matter. Prompt design begins with intent, context, and risk. It specifies roles, constraints, and escalation paths. It requires disclosure of uncertainty and builds scaffolding that fits how humans make decisions. Prompts become design surfaces that are structured, repeatable, and auditable.</p>
+			</div>
+			<div class="col-1"></div>
+		</div>
+		<div class="row section-padtop">
+			<div class="col-5"></div>
+			<div class="col-5">
+				<img src="img-04.png">
+			</div>
+		</div>
+		<div class="row section-padtop">
+			<div class="col-5"></div>
+			<div class="col-4">
+				<p>Case: Medical Notes</p>
+				<p>Take for example, a doctor’s note for a patient recovering from a surgery.</p>
+				<p>An engineering-driven prompt might be:</p>
+				<code>Prompt<br>
+					"Summarize the note in plain English for the patient."<br><br>
+					Output:<br>
+					"The patient is recovering well from appendix surgery. Chest pain and breathing are better, but she still has a headache. The vital signs are normal and the incision looks clean and improving."
+				</code>
+				<p>While it’s quick to read, but there is no uncertainty, missing data, or risk checks.</p>
+				<p>A design-style prompt might be:</p>
+				<code>Prompt<br>
+					"Role: Clinical documentation assistant. Audience: patient and care team. Provide a plain summary for the patient in a structured format for clinicians, and flag risks."<br><br>
+					Output:<br>
+					"Patient summary with disclaimer: The patient is recovering well after appendix surgery. Breathing and chest discomfort have improved. Stomach tenderness is improving. The incision looks clean and your vital signs are stable. He still has a headache and your care team should review it.<br><br>
+					Questions and gaps: Severity, duration, and response to medication not documented. Possible omission of allergy status."
+				</code>
+				<p>Longer but structured, auditable, and usable by both humans and systems. This also highlights omissions, which are just as important for doctors to assess a case efficiently.</p>
+			</div>
+		</div>
+		<div class="row section-padtop">
+			<div class="col-5"></div>
+			<div class="col-5">
+				<img src="img-05.png">
+			</div>
+		</div>
+		<div class="row section-padtop">
+			<div class="col-5"></div>
+			<div class="col-4">
+				<p>These differences show where design work shifts in AI-native products by designing the invisible layer, and now extending into shaping how models reason, explain, and defer.</p>
+				<p>Good prompt design aligns model behavior with real human work. It uses role framing to match domain norms. It structures reasoning into formats that can be parsed reliably. It makes reversibility clear so users can back out of commitments. It encodes safety rules and escalation paths. It treats tone as a lever of trust and comprehension.</p>
+				<p>Designers now shape both interface behavior and model behavior. We decide how AI systems reason, how they explain themselves, and how they recover. We translate messy human ideas into structured model intent. Designing the product now means designing the prompts and contracts that guide its reasoning. On top of prompt engineering that makes AI works, prompt designing makes AI useful, safe, and accountable.</p>
+				<p>All this means creating governance for cognition. Product teams need playbooks for prompt design like they once design systems for interaction design. The propmt engineering and designing work require the same rigor testing and standards that make reasoning visible and accountable just like in user research. Building this now will decide how products remain trustworthy as models evolve. Teams that master prompt designing as a system will define the foundation of safe and scalable AI experiences.</p>
+			</div>
+		</div>
+		<!-- TOPICS -->
+		<div class="row section-padtop" id="credits">
+			<div class="col-5"></div>
+			<div class="col-4">
+				<p><span>Topics / </span><br>
+					Prompt Designing / Prompt Engineering
+				</p>
+			</div>
+			<div class="col-1"></div>
+		</div>
+	</div>
+	<!-- FOOTER DESKTOP+RWD -->
+	<div class="container parasection all-device" id="footer-all-devices">
+		<div class="row">
+			<div class="col-1-sm">
+				<a href="https://www.linkedin.com/in/jjmoi" target="_blank">LI</a>
+			</div>
+			<div class="col-1-sm">
+				<a href="https://x.com/goodnightjj" target="_blank">X</a>
+			</div>
+			<div class="col-1-sm">
+				<a href="https://www.instagram.com/goodnightjj" target="_blank">IG</a>
+			</div>
+			<div class="col-7-sm right">
+				<p><span id="copyrights">©</span> 2046</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
