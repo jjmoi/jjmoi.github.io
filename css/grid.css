@@ -82,6 +82,7 @@ p+p {padding-top: 30px;}
 
 /* BLOG POST */
 code p {background-color: slategrey; color: white; margin-top: 20px; margin-bottom: 20px; padding: 20px; border-radius: 15px;}
+p.blog-title {margin-top: 20px;}
 
 /* FOOTER  */
 #footer-all-devices {margin-bottom: 0; padding-top:90px; padding-bottom: 60px;}
