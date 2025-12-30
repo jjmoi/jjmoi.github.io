@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Synecdoche®</title>
-  
-  <!-- Embed Google Fonts inline for complete standalone functionality -->
+  <title>Lightcone Ventures</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  
+
   <style>
     * {
       margin: 0;
@@ -36,15 +35,13 @@
       --border: hsl(0, 0%, 20%);
       --inset: min(2vw, 1.5rem);
       --sides: 1rem;
-      --font-geist-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      --font-geist-mono: "Geist Mono", ui-monospace, monospace;
       --font-instrument-serif: "Instrument Serif", Georgia, serif;
     }
 
     body {
       background-color: white;
       color: var(--foreground);
-      font-family: var(--font-geist-sans);
+      font-family: var(--font-instrument-serif);
       overflow: hidden;
     }
 
@@ -192,33 +189,14 @@
   <main>
     <div class="container">
       <!-- Placeholder div with gradient background -->
-      <img 
-        id="placeholder" 
-        class="background-placeholder" 
-        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/alt-placeholder-xLztW6k6jKQJ0XnJMmKoVaWc64autA.png"
-        alt="Background placeholder"
-      />
-      
-      <!-- Video element with inline source fallback -->
-      <video 
-        id="bgVideo"
-        class="background" 
-        muted 
-        playsinline 
-        loop 
-        preload="auto"
-      >
-        <!-- Add video source - replace with your actual video URL or use a public CDN link -->
-        <source src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/alt-g7Cv2QzqL3k6ey3igjNYkM32d8Fld7.mp4" type="video/mp4">
-        <!-- Fallback: You can add multiple formats here -->
-      </video>
-      
+      <img id="placeholder" class="background-placeholder" src="now.png"
+        alt="Now"
+      />      
       <div class="content">
         <div>
           <img src="lightcone-ventures.svg" alt="Lightcone Ventures" class="logo">
           <p class="">We invest in civilization scale deep tech</p>
         </div>
-
         <div class="text-wrapper">
           <div class="text-content">
             <p class="caption">©2025 Lightcone Ventures</p>
@@ -227,50 +205,5 @@
       </div>
     </div>
   </main>
-
-  <!-- Enhanced JavaScript for smooth video loading and animation -->
-  <script>
-    (function() {
-      const video = document.getElementById('bgVideo');
-      const placeholder = document.getElementById('placeholder');
-      
-      // Track if video has successfully loaded
-      let videoLoaded = false;
-
-      function onVideoLoaded() {
-        if (videoLoaded) return;
-        videoLoaded = true;
-        
-        // Fade in video and fade out placeholder
-        video.classList.add('loaded');
-        placeholder.classList.add('hidden');
-        
-        // Start playing video
-        video.play().catch(function(error) {
-          console.log('Video autoplay failed:', error);
-        });
-      }
-
-      // Listen for multiple video ready events for better compatibility
-      video.addEventListener('loadeddata', onVideoLoaded);
-      video.addEventListener('canplay', onVideoLoaded);
-      video.addEventListener('canplaythrough', onVideoLoaded);
-      
-      // Check if video is already loaded (cached)
-      if (video.readyState >= 2) {
-        onVideoLoaded();
-      }
-
-      // Attempt to load the video
-      video.load();
-
-      // Fallback: If video fails to load after 3 seconds, just hide placeholder
-      setTimeout(function() {
-        if (!videoLoaded) {
-          placeholder.classList.add('hidden');
-        }
-      }, 3000);
-    })();
-  </script>
 </body>
 </html>
