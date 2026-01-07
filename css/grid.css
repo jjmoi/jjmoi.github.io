@@ -55,7 +55,7 @@ a#together:hover p {color: tomato;}
 .nav p, .nav a {padding-top: 60px; line-height: 0;}
 .right {text-align: right;}
 p+p {padding-top: 30px;}
-.nav a, .index p, .home p, #subtitle, #title, #case-title span, #credits span, .sides-text span, .next-project span {text-transform: uppercase;}
+.nav a, .index p, .home p, #subtitle, #title, #case-title span, #credits span, #last-section span, .sides-text span, .next-project span {text-transform: uppercase;}
 .col-25 p {padding-right: 25px;}
 
 /* INFO */
@@ -74,8 +74,8 @@ p+p {padding-top: 30px;}
 
 /* img {padding-top: 60px;} */
 #endsection {padding-bottom: 100px;}
-#credits {padding-bottom: 275px;}
-#credits p+p {padding-top: 70px;}
+#credits, #last-section {padding-bottom: 275px;}
+#credits p+p, #last-section p+p {padding-top: 70px;}
 .resize {overflow: hidden; border-radius: 2rem; transition: border-radius 0.3s ease;}
 .resize:hover {border-radius: 7rem;}
 .resize img {width: 100%; border-radius: 2rem; transition: transform 0.3s ease; display: block; transform-origin: center center;}
@@ -129,8 +129,8 @@ code p {background-color: slategrey; color: white; margin-top: 20px; margin-bott
 	#endsection {padding-bottom: 60px;}
 	.section-padtop {padding-top: 150px;}
 	#last {padding-top: 325px; padding-bottom: 50px;}
-	#credits {padding-bottom: 350px;}
-	#credits .stackcolumn {margin-top: 50px;}
+	#credits, #last-section {padding-bottom: 350px;}
+	#credits .stackcolumn, #last-section .stackcolumn {margin-top: 50px;}
 	.all-device {width: 92%;}
 	.parasection img {margin-top: -5px; border-radius: 1.375rem;}
 	/* .parasection p {padding-top: 2px;} */
