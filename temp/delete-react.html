@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Destructive Actions — React</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Sometype+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Tokens ── */
+    :root {
+      --font: 'Manrope', sans-serif;
+      --font-mono: 'Sometype Mono', monospace;
+
+      --bg:              #f5f5f4;
+      --surface:         #ffffff;
+      --border:          #e4e4e7;
+      --border-strong:   #d1d1d6;
+
+      --text:            #18181b;
+      --text-muted:      #71717a;
+      --text-subtle:     #a1a1aa;
+
+      --color-brand-500: 0.6608 0.1962 37.57;
+      --color-brand-400: 0.7753 0.1451 49.46;
+      --color-black:     #000000;
+      --color-white:     #ffffff;
+
+      --accent: oklch(var(--color-brand-500));
+      --accent-fg: var(--color-white);
+      --accent-hover: oklch(var(--color-brand-400));
+      --accent-subtle: oklch(var(--color-brand-500) / 0.08);
+      --accent-hover-subtle: oklch(var(--color-brand-400) / 0.08);
+
+      --red:             #dc2626;
+      --red-hover:       #b91c1c;
+      --red-muted:       #fef2f2;
+      --red-border:      #fca5a5;
+      --red-fg:          #ffffff;
+      --red-text:        #dc2626;
+      --red-text-hover:  #b91c1c;
+
+      --disabled-bg:     #f4f4f5;
+      --disabled-fg:     #a1a1aa;
+      --disabled-border: #e4e4e7;
+
+      --focus-ring:      0 0 0 2px #fff, 0 0 0 4px var(--accent);
+
+      --radius-sm:  6px;
+      --radius-md:  8px;
+      --radius-lg:  12px;
+
+      --shadow-sm:  0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+      --shadow-md:  0 4px 12px rgba(0,0,0,.10), 0 2px 4px rgba(0,0,0,.06);
+      --shadow-lg:  0 8px 32px rgba(0,0,0,.14), 0 2px 8px rgba(0,0,0,.08);
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font);
+      font-size: 14px;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 48px 40px 80px;
+    }
+
+    /* ── Page ── */
+    .page-title    { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+    .page-subtitle { font-size: 13px; color: var(--text-muted); margin-bottom: 48px; max-width: 560px; }
+
+    .section      { margin-bottom: 56px; }
+    .section-label {
+      font-size: 11px; font-weight: 600; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--text); margin-bottom: 6px;
+    }
+    .section-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; max-width: 40ch; }
+
+    /* ── Grid ── */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+    /* ── Card ── */
+    .card         { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+    .card-inner   { max-width: 640px; margin: 0 auto; width: 100%; }
+    .card-header  { padding: 20px 24px 16px; }
+    .card-title   { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+    .card-body    { padding: 24px; }
+    .card-footer  { padding: 16px 24px; display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
+
+    /* ── Form ── */
+    .field              { margin-bottom: 16px; }
+    .field:last-child   { margin-bottom: 0; }
+    .field-label        { display: block; font-size: 13px; font-weight: 500; margin-bottom: 6px; }
+    .field-hint         { font-size: 12px; color: var(--text-muted); margin-top: 5px; }
+    .field-group-label  { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+    .field-group-desc   { font-size: 12px; color: var(--text-muted); margin-bottom: 16px; }
+
+    /* ── Custom Select ── */
+    .select-trigger { width: 100%; padding: 8px 12px; font-family: var(--font); font-size: 14px; border: 1px solid var(--border-strong); border-radius: var(--radius-sm); background: var(--surface); color: var(--text); cursor: pointer; display: flex; align-items: center; justify-content: space-between; text-align: left; transition: border-color .15s; }
+    .select-trigger:focus { border-color: var(--accent); outline: none; }
+    .select-trigger svg { color: var(--text-muted); flex-shrink: 0; }
+    .select-dropdown { position: absolute; z-index: 50; margin-top: 4px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); box-shadow: var(--shadow-md); min-width: 100%; padding: 4px; }
+    .select-wrap { position: relative; }
+
+    input[type="text"], .input-readonly {
+      width: 100%; padding: 8px 12px;
+      font-family: var(--font); font-size: 14px;
+      border: 1px solid var(--border-strong); border-radius: var(--radius-sm);
+      outline: none; background: var(--surface); color: var(--text);
+      transition: border-color .15s, box-shadow .15s;
+    }
+    input[type="text"]:focus {
+      border-color: var(--accent);
+    }
+    #confirm-input-1:focus, #confirm-input-2:focus { box-shadow: none; }
+
+    .input-readonly {
+      background: #fafafa; color: var(--text-muted); cursor: default;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .input-copy-btn {
+      background: none; border: none; cursor: pointer;
+      color: var(--text-subtle); padding: 2px 4px; border-radius: 4px;
+      font-size: 13px; transition: color .15s;
+    }
+    .input-copy-btn:hover { color: var(--text); }
+    .input-disabled {
+      background: var(--disabled-bg); color: var(--disabled-fg);
+      border-color: var(--disabled-border); cursor: not-allowed;
+    }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 16px;
+      font-family: var(--font-mono); font-size: 12px; font-weight: 500;
+      letter-spacing: .04em; text-transform: uppercase;
+      border-radius: 2px; border: 1px solid transparent;
+      cursor: pointer;
+      transition: background .15s, color .15s, border-color .15s, box-shadow .15s;
+      white-space: nowrap;
+    }
+    .btn:focus-visible { box-shadow: var(--focus-ring); outline: none; }
+
+    .btn-primary       { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+    .btn-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+
+    .btn-ghost         { background: transparent; color: var(--text-muted); border-color: var(--border-strong); }
+    .btn-ghost:hover   { background: #f4f4f5; color: var(--text); }
+
+    .btn-destructive-ghost       { background: transparent; color: var(--red); border-color: var(--red-border); }
+    .btn-destructive-ghost:hover { background: var(--red-muted); border-color: var(--red); }
+
+    .btn-destructive-link         { background: none; border: none; color: var(--red-text); padding: 6px 8px; font-weight: 500; cursor: pointer; border-radius: 2px; transition: background .15s, color .15s; }
+    .btn-destructive-link:hover   { background: var(--red-muted); color: var(--red-hover); }
+
+    .btn-destructive-solid         { background: var(--red); color: var(--red-fg); border-color: var(--red); }
+    .btn-destructive-solid:hover   { background: var(--red-hover); border-color: var(--red-hover); }
+    .btn-destructive-solid:disabled,
+    .btn-destructive-solid[aria-disabled="true"] {
+      background: var(--disabled-bg); color: var(--disabled-fg);
+      border-color: var(--disabled-border); cursor: not-allowed; pointer-events: none;
+    }
+    .btn:disabled { pointer-events: none; cursor: not-allowed; opacity: 0.5; }
+
+    /* ── Footer layouts ── */
+    .footer-actions-split           { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+    .footer-actions-split .primary-actions { display: flex; gap: 10px; }
+
+    /* ── Context menu ── */
+    .context-menu   { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); box-shadow: var(--shadow-md); width: 200px; padding: 4px; }
+    .menu-item      { display: flex; align-items: center; gap: 8px; padding: 7px 10px; font-size: 13px; color: var(--text); border-radius: 5px; cursor: pointer; border: none; background: none; width: 100%; text-align: left; transition: background .1s; font-family: var(--font); font-weight: 400; }
+    .menu-item:hover               { background: var(--bg); }
+    .menu-item:active              { background: #e8e8ea; }
+    .menu-item.active              { background: #f0f0f0; font-weight: 500; }
+    .menu-item.active:hover        { background: #e8e8ea; }
+    .menu-item svg                 { color: var(--text-muted); flex-shrink: 0; }
+    .menu-item input[type="checkbox"] { width: 14px; height: 14px; accent-color: var(--accent); cursor: pointer; flex-shrink: 0; pointer-events: none; }
+    .menu-separator                { height: 1px; background: var(--border); margin: 6px 4px; }
+    .menu-destructive-section      { padding: 2px 0; }
+    .menu-item-destructive         { color: var(--red-text); font-weight: 500; }
+    .menu-item-destructive:hover   { background: var(--red-muted); }
+    .menu-item-destructive svg     { color: var(--red-text); }
+
+    /* ── Modal ── */
+    .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 100; padding: 24px; }
+    .modal          { background: var(--surface); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); width: 100%; max-width: 420px; overflow: hidden; }
+    .modal-header   { padding: 20px 24px 0; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+    .modal-title    { font-size: 15px; font-weight: 700; }
+    .modal-close    { background: none; border: none; cursor: pointer; color: var(--text-subtle); padding: 2px; border-radius: 2px; line-height: 1; flex-shrink: 0; transition: color .15s, background .15s; font-size: 18px; }
+    .modal-close:hover           { color: var(--text); background: #f4f4f5; }
+    .modal-close:focus-visible   { box-shadow: var(--focus-ring); outline: none; }
+    .modal-body     { padding: 24px 24px 0; }
+    .modal-body p   { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+    .modal-footer   { padding: 16px 24px; display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
+
+    .modal-warning  { margin: 0 0 16px; padding: 10px 12px; background: var(--red-muted); border: 1px solid var(--red-border); border-radius: var(--radius-sm); font-size: 12px; color: #991b1b; line-height: 1.5; }
+
+    .modal-consequences          { margin: 16px 0 0; padding: 0; list-style: none; }
+    .modal-consequences li       { font-size: 13px; color: var(--text-muted); padding: 3px 0 3px 16px; position: relative; }
+    .modal-consequences li::before { content: '•'; position: absolute; left: 4px; color: var(--text-subtle); }
+    .modal-consequences strong   { color: var(--text); font-weight: 600; }
+
+    .modal-confirm-field  { margin-top: 16px; }
+    .modal-confirm-label  { font-size: 12px; color: var(--text-muted); margin-bottom: 6px; line-height: 1.5; }
+    .modal-confirm-label code { font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--text); background: #f4f4f5; padding: 1px 4px; border-radius: 3px; }
+
+    /* ── Rubric table ── */
+    .tier-badge               { display: inline-flex; align-items: center; justify-content: center; min-width: 56px; font-size: 11px; font-weight: 600; letter-spacing: .05em; padding: 3px 8px; border-radius: 20px; }
+    .tier-badge.t1            { background: #fef2f2; color: #991b1b; }
+    .tier-badge.t2            { background: #fff7ed; color: #9a3412; }
+    .tier-badge.t3            { background: #450a0a; color: #fca5a5; }
+
+    /* ── Misc ── */
+    hr.divider { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+
+    /* ─────────────────────────────────────────
+       Icons
+    ───────────────────────────────────────── */
+const IconList     = () => <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M2 4h12M2 8h8M2 12h5"/></svg>;
+    const IconPlus     = () => <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M8 3v10M3 8h10"/></svg>;
+    const IconSettings = () => <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="8" cy="8" r="2"/><path d="M8 2v2M8 12v2M2 8h2M12 8h2"/></svg>;
+    const IconTrash    = () => <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 4h10M6 4V3h4v1M5 4v8a1 1 0 001 1h4a1 1 0 001-1V4"/></svg>;
+    const IconChevron  = () => <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M4 6l4 4 4-4"/></svg>;
+
+    /* ─────────────────────────────────────────
+       Select
+       Props: value, onChange, options
+    ───────────────────────────────────────── */
+    function Select({ value, onChange, options, id }) {
+      const [open, setOpen] = useState(false);
+      const [focusedIdx, setFocusedIdx] = useState(0);
+      const ref = useRef(null);
+      const triggerRef = useRef(null);
+      const listboxId = `${id}-listbox`;
+
+      useEffect(() => {
+        if (!open) return;
+        const handle = (e) => { if (!ref.current?.contains(e.target)) setOpen(false); };
+        document.addEventListener('mousedown', handle);
+        return () => document.removeEventListener('mousedown', handle);
+      }, [open]);
+
+      useEffect(() => {
+        if (open) setFocusedIdx(options.indexOf(value) ?? 0);
+      }, [open]);
+
+      const handleTriggerKeyDown = (e) => {
+        if (e.key === ' ' || e.key === 'Enter' || e.key === 'ArrowDown') { e.preventDefault(); setOpen(true); }
+        if (e.key === 'Escape') setOpen(false);
+      };
+
+      const handleOptionKeyDown = (e, idx) => {
+        if (e.key === 'ArrowDown') { e.preventDefault(); setFocusedIdx((idx + 1) % options.length); }
+        if (e.key === 'ArrowUp')   { e.preventDefault(); setFocusedIdx((idx - 1 + options.length) % options.length); }
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onChange(options[idx]); setOpen(false); triggerRef.current?.focus(); }
+        if (e.key === 'Escape') { setOpen(false); triggerRef.current?.focus(); }
+        if (e.key === 'Tab') setOpen(false);
+      };
+
+      return (
+        <div className="select-wrap" ref={ref}>
+          <button
+            ref={triggerRef}
+            id={id}
+            type="button"
+            className="select-trigger"
+            onClick={() => setOpen(o => !o)}
+            onKeyDown={handleTriggerKeyDown}
+            aria-haspopup="listbox"
+            aria-expanded={open}
+            aria-controls={listboxId}
+          >
+            <span>{value}</span>
+            <IconChevron />
+          </button>
+          {open && (
+            <div id={listboxId} className="select-dropdown" role="listbox" aria-label="Region visibility">
+              {options.map((opt, idx) => (
+                <button
+                  key={opt}
+                  role="option"
+                  aria-selected={opt === value}
+                  className={`menu-item${opt === value ? ' active' : ''}`}
+                  tabIndex={idx === focusedIdx ? 0 : -1}
+                  autoFocus={idx === focusedIdx}
+                  onClick={() => { onChange(opt); setOpen(false); triggerRef.current?.focus(); }}
+                  onKeyDown={(e) => handleOptionKeyDown(e, idx)}
+                >
+                  {opt}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    /* ─────────────────────────────────────────
+       Button
+       Props: variant, disabled, onClick, children, style
+    ───────────────────────────────────────── */
+    function Button({ variant = 'primary', size = 'md', disabled = false, onClick, children, style }) {
+      const variantClass = {
+        primary:            'btn-primary',
+        ghost:              'btn-ghost',
+        'destructive-ghost':'btn-destructive-ghost',
+        'destructive-solid':'btn-destructive-solid',
+        'destructive-link': 'btn-destructive-link',
+      }[variant] || '';
+
+      const sizeStyle = size === 'sm' ? { fontSize: '12px', padding: '6px 12px' } : {};
+
+      return (
+        <button
+          type="button"
+          className={`btn ${variantClass}`}
+          disabled={disabled}
+          aria-disabled={disabled || undefined}
+          onClick={onClick}
+          style={{ ...sizeStyle, ...style }}
+        >
+          {children}
+        </button>
+      );
+    }
+
+    /* ─────────────────────────────────────────
+       Modal (base)
+       Props: isOpen, onClose, title, titleId, footer, children
+    ───────────────────────────────────────── */
+    function Modal({ isOpen, onClose, title, titleId, footer, children }) {
+      const modalRef  = useRef(null);
+      const triggerRef = useRef(null);
+
+      // Capture trigger on open; restore focus on close
+      useEffect(() => {
+        if (isOpen) {
+          triggerRef.current = document.activeElement;
+        } else if (triggerRef.current) {
+          triggerRef.current.focus();
+          triggerRef.current = null;
+        }
+      }, [isOpen]);
+
+      useEffect(() => {
+        if (!isOpen) return;
+
+        // Escape key
+        const handleKey = (e) => { if (e.key === 'Escape') onClose(); };
+        document.addEventListener('keydown', handleKey);
+
+        // Focus trap
+        const modal = modalRef.current;
+        const focusable = modal?.querySelectorAll('button, input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        const first = focusable?.[0];
+        const last  = focusable?.[focusable.length - 1];
+        first?.focus();
+
+        const trapFocus = (e) => {
+          if (e.key !== 'Tab') return;
+          if (e.shiftKey) {
+            if (document.activeElement === first) { e.preventDefault(); last?.focus(); }
+          } else {
+            if (document.activeElement === last)  { e.preventDefault(); first?.focus(); }
+          }
+        };
+        document.addEventListener('keydown', trapFocus);
+
+        return () => {
+          document.removeEventListener('keydown', handleKey);
+          document.removeEventListener('keydown', trapFocus);
+        };
+      }, [isOpen, onClose]);
+
+      if (!isOpen) return null;
+
+      return (
+        <div className="modal-backdrop">
+          <div className="modal" role="dialog" aria-modal="true" aria-labelledby={titleId} ref={modalRef}>
+            <div className="modal-header">
+              <div id={titleId} className="modal-title">{title}</div>
+            </div>
+            <div className="modal-body">{children}</div>
+            {footer && <div className="modal-footer">{footer}</div>}
+          </div>
+        </div>
+      );
+    }
+
+    /* ─────────────────────────────────────────
+       DeleteApiKeyModal (Tier 3a)
+       Props: isOpen, onClose, onConfirm, inline, title, warningText, bodyText, confirmLabel
+    ───────────────────────────────────────── */
+    function DeleteApiKeyModal({ isOpen, onClose, onConfirm, inline = false, title = 'Delete API key', warningText = null, bodyText = 'Deleting this API key will revoke access for all applications using this key immediately.', confirmLabel = 'Delete key' }) {
+      const body = (
+        <>
+          {warningText && <div className="modal-warning">⚠ {warningText}</div>}
+          <p>{bodyText}</p>
+        </>
+      );
+      const footer = (
+        <>
+          <Button variant="ghost" onClick={onClose}>Cancel</Button>
+          <Button variant="destructive-solid" onClick={onConfirm}>{confirmLabel}</Button>
+        </>
+      );
+
+      if (inline) {
+        const inlineTitleId = `inline-apikey-${title.replace(/\s+/g, '-').toLowerCase()}`;
+        return (
+          <div className="modal" role="region" aria-labelledby={inlineTitleId}>
+            <div className="modal-header">
+              <div id={inlineTitleId} className="modal-title">{title}</div>
+            </div>
+            <div className="modal-body">{body}</div>
+            <div className="modal-footer">{footer}</div>
+          </div>
+        );
+      }
+
+      return (
+        <Modal
+          isOpen={isOpen}
+          onClose={onClose}
+          title={title}
+          titleId={`modal-${title.replace(/\s+/g, '-').toLowerCase()}`}
+          footer={footer}
+        >
+          {body}
+        </Modal>
+      );
+    }
+
+    /* ─────────────────────────────────────────
+       DeleteModelEndpointModal (Tier 3b)
+       Props: isOpen, onClose, onConfirm, endpointName, inline, initialValue
+       - inline: renders without backdrop (for static demos)
+    ───────────────────────────────────────── */
+    function DeleteModelEndpointModal({ isOpen, onClose, onConfirm, endpointName, inline = false, initialValue = '', instanceId = 'default', modalTitle, bodyText, consequences }) {
+      const [inputValue, setInputValue] = useState(initialValue);
+      const isMatch = inputValue === endpointName;
+      const hintId  = `confirm-hint-${instanceId}`;
+
+      const resolvedTitle        = modalTitle ?? 'Delete model endpoint';
+      const resolvedBodyText     = bodyText   ?? 'Deleting this model endpoint will permanently remove the model along with all served models and their deployment history.';
+      const resolvedConsequences = consequences ?? [
+        'All active endpoints under this model will stop immediately',
+        'Any ongoing API requests to this endpoint will fail',
+        <React.Fragment>This action <strong>cannot</strong> be recovered</React.Fragment>,
+      ];
+
+      useEffect(() => {
+        if (!inline && !isOpen) setInputValue('');
+      }, [isOpen, inline]);
+
+      const body = (
+        <>
+          <p>{resolvedBodyText}</p>
+          <ul className="modal-consequences" aria-label="Consequences of this action">
+            {resolvedConsequences.map((c, i) => <li key={i}>{c}</li>)}
+          </ul>
+          <div className="modal-confirm-field">
+            <div className="modal-confirm-label">
+              To confirm, type <code>{endpointName}</code> in the field below
+            </div>
+            <input
+              type="text"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              placeholder="Type the endpoint name to confirm"
+              aria-label="Confirm deletion by typing the endpoint name"
+              aria-describedby={hintId}
+              style={isMatch ? { borderColor: 'var(--accent)' } : {}}
+            />
+            <div id={hintId} style={{ fontSize: '11px', color: 'var(--text-subtle)', marginTop: '4px' }}>
+              {isMatch ? <span style={{ color: 'var(--text)' }}>✓ Name matches — you may proceed</span> : 'Case-sensitive'}
+            </div>
+          </div>
+        </>
+      );
+
+      const footer = (
+        <>
+          <Button variant="ghost" onClick={onClose}>Cancel</Button>
+          <Button variant="destructive-solid" disabled={!isMatch} onClick={isMatch ? onConfirm : undefined}>
+            Delete endpoint
+          </Button>
+        </>
+      );
+
+      // Inline mode: render as a static card (no backdrop, no isOpen gate)
+      if (inline) {
+        const inlineTitleId = `inline-endpoint-${instanceId}`;
+        return (
+          <div className="modal" role="region" aria-labelledby={inlineTitleId}>
+            <div className="modal-header">
+              <div id={inlineTitleId} className="modal-title">{resolvedTitle}</div>
+            </div>
+            <div className="modal-body">{body}</div>
+            <div className="modal-footer">{footer}</div>
+          </div>
+        );
+      }
+
+      return (
+        <Modal
+          isOpen={isOpen}
+          onClose={onClose}
+          title={resolvedTitle}
+          titleId={`modal-endpoint-${instanceId}`}
+          footer={footer}
+        >
+          {body}
+        </Modal>
+      );
+    }
+
+    /* ─────────────────────────────────────────
+       ContextMenu (Tier 2)
+       Props: onDelete
+    ───────────────────────────────────────── */
+    function ContextMenu({ onDelete, onClose }) {
+      const menuRef = useRef(null);
+      const [selected, setSelected] = useState(null);
+      const [allChecked, setAllChecked] = useState(false);
+
+      useEffect(() => {
+        const menu = menuRef.current;
+        if (!menu) return;
+        const items = [...menu.querySelectorAll('.menu-item')];
+        const handlers = items.map((item, i) => {
+          const handler = (e) => {
+            if (e.key === 'ArrowDown') { e.preventDefault(); items[(i + 1) % items.length].focus(); }
+            if (e.key === 'ArrowUp')   { e.preventDefault(); items[(i - 1 + items.length) % items.length].focus(); }
+            if (e.key === 'Escape')    { e.preventDefault(); onClose?.(); }
+          };
+          item.addEventListener('keydown', handler);
+          return { item, handler };
+        });
+        return () => handlers.forEach(({ item, handler }) => item.removeEventListener('keydown', handler));
+      }, [onClose]);
+
+      const projects = ['Default', 'acme'];
+
+      return (
+        <div className="context-menu" role="menu" ref={menuRef}>
+          <button
+            role="menuitemcheckbox"
+            className={`menu-item${allChecked ? ' active' : ''}`}
+            aria-checked={allChecked}
+            onClick={() => setAllChecked(v => !v)}
+          >
+            <input type="checkbox" checked={allChecked} onChange={() => {}} /> All
+          </button>
+          {projects.map((ws) => (
+            <button
+              key={ws}
+              role="menuitemradio"
+              className={`menu-item${selected === ws ? ' active' : ''}`}
+              aria-checked={selected === ws}
+              onClick={() => setSelected(ws)}
+            >
+              <IconList /> {ws}
+            </button>
+          ))}
+          <div role="separator" className="menu-separator" />
+          <button role="menuitem" className="menu-item"><IconPlus /> Create</button>
+          <button role="menuitem" className="menu-item"><IconSettings /> Settings</button>
+          <div role="separator" className="menu-separator" style={{ marginTop: '8px', marginBottom: '8px' }} />
+          <div className="menu-destructive-section">
+            <button role="menuitem" className="menu-item menu-item-destructive" onClick={onDelete}>
+              <IconTrash /> Delete project
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    /* ─────────────────────────────────────────
+       OrganizationSettingsCard (Tier 1)
+       Props: onDelete
+    ───────────────────────────────────────── */
+    function OrganizationSettingsCard({ onDelete }) {
+      const [orgName, setOrgName]           = useState('test 22');
+      const [modalOpen, setModalOpen]       = useState(false);
+
+      return (
+        <>
+          <div className="card" style={{ paddingTop: '40px', paddingBottom: '40px' }}>
+            <div className="card-header">
+              <div className="card-inner">
+                <div className="card-title">Organization Settings</div>
+                <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>{orgName}</div>
+              </div>
+            </div>
+            <div className="card-body">
+              <div className="card-inner">
+                <div className="field-group-label">General</div>
+                <div className="field">
+                  <label className="field-label" htmlFor="org-id">Organization ID</label>
+                  <div className="input-readonly">
+                    <input
+                      id="org-id"
+                      type="text"
+                      defaultValue="org_vwd6m6mchxkjjmhkvf8hwc9h"
+                      readOnly
+                      aria-readonly="true"
+                      style={{ border: 'none', background: 'transparent', padding: 0, width: '100%', color: 'var(--text-muted)', fontFamily: 'var(--font)', fontSize: '14px' }}
+                    />
+                    <button type="button" className="input-copy-btn" aria-label="Copy organization ID">⧉</button>
+                  </div>
+                </div>
+                <div className="field">
+                  <label className="field-label" htmlFor="org-name">Organization name</label>
+                  <input id="org-name" type="text" value={orgName} onChange={(e) => setOrgName(e.target.value)} />
+                </div>
+                <div className="field">
+                  <label className="field-label" htmlFor="org-type">Organization type</label>
+                  <input id="org-type" type="text" defaultValue="Enterprise" className="input-disabled" readOnly aria-readonly="true" />
+                  <div className="field-hint">Please contact support if you wish to change the type of your organization.</div>
+                </div>
+              </div>
+            </div>
+            <div className="card-footer">
+              <div className="card-inner">
+                <div className="footer-actions-split">
+                  <Button variant="destructive-ghost" size="sm" onClick={() => setModalOpen(true)}>
+                    Delete organization
+                  </Button>
+                  <Button variant="primary">Save changes</Button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <DeleteModelEndpointModal
+            isOpen={modalOpen}
+            onClose={() => setModalOpen(false)}
+            onConfirm={() => { setModalOpen(false); onDelete?.(); }}
+            endpointName={orgName}
+            instanceId="org"
+            modalTitle="Delete organization"
+            bodyText="Deleting this organization will permanently remove all members, API keys, and endpoints."
+            consequences={[
+              'All members will immediately lose access',
+              'All API keys and endpoints will be permanently deleted',
+              <React.Fragment>This action <strong>cannot</strong> be undone</React.Fragment>,
+            ]}
+          />
+        </>
+      );
+    }
+
+    /* ─────────────────────────────────────────
+       RegionSettingsCard (Tier 1 — 3-action)
+       Props: onDelete
+    ───────────────────────────────────────── */
+    function RegionSettingsCard({ onDelete }) {
+      const [apiUrl, setApiUrl]         = useState('https://api.cerebras.ai');
+      const [visibility, setVisibility] = useState('Public');
+      const [modalOpen, setModalOpen]   = useState(false);
+
+      return (
+        <>
+          <div className="card" style={{ paddingTop: '40px', paddingBottom: '40px' }}>
+            <div className="card-header">
+              <div className="card-inner">
+                <div className="card-title">Region Base API URL</div>
+              </div>
+            </div>
+            <div className="card-body">
+              <div className="card-inner">
+                <div className="field">
+                  <label className="field-label" htmlFor="region-id">Region ID</label>
+                  <div className="input-readonly">
+                    <input
+                      id="region-id"
+                      type="text"
+                      defaultValue="reg_us-east-1"
+                      readOnly
+                      aria-readonly="true"
+                      style={{ border: 'none', background: 'transparent', padding: 0, width: '100%', color: 'var(--text-muted)', fontFamily: 'var(--font)', fontSize: '14px' }}
+                    />
+                    <button type="button" className="input-copy-btn" aria-label="Copy region ID">⧉</button>
+                  </div>
+                </div>
+                <div className="field">
+                  <label className="field-label">Region visibility</label>
+                  <Select id="region-visibility" value={visibility} onChange={setVisibility} options={['Public', 'Private']} />
+                </div>
+                <div className="field">
+                  <label className="field-label" htmlFor="region-api-url">Region Base API URL</label>
+                  <input id="region-api-url" type="text" value={apiUrl} onChange={(e) => setApiUrl(e.target.value)} />
+                  <div className="field-hint">Base URL of the API router for the region.</div>
+                </div>
+              </div>
+            </div>
+            <div className="card-footer">
+              <div className="card-inner">
+                <div className="footer-actions-split">
+                  <Button variant="destructive-ghost" size="sm" onClick={() => setModalOpen(true)}>
+                    Delete region
+                  </Button>
+                  <div className="primary-actions">
+                    <Button variant="ghost" size="sm">Sync to API router</Button>
+                    <Button variant="primary" size="sm">Save region</Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <DeleteModelEndpointModal
+            isOpen={modalOpen}
+            onClose={() => setModalOpen(false)}
+            onConfirm={() => { setModalOpen(false); onDelete?.(); }}
+            endpointName="us-east-1"
+            instanceId="region"
+            modalTitle="Delete region"
+            bodyText="Deleting this region will permanently remove all associated endpoints and their deployment history."
+            consequences={[
+              'All endpoints in this region will stop immediately',
+              'Any ongoing API requests to this region will fail',
+              <React.Fragment>This action <strong>cannot</strong> be undone</React.Fragment>,
+            ]}
+          />
+        </>
+      );
+    }
+
+    /* ─────────────────────────────────────────
+       TierDecisionRubric
+    ───────────────────────────────────────── */
+    function TierDecisionRubric() {
+      const rows = [
+        { tier: 'Tier 1',  style: 'Ghost red',                  useWhen: 'Delete is a secondary action alongside a primary save/submit',           examples: 'Delete org, Delete region in a settings form' },
+        { tier: 'Tier 2',  style: 'Red link',                    useWhen: 'Delete is a tertiary option embedded in a list or context menu',          examples: 'Delete project in dropdown, delete row in a data table' },
+        { tier: 'Tier 3a', style: 'Solid red',                   useWhen: 'Item has no active dependents and deletion affects only the current user', examples: 'Delete API key, Delete saved prompt' },
+        { tier: 'Tier 3b', style: 'Type-to-confirm + solid red', useWhen: 'Item has active dependents OR affects other users / shared resources',    examples: 'Delete active model endpoint, Delete project with members' },
+      ];
+      const thStyle = { textAlign: 'left', padding: '8px 12px', fontWeight: 600, color: 'var(--text)', fontSize: '11px', letterSpacing: '.06em', textTransform: 'uppercase' };
+      return (
+        <div className="card">
+          <div className="card-body">
+            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
+              <thead>
+                <tr style={{ borderBottom: '1px solid var(--border)' }}>
+                  {['Tier', 'Style', 'Use when', 'Examples'].map(h => <th key={h} style={thStyle}>{h}</th>)}
+                </tr>
+              </thead>
+              <tbody>
+                {rows.map((row, i) => (
+                  <tr key={i} style={i < rows.length - 1 ? { borderBottom: '1px solid var(--border)' } : {}}>
+                    <td style={{ padding: '12px', color: 'var(--text)', fontWeight: 500 }}>{row.tier}</td>
+                    <td style={{ padding: '12px' }}>{row.style}</td>
+                    <td style={{ padding: '12px', color: 'var(--text)' }}>{row.useWhen}</td>
+                    <td style={{ padding: '12px', color: 'var(--text)' }}>{row.examples}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      );
+    }
+
+    /* ─────────────────────────────────────────
+       Section wrapper
+    ───────────────────────────────────────── */
+    function Section({ label, desc, children }) {
+      return (
+        <div className="section">
+          <div className="section-label">{label}</div>
+          {desc && <div className="section-desc">{desc}</div>}
+          {children}
+        </div>
+      );
+    }
+
+    /* ─────────────────────────────────────────
+       App
+    ───────────────────────────────────────── */
+    function App() {
+      const [projectModalOpen, setProjectModalOpen] = useState(false);
+
+      return (
+        <>
+          <h1 className="page-title">Destructive Actions</h1>
+          <p className="page-subtitle">A three-tier system for destructive actions, scaled to the risk level of each operation.</p>
+
+          {/* ── Tier 1 ── */}
+          <Section
+            label="Tier 1 — Secondary Destructive"
+            desc="Secondary destructive action. Used alongside a primary save/confirm action. The delete button is anchored to the left in a split footer layout, visually separated from the primary action on the right."
+          >
+            <div>
+              <div style={{ fontSize: '12px', color: 'var(--text)', marginBottom: '14px', fontWeight: 500 }}>2-action row</div>
+              <OrganizationSettingsCard />
+            </div>
+            <div style={{ marginTop: '28px' }}>
+              <div style={{ fontSize: '12px', color: 'var(--text)', marginBottom: '14px', fontWeight: 500 }}>3-action row</div>
+              <RegionSettingsCard />
+            </div>
+          </Section>
+
+          <hr className="divider" />
+
+          {/* ── Tier 2 ── */}
+          <Section
+            label="Tier 2 — Tertiary Destructive"
+            desc="Tertiary destructive action embedded in a context menu or inline list. A generous separator above the delete item creates visual distance from safe actions, reducing misclick risk."
+          >
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <div>
+                <ContextMenu onClose={() => {}} onDelete={() => setProjectModalOpen(true)} />
+              </div>
+            </div>
+            <DeleteApiKeyModal
+              isOpen={projectModalOpen}
+              onClose={() => setProjectModalOpen(false)}
+              onConfirm={() => setProjectModalOpen(false)}
+              title="Delete project"
+              bodyText="Deleting this project will permanently remove it and all its contents."
+              confirmLabel="Delete project"
+            />
+          </Section>
+
+          <hr className="divider" />
+
+          {/* ── Tier 3a ── */}
+          <Section
+            label="Tier 3a — Primary Destructive"
+            desc="Confirmation modal for deleting items with no active dependents. Permanence is communicated through a dedicated warning block rather than buried in body copy."
+          >
+            <div style={{ display: 'flex', gap: '64px', justifyContent: 'center', alignItems: 'flex-start' }}>
+              <div>
+                <div style={{ fontSize: '12px', color: 'var(--text)', marginBottom: '10px', fontWeight: 500 }}>Confirmation modal</div>
+                <DeleteApiKeyModal
+                  inline={true}
+                  title="Delete project"
+                  bodyText="Deleting this project will permanently remove it and all its contents."
+                  confirmLabel="Delete project"
+                  onClose={() => {}}
+                  onConfirm={() => {}}
+                />
+              </div>
+              <div>
+                <div style={{ fontSize: '12px', color: 'var(--text)', marginBottom: '10px', fontWeight: 500 }}>Confirmation modal with warning</div>
+                <DeleteApiKeyModal
+                  inline={true}
+                  warningText="This action is permanent and cannot be undone. Any services using this key will stop working immediately."
+                  onClose={() => {}}
+                  onConfirm={() => {}}
+                />
+              </div>
+            </div>
+          </Section>
+
+          <hr className="divider" />
+
+          {/* ── Tier 3b ── */}
+          <Section
+            label="Tier 3b — Primary Destructive, High-Stakes"
+            desc="High-stakes delete for items with active dependents or shared impact. The user must type the exact resource name before the delete action enables."
+          >
+            <div style={{ display: 'flex', gap: '64px', justifyContent: 'center', alignItems: 'start' }}>
+              <div>
+                <div style={{ fontSize: '12px', color: 'var(--text)', marginBottom: '10px', fontWeight: 500 }}>Empty state</div>
+                <DeleteModelEndpointModal
+                  inline={true}
+                  instanceId="empty"
+                  endpointName="supra-a80-2jz-gte"
+                  onClose={() => {}}
+                  onConfirm={() => {}}
+                />
+              </div>
+              <div>
+                <div style={{ fontSize: '12px', color: 'var(--text)', marginBottom: '10px', fontWeight: 500 }}>Filled state</div>
+                <DeleteModelEndpointModal
+                  inline={true}
+                  instanceId="filled"
+                  endpointName="supra-a80-2jz-gte"
+                  initialValue="supra-a80-2jz-gte"
+                  onClose={() => {}}
+                  onConfirm={() => {}}
+                />
+              </div>
+            </div>
+          </Section>
+
+          <hr className="divider" />
+
+          {/* ── Rubric ── */}
+          <Section
+            label="Tier Decision Rubric"
+            desc="Use this table to determine which tier applies. When in doubt, default to the higher tier."
+          >
+            <TierDecisionRubric />
+          </Section>
+        </>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>

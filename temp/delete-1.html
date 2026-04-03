@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Destructive Actions — Improved UX</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Sometype+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Tokens ── */
+    :root {
+      --font: 'Manrope', sans-serif;
+      --font-mono: 'Sometype Mono', monospace;
+
+      --bg:            #f5f5f4;
+      --surface:       #ffffff;
+      --border:        #e4e4e7;
+      --border-strong: #d1d1d6;
+
+      --text:          #18181b;
+      --text-muted:    #71717a;
+      --text-subtle:   #a1a1aa;
+
+      --orange:        hsl(15, 88%, 55%);
+      --orange-hover:  hsl(22, 100%, 68%);
+      --orange-fg:     #ffffff;
+
+      --red:           #dc2626;
+      --red-hover:     #b91c1c;
+      --red-muted:     #fef2f2;
+      --red-border:    #fca5a5;
+      --red-fg:        #ffffff;
+      --red-text:      #dc2626;
+      --red-text-hover:#b91c1c;
+
+      --disabled-bg:   #f4f4f5;
+      --disabled-fg:   #a1a1aa;
+      --disabled-border: #e4e4e7;
+
+      --focus-ring:    0 0 0 2px #fff, 0 0 0 4px hsl(15, 88%, 55%);
+
+      --radius-sm:     6px;
+      --radius-md:     8px;
+      --radius-lg:     12px;
+
+      --shadow-sm:     0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+      --shadow-md:     0 4px 12px rgba(0,0,0,.10), 0 2px 4px rgba(0,0,0,.06);
+      --shadow-lg:     0 8px 32px rgba(0,0,0,.14), 0 2px 8px rgba(0,0,0,.08);
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font);
+      font-size: 14px;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 48px 40px 80px;
+    }
+
+    /* ── Page layout ── */
+    .page-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .page-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 48px;
+      max-width: 560px;
+    }
+
+    .section {
+      margin-bottom: 56px;
+    }
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-subtle);
+      margin-bottom: 6px;
+    }
+    .section-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      max-width: 40ch;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+    .card-header {
+      padding: 20px 24px 16px;
+    }
+    .card-title { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+    .card-body { padding: 24px; }
+    .card-footer {
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    /* ── Form fields ── */
+    .field { margin-bottom: 16px; }
+    .field:last-child { margin-bottom: 0; }
+    .field-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+    .field-hint {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 5px;
+    }
+    .field-group-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+    .field-group-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+    input[type="text"],
+    select,
+    .input-readonly {
+      width: 100%;
+      padding: 8px 12px;
+      font-family: var(--font);
+      font-size: 14px;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+      outline: none;
+      background: var(--surface);
+      color: var(--text);
+      transition: border-color .15s, box-shadow .15s;
+    }
+    input[type="text"]:focus,
+    select:focus {
+      border-color: var(--orange);
+      box-shadow: var(--focus-ring);
+    }
+    .input-readonly {
+      background: #fafafa;
+      color: var(--text-muted);
+      cursor: default;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .input-copy-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-subtle);
+      padding: 2px 4px;
+      border-radius: 4px;
+      font-size: 13px;
+      transition: color .15s;
+    }
+    .input-copy-btn:hover { color: var(--text); }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: background .15s, color .15s, border-color .15s, box-shadow .15s;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+    .btn:focus-visible { box-shadow: var(--focus-ring); outline: none; }
+
+    /* Primary — orange */
+    .btn-primary {
+      background: var(--orange);
+      color: var(--orange-fg);
+      border-color: var(--orange);
+    }
+    .btn-primary:hover { background: var(--orange-hover); border-color: var(--orange-hover); }
+
+    /* Ghost — neutral */
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-muted);
+      border-color: var(--border-strong);
+    }
+    .btn-ghost:hover { background: #f4f4f5; color: var(--text); }
+
+    /* Tier 1 — ghost red (secondary destructive) */
+    .btn-destructive-ghost {
+      background: transparent;
+      color: var(--red);
+      border-color: var(--red-border);
+    }
+    .btn-destructive-ghost:hover {
+      background: var(--red-muted);
+      border-color: var(--red);
+    }
+
+    /* Tier 2 — link red (tertiary in context) */
+    .btn-destructive-link {
+      background: none;
+      border: none;
+      color: var(--red-text);
+      padding: 6px 8px;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: background .15s, color .15s;
+    }
+    .btn-destructive-link:hover {
+      background: var(--red-muted);
+      color: var(--red-hover);
+    }
+
+    /* Tier 3 — solid red (primary in modal) */
+    .btn-destructive-solid {
+      background: var(--red);
+      color: var(--red-fg);
+      border-color: var(--red);
+    }
+    .btn-destructive-solid:hover { background: var(--red-hover); border-color: var(--red-hover); }
+    .btn-destructive-solid:disabled,
+    .btn-destructive-solid[aria-disabled="true"] {
+      background: var(--disabled-bg);
+      color: var(--disabled-fg);
+      border-color: var(--disabled-border);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    /* ── Danger zone strip (improvement: separates delete from save) ── */
+    .danger-zone {
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .danger-zone-label {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ── Context menu ── */
+    .context-menu {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      width: 200px;
+      padding: 4px;
+      overflow: hidden;
+    }
+    .menu-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      font-size: 13px;
+      color: var(--text);
+      border-radius: 5px;
+      cursor: pointer;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      transition: background .1s;
+      font-family: var(--font);
+      font-weight: 400;
+    }
+    .menu-item:hover { background: var(--bg); }
+    .menu-item.active { background: #f0f0f0; font-weight: 500; }
+    .menu-item svg { color: var(--text-muted); flex-shrink: 0; }
+
+    /* Improved: more padding + separator before destructive item */
+    .menu-separator {
+      height: 1px;
+      background: var(--border);
+      margin: 6px 4px;
+    }
+    .menu-destructive-section {
+      padding-top: 2px;
+      padding-bottom: 2px;
+    }
+    .menu-item-destructive {
+      color: var(--red-text);
+      font-weight: 500;
+    }
+    .menu-item-destructive:hover { background: var(--red-muted); }
+    .menu-item-destructive svg { color: var(--red-text); }
+
+    /* ── Modal overlay ── */
+    .modal-demo {
+      position: relative;
+    }
+    .modal-backdrop {
+      border-radius: var(--radius-lg);
+      padding: 40px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      width: 100%;
+      max-width: 420px;
+      overflow: hidden;
+    }
+    .modal-header {
+      padding: 20px 24px 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .modal-title {
+      font-size: 15px;
+      font-weight: 700;
+    }
+    .modal-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-subtle);
+      padding: 2px;
+      border-radius: 2px;
+      line-height: 1;
+      flex-shrink: 0;
+      transition: color .15s, background .15s;
+      font-size: 18px;
+    }
+    .modal-close:hover { color: var(--text); background: #f4f4f5; }
+    .modal-close:focus-visible { box-shadow: var(--focus-ring); outline: none; }
+    .modal-body {
+      padding: 24px 24px 0;
+    }
+    .modal-body p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .modal-consequences {
+      margin: 16px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    .modal-consequences li {
+      font-size: 13px;
+      color: var(--text-muted);
+      padding: 3px 0 3px 16px;
+      position: relative;
+    }
+    .modal-consequences li::before {
+      content: '•';
+      position: absolute;
+      left: 4px;
+      color: var(--text-subtle);
+    }
+    .modal-consequences strong { color: var(--text); font-weight: 600; }
+
+    /* Warning banner inside modal */
+    .modal-warning {
+      margin: 0 0 16px;
+      padding: 10px 12px;
+      background: var(--red-muted);
+      border: 1px solid var(--red-border);
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      color: #991b1b;
+      line-height: 1.5;
+    }
+
+    .modal-confirm-field {
+      margin-top: 16px; /* 1x */
+    }
+    #confirm-input-1:focus,
+    #confirm-input-2:focus {
+      box-shadow: none;
+    }
+    .modal-confirm-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+    .modal-confirm-label code {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+      background: #f4f4f5;
+      padding: 1px 4px;
+      border-radius: 3px;
+    }
+    .modal-footer {
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    /* ── Comparison layout ── */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+    .compare-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+    .compare-label.before {
+      background: #fef2f2;
+      color: #b91c1c;
+    }
+    .compare-label.after {
+      background: #f0fdf4;
+      color: #15803d;
+    }
+
+    /* ── Disabled input ── */
+    .input-disabled {
+      background: var(--disabled-bg);
+      color: var(--disabled-fg);
+      border-color: var(--disabled-border);
+      cursor: not-allowed;
+    }
+
+    /* ── Multi-action footer fix ── */
+    .footer-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+    .footer-actions-split {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .footer-actions-split .primary-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    /* ── Divider ── */
+    hr.divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 32px 0;
+    }
+
+    /* ── Tier badge ── */
+    .tier-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .05em;
+      padding: 3px 8px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+    .tier-badge.t1 { background: #fef2f2; color: #991b1b; }
+    .tier-badge.t2 { background: #fff7ed; color: #9a3412; }
+    .tier-badge.t3 { background: #450a0a; color: #fca5a5; }
+  </style>
+</head>
+<body>
+
+  <h1 class="page-title">Destructive Actions</h1>
+  <p class="page-subtitle">
+    A three-tier system for destructive actions, scaled to the risk level of each operation.
+  </p>
+
+  <!-- ═══════════════════════════════════════════
+       TIER 1 — Ghost Red (secondary action)
+  ════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label">Tier 1 — Secondary Destructive</div>
+    <div class="section-desc">Secondary destructive action. Used alongside a primary save/confirm action. The delete button is anchored to the left in a split footer layout, visually separated from the primary action on the right. Button labels use sentence case to keep tone calm and deliberate.</div>
+
+    <div style="max-width:640px;margin:0 auto;">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Organization Settings</div>
+            <div style="font-size:12px;color:var(--text-muted)">test 22</div>
+          </div>
+          <div class="card-body">
+            <div class="field-group-label">General</div>
+            <div class="field-group-desc">General information about your organization.</div>
+            <div class="field">
+              <label class="field-label">Organization ID</label>
+              <div class="input-readonly">
+                org_vwd6m6mchxkjjmhkvf8hwc9h
+                <button class="input-copy-btn" aria-label="Copy organization ID">⧉</button>
+              </div>
+            </div>
+            <div class="field">
+              <label class="field-label">Organization name</label>
+              <input type="text" value="test 22" />
+            </div>
+            <div class="field">
+              <label class="field-label">Organization type</label>
+              <input type="text" value="Enterprise" class="input-disabled" readonly />
+              <div class="field-hint">Please contact support if you wish to change the type of your organization.</div>
+            </div>
+          </div>
+          <!-- Fix: danger zone clearly separated from primary save action -->
+          <div class="card-footer">
+            <div class="footer-actions-split">
+              <button class="btn btn-destructive-ghost" style="font-size:12px;padding:6px 12px;">Delete organization</button>
+              <button class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- Region settings — 3 action row fix -->
+    <div style="margin-top:28px;max-width:640px;margin-left:auto;margin-right:auto;">
+      <div style="font-size:12px;color:var(--text-muted);margin-bottom:14px;font-weight:500;">3-action row — improved</div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Region Base API URL</div>
+        </div>
+        <div class="card-body">
+          <div class="field">
+            <input type="text" value="https://api.cerebras.ai" />
+            <div class="field-hint">Base URL of the API router for the region.</div>
+          </div>
+          <div class="field">
+            <label class="field-label">Region visibility</label>
+            <select>
+              <option>Public</option>
+              <option>Private</option>
+            </select>
+          </div>
+        </div>
+        <!-- Fix: ghost is a secondary utility action, delete is left-isolated, save is primary -->
+        <div class="card-footer">
+          <div class="footer-actions-split">
+            <button class="btn btn-destructive-ghost" style="font-size:12px;padding:6px 12px;">Delete region</button>
+            <div class="primary-actions">
+              <button class="btn btn-ghost" style="font-size:12px;padding:6px 12px;">Sync to API router</button>
+              <button class="btn btn-primary" style="font-size:12px;padding:6px 12px;">Save region</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- ═══════════════════════════════════════════
+       TIER 2 — Red Link (tertiary in context)
+  ════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label">Tier 2 — Tertiary Destructive</div>
+    <div class="section-desc">Tertiary destructive action embedded in a context menu or inline list. A generous separator above the delete item creates visual distance from safe actions, reducing misclick risk. The label names the specific resource being deleted rather than using a generic "Delete" to eliminate ambiguity.</div>
+
+    <div style="display:flex;justify-content:center;">
+        <div style="display:inline-block;">
+          <div class="context-menu">
+            <button class="menu-item active">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="2"/></svg>
+              All
+            </button>
+            <button class="menu-item">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h8M2 12h5"/></svg>
+              Default
+            </button>
+            <button class="menu-item">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h8M2 12h5"/></svg>
+              acme
+            </button>
+            <div class="menu-separator"></div>
+            <button class="menu-item">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v10M3 8h10"/></svg>
+              Create
+            </button>
+            <button class="menu-item">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="2"/><path d="M8 2v2M8 12v2M2 8h2M12 8h2"/></svg>
+              Settings
+            </button>
+            <!-- Fix: extra separator with larger margin isolates delete -->
+            <div class="menu-separator" style="margin-top:8px;margin-bottom:8px;"></div>
+            <div class="menu-destructive-section">
+              <button class="menu-item menu-item-destructive">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 4h10M6 4V3h4v1M5 4v8a1 1 0 001 1h4a1 1 0 001-1V4"/></svg>
+                Delete workspace
+              </button>
+            </div>
+          </div>
+        </div>
+    </div>
+
+  </div>
+
+  <hr class="divider" />
+
+  <!-- ═══════════════════════════════════════════
+       TIER 3a — Solid Red, non-critical
+  ════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label">Tier 3a — Primary Destructive</div>
+    <div class="section-desc">Confirmation modal for deleting items with no active dependents. Permanence is communicated through a dedicated warning block rather than buried in body copy. An explicit close button and Escape key support provide clear exit paths without requiring the user to hunt for a cancel action.</div>
+
+    <div class="modal-backdrop">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title-1">
+        <div class="modal-header">
+          <div id="modal-title-1" class="modal-title">Delete API key</div>
+          <button class="modal-close" aria-label="Close dialog" onclick="this.closest('.modal-backdrop').style.display='none'">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="modal-warning">
+            ⚠ This action is permanent and cannot be undone. Any services using this key will stop working immediately.
+          </div>
+          <p>
+            Deleting this API key will revoke access for all applications using this key immediately.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-ghost">Cancel</button>
+          <button class="btn btn-destructive-solid">Delete key</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="divider" />
+
+  <!-- ═══════════════════════════════════════════
+       TIER 3b — Solid Red, critical (typed confirm)
+  ════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label">Tier 3b — Primary Destructive, High-Stakes</div>
+    <div class="section-desc">High-stakes delete for items with active dependents or shared impact. The user must type the exact resource name before the delete action enables. Inline validation confirms the match in real time, and a case-sensitive hint prevents silent errors from minor typos.</div>
+
+    <div class="grid-2" style="align-items:start;">
+
+      <!-- Empty state -->
+      <div>
+        <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px;font-weight:500;">Empty state — Delete disabled</div>
+        <div class="modal-backdrop" style="padding:28px 24px;">
+          <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title-2">
+            <div class="modal-header">
+              <div id="modal-title-2" class="modal-title">Delete model endpoint</div>
+              <button class="modal-close" aria-label="Close dialog">✕</button>
+            </div>
+            <div class="modal-body">
+              <p>
+                Deleting this model endpoint will permanently remove the model along with all served models and their deployment history.
+              </p>
+              <ul class="modal-consequences" aria-label="Consequences of this action">
+                <li>All active endpoints under this model will stop immediately</li>
+                <li>Any ongoing API requests to this endpoint will fail</li>
+                <li>This action <strong>cannot</strong> be recovered</li>
+              </ul>
+              <div class="modal-confirm-field">
+                <div class="modal-confirm-label">
+                  To confirm, type <code>supra-a80-2jz-gte</code> in the field below
+                </div>
+                <input
+                  type="text"
+                  id="confirm-input-1"
+                  placeholder="Type the endpoint name to confirm"
+                  aria-label="Confirm deletion by typing the endpoint name"
+                  aria-describedby="confirm-hint-1"
+                  oninput="
+                    const val = this.value;
+                    const btn = document.getElementById('delete-btn-1');
+                    const match = val === 'supra-a80-2jz-gte';
+                    btn.disabled = !match;
+                    btn.setAttribute('aria-disabled', String(!match));
+                  "
+                />
+                <div id="confirm-hint-1" style="font-size:11px;color:var(--text-subtle);margin-top:4px;">
+                  Case-sensitive
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-ghost">Cancel</button>
+              <button
+                id="delete-btn-1"
+                class="btn btn-destructive-solid"
+                disabled
+                aria-disabled="true"
+              >Delete endpoint</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filled state -->
+      <div>
+        <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px;font-weight:500;">Filled state — Delete enabled</div>
+        <div class="modal-backdrop" style="padding:28px 24px;">
+          <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title-3">
+            <div class="modal-header">
+              <div id="modal-title-3" class="modal-title">Delete model endpoint</div>
+              <button class="modal-close" aria-label="Close dialog">✕</button>
+            </div>
+            <div class="modal-body">
+              <p>
+                Deleting this model endpoint will permanently remove the model along with all served models and their deployment history.
+              </p>
+              <ul class="modal-consequences" aria-label="Consequences of this action">
+                <li>All active endpoints under this model will stop immediately</li>
+                <li>Any ongoing API requests to this endpoint will fail</li>
+                <li>This action <strong>cannot</strong> be recovered</li>
+              </ul>
+              <div class="modal-confirm-field">
+                <div class="modal-confirm-label">
+                  To confirm, type <code>supra-a80-2jz-gte</code> in the field below
+                </div>
+                <input
+                  type="text"
+                  id="confirm-input-2"
+                  value="supra-a80-2jz-gte"
+                  aria-label="Confirm deletion by typing the endpoint name"
+                  style="border-color: var(--red);"
+                  oninput="
+                    const val = this.value;
+                    const btn = document.getElementById('delete-btn-2');
+                    const match = val === 'supra-a80-2jz-gte';
+                    btn.disabled = !match;
+                    btn.setAttribute('aria-disabled', String(!match));
+                    this.style.borderColor = match ? 'var(--red)' : 'var(--border-strong)';
+                    this.style.boxShadow = match ? '0 0 0 2px #fff, 0 0 0 4px var(--red-border)' : 'none';
+                  "
+                />
+                <!-- Improvement: inline validation feedback -->
+                <div style="font-size:11px;color:#16a34a;margin-top:4px;display:flex;align-items:center;gap:4px;">
+                  ✓ Name matches — you may proceed
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-ghost">Cancel</button>
+              <button
+                id="delete-btn-2"
+                class="btn btn-destructive-solid"
+                aria-disabled="false"
+              >Delete endpoint</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <hr class="divider" />
+
+  <!-- ═══════════════════════════════════════════
+       Tier Decision Rubric
+  ════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label">Tier Decision Rubric</div>
+    <div class="section-desc">Clear rules for which tier to apply — prevents case-by-case inconsistency.</div>
+
+    <div class="card">
+      <div class="card-body">
+        <table style="width:100%;border-collapse:collapse;font-size:13px;">
+          <thead>
+            <tr style="border-bottom:1px solid var(--border);">
+              <th style="text-align:left;padding:8px 12px;font-weight:600;color:var(--text-muted);font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Tier</th>
+              <th style="text-align:left;padding:8px 12px;font-weight:600;color:var(--text-muted);font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Style</th>
+              <th style="text-align:left;padding:8px 12px;font-weight:600;color:var(--text-muted);font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Use when</th>
+              <th style="text-align:left;padding:8px 12px;font-weight:600;color:var(--text-muted);font-size:11px;letter-spacing:.06em;text-transform:uppercase;">Examples</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:12px;"><span class="tier-badge t1">Tier 1</span></td>
+              <td style="padding:12px;">Ghost red</td>
+              <td style="padding:12px;color:var(--text-muted);">Delete is a secondary action alongside a primary save/submit</td>
+              <td style="padding:12px;color:var(--text-muted);">Delete org, Delete region in a settings form</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:12px;"><span class="tier-badge t2">Tier 2</span></td>
+              <td style="padding:12px;">Red link</td>
+              <td style="padding:12px;color:var(--text-muted);">Delete is a tertiary option embedded in a list or context menu</td>
+              <td style="padding:12px;color:var(--text-muted);">Delete workspace in dropdown, delete row in a data table</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:12px;"><span class="tier-badge t3">Tier 3a</span></td>
+              <td style="padding:12px;">Solid red modal</td>
+              <td style="padding:12px;color:var(--text-muted);">Item has no active dependents and deletion affects only the current user</td>
+              <td style="padding:12px;color:var(--text-muted);">Delete API key, Delete saved prompt</td>
+            </tr>
+            <tr>
+              <td style="padding:12px;"><span class="tier-badge t3">Tier 3b</span></td>
+              <td style="padding:12px;">Solid red + type-to-confirm</td>
+              <td style="padding:12px;color:var(--text-muted);">Item has active dependents OR affects other users / shared resources</td>
+              <td style="padding:12px;color:var(--text-muted);">Delete active model endpoint, Delete workspace with members</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Keyboard accessibility script ── -->
+  <script>
+    // Close modal on Escape
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('[role="dialog"]').forEach(modal => {
+          modal.closest('.modal-backdrop')?.style && (modal.closest('.modal-backdrop').style.display = 'none');
+        });
+      }
+    });
+
+    // Dropdown keyboard nav (Tier 2 menu items)
+    document.querySelectorAll('.context-menu').forEach(menu => {
+      const items = [...menu.querySelectorAll('.menu-item')];
+      items.forEach((item, i) => {
+        item.addEventListener('keydown', e => {
+          if (e.key === 'ArrowDown') { e.preventDefault(); items[(i + 1) % items.length].focus(); }
+          if (e.key === 'ArrowUp')   { e.preventDefault(); items[(i - 1 + items.length) % items.length].focus(); }
+          if (e.key === 'Escape')    { item.blur(); }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
