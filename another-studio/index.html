@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Another Studio</title>
+<style>
+  @font-face {
+    font-family: "another-sans";
+    src: url(type/another-sans.woff);
+  }
+  * {
+    margin: 0;
+    box-sizing: border-box;
+  }
+  html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1vw;
+  }
+  p {
+    line-height: 1;
+    margin-top: 3%;
+    font-family: "another-sans", sans-serif;
+  }
+  p+p {
+    margin-bottom: 3%;
+  }
+</style>
+</head>
+<body>
+  <div id="txt">
+<p>Another Studio<p>
+<p>Creative studio and design consultancy partnering with founders to shape identities and experiences that shift perceptions and move worlds.</p>
+</body>
+<script>
+  const txt = document.getElementById('txt');
+
+  function fit() {
+    const W = document.body.clientWidth;
+    const H = document.body.clientHeight;
+    txt.style.width = W + 'px';
+    let lo = 1, hi = 300;
+    for (let i = 0; i < 20; i++) {
+      const mid = (lo + hi) / 2;
+      txt.style.fontSize = mid + 'px';
+      if (txt.offsetWidth <= W && txt.offsetHeight <= H) lo = mid;
+      else hi = mid;
+    }
+    txt.style.fontSize = lo + 'px';
+  }
+
+  new ResizeObserver(fit).observe(document.body);
+  fit();
+</script>
+
+</html>
