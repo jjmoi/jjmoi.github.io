@@ -25,24 +25,26 @@
   }
 </style>
 </head>
-  <div id="word">
-    <p>Another Studio partnering with leading venture firms and ambitious startups to build brands and experiences that shift perceptions and move worlds.</p>
+  <div id="txt">
+    <p>Another Studio partnering with leading venture firms and ambitious startups to build brands that shift perceptions and design experiences that move worlds.</p>
 </body>
 <script>
-  const word = document.getElementById('word');
+  const txt = document.getElementById('txt');
+
   function fit() {
     const W = document.body.clientWidth;
     const H = document.body.clientHeight;
-    word.style.width = W + 'px';
+    txt.style.width = W + 'px';
     let lo = 1, hi = 300;
     for (let i = 0; i < 20; i++) {
       const mid = (lo + hi) / 2;
-      word.style.size = mid + 'px';
-      if (word.offsetWidth <= W && word.offsetHeight <= H) lo = mid;
+      txt.style.fontSize = mid + 'px';
+      if (txt.offsetWidth <= W && txt.offsetHeight <= H) lo = mid;
       else hi = mid;
     }
-    word.style.size = lo + 'px';
+    txt.style.fontSize = lo + 'px';
   }
+
   new ResizeObserver(fit).observe(document.body);
   fit();
 </script>
