@@ -16,38 +16,32 @@
     height: 100%;
     overflow: hidden;
   }
-  body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1vw;
-  }
+  ::-moz-selection {background: black; color: #001;}
+  ::selection {background: black; color: #001;}
   p {
     font-family: "another-sans", sans-serif;
-    line-height: 1;
-    margin-top: 3% 2% 4% 2%;
-    ::-moz-selection {background: black; color: #001;}
-    ::selection {background: black; color: #001;}
+    line-height: 0.9;
+    margin: 3vw 1vw 4vw 1vw;
   }
 </style>
 </head>
-  <div id="txt">
-    <p>Another Studio partnering with leading venture firms and founders from day minus one to shape identities and experiences that shift perceptions and move worlds.</p>
+  <div id="word">
+    <p>Another Studio partnering with leading venture firms and ambitious startups to shape identities and experiences that shift perceptions and move worlds.</p>
 </body>
 <script>
-  const txt = document.getElementById('txt');
+  const word = document.getElementById('word');
   function fit() {
     const W = document.body.clientWidth;
     const H = document.body.clientHeight;
-    txt.style.width = W + 'px';
+    word.style.width = W + 'px';
     let lo = 1, hi = 300;
     for (let i = 0; i < 20; i++) {
       const mid = (lo + hi) / 2;
-      txt.style.fontSize = mid + 'px';
-      if (txt.offsetWidth <= W && txt.offsetHeight <= H) lo = mid;
+      word.style.size = mid + 'px';
+      if (word.offsetWidth <= W && word.offsetHeight <= H) lo = mid;
       else hi = mid;
     }
-    txt.style.fontSize = lo + 'px';
+    word.style.size = lo + 'px';
   }
   new ResizeObserver(fit).observe(document.body);
   fit();
