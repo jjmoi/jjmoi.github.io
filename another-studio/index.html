@@ -32,14 +32,11 @@
   }
 </style>
 </head>
-<body>
   <div id="txt">
-<p>Another Studio<p>
-<p>Creative studio and design consultancy partnering with founders to shape identities and experiences that shift perceptions and move worlds.</p>
+    <p>Another Studio partnering with leading venture firms and founders from day minus one to shape identities and experiences that shift perceptions and move worlds</p>
 </body>
 <script>
   const txt = document.getElementById('txt');
-
   function fit() {
     const W = document.body.clientWidth;
     const H = document.body.clientHeight;
@@ -53,9 +50,7 @@
     }
     txt.style.fontSize = lo + 'px';
   }
-
   new ResizeObserver(fit).observe(document.body);
   fit();
 </script>
-
 </html>
