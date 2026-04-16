@@ -1,5 +1,8 @@
 # 😻
 
+# owner
+- heyheyjjmoi
+
 # branch
 - if username.github.io, use master
 - if custom domain url, use gh-pages
@@ -14,7 +17,7 @@ http://bryancshepherd.com/Setting-up-Bluehost-DNS-for-a-GitHub-Jekyll-blog
 ### namecheap
 http://davidensinger.com/2013/03/setting-the-dns-for-github-pages-on-namecheap
 
-### google domain
+### google domain / squarespace
 http://www.curtismlarson.com/blog/2015/04/12/github-pages-google-domains
 
 ### github ip
