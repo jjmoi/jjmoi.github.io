@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- v0.190118 -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-122843739-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'UA-122843739-1');
+	</script>
+	<meta name="robots" content="noindex"> <!-- No bots indexing -->
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="shortcut icon" type="image/x-icon" href="/img/spring.png">
+	<link rel="stylesheet" href="/css/grid.css">
+	<title>THOUGHTS</title>
+	<style>
+		/* BACKGROUND */
+		html {background-color: black;}
+		body {height: auto; background-color: white;}
+		::-moz-selection {background: black; color: #001;}
+		::selection {background: black; color: #001;}
+	</style>
+</head>
+<body>
+	<!-- NAV DESKTOP -->
+	<div class="container nav desktop">
+		<div class="row">
+			<div class="col-5">
+				<a href="/folio">JJ</a>
+			</div>
+			<div class="col-2">
+				<a href="/folio">0→1 Designer / Educator</a>
+			</div>
+			<div class="col-1 right">
+				<a href="https://www.google.com/maps/place/Portland,+OR/@45.5161077,-122.7368012,12z">45°N 122°W</a>
+			</div>
+			<div class="col-1 right">
+				<a href="/thoughts">Thoughts</a>
+			</div>
+			<div class="col-1 right">
+				<a href="/info">Info</a>
+			</div>
+		</div>
+	</div>
+	<!-- NAV RWD -->
+	<div class="container nav rwd">
+		<div class="row">
+			<div class="col-9-sm">
+				<a href="/folio">JJ</a>
+			</div>
+			<div class="col-1-sm right">
+				<a href="/info">Info</a>
+			</div>
+		</div>
+	</div>
+	<!-- CONTENT -->
+	<div class="container parasection first all-device">
+		<div class="row">
+			<div class="col-5">
+				<p>Ephemeral Software<br>
+				250712<br><br>
+				Topics<br>
+				Generative UI</p>
+			</div>
+			<div class="col-4" id="rwd-intro">
+				<p>You search the App Store, buy a subscription, learn someone else’s information architecture, ignore half the features, and patch the gaps with spreadsheets. Now the question is whether something can be made for this instead, and the answer arrives in ninety seconds: no onboarding, no settings screen, nothing in it I didn’t ask for, and no expectation that it survives the week. Software behaves less like a product than a material. Software as a Self Service.</p>
+				<p>The ceiling on how well a commercial product fits you is arithmetic rather than craft: it must earn an audience large enough to fund the team building it, so every feature justifies itself against that entire audience. Your workflow, with its three unusual fields in an order that makes sense only given how you operate, is an edge case by definition. It loses the prioritization argument every time, and it should. A product manager who ships for you is doing the job badly. So you get seventy percent fit and absorb the rest as unpaid labor, invisible from the vendor’s side: you renaming fields and maintaining a side spreadsheet looks identical, in every metric they have, to the product working.</p>
+				<p>Personal software has no market to average across. It needs one person with one recurring problem, which makes previously absurd software reasonable: a receipt viewer grouped the way an accountant actually wants it, a dashboard showing whether the kids finished their reading. Would I ship this to anyone else? If yes, it’s too general, and I’ve started designing for an imagined median user again. A product needs an audience; a personal app only needs to beat doing the task by hand, once a week, for a few months.</p>
+			</div>
+			<div class="col-1"></div>
+		</div>
+		<div class="row section-padtop">
+			<div class="col-5"></div>
+			<div class="col-5">
+				<img src="img-03.png">
+			</div>
+		</div>
+		<div class="row section-padtop">
+			<div class="col-5"></div>
+			<div class="col-4">
+				<p>Some of the best applications will exist for five minutes: a temporary interface for comparing twenty hotel rooms, discarded once you book. We treated software as worth maintaining because it was expensive to build, and when an interface is nearly free, permanence stops being a virtue. Retention was a reasonable proxy for value when software was hard to make. Now it mostly measures how difficult something is to replace.</p>
+				<p>Make apps that cheaply and a folder full of HTML files is not a personal operating system. It’s a new kind of clutter. What made an operating system an operating system was never its applications; it was the conventions about where things live and how they hand state to each other. When the apps expire, the shell is the only durable asset, because it’s where disposable things accumulate into a system. The browser becomes that shell, the agent becomes the builder, and the filesystem becomes part of the application layer.</p>
+				<p>Interfaces are fixed because designers have to decide what people need before the software ships. An agent has no reason to accept that constraint. Ask it to compare four companies and you get a table; say revenue matters more than valuation and the table reorganizes; narrow the question and half the controls disappear. That isn’t a product, it’s a shared canvas, and the meaning of state has changed underneath it: the shell is state too, as editable as the contents. Bolting a chatbot onto the corner of a SaaS product is the least interesting possible response to any of this.</p>
+			</div>
+		</div>
+		<div class="row section-padtop">
+			<div class="col-5"></div>
+			<div class="col-5">
+				<img src="img-04.png">
+			</div>
+		</div>
+		<div class="row section-padtop">
+			<div class="col-5"></div>
+			<div class="col-4">
+				<p>The cost of a surface that never settles is muscle memory, which is most of why experienced users are fast. The canvases that work pin some regions and leave others fluid, and deciding what gets pinned is a real design judgment nobody has solved. Everyone building here is guessing, including me.</p>
+				<p>Not everything generated should expire, and right now that gets decided by accident: a diagram dies forty messages up a thread, a dashboard gets rebuilt every time you want to look at it. The fix isn’t a better file manager. It’s an address. A URL makes an artifact linkable, revisable and findable in six months, and lets tools reference one another. Composition is what chat structurally cannot do. A conversation cannot link into another conversation, while a page can link to anything.</p>
+				<p>The best argument for running this locally has nothing to do with privacy. Connecting two pieces of cloud software means an API, an auth flow, a rate limit and a data model somebody else designed, and that cost was never technical. It was organizational, two companies with different incentives maintaining a contract. On your own machine there is one owner, so the contract disappears. A Markdown file can be an interface, and so can SQLite, a folder, a running process. Integration becomes a path rather than a project, which is what makes five-minute software possible at all.</p>
+				<p>One dialog asking whether an agent may access your computer is not a permission model. Permissions have to be layered, legible, and attached to the shell rather than the app, because the app won’t be here next week and the permission will. Security stops being a settings page and becomes interaction design, where the job is making agency visible.</p>
+			</div>
+		</div>
+		<div class="row section-padtop">
+			<div class="col-5"></div>
+			<div class="col-5">
+				<img src="img-05.png">
+			</div>
+		</div>
+		<div class="row section-padtop" id="last-section">
+			<div class="col-5"></div>
+			<div class="col-4">
+				<p>Temporary software makes design systems more important, and the system isn’t for the user. It’s for the generator. When every interface gets discarded, consistency cannot live in the interface; it has to live in the thing generating them. The design system becomes a compression format for taste, a paragraph of aesthetic preference turned into a file the machine reads before it writes, and constraint improves reliability, because a model choosing among twelve spacing values fails less often than one choosing among infinite pixels. Documentation for humans becomes runtime input for machines.</p>
+				<p>What’s ephemeral is the surface. The substance underneath has to be the opposite: plain text, CSV, SQLite, folders with sensible names, so when an app expires the data survives and you regenerate the app in ten minutes. Get that backwards and the failure mode is silent wrongness. A tool with one user has nobody to report the bug, and a subtly wrong number will be believed because you asked for it and it renders beautifully.</p>
+				<p>Companies will eventually publish machine-readable component contracts the way they publish APIs today, so agents can generate on-brand surfaces against their data. Brand stops being screens designers draw and becomes a specification that survives every interface built from it. SaaS splits in two: what survives has network effects, regulated data, physical operations or legal liability, and what dissolves is single-player tooling that amounts to a database with opinions and a form on top. If your product is a table, a filter and a chart, defending twelve dollars per user per month is about to get very hard.</p>
+				<p>Trust can’t accumulate in software that only exists once, so it accumulates in the specification instead. When building is cheap, the scarce skill is knowing exactly what you want and saying it without ambiguity, which is the old design skill finally unbundled from production. For the first time, building software for one person costs less than bending yourself around software built for everyone, and nearly everything we take for granted rests on that ratio pointing the other way: app stores, seat pricing, roadmaps, the idea of a user base. The future of personal software isn’t an App Store with infinitely more apps. It’s software that shows up for the task and doesn’t ask to stay.</p>
+			</div>
+		</div>
+	</div>
+	<!-- FOOTER DESKTOP+RWD -->
+	<div class="container parasection all-device" id="footer-all-devices">
+		<div class="row">
+			<div class="col-1-sm">
+				<a href="https://www.linkedin.com/in/jjmoi" target="_blank">LI</a>
+			</div>
+			<div class="col-1-sm">
+				<a href="https://x.com/goodnightjj" target="_blank">X</a>
+			</div>
+			<div class="col-1-sm">
+				<a href="https://www.instagram.com/goodnightjj" target="_blank">IG</a>
+			</div>
+			<div class="col-7-sm right">
+				<p><span id="copyrights">©</span> 2046</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
