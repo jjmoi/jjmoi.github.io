@@ -1,0 +1,1211 @@
+/* =========================================================
+   Common Goods — Research Wall
+   Every visual value is a custom property. No exceptions.
+   ========================================================= */
+
+:root {
+  /* --- surfaces -------------------------------------------------- */
+  --wall: oklch(0.958 0.004 95);
+  --wall-lit: oklch(0.978 0.005 95);
+  --wall-shade: oklch(0.888 0.006 95);
+
+  --paper: oklch(0.987 0.003 95);
+  --paper-warm: oklch(0.955 0.014 85);
+  --paper-grey: oklch(0.905 0.004 260);
+  --paper-silver: oklch(0.878 0.006 250);
+  --paper-kraft: oklch(0.762 0.045 70);
+  --paper-news: oklch(0.925 0.012 90);
+
+  /* --- ink ------------------------------------------------------- */
+  --ink: oklch(0.185 0.006 265);
+  --ink-solid: oklch(0.135 0.004 265);
+  --ink-soft: oklch(0.478 0.008 265);
+  --ink-faint: oklch(0.672 0.008 265);
+  --ink-rule: oklch(0.845 0.006 265);
+  --ink-inverse: oklch(0.985 0.002 95);
+
+  /* --- fluorescents (photocopy shop stock) ----------------------- */
+  --flu-magenta: oklch(0.672 0.288 350);
+  --flu-yellow: oklch(0.928 0.196 108);
+  --flu-cyan: oklch(0.828 0.132 205);
+  --flu-orange: oklch(0.762 0.196 48);
+  --flu-green: oklch(0.888 0.192 132);
+
+  /* --- photographic plates --------------------------------------- */
+  --plate-a1: oklch(0.688 0.062 232); --plate-a2: oklch(0.312 0.048 258); --plate-a3: oklch(0.858 0.038 218);
+  --plate-b1: oklch(0.742 0.098 62);  --plate-b2: oklch(0.352 0.072 40);  --plate-b3: oklch(0.888 0.062 78);
+  --plate-c1: oklch(0.622 0.012 260); --plate-c2: oklch(0.242 0.008 260); --plate-c3: oklch(0.868 0.008 260);
+  --plate-d1: oklch(0.578 0.192 28);  --plate-d2: oklch(0.298 0.108 22);  --plate-d3: oklch(0.868 0.062 68);
+  --plate-e1: oklch(0.622 0.128 148); --plate-e2: oklch(0.288 0.058 152); --plate-e3: oklch(0.892 0.052 132);
+  --plate-f1: oklch(0.532 0.032 288); --plate-f2: oklch(0.202 0.018 288); --plate-f3: oklch(0.822 0.022 300);
+
+  /* --- marker, for going over everything twice -------------------- */
+  --marker-red: oklch(0.552 0.238 25);
+  --marker-blue: oklch(0.512 0.198 258);
+  --marker-orange: oklch(0.688 0.196 52);
+  --marker-green: oklch(0.588 0.172 148);
+  --marker-purple: oklch(0.482 0.196 305);
+  --marker-pink: oklch(0.628 0.248 348);
+
+  --ink-pen-a: 0.86;      /* pen, gone over hard */
+  --ink-wash-a: 0.36;     /* highlighter, laid down once */
+  --ink-wash-w: 14px;
+
+  /* --- fasteners: matte tape -------------------------------------- */
+  /* The frosted kind, not the shiny kind. It scatters light instead of
+     reflecting it, so there is no highlight to draw and no hard shadow —
+     just a flat milky tint and two soft edges. */
+  --tape: oklch(0.926 0.005 92 / 0.46);
+  --tape-edge: oklch(0.828 0.006 92 / 0.36);
+  --tape-frost: 0.055;
+  --tape-w: 46px;
+  --tape-h: 18px;
+
+  /* --- effects --------------------------------------------------- */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
+  --grain-wall: 0.052;
+  --grain-paper: 0.078;
+  --grain-plate: 0.24;
+
+  --shadow-rest:
+    0 1px 1px oklch(0.42 0.02 265 / 0.14),
+    0 5px 10px -6px oklch(0.42 0.02 265 / 0.30);
+  --shadow-hover:
+    0 1px 2px oklch(0.42 0.02 265 / 0.16),
+    0 8px 16px -8px oklch(0.42 0.02 265 / 0.36);
+  --shadow-held:
+    0 3px 5px oklch(0.42 0.02 265 / 0.10),
+    0 40px 60px -22px oklch(0.42 0.02 265 / 0.48);
+  --shadow-rail: 0 1px 0 oklch(0.42 0.02 265 / 0.08), 0 12px 28px -18px oklch(0.42 0.02 265 / 0.34);
+
+  --focus: oklch(0.552 0.212 258);
+
+  /* --- type ------------------------------------------------------ */
+  --font-grotesk: "Helvetica Neue", Helvetica, "Inter", Arial, sans-serif;
+  --font-condensed: "Helvetica Neue Condensed Bold", "HelveticaNeue-CondensedBold",
+                    "Avenir Next Condensed", "Arial Narrow", "Haettenschweiler",
+                    "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: "Sometype Mono", ui-monospace, "SF Mono", "Courier New", monospace;
+  --font-serif: "Times New Roman", Times, Georgia, serif;
+  --font-hand: "Bradley Hand", "Noteworthy", "Marker Felt", "Segoe Print",
+               "Chalkboard SE", "Comic Sans MS", cursive;
+
+  --step--2: 0.5625rem;
+  --step--1: 0.6875rem;
+  --step-0: 0.8125rem;
+  --step-1: 1rem;
+  --step-2: 1.375rem;
+  --step-3: 2rem;
+  --step-4: 3rem;
+
+  --track-tight: -0.02em;
+  --track-caps: 0.09em;
+  --track-wide: 0.16em;
+
+  /* --- space ----------------------------------------------------- */
+  --s-1: 2px;
+  --s-2: 4px;
+  --s-3: 8px;
+  --s-4: 12px;
+  --s-5: 16px;
+  --s-6: 24px;
+  --s-7: 32px;
+  --s-8: 48px;
+
+  /* --- geometry -------------------------------------------------- */
+  --r-0: 0px;
+  --r-1: 1px;
+  --r-2: 2px;
+  --r-3: 4px;
+  --r-pill: 999px;
+  --hair: 1px;
+
+  --rail-h: 52px;
+  --plinth-h: 34px;
+  --board-w: 2360px;
+  --board-h: 1100px;
+
+  /* --- motion ---------------------------------------------------- */
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --t-fast: 130ms;
+  --t-mid: 260ms;
+  --t-slow: 620ms;
+}
+
+/* =========================================================
+   Reset
+   ========================================================= */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  background: var(--wall-shade);
+  color: var(--ink);
+  font-family: var(--font-grotesk);
+  font-size: var(--step-0);
+  line-height: 1.35;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+button { font: inherit; color: inherit; }
+
+:where(button):focus-visible {
+  outline: var(--s-1) solid var(--focus);
+  outline-offset: var(--s-1);
+}
+
+/* =========================================================
+   Rail
+   ========================================================= */
+
+.rail {
+  position: relative;
+  z-index: 40;
+  height: var(--rail-h);
+  display: flex;
+  align-items: center;
+  gap: var(--s-6);
+  padding-inline: var(--s-5);
+  background: var(--paper);
+  border-bottom: var(--hair) solid var(--ink-rule);
+  box-shadow: var(--shadow-rail);
+}
+
+.rail__id { display: flex; align-items: baseline; gap: var(--s-3); min-width: 0; }
+
+.rail__mark {
+  align-self: center;
+  width: var(--s-4);
+  height: var(--s-4);
+  background: var(--ink-solid);
+  border-radius: var(--r-0);
+  flex: none;
+}
+
+.rail__name {
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  font-size: var(--step-1);
+  letter-spacing: var(--track-tight);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.rail__role {
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+  letter-spacing: var(--track-tight);
+  white-space: nowrap;
+}
+
+.rail__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin-inline-start: auto;
+}
+
+.rail__label {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+.rail__seg {
+  display: flex;
+  gap: var(--s-1);
+  padding: var(--s-1);
+  background: var(--wall);
+  border: var(--hair) solid var(--ink-rule);
+  border-radius: var(--r-3);
+}
+
+.chip {
+  appearance: none;
+  border: var(--hair) solid transparent;
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: var(--track-tight);
+  padding: var(--s-2) var(--s-3);
+  border-radius: var(--r-2);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color var(--t-fast) var(--ease), background var(--t-fast) var(--ease);
+}
+
+.chip:hover { color: var(--ink); background: var(--wall); }
+
+.chip.is-on {
+  color: var(--ink-inverse);
+  background: var(--ink-solid);
+  border-color: var(--ink-solid);
+}
+
+.rail__tools { display: flex; align-items: center; gap: var(--s-4); }
+
+.rail__count {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.btn {
+  appearance: none;
+  cursor: pointer;
+  background: var(--paper);
+  color: var(--ink);
+  border: var(--hair) solid var(--ink);
+  border-radius: var(--r-2);
+  padding: var(--s-2) var(--s-4);
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: var(--track-tight);
+  white-space: nowrap;
+  transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+}
+
+.btn:hover { background: var(--ink-solid); color: var(--ink-inverse); }
+
+.btn--ghost { border-color: var(--ink-rule); color: var(--ink-soft); }
+
+
+/* =========================================================
+   Wall — the scrollable room
+   ========================================================= */
+
+.wall {
+  position: relative;
+  overflow: auto;
+  background: var(--wall);
+  cursor: grab;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+}
+
+.wall::-webkit-scrollbar { display: none; }
+
+.wall.is-panning { cursor: grabbing; }
+
+/* light from the top-left, grain over everything, vignette at the edges */
+.wall::before,
+.wall::after {
+  content: "";
+  position: fixed;
+  inset: var(--rail-h) 0 var(--plinth-h);
+  pointer-events: none;
+  z-index: 30;
+}
+
+.wall::before {
+  background:
+    radial-gradient(140% 120% at 8% -10%, var(--wall-lit) 0%, transparent 46%),
+    radial-gradient(120% 110% at 92% 108%, var(--wall-shade) 0%, transparent 52%);
+  mix-blend-mode: multiply;
+  opacity: 0.9;
+}
+
+.wall::after {
+  background-image: var(--grain);
+  opacity: var(--grain-wall);
+  mix-blend-mode: multiply;
+}
+
+.board {
+  position: relative;
+  width: var(--board-w);
+  height: var(--board-h);
+}
+
+/* =========================================================
+   Cluster headers
+   ========================================================= */
+
+/* Headings are not typeset here. Somebody wrote them on the wall and drew a
+   box round them, in whatever marker that group is colour-coded with. */
+.cluster {
+  position: absolute;
+  left: 0; top: 0;
+  translate: var(--x) var(--y);
+  width: var(--w);
+  z-index: 500;
+
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font: inherit;
+  text-align: center;
+  cursor: pointer;
+  display: grid;
+  justify-items: center;
+  gap: var(--s-2);
+  color: var(--marker, var(--marker-red));
+  transition:
+    translate var(--t-slow) var(--ease-out),
+    opacity var(--t-mid) var(--ease);
+}
+
+.cluster__mark {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: var(--s-1);
+  padding: var(--s-3) var(--s-6) var(--s-4);
+}
+
+.cluster__box {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  fill: none;
+  stroke: var(--marker, var(--marker-red));
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  opacity: 0.82;
+  mix-blend-mode: multiply;
+  vector-effect: non-scaling-stroke;
+}
+
+.cluster__title {
+  font-family: var(--font-hand);
+  font-size: var(--step-2);
+  line-height: 1.02;
+  letter-spacing: var(--track-tight);
+}
+
+.cluster__sub {
+  font-family: var(--font-hand);
+  font-size: var(--step-0);
+  opacity: 0.76;
+}
+
+/* the count only shows when you go looking for it */
+.cluster__count {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  opacity: 0;
+  transition: opacity var(--t-fast) var(--ease);
+}
+
+.cluster:hover .cluster__count,
+.cluster:focus-visible .cluster__count,
+.cluster[aria-pressed="true"] .cluster__count { opacity: 1; }
+
+.cluster[aria-pressed="true"] .cluster__box { stroke-width: 4; opacity: 1; }
+
+/* --- and the notes that never made it onto paper ------------------ */
+
+.scrawl {
+  position: absolute;
+  left: 0; top: 0;
+  translate: var(--x) var(--y);
+  rotate: var(--rot);
+  z-index: 1;
+  width: 88px;
+  font-family: var(--font-hand);
+  font-size: var(--step-0);
+  line-height: 1.12;
+  color: var(--marker, var(--marker-red));
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  opacity: 0.88;
+  transition: translate var(--t-slow) var(--ease-out), opacity var(--t-mid) var(--ease);
+}
+
+/* =========================================================
+   Card — a pinned piece of paper
+   ========================================================= */
+
+.card {
+  --rot-rest: var(--rot);
+  position: absolute;
+  left: 0; top: 0;
+  translate: var(--x) var(--y);
+  rotate: var(--rot-rest);
+  width: var(--w);
+  min-height: var(--h);
+  z-index: var(--z);
+
+  color: var(--ink);
+  background: var(--paper);
+  border-radius: var(--r-1);
+  box-shadow: var(--shadow-rest);
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  transition:
+    rotate var(--t-mid) var(--ease),
+    scale var(--t-mid) var(--ease),
+    box-shadow var(--t-mid) var(--ease),
+    opacity var(--t-mid) var(--ease),
+    filter var(--t-mid) var(--ease);
+}
+
+/* --- what somebody did to all this paper -------------------------- */
+
+/* the strokes run past the edge of the sheet, the way a marker does */
+.ink {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  fill: none;
+  stroke: var(--marker, var(--marker-red));
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ink__pen {
+  stroke-width: 1.7;
+  opacity: var(--ink-pen-a);
+  vector-effect: non-scaling-stroke;
+}
+
+.ink__pen--fat { stroke-width: 3.4; }
+
+.ink__wash {
+  stroke-width: var(--ink-wash-w);
+  opacity: var(--ink-wash-a);
+  stroke-linecap: butt;
+  vector-effect: non-scaling-stroke;
+}
+
+/* paper grain */
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--grain);
+  opacity: var(--grain-paper);
+  mix-blend-mode: multiply;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Hovering a sheet of paper does nothing to it. The only tell is the shadow
+   deepening a little, as a hand comes near and blocks the light. */
+.card:hover { box-shadow: var(--shadow-hover); }
+
+/* Held between finger and thumb: off the wall, straightened, casting further. */
+.card.is-held {
+  rotate: calc(var(--rot-rest) * 0.35);
+  scale: 1.03;
+  box-shadow: var(--shadow-held);
+  cursor: grabbing;
+  z-index: calc(var(--z) + 400);
+  transition:
+    rotate var(--t-fast) var(--ease),
+    scale var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
+}
+
+.card.is-settling {
+  transition:
+    translate var(--t-slow) var(--ease-out),
+    rotate var(--t-slow) var(--ease-out),
+    scale var(--t-mid) var(--ease),
+    box-shadow var(--t-mid) var(--ease);
+}
+
+.card.is-dimmed {
+  opacity: 0.24;
+  filter: saturate(0.15);
+  pointer-events: none;
+}
+
+.cluster.is-dimmed { opacity: 0.18; }
+
+/* --- fasteners: hand-torn scotch tape ---------------------------- */
+
+/* Each strip straddles the edge — half on the paper, half on the wall.
+   Matte tape barely tints what's under it; the giveaway is the crisp long
+   edges, the sheen, and the shadow it casts on the sheet. */
+.tape {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+  width: var(--tape-w);
+  height: var(--tape-h);
+  background: var(--tape);
+  border-block: var(--hair) solid var(--tape-edge);
+  /* torn by hand, so neither end is straight */
+  clip-path: polygon(
+    3% 0%, 97% 0%,
+    100% 20%, 96% 44%, 100% 72%, 95% 100%,
+    4% 100%, 0% 74%, 4% 46%, 1% 22%
+  );
+}
+
+/* one strip across the top edge */
+/* the fine tooth that makes matte tape read as matte */
+.tape::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--grain);
+  opacity: var(--tape-frost);
+  mix-blend-mode: multiply;
+}
+
+.tape--top {
+  top: calc(var(--tape-h) / -2);
+  left: 50%;
+  translate: -50% 0;
+  rotate: -1.8deg;
+}
+
+/* a strip across each top corner, centred on the corner point */
+.tape--l,
+.tape--r,
+.tape--diag { top: calc(var(--tape-h) / -2); }
+
+.tape--l,
+.tape--diag { left: calc(var(--tape-w) / -2); rotate: -45deg; }
+
+.tape--r { right: calc(var(--tape-w) / -2); rotate: 45deg; }
+
+/* one long strip over a single corner — the two-second fix */
+.tape--diag { --tape-w: 62px; }
+
+/* strips on the side edges, for anything that curls */
+.tape--side-l,
+.tape--side-r {
+  top: 34%;
+  --tape-w: 38px;
+  rotate: 87deg;
+}
+
+.tape--side-l { left: calc(var(--tape-w) / -2); }
+.tape--side-r { right: calc(var(--tape-w) / -2); }
+
+/* =========================================================
+   Card kinds
+   ========================================================= */
+
+/* -- specimen: letters in a locked grid --------------------------- */
+.card--specimen { background: var(--paper); }
+
+.specimen {
+  padding: var(--s-4) var(--s-3);
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  font-size: var(--step-2);
+  line-height: 0.98;
+  letter-spacing: var(--track-tight);
+  text-align: center;
+  color: var(--flu-magenta);
+}
+
+.specimen span { display: block; }
+
+/* -- slab: solid field, one loud word ----------------------------- */
+.card--slab {
+  background: var(--slab-bg, var(--ink-solid));
+  color: var(--slab-fg, var(--ink-inverse));
+  display: grid;
+  place-items: center;
+  padding: var(--s-5);
+}
+
+.slab {
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  font-size: var(--slab-size, var(--step-3));
+  line-height: 0.86;
+  letter-spacing: var(--track-tight);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.slab em { display: block; font-style: normal; }
+
+/* -- word: serif, printed dead-centre on stock -------------------- */
+.card--word {
+  background: var(--word-bg, var(--paper-silver));
+  display: grid;
+  align-content: center;
+  gap: var(--s-5);
+  padding: var(--s-6) var(--s-4);
+}
+
+.word {
+  font-family: var(--font-serif);
+  font-size: var(--step-2);
+  line-height: 1.02;
+  text-align: center;
+  color: var(--ink-solid);
+}
+
+.word span { display: block; }
+
+.word__foot {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--ink-soft);
+}
+
+/* -- flyer: fluorescent stock, dense caps ------------------------- */
+.card--flyer {
+  background: var(--flyer-bg, var(--flu-yellow));
+  padding: var(--s-4);
+  display: grid;
+  gap: var(--s-2);
+  align-content: start;
+}
+
+.flyer__head {
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  font-size: var(--step-1);
+  line-height: 0.98;
+  letter-spacing: var(--track-tight);
+  text-transform: uppercase;
+  color: var(--ink-solid);
+}
+
+.flyer__body {
+  font-size: var(--step--2);
+  line-height: 1.32;
+  color: var(--ink);
+}
+
+.flyer__foot {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--ink-solid);
+}
+
+/* -- sign: the street's own typography ---------------------------- */
+.card--sign {
+  background: var(--paper);
+  padding: var(--s-2);
+}
+
+.sign {
+  border: var(--s-1) solid var(--sign-line, var(--ink-solid));
+  padding: var(--s-4) var(--s-3);
+  text-align: center;
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  font-size: var(--step-1);
+  line-height: 1.04;
+  letter-spacing: var(--track-tight);
+  text-transform: uppercase;
+  color: var(--sign-line, var(--ink-solid));
+  display: grid;
+  gap: var(--s-2);
+}
+
+.sign em { display: block; font-style: normal; }
+.sign .sign__lead { font-size: var(--step--1); letter-spacing: var(--track-caps); }
+
+/* -- shout: giant stacked type, no frame -------------------------- */
+.card--shout { background: var(--paper); padding: var(--s-5) var(--s-4); }
+
+.shout {
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  font-size: var(--step-2);
+  line-height: 1.06;
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--ink-solid);
+  display: grid;
+  gap: var(--s-1);
+}
+
+.shout em { display: block; font-style: normal; }
+.shout .shout__small { font-size: var(--step--1); letter-spacing: var(--track-wide); }
+.shout .shout__num { font-family: var(--font-mono); font-size: var(--step-0); letter-spacing: var(--track-tight); }
+
+/* -- plate: a photograph, printed and trimmed --------------------- */
+.card--plate { background: var(--paper); padding: var(--s-2) var(--s-2) var(--s-1); }
+
+.plate {
+  position: relative;
+  aspect-ratio: var(--plate-ratio, 4 / 3);
+  overflow: hidden;
+  background-image:
+    radial-gradient(110% 80% at 22% 12%, var(--p3) 0%, transparent 58%),
+    radial-gradient(90% 70% at 82% 88%, var(--p1) 0%, transparent 62%),
+    linear-gradient(168deg, var(--p2) 0%, var(--p1) 62%, var(--p3) 100%);
+}
+
+.plate::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--grain);
+  opacity: var(--grain-plate);
+  mix-blend-mode: overlay;
+}
+
+.plate__form {
+  position: absolute;
+  inset: 0;
+  filter: blur(4px);
+  opacity: 0.78;
+}
+
+.plate__form::before,
+.plate__form::after {
+  content: "";
+  position: absolute;
+  background: var(--p2);
+}
+
+/* a standing figure */
+.plate--figure .plate__form::before {
+  left: 38%; bottom: 0; width: 24%; height: 66%;
+  border-radius: var(--r-pill) var(--r-pill) 0 0;
+}
+.plate--figure .plate__form::after {
+  left: 43%; bottom: 62%; width: 14%; height: 18%;
+  border-radius: var(--r-pill);
+}
+
+/* a horizon and a mass */
+.plate--horizon .plate__form::before {
+  left: 0; bottom: 0; width: 100%; height: 34%;
+  background: var(--p2);
+}
+.plate--horizon .plate__form::after {
+  left: 58%; bottom: 30%; width: 30%; height: 26%;
+  background: var(--p3);
+}
+
+/* an object on a shelf */
+.plate--object .plate__form::before {
+  left: 26%; top: 24%; width: 48%; height: 44%;
+  border-radius: var(--r-3);
+}
+.plate--object .plate__form::after {
+  left: 0; top: 68%; width: 100%; height: var(--s-5);
+  background: var(--p3);
+}
+
+/* a stall, awning, van */
+.plate--stall .plate__form::before {
+  left: 8%; top: 18%; width: 84%; height: 26%;
+  background: var(--p3);
+  border-radius: var(--r-3) var(--r-3) 0 0;
+}
+.plate--stall .plate__form::after {
+  left: 16%; top: 44%; width: 68%; height: 40%;
+}
+
+.plate__strip {
+  padding: var(--s-2) var(--s-1) 0;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--track-tight);
+  color: var(--ink-soft);
+}
+
+/* -- label: packaging front, pulled off the pack ------------------ */
+.card--label {
+  background: var(--label-bg, var(--paper));
+  padding: var(--s-4);
+  display: grid;
+  gap: var(--s-3);
+  align-content: space-between;
+}
+
+.label__name {
+  font-family: var(--font-grotesk);
+  font-weight: 700;
+  font-size: var(--step-0);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--ink-solid);
+}
+
+.label__spec {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+.label__spec span { display: block; }
+
+.barcode {
+  height: var(--s-6);
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--ink-solid) 0 var(--hair),
+    transparent var(--hair) 3px,
+    var(--ink-solid) 3px 5px,
+    transparent 5px 6px,
+    var(--ink-solid) 6px 7px,
+    transparent 7px 10px
+  );
+}
+
+/* -- ruled: index card, lined ------------------------------------- */
+.card--ruled {
+  background:
+    linear-gradient(var(--ink-rule) 0 var(--hair), transparent var(--hair) 100%) 0 0 / 100% 17px repeat-y,
+    var(--paper);
+  padding: var(--s-5) var(--s-4) var(--s-4);
+}
+
+.ruled {
+  font-family: var(--font-serif);
+  font-size: var(--step-0);
+  font-style: italic;
+  line-height: 17px;
+  color: var(--ink);
+}
+
+.ruled__sig {
+  display: block;
+  margin-top: 17px;
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: var(--step--2);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* -- receipt: narrow strip, torn off a roll ----------------------- */
+/* No clip-path here — it would swallow the tape that holds the strip up.
+   The tear reads as the printed perforation the strip was torn along. */
+.card--receipt {
+  background: var(--paper-news);
+  padding: var(--s-4) var(--s-3) var(--s-6);
+}
+
+.card--receipt::before {
+  content: "";
+  position: absolute;
+  inset: auto var(--s-3) var(--s-3);
+  height: var(--hair);
+  background-image: linear-gradient(90deg, var(--ink-faint) 0 2px, transparent 2px 5px);
+  background-size: 5px var(--hair);
+  opacity: 0.7;
+}
+
+.receipt {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.receipt__head {
+  font-weight: 700;
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  padding-bottom: var(--s-2);
+  border-bottom: var(--hair) dashed var(--ink-faint);
+  margin-bottom: var(--s-2);
+}
+
+.receipt__row { display: flex; justify-content: space-between; gap: var(--s-3); }
+.receipt__row span:last-child { font-variant-numeric: tabular-nums; }
+
+.receipt__total {
+  margin-top: var(--s-2);
+  padding-top: var(--s-2);
+  border-top: var(--hair) dashed var(--ink-faint);
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+}
+
+/* -- swatch: chips with their own names --------------------------- */
+.card--swatch { background: var(--paper); padding: var(--s-3); display: grid; gap: var(--s-2); }
+
+.swatch { display: grid; grid-template-columns: var(--s-7) 1fr; align-items: center; gap: var(--s-3); }
+
+.swatch__chip { height: var(--s-6); background: var(--chip); }
+
+.swatch__name {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--track-tight);
+  color: var(--ink-soft);
+}
+
+/* -- grid: calendar / matrix -------------------------------------- */
+.card--grid { background: var(--paper); padding: var(--s-4) var(--s-3); }
+
+.gridcard { display: grid; grid-template-columns: repeat(7, 1fr); gap: var(--s-1); }
+
+.gridcard b,
+.gridcard i {
+  font-family: var(--font-condensed);
+  font-style: normal;
+  font-weight: 700;
+  font-size: var(--step--1);
+  text-align: center;
+  letter-spacing: var(--track-tight);
+  color: var(--ink-solid);
+}
+
+.gridcard i { color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+
+/* -- framed: thin frame, wide mat, tiny mark ---------------------- */
+.card--framed {
+  background: var(--ink-solid);
+  padding: var(--s-2);
+}
+
+.framed {
+  background: var(--paper);
+  padding: var(--s-6) var(--s-5);
+  display: grid;
+  gap: var(--s-4);
+  place-items: center;
+}
+
+.framed__mark {
+  width: 100%;
+  aspect-ratio: 1;
+  background: var(--framed-mark, var(--ink-solid));
+}
+
+.framed__cap {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+/* -- note: torn scrap, handwritten -------------------------------- */
+.card--note {
+  background: var(--note-bg, var(--flu-cyan));
+  padding: var(--s-5) var(--s-4);
+  display: grid;
+  gap: var(--s-3);
+}
+
+/* written by hand, in whatever pen was on the desk */
+.note {
+  font-family: var(--font-hand);
+  font-size: var(--step-1);
+  line-height: 1.24;
+  color: var(--ink-solid);
+}
+
+.note__by {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* -- dossier / snippet: the paper that is only ever texture -------- */
+.card--dossier,
+.card--snippet {
+  background: var(--doc-bg, var(--paper));
+  padding: var(--s-3) var(--s-3) var(--s-4);
+  display: grid;
+  gap: var(--s-2);
+  align-content: start;
+}
+
+.doc__head {
+  font-family: var(--font-grotesk);
+  font-weight: 600;
+  font-size: var(--step--2);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  opacity: 0.82;
+}
+
+/* body copy at reading distance: bars, not words */
+.doc__body { display: grid; gap: 3px; }
+
+.doc__body span {
+  height: 2px;
+  background: var(--ink-soft);
+  opacity: 0.42;
+  border-radius: var(--r-1);
+}
+
+.doc__body--tight { gap: 4px; }
+.doc__body--tight span { height: 2px; opacity: 0.5; }
+
+.doc__stamp {
+  justify-self: start;
+  margin-top: var(--s-1);
+  padding: 0 var(--s-1);
+  border: var(--hair) solid var(--ink-faint);
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  rotate: -3deg;
+}
+
+/* -- mugshot: a face, named in marker ------------------------------ */
+.card--mugshot { background: var(--paper); padding: var(--s-2) var(--s-2) var(--s-1); }
+
+.card--mugshot .plate { aspect-ratio: 4 / 5; }
+
+.doc__name {
+  margin: 0;
+  padding-top: var(--s-1);
+  font-family: var(--font-hand);
+  font-size: var(--step--1);
+  line-height: 1.1;
+  color: var(--marker, var(--ink-solid));
+}
+
+/* -- badge: circular sticker -------------------------------------- */
+.card--badge {
+  background: var(--badge-bg, var(--flu-orange));
+  border-radius: var(--r-pill);
+  display: grid;
+  place-items: center;
+  padding: var(--s-4);
+  text-align: center;
+}
+
+.card--badge::after { border-radius: var(--r-pill); }
+
+.badge {
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  font-size: var(--step-0);
+  line-height: 1;
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--badge-fg, var(--ink-solid));
+  display: grid;
+  gap: var(--s-1);
+}
+
+.badge em { display: block; font-style: normal; }
+
+/* =========================================================
+   Plinth
+   ========================================================= */
+
+.plinth {
+  position: relative;
+  z-index: 40;
+  height: var(--plinth-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-5);
+  padding-inline: var(--s-5);
+  background: var(--paper);
+  border-top: var(--hair) solid var(--ink-rule);
+}
+
+.plinth p { margin: 0; }
+
+.plinth__hint { font-size: var(--step--1); color: var(--ink-soft); }
+
+.plinth__meta {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+/* =========================================================
+   Narrow — the wall comes down and stacks
+   ========================================================= */
+
+@media (max-width: 900px) {
+  body { overflow: auto; }
+
+  .rail { flex-wrap: wrap; height: auto; padding-block: var(--s-3); gap: var(--s-3); }
+  .rail__nav { margin-inline-start: 0; order: 3; width: 100%; overflow-x: auto; }
+  .rail__tools { margin-inline-start: auto; }
+  .rail__role { display: none; }
+
+  .wall { overflow: visible; cursor: auto; }
+  .wall::before, .wall::after { position: absolute; inset: 0; }
+
+  .board {
+    width: 100%;
+    height: auto;
+    background-image: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    align-items: start;
+    gap: var(--s-7) var(--s-5);
+    /* gutter wide enough for tape that hangs off the side edges */
+    padding: var(--s-7) var(--s-7) var(--s-8);
+  }
+
+  /* the wall comes down and the pieces get re-taped in a single column */
+  .cluster,
+  .card {
+    position: static;
+    translate: none;
+    width: auto;
+  }
+
+  .cluster { grid-column: 1 / -1; margin-top: var(--s-6); }
+  .cluster:first-of-type { margin-top: 0; }
+
+  .card { min-height: 0; }
+  .card.is-dimmed { display: none; }
+  .cluster.is-dimmed { display: none; }
+
+  /* The bulk paper exists to make a wall dense. Stacked in one column there
+     is no density to make — it would just be 124 documents of nobody's
+     business between you and the pieces that matter. And a scrawl written in
+     a channel has no channel to sit in. */
+  .card[data-bulk],
+  .scrawl { display: none; }
+
+  .plinth { height: auto; padding-block: var(--s-3); }
+  /* nothing drags on a stacked wall, so the hint has nothing to say */
+  .plinth__hint { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+  }
+}

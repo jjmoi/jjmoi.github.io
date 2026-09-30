@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Common Goods — Research Wall 04</title>
+<meta name="description" content="A design studio's research wall. Fifty-odd pieces of printed matter, taped up, overlapping, unfinished.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="rail">
+  <div class="rail__id">
+    <span class="rail__mark" aria-hidden="true"></span>
+    <span class="rail__name">Common&nbsp;Goods</span>
+    <span class="rail__role">Brand &amp; printed matter</span>
+  </div>
+
+  <div class="rail__nav">
+    <span class="rail__label" id="axis-label">Grouped by</span>
+    <div class="rail__seg" role="group" aria-labelledby="axis-label">
+      <button type="button" class="chip is-on" data-axis="theme" aria-pressed="true">Theme</button>
+      <button type="button" class="chip" data-axis="colour" aria-pressed="false">Colour</button>
+      <button type="button" class="chip" data-axis="format" aria-pressed="false">Format</button>
+    </div>
+  </div>
+
+  <div class="rail__tools">
+    <span class="rail__count"><span id="count">0</span> pieces</span>
+    <button type="button" class="btn" id="tidy">Tidy the wall</button>
+  </div>
+</header>
+
+<main class="wall" id="wall" tabindex="-1">
+  <div class="board" id="board">
+    <!-- cluster headers + cards injected by board.js -->
+  </div>
+</main>
+
+<footer class="plinth">
+  <p class="plinth__hint">Drag a piece to move it.</p>
+  <p class="plinth__meta">Research wall 04 &middot; Open since March</p>
+</footer>
+
+<script src="board.js"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>JJ Moi — Selected Work</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Home">JJ</a>
+    <nav><a href="#work">WORK</a><a href="#about">ABOUT</a><a href="#notes">NOTES</a></nav>
+    <div class="meta">PACIFIC NW <span>14:50</span></div>
+  </header>
+
+  <main id="home">
+    <section class="hero hero-full" id="work">
+      <button class="hero-collage project-link" data-project="cerebras" aria-label="Open Cerebras case study">
+        <img src="assets/hero-collage.jpg" alt="Collage of interface, architecture, landscape and technology imagery" />
+      </button>
+    </section>
+  </main>
+
+  <dialog id="caseStudy" aria-labelledby="caseTitle">
+    <button class="close" aria-label="Close case study">×</button>
+    <div id="caseContent"></div>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
