@@ -7,7 +7,11 @@ button,a{font:inherit;color:inherit}.topbar{height:64px;padding:0 3vw;display:fl
 .brand{font-weight:800;text-decoration:none;font-size:17px}.topbar nav{display:flex;gap:32px}.topbar nav a{font:10px "Courier New",monospace;text-decoration:none;letter-spacing:.06em}.topbar .meta{margin-left:auto;font:10px "Courier New",monospace;color:var(--muted);letter-spacing:.05em}
 .canvas{height:calc(100dvh - 64px);min-height:620px;position:relative;overflow:hidden;touch-action:none;user-select:none;background-image:linear-gradient(rgba(0,0,0,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.022) 1px,transparent 1px);background-size:96px 96px}
 .canvas:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,rgba(255,255,255,.42),transparent 48%);pointer-events:none}
-.piece{position:absolute;left:var(--x);top:var(--y);width:var(--w);padding:0;border:0;background:transparent;cursor:grab;touch-action:none;transform:rotate(var(--r,0deg));transform-origin:center;box-shadow:0 1px 0 rgba(0,0,0,.06);transition:box-shadow .16s ease,filter .16s ease;z-index:var(--z,1)}
+.piece{position:absolute;left:var(--x);top:var(--y);width:var(--w);padding:0;border:0;background:transparent;cursor:grab;touch-action:none;transform:rotate(var(--r,0deg));transform-origin:center;box-shadow:0 1px 0 rgba(0,0,0,.06);transition:box-shadow .18s ease,filter .18s ease,opacity .18s ease;z-index:var(--z,1)}
+
+.canvas.group-hover .piece{opacity:.26;filter:saturate(.5) contrast(.94)}
+.canvas.group-hover .piece.group-related{opacity:1;filter:saturate(1.03) contrast(1.02);box-shadow:0 12px 30px rgba(0,0,0,.13);z-index:10000!important}
+.canvas.group-hover .piece.dragging{opacity:1;filter:saturate(1.03);box-shadow:0 18px 40px rgba(0,0,0,.16);z-index:20000!important}
 .piece:active{cursor:grabbing}.piece.dragging{box-shadow:0 18px 40px rgba(0,0,0,.16);filter:saturate(1.03);transition:none}.piece img{display:block;width:100%;height:auto;pointer-events:none;-webkit-user-drag:none}.piece:focus-visible{outline:1px solid var(--ink);outline-offset:5px}
 .canvas-note{position:absolute;left:3vw;bottom:2.8vw;font:9px "Courier New",monospace;color:var(--muted);letter-spacing:.04em;pointer-events:none}.canvas-note span{display:inline-block;width:28px;border-top:1px solid var(--ink);vertical-align:middle;margin-right:8px}
 .dialog{width:100vw;max-width:none;height:100dvh;max-height:none;margin:0;padding:0;border:0;background:var(--paper);color:var(--ink);overflow-y:auto}.dialog::backdrop{background:rgba(0,0,0,.22)}.dialog[open]{animation:fadein .2s ease}.close{position:fixed;right:26px;top:18px;z-index:1000;width:42px;height:42px;border:1px solid rgba(0,0,0,.18);border-radius:50%;background:rgba(241,239,232,.92);font-size:24px;cursor:pointer;backdrop-filter:blur(8px)}
@@ -95,8 +99,23 @@ collage.forEach((item,i)=>{
   b.innerHTML=`<img src="${item.src}" alt="${projects[item.project].title} project fragment">`;
   canvas.appendChild(b);
   enableDrag(b);
+  b.addEventListener('pointerenter',()=>{if(window.matchMedia('(hover:hover)').matches)setProjectHover(item.project)});
+  b.addEventListener('pointerleave',()=>{if(!b.classList.contains('dragging'))clearProjectHover()});
+  b.addEventListener('focus',()=>setProjectHover(item.project));
+  b.addEventListener('blur',clearProjectHover);
   b.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openCase(item.project)}});
 });
+
+function setProjectHover(project){
+  canvas.classList.add('group-hover');
+  canvas.querySelectorAll('.piece').forEach(piece=>{
+    piece.classList.toggle('group-related',piece.dataset.project===project);
+  });
+}
+function clearProjectHover(){
+  canvas.classList.remove('group-hover');
+  canvas.querySelectorAll('.piece').forEach(piece=>piece.classList.remove('group-related'));
+}
 
 function enableDrag(el){
   let state=null;
@@ -125,9 +144,10 @@ function enableDrag(el){
       localStorage.setItem(storageKey,JSON.stringify(saved));
     }
     state=null;
+    clearProjectHover();
     if(!moved)openCase(el.dataset.project);
   });
-  el.addEventListener('pointercancel',()=>{state=null;el.classList.remove('dragging')});
+  el.addEventListener('pointercancel',()=>{state=null;el.classList.remove('dragging');clearProjectHover()});
   el.addEventListener('click',e=>e.preventDefault());
 }
 
