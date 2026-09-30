@@ -83,18 +83,26 @@ const canvas=document.querySelector('#canvas');
 const dlg=document.querySelector('#caseStudy');
 const caseContent=document.querySelector('#caseContent');
 const closeBtn=document.querySelector('.close');
-const storageKey='jj-collage-positions-v3';
-let saved={}; try{saved=JSON.parse(localStorage.getItem(storageKey)||'{}')}catch(e){}
-let topZ=30;
+const storageKey='collagePositions';
+let saved={};
+try{saved=JSON.parse(localStorage.getItem(storageKey)||'{}')||{}}catch(e){saved={}}
+let topZ=Math.max(30,...Object.values(saved).map(p=>Number(p?.zIndex)||0));
 
 collage.forEach((item,i)=>{
+  const imageId=`img${i+1}`;
   const b=document.createElement('button');
-  b.className='piece'; b.type='button'; b.dataset.i=i; b.dataset.project=item.project;
-  b.style.setProperty('--x',(saved[i]?.x ?? item.x)+'%');
-  b.style.setProperty('--y',(saved[i]?.y ?? item.y)+'%');
+  b.className='piece'; b.type='button'; b.id=imageId; b.dataset.imageId=imageId; b.dataset.project=item.project;
+  const savedPosition=saved[imageId];
+  if(savedPosition&&Number.isFinite(savedPosition.x)&&Number.isFinite(savedPosition.y)){
+    b.style.left=savedPosition.x+'px';
+    b.style.top=savedPosition.y+'px';
+  }else{
+    b.style.setProperty('--x',item.x+'%');
+    b.style.setProperty('--y',item.y+'%');
+  }
   b.style.setProperty('--w',item.w+'vw');
   b.style.setProperty('--r',item.r+'deg');
-  b.style.setProperty('--z',saved[i]?.z ?? item.z);
+  b.style.setProperty('--z',savedPosition?.zIndex ?? item.z);
   b.setAttribute('aria-label',`Open ${projects[item.project].title} case study`);
   b.innerHTML=`<img src="${item.src}" alt="${projects[item.project].title} project fragment">`;
   canvas.appendChild(b);
@@ -139,8 +147,12 @@ function enableDrag(el){
     if(!state||state.id!==e.pointerId)return;
     const moved=state.moved; el.classList.remove('dragging');
     if(moved){
-      const x=(el.offsetLeft/canvas.clientWidth)*100,y=(el.offsetTop/canvas.clientHeight)*100;
-      const i=el.dataset.i;saved[i]={x:+x.toFixed(3),y:+y.toFixed(3),z:+el.style.zIndex||topZ};
+      const imageId=el.dataset.imageId||el.id;
+      saved[imageId]={
+        x:Math.round(el.offsetLeft),
+        y:Math.round(el.offsetTop),
+        zIndex:Number(el.style.zIndex)||topZ
+      };
       localStorage.setItem(storageKey,JSON.stringify(saved));
     }
     state=null;
