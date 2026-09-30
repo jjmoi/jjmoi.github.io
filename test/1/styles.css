@@ -1149,6 +1149,244 @@ button { font: inherit; color: inherit; }
   white-space: nowrap;
 }
 
+
+
+/* =========================================================
+   Case study
+   ========================================================= */
+
+.case-study {
+  width: 100vw;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.case-study::backdrop {
+  background: oklch(0.16 0.01 265 / 0.28);
+}
+
+.case-study__shell {
+  height: 100%;
+  overflow: auto;
+  overscroll-behavior: contain;
+  background:
+    linear-gradient(var(--paper) 0 0) padding-box,
+    var(--paper);
+}
+
+.case-study__bar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  min-height: var(--rail-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-5);
+  padding: var(--s-3) var(--s-5);
+  background: oklch(0.987 0.003 95 / 0.94);
+  border-bottom: var(--hair) solid var(--ink-rule);
+  backdrop-filter: blur(14px);
+}
+
+.case-study__back {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.case-study__back:hover { opacity: 0.58; }
+
+.case-study__bar-meta,
+.case-study__eyebrow,
+.case-study__kicker {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+}
+
+.case-study__bar-meta { color: var(--ink-faint); }
+
+.case-study__article {
+  width: min(1240px, calc(100% - 64px));
+  margin: 0 auto;
+  padding: 72px 0 120px;
+}
+
+.case-study__hero {
+  min-height: 620px;
+  display: grid;
+  grid-template-columns: minmax(0, 0.88fr) minmax(440px, 1.12fr);
+  gap: clamp(48px, 7vw, 112px);
+  align-items: center;
+}
+
+.case-study__intro {
+  align-self: center;
+}
+
+.case-study__eyebrow {
+  margin-bottom: var(--s-5);
+  color: var(--ink-soft);
+}
+
+.case-study__title {
+  max-width: 760px;
+  margin: 0;
+  font-family: var(--font-condensed);
+  font-size: clamp(3.5rem, 7vw, 7rem);
+  line-height: 0.84;
+  letter-spacing: -0.055em;
+  text-transform: uppercase;
+}
+
+.case-study__dek {
+  max-width: 610px;
+  margin: var(--s-6) 0 0;
+  font-size: clamp(1.1rem, 1.55vw, 1.45rem);
+  line-height: 1.35;
+  letter-spacing: var(--track-tight);
+  color: var(--ink-soft);
+}
+
+.case-study__facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s-5);
+  margin: var(--s-8) 0 0;
+  padding-top: var(--s-5);
+  border-top: var(--hair) solid var(--ink-rule);
+}
+
+.case-study__facts div { min-width: 0; }
+
+.case-study__facts dt {
+  margin-bottom: var(--s-2);
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.case-study__facts dd {
+  margin: 0;
+  font-size: var(--step--1);
+  line-height: 1.3;
+}
+
+.case-study__visual {
+  min-height: 570px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 90% at 10% 0%, var(--wall-lit), transparent 58%),
+    var(--wall);
+  border: var(--hair) solid var(--ink-rule);
+}
+
+.case-study__artifact.card {
+  position: relative;
+  left: auto;
+  top: auto;
+  translate: none !important;
+  rotate: var(--rot-rest);
+  z-index: 1 !important;
+  scale: 1.75;
+  cursor: default;
+  touch-action: auto;
+  pointer-events: none;
+  box-shadow: var(--shadow-held);
+}
+
+.case-study__body {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 72px 24px;
+  margin-top: 112px;
+  padding-top: 48px;
+  border-top: var(--hair) solid var(--ink);
+}
+
+.case-study__section {
+  grid-column: span 5;
+}
+
+.case-study__section--lead {
+  grid-column: 1 / -1;
+}
+
+.case-study__section--lead h2 {
+  max-width: 1040px;
+  margin: var(--s-4) 0 0;
+  font-family: var(--font-condensed);
+  font-size: clamp(2.5rem, 4.4vw, 5rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+.case-study__section:not(.case-study__section--lead):nth-of-type(even) {
+  grid-column-start: 2;
+}
+
+.case-study__section:not(.case-study__section--lead):nth-of-type(odd) {
+  grid-column-start: 7;
+}
+
+.case-study__section .case-study__kicker {
+  margin-bottom: var(--s-3);
+  color: var(--ink-faint);
+}
+
+.case-study__section > p:last-child {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.58;
+}
+
+.case-study__quote {
+  grid-column: 3 / 11;
+  margin: 48px 0 0;
+  padding: 48px 0 0;
+  border-top: var(--hair) solid var(--ink-rule);
+}
+
+.case-study__quote blockquote {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.6vw, 4.4rem);
+  line-height: 1.03;
+  letter-spacing: -0.035em;
+}
+
+.case-study__quote figcaption {
+  margin-top: var(--s-5);
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+
 /* =========================================================
    Narrow — the wall comes down and stacks
    ========================================================= */
@@ -1197,6 +1435,56 @@ button { font: inherit; color: inherit; }
      a channel has no channel to sit in. */
   .card[data-bulk],
   .scrawl { display: none; }
+
+
+
+  .case-study__bar-meta { display: none; }
+
+  .case-study__article {
+    width: min(100% - 32px, 720px);
+    padding: 40px 0 72px;
+  }
+
+  .case-study__hero {
+    min-height: 0;
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .case-study__title {
+    font-size: clamp(3rem, 16vw, 5.8rem);
+  }
+
+  .case-study__facts {
+    grid-template-columns: 1fr;
+    gap: var(--s-4);
+  }
+
+  .case-study__visual {
+    min-height: 420px;
+  }
+
+  .case-study__artifact.card {
+    width: var(--w);
+    scale: 1.3;
+  }
+
+  .case-study__body {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    margin-top: 72px;
+  }
+
+  .case-study__section,
+  .case-study__section--lead,
+  .case-study__section:not(.case-study__section--lead):nth-of-type(even),
+  .case-study__section:not(.case-study__section--lead):nth-of-type(odd),
+  .case-study__quote {
+    grid-column: 1;
+  }
+
+  .case-study__quote { margin-top: 16px; }
+
 
   .plinth { height: auto; padding-block: var(--s-3); }
   /* nothing drags on a stacked wall, so the hint has nothing to say */

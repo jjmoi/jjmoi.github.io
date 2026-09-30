@@ -37,8 +37,78 @@
   </div>
 </main>
 
+<dialog class="case-study" id="case-study" aria-labelledby="case-study-title">
+  <div class="case-study__shell">
+    <header class="case-study__bar">
+      <button type="button" class="case-study__back" id="case-study-close" aria-label="Return to research wall">
+        <span aria-hidden="true">←</span> Research wall
+      </button>
+      <p class="case-study__bar-meta" id="case-study-bar-meta"></p>
+    </header>
+
+    <article class="case-study__article">
+      <section class="case-study__hero">
+        <div class="case-study__intro">
+          <p class="case-study__eyebrow" id="case-study-eyebrow"></p>
+          <h1 class="case-study__title" id="case-study-title"></h1>
+          <p class="case-study__dek" id="case-study-dek"></p>
+
+          <dl class="case-study__facts">
+            <div>
+              <dt>Reference</dt>
+              <dd id="case-study-ref"></dd>
+            </div>
+            <div>
+              <dt>Source</dt>
+              <dd id="case-study-origin"></dd>
+            </div>
+            <div>
+              <dt>Year</dt>
+              <dd id="case-study-year"></dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="case-study__visual" id="case-study-visual" aria-label="Selected research artifact"></div>
+      </section>
+
+      <section class="case-study__body">
+        <div class="case-study__section case-study__section--lead">
+          <p class="case-study__kicker">The brief</p>
+          <h2 id="case-study-challenge"></h2>
+        </div>
+
+        <div class="case-study__section">
+          <p class="case-study__kicker">What we noticed</p>
+          <p id="case-study-observation"></p>
+        </div>
+
+        <div class="case-study__section">
+          <p class="case-study__kicker">Design translation</p>
+          <p id="case-study-translation"></p>
+        </div>
+
+        <div class="case-study__section">
+          <p class="case-study__kicker">System</p>
+          <p id="case-study-system"></p>
+        </div>
+
+        <div class="case-study__section">
+          <p class="case-study__kicker">Outcome</p>
+          <p id="case-study-outcome"></p>
+        </div>
+
+        <figure class="case-study__quote">
+          <blockquote id="case-study-note"></blockquote>
+          <figcaption id="case-study-caption"></figcaption>
+        </figure>
+      </section>
+    </article>
+  </div>
+</dialog>
+
 <footer class="plinth">
-  <p class="plinth__hint">Drag a piece to move it.</p>
+  <p class="plinth__hint">Click a piece to open its case study. Drag to move it.</p>
   <p class="plinth__meta">Research wall 04 &middot; Open since March</p>
 </footer>
 

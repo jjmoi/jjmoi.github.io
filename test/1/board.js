@@ -884,6 +884,9 @@ function makeCard(piece) {
   const el = document.createElement('div');
   el.className = `card card--${piece.kind}`;
   el.dataset.ref = piece.ref;
+  el.setAttribute('role', 'button');
+  el.setAttribute('tabindex', '0');
+  el.setAttribute('aria-label', `Open case study: ${piece.title}`);
   if (piece.bulk) el.dataset.bulk = '';
 
   el.style.setProperty('--w', `${piece.w}px`);
@@ -1023,6 +1026,133 @@ function syncOrder() {
 syncOrder();
 narrow.addEventListener('change', syncOrder);
 
+
+/* ---------- case studies ---------------------------------------- */
+
+const caseStudy = document.getElementById('case-study');
+const caseStudyClose = document.getElementById('case-study-close');
+const caseStudyVisual = document.getElementById('case-study-visual');
+let caseStudyTrigger = null;
+
+const CASE_STUDIES = {
+  A: {
+    title: 'Radical clarity',
+    dek: 'A brand system built from ordinary packaging, direct language, and the confidence to leave things alone.',
+    challenge: 'How little identity can a product use before it stops feeling designed?',
+    system: 'Product name first. Useful information second. Uncoated material, restrained color, and typography that behaves like information rather than decoration.',
+    outcome: 'The system stays recognizable across labels, cartons, signage, and print because the rules are stronger than any single logo treatment.',
+  },
+  B: {
+    title: 'Street language',
+    dek: 'A visual system that borrows the speed, utility, and accidental character of everyday public communication.',
+    challenge: 'How can a brand communicate as quickly as a sign you only see for three seconds?',
+    system: 'Compressed hierarchy, blunt copy, cheap stock, loud utility colors, and layouts that prioritize comprehension before polish.',
+    outcome: 'The identity gains personality through use. Each application can feel improvised while still reading as part of the same system.',
+  },
+  C: {
+    title: 'Quiet premium',
+    dek: 'A premium identity built through reduction, material choices, and exact hierarchy instead of ornamental branding.',
+    challenge: 'How can restraint feel expensive without becoming anonymous?',
+    system: 'Large fields of silence, precise type, neutral stock, deliberate scale, and a small number of repeated compositional moves.',
+    outcome: 'The system feels premium through consistency and proportion. Individual applications can be almost empty without losing authorship.',
+  },
+};
+
+const KIND_TRANSLATION = {
+  sign: 'Treat the message itself as the graphic. Remove supporting decoration until the hierarchy can be understood at a glance.',
+  shout: 'Let scale and phrasing carry the identity. A single emphatic message can do more work than a layered composition.',
+  slab: 'Use one dominant field and one dominant typographic gesture. Make the reduction feel intentional through proportion.',
+  specimen: 'Turn production testing into visible language. Repetition, spacing, and imperfection become part of the system.',
+  badge: 'Use the format as an editing constraint. Shorter copy becomes sharper copy when the container cannot accommodate excess.',
+  word: 'Give typography enough space to become the image. Small shifts in type, spacing, and alignment become the identity.',
+  label: 'Build hierarchy from useful information. Name, specification, and instruction can create a complete front panel without additional storytelling.',
+  swatch: 'Treat material and color decisions as evidence. The palette comes from the physical world instead of an abstract brand board.',
+  flyer: 'Use cheap production constraints as a visual rule. Stock color, dense type, and direct copy make speed visible.',
+  receipt: 'Let sequence create hierarchy. Ordered information can become a recognizable graphic language without illustration.',
+  note: 'Keep working language visible. A direct sentence can communicate the principle more effectively than polished campaign copy.',
+  ruled: 'Use one sentence as the governing rule. The artifact works as both reference and constraint for future decisions.',
+  grid: 'Make comparison visible. A repeated structure turns selection and difference into the content.',
+  dossier: 'Organize evidence before styling it. The document gains authority from sequence, labeling, and accumulation.',
+  snippet: 'Preserve fragments that reveal the voice. Small samples can carry more specificity than a generalized brand statement.',
+  plate: 'Use photography as evidence rather than decoration. Framing, crop, and context should explain what was observed.',
+  framed: 'Use spacing and presentation to change perceived value. The frame is part of the message, not a neutral container.',
+  mugshot: 'Present the subject directly and consistently. Repetition makes difference easier to see and reduces visual editorializing.',
+};
+
+function studyFor(piece) {
+  const base = CASE_STUDIES[piece.c] || CASE_STUDIES.A;
+  const theme = AXES.theme.groups.find((group) => group.key === piece.c);
+  const translation = KIND_TRANSLATION[piece.kind] || 'Translate the strongest property of the reference into a repeatable design rule.';
+
+  return {
+    ...base,
+    eyebrow: `${theme?.title || 'Research'} / ${piece.title}`,
+    observation: piece.note,
+    translation,
+  };
+}
+
+function setCaseStudyText(id, value) {
+  document.getElementById(id).textContent = value;
+}
+
+function openCaseStudy(card) {
+  const piece = card._piece;
+  const study = studyFor(piece);
+  caseStudyTrigger = card;
+
+  setCaseStudyText('case-study-bar-meta', `${piece.ref} / ${piece.year}`);
+  setCaseStudyText('case-study-eyebrow', study.eyebrow);
+  setCaseStudyText('case-study-title', study.title);
+  setCaseStudyText('case-study-dek', study.dek);
+  setCaseStudyText('case-study-ref', piece.ref);
+  setCaseStudyText('case-study-origin', piece.origin);
+  setCaseStudyText('case-study-year', piece.year);
+  setCaseStudyText('case-study-challenge', study.challenge);
+  setCaseStudyText('case-study-observation', study.observation);
+  setCaseStudyText('case-study-translation', study.translation);
+  setCaseStudyText('case-study-system', study.system);
+  setCaseStudyText('case-study-outcome', study.outcome);
+  setCaseStudyText('case-study-note', `“${piece.note}”`);
+  setCaseStudyText('case-study-caption', `${piece.title} / ${piece.origin} / ${piece.year}`);
+
+  const preview = card.cloneNode(true);
+  preview.classList.remove('is-held', 'is-settling', 'is-dimmed');
+  preview.classList.add('case-study__artifact');
+  preview.removeAttribute('role');
+  preview.removeAttribute('tabindex');
+  preview.removeAttribute('aria-label');
+  preview.removeAttribute('data-cluster');
+  caseStudyVisual.replaceChildren(preview);
+
+  if (!caseStudy.open) caseStudy.showModal();
+  caseStudy.querySelector('.case-study__shell').scrollTop = 0;
+  caseStudyClose.focus();
+}
+
+function closeCaseStudy() {
+  if (caseStudy.open) caseStudy.close();
+}
+
+caseStudyClose.addEventListener('click', closeCaseStudy);
+
+caseStudy.addEventListener('click', (e) => {
+  if (e.target === caseStudy) closeCaseStudy();
+});
+
+caseStudy.addEventListener('close', () => {
+  if (caseStudyTrigger) caseStudyTrigger.focus({ preventScroll: true });
+  caseStudyTrigger = null;
+});
+
+board.addEventListener('keydown', (e) => {
+  const card = e.target.closest('.card');
+  if (!card || (e.key !== 'Enter' && e.key !== ' ')) return;
+  e.preventDefault();
+  openCaseStudy(card);
+});
+
+
 /* ---------- drag a piece off its pin ---------------------------- */
 
 let drag = null;
@@ -1064,8 +1194,12 @@ board.addEventListener('pointermove', (e) => {
 
 board.addEventListener('pointerup', (e) => {
   if (!drag || e.pointerId !== drag.id) return;
-  drag.card.classList.remove('is-held');
+  const card = drag.card;
+  const moved = drag.moved;
+  card.classList.remove('is-held');
   drag = null;
+
+  if (!moved) openCaseStudy(card);
 });
 
 board.addEventListener('pointercancel', () => {
