@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CG DIAGRAM GENERATOR</title><style>
+:root{
+  --ui:#ffffff;
+  --ink:#0a0a0a;
+  --muted:#777;
+  --line:#d8d8d8;
+  --accent:#f2184f;
+  --paper:#efede7;
+  --panel:350px;
+}
+*{box-sizing:border-box}
+html,body{
+  margin:0;height:100%;background:var(--ui);color:var(--ink);
+  font-family:Helvetica,Arial,sans-serif;font-optical-sizing:auto;font-weight:600;
+}
+body{overflow:hidden}
+button,input,select{
+  font:inherit;font-weight:600;font-optical-sizing:auto;text-transform:uppercase;color:var(--ink)
+}
+button{border:0;background:none;cursor:pointer}
+.app{height:100vh;display:grid;grid-template-columns:var(--panel) 1fr}
+.panel{
+  height:100vh;overflow:auto;padding:18px 18px 92px;
+  background:#fff;border-right:1px solid #000
+}
+.kicker{font-size:22px;line-height:.9;margin-bottom:3px}
+h1{font-size:15px;line-height:1;margin:0 0 8px}
+.desc{font-size:10px;line-height:1.15;max-width:280px;margin-bottom:18px}
+.rule{height:1px;background:#000;margin-bottom:14px}
+.section-title{
+  font-size:9px;line-height:1;margin:16px 0 9px;padding-top:12px;border-top:1px solid #000
+}
+.row{
+  display:grid;grid-template-columns:104px 1fr 38px;
+  align-items:center;gap:8px;margin:10px 0
+}
+.row label{font-size:9px;line-height:1}
+.value{font-size:9px;text-align:right;font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;appearance:none;background:transparent;height:18px;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{
+  height:2px;background:linear-gradient(90deg,var(--accent) 0 var(--fill,50%),#d5d5d5 var(--fill,50%) 100%)
+}
+input[type=range]::-webkit-slider-thumb{
+  appearance:none;width:10px;height:10px;border-radius:50%;background:#fff;border:1px solid #cfcfcf;margin-top:-4px
+}
+input[type=range]::-moz-range-track{height:2px;background:#d5d5d5}
+input[type=range]::-moz-range-progress{height:2px;background:var(--accent)}
+input[type=range]::-moz-range-thumb{width:10px;height:10px;border:1px solid #cfcfcf;border-radius:50%;background:#fff}
+input[type=color]{
+  appearance:none;-webkit-appearance:none;width:24px;height:24px;padding:0;border:0;background:none;cursor:pointer
+}
+input[type=color]::-webkit-color-swatch-wrapper{padding:0}
+input[type=color]::-webkit-color-swatch{border:0;border-radius:0}
+input[type=color]::-moz-color-swatch{border:0;border-radius:0}
+.segmented{display:grid;gap:5px;margin:8px 0 12px}
+.segmented.two{grid-template-columns:repeat(2,1fr)}
+.segmented.three{grid-template-columns:repeat(3,1fr)}
+.segmented.four{grid-template-columns:repeat(4,1fr)}
+.segmented button{
+  height:31px;border:1px solid var(--line);font-size:8px;background:#fff
+}
+.segmented button.active{background:#0a0a0a;color:#fff;border-color:#0a0a0a}
+.palette{display:grid;grid-template-columns:104px 1fr;align-items:center;margin-top:12px}
+.palette label{font-size:9px}
+.swatches{display:flex;gap:5px}
+.seed-row{display:grid;grid-template-columns:104px 1fr;align-items:center;margin-top:10px}
+.seed-row label{font-size:9px}
+.seed-value{font-size:9px;text-align:right}
+.toggle-row{
+  display:grid;grid-template-columns:104px 1fr;align-items:center;gap:8px;margin:10px 0
+}
+.toggle-row label{font-size:9px}
+.switch{
+  width:34px;height:18px;background:#d4d4d4;position:relative;cursor:pointer;border:0
+}
+.switch::after{
+  content:"";position:absolute;width:14px;height:14px;background:#fff;left:2px;top:2px;transition:.12s
+}
+.switch.on{background:var(--accent)}
+.switch.on::after{left:18px}
+.actions{
+  position:fixed;left:0;bottom:0;width:var(--panel);height:70px;background:#fff;border-top:1px solid #000;
+  display:grid;grid-template-columns:repeat(3,1fr);z-index:10;padding:13px 12px 15px;gap:7px
+}
+.actions button{background:#f3f3f3;border-radius:4px;font-size:9px}
+.actions button:active{background:#000;color:#fff}
+.stage{
+  position:relative;min-width:0;min-height:0;background:#efefef;
+  display:flex;align-items:center;justify-content:center;padding:34px
+}
+.canvas-shell{
+  width:min(82vh,calc(100vw - var(--panel) - 70px));aspect-ratio:1;
+  display:flex;align-items:center;justify-content:center
+}
+canvas{
+  display:block;max-width:100%;max-height:100%;background:var(--paper);
+  box-shadow:0 0 0 1px rgba(0,0,0,.08)
+}
+.stage-meta,.stage-seed{
+  position:absolute;top:16px;font-size:9px;background:#fff;padding:5px 7px
+}
+.stage-meta{left:18px}.stage-seed{right:18px}
+@media(max-width:720px){
+  :root{--panel:292px}
+  .panel{padding-left:14px;padding-right:14px}
+  .stage{padding:18px}
+}
+@media(max-width:600px){
+  body{overflow:auto}.app{display:block}
+  .panel{height:auto;border-right:0;border-bottom:1px solid #000;padding-bottom:84px}
+  .actions{width:100%}.stage{height:68vh}.canvas-shell{width:min(90vw,62vh)}
+}
+</style></head>
+<body>
+<div class="app">
+<aside class="panel">
+  <div class="kicker">07</div>
+  <h1>DIAGRAM GENERATOR</h1>
+  <div class="desc">CREATE SYSTEMS DIAGRAMS, NETWORKS, AND FLOWS.</div>
+  <div class="rule"></div>
+
+  <div class="section-title" style="margin-top:0;padding-top:0;border-top:0">LAYOUT</div>
+  <div class="segmented four" id="layouts">
+    <button data-layout="hierarchy">TREE</button><button data-layout="matrix">MATRIX</button>
+    <button data-layout="radial">RADIAL</button><button data-layout="flow">FLOW</button>
+  </div>
+
+  <div class="section-title">LINE STYLE</div>
+  <div class="segmented three" id="lineStyles">
+    <button data-line="straight">STRAIGHT</button><button data-line="elbow">ELBOW</button><button data-line="curve">CURVE</button>
+  </div>
+
+  <div id="controls"></div>
+
+  <div class="toggle-row"><label>LABELS</label><button id="labelsToggle" class="switch on" aria-label="Labels"></button></div>
+  <div class="toggle-row"><label>ARROWS</label><button id="arrowsToggle" class="switch" aria-label="Arrows"></button></div>
+
+  <div class="section-title">COLOR</div>
+  <div class="palette"><label>PALETTE</label><div class="swatches">
+    <input id="ink" type="color" value="#111111"><input id="accentColor" type="color" value="#ef1749">
+    <input id="gray" type="color" value="#b2b2ae"><input id="paper" type="color" value="#efede7">
+  </div></div>
+  <div class="seed-row"><label>SEED</label><div class="seed-value" id="seedValue">19374</div></div>
+</aside>
+<main class="stage">
+  <div class="stage-meta">CG SYSTEM STUDY</div><div class="stage-seed" id="stageSeed">SEED 19374</div>
+  <div class="canvas-shell"><canvas id="canvas" width="1800" height="1800"></canvas></div>
+</main>
+<div class="actions"><button id="randomize">RANDOMIZE</button><button id="nudge">NUDGE</button><button id="export">EXPORT</button></div>
+</div>
+<script>
+"use strict";
+
+function rng(seed){
+  let a=seed>>>0;
+  return function(){
+    a+=0x6D2B79F5;
+    let t=a;
+    t=Math.imul(t^t>>>15,t|1);
+    t^=t+Math.imul(t^t>>>7,t|61);
+    return ((t^t>>>14)>>>0)/4294967296;
+  }
+}
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const lerp=(a,b,t)=>a+(b-a)*t;
+const pick=(a,r)=>a[Math.floor(r()*a.length)];
+function hexAlpha(hex,a){
+  const n=parseInt(hex.slice(1),16);
+  return `rgba(${(n>>16)&255},${(n>>8)&255},${n&255},${a})`;
+}
+function updateFill(el){
+  const min=Number(el.min),max=Number(el.max),v=Number(el.value);
+  el.style.setProperty("--fill",`${((v-min)/(max-min))*100}%`);
+}
+function makeSlider(root,state,def,render){
+  const [key,label,min,max,step]=def;
+  const row=document.createElement("div");row.className="row";
+  const lab=document.createElement("label");lab.textContent=label;
+  const input=document.createElement("input");
+  input.type="range";input.min=min;input.max=max;input.step=step;input.value=state[key];input.id=key;
+  const value=document.createElement("div");value.className="value";value.id="v_"+key;value.textContent=state[key];
+  input.addEventListener("input",()=>{
+    state[key]=Number(input.value);value.textContent=input.value;updateFill(input);render();
+  });
+  row.append(lab,input,value);root.append(row);updateFill(input);
+}
+function syncSliders(state,defs){
+  defs.forEach(([key])=>{
+    const el=document.getElementById(key); if(!el)return;
+    el.value=state[key];document.getElementById("v_"+key).textContent=Math.round(state[key]);updateFill(el);
+  });
+}
+function downloadCanvas(canvas,name,render){
+  render();
+  const a=document.createElement("a");
+  a.download=name;a.href=canvas.toDataURL("image/png");a.click();
+}
+
+const canvas=document.getElementById("canvas"),ctx=canvas.getContext("2d"),W=canvas.width,H=canvas.height;
+const state={
+  seed:19374,layout:"hierarchy",lineStyle:"elbow",labels:true,arrows:false,
+  nodeCount:16,branching:3,nodeScale:58,lineWeight:28,spacing:64,connectionDensity:42,
+  hierarchyBias:72,accentMix:26,shapeMix:52,labelScale:42,jitter:10,
+  ink:"#111111",accentColor:"#ef1749",gray:"#b2b2ae",paper:"#efede7"
+};
+const defs=[
+  ["nodeCount","NODE COUNT",6,40,1],["branching","BRANCHING",1,5,1],["nodeScale","NODE SCALE",20,100,1],
+  ["lineWeight","LINE WEIGHT",10,100,1],["spacing","SPACING",20,100,1],
+  ["connectionDensity","CONNECTIONS",10,100,1],["hierarchyBias","HIERARCHY",0,100,1],
+  ["accentMix","ACCENT MIX",0,100,1],["shapeMix","SHAPE MIX",0,100,1],
+  ["labelScale","LABEL SCALE",20,100,1],["jitter","JITTER",0,45,1]
+];
+defs.forEach(d=>makeSlider(document.getElementById("controls"),state,d,render));
+function syncUI(){
+  syncSliders(state,defs);
+  ["ink","accentColor","gray","paper"].forEach(k=>document.getElementById(k).value=state[k]);
+  document.querySelectorAll("#layouts button").forEach(b=>b.classList.toggle("active",b.dataset.layout===state.layout));
+  document.querySelectorAll("#lineStyles button").forEach(b=>b.classList.toggle("active",b.dataset.line===state.lineStyle));
+  document.getElementById("labelsToggle").classList.toggle("on",state.labels);
+  document.getElementById("arrowsToggle").classList.toggle("on",state.arrows);
+  document.getElementById("seedValue").textContent=state.seed;
+  document.getElementById("stageSeed").textContent="SEED "+state.seed;
+}
+document.querySelectorAll("#layouts button").forEach(b=>b.onclick=()=>{state.layout=b.dataset.layout;syncUI();render();});
+document.querySelectorAll("#lineStyles button").forEach(b=>b.onclick=()=>{state.lineStyle=b.dataset.line;syncUI();render();});
+document.getElementById("labelsToggle").onclick=()=>{state.labels=!state.labels;syncUI();render();};
+document.getElementById("arrowsToggle").onclick=()=>{state.arrows=!state.arrows;syncUI();render();};
+["ink","accentColor","gray","paper"].forEach(k=>document.getElementById(k).oninput=e=>{state[k]=e.target.value;render();});
+
+function labelFor(i){
+  const prefixes=["SYS","NODE","MOD","IO","BUS","SEQ","REF","AUX"];
+  return `${prefixes[i%prefixes.length]}.${String(i+1).padStart(2,"0")}`;
+}
+function nodeShape(i,r){
+  const t=state.shapeMix/100;
+  if(i===0)return "circle";
+  const v=r();
+  if(v<t*.33)return "circle";
+  if(v<t*.66)return "pill";
+  return "rect";
+}
+
+function buildHierarchy(r,n){
+  const nodes=[{id:0,parent:null,depth:0}],queue=[0];
+  let next=1;
+  while(next<n && queue.length){
+    const parent=queue.shift();
+    const depth=nodes[parent].depth+1;
+    const b=clamp(Math.round(1+r()*state.branching),1,state.branching);
+    for(let k=0;k<b && next<n;k++){
+      nodes.push({id:next,parent,depth});queue.push(next);next++;
+    }
+  }
+  const maxDepth=Math.max(...nodes.map(n=>n.depth));
+  const bands=Array.from({length:maxDepth+1},()=>[]);
+  nodes.forEach(n=>bands[n.depth].push(n));
+  const margin=W*(.09+(100-state.spacing)/100*.035);
+  bands.forEach((band,d)=>{
+    band.forEach((node,i)=>{
+      const x=margin+(W-2*margin)*(band.length===1?.5:i/(band.length-1));
+      const y=margin+(H-2*margin)*(maxDepth===0?.5:d/maxDepth);
+      node.x=x+(r()-.5)*state.jitter/100*W*.06;
+      node.y=y+(r()-.5)*state.jitter/100*H*.045;
+    });
+  });
+  const edges=nodes.filter(n=>n.parent!==null).map(n=>[n.parent,n.id]);
+  return {nodes,edges};
+}
+
+function buildMatrix(r,n){
+  const cols=Math.ceil(Math.sqrt(n)),rows=Math.ceil(n/cols),m=W*.11;
+  const nodes=[];
+  for(let i=0;i<n;i++){
+    const c=i%cols,rr=Math.floor(i/cols);
+    nodes.push({id:i,x:m+(W-2*m)*(cols===1?.5:c/(cols-1)),y:m+(H-2*m)*(rows===1?.5:rr/(rows-1))});
+  }
+  const edges=[];
+  for(let i=0;i<n;i++){
+    const c=i%cols,rr=Math.floor(i/cols);
+    if(c<cols-1 && i+1<n && r()<.82)edges.push([i,i+1]);
+    if(rr<rows-1 && i+cols<n && r()<.72)edges.push([i,i+cols]);
+  }
+  return {nodes,edges};
+}
+
+function buildRadial(r,n){
+  const nodes=[{id:0,x:W*.5,y:H*.5}],edges=[];
+  const rings=Math.max(1,Math.ceil((n-1)/8)),m=W*.13;
+  for(let i=1;i<n;i++){
+    const ring=1+((i-1)%rings);
+    const index=Math.floor((i-1)/rings);
+    const count=Math.ceil((n-1)/rings);
+    const ang=(index/count)*Math.PI*2+ring*.38;
+    const radius=(W*.34)*(ring/rings);
+    nodes.push({id:i,x:W*.5+Math.cos(ang)*radius,y:H*.5+Math.sin(ang)*radius});
+    edges.push([0,i]);
+    if(i>1 && r()<state.connectionDensity/150)edges.push([i-1,i]);
+  }
+  return {nodes,edges};
+}
+
+function buildFlow(r,n){
+  const cols=clamp(Math.round(3+state.hierarchyBias/25),3,7);
+  const groups=Array.from({length:cols},()=>[]);
+  for(let i=0;i<n;i++)groups[i%cols].push(i);
+  const nodes=Array(n),m=W*.10;
+  groups.forEach((g,c)=>g.forEach((id,j)=>{
+    nodes[id]={id,x:m+(W-2*m)*(c/(cols-1)),y:m+(H-2*m)*(g.length===1?.5:j/(g.length-1))};
+  }));
+  const edges=[];
+  for(let c=0;c<cols-1;c++){
+    groups[c].forEach(a=>{
+      const targets=groups[c+1];
+      if(!targets.length)return;
+      const b=targets[Math.floor(r()*targets.length)];
+      edges.push([a,b]);
+      if(r()<state.connectionDensity/140 && targets.length>1)edges.push([a,targets[Math.floor(r()*targets.length)]]);
+    });
+  }
+  return {nodes,edges};
+}
+
+function buildGraph(){
+  const r=rng(state.seed+412),n=Math.round(state.nodeCount);
+  let graph=state.layout==="matrix"?buildMatrix(r,n):state.layout==="radial"?buildRadial(r,n):state.layout==="flow"?buildFlow(r,n):buildHierarchy(r,n);
+  graph.nodes.forEach((node,i)=>{
+    node.shape=nodeShape(i,r);
+    node.size=(W*.018+W*.030*state.nodeScale/100)*(i===0?1.9:(.75+r()*.75));
+    node.color=(r()<state.accentMix/100*.30)?state.accentColor:(r()<.16?state.gray:state.ink);
+  });
+  return graph;
+}
+
+function arrowHead(x1,y1,x2,y2,color){
+  const ang=Math.atan2(y2-y1,x2-x1),s=10+state.lineWeight*.06;
+  ctx.save();ctx.fillStyle=color;ctx.translate(x2,y2);ctx.rotate(ang);
+  ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(-s,-s*.45);ctx.lineTo(-s,s*.45);ctx.closePath();ctx.fill();ctx.restore();
+}
+function drawEdge(a,b){
+  ctx.strokeStyle=hexAlpha(state.ink,.45);ctx.lineWidth=.8+state.lineWeight/100*4.2;ctx.beginPath();
+  if(state.lineStyle==="curve"){
+    const mx=(a.x+b.x)/2;
+    ctx.moveTo(a.x,a.y);ctx.bezierCurveTo(mx,a.y,mx,b.y,b.x,b.y);
+  }else if(state.lineStyle==="elbow"){
+    const horizontalFirst=state.layout!=="hierarchy";
+    ctx.moveTo(a.x,a.y);
+    if(horizontalFirst){ctx.lineTo(b.x,a.y);ctx.lineTo(b.x,b.y);}
+    else{ctx.lineTo(a.x,b.y);ctx.lineTo(b.x,b.y);}
+  }else{ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);}
+  ctx.stroke();
+  if(state.arrows)arrowHead(a.x,a.y,b.x,b.y,state.ink);
+}
+function drawNode(n,r){
+  const s=n.size;
+  ctx.save();ctx.translate(n.x,n.y);ctx.fillStyle=n.color;ctx.strokeStyle=n.color;
+  if(n.shape==="circle"){ctx.beginPath();ctx.arc(0,0,s*.5,0,Math.PI*2);ctx.fill();}
+  else if(n.shape==="pill"){ctx.beginPath();ctx.roundRect(-s*.72,-s*.26,s*1.44,s*.52,s*.26);ctx.fill();}
+  else{ctx.fillRect(-s*.5,-s*.5,s,s);}
+  ctx.restore();
+
+  if(state.labels){
+    const fs=12+state.labelScale/100*18;
+    ctx.font=`600 ${fs}px Helvetica,Arial,sans-serif`;ctx.fillStyle=state.ink;ctx.textBaseline="top";
+    ctx.fillText(labelFor(n.id),n.x+s*.72,n.y-s*.18);
+  }
+}
+
+function render(){
+  ctx.fillStyle=state.paper;ctx.fillRect(0,0,W,H);
+  const r=rng(state.seed+811),g=buildGraph();
+
+  // Registration grid: intentionally faint and sparse.
+  ctx.strokeStyle=hexAlpha(state.ink,.07);ctx.lineWidth=1;
+  for(let i=1;i<10;i++){const p=i*W/10;ctx.beginPath();ctx.moveTo(p,W*.04);ctx.lineTo(p,H*.96);ctx.stroke();ctx.beginPath();ctx.moveTo(W*.04,p);ctx.lineTo(W*.96,p);ctx.stroke();}
+
+  g.edges.forEach(([a,b])=>drawEdge(g.nodes[a],g.nodes[b]));
+  g.nodes.forEach(n=>drawNode(n,r));
+
+  // Diagram furniture.
+  ctx.fillStyle=state.ink;
+  ctx.font="600 16px Helvetica,Arial,sans-serif";ctx.fillText("SYSTEM MAP",W*.055,H*.955);
+  ctx.font="600 11px Helvetica,Arial,sans-serif";ctx.fillText(`NODES ${g.nodes.length} / ${state.layout.toUpperCase()} / ${state.seed}`,W*.055,H*.973);
+  ctx.fillRect(W*.84,H*.952,W*.105,2);
+  document.getElementById("seedValue").textContent=state.seed;
+  document.getElementById("stageSeed").textContent="SEED "+state.seed;
+}
+
+function randomize(){
+  const r=rng((Date.now()^Math.floor(performance.now()*100000))>>>0);
+  state.seed=Math.floor(10000+r()*89999);state.layout=pick(["hierarchy","matrix","radial","flow"],r);state.lineStyle=pick(["straight","elbow","curve"],r);
+  state.nodeCount=Math.round(10+r()*24);state.branching=Math.round(2+r()*3);state.nodeScale=Math.round(35+r()*55);
+  state.lineWeight=Math.round(16+r()*52);state.spacing=Math.round(42+r()*50);state.connectionDensity=Math.round(22+r()*62);
+  state.hierarchyBias=Math.round(35+r()*64);state.accentMix=Math.round(10+r()*45);state.shapeMix=Math.round(28+r()*68);
+  state.labelScale=Math.round(28+r()*54);state.jitter=Math.round(r()*18);state.labels=r()>.18;state.arrows=r()>.72;
+  syncUI();render();
+}
+function nudge(){
+  const r=rng(state.seed+1507);state.seed=(state.seed+1+Math.floor(r()*67))%99999;
+  const d={nodeCount:2,branching:1,nodeScale:6,lineWeight:5,spacing:5,connectionDensity:6,hierarchyBias:5,accentMix:4,shapeMix:5,labelScale:4,jitter:3};
+  defs.forEach(([k,,min,max])=>{state[k]=clamp(Math.round(state[k]+(r()-.5)*d[k]*1.3),min,max);});
+  syncUI();render();
+}
+document.getElementById("randomize").onclick=randomize;
+document.getElementById("nudge").onclick=nudge;
+document.getElementById("export").onclick=()=>downloadCanvas(canvas,`cg-diagram-${state.seed}.png`,render);
+syncUI();render();
+</script></body></html>

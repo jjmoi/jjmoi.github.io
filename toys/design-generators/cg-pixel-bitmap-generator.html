@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CG PIXEL BITMAP GENERATOR</title><style>
+:root{
+  --ui:#ffffff;
+  --ink:#0a0a0a;
+  --muted:#777;
+  --line:#d8d8d8;
+  --accent:#f2184f;
+  --paper:#efede7;
+  --panel:350px;
+}
+*{box-sizing:border-box}
+html,body{
+  margin:0;height:100%;background:var(--ui);color:var(--ink);
+  font-family:Helvetica,Arial,sans-serif;font-optical-sizing:auto;font-weight:600;
+}
+body{overflow:hidden}
+button,input,select{
+  font:inherit;font-weight:600;font-optical-sizing:auto;text-transform:uppercase;color:var(--ink)
+}
+button{border:0;background:none;cursor:pointer}
+.app{height:100vh;display:grid;grid-template-columns:var(--panel) 1fr}
+.panel{
+  height:100vh;overflow:auto;padding:18px 18px 92px;
+  background:#fff;border-right:1px solid #000
+}
+.kicker{font-size:22px;line-height:.9;margin-bottom:3px}
+h1{font-size:15px;line-height:1;margin:0 0 8px}
+.desc{font-size:10px;line-height:1.15;max-width:280px;margin-bottom:18px}
+.rule{height:1px;background:#000;margin-bottom:14px}
+.section-title{
+  font-size:9px;line-height:1;margin:16px 0 9px;padding-top:12px;border-top:1px solid #000
+}
+.row{
+  display:grid;grid-template-columns:104px 1fr 38px;
+  align-items:center;gap:8px;margin:10px 0
+}
+.row label{font-size:9px;line-height:1}
+.value{font-size:9px;text-align:right;font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;appearance:none;background:transparent;height:18px;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{
+  height:2px;background:linear-gradient(90deg,var(--accent) 0 var(--fill,50%),#d5d5d5 var(--fill,50%) 100%)
+}
+input[type=range]::-webkit-slider-thumb{
+  appearance:none;width:10px;height:10px;border-radius:50%;background:#fff;border:1px solid #cfcfcf;margin-top:-4px
+}
+input[type=range]::-moz-range-track{height:2px;background:#d5d5d5}
+input[type=range]::-moz-range-progress{height:2px;background:var(--accent)}
+input[type=range]::-moz-range-thumb{width:10px;height:10px;border:1px solid #cfcfcf;border-radius:50%;background:#fff}
+input[type=color]{
+  appearance:none;-webkit-appearance:none;width:24px;height:24px;padding:0;border:0;background:none;cursor:pointer
+}
+input[type=color]::-webkit-color-swatch-wrapper{padding:0}
+input[type=color]::-webkit-color-swatch{border:0;border-radius:0}
+input[type=color]::-moz-color-swatch{border:0;border-radius:0}
+.segmented{display:grid;gap:5px;margin:8px 0 12px}
+.segmented.two{grid-template-columns:repeat(2,1fr)}
+.segmented.three{grid-template-columns:repeat(3,1fr)}
+.segmented.four{grid-template-columns:repeat(4,1fr)}
+.segmented button{
+  height:31px;border:1px solid var(--line);font-size:8px;background:#fff
+}
+.segmented button.active{background:#0a0a0a;color:#fff;border-color:#0a0a0a}
+.palette{display:grid;grid-template-columns:104px 1fr;align-items:center;margin-top:12px}
+.palette label{font-size:9px}
+.swatches{display:flex;gap:5px}
+.seed-row{display:grid;grid-template-columns:104px 1fr;align-items:center;margin-top:10px}
+.seed-row label{font-size:9px}
+.seed-value{font-size:9px;text-align:right}
+.toggle-row{
+  display:grid;grid-template-columns:104px 1fr;align-items:center;gap:8px;margin:10px 0
+}
+.toggle-row label{font-size:9px}
+.switch{
+  width:34px;height:18px;background:#d4d4d4;position:relative;cursor:pointer;border:0
+}
+.switch::after{
+  content:"";position:absolute;width:14px;height:14px;background:#fff;left:2px;top:2px;transition:.12s
+}
+.switch.on{background:var(--accent)}
+.switch.on::after{left:18px}
+.actions{
+  position:fixed;left:0;bottom:0;width:var(--panel);height:70px;background:#fff;border-top:1px solid #000;
+  display:grid;grid-template-columns:repeat(3,1fr);z-index:10;padding:13px 12px 15px;gap:7px
+}
+.actions button{background:#f3f3f3;border-radius:4px;font-size:9px}
+.actions button:active{background:#000;color:#fff}
+.stage{
+  position:relative;min-width:0;min-height:0;background:#efefef;
+  display:flex;align-items:center;justify-content:center;padding:34px
+}
+.canvas-shell{
+  width:min(82vh,calc(100vw - var(--panel) - 70px));aspect-ratio:1;
+  display:flex;align-items:center;justify-content:center
+}
+canvas{
+  display:block;max-width:100%;max-height:100%;background:var(--paper);
+  box-shadow:0 0 0 1px rgba(0,0,0,.08)
+}
+.stage-meta,.stage-seed{
+  position:absolute;top:16px;font-size:9px;background:#fff;padding:5px 7px
+}
+.stage-meta{left:18px}.stage-seed{right:18px}
+@media(max-width:720px){
+  :root{--panel:292px}
+  .panel{padding-left:14px;padding-right:14px}
+  .stage{padding:18px}
+}
+@media(max-width:600px){
+  body{overflow:auto}.app{display:block}
+  .panel{height:auto;border-right:0;border-bottom:1px solid #000;padding-bottom:84px}
+  .actions{width:100%}.stage{height:68vh}.canvas-shell{width:min(90vw,62vh)}
+}
+</style></head>
+<body>
+<div class="app">
+<aside class="panel">
+  <div class="kicker">08</div>
+  <h1>PIXEL / BITMAP GENERATOR</h1>
+  <div class="desc">LOW RESOLUTION GRAPHICS, DITHERING, AND DIGITAL TEXTURES.</div>
+  <div class="rule"></div>
+
+  <div class="section-title" style="margin-top:0;padding-top:0;border-top:0">DITHER PATTERN</div>
+  <div class="segmented four" id="patterns">
+    <button data-pattern="bayer">BAYER</button><button data-pattern="cluster">CLUSTER</button>
+    <button data-pattern="diagonal">DIAGONAL</button><button data-pattern="noise">NOISE</button>
+  </div>
+
+  <div class="section-title">PIXEL SHAPE</div>
+  <div class="segmented three" id="pixelShapes">
+    <button data-shape="square">SQUARE</button><button data-shape="dot">DOT</button><button data-shape="slash">SLASH</button>
+  </div>
+
+  <div id="controls"></div>
+
+  <div class="toggle-row"><label>SCANLINES</label><button id="scanToggle" class="switch on" aria-label="Scanlines"></button></div>
+
+  <div class="section-title">COLOR</div>
+  <div class="palette"><label>PALETTE</label><div class="swatches">
+    <input id="ink" type="color" value="#101010"><input id="accentColor" type="color" value="#ef1749">
+    <input id="gray" type="color" value="#aaa9a5"><input id="paper" type="color" value="#efede7">
+  </div></div>
+  <div class="seed-row"><label>SEED</label><div class="seed-value" id="seedValue">72016</div></div>
+</aside>
+<main class="stage">
+  <div class="stage-meta">CG BITMAP STUDY</div><div class="stage-seed" id="stageSeed">SEED 72016</div>
+  <div class="canvas-shell"><canvas id="canvas" width="1800" height="1800"></canvas></div>
+</main>
+<div class="actions"><button id="randomize">RANDOMIZE</button><button id="nudge">NUDGE</button><button id="export">EXPORT</button></div>
+</div>
+<script>
+"use strict";
+
+function rng(seed){
+  let a=seed>>>0;
+  return function(){
+    a+=0x6D2B79F5;
+    let t=a;
+    t=Math.imul(t^t>>>15,t|1);
+    t^=t+Math.imul(t^t>>>7,t|61);
+    return ((t^t>>>14)>>>0)/4294967296;
+  }
+}
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const lerp=(a,b,t)=>a+(b-a)*t;
+const pick=(a,r)=>a[Math.floor(r()*a.length)];
+function hexAlpha(hex,a){
+  const n=parseInt(hex.slice(1),16);
+  return `rgba(${(n>>16)&255},${(n>>8)&255},${n&255},${a})`;
+}
+function updateFill(el){
+  const min=Number(el.min),max=Number(el.max),v=Number(el.value);
+  el.style.setProperty("--fill",`${((v-min)/(max-min))*100}%`);
+}
+function makeSlider(root,state,def,render){
+  const [key,label,min,max,step]=def;
+  const row=document.createElement("div");row.className="row";
+  const lab=document.createElement("label");lab.textContent=label;
+  const input=document.createElement("input");
+  input.type="range";input.min=min;input.max=max;input.step=step;input.value=state[key];input.id=key;
+  const value=document.createElement("div");value.className="value";value.id="v_"+key;value.textContent=state[key];
+  input.addEventListener("input",()=>{
+    state[key]=Number(input.value);value.textContent=input.value;updateFill(input);render();
+  });
+  row.append(lab,input,value);root.append(row);updateFill(input);
+}
+function syncSliders(state,defs){
+  defs.forEach(([key])=>{
+    const el=document.getElementById(key); if(!el)return;
+    el.value=state[key];document.getElementById("v_"+key).textContent=Math.round(state[key]);updateFill(el);
+  });
+}
+function downloadCanvas(canvas,name,render){
+  render();
+  const a=document.createElement("a");
+  a.download=name;a.href=canvas.toDataURL("image/png");a.click();
+}
+
+const canvas=document.getElementById("canvas"),ctx=canvas.getContext("2d"),W=canvas.width,H=canvas.height;
+const state={
+  seed:72016,pattern:"bayer",pixelShape:"dot",scanlines:true,
+  resolution:76,bitDepth:2,pixelScale:78,fieldComplexity:66,blockScale:52,
+  accentMix:34,contrast:72,threshold:50,waveMix:48,grain:18,scanlineStrength:22,
+  ink:"#101010",accentColor:"#ef1749",gray:"#aaa9a5",paper:"#efede7"
+};
+const defs=[
+  ["resolution","RESOLUTION",20,140,1],["bitDepth","BIT DEPTH",1,4,1],["pixelScale","PIXEL SCALE",35,100,1],
+  ["fieldComplexity","COMPLEXITY",10,100,1],["blockScale","BLOCK SCALE",10,100,1],["accentMix","ACCENT MIX",0,100,1],
+  ["contrast","CONTRAST",10,100,1],["threshold","THRESHOLD",20,80,1],["waveMix","WAVE MIX",0,100,1],
+  ["grain","GRAIN",0,70,1],["scanlineStrength","SCANLINE",0,70,1]
+];
+defs.forEach(d=>makeSlider(document.getElementById("controls"),state,d,render));
+function syncUI(){
+  syncSliders(state,defs);
+  ["ink","accentColor","gray","paper"].forEach(k=>document.getElementById(k).value=state[k]);
+  document.querySelectorAll("#patterns button").forEach(b=>b.classList.toggle("active",b.dataset.pattern===state.pattern));
+  document.querySelectorAll("#pixelShapes button").forEach(b=>b.classList.toggle("active",b.dataset.shape===state.pixelShape));
+  document.getElementById("scanToggle").classList.toggle("on",state.scanlines);
+  document.getElementById("seedValue").textContent=state.seed;document.getElementById("stageSeed").textContent="SEED "+state.seed;
+}
+document.querySelectorAll("#patterns button").forEach(b=>b.onclick=()=>{state.pattern=b.dataset.pattern;syncUI();render();});
+document.querySelectorAll("#pixelShapes button").forEach(b=>b.onclick=()=>{state.pixelShape=b.dataset.shape;syncUI();render();});
+document.getElementById("scanToggle").onclick=()=>{state.scanlines=!state.scanlines;syncUI();render();};
+["ink","accentColor","gray","paper"].forEach(k=>document.getElementById(k).oninput=e=>{state[k]=e.target.value;render();});
+
+const bayer4=[
+  [0,8,2,10],[12,4,14,6],[3,11,1,9],[15,7,13,5]
+];
+const cluster4=[
+  [12,5,6,13],[4,0,1,7],[11,3,2,8],[15,10,9,14]
+];
+function ditherThreshold(x,y,r){
+  if(state.pattern==="bayer")return (bayer4[y%4][x%4]+.5)/16;
+  if(state.pattern==="cluster")return (cluster4[y%4][x%4]+.5)/16;
+  if(state.pattern==="diagonal")return (((x+y*2)%8)+.5)/8;
+  return r();
+}
+function hash2(x,y,s){
+  let n=(x*374761393+y*668265263+s*1442695041)|0;
+  n=(n^(n>>13))*1274126177;n^=n>>16;return (n>>>0)/4294967295;
+}
+function sourceField(x,y,rules){
+  let v=.46;
+  const c=state.fieldComplexity/100,w=state.waveMix/100;
+  // Large editorial masses.
+  for(const q of rules.blocks){
+    if(x>q.x && x<q.x+q.w && y>q.y && y<q.y+q.h)v+=q.v;
+  }
+  // Circular and diagonal structures.
+  for(const q of rules.circles){
+    const d=Math.hypot(x-q.x,y-q.y);
+    v+=Math.exp(-(d*d)/(q.r*q.r))*q.v;
+  }
+  v+=Math.sin((x*rules.fx+y*rules.fy)*Math.PI*2+rules.phase)*.19*w;
+  v+=Math.sin((x*rules.fx2-y*rules.fy2)*Math.PI*2+rules.phase2)*.11*w*c;
+  const diag=(x*.78+y*.92);
+  v+=(diag>rules.bandA && diag<rules.bandB)?.24*c:0;
+  return clamp(v,0,1);
+}
+function buildRules(){
+  const r=rng(state.seed+77),blocks=[],circles=[];
+  const bcount=Math.round(2+state.blockScale/16);
+  for(let i=0;i<bcount;i++){
+    const ww=.10+r()*.28*(state.blockScale/100),hh=.08+r()*.28*(state.blockScale/100);
+    blocks.push({x:r()*(1-ww),y:r()*(1-hh),w:ww,h:hh,v:(r()>.5?1:-1)*(.18+r()*.30)});
+  }
+  const ccount=Math.round(2+state.fieldComplexity/26);
+  for(let i=0;i<ccount;i++)circles.push({x:r(),y:r(),r:.08+r()*.22,v:(r()>.5?1:-1)*(.15+r()*.28)});
+  return {blocks,circles,fx:1+r()*5,fy:1+r()*4,fx2:2+r()*8,fy2:2+r()*7,phase:r()*6.28,phase2:r()*6.28,bandA:.42+r()*.36,bandB:.90+r()*.36};
+}
+function drawPixel(x,y,s,color,alpha=1){
+  const p=s*state.pixelScale/100;
+  const ox=x+(s-p)/2,oy=y+(s-p)/2;
+  ctx.save();ctx.globalAlpha=alpha;ctx.fillStyle=color;
+  if(state.pixelShape==="dot"){ctx.beginPath();ctx.arc(x+s/2,y+s/2,p*.48,0,Math.PI*2);ctx.fill();}
+  else if(state.pixelShape==="slash"){
+    ctx.translate(x+s/2,y+s/2);ctx.rotate(-Math.PI/4);ctx.fillRect(-p*.48,-p*.11,p*.96,p*.22);
+  } else ctx.fillRect(ox,oy,p,p);
+  ctx.restore();
+}
+function render(){
+  ctx.fillStyle=state.paper;ctx.fillRect(0,0,W,H);
+  const res=Math.round(state.resolution),cell=W/res,r=rng(state.seed+997),rules=buildRules();
+  const levels=Math.max(2,Math.pow(2,Math.round(state.bitDepth)));
+  const contrast=.35+state.contrast/100*1.55;
+  const threshold=state.threshold/100;
+  const accent=state.accentMix/100;
+  const grain=state.grain/100;
+
+  for(let gy=0;gy<res;gy++){
+    for(let gx=0;gx<res;gx++){
+      const x=(gx+.5)/res,y=(gy+.5)/res;
+      let v=sourceField(x,y,rules);
+      v=clamp((v-.5)*contrast+.5,0,1);
+      v=clamp(v+(hash2(gx,gy,state.seed)-.5)*grain*.22,0,1);
+      const t=ditherThreshold(gx,gy,r);
+      const q=Math.floor(v*(levels-1)+t)/Math.max(1,levels-1);
+
+      let color=state.paper;
+      if(q>threshold+.20)color=state.ink;
+      else if(q>threshold-.02){
+        const accentField=Math.sin((x*3.3-y*2.1)*Math.PI+rules.phase)*.5+.5;
+        color=accentField<accent?state.accentColor:state.ink;
+      }else if(q>threshold-.24)color=state.gray;
+
+      if(color!==state.paper)drawPixel(gx*cell,gy*cell,cell,color,1);
+    }
+  }
+
+  // Hard-edged accent blocks that remain pixel aligned.
+  const rr=rng(state.seed+331);
+  const blocks=1+Math.round(accent*5);
+  for(let i=0;i<blocks;i++){
+    const bw=Math.round((4+rr()*10))*cell,bh=Math.round((2+rr()*8))*cell;
+    const bx=Math.round(rr()*(res-bw/cell))*cell,by=Math.round(rr()*(res-bh/cell))*cell;
+    ctx.save();ctx.globalAlpha=.25+accent*.55;ctx.fillStyle=state.accentColor;ctx.fillRect(bx,by,bw,bh);ctx.restore();
+  }
+
+  if(state.scanlines){
+    ctx.save();ctx.globalAlpha=state.scanlineStrength/100*.20;ctx.fillStyle=state.ink;
+    const step=Math.max(3,Math.round(cell*.7));
+    for(let y=0;y<H;y+=step*2)ctx.fillRect(0,y,W,Math.max(1,step*.22));
+    ctx.restore();
+  }
+
+  document.getElementById("seedValue").textContent=state.seed;document.getElementById("stageSeed").textContent="SEED "+state.seed;
+}
+function randomize(){
+  const r=rng((Date.now()^Math.floor(performance.now()*100000))>>>0);
+  state.seed=Math.floor(10000+r()*89999);state.pattern=pick(["bayer","cluster","diagonal","noise"],r);state.pixelShape=pick(["square","dot","slash"],r);
+  state.resolution=Math.round(42+r()*78);state.bitDepth=Math.round(1+r()*3);state.pixelScale=Math.round(52+r()*46);
+  state.fieldComplexity=Math.round(36+r()*62);state.blockScale=Math.round(28+r()*65);state.accentMix=Math.round(14+r()*48);
+  state.contrast=Math.round(45+r()*53);state.threshold=Math.round(36+r()*27);state.waveMix=Math.round(22+r()*70);
+  state.grain=Math.round(r()*38);state.scanlineStrength=Math.round(8+r()*36);state.scanlines=r()>.25;
+  syncUI();render();
+}
+function nudge(){
+  const r=rng(state.seed+2027);state.seed=(state.seed+1+Math.floor(r()*61))%99999;
+  const d={resolution:6,bitDepth:1,pixelScale:5,fieldComplexity:5,blockScale:5,accentMix:4,contrast:5,threshold:3,waveMix:5,grain:4,scanlineStrength:4};
+  defs.forEach(([k,,min,max])=>{state[k]=clamp(Math.round(state[k]+(r()-.5)*d[k]*1.3),min,max);});
+  syncUI();render();
+}
+document.getElementById("randomize").onclick=randomize;
+document.getElementById("nudge").onclick=nudge;
+document.getElementById("export").onclick=()=>downloadCanvas(canvas,`cg-pixel-bitmap-${state.seed}.png`,render);
+syncUI();render();
+</script></body></html>

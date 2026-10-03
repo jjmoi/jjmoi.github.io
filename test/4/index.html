@@ -1,0 +1,662 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>JJ — Collage Portfolio</title><style>:root{
+  --paper:#fff; --ink:#0b0b0a; --muted:#6f6d66; --line:rgba(11,11,10,.14);
+  --orange:#ed6339; --blue:#315fce; --green:#456757; --copper:#b46f45;
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,Helvetica,sans-serif;overflow-x:hidden}
+button,a{font:inherit;color:inherit}.topbar{width:98%;height:60px;margin-left:auto;margin-right:auto;padding:0;display:grid;grid-template-columns:50% 20% 10% 10% 10%;align-items:start;column-gap:0;position:relative;z-index:100;background:#fff;font-family:Helvetica,sans-serif;font-optical-sizing:auto;font-weight:600;font-style:normal;text-transform:uppercase;color:#000}
+.brand,.positioning,.topbar nav a,.location{font-family:Helvetica,sans-serif;font-optical-sizing:auto;font-weight:600;font-style:normal;font-size:15px;line-height:0;text-decoration:none;letter-spacing:0;white-space:nowrap;color:#000;padding-top:60px;text-transform:uppercase}.brand,.positioning{text-align:left}.location,.topbar nav a{text-align:right}.topbar nav{display:contents}.topbar a:hover{opacity:1;color:#000}
+.canvas{height:calc(100dvh - 60px);min-height:620px;position:relative;overflow:hidden;touch-action:none;user-select:none;background:#fff}
+.canvas:before{content:"";position:absolute;inset:0;background:transparent;pointer-events:none}
+.piece{position:absolute;left:var(--x);top:var(--y);width:var(--w);padding:0;border:0;background:transparent;cursor:pointer;touch-action:none;transform:rotate(var(--r,0deg));transform-origin:center;box-shadow:0 1px 0 rgba(0,0,0,.06);transition:box-shadow .18s ease,filter .18s ease,opacity .18s ease,transform .18s ease;z-index:var(--z,1)}
+.canvas.group-hover .piece{opacity:.15;filter:saturate(.5) contrast(.94)}
+.canvas.group-hover .piece.group-related{opacity:1;filter:saturate(1.03) contrast(1.02);box-shadow:0 16px 34px rgba(0,0,0,.14);transform:translateY(-5px) rotate(var(--r,0deg)) scale(1.025);z-index:10000!important}
+.canvas.group-hover .piece.dragging{opacity:1;z-index:20000!important}
+.canvas.arranging .piece{transition:left .55s cubic-bezier(.22,.8,.2,1),top .55s cubic-bezier(.22,.8,.2,1),width .55s cubic-bezier(.22,.8,.2,1),box-shadow .18s ease,filter .18s ease,opacity .18s ease,transform .18s ease}
+.piece.dragging{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ccircle cx='12' cy='12' r='8' fill='%230b0b0a'/%3E%3Cpath d='M12 3v4M12 17v4M3 12h4M17 12h4' stroke='%23ffffff' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") 12 12,grabbing!important;transition:none}.piece img{display:block;width:100%;height:auto;pointer-events:none;-webkit-user-drag:none}.piece:focus,.piece:focus-visible,.piece:active{outline:none}.piece{-webkit-tap-highlight-color:transparent}
+.project-tooltip{position:absolute;left:0;top:0;z-index:30000;pointer-events:none;background:#fff;color:var(--ink);padding:10px 12px 9px;border:1px solid rgba(11,11,10,.1);box-shadow:0 8px 24px rgba(0,0,0,.08);opacity:0;transform:none;transition:opacity .14s ease;white-space:nowrap}.project-tooltip.visible{opacity:1}.project-tooltip strong{display:block;font-size:13px;line-height:1.1;margin-bottom:5px}.project-tooltip span{display:block;font:9px "Courier New",monospace;letter-spacing:.055em;color:var(--muted)}
+
+.canvas:after{content:"";position:absolute;inset:0;background:rgba(255,255,255,.78);opacity:0;pointer-events:none;z-index:9000;transition:opacity .63s ease}
+.canvas.world-active:after{opacity:1}
+.canvas.world-active .piece{pointer-events:none;transition:left .78s cubic-bezier(.2,.8,.2,1),top .78s cubic-bezier(.2,.8,.2,1),opacity .51s ease,filter .51s ease,transform .78s cubic-bezier(.2,.8,.2,1),box-shadow .51s ease}
+.canvas.world-active .piece.world-away{opacity:0;filter:saturate(.25) blur(1px);transform:rotate(var(--r,0deg)) scale(.96);z-index:0!important}
+.canvas.world-active .piece.world-focus{opacity:1;filter:saturate(1.03) contrast(1.02);transform:rotate(var(--r,0deg)) scale(var(--world-scale,1));box-shadow:0 24px 60px rgba(0,0,0,.18);z-index:var(--world-z,12000)!important}
+.canvas.world-return .piece{transition:left .69s cubic-bezier(.2,.8,.2,1),top .69s cubic-bezier(.2,.8,.2,1),opacity .51s ease,filter .51s ease,transform .69s cubic-bezier(.2,.8,.2,1),box-shadow .51s ease}
+@media(prefers-reduced-motion:reduce){.canvas.world-active .piece,.canvas.world-return .piece,.canvas:after,.dialog,.dialog #caseContent{transition:none!important}.dialog,.dialog #caseContent{opacity:1!important;transform:none!important}}
+.dialog{width:100vw;max-width:none;height:100dvh;max-height:none;margin:0;padding:0;border:0;background:var(--paper);color:var(--ink);overflow-y:auto;opacity:0;transition:opacity 1.05s cubic-bezier(.22,.8,.2,1)}.dialog::backdrop{background:rgba(0,0,0,.22)}.dialog[open]{animation:none}.dialog.case-visible{opacity:1}.dialog #caseContent{opacity:0;transform:translateY(18px);transition:opacity 1.05s ease,transform 1.2s cubic-bezier(.22,.8,.2,1)}.dialog.case-visible #caseContent{opacity:1;transform:translateY(0)}.close{position:fixed;right:26px;top:18px;z-index:1000;width:42px;height:42px;border:1px solid rgba(0,0,0,.18);border-radius:50%;background:rgba(255,255,255,.92);font-size:24px;cursor:pointer;backdrop-filter:blur(8px)}
+.case-nav{height:64px;padding:0 3vw;display:flex;align-items:center;border-bottom:1px solid var(--line);font:10px "Courier New",monospace;letter-spacing:.05em}.case-nav .index{margin-left:auto;margin-right:62px;color:var(--muted)}
+.case-hero{min-height:720px;padding:6vw 4vw 5vw;display:grid;grid-template-columns:30% 70%;gap:36px;border-bottom:1px solid var(--line)}.case-kicker{font:10px "Courier New",monospace;letter-spacing:.06em;color:var(--muted);margin-bottom:16px}.case-title{align-self:center}.case-title h1{font-size:clamp(62px,7.5vw,118px);line-height:.88;letter-spacing:-.07em;margin:0 0 28px}.case-tags{font:10px "Courier New",monospace;letter-spacing:.06em}.case-dek{font-size:22px;line-height:1.3;max-width:330px;margin-top:55px;padding-left:18px;border-left:1px solid var(--ink)}.hero-visual{position:relative;min-height:560px;display:flex;align-items:center;justify-content:center}.hero-visual img{width:min(860px,100%);max-height:560px;object-fit:cover}.hero-visual:after{content:"";position:absolute;inset:10% 7% auto auto;width:15%;height:20%;border:1px solid var(--line);transform:translate(30%, -30%)}
+.section{padding:92px 4vw;border-bottom:1px solid var(--line);display:grid;grid-template-columns:22% 78%;gap:30px}.section-label{font:10px "Courier New",monospace;color:var(--muted);letter-spacing:.06em;padding-top:7px}.section-body{max-width:1100px}.section h2{font-size:clamp(38px,4.8vw,70px);line-height:.98;letter-spacing:-.05em;margin:0 0 28px;max-width:850px}.section p{font-size:17px;line-height:1.6;max-width:760px;color:#2f2e2a;margin:0 0 38px}.copy-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px}.copy-grid p{margin:0}.visual-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:start}.visual-grid img{width:100%;display:block;object-fit:cover;min-height:280px}.visual-grid img:first-child{grid-row:span 2;min-height:580px}.visual-grid img:not(:first-child){height:281px}.full-image{width:100%;max-height:650px;object-fit:cover;display:block}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:42px}.metric{background:var(--paper);padding:36px 28px;min-height:165px}.metric strong{display:block;font-size:42px;letter-spacing:-.05em;margin-bottom:18px}.metric span{font:10px "Courier New",monospace;color:var(--muted)}
+.diagram{position:relative;height:520px;border:1px solid var(--line);overflow:hidden;background:rgba(255,255,255,.18)}.diagram svg{width:100%;height:100%;display:block}.diagram .node{fill:var(--paper);stroke:rgba(11,11,10,.3);stroke-width:1}.diagram .edge{stroke:rgba(11,11,10,.32);stroke-width:1;fill:none}.diagram .accent{fill:var(--accent);stroke:none}.diagram text{font-family:"Courier New",monospace;font-size:12px;fill:var(--ink)}
+.ui-board{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:82px;gap:14px}.ui-card{border:1px solid var(--line);background:#f6f4ed;position:relative;overflow:hidden}.ui-card.dark{background:#111;color:#fff}.ui-card.large{grid-column:span 8;grid-row:span 5}.ui-card.medium{grid-column:span 4;grid-row:span 3}.ui-card.small{grid-column:span 4;grid-row:span 2}.ui-card .minihead{padding:15px 16px;font:9px "Courier New",monospace;letter-spacing:.05em;border-bottom:1px solid currentColor;opacity:.7}.ui-lines{padding:20px}.ui-lines i{display:block;height:7px;background:currentColor;opacity:.12;margin-bottom:12px}.ui-lines i:nth-child(2){width:65%}.ui-lines i:nth-child(3){width:82%}.ui-chart{position:absolute;left:8%;right:8%;bottom:10%;height:46%;display:flex;align-items:flex-end;gap:4%}.ui-chart b{flex:1;background:var(--accent);opacity:.75}.ui-chart b:nth-child(1){height:31%}.ui-chart b:nth-child(2){height:48%}.ui-chart b:nth-child(3){height:39%}.ui-chart b:nth-child(4){height:61%}.ui-chart b:nth-child(5){height:76%}.ui-chart b:nth-child(6){height:90%}
+.chart-panel{border:1px solid var(--line);padding:28px}.chart-top{display:flex;justify-content:space-between;font:10px "Courier New",monospace;color:var(--muted);margin-bottom:22px}.chart-panel svg{display:block;width:100%;height:360px}.gridline{stroke:rgba(11,11,10,.10);stroke-width:1}.trend{stroke:var(--accent);stroke-width:3;fill:none}.area{fill:var(--accent);opacity:.08}.dot{fill:var(--accent)}
+.system-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.system-card{border:1px solid var(--line);min-height:210px;padding:20px;position:relative}.system-card .swatch{width:100%;height:70px;background:var(--accent);opacity:.84;margin-bottom:30px}.system-card:nth-child(2) .swatch{opacity:.3}.system-card:nth-child(3) .swatch{background:#111;opacity:1}.system-card:nth-child(4) .swatch{background:linear-gradient(90deg,var(--accent) 0 25%,#d9d5cb 25% 50%,#111 50% 75%,#fff 75%)}.system-card strong{font-size:15px}.system-card small{display:block;font:10px "Courier New",monospace;color:var(--muted);margin-top:8px}
+.timeline{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--line);margin-top:48px}.step{padding:28px 24px 0 0;min-height:180px;border-right:1px solid var(--line)}.step:last-child{border-right:0}.step b{font:10px "Courier New",monospace;color:var(--muted)}.step strong{display:block;font-size:19px;margin:20px 0 10px}.step p{font-size:13px;line-height:1.45;margin:0;max-width:180px}
+.quote{font-family:Georgia,"Times New Roman",serif;font-size:clamp(34px,5vw,74px);line-height:1.05;letter-spacing:-.035em;max-width:980px;margin:0 0 56px}.next{padding:80px 4vw 110px;display:grid;grid-template-columns:22% 78%;gap:30px}.next button{border:0;background:transparent;padding:0;text-align:left;cursor:pointer}.next img{width:100%;height:520px;object-fit:cover;display:block}.next h2{font-size:54px;letter-spacing:-.05em;margin:20px 0 0}.next .eyebrow{font:10px "Courier New",monospace;color:var(--muted);letter-spacing:.05em}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+@media only screen and (max-width:1111px){.topbar{width:92%;height:30px;grid-template-columns:90% 10%}.topbar .positioning,.topbar .location,.topbar nav a:first-child{display:none}.brand,.topbar nav a:last-child{font-size:15px;line-height:0;padding-top:30px;font-weight:600;letter-spacing:0}.brand{text-align:left}.topbar nav a:last-child{text-align:right}.canvas{height:calc(100dvh - 30px)}}
+@media(max-width:900px){.canvas{min-height:650px}.piece{width:calc(var(--w) * 1.2)}.case-hero{grid-template-columns:1fr;padding:80px 24px 50px;min-height:auto}.case-dek{margin-top:32px}.hero-visual{min-height:360px}.section{grid-template-columns:1fr;padding:64px 24px}.section-label{margin-bottom:18px}.copy-grid{grid-template-columns:1fr;gap:18px}.visual-grid{grid-template-columns:1fr}.visual-grid img:first-child,.visual-grid img:not(:first-child){height:auto;min-height:0;grid-row:auto}.metrics{grid-template-columns:1fr}.ui-board{display:block}.ui-card{min-height:260px;margin-bottom:12px}.system-grid{grid-template-columns:1fr 1fr}.timeline{grid-template-columns:1fr}.step{border-right:0;border-bottom:1px solid var(--line)}.next{grid-template-columns:1fr;padding:64px 24px}.next img{height:auto}}
+</style></head><body>
+<header class="topbar"><a class="brand" href="https://jjmoi.com/folio">JJ</a><a class="positioning" href="https://jjmoi.com/folio">-1 → 0</a><a class="location" href="https://www.google.com/maps/place/Portland,+OR/@45.5161077,-122.7368012,12z" target="_blank" rel="noopener">45°N 122°W</a><nav><a href="https://jjmoi.com/thoughts">Thoughts</a><a href="https://jjmoi.com/info">Info</a></nav></header>
+<main><section class="canvas" id="canvas" aria-label="Interactive project collage"></section></main>
+<dialog class="dialog" id="caseStudy"><button class="close" type="button" aria-label="Close case study">×</button><div id="caseContent"></div></dialog>
+<script>const projects={
+  cerebras:{
+    num:'01',title:'Cerebras',tags:'PRODUCT / BRAND / SYSTEMS',tooltipTags:'AI · INFRA · 0→1 · PRODUCT',accent:'#ed6339',
+    dek:'Developer platform and brand for frontier AI infrastructure.',
+    hero:'assets/cerebras-hero.jpg', images:['assets/cerebras-case-01.jpg','assets/cerebras-case-02.jpg','assets/cerebras-case-03.jpg','assets/cerebras-case-04.jpg','assets/cerebras-case-05.jpg','assets/cerebras-case-06.jpg','assets/cerebras-case-07.jpg'],
+    context:'A placeholder narrative for a complex technical product becoming easier to understand, operate, and trust. This section is intentionally written as editorial scaffolding so the structure can later be replaced with the real case study.',
+    problem:'Technical users need dense operational information without losing orientation. The design direction balances system visibility, strong hierarchy, and quick access to high frequency actions.',
+    system:'A shared visual language connects infrastructure, product UI, launch storytelling, and documentation. The system is designed to make complexity feel coherent rather than hidden.',
+    outcome:'Placeholder outcome language can summarize adoption, speed, clarity, and organizational leverage without forcing the case study into a rigid template.'
+  },
+  lumiflow:{
+    num:'02',title:'Lumiflow',tags:'PRODUCT / RESEARCH / AI',tooltipTags:'AI · HEALTH · RESEARCH · PRODUCT',accent:'#456757',
+    dek:'Clinical intelligence designed around evidence, review, and judgment.',
+    hero:'assets/lumiflow-hero.jpg', images:['assets/lumiflow-case-01.jpg','assets/lumiflow-case-02.jpg','assets/lumiflow-case-03.jpg','assets/lumiflow-case-04.jpg','assets/lumiflow-case-05.jpg','assets/lumiflow-case-06.jpg'],
+    context:'A placeholder story about turning fragmented evidence into an inspectable review workflow. The page structure makes room for research, interaction design, evaluation logic, and product decisions.',
+    problem:'Reviewers need to understand where a signal came from, how it was evaluated, and what deserves attention next. Provenance and clarity are treated as first class interface requirements.',
+    system:'Reusable patterns separate source material, evaluation criteria, model output, and reviewer decisions while preserving context across the workflow.',
+    outcome:'Placeholder outcome language can later hold quality metrics, review speed, completeness, adherence, and qualitative feedback from expert users.'
+  },
+  tachyus:{
+    num:'03',title:'Tachyus',tags:'PRODUCT / SYSTEMS / DATA',tooltipTags:'ENERGY · DATA · 0→1 · PRODUCT',accent:'#b46f45',
+    dek:'Decision software for operators working with physical systems.',
+    hero:'assets/tachyus-hero.jpg', images:['assets/tachyus-case-01.jpg','assets/tachyus-case-02.jpg','assets/tachyus-case-03.jpg','assets/tachyus-case-04.jpg','assets/tachyus-case-05.jpg','assets/tachyus-case-06.jpg','assets/tachyus-case-07.jpg'],
+    context:'A placeholder narrative for software that brings modeling, operational data, and scenario planning into one working environment for technical teams.',
+    problem:'Expert users need to compare assumptions and scenarios across time without being buried by the underlying model. The interface surfaces the decisions while keeping the technical depth available.',
+    system:'Charts, maps, tables, controls, and scenario states use a compact visual hierarchy that supports dense work while maintaining orientation.',
+    outcome:'Placeholder outcome language can eventually describe reduced analysis time, greater confidence, reusable workflows, and clearer communication across technical teams.'
+  }
+};
+
+const collage=[
+ {src:'assets/collage-lumiflow-01.jpg',project:'lumiflow',x:35,y:4,w:15,r:-1,z:5},
+ {src:'assets/collage-tachyus-01.jpg',project:'tachyus',x:54,y:8,w:10,r:0,z:3},
+ {src:'assets/collage-tachyus-02.jpg',project:'tachyus',x:64,y:10,w:17,r:1,z:2},
+ {src:'assets/collage-cerebras-01.jpg',project:'cerebras',x:21,y:31,w:24,r:0,z:9},
+ {src:'assets/collage-cerebras-02.jpg',project:'cerebras',x:55,y:33,w:19,r:0,z:8},
+ {src:'assets/collage-lumiflow-02.jpg',project:'lumiflow',x:44,y:51,w:14,r:-1,z:7},
+ {src:'assets/collage-tachyus-03.jpg',project:'tachyus',x:58,y:55,w:10,r:0,z:10},
+ {src:'assets/collage-lumiflow-03.jpg',project:'lumiflow',x:73,y:39,w:14,r:1,z:11},
+ {src:'assets/collage-tachyus-04.jpg',project:'tachyus',x:83,y:59,w:8,r:0,z:6},
+ {src:'assets/collage-cerebras-03.jpg',project:'cerebras',x:67,y:58,w:17,r:0,z:12},
+ {src:'assets/collage-lumiflow-04.jpg',project:'lumiflow',x:29,y:61,w:18,r:0,z:13},
+ {src:'assets/collage-tachyus-05.jpg',project:'tachyus',x:12,y:10,w:19,r:-1,z:1},
+ {src:'assets/collage-cerebras-04.jpg',project:'cerebras',x:12,y:61,w:14,r:1,z:4},
+ {src:'assets/collage-lumiflow-05.jpg',project:'lumiflow',x:40,y:72,w:11,r:-1,z:14},
+ {src:'assets/collage-tachyus-06.jpg',project:'tachyus',x:75,y:9,w:15,r:0,z:15}
+];
+
+const canvas=document.querySelector('#canvas');
+const dlg=document.querySelector('#caseStudy');
+const caseContent=document.querySelector('#caseContent');
+const closeBtn=document.querySelector('.close');
+const projectTooltip=document.createElement('div');
+projectTooltip.className='project-tooltip';
+projectTooltip.setAttribute('role','tooltip');
+canvas.appendChild(projectTooltip);
+let hoveredProject=null;
+const storageKey='collagePositions';
+const modeStorageKey='collageLayoutModes';
+const CLICK_DELAY=280;
+let currentBucket=viewportBucket();
+let allLayouts={};
+let saved={};
+let layoutModes={};
+let layoutMode='randomized';
+let arrangeMode=false;
+let manualDragOccurred=false;
+let topZ=30;
+let lastSourceId=null;
+let homeScrollY=0;
+let worldState=null;
+let transitionBusy=false;
+const WORLD_IN_MS=810;
+const WORLD_OUT_MS=705;
+
+function viewportBucket(){
+  const w=window.innerWidth,h=window.innerHeight;
+  const wb=w<760?'mobile':w<1100?'compact':w<1450?'laptop':w<1800?'desktop':'wide';
+  const hb=h<720?'short':h<980?'standard':'tall';
+  return `${wb}-${hb}`;
+}
+function readLayouts(){
+  try{
+    const parsed=JSON.parse(localStorage.getItem(storageKey)||'{}')||{};
+    const legacy=Object.keys(parsed).some(k=>/^img\d+$/.test(k));
+    allLayouts=legacy?{[currentBucket]:parsed}:parsed;
+  }catch(e){allLayouts={}}
+  try{layoutModes=JSON.parse(localStorage.getItem(modeStorageKey)||'{}')||{}}catch(e){layoutModes={}}
+  saved=allLayouts[currentBucket]||{};
+  layoutMode=layoutModes[currentBucket]||'randomized';
+  arrangeMode=layoutMode.startsWith('arranged');
+}
+function writeLayouts(){
+  allLayouts[currentBucket]=saved;
+  localStorage.setItem(storageKey,JSON.stringify(allLayouts));
+}
+function writeLayoutMode(mode){
+  layoutMode=mode;
+  arrangeMode=mode.startsWith('arranged');
+  layoutModes[currentBucket]=mode;
+  localStorage.setItem(modeStorageKey,JSON.stringify(layoutModes));
+}
+function savePiece(el){
+  const id=el.dataset.imageId||el.id;
+  saved[id]={x:Math.round(el.offsetLeft),y:Math.round(el.offsetTop),zIndex:Number(el.style.zIndex)||Number(el.dataset.baseZ)||1};
+  writeLayouts();
+}
+function setArrangeMode(on){writeLayoutMode(on?'arranged':'randomized');}
+function applyBucketLayout(){
+  saved=allLayouts[currentBucket]||{};
+  topZ=30;
+  if(layoutMode!=='grid-randomized')clearGridSizing?.();
+  canvas.querySelectorAll('.piece').forEach(el=>{
+    const item=collage[Number(el.dataset.index)];
+    const pos=saved[el.dataset.imageId];
+    el.style.removeProperty('left');el.style.removeProperty('top');
+    if(pos&&Number.isFinite(pos.x)&&Number.isFinite(pos.y)){
+      el.style.left=pos.x+'px';el.style.top=pos.y+'px';
+      el.style.removeProperty('--x');el.style.removeProperty('--y');
+      el.style.zIndex=Number(pos.zIndex)||item.z;
+    }else{
+      el.style.setProperty('--x',item.x+'%');el.style.setProperty('--y',item.y+'%');
+      el.style.zIndex=item.z;
+    }
+    topZ=Math.max(topZ,Number(el.style.zIndex)||item.z||1);
+  });
+  if(layoutMode==='grid-randomized'){
+    requestAnimationFrame(()=>{
+      const cr=canvas.getBoundingClientRect();
+      const pieces=[...canvas.querySelectorAll('.piece')];
+      const {cols,rows}=gridDimensions(pieces.length,cr.width,cr.height);
+      const padX=Math.max(28,cr.width*.035),padY=Math.max(24,cr.height*.055);
+      const cellW=(cr.width-padX*2)/cols,cellH=(cr.height-padY*2)/rows;
+      pieces.forEach(el=>{
+        const img=el.querySelector('img');
+        const ratio=(img?.naturalWidth&&img?.naturalHeight)?img.naturalWidth/img.naturalHeight:(el.getBoundingClientRect().width/Math.max(1,el.getBoundingClientRect().height));
+        el.style.width=Math.round(Math.max(56,Math.min(cellW*.72,cellH*.68*ratio)))+'px';
+      });
+    });
+  }
+}
+function bringToFront(el,persist=true){
+  topZ+=1;el.style.zIndex=topZ;if(persist)savePiece(el);
+}
+function clearGridSizing(){
+  canvas.querySelectorAll('.piece').forEach(el=>el.style.removeProperty('width'));
+}
+function shuffle(items){
+  const out=[...items];
+  for(let i=out.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[out[i],out[j]]=[out[j],out[i]]}
+  return out;
+}
+function gridDimensions(count,width,height){
+  let best={cols:count,rows:1,score:Infinity};
+  const target=Math.max(.25,width/Math.max(1,height));
+  for(let rows=1;rows<=count;rows++){
+    if(count%rows)continue;
+    const cols=count/rows;
+    const score=Math.abs(Math.log((cols/rows)/target));
+    if(score<best.score)best={cols,rows,score};
+  }
+  return best;
+}
+function autoArrange(){
+  clearGridSizing();
+  const cr=canvas.getBoundingClientRect();
+  const origins={cerebras:{x:cr.width*.055,y:cr.height*.09},lumiflow:{x:cr.width*.37,y:cr.height*.29},tachyus:{x:cr.width*.67,y:cr.height*.08}};
+  const offsets=[[0,0],[90,58],[28,168],[165,188],[206,64],[56,285],[235,260],[132,335]];
+  canvas.classList.add('arranging');
+  ['cerebras','lumiflow','tachyus'].forEach(project=>{
+    const group=[...canvas.querySelectorAll(`.piece[data-project="${project}"]`)];
+    const origin=origins[project];
+    group.forEach((el,i)=>{
+      const off=offsets[i%offsets.length],r=el.getBoundingClientRect();
+      const x=Math.max(-r.width+28,Math.min(cr.width-28,origin.x+off[0]));
+      const y=Math.max(-r.height+28,Math.min(cr.height-28,origin.y+off[1]));
+      el.style.left=Math.round(x)+'px';el.style.top=Math.round(y)+'px';el.style.removeProperty('--x');el.style.removeProperty('--y');
+      topZ+=1;el.style.zIndex=topZ;savePiece(el);
+    });
+  });
+  writeLayoutMode('arranged');setTimeout(()=>canvas.classList.remove('arranging'),600);
+}
+function gridRandomizeLayout(){
+  const cr=canvas.getBoundingClientRect();
+  const pieces=[...canvas.querySelectorAll('.piece')];
+  const {cols,rows}=gridDimensions(pieces.length,cr.width,cr.height);
+  const padX=Math.max(28,cr.width*.035),padY=Math.max(24,cr.height*.055);
+  const cellW=(cr.width-padX*2)/cols,cellH=(cr.height-padY*2)/rows;
+  const ordered=shuffle(pieces);
+  canvas.classList.add('arranging');
+  ordered.forEach((el,i)=>{
+    const img=el.querySelector('img');
+    const ratio=(img?.naturalWidth&&img?.naturalHeight)?img.naturalWidth/img.naturalHeight:(el.getBoundingClientRect().width/Math.max(1,el.getBoundingClientRect().height));
+    const targetW=Math.max(56,Math.min(cellW*.72,cellH*.68*ratio));
+    el.style.width=Math.round(targetW)+'px';
+    const col=i%cols,row=Math.floor(i/cols);
+    const x=padX+col*cellW+(cellW-targetW)/2;
+    const targetH=targetW/Math.max(.2,ratio);
+    const y=padY+row*cellH+(cellH-targetH)/2;
+    el.style.left=Math.round(x)+'px';el.style.top=Math.round(y)+'px';
+    el.style.removeProperty('--x');el.style.removeProperty('--y');
+    topZ+=1;el.style.zIndex=topZ;savePiece(el);
+  });
+  writeLayoutMode('grid-randomized');
+  setTimeout(()=>canvas.classList.remove('arranging'),600);
+}
+function autoArrangeRandomized(){
+  clearGridSizing();
+  const cr=canvas.getBoundingClientRect();
+  const regions={
+    cerebras:{x:.04,y:.08,w:.31,h:.72},
+    lumiflow:{x:.345,y:.18,w:.31,h:.72},
+    tachyus:{x:.65,y:.07,w:.31,h:.72}
+  };
+  canvas.classList.add('arranging');
+  ['cerebras','lumiflow','tachyus'].forEach(project=>{
+    const region=regions[project];
+    const group=shuffle([...canvas.querySelectorAll(`.piece[data-project="${project}"]`)]);
+    group.forEach(el=>{
+      const bounds=safePlacementBounds(el,cr,18);
+      const regionLeft=cr.width*region.x;
+      const regionTop=cr.height*region.y;
+      const regionRight=regionLeft+cr.width*region.w;
+      const regionBottom=regionTop+cr.height*region.h;
+      let minX=Math.max(bounds.minX,regionLeft);
+      let maxX=Math.min(bounds.maxX,regionRight-el.offsetWidth);
+      let minY=Math.max(bounds.minY,regionTop);
+      let maxY=Math.min(bounds.maxY,regionBottom-el.offsetHeight);
+      if(maxX<minX){minX=bounds.minX;maxX=bounds.maxX}
+      if(maxY<minY){minY=bounds.minY;maxY=bounds.maxY}
+      const x=randomInRange(minX,maxX);
+      const y=randomInRange(minY,maxY);
+      el.style.left=Math.round(x)+'px';el.style.top=Math.round(y)+'px';
+      el.style.removeProperty('--x');el.style.removeProperty('--y');
+      topZ+=1;el.style.zIndex=topZ;savePiece(el);
+    });
+  });
+  writeLayoutMode('arranged-randomized');
+  setTimeout(()=>canvas.classList.remove('arranging'),600);
+}
+function safePlacementBounds(el,cr,margin=18){
+  const rect=el.getBoundingClientRect();
+  const layoutLeft=el.offsetLeft;
+  const layoutTop=el.offsetTop;
+  // getBoundingClientRect includes rotation; these offsets describe how far the
+  // rotated visual extends beyond the element's untransformed layout box.
+  const visualOffsetX=(rect.left-cr.left)-layoutLeft;
+  const visualOffsetY=(rect.top-cr.top)-layoutTop;
+  let minX=margin-visualOffsetX;
+  let maxX=cr.width-margin-visualOffsetX-rect.width;
+  let minY=margin-visualOffsetY;
+  let maxY=cr.height-margin-visualOffsetY-rect.height;
+  if(maxX<minX){const centered=(cr.width-el.offsetWidth)/2;minX=maxX=centered}
+  if(maxY<minY){const centered=(cr.height-el.offsetHeight)/2;minY=maxY=centered}
+  return {minX,maxX,minY,maxY};
+}
+function randomInRange(min,max){return min+Math.random()*Math.max(0,max-min)}
+function randomizeLayout(){
+  clearGridSizing();
+  const cr=canvas.getBoundingClientRect();
+  const pieces=[...canvas.querySelectorAll('.piece')];
+  canvas.classList.add('arranging');
+  pieces.forEach(el=>{
+    const bounds=safePlacementBounds(el,cr,18);
+    const x=randomInRange(bounds.minX,bounds.maxX);
+    const y=randomInRange(bounds.minY,bounds.maxY);
+    el.style.left=Math.round(x)+'px';el.style.top=Math.round(y)+'px';
+    el.style.removeProperty('--x');el.style.removeProperty('--y');
+    topZ+=1;el.style.zIndex=topZ;savePiece(el);
+  });
+  writeLayoutMode('randomized');
+  setTimeout(()=>canvas.classList.remove('arranging'),600);
+}
+function focusAdjacentPiece(current,direction){
+  const pieces=[...canvas.querySelectorAll('.piece')];
+  const index=pieces.indexOf(current);
+  if(index<0||!pieces.length)return;
+  const next=(index+direction+pieces.length)%pieces.length;
+  pieces[next].focus({preventScroll:true});
+}
+
+
+function snapshotPiece(el){
+  return {
+    el,
+    left:el.style.left,
+    top:el.style.top,
+    x:el.style.getPropertyValue('--x'),
+    y:el.style.getPropertyValue('--y'),
+    zIndex:el.style.zIndex,
+    worldScale:el.style.getPropertyValue('--world-scale'),
+    worldZ:el.style.getPropertyValue('--world-z')
+  };
+}
+function restorePieceSnapshot(item){
+  const el=item.el;
+  if(item.left)el.style.left=item.left;else el.style.removeProperty('left');
+  if(item.top)el.style.top=item.top;else el.style.removeProperty('top');
+  if(item.x)el.style.setProperty('--x',item.x);else el.style.removeProperty('--x');
+  if(item.y)el.style.setProperty('--y',item.y);else el.style.removeProperty('--y');
+  if(item.zIndex)el.style.zIndex=item.zIndex;else el.style.removeProperty('z-index');
+  if(item.worldScale)el.style.setProperty('--world-scale',item.worldScale);else el.style.removeProperty('--world-scale');
+  if(item.worldZ)el.style.setProperty('--world-z',item.worldZ);else el.style.removeProperty('--world-z');
+}
+function projectWorldSlots(){
+  return [
+    {cx:.50,cy:.48,s:1.42},
+    {cx:.22,cy:.20,s:.94},
+    {cx:.75,cy:.18,s:.90},
+    {cx:.18,cy:.68,s:.84},
+    {cx:.78,cy:.66,s:.88},
+    {cx:.48,cy:.15,s:.76},
+    {cx:.51,cy:.76,s:.78},
+    {cx:.83,cy:.40,s:.72}
+  ];
+}
+function enterProjectWorld(id,sourceEl,done){
+  if(transitionBusy)return;
+  transitionBusy=true;
+  clearProjectHover();
+  const pieces=[...canvas.querySelectorAll('.piece')];
+  const related=pieces.filter(el=>el.dataset.project===id);
+  const ordered=sourceEl?[sourceEl,...related.filter(el=>el!==sourceEl)]:related;
+  const cr=canvas.getBoundingClientRect();
+  const slots=projectWorldSlots();
+  worldState={project:id,sourceId:sourceEl?.id||null,pieces:pieces.map(snapshotPiece)};
+  canvas.classList.remove('arranging','group-hover','world-return');
+  canvas.classList.add('world-active');
+  pieces.forEach(el=>{
+    el.classList.toggle('world-focus',el.dataset.project===id);
+    el.classList.toggle('world-away',el.dataset.project!==id);
+  });
+  requestAnimationFrame(()=>{
+    ordered.forEach((el,i)=>{
+      const slot=slots[i%slots.length];
+      const r=el.getBoundingClientRect();
+      const x=Math.max(-r.width*.08,Math.min(cr.width-r.width*.92,cr.width*slot.cx-r.width/2));
+      const y=Math.max(-r.height*.08,Math.min(cr.height-r.height*.92,cr.height*slot.cy-r.height/2));
+      el.style.left=Math.round(x)+'px';
+      el.style.top=Math.round(y)+'px';
+      el.style.removeProperty('--x');
+      el.style.removeProperty('--y');
+      el.style.setProperty('--world-scale',String(slot.s));
+      el.style.setProperty('--world-z',String(12000+i));
+    });
+  });
+  const wait=window.matchMedia('(prefers-reduced-motion: reduce)').matches?30:WORLD_IN_MS;
+  setTimeout(()=>{transitionBusy=false;done?.()},wait);
+}
+function exitProjectWorld(){
+  if(!worldState){transitionBusy=false;return}
+  transitionBusy=true;
+  canvas.classList.add('world-return');
+  const state=worldState;
+  requestAnimationFrame(()=>{
+    state.pieces.forEach(item=>{
+      restorePieceSnapshot(item);
+      item.el.style.setProperty('--world-scale','1');
+      item.el.classList.remove('world-away');
+    });
+  });
+  const wait=window.matchMedia('(prefers-reduced-motion: reduce)').matches?30:WORLD_OUT_MS;
+  setTimeout(()=>{
+    state.pieces.forEach(item=>{
+      restorePieceSnapshot(item);
+      item.el.classList.remove('world-focus','world-away');
+    });
+    canvas.classList.remove('world-active','world-return');
+    worldState=null;
+    transitionBusy=false;
+    if(lastSourceId)document.getElementById(lastSourceId)?.focus({preventScroll:true});
+  },wait);
+}
+
+
+function waitForCollageImages(){
+  const imgs=[...canvas.querySelectorAll('.piece img')];
+  return Promise.all(imgs.map(img=>{
+    if(img.complete&&img.naturalWidth)return Promise.resolve();
+    if(img.decode)return img.decode().catch(()=>{});
+    return new Promise(resolve=>{img.addEventListener('load',resolve,{once:true});img.addEventListener('error',resolve,{once:true})});
+  }));
+}
+const INITIAL_VISIBLE_COUNT=2;
+function finishHomepageLoad(){
+  canvas.querySelectorAll('.piece').forEach(el=>{el.style.removeProperty('opacity');el.style.removeProperty('pointer-events')});
+}
+function revealInitialAnchors(){
+  const pieces=[...canvas.querySelectorAll('.piece')];
+  pieces.slice(0,INITIAL_VISIBLE_COUNT).forEach(el=>{
+    el.style.opacity='1';
+    el.style.pointerEvents='auto';
+  });
+}
+function startHomepageLoad(){
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){finishHomepageLoad();return}
+  waitForCollageImages().then(()=>requestAnimationFrame(()=>runHomepageLoadAnimation()));
+}
+
+function runHomepageLoadAnimation(){
+  const pieces=[...canvas.querySelectorAll('.piece')];
+  pieces.forEach((el,i)=>{
+    const r=collage[Number(el.dataset.index)].r||0;
+    const isAnchor=i<INITIAL_VISIBLE_COUNT;
+    el.style.removeProperty('opacity');
+    const sequence=isAnchor ? [
+      {opacity:1,filter:'blur(1.5px)',transform:`translate3d(0,8px,0) rotate(${r}deg) scale(.94)`},
+      {opacity:1,filter:'blur(0)',transform:`translate3d(0,0,0) rotate(${r}deg) scale(1)`}
+    ] : [
+      {opacity:0,filter:'blur(10px)',transform:`translate3d(0,28px,0) rotate(${r}deg) scale(.76)`},
+      {opacity:.72,filter:'blur(2px)',transform:`translate3d(0,7px,0) rotate(${r}deg) scale(.97)`,offset:.72},
+      {opacity:1,filter:'blur(0)',transform:`translate3d(0,0,0) rotate(${r}deg) scale(1)`}
+    ];
+    const sequenceIndex=Math.max(0,i-INITIAL_VISIBLE_COUNT);
+    const anim=el.animate(sequence,{
+      duration:isAnchor?900:1500+((sequenceIndex%5)*90),
+      delay:isAnchor?0:sequenceIndex*38,
+      easing:'cubic-bezier(.18,.82,.2,1)',
+      fill:'both'
+    });
+    anim.finished.finally(()=>{anim.cancel();el.style.removeProperty('pointer-events')});
+  });
+  const animatedCount=Math.max(1,pieces.length-INITIAL_VISIBLE_COUNT);
+  const total=1500+(animatedCount-1)*38+360;
+  setTimeout(finishHomepageLoad,total);
+}
+
+readLayouts();
+collage.forEach((item,i)=>{
+  const imageId=`img${i+1}`;
+  const b=document.createElement('button');
+  b.className='piece';b.type='button';b.id=imageId;b.dataset.imageId=imageId;b.dataset.project=item.project;b.dataset.index=i;b.dataset.baseZ=item.z;
+  b.style.opacity='0';b.style.pointerEvents='none';
+  b.style.setProperty('--w',item.w+'vw');b.style.setProperty('--r',item.r+'deg');
+  b.setAttribute('aria-label',`Open ${projects[item.project].title} case study`);
+  b.innerHTML=`<img src="${item.src}" alt="${projects[item.project].title} project fragment">`;
+  canvas.appendChild(b);enableDrag(b);
+  b.addEventListener('pointerenter',e=>{if(window.matchMedia('(hover:hover)').matches){setProjectHover(item.project,e)}});
+  b.addEventListener('pointermove',e=>{if(window.matchMedia('(hover:hover)').matches&&hoveredProject===item.project&&!b.classList.contains('dragging'))positionProjectTooltipNearPointer(e)});
+  b.addEventListener('pointerleave',e=>{const next=e.relatedTarget?.closest?.('.piece');if(next&&next.dataset.project===item.project)return;if(!b.classList.contains('dragging'))clearProjectHover()});
+  b.addEventListener('keydown',e=>{
+    if(e.key==='Enter'||e.key===' '){e.preventDefault();openCase(item.project,b);return}
+    if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)){
+      e.preventDefault();
+      const direction=(e.key==='ArrowLeft'||e.key==='ArrowUp')?-1:1;
+      focusAdjacentPiece(b,direction);
+    }
+  });
+});
+applyBucketLayout();
+// Every fresh page load starts from a newly randomized composition.
+// Wait for intrinsic image dimensions first so random placement can keep every
+// rotated image fully inside the visible canvas.
+waitForCollageImages().then(()=>requestAnimationFrame(()=>{
+  randomizeLayout();
+  revealInitialAnchors();
+  setTimeout(startHomepageLoad,120);
+}));
+
+function positionProjectTooltipNearPointer(e){
+  if(!e)return;
+  const cr=canvas.getBoundingClientRect();
+  const gap=16, edge=8;
+  const tr=projectTooltip.getBoundingClientRect();
+  let x=e.clientX-cr.left+gap;
+  let y=e.clientY-cr.top-tr.height-gap;
+  const maxX=Math.max(edge,cr.width-tr.width-edge);
+  const maxY=Math.max(edge,cr.height-tr.height-edge);
+  x=Math.max(edge,Math.min(maxX,x));
+  y=Math.max(edge,Math.min(maxY,y));
+  projectTooltip.style.left=x+'px';
+  projectTooltip.style.top=y+'px';
+}
+function setProjectHover(project,e){
+  const sameProject=hoveredProject===project&&projectTooltip.classList.contains('visible');
+  if(!sameProject){
+    hoveredProject=project;
+    canvas.classList.add('group-hover');
+    canvas.querySelectorAll('.piece').forEach(piece=>piece.classList.toggle('group-related',piece.dataset.project===project));
+    const p=projects[project];
+    projectTooltip.innerHTML=`<strong>${p.title}</strong><span>${p.tooltipTags||p.tags}</span>`;
+    projectTooltip.classList.add('visible');
+  }
+  positionProjectTooltipNearPointer(e);
+}
+function clearProjectHover(){
+  hoveredProject=null;
+  canvas.classList.remove('group-hover');
+  canvas.querySelectorAll('.piece').forEach(piece=>piece.classList.remove('group-related'));
+  projectTooltip.classList.remove('visible');
+}
+function enableDrag(el){
+  let state=null,clickTimer=null;
+  el.addEventListener('pointerdown',e=>{
+    if(e.button!==undefined&&e.button!==0)return;
+    clearTimeout(clickTimer);
+    projectTooltip.classList.remove('visible');
+    const r=el.getBoundingClientRect(),cr=canvas.getBoundingClientRect();
+    const oldZ=Number(el.style.zIndex)||Number(el.dataset.baseZ)||1,tempZ=topZ+1;
+    state={id:e.pointerId,startX:e.clientX,startY:e.clientY,left:r.left-cr.left,top:r.top-cr.top,moved:false,oldZ,tempZ};
+    el.style.zIndex=tempZ;el.classList.add('dragging');el.setPointerCapture(e.pointerId);e.preventDefault();
+  });
+  el.addEventListener('pointermove',e=>{
+    if(!state||state.id!==e.pointerId)return;
+    const dx=e.clientX-state.startX,dy=e.clientY-state.startY;if(dx===0&&dy===0)return;state.moved=true;
+    const cr=canvas.getBoundingClientRect(),er=el.getBoundingClientRect();
+    const x=Math.min(cr.width-24,Math.max(-er.width+24,state.left+dx)),y=Math.min(cr.height-24,Math.max(-er.height+24,state.top+dy));
+    el.style.left=x+'px';el.style.top=y+'px';el.style.removeProperty('--x');el.style.removeProperty('--y');
+  });
+  el.addEventListener('pointerup',e=>{
+    if(!state||state.id!==e.pointerId)return;
+    const moved=state.moved,oldZ=state.oldZ,tempZ=state.tempZ;el.classList.remove('dragging');
+    if(moved){manualDragOccurred=true;topZ=Math.max(topZ,tempZ);writeLayoutMode('custom');savePiece(el)}
+    else{el.style.zIndex=oldZ;clickTimer=setTimeout(()=>openCase(el.dataset.project,el),CLICK_DELAY)}
+    state=null;
+  });
+  el.addEventListener('pointercancel',()=>{if(state)el.style.zIndex=state.oldZ;state=null;el.classList.remove('dragging')});
+  el.addEventListener('dblclick',e=>{e.preventDefault();e.stopPropagation();clearTimeout(clickTimer);bringToFront(el,true)});
+  el.addEventListener('click',e=>e.preventDefault());
+}
+
+canvas.addEventListener('dblclick',e=>{
+  if(transitionBusy||worldState)return;
+  if(e.target.closest&&e.target.closest('.piece'))return;
+  e.preventDefault();
+  if(layoutMode==='randomized'||layoutMode==='custom')autoArrange();
+  else if(layoutMode==='arranged')gridRandomizeLayout();
+  else if(layoutMode==='grid-randomized')autoArrangeRandomized();
+  else if(layoutMode==='arranged-randomized')randomizeLayout();
+  else randomizeLayout();
+});
+
+window.addEventListener('keydown',e=>{
+  if(dlg.open||transitionBusy||worldState||e.metaKey||e.ctrlKey||e.altKey)return;
+  const tag=document.activeElement?.tagName;if(tag==='INPUT'||tag==='TEXTAREA'||tag==='SELECT')return;
+  if(e.key==='r'||e.key==='R'){e.preventDefault();randomizeLayout()}
+  if(e.key==='a'||e.key==='A'){e.preventDefault();autoArrange()}
+});
+let resizeTimer=null;
+window.addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{const next=viewportBucket();if(next!==currentBucket){currentBucket=next;readLayouts();applyBucketLayout();if(!Object.keys(saved).length)requestAnimationFrame(randomizeLayout)}},180)});
+
+function diagramSVG(accent){
+ return `<div class="diagram" style="--accent:${accent}"><svg viewBox="0 0 1000 520" role="img" aria-label="Placeholder system diagram">
+ <path class="edge" d="M180 135 C310 135 315 260 430 260 S590 145 700 145 M430 260 C570 260 575 385 720 385 M700 145 C825 145 825 270 900 270 M720 385 C820 385 835 270 900 270"/>
+ <rect class="node" x="65" y="90" width="230" height="90" rx="2"/><text x="95" y="142">INPUT / CONTEXT</text>
+ <rect class="node" x="330" y="215" width="220" height="90" rx="2"/><text x="360" y="267">CORE WORKFLOW</text>
+ <rect class="node" x="620" y="100" width="210" height="90" rx="2"/><text x="650" y="152">EVALUATION</text>
+ <rect class="node" x="620" y="340" width="210" height="90" rx="2"/><text x="650" y="392">OPERATIONS</text>
+ <rect class="accent" x="845" y="225" width="110" height="90" rx="2"/><text x="866" y="278">OUTPUT</text>
+ <circle cx="180" cy="260" r="4" fill="${accent}"/><circle cx="900" cy="150" r="4" fill="${accent}"/>
+ </svg></div>`
+}
+
+function chartSVG(accent){
+ return `<div class="chart-panel" style="--accent:${accent}"><div class="chart-top"><span>ILLUSTRATIVE PLACEHOLDER DATA</span><span>01 → 08</span></div><svg viewBox="0 0 900 360" role="img" aria-label="Placeholder trend chart">
+ <line class="gridline" x1="40" x2="875" y1="55" y2="55"/><line class="gridline" x1="40" x2="875" y1="125" y2="125"/><line class="gridline" x1="40" x2="875" y1="195" y2="195"/><line class="gridline" x1="40" x2="875" y1="265" y2="265"/><line class="gridline" x1="40" x2="875" y1="330" y2="330"/>
+ <path class="area" d="M40 300 L150 286 L260 245 L370 258 L480 192 L590 165 L700 118 L810 82 L875 66 L875 330 L40 330 Z"/>
+ <path class="trend" d="M40 300 L150 286 L260 245 L370 258 L480 192 L590 165 L700 118 L810 82 L875 66"/>
+ ${[[40,300],[150,286],[260,245],[370,258],[480,192],[590,165],[700,118],[810,82],[875,66]].map(([x,y])=>`<circle class="dot" cx="${x}" cy="${y}" r="4"/>`).join('')}
+ </svg></div>`
+}
+
+function uiBoard(accent){
+ return `<div class="ui-board" style="--accent:${accent}">
+ <div class="ui-card large dark"><div class="minihead">PRIMARY WORKSPACE</div><div class="ui-lines"><i></i><i></i><i></i></div><div class="ui-chart">${'<b></b>'.repeat(6)}</div></div>
+ <div class="ui-card medium"><div class="minihead">DETAIL PANEL</div><div class="ui-lines"><i></i><i></i><i></i></div></div>
+ <div class="ui-card small"><div class="minihead">STATUS / SYSTEM</div><div class="ui-lines"><i></i><i></i></div></div>
+ <div class="ui-card small"><div class="minihead">FILTERS / ACTIONS</div><div class="ui-lines"><i></i><i></i></div></div>
+ </div>`
+}
+
+function renderCase(id){
+ const p=projects[id]; if(!p)return;
+ const imgs=p.images;
+ const nextId=id==='cerebras'?'lumiflow':id==='lumiflow'?'tachyus':'cerebras';
+ const next=projects[nextId];
+ caseContent.innerHTML=`<article class="case" style="--accent:${p.accent}">
+ <div class="case-nav"><strong>JJ</strong><span class="index">${p.num} / 03</span></div>
+ <section class="case-hero"><div class="case-title"><div class="case-kicker">${p.num} / CASE STUDY</div><h1>${p.title}</h1><div class="case-tags">${p.tags}</div><div class="case-dek">${p.dek}</div></div><div class="hero-visual"><img src="${p.hero}" alt="${p.title} hero visual"></div></section>
+ <section class="section"><div class="section-label">01 / CONTEXT</div><div class="section-body"><h2>Start with the system, not the screen.</h2><div class="copy-grid"><p>${p.context}</p><p>${p.problem}</p></div><div class="metrics"><div class="metric"><strong>3×</strong><span>PLACEHOLDER IMPROVEMENT</span></div><div class="metric"><strong>42%</strong><span>PLACEHOLDER REDUCTION</span></div><div class="metric"><strong>08</strong><span>CORE WORKFLOWS</span></div></div></div></section>
+ <section class="section"><div class="section-label">02 / EVIDENCE</div><div class="section-body"><h2>Build the story from artifacts.</h2><p>Placeholder imagery can hold interface states, research evidence, environmental context, hardware, diagrams, or process fragments. The layout intentionally behaves more like an evidence wall than a conventional gallery.</p><div class="visual-grid"><img src="${imgs[0]}" alt="${p.title} visual"><img src="${imgs[1]||imgs[0]}" alt="${p.title} detail"><img src="${imgs[2]||imgs[0]}" alt="${p.title} detail"></div></div></section>
+ <section class="section"><div class="section-label">03 / MODEL</div><div class="section-body"><h2>Expose how the product fits together.</h2><p>A system diagram gives the reader a quick mental model before introducing individual screens. Replace this placeholder with the real architecture, actors, inputs, decision points, and outputs.</p>${diagramSVG(p.accent)}</div></section>
+ <section class="section"><div class="section-label">04 / PRODUCT</div><div class="section-body"><h2>Show the interface at working scale.</h2><p>The case study can alternate between real screenshots and abstracted interface diagrams. Dense screens deserve enough space to be understood rather than compressed into decorative thumbnails.</p>${uiBoard(p.accent)}</div></section>
+ <section class="section"><div class="section-label">05 / DETAIL</div><div class="section-body"><h2>Zoom from system to decision.</h2><p>${p.system}</p><div class="visual-grid"><img src="${imgs[3]||imgs[0]}" alt="${p.title} project detail"><img src="${imgs[4]||imgs[1]||imgs[0]}" alt="${p.title} project detail"><img src="${imgs[5]||imgs[2]||imgs[0]}" alt="${p.title} project detail"></div></div></section>
+ <section class="section"><div class="section-label">06 / SIGNAL</div><div class="section-body"><h2>Let data carry part of the argument.</h2><p>Use graphs for the part of the case study that needs evidence. These values are intentionally illustrative placeholders, ready to be replaced with actual product or research metrics.</p>${chartSVG(p.accent)}</div></section>
+ <section class="section"><div class="section-label">07 / SYSTEM</div><div class="section-body"><h2>A small language that scales.</h2><p>Placeholder system primitives show how color, typography, spacing, data visualization, and reusable components can be documented without turning the case study into a component catalog.</p><div class="system-grid" style="--accent:${p.accent}"><div class="system-card"><div class="swatch"></div><strong>Signal</strong><small>ACCENT / EMPHASIS</small></div><div class="system-card"><div class="swatch"></div><strong>Surface</strong><small>LAYERS / STATES</small></div><div class="system-card"><div class="swatch"></div><strong>Contrast</strong><small>HIERARCHY / FOCUS</small></div><div class="system-card"><div class="swatch"></div><strong>Range</strong><small>TOKENS / SCALE</small></div></div></div></section>
+ <section class="section"><div class="section-label">08 / PROCESS</div><div class="section-body"><h2>Keep the path visible.</h2><p>Placeholder process content can show how the work moved from ambiguity through research, framing, prototyping, validation, and systemization.</p><div class="timeline"><div class="step"><b>01</b><strong>Frame</strong><p>Define the decisions that matter before producing interface volume.</p></div><div class="step"><b>02</b><strong>Observe</strong><p>Gather behavior, constraints, evidence, and technical context.</p></div><div class="step"><b>03</b><strong>Model</strong><p>Map the system and expose the highest leverage relationships.</p></div><div class="step"><b>04</b><strong>Prototype</strong><p>Test interaction and hierarchy at realistic density.</p></div><div class="step"><b>05</b><strong>Scale</strong><p>Turn successful patterns into reusable product language.</p></div></div></div></section>
+ <section class="section"><div class="section-label">09 / OUTCOME</div><div class="section-body"><div class="quote">“${p.outcome}”</div><img class="full-image" src="${imgs[6]||imgs[0]}" alt="${p.title} concluding visual"></div></section>
+ <section class="next"><div class="section-label">NEXT PROJECT</div><button type="button" data-next="${nextId}"><span class="eyebrow">${next.num} / ${next.tags}</span><img src="${next.hero}" alt="Open ${next.title} case study"><h2>${next.title} →</h2></button></section>
+ </article>`;
+ const wasOpen=dlg.open;
+ if(!wasOpen){
+   dlg.classList.remove('case-visible');
+   dlg.showModal();
+   requestAnimationFrame(()=>requestAnimationFrame(()=>dlg.classList.add('case-visible')));
+ }else{dlg.classList.add('case-visible')}
+ dlg.scrollTop=0;history.replaceState(null,'',`#case/${id}`);document.body.style.overflow='hidden';
+ caseContent.querySelector('[data-next]').addEventListener('click',e=>renderCase(e.currentTarget.dataset.next));
+ caseContent.querySelector('.hero-visual img')?.addEventListener('dblclick',e=>{e.preventDefault();e.stopPropagation();closeCase()});
+}
+
+function openCase(id,sourceEl){
+ if(transitionBusy)return;
+ homeScrollY=window.scrollY;lastSourceId=sourceEl?.id||null;
+ if(sourceEl&&!dlg.open)enterProjectWorld(id,sourceEl,()=>renderCase(id));
+ else renderCase(id);
+}
+function closeCase(){
+ if(dlg.open)dlg.close();dlg.classList.remove('case-visible');document.body.style.overflow='';history.replaceState(null,'',location.pathname+location.search+'#work');
+ requestAnimationFrame(()=>{
+   window.scrollTo({top:homeScrollY,left:0,behavior:'auto'});
+   if(worldState)exitProjectWorld();
+   else if(lastSourceId)document.getElementById(lastSourceId)?.focus({preventScroll:true});
+ });
+}
+closeBtn.addEventListener('click',closeCase);
+dlg.addEventListener('cancel',e=>{e.preventDefault();closeCase()});
+function route(){const m=location.hash.match(/^#case\/(.+)$/);if(m&&projects[m[1]]&&!dlg.open)renderCase(m[1])}
+window.addEventListener('hashchange',route);route();
+</script></body></html>
