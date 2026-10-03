@@ -70,7 +70,7 @@ p+p {padding-top: 30px;}
 #launch a {padding-top: 4px;}
 .section-padtop {padding-top: 200px;}
 .parasection img {width: 100%; margin-top: -5px; border-radius: 2rem;}
-.col-5 img {width: 100%; margin-top: -6px; border-radius: 2rem;}
+.col-5 img {width: 100%; margin-top: -6px; margin-bottom: -1px; border-radius: 2rem;}
 
 /* img {padding-top: 60px;} */
 #endsection {padding-bottom: 100px;}
