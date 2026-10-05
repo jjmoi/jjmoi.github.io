@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>BLUEBERRY SKIES</title>
+<title>SKY</title>
 <style>
 :root{font-family:Helvetica,Arial,sans-serif;font-optical-sizing:auto;font-weight:600;color:#000;background:#fff}
 *{box-sizing:border-box}html,body{margin:0;height:100%;background:#fff;color:#000}body{overflow:hidden;text-transform:uppercase}
@@ -21,7 +21,7 @@ button,input{font:inherit;text-transform:uppercase;color:#000}button{background:
 <body>
 <div class="app">
   <aside class="panel" id="panel">
-    <div class="brand">BLUEBERRY SKIES</div>
+    <div class="brand">SKY</div>
     <section class="section">
       <div class="control slider"><input id="distortion" type="range" min="0" max="400" value="58"><span class="thumb-label" data-for="distortion">DISTORT</span></div>
       <div class="control slider"><input id="blur" type="range" min="0" max="480" value="48"><span class="thumb-label" data-for="blur">BLUR</span></div>
@@ -338,7 +338,7 @@ function savePNG(){
   out.toBlob(blob=>{
     if(!blob)return;
     const url=URL.createObjectURL(blob),a=document.createElement('a');
-    a.download='blueberry-skies.png';a.href=url;a.click();
+    a.download='sky.png';a.href=url;a.click();
     setTimeout(()=>URL.revokeObjectURL(url),1000);
   },'image/png');
 }

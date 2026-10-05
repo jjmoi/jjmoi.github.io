@@ -1,29 +1,13 @@
-CG GENERATOR SUITE
 
-Eight independent, self contained browser tools. No build step and no external dependencies. Open any HTML file directly in a modern browser.
+blueberry skies
+A generative tool for creating animated gradient backgrounds and atmospheric color fields, shaped through controls for distortion, blur, density, noise, speed, and color.
 
-01 album-art-generator.html
-Image or procedural artwork, typography, metadata, layout rules, texture, PNG export.
+cell field
+CELL FIELD is a generative motion graphics tool for creating living, microscope inspired compositions. Adjust field and biology controls to shape density, drift, focus, membrane, adhesion, cytoplasmic flow, pulsation, and mitosis, then combine them with distinct rendering modes and color palettes. Use it to generate abstract cellular visuals for motion backgrounds, title sequences, album artwork, installations, brand graphics, and experimental image making.
 
-02 loop-generator.html
-Kinetic typography and procedural form loops, live preview, frame PNG export, WebM recording.
+diaounce
+A generative diagramming tool for designers, engineers, and technical teams creating system maps, architectures, networks, and flows. Adjust structure, density, hierarchy, connections, node forms, labels, and visual style to quickly explore and generate clear system diagrams.
 
-03 fruit-sticker-generator.html
-Procedural fruit surfaces with curved sticker placement, label typography, surface position and rotation controls.
+pixies
+A generative pixel playground for creating bitmap compositions through dithering, shape, color, motion, and controlled randomness.
 
-04 background-generator.html
-Distorted multi color gradient fields with field, fold, bloom, and band systems.
-
-05 topographic-generator.html
-Procedural terrain, crater, ridge, and flow fields rendered as contour maps.
-
-06 letterform-generator.html
-Abstract compositions derived from one glyph using fragment, repeat, orbit, slice, and monolith systems.
-
-07 type-composition-generator.html
-Oversized, cropped, repeated, stretched, vertical, stacked, and grid based typography.
-
-08 shape-grammar-generator.html
-Families of related geometric forms generated from recursive, radial, chain, stack, and fold grammars.
-
-Shared UI: Helvetica, 600 weight, uppercase labels, white controls, black type, thin separators, borderless sliders and color inputs.
