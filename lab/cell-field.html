@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Cell Field</title>
+<style>
+  :root{
+    color-scheme:dark;
+    --ink:#f3f1eb;
+    --muted:rgba(243,241,235,.58);
+    --line:rgba(243,241,235,.15);
+    --panel:rgba(9,9,12,.76);
+    --panel-strong:rgba(9,9,12,.88);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#08080a;color:var(--ink);font-family:Helvetica,Arial,sans-serif}
+  canvas{position:fixed;inset:0;width:100%;height:100%;display:block;background:#08080a}
+  .chrome{position:fixed;inset:0;pointer-events:none;transition:opacity .18s ease}
+  .chrome.hidden{opacity:0;pointer-events:none}
+  .panel{
+    pointer-events:auto;position:absolute;left:22px;top:22px;bottom:22px;width:min(360px,calc(100vw - 44px));
+    padding:16px 16px 15px;border:1px solid var(--line);border-radius:18px;
+    background:linear-gradient(180deg,var(--panel-strong),var(--panel));
+    box-shadow:0 18px 56px rgba(0,0,0,.24);display:flex;flex-direction:column;overflow:auto;scrollbar-width:none;contain:layout paint
+  }
+  .panel::-webkit-scrollbar{display:none}
+  .eyebrow{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:13px}
+  .title{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+  .status{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .group{border-top:1px solid var(--line);padding-top:20px;margin-top:20px}
+  .group-title{font-size:9px;line-height:1;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+  .control{display:grid;grid-template-columns:72px 1fr 38px;gap:10px;align-items:center;margin:8px 0}
+  .control label,.value{font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+  .value{text-align:right;color:var(--muted);font-variant-numeric:tabular-nums}
+  input[type=range]{appearance:none;width:100%;height:16px;background:transparent;margin:0;padding:0;cursor:pointer}
+  input[type=range]::-webkit-slider-runnable-track{height:1px;background:rgba(243,241,235,.28)}
+  input[type=range]::-moz-range-track{height:1px;background:rgba(243,241,235,.28)}
+  input[type=range]::-webkit-slider-thumb{appearance:none;width:10px;height:10px;border-radius:50%;background:var(--ink);margin-top:-4.5px;border:0}
+  input[type=range]::-moz-range-thumb{width:10px;height:10px;border-radius:50%;background:var(--ink);border:0}
+  .segmented{display:grid;gap:6px}
+  .segmented.modes{grid-template-columns:repeat(4,1fr)}
+  .segmented.palettes{grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+  button{
+    appearance:none;border:1px solid var(--line);background:rgba(255,255,255,.035);color:var(--ink);
+    font:600 9px/1 Helvetica,Arial,sans-serif;letter-spacing:.09em;text-transform:uppercase;
+    border-radius:999px;height:28px;padding:0 9px;cursor:pointer;transition:background .15s ease,border-color .15s ease,color .15s ease
+  }
+  button:hover{background:rgba(255,255,255,.09)}
+  .regen-button:hover{background:rgba(255,255,255,.30)}
+  button.active,.modes button.active,.palettes button.active{background:rgba(255,255,255,.30);color:var(--ink);border-color:var(--line)}
+  .palettes button{padding:0 3px;font-size:8px;letter-spacing:.05em}
+  .regen-zone{flex:1;min-height:84px;display:flex;align-items:center;justify-content:center;padding:22px 0}
+  .regen-button{min-width:132px;padding:0 18px}
+  .legend{position:sticky;bottom:-15px;margin-top:auto;padding-top:20px;padding-bottom:15px;border-top:1px solid var(--line);background:none;text-align:left;font-size:10px;line-height:1.55;letter-spacing:.07em;text-transform:uppercase;color:rgba(243,241,235,.55);}
+  .legend b{color:rgba(243,241,235,.92);font-weight:700}
+  .pause-pill{position:absolute;left:50%;bottom:18px;transform:translateX(-50%) translateY(12px);opacity:0;padding:7px 11px;border:1px solid var(--line);border-radius:999px;background:rgba(0,0,0,.62);font-size:9px;letter-spacing:.14em;text-transform:uppercase;transition:opacity .18s ease,transform .18s ease}
+  .pause-pill.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  @media(max-width:640px){.panel{left:12px;top:12px;bottom:12px;width:calc(100vw - 24px);overflow:auto}.legend{font-size:9px}}
+</style>
+</head>
+<body>
+<canvas id="gl"></canvas>
+<div class="chrome" id="chrome">
+  <section class="panel">
+    <div class="eyebrow"><div class="title">Cell Field</div><div class="status" id="status">live</div></div>
+
+    <div class="group" style="border-top:0;padding-top:0;margin-top:0">
+      <div class="group-title">Field</div>
+      <div class="control"><label for="speed">speed</label><input id="speed" type="range" min="0" max="1" step="0.001" value="0.24"><div class="value" id="speedv">24</div></div>
+      <div class="control"><label for="focus">focus</label><input id="focus" type="range" min="0" max="1" step="0.001" value="0.66"><div class="value" id="focusv">66</div></div>
+      <div class="control"><label for="depth">depth</label><input id="depth" type="range" min="0" max="1" step="0.001" value="0.68"><div class="value" id="depthv">68</div></div>
+      <div class="control"><label for="noise">noise</label><input id="noise" type="range" min="0" max="0.5" step="0.001" value="0.42"><div class="value" id="noisev">42</div></div>
+    </div>
+
+    <div class="group">
+      <div class="group-title">Specimen</div>
+      <div class="control"><label for="density">density</label><input id="density" type="range" min="0" max="1" step="0.001" value="0.72"><div class="value" id="densityv">72</div></div>
+      <div class="control"><label for="filaments">filaments</label><input id="filaments" type="range" min="0" max="0.5" step="0.001" value="0.34"><div class="value" id="filamentsv">34</div></div>
+      <div class="control"><label for="morphology">morphology</label><input id="morphology" type="range" min="0" max="1" step="0.001" value="0.44"><div class="value" id="morphologyv">44</div></div>
+      <div class="control"><label for="scale">scale</label><input id="scale" type="range" min="0" max="1" step="0.001" value="0.52"><div class="value" id="scalev">52</div></div>
+      <div class="control"><label for="packing">packing</label><input id="packing" type="range" min="0" max="1" step="0.001" value="0.62"><div class="value" id="packingv">62</div></div>
+    </div>
+
+    <div class="group">
+      <div class="group-title">Behavior</div>
+      <div class="control"><label for="adhesion">adhesion</label><input id="adhesion" type="range" min="0" max="1" step="0.001" value="0.48"><div class="value" id="adhesionv">48</div></div>
+      <div class="control"><label for="pulsation">pulsation</label><input id="pulsation" type="range" min="0" max="1" step="0.001" value="0.16"><div class="value" id="pulsationv">16</div></div>
+      <div class="control"><label for="mitosis">mitosis</label><input id="mitosis" type="range" min="0" max="1" step="0.001" value="0.22"><div class="value" id="mitosisv">22</div></div>
+    </div>
+
+    <div class="group">
+      <div class="group-title">Mode</div>
+      <div class="segmented modes" id="modeButtons">
+        <button data-mode="0">soft</button><button data-mode="1">cream</button><button data-mode="2">bleed</button><button data-mode="4">phase</button>
+        <button data-mode="5">fluoro</button><button data-mode="8" class="active">scan</button><button data-mode="9">flat</button><button data-mode="10">false</button>
+      </div>
+    </div>
+
+    <div class="group">
+      <div class="group-title">Palette</div>
+      <div class="segmented palettes" id="paletteButtons">
+        <button data-palette="plumDusk" class="active">plum</button><button data-palette="iceGlass">ice</button><button data-palette="acidBloom">acid</button><button data-palette="viridianTide">coast</button>
+      </div>
+    </div>
+
+    <div class="regen-zone"><button class="regen-button" id="regenButton">Regenerate</button></div>
+    <div class="legend"><b>R</b> regen&nbsp;&nbsp;&nbsp;<b>Space</b> pause&nbsp;&nbsp;&nbsp;<b>H</b> hide UI&nbsp;&nbsp;&nbsp;<b>S</b> save PNG</div>
+  </section>
+  <div class="pause-pill" id="pausePill">Paused</div>
+</div>
+
+<script>
+(() => {
+  const canvas = document.getElementById('gl');
+  const gl = canvas.getContext('webgl', {
+    antialias:false,
+    preserveDrawingBuffer:false,
+    premultipliedAlpha:false,
+    powerPreference:'high-performance',
+    desynchronized:true
+  });
+  if(!gl){document.body.innerHTML='<div style="padding:24px;font:14px Helvetica;color:white">WebGL is required.</div>';return;}
+
+  const vert=`
+    attribute vec2 p;
+    void main(){gl_Position=vec4(p,0.0,1.0);}
+  `;
+
+  const frag=`
+    precision highp float;
+    uniform vec2 r;
+    uniform float t,density,focusAmt,pulsation,mitosis,adhesion;
+    uniform float filamentAmt,morphologyAmt,scaleAmt,packingAmt,depthAmt,noiseAmt,mode;
+    uniform vec3 c0,c1,c2,c3,c4;
+
+    float sat(float x){return clamp(x,0.0,1.0);}
+    float isMode(float id){return 1.0-step(.49,abs(mode-id));}
+    float hash21(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+45.32);return fract(p.x*p.y);}
+    float hash11(float p){return fract(sin(p*127.1)*43758.5453);}
+    vec2 rot(vec2 p,float a){float s=sin(a),c=cos(a);return mat2(c,-s,s,c)*p;}
+    float valueNoise(vec2 p){
+      vec2 i=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);
+      float a=hash21(i),b=hash21(i+vec2(1.0,0.0)),c=hash21(i+vec2(0.0,1.0)),d=hash21(i+vec2(1.0,1.0));
+      return mix(mix(a,b,f.x),mix(c,d,f.x),f.y);
+    }
+    float fastFbm(vec2 p){
+      float v=valueNoise(p)*.68;
+      p=rot(p*2.03,.57);
+      v+=valueNoise(p)*.32;
+      return v;
+    }
+    float ellipse(vec2 p,vec2 c,vec2 rad,float a){vec2 q=rot(p-c,a)/rad;return length(q)-1.0;}
+    float softFill(float d,float e){return 1.0-smoothstep(-e,e,d);}
+    float softEdge(float d,float e,float thick){return 1.0-smoothstep(thick,thick+e,abs(d));}
+    vec3 blendScreen(vec3 a,vec3 b){return 1.0-(1.0-a)*(1.0-b);}
+
+    float organicCell(vec2 p,vec2 c,vec2 rad,float a,float phase,float life){
+      vec2 q=rot(p-c,a)/rad;
+      float ang=atan(q.y,q.x),rr=length(q),morph=morphologyAmt;
+      float lobes=(sin(ang*3.0+phase)*.065+sin(ang*5.0-phase*.73)*.045+sin(ang*8.0+phase*.41)*.024)*(0.35+morph*.95);
+      float asym=(.045*sin(ang+phase*.37)+.028*cos(ang*2.0-phase*.21))*(0.35+morph*1.15);
+      float micro=(valueNoise(q*(4.2+noiseAmt*5.0)+phase*1.7)-.5)*noiseAmt*(.040+.035*morph);
+      float pulse=(.004+pulsation*.050)*sin(life*(.58+pulsation*.95)+phase);
+      float rod=abs(q.y)*.10*morph+max(abs(q.x)-.70,0.0)*.12*morph;
+      return rr+rod-(1.0+lobes+asym+micro+pulse);
+    }
+
+    float filamentField(vec2 p,float time){
+      float f=0.0;
+      float y1=p.y-.35*sin(p.x*2.2+time*.07)-.10*sin(p.x*7.0-time*.05);
+      f+=1.0-smoothstep(.008,.030+filamentAmt*.025,abs(y1+.20));
+      float y2=p.y+.27*sin(p.x*2.8-time*.06)+.08*sin(p.x*8.0+time*.03);
+      f+=1.0-smoothstep(.008,.026+filamentAmt*.023,abs(y2-.34));
+      vec2 a=rot(p-vec2(.34,-.08),.72);
+      float y3=a.y-.18*sin(a.x*4.2+time*.08)-.05*sin(a.x*11.0);
+      f+=1.0-smoothstep(.007,.021+filamentAmt*.020,abs(y3));
+      return sat(f)*filamentAmt;
+    }
+
+    vec3 textureCell(vec3 base,vec2 q,float mask,float seed,float rough){
+      float coarse=valueNoise(q*(4.0+rough*8.0)+seed*13.0);
+      float fine=hash21(floor(q*(34.0+rough*46.0)+seed*29.0));
+      float pits=smoothstep(.74,.98,fine)*rough;
+      vec3 hi=mix(base,c4,.20+.18*coarse);
+      vec3 lo=mix(base,c0,.30);
+      vec3 tex=mix(lo,hi,sat(.20+coarse*.86));
+      tex*=1.0-pits*.30;
+      return mix(base,tex,mask*(.20+rough*.70));
+    }
+
+    vec3 sampleScene(vec2 p,float time){
+      float mCream=isMode(1.0),mBleed=isMode(2.0),mPhase=isMode(4.0),mFluoro=isMode(5.0);
+      float mScan=isMode(8.0),mFlat=isMode(9.0),mFalse=isMode(10.0);
+      float microscope=max(mScan,max(mFlat,mFalse));
+
+      float driftAmp=.173;
+      vec2 q=p+vec2(sin(time*.11)*.04+sin(time*.043)*driftAmp*.14,cos(time*.09)*.03+cos(time*.037)*driftAmp*.11);
+      float softness=1.0-focusAmt;
+      float blurBase=.012+softness*.105;
+      float pack=packingAmt;
+      float scaleSpread=.68+scaleAmt*.78;
+
+      float substrate=valueNoise(q*(2.2+noiseAmt*2.2)+vec2(4.7,1.9));
+      vec3 col=mix(c0,mix(c0,c1,.42),substrate*(.18+.34*noiseAmt));
+
+      float offset=mix(1.0,.58,pack);
+      vec2 A0=vec2(.48,.12)*offset+vec2(sin(time*.082),cos(time*.067))*driftAmp*vec2(.72,.52);
+      vec2 B0=vec2(-.62,-.28)*offset+vec2(cos(time*.071),sin(time*.061))*driftAmp*vec2(.66,.58);
+      vec2 C0=vec2(.02,.82)*offset+vec2(sin(time*.053),cos(time*.049))*driftAmp*.40;
+      vec2 D0=vec2(.66,-.58)*offset+vec2(cos(time*.047),sin(time*.055))*driftAmp*.48;
+      vec2 E0=vec2(-.18,.12)*offset+vec2(sin(time*.064),cos(time*.058))*driftAmp*.28;
+
+      vec2 A=mix(A0,vec2(.16,.05),adhesion*.35);
+      vec2 B=mix(B0,vec2(-.22,-.05),adhesion*.40);
+      vec2 C=mix(C0,vec2(.03,.42),adhesion*.25);
+      vec2 D=mix(D0,vec2(.32,-.30),adhesion*.26);
+      vec2 E=mix(E0,vec2(-.05,.08),adhesion*.42);
+
+      vec2 rA=vec2(.55,.68)*scaleSpread;
+      vec2 rB=vec2(.68,.43)*mix(.82,1.08,scaleAmt);
+      vec2 rC=vec2(.31,.63)*mix(.74,1.02,scaleAmt);
+      vec2 rD=vec2(.34,.28)*mix(.62,1.15,scaleAmt);
+      vec2 rE=vec2(.20,.16)*mix(.48,1.08,scaleAmt);
+
+      float dA=organicCell(q,A,rA,-.40,time*.23,time);
+      float dB=organicCell(q,B,rB,.28,time*.19+2.1,time*1.12);
+      float dC=organicCell(q,C,rC,-.08,time*.15+3.0,time*.74);
+      float dD=organicCell(q,D,rD,.52,time*.21+1.2,time*.93);
+      float dE=organicCell(q,E,rE,-.20,time*.33+6.2,time*.9);
+      float mA=softFill(dA,blurBase),mB=softFill(dB,blurBase),mC=softFill(dC,blurBase),mD=softFill(dD,blurBase),mE=softFill(dE,blurBase);
+
+      // Density is population density: cells enter the field as density rises.
+      float aA=1.0;
+      float aB=smoothstep(.08,.18,density);
+      float aC=smoothstep(.22,.34,density);
+      float aD=smoothstep(.38,.52,density);
+      float aE=smoothstep(.54,.68,density);
+      mA*=aA;mB*=aB;mC*=aC;mD*=aD;mE*=aE;
+
+      vec3 colA=textureCell(mix(c1,c2,sat(.36+q.y*.44)),q-A,mA,1.2,noiseAmt);
+      vec3 colB=textureCell(mix(c4,c2,sat(.34+q.x*.48)),q-B,mB,2.8,noiseAmt);
+      vec3 colC=textureCell(mix(c1,c3,.46),q-C,mC,4.1,noiseAmt);
+      vec3 colD=textureCell(mix(c2,c4,.52),q-D,mD,6.4,noiseAmt);
+      vec3 colE=textureCell(mix(c3,c1,.46),q-E,mE,8.7,noiseAmt);
+
+      float shadeA=sat(.48+(q.x-A.x)*.40-(q.y-A.y)*.30);
+      float shadeB=sat(.55+(q.x-B.x)*.32-(q.y-B.y)*.28);
+      colA*=mix(.86,1.18,shadeA*depthAmt);colB*=mix(.84,1.16,shadeB*depthAmt);colC*=mix(.88,1.14,sat(.5+(q.x-C.x)*.35)*depthAmt);
+
+      col=mix(col,colA,mA*.78);
+      col=mix(col,colB,mB*.75);
+      col=mix(col,colC,mC*.52);
+      col=mix(col,colD,mD*.44);
+      col=mix(col,colE,mE*.35);
+
+      float smallMask=0.0;
+      for(int i=0;i<7;i++){
+        float fi=float(i),ang=fi*2.399+1.2,rr=.18+.78*hash11(fi+2.0);
+        vec2 cp=vec2(cos(ang),sin(ang))*rr*mix(1.10,.62,pack)+vec2(.05,-.02);
+        float rad=mix(.045,.125,hash11(fi+9.0))*mix(.65,1.35,scaleAmt);
+        float threshold=.18+fi*.115;
+        float alive=smoothstep(threshold-.025,threshold+.025,density);
+        float ms=softFill(length(q-cp)-rad,blurBase*.68)*alive;
+        smallMask=max(smallMask,ms);
+        vec3 sc=mix(c2,c3,hash11(fi+19.0));
+        float speck=hash21(floor((q-cp)*(26.0+noiseAmt*34.0)+fi*7.0));
+        sc*=.88+.20*speck*noiseAmt;
+        col=mix(col,sc,ms*(.13+pack*.13));
+      }
+
+      vec2 nA=A+vec2(-.07,.06),nB=B+vec2(.13,-.02);
+      float nAms=softFill(ellipse(q,nA,rA*.25,.35),blurBase*.72);
+      float nBms=softFill(ellipse(q,nB,rB*.24,-.28),blurBase*.72);
+      col=mix(col,mix(c3,c4,.42),nAms*mA*.14);col=mix(col,mix(c1,c3,.55),nBms*mB*.12);
+
+      float split=smoothstep(.08,.92,mitosis);vec2 bud=B+vec2(mix(.24,.52,split),mix(.08,.20,split));
+      float dBud=organicCell(q,bud,mix(vec2(.11,.10),vec2(.24,.20),split)*scaleSpread,.18,time*.29+5.2,time*1.22);
+      float mBud=softFill(dBud,blurBase*.9)*aB;col=mix(col,mix(c2,c4,.44),mBud*(.06+.34*mitosis));
+
+      vec2 bridgeCenter=mix(A,B,.50),ab=B-A;float bridgeAngle=atan(ab.y,ab.x);
+      float bridge=softFill(ellipse(q,bridgeCenter,vec2(length(ab)*.43,.07+.10*adhesion),bridgeAngle),blurBase*.72);
+      col=mix(col,mix(c2,c4,.36),bridge*adhesion*sat(mA+mB)*.13);
+
+      float fil=filamentField(q,time);
+      float filTex=.70+.30*valueNoise(q*18.0+time*.02);
+      col=mix(col,mix(c2,c4,.42)*filTex,fil*(.10+.58*filamentAmt));
+
+      float cellMask=sat(mA*.86+mB*.82+mC*.65+mD*.58+mE*.45+mBud*.40+smallMask*.36);
+      float nucleusMask=sat(nAms*.90+nBms*.75);
+      float edgeA=softEdge(dA,.006+.011*softness,.010),edgeB=softEdge(dB,.006+.011*softness,.010),edgeC=softEdge(dC,.007+.012*softness,.009),edgeD=softEdge(dD,.006+.011*softness,.008);
+      float cellEdge=sat(edgeA+edgeB+edgeC*.7+edgeD*.55);
+
+      if(mCream>.5)col=mix(col,mix(col,vec3(.96,.92,.83),.16),.32);
+      if(mBleed>.5){float stain=softFill(dD,blurBase*1.8);col=mix(col,c4,stain*.24);}
+      if(mPhase>.5){float lum=dot(col,vec3(.299,.587,.114));vec3 base=mix(vec3(.80,.82,.77),vec3(.94,.95,.90),sat(.58+q.y*.14));vec3 pc=mix(vec3(.18,.22,.21),vec3(.62,.67,.60),lum);col=mix(base,pc,cellMask*.64);col-=nucleusMask*vec3(.08);}
+      if(mFluoro>.5){vec3 glow=blendScreen(c1*1.10,c2*1.30);glow=blendScreen(glow,c3*(.48+.52*nucleusMask));col=mix(c0*.05,glow,cellMask*.80);col+=nucleusMask*mix(c3,c4,.55)*.58;}
+
+      if(mScan>.5){
+        float rough=fastFbm(q*(10.0+noiseAmt*16.0));
+        float micro=hash21(floor(q*(54.0+noiseAmt*72.0)));
+        float relief=sat(.18+rough*.92+micro*.13);
+        vec3 scanBase=mix(c1,c2,.34),scanLit=mix(scanBase*.22,mix(scanBase,c4,.32),relief);
+        float shadow=sat(.28+depthAmt*.72*(.48-q.y*.18+q.x*.10));scanLit*=mix(.70,1.28,shadow);
+        col=mix(c0*.035,scanLit,cellMask*.94);col=mix(col,mix(c3,c4,.26),fil*.72);col+=cellEdge*mix(c2,c4,.48)*(.02+.06*noiseAmt);
+      }
+
+      if(mFlat>.5){
+        float interior=valueNoise(q*(16.0+noiseAmt*16.0));
+        vec3 paper=mix(vec3(.82,.81,.75),vec3(.94,.94,.90),.64+.18*valueNoise(q*3.0));
+        vec3 body=mix(vec3(.30,.34,.35),vec3(.55,.59,.58),interior);
+        col=mix(paper,body,cellMask*.48);col-=cellEdge*vec3(.22,.24,.24)*.35;col-=nucleusMask*vec3(.08,.09,.10)*.40;col=mix(col,vec3(.22,.27,.30),fil*.14);
+      }
+
+      if(mFalse>.5){
+        vec3 bg=mix(c0*.20,mix(c0,c1,.22),substrate*.38),fc=bg;
+        fc=mix(fc,c1,mA*.90);fc=mix(fc,c2,mB*.88);fc=mix(fc,c3,mC*.82);fc=mix(fc,c4,mD*.80);fc=mix(fc,mix(c2,c4,.50),smallMask*.72);
+        fc+=(valueNoise(q*(14.0+noiseAmt*18.0))-.5)*noiseAmt*.30*cellMask;fc=mix(fc,mix(c3,c4,.62),fil*.74);col=fc;
+      }
+
+      col*=1.0+(valueNoise(q*3.4+vec2(8.0,2.0))-.5)*depthAmt*.16*(1.0-mFlat*.65);
+      return col;
+    }
+
+    void main(){
+      vec2 uv=gl_FragCoord.xy/r.xy;
+      vec2 p=(gl_FragCoord.xy*2.0-r.xy)/r.y;
+      vec3 col=sampleScene(p,t);
+
+      float grain=hash21(gl_FragCoord.xy+floor(t*12.0));
+      float grain2=hash21(floor(gl_FragCoord.xy*.41)+floor(t*3.0));
+      float microscopy=max(isMode(8.0),max(isMode(9.0),isMode(10.0)));
+      float g=noiseAmt*.052*(1.0+microscopy*.68);
+      col+=(grain-.5)*g;col+=(grain2-.5)*noiseAmt*.018;
+      float speck=smoothstep(.94,.998,hash21(floor(gl_FragCoord.xy*(.18+.16*noiseAmt))+17.0));
+      col+=speck*noiseAmt*.042*(1.0-isMode(9.0)*.30);
+
+      float vig=1.0-smoothstep(.08,1.28,length(p*.74));
+      float darkField=max(isMode(5.0),isMode(8.0));
+      col*=mix(.91+.09*vig,.78+.22*vig,darkField);
+      col+=.010*(1.0-vig)*c4*(1.0-darkField*.78);
+      float gamma=.94;gamma=mix(gamma,.84,isMode(5.0));gamma=mix(gamma,.88,isMode(8.0));gamma=mix(gamma,1.08,isMode(9.0));
+      col=pow(max(col,0.0),vec3(gamma));
+      gl_FragColor=vec4(clamp(col,0.0,1.0),1.0);
+    }
+  `;
+
+  function compile(type,src){
+    const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);
+    if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(s));return s;
+  }
+  const program=gl.createProgram();
+  gl.attachShader(program,compile(gl.VERTEX_SHADER,vert));gl.attachShader(program,compile(gl.FRAGMENT_SHADER,frag));
+  gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw new Error(gl.getProgramInfoLog(program));gl.useProgram(program);
+
+  const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
+  const pos=gl.getAttribLocation(program,'p');gl.enableVertexAttribArray(pos);gl.vertexAttribPointer(pos,2,gl.FLOAT,false,0,0);
+  const U=n=>gl.getUniformLocation(program,n);
+  const uni={r:U('r'),t:U('t'),density:U('density'),focusAmt:U('focusAmt'),pulsation:U('pulsation'),mitosis:U('mitosis'),adhesion:U('adhesion'),filamentAmt:U('filamentAmt'),morphologyAmt:U('morphologyAmt'),scaleAmt:U('scaleAmt'),packingAmt:U('packingAmt'),depthAmt:U('depthAmt'),noiseAmt:U('noiseAmt'),mode:U('mode'),c0:U('c0'),c1:U('c1'),c2:U('c2'),c3:U('c3'),c4:U('c4')};
+
+  const palettes={
+    plumDusk:[[.075,.055,.090],[.435,.170,.405],[.875,.355,.620],[.515,.555,.900],[.985,.705,.555]],
+    iceGlass:[[.045,.070,.085],[.160,.430,.505],[.560,.905,.925],[.750,.760,1.000],[.955,.985,.970]],
+    acidBloom:[[.055,.060,.040],[.515,.900,.105],[.955,.890,.120],[.995,.275,.420],[.490,.220,.900]],
+    viridianTide:[[.018,.055,.060],[.030,.300,.250],[.110,.720,.610],[.095,.430,.760],[.665,.965,.845]]
+  };
+
+  const state={density:.72,focus:.66,speed:.24,adhesion:.48,pulsation:.16,mitosis:.22,filaments:.34,morphology:.44,scale:.52,packing:.62,depth:.68,noise:.42,mode:8,palette:'plumDusk'};
+  const controls=['density','speed','focus','adhesion','pulsation','mitosis','filaments','morphology','scale','packing','depth','noise'];
+  const controlEls={};
+  let uniformsDirty=true,paletteDirty=true,resolutionDirty=true;
+  let paused=false,hidden=false,elapsed=0,last=performance.now(),raf=0;
+
+  function requestFrame(){if(!raf&&!document.hidden)raf=requestAnimationFrame(render);}
+
+  controls.forEach(id=>{
+    const el=document.getElementById(id),val=document.getElementById(id+'v');controlEls[id]={el,val};
+    el.addEventListener('input',e=>{state[id]=parseFloat(e.target.value);val.textContent=Math.round(state[id]*100);uniformsDirty=true;requestFrame();},{passive:true});
+  });
+
+  const modeButtons=[...document.querySelectorAll('[data-mode]')];
+  const paletteButtons=[...document.querySelectorAll('[data-palette]')];
+  modeButtons.forEach(btn=>btn.addEventListener('click',()=>{state.mode=Number(btn.dataset.mode);modeButtons.forEach(b=>b.classList.toggle('active',b===btn));uniformsDirty=true;requestFrame();}));
+  paletteButtons.forEach(btn=>btn.addEventListener('click',()=>{state.palette=btn.dataset.palette;paletteButtons.forEach(b=>b.classList.toggle('active',b===btn));paletteDirty=true;requestFrame();}));
+  document.getElementById('regenButton').addEventListener('click',regenerate);
+
+  const MAX_PIXELS=2400000,MAX_DPR=1.5;
+  function resize(){
+    const cssW=Math.max(1,innerWidth),cssH=Math.max(1,innerHeight),rawDpr=Math.min(window.devicePixelRatio||1,MAX_DPR);
+    const budgetDpr=Math.sqrt(MAX_PIXELS/(cssW*cssH));
+    const dpr=Math.max(.5,Math.min(rawDpr,budgetDpr));
+    const w=Math.max(1,Math.floor(cssW*dpr)),h=Math.max(1,Math.floor(cssH*dpr));
+    if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;gl.viewport(0,0,w,h);resolutionDirty=true;requestFrame();}
+  }
+  addEventListener('resize',resize,{passive:true});resize();
+
+  function syncUniforms(){
+    if(resolutionDirty){gl.uniform2f(uni.r,canvas.width,canvas.height);resolutionDirty=false;}
+    if(uniformsDirty){
+      gl.uniform1f(uni.density,state.density);gl.uniform1f(uni.focusAmt,state.focus);
+      gl.uniform1f(uni.pulsation,state.pulsation);gl.uniform1f(uni.mitosis,state.mitosis);
+      gl.uniform1f(uni.adhesion,state.adhesion);gl.uniform1f(uni.filamentAmt,state.filaments);gl.uniform1f(uni.morphologyAmt,state.morphology);
+      gl.uniform1f(uni.scaleAmt,state.scale);gl.uniform1f(uni.packingAmt,state.packing);gl.uniform1f(uni.depthAmt,state.depth);gl.uniform1f(uni.noiseAmt,state.noise);gl.uniform1f(uni.mode,state.mode);
+      uniformsDirty=false;
+    }
+    if(paletteDirty){const pal=palettes[state.palette];gl.uniform3fv(uni.c0,pal[0]);gl.uniform3fv(uni.c1,pal[1]);gl.uniform3fv(uni.c2,pal[2]);gl.uniform3fv(uni.c3,pal[3]);gl.uniform3fv(uni.c4,pal[4]);paletteDirty=false;}
+  }
+
+  function drawFrame(){syncUniforms();gl.uniform1f(uni.t,elapsed);gl.drawArrays(gl.TRIANGLES,0,6);}
+
+  function render(now){
+    raf=0;
+    const dt=Math.min((now-last)/1000,.05);last=now;
+    if(!paused)elapsed+=dt*(.05+state.speed*1.84);
+    drawFrame();
+    if(!paused)requestFrame();
+  }
+
+  function savePNG(){
+    drawFrame();gl.finish();
+    const w=canvas.width,h=canvas.height,pixels=new Uint8Array(w*h*4);gl.readPixels(0,0,w,h,gl.RGBA,gl.UNSIGNED_BYTE,pixels);
+    const flipped=new Uint8ClampedArray(pixels.length),row=w*4;
+    for(let y=0;y<h;y++)flipped.set(pixels.subarray(y*row,(y+1)*row),(h-1-y)*row);
+    const out=document.createElement('canvas');out.width=w;out.height=h;const ctx=out.getContext('2d');ctx.putImageData(new ImageData(flipped,w,h),0,0);
+    out.toBlob(blob=>{if(!blob)return;const url=URL.createObjectURL(blob),a=document.createElement('a');a.download=`cell-field-${state.palette}.png`;a.href=url;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);},'image/png');
+  }
+
+  function regenerate(){
+    const ranges={density:[.08,.98],speed:[.05,.68],focus:[.30,.92],adhesion:[.02,.94],pulsation:[.01,.64],mitosis:[0,.80],filaments:[0,.46],morphology:[.08,.96],scale:[.04,.96],packing:[.08,.98],depth:[.10,.98],noise:[.06,.46]};
+    controls.forEach(id=>{const [min,max]=ranges[id],v=min+Math.random()*(max-min);state[id]=v;controlEls[id].el.value=v;controlEls[id].val.textContent=Math.round(v*100);});
+    const modes=[0,1,2,4,5,8,9,10];state.mode=modes[Math.floor(Math.random()*modes.length)];modeButtons.forEach(b=>b.classList.toggle('active',Number(b.dataset.mode)===state.mode));
+    const names=Object.keys(palettes);state.palette=names[Math.floor(Math.random()*names.length)];paletteButtons.forEach(b=>b.classList.toggle('active',b.dataset.palette===state.palette));
+    elapsed=Math.random()*80.0;uniformsDirty=true;paletteDirty=true;requestFrame();
+  }
+
+  addEventListener('keydown',e=>{
+    if(e.code==='Space'){
+      e.preventDefault();paused=!paused;document.getElementById('status').textContent=paused?'paused':'live';document.getElementById('pausePill').classList.toggle('show',paused);last=performance.now();requestFrame();
+    }else if(e.key.toLowerCase()==='r'){e.preventDefault();regenerate();}
+    else if(e.key.toLowerCase()==='h'){hidden=!hidden;document.getElementById('chrome').classList.toggle('hidden',hidden);}
+    else if(e.key.toLowerCase()==='s'){e.preventDefault();savePNG();}
+  });
+
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden){if(raf)cancelAnimationFrame(raf);raf=0;}
+    else{last=performance.now();requestFrame();}
+  });
+
+  requestFrame();
+})();
+</script>
+</body>
+</html>

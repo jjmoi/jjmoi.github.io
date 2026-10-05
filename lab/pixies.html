@@ -1,0 +1,1202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Pixies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..125,200..900&display=swap" rel="stylesheet">
+<style>
+/* ── Tokens ─────────────────────────────────────────────── */
+:root{
+  --mist:#eceef1;          /* stage */
+  --mist-hi:#f7f8fa;       /* light pooling behind the print */
+  --surface:#ffffff;
+  --text:#1d1e22;
+  --text-2:#686b73;
+  --track:#f2f3f5;
+  --track-hover:#edeef1;
+  --fill:#e1e3e8;
+  --fill-hover:#d9dce2;
+  --fill-active:#cfd3da;
+  --hair:rgba(29,30,34,.075);
+  --hair-2:rgba(29,30,34,.14);
+  --accent:#15ef74;        /* follows the palette's accent */
+  --paper:#efede7;         /* follows the palette's paper */
+
+  --shadow-card:0 1px 1px rgba(23,25,31,.03),0 3px 8px -3px rgba(23,25,31,.06),0 22px 44px -22px rgba(23,25,31,.16);
+  --shadow-lift:0 1px 2px rgba(23,25,31,.08),0 3px 10px -3px rgba(23,25,31,.12);
+
+  --r-card:26px;
+  --r-ctl:12px;
+  --r-tile:15px;
+  --inspector:368px;
+  --gutter:36px;
+  --ease:cubic-bezier(.22,.8,.24,1);
+  --font:"Mona Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+}
+
+/* ── Base ───────────────────────────────────────────────── */
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden}
+body{
+  font-family:var(--font);font-stretch:104%;font-weight:430;font-size:13px;line-height:1.4;
+  color:var(--text);background:var(--mist);
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;
+}
+button,input,output{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--text);outline-offset:2px}
+
+/* ── Layout ─────────────────────────────────────────────── */
+.app{
+  display:grid;grid-template-columns:minmax(0,1fr) var(--inspector);
+  height:100vh;height:100dvh;
+  background:
+    radial-gradient(ellipse 62% 74% at calc((100% - var(--inspector)) / 2) 44%,var(--mist-hi) 0%,rgba(247,248,250,0) 72%),
+    var(--mist);
+}
+
+/* ── Stage ──────────────────────────────────────────────── */
+.stage{
+  position:relative;min-width:0;min-height:0;
+  display:grid;grid-template-rows:auto minmax(0,1fr) auto;
+  padding:28px 12px 26px var(--gutter);
+}
+.brand h1{
+  margin:0;font-size:23px;line-height:1.2;font-weight:380;font-stretch:118%;letter-spacing:-.014em;
+}
+.brand p{margin:4px 0 0;font-size:13px;line-height:1.45;color:var(--text-2);text-wrap:pretty}
+
+.art-area{
+  position:relative;min-height:0;container-type:size;
+  display:grid;place-items:center;
+  padding:22px 76px 4px;
+}
+.figure{margin:0;width:min(100cqw,calc(100cqh - 70px),980px)}
+/* The print is a card: click it and it turns over in 3D. Its back face is the
+   same sheet seen from behind, so the pattern reads mirrored. */
+.flip{
+  position:relative;aspect-ratio:1;perspective:2200px;border-radius:14px;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;transition:translate .35s var(--ease);
+}
+.flip:hover{translate:0 -2px}
+.flip:focus-visible{outline-offset:5px}
+/* Ambient shadow on the surface below: a soft solid blob (not a box-shadow, which
+   would show a hollow outline once the card narrows mid-turn). It narrows with the card. */
+.shadow{
+  position:absolute;left:8%;right:8%;top:16%;bottom:-1.5%;border-radius:48px;
+  background:rgba(23,25,31,.30);filter:blur(34px);opacity:.92;
+  transition:opacity .35s var(--ease),translate .35s var(--ease);
+}
+.flip:hover .shadow{opacity:1;translate:0 5px}
+.print{
+  position:absolute;inset:0;border-radius:14px;overflow:hidden;background:var(--paper);
+  box-shadow:0 1px 2px rgba(23,25,31,.07),0 12px 24px -12px rgba(23,25,31,.2);
+  backface-visibility:visible;will-change:transform;
+}
+.print canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+#fx{pointer-events:none}
+
+.caption{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  margin-top:18px;min-height:44px;
+}
+.cap-title{font-size:13.5px;font-weight:560;letter-spacing:-.003em}
+.side-tag{
+  display:inline-block;margin-left:9px;padding:0 8px;border-radius:999px;vertical-align:1px;
+  font-size:11px;font-weight:520;line-height:19px;color:var(--text-2);
+  background:rgba(255,255,255,.75);box-shadow:inset 0 0 0 1px var(--hair-2);
+  opacity:0;translate:0 3px;transition:opacity .3s var(--ease),translate .3s var(--ease);
+}
+.is-back .side-tag{opacity:1;translate:0 0}
+.cap-meta{margin-top:2px;font-size:12.5px;color:var(--text-2);text-wrap:pretty}
+
+/* palette chips — a printer's color bar under the print */
+.swatches{display:flex;gap:7px;flex:none}
+.swatch{
+  position:relative;width:30px;height:30px;border-radius:10px;background:var(--c);
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.09),0 1px 2px rgba(23,25,31,.08);
+  transition:transform .22s var(--ease),box-shadow .22s var(--ease);
+}
+.swatch:hover{transform:translateY(-2px);box-shadow:inset 0 0 0 1px rgba(0,0,0,.09),var(--shadow-lift)}
+.swatch input{
+  position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0;border:0;opacity:0;cursor:pointer;
+}
+.swatch:has(input:focus-visible){outline:2px solid var(--text);outline-offset:3px}
+
+/* variation strip */
+.history{
+  position:absolute;left:0;top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;gap:10px;
+  max-height:calc(100% - 24px);overflow-y:auto;overflow-x:hidden;
+  padding:4px;margin:-4px;scrollbar-width:none;
+}
+.history::-webkit-scrollbar{display:none}
+.history[hidden]{display:none}
+.thumb{
+  flex:none;width:46px;height:46px;padding:0;border:0;border-radius:11px;overflow:hidden;background:var(--paper);
+  box-shadow:0 0 0 1px var(--hair),0 1px 2px rgba(23,25,31,.06);
+  opacity:.72;transition:opacity .2s,transform .22s var(--ease),box-shadow .22s var(--ease);
+  animation:thumb-in .34s var(--ease) backwards;
+}
+.thumb canvas{display:block;width:100%;height:100%}
+.thumb:hover{opacity:1;transform:translateY(-1px)}
+.thumb[aria-current="true"]{opacity:1;box-shadow:0 0 0 2px var(--mist),0 0 0 3.5px var(--text)}
+@keyframes thumb-in{from{opacity:0;transform:scale(.6)}}
+
+/* ── Dock ───────────────────────────────────────────────── */
+.dock-row{display:flex;justify-content:center;padding-top:20px}
+.dock{
+  display:flex;gap:2px;padding:6px;border-radius:999px;
+  background:rgba(255,255,255,.8);
+  -webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);
+  box-shadow:var(--shadow-card),inset 0 0 0 1px rgba(255,255,255,.7);
+}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 17px 0 15px;
+  border:0;border-radius:999px;background:transparent;
+  font-size:13.5px;font-weight:500;letter-spacing:-.002em;white-space:nowrap;
+  transition:background .18s,transform .14s var(--ease),box-shadow .18s;
+}
+.btn svg{width:17px;height:17px;flex:none}
+.btn:hover{background:rgba(29,30,34,.055)}
+.btn:active{transform:scale(.965)}
+.btn.primary{
+  padding:0 20px 0 16px;color:#fff;background:var(--text);
+  box-shadow:0 1px 1px rgba(0,0,0,.22),0 8px 16px -8px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.14);
+}
+.btn.primary:hover{background:#2b2c32}
+.btn .done-icon{display:none}
+.btn.done .done-icon{display:block}
+.btn.done .idle-icon{display:none}
+
+/* play / pause toggles (dock button and the small one in the Animate section) */
+.pause-icon{display:none}
+[aria-pressed="true"] > .play-icon{display:none}
+[aria-pressed="true"] > .pause-icon{display:block}
+.btn.toggle{position:relative}
+.btn.toggle .live{
+  position:absolute;top:8px;left:28px;width:7px;height:7px;border-radius:50%;
+  background:var(--accent);box-shadow:0 0 0 2px #fff;opacity:0;scale:.4;
+  transition:opacity .2s,scale .3s var(--ease);
+}
+.btn.toggle[aria-pressed="true"] .live{opacity:1;scale:1}
+
+/* ── Inspector ──────────────────────────────────────────── */
+.inspector{min-height:0;display:flex;padding:14px 14px 14px 0}
+.card{
+  flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;
+  padding:24px 20px 22px;border-radius:var(--r-card);
+  background:var(--surface);box-shadow:var(--shadow-card);
+  scrollbar-width:thin;scrollbar-color:rgba(29,30,34,.16) transparent;
+}
+.group+.group{margin-top:26px}
+.group h2{margin:0 0 11px;font-size:12px;font-weight:560;letter-spacing:.004em;color:var(--text-2)}
+.group-head{display:flex;align-items:center;justify-content:space-between;margin:-4px 0 7px}
+.group-head h2{margin:0}
+.mini-play{
+  display:grid;place-items:center;width:28px;height:28px;padding:0;border:0;border-radius:50%;
+  color:var(--text);background:var(--track);transition:background .18s,color .18s,transform .14s var(--ease);
+}
+.mini-play:hover{background:var(--fill)}
+.mini-play:active{transform:scale(.92)}
+.mini-play[aria-pressed="true"]{color:#fff;background:var(--text)}
+.mini-play svg{width:12px;height:12px}
+.stack{display:grid;gap:6px}
+
+/* segmented control with a gliding thumb */
+.seg{
+  --n:3;--i:0;position:relative;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);
+  padding:3px;border-radius:var(--r-ctl);background:var(--track);
+}
+.seg .glide{
+  position:absolute;top:3px;bottom:3px;left:3px;width:calc((100% - 6px) / var(--n));
+  border-radius:9px;background:var(--surface);box-shadow:var(--shadow-lift);
+  transform:translateX(calc(100% * var(--i)));transition:transform .3s var(--ease);
+}
+.seg button{
+  position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:7px;
+  height:32px;border:0;border-radius:9px;background:transparent;
+  font-size:12.5px;color:var(--text-2);transition:color .2s;
+}
+.seg button:hover,.seg button[aria-pressed="true"]{color:var(--text)}
+.seg button svg{width:14px;height:14px;flex:none}
+
+/* pill slider: the whole row is the control */
+.slider{
+  --p:.5;position:relative;display:flex;align-items:center;justify-content:space-between;
+  height:34px;padding:0 12px;border-radius:var(--r-ctl);overflow:hidden;background:var(--track);
+  cursor:ew-resize;touch-action:pan-y;-webkit-user-select:none;user-select:none;
+  transition:background .16s,opacity .24s;
+}
+.slider::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:calc(8px + (100% - 16px) * var(--p));
+  background:var(--fill);transition:background .16s;
+}
+.slider::after{
+  content:"";position:absolute;top:50%;left:calc(8px + (100% - 16px) * var(--p));
+  width:2px;height:12px;margin:-6px 0 0 -1px;border-radius:2px;background:var(--text);opacity:0;
+  transition:opacity .16s,height .2s var(--ease),margin .2s var(--ease);
+}
+.slider:hover{background:var(--track-hover)}
+.slider:hover::before{background:var(--fill-hover)}
+.slider.dragging::before{background:var(--fill-active)}
+.slider.dragging::after{opacity:1;height:20px;margin-top:-10px}
+.slider label,.slider output{position:relative;z-index:1;pointer-events:none;font-size:12.5px}
+.slider label{font-weight:460}
+.slider output{color:var(--text-2)}
+.slider.dragging output{color:var(--text)}
+.slider input{
+  position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;pointer-events:none;
+  -webkit-appearance:none;appearance:none;background:transparent;
+}
+.slider:has(input:focus-visible){box-shadow:0 0 0 2px var(--surface),0 0 0 4px var(--text)}
+
+/* a pill row that holds a compact segmented control */
+.pillrow{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  height:34px;padding:0 3px 0 12px;border-radius:var(--r-ctl);background:var(--track);
+}
+.pillrow > span{font-size:12.5px;font-weight:460}
+.seg.mini{padding:0;background:transparent;width:calc(var(--n) * 36px);height:28px}
+.seg.mini .glide{top:0;bottom:0;left:0;width:calc(100% / var(--n));border-radius:9px}
+.seg.mini button{height:28px;font-size:12px}
+.seg.mini button svg{width:13px;height:13px}
+
+.footnote{
+  margin:28px 0 0;padding-top:18px;border-top:1px solid var(--hair);
+  font-size:12px;line-height:1.6;color:var(--text-2);
+}
+.footnote p{margin:0}
+.footnote p+p{margin-top:8px}
+.keys{display:flex;flex-wrap:wrap;align-items:center;gap:6px 0}
+.keys > span:not(.sep){white-space:nowrap}
+.keys .sep{margin:0 8px;color:var(--hair-2)}
+kbd{
+  display:inline-block;min-width:19px;padding:0 5px;border-radius:6px;
+  font:inherit;font-size:11px;font-weight:520;line-height:18px;text-align:center;color:var(--text);
+  background:var(--track);box-shadow:inset 0 -1px 0 var(--hair-2);
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media (max-width:1180px){
+  :root{--inspector:336px;--gutter:28px}
+  .art-area{padding-inline:68px}
+}
+@media (max-width:860px){
+  html,body{height:auto;overflow:auto}
+  .app{display:block;height:auto;min-height:100dvh;background:var(--mist)}
+  .stage{display:block;padding:22px 18px 6px}
+  .art-area{display:flex;flex-direction:column;align-items:stretch;container-type:normal;padding:22px 0 0}
+  .figure{width:100%}
+  .history{
+    order:2;position:static;transform:none;flex-direction:row;
+    max-height:none;overflow-x:auto;overflow-y:hidden;margin:14px -4px 0;
+  }
+  .thumb{width:44px;height:44px}
+  .swatches{gap:5px}
+  .swatch{width:26px;height:26px;border-radius:9px}
+  .dock-row{
+    position:fixed;left:0;right:0;bottom:calc(14px + env(safe-area-inset-bottom));z-index:20;
+    padding:0;pointer-events:none;
+  }
+  .dock{pointer-events:auto}
+  .inspector{display:block;padding:14px 12px 112px}
+  .card{overflow:visible;padding:22px 18px}
+}
+/* phones: secondary dock buttons go icon-only so all four fit */
+@media (max-width:560px){
+  .btn:not(.primary){width:42px;padding:0;justify-content:center}
+  .btn:not(.primary) .label{
+    position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;
+  }
+  .btn.toggle .live{left:24px;top:7px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <main class="stage">
+    <header class="brand">
+      <h1>Pixies</h1>
+      <p>Flying pixels and dithering textures</p>
+    </header>
+
+    <section class="art-area">
+      <nav class="history" id="history" aria-label="Recent variations" hidden></nav>
+      <figure class="figure">
+        <div class="flip" id="flip" role="button" tabindex="0" aria-pressed="false" aria-label="Turn the print over" title="Click to see the back (F)">
+          <div class="shadow" aria-hidden="true"></div>
+          <div class="print">
+            <canvas id="canvas" width="1800" height="1800" aria-hidden="true"></canvas>
+            <canvas id="fx" width="900" height="900" aria-hidden="true"></canvas>
+          </div>
+        </div>
+        <figcaption class="caption">
+          <div>
+            <div class="cap-title">Seed <span id="seedValue">72016</span><span class="side-tag" aria-hidden="true">Back</span></div>
+            <div class="cap-meta" id="capMeta"></div>
+          </div>
+          <div class="swatches" role="group" aria-label="Palette">
+            <label class="swatch" data-key="ink"><input id="ink" type="color" value="#101010" aria-label="Ink color"></label>
+            <label class="swatch" data-key="accentColor"><input id="accentColor" type="color" value="#15ef74" aria-label="Accent color"></label>
+            <label class="swatch" data-key="gray"><input id="gray" type="color" value="#aaa9a5" aria-label="Gray color"></label>
+            <label class="swatch" data-key="paper"><input id="paper" type="color" value="#efede7" aria-label="Paper color"></label>
+          </div>
+        </figcaption>
+      </figure>
+    </section>
+
+    <div class="dock-row">
+      <div class="dock" role="toolbar" aria-label="Generate">
+        <button class="btn toggle" id="animate" type="button" aria-pressed="false" title="Animate (A)">
+          <svg class="play-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M7.1 5.3v9.4l7.8-4.7Z"/></svg>
+          <svg class="pause-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M7.6 5.4v9.2M12.4 5.4v9.2"/></svg>
+          <span class="live" aria-hidden="true"></span>
+          <span class="label">Animate</span>
+        </button>
+        <button class="btn primary" id="regenerate" type="button" title="Regenerate (R)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19.5 12a7.5 7.5 0 1 1-2.68-5.75"/><path d="M15.89 2.77 16.82 6.25 13.23 5.93"/></svg>
+          <span>Regenerate</span>
+        </button>
+        <button class="btn" id="export" type="button" title="Export PNG, 1800 × 1800 (E)">
+          <svg class="idle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3.5v9.25M6.25 9.25 10 13l3.75-3.75M4 16.25h12"/></svg>
+          <svg class="done-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.75 10.5 8.2 14l7.05-7.75"/></svg>
+          <span class="label btn-label">Export</span>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <aside class="inspector" aria-label="Settings">
+    <div class="card">
+      <section class="group">
+        <h2>Pixels</h2>
+        <div class="stack" id="g-pixels"></div>
+      </section>
+      <section class="group">
+        <h2>Composition</h2>
+        <div class="stack" id="g-composition"></div>
+      </section>
+      <section class="group">
+        <h2>Tone</h2>
+        <div class="stack" id="g-tone"></div>
+      </section>
+      <section class="group">
+        <div class="group-head">
+          <h2 id="anim-title">Animate</h2>
+          <button class="mini-play" id="animate-mini" type="button" aria-pressed="false" aria-label="Animate" title="Animate (A)">
+            <svg class="play-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M7.1 5.3v9.4l7.8-4.7Z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M7.4 5.2v9.6M12.6 5.2v9.6"/></svg>
+          </button>
+        </div>
+        <div class="stack" id="g-animate" role="group" aria-labelledby="anim-title"></div>
+      </section>
+      <div class="footnote">
+        <p class="keys"><span><kbd>A</kbd> Animate</span><span class="sep" aria-hidden="true">|</span><span><kbd>R</kbd> Regenerate</span><span class="sep" aria-hidden="true">|</span><span><kbd>N</kbd> Nudge</span><span class="sep" aria-hidden="true">|</span><span><kbd>F</kbd> Flip</span><span class="sep" aria-hidden="true">|</span><span><kbd>E</kbd> Export</span></p>
+        <p>Double-click a slider to reset. Pausing an animation keeps that frame as a new variation.</p>
+      </div>
+    </div>
+  </aside>
+</div>
+<script>
+/* ── Generator ─────────────────────────────────────────────
+   Carried over from the original file with these changes:
+   · render() hands its seed readout to onRendered() in the UI layer below.
+   · Scanlines are retired: the state starts with them off, they are gone from
+     defs, and randomize() no longer turns them on, so the scanline pass never runs.
+   · Drift for Animate (state.drift, see the Drift block). null, which is where every
+     seed starts, draws exactly what the original drew.
+   · The Animate settings (animSpeed, animRange, fps) live in state so each variation
+     remembers them; the generator itself never reads them.
+   · Threshold shifts tone before quantising instead of re-sorting quantised levels, and
+     Block and Complexity add and remove shapes without disturbing the rest of the picture
+     (state.baseBlocks, state.baseCircles). At Threshold 50 and an image's own Block and
+     Complexity values, output matches the original.
+   · 4-bit draws its 16 levels as mark sizes too (a halftone), so it looks clearly different
+     from 3-bit instead of nearly the same; 1- to 3-bit are unchanged.
+   · The dither is always Bayer now; the other patterns stay in ditherThreshold but
+     nothing picks them.
+   · Three more pixel shapes: x, plus, and all (a shape per pixel chosen by its tone).
+     render() passes each cell's tone to drawPixel for that; the original three ignore it.
+   · A batch drawing mode for animation frames (see flushPixels). Stills and exports
+     never use it.
+   ───────────────────────────────────────────────────────── */
+"use strict";
+
+function rng(seed){
+  let a=seed>>>0;
+  return function(){
+    a+=0x6D2B79F5;
+    let t=a;
+    t=Math.imul(t^t>>>15,t|1);
+    t^=t+Math.imul(t^t>>>7,t|61);
+    return ((t^t>>>14)>>>0)/4294967296;
+  }
+}
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const lerp=(a,b,t)=>a+(b-a)*t;
+const pick=(a,r)=>a[Math.floor(r()*a.length)];
+function hexAlpha(hex,a){
+  const n=parseInt(hex.slice(1),16);
+  return `rgba(${(n>>16)&255},${(n>>8)&255},${n&255},${a})`;
+}
+
+function downloadCanvas(canvas,name,render){
+  render();
+  const a=document.createElement("a");
+  a.download=name;a.href=canvas.toDataURL("image/png");a.click();
+}
+
+const canvas=document.getElementById("canvas"),ctx=canvas.getContext("2d"),W=canvas.width,H=canvas.height;
+const state={
+  seed:72016,pattern:"bayer",pixelShape:"dot",scanlines:false,
+  resolution:76,bitDepth:2,pixelScale:78,fieldComplexity:66,blockScale:52,
+  accentMix:34,contrast:72,threshold:50,waveMix:48,grain:18,scanlineStrength:22,
+  ink:"#101010",accentColor:"#15ef74",gray:"#aaa9a5",paper:"#efede7",
+  drift:null,
+  animSpeed:30,animRange:30,fps:24
+};
+/* Block and Complexity set how many blocks and blobs there are, as in the original, but dragging
+   them no longer reshuffles the picture. An image's own blocks and blobs (state.baseBlocks and
+   state.baseCircles, settled when it's made) always use up their share of the random draws, so
+   everything drawn after them never shifts; turning a slider down hides shapes from the end, and
+   turning it up adds extras from a stream of their own. */
+const nativeBlockCount=()=>Math.round(2+state.blockScale/16);
+const nativeCircleCount=()=>Math.round(2+state.fieldComplexity/26);
+state.baseBlocks=nativeBlockCount();
+state.baseCircles=nativeCircleCount();
+const EXTRA_BLOCKS=5077,EXTRA_CIRCLES=6089;
+const defs=[
+  ["resolution","RESOLUTION",20,140,1],["bitDepth","BIT DEPTH",1,4,1],["pixelScale","PIXEL SCALE",35,100,1],
+  ["fieldComplexity","COMPLEXITY",10,100,1],["blockScale","BLOCK SCALE",10,100,1],["accentMix","ACCENT MIX",0,100,1],
+  ["contrast","CONTRAST",10,100,1],["threshold","THRESHOLD",20,80,1],["waveMix","WAVE MIX",0,100,1],
+  ["grain","GRAIN",0,70,1]
+];
+
+const bayer4=[
+  [0,8,2,10],[12,4,14,6],[3,11,1,9],[15,7,13,5]
+];
+const cluster4=[
+  [12,5,6,13],[4,0,1,7],[11,3,2,8],[15,10,9,14]
+];
+function ditherThreshold(x,y,r){
+  if(state.pattern==="bayer")return (bayer4[y%4][x%4]+.5)/16;
+  if(state.pattern==="cluster")return (cluster4[y%4][x%4]+.5)/16;
+  if(state.pattern==="diagonal")return (((x+y*2)%8)+.5)/8;
+  return r();
+}
+function hash2(x,y,s){
+  let n=(x*374761393+y*668265263+s*1442695041)|0;
+  n=(n^(n>>13))*1274126177;n^=n>>16;return (n>>>0)/4294967295;
+}
+function sourceField(x,y,rules){
+  let v=.46;
+  const c=state.fieldComplexity/100,w=state.waveMix/100;
+  // Large editorial masses.
+  for(const q of rules.blocks){
+    if(x>q.x && x<q.x+q.w && y>q.y && y<q.y+q.h)v+=q.v;
+  }
+  // Circular and diagonal structures.
+  for(const q of rules.circles){
+    const d=Math.hypot(x-q.x,y-q.y);
+    v+=Math.exp(-(d*d)/(q.r*q.r))*q.v;
+  }
+  v+=Math.sin((x*rules.fx+y*rules.fy)*Math.PI*2+rules.phase)*.19*w;
+  v+=Math.sin((x*rules.fx2-y*rules.fy2)*Math.PI*2+rules.phase2)*.11*w*c;
+  const diag=(x*.78+y*.92);
+  v+=(diag>rules.bandA && diag<rules.bandB)?.24*c:0;
+  return clamp(v,0,1);
+}
+function buildRules(r=rng(state.seed+77)){
+  const blocks=[],circles=[];
+  const base=state.baseBlocks??nativeBlockCount(),want=nativeBlockCount(),bs=state.blockScale/100;
+  const block=d=>{const ww=.10+d()*.28*bs,hh=.08+d()*.28*bs;return {x:d()*(1-ww),y:d()*(1-hh),w:ww,h:hh,v:(d()>.5?1:-1)*(.18+d()*.30)};};
+  for(let i=0;i<base;i++){const b=block(r);if(i<want)blocks.push(b);}
+  if(want>base){const e=rng(state.seed+EXTRA_BLOCKS);for(let i=base;i<want;i++)blocks.push(block(e));}
+  const cbase=state.baseCircles??nativeCircleCount(),cwant=nativeCircleCount();
+  const circle=d=>({x:d(),y:d(),r:.08+d()*.22,v:(d()>.5?1:-1)*(.15+d()*.28)});
+  for(let i=0;i<cbase;i++){const c=circle(r);if(i<cwant)circles.push(c);}
+  if(cwant>cbase){const e=rng(state.seed+EXTRA_CIRCLES);for(let i=cbase;i<cwant;i++)circles.push(circle(e));}
+  return {blocks,circles,fx:1+r()*5,fy:1+r()*4,fx2:2+r()*8,fy2:2+r()*7,phase:r()*6.28,phase2:r()*6.28,bandA:.42+r()*.36,bandB:.90+r()*.36};
+}
+/* ── Drift ───────────────────────────────────────────────────
+   The canvas is a window onto a field that flows past it, in two layers with their own
+   random directions:
+   · rectangles: the light and dark blocks of the pattern and the solid accent blocks;
+   · pixel shapes: the round blobs, which always flow.
+   Each drift also tosses two coins: whether the rectangles flow at all (otherwise they hold
+   still), and whether the waves, the diagonal band and the accent banding travel with the
+   pixel shapes (otherwise they hold still). Whatever leaves downstream is replaced by a new
+   shape entering upstream, so the image keeps moving on and never returns. Range adds variety
+   on the way: each current meanders, shapes travel at their own pace, and their size and
+   strength keep changing. Each shape is kept as its original random draws ("genes") plus how
+   far it has travelled, so the first frame of a drift is exactly the resting image, sliders
+   keep working mid-drift, and a paused frame redraws from its snapshot. state.drift is
+   replaced, never edited, on each step. */
+const TURN=Math.PI*2;
+const unit=()=>Math.random();
+const gauss=()=>(Math.random()+Math.random()+Math.random()+Math.random()-2)*1.732;   // ≈ normal
+const bounce=x=>{x%=2;if(x<0)x+=2;return x>1?2-x:x;};
+const blockCount=nativeBlockCount;
+const circleCount=nativeCircleCount;
+const accentCount=()=>1+Math.round(state.accentMix/100*5);
+// Footprints in canvas units, for deciding when a shape has left the frame.
+function blockBox(p){
+  const bs=state.blockScale/100,w=.10+p.gw*.28*bs,h=.08+p.gh*.28*bs,x=p.gx*(1-w)+p.ox,y=p.gy*(1-h)+p.oy;
+  return [x,y,x+w,y+h];
+}
+function circleBox(p){const r=(.08+p.gr*.22)*2.2,x=p.gx+p.ox,y=p.gy+p.oy;return [x-r,y-r,x+r,y+r];}
+function accentBox(p){
+  const res=Math.round(state.resolution),w=Math.round(4+p.gw*10)/res,h=Math.round(2+p.gh*8)/res;
+  const x=p.gx*(1-w)+p.ox,y=p.gy*(1-h)+p.oy;
+  return [x,y,x+w,y+h];
+}
+const isOut=([x0,y0,x1,y1])=>x1<-.01||x0>1.01||y1<-.01||y0>1.01;
+const isDownstream=([x0,y0,x1,y1],c,s)=>((x0+x1)/2-.5)*c+((y0+y1)/2-.5)*s>0;
+function enterUpstream(p,box,c,s){       // slide a new shape back against the current until it waits just outside
+  for(let i=0;i<150&&!isOut(box(p));i++){p.ox-=c*.02;p.oy-=s*.02;}
+  return p;
+}
+const newBlock=()=>({gw:unit(),gh:unit(),gx:unit(),gy:unit(),gs:unit(),gm:unit(),gk:unit(),ox:0,oy:0});
+const newCircle=()=>({gx:unit(),gy:unit(),gr:unit(),gs:unit(),gm:unit(),gk:unit(),ox:0,oy:0});
+const newAccent=()=>({gw:unit(),gh:unit(),gx:unit(),gy:unit(),gk:unit(),ox:0,oy:0});
+function startDrift(){                   // the resting composition, read from the same random draws
+  const r=rng(state.seed+77),a=rng(state.seed+331),blocks=[],circles=[],accents=[];
+  const base=state.baseBlocks??nativeBlockCount(),want=blockCount();
+  const gblock=d=>{const gw=d(),gh=d(),gx=d(),gy=d(),gs=d(),gm=d();return {gw,gh,gx,gy,gs,gm,gk:unit(),ox:0,oy:0};};
+  for(let i=0;i<base;i++){const b=gblock(r);if(i<want)blocks.push(b);}
+  if(want>base){const e=rng(state.seed+EXTRA_BLOCKS);for(let i=base;i<want;i++)blocks.push(gblock(e));}
+  const cbase=state.baseCircles??nativeCircleCount(),cwant=circleCount();
+  const gcircle=d=>{const gx=d(),gy=d(),gr=d(),gs=d(),gm=d();return {gx,gy,gr,gs,gm,gk:unit(),ox:0,oy:0};};
+  for(let i=0;i<cbase;i++){const c=gcircle(r);if(i<cwant)circles.push(c);}
+  if(cwant>cbase){const e=rng(state.seed+EXTRA_CIRCLES);for(let i=cbase;i<cwant;i++)circles.push(gcircle(e));}
+  const waves={fx:1+r()*5,fy:1+r()*4,fx2:2+r()*8,fy2:2+r()*7,phase:r()*6.28,phase2:r()*6.28};
+  const band={a:.42+r()*.36,b:.90+r()*.36};
+  for(let i=0;i<accentCount();i++){const gw=a(),gh=a(),gx=a(),gy=a();accents.push({gw,gh,gx,gy,gk:unit(),ox:0,oy:0});}
+  const current=()=>({heading:unit()*TURN,turn:0});
+  return {blocks,circles,accents,waves,band,accentPhase:waves.phase,
+    shapes:current(),rects:current(),                  // independent random directions
+    rectsFlow:unit()<.5,wavesFlow:unit()<.5};          // the two coin tosses
+}
+function steer(cur,tau,range){                       // a current bends smoothly, more with Range
+  const turn=cur.turn*Math.exp(-tau*2)+gauss()*range*3*Math.sqrt(tau);
+  return {heading:cur.heading+turn*tau,turn};
+}
+function stepDrift(d,tau,range){         // tau: distance travelled this step, in canvas widths
+  const vary=range*.35*Math.sqrt(tau);
+  const flow=(list,genes,box,make,count,cur)=>{
+    const c=Math.cos(cur.heading),s=Math.sin(cur.heading),out=[];
+    for(const p of list.slice(0,count)){
+      const k=1+(p.gk-.5)*range;                       // own pace
+      const q={...p,ox:p.ox+c*tau*k,oy:p.oy+s*tau*k};
+      for(const g of genes)q[g]=bounce(q[g]+gauss()*vary);
+      const b=box(q);
+      out.push(isOut(b)&&isDownstream(b,c,s)?enterUpstream(make(),box,c,s):q);
+    }
+    while(out.length<count)out.push(enterUpstream(make(),box,c,s));
+    return out;
+  };
+  const hold=(list,make,count)=>{                      // a layer that isn't flowing stays exactly where it is
+    const out=list.slice(0,count);
+    while(out.length<count)out.push(make());
+    return out;
+  };
+  const shapes=steer(d.shapes,tau,range),rects=d.rectsFlow?steer(d.rects,tau,range):d.rects;
+  const next={...d,shapes,rects,
+    circles:flow(d.circles,["gr","gm"],circleBox,newCircle,circleCount(),shapes),
+    blocks:d.rectsFlow?flow(d.blocks,["gw","gh","gm"],blockBox,newBlock,blockCount(),rects):hold(d.blocks,newBlock,blockCount()),
+    accents:d.rectsFlow?flow(d.accents,["gw","gh"],accentBox,newAccent,accentCount(),rects):hold(d.accents,newAccent,accentCount())
+  };
+  if(d.wavesFlow){                                     // waves, band and accent banding travel with the pixel shapes
+    const dx=Math.cos(shapes.heading)*tau,dy=Math.sin(shapes.heading)*tau,w=d.waves,wv=range*.8*Math.sqrt(tau);
+    next.waves={
+      fx:clamp(w.fx+gauss()*wv,1,6),fy:clamp(w.fy+gauss()*wv,1,5),
+      fx2:clamp(w.fx2+gauss()*wv,2,10),fy2:clamp(w.fy2+gauss()*wv,2,9),
+      phase:w.phase-TURN*(w.fx*dx+w.fy*dy),phase2:w.phase2-TURN*(w.fx2*dx-w.fy2*dy)
+    };
+    const along=.78*dx+.92*dy;            // the band rides along; a new one follows once it has passed
+    let a=d.band.a+along,b=d.band.b+along;
+    if(along>0&&a>1.72){b=-.02;a=b-(.2+unit()*.5);}
+    else if(along<0&&b<-.02){a=1.72;b=a+.2+unit()*.5;}
+    next.band={a,b};
+    next.accentPhase=d.accentPhase-Math.PI*(3.3*dx-2.1*dy);
+  }
+  return next;
+}
+function driftRules(){
+  const d=state.drift;
+  if(!d)return buildRules();
+  const bs=state.blockScale/100,w=d.waves;
+  return {
+    blocks:d.blocks.slice(0,blockCount()).map(p=>{
+      const ww=.10+p.gw*.28*bs,hh=.08+p.gh*.28*bs;
+      return {x:p.gx*(1-ww)+p.ox,y:p.gy*(1-hh)+p.oy,w:ww,h:hh,v:(p.gs>.5?1:-1)*(.18+p.gm*.30)};
+    }),
+    circles:d.circles.slice(0,circleCount()).map(p=>({x:p.gx+p.ox,y:p.gy+p.oy,r:.08+p.gr*.22,v:(p.gs>.5?1:-1)*(.15+p.gm*.28)})),
+    fx:w.fx,fy:w.fy,fx2:w.fx2,fy2:w.fy2,phase:w.phase,phase2:w.phase2,
+    bandA:d.band.a,bandB:d.band.b,accentPhase:d.accentPhase
+  };
+}
+/* Animate draws its frames in batch mode: cells are queued per colour and filled as one path
+   each, many times faster than a fill per cell. Stills and exports never use it. */
+let pixelBatch=null;
+const SHAPE_LIST=["square","dot","slash","x","plus"];
+/* "all": each pixel takes the mark whose ink weight matches its tone, lightest to heaviest. */
+const shapeForTone=v=>v<.4?"slash":v<.5?"x":v<.6?"plus":v<.7?"dot":"square";
+function flushPixels(s){
+  if(!pixelBatch)return;
+  const p0=s*state.pixelScale/100,h=s/2,k=Math.SQRT1_2;
+  for(const color in pixelBatch){
+    const a=pixelBatch[color];
+    ctx.fillStyle=color;
+    // Diagonal bars rasterise badly as one giant path, so each slash or x is its own quad.
+    for(let i=0;i<a.length;i+=4){
+      const sh=a[i+2];
+      if(sh!==2&&sh!==3)continue;
+      const p=p0*a[i+3],L=p*.48,T=p*.11;
+      ctx.setTransform(k,-k,k,k,a[i]+h,a[i+1]+h);
+      ctx.fillRect(-L,-T,2*L,2*T);
+      if(sh===3)ctx.fillRect(-T,-L,2*T,2*L);
+    }
+    ctx.setTransform(1,0,0,1,0,0);
+    ctx.beginPath();
+    let any=false;
+    for(let i=0;i<a.length;i+=4){
+      const sh=a[i+2],cx=a[i]+h,cy=a[i+1]+h,p=p0*a[i+3],L=p*.48,T=p*.11;
+      if(sh===1){ctx.moveTo(cx+p*.48,cy);ctx.arc(cx,cy,p*.48,0,Math.PI*2);any=true;}
+      else if(sh===0){ctx.rect(cx-p/2,cy-p/2,p,p);any=true;}
+      else if(sh===4){ctx.rect(cx-L,cy-T,2*L,2*T);ctx.rect(cx-T,cy-L,2*T,2*L);any=true;}
+    }
+    if(any)ctx.fill();
+  }
+  pixelBatch={};
+}
+function drawPixel(x,y,s,color,alpha=1,tone=.5,size=1){
+  const shape=state.pixelShape==="all"?shapeForTone(tone):state.pixelShape;
+  if(pixelBatch){(pixelBatch[color]||(pixelBatch[color]=[])).push(x,y,SHAPE_LIST.indexOf(shape),size);return;}
+  const p=s*state.pixelScale/100*size;
+  const ox=x+(s-p)/2,oy=y+(s-p)/2;
+  ctx.save();ctx.globalAlpha=alpha;ctx.fillStyle=color;
+  if(shape==="dot"){ctx.beginPath();ctx.arc(x+s/2,y+s/2,p*.48,0,Math.PI*2);ctx.fill();}
+  else if(shape==="slash"){
+    ctx.translate(x+s/2,y+s/2);ctx.rotate(-Math.PI/4);ctx.fillRect(-p*.48,-p*.11,p*.96,p*.22);
+  }else if(shape==="x"){
+    ctx.translate(x+s/2,y+s/2);ctx.rotate(-Math.PI/4);
+    ctx.fillRect(-p*.48,-p*.11,p*.96,p*.22);ctx.fillRect(-p*.11,-p*.48,p*.22,p*.96);
+  }else if(shape==="plus"){
+    const cx=x+s/2,cy=y+s/2;
+    ctx.fillRect(cx-p*.48,cy-p*.11,p*.96,p*.22);ctx.fillRect(cx-p*.11,cy-p*.48,p*.22,p*.96);
+  } else ctx.fillRect(ox,oy,p,p);
+  ctx.restore();
+}
+function render(){
+  ctx.fillStyle=state.paper;ctx.fillRect(0,0,W,H);
+  const res=Math.round(state.resolution),cell=W/res,r=rng(state.seed+997),rules=driftRules();
+  const levels=Math.max(2,Math.pow(2,Math.round(state.bitDepth)));
+  const contrast=.35+state.contrast/100*1.55;
+  const threshold=.5;                        // colour bands stay where the original's default put them…
+  const shift=.5-state.threshold/100;         // …and Threshold shifts tone before quantising, so it moves smoothly at every bit depth
+  const accent=state.accentMix/100;
+  const grain=state.grain/100;
+
+  for(let gy=0;gy<res;gy++){
+    for(let gx=0;gx<res;gx++){
+      const x=(gx+.5)/res,y=(gy+.5)/res;
+      let v=sourceField(x,y,rules);
+      v=clamp((v-.5)*contrast+.5,0,1);
+      v=clamp(v+(hash2(gx,gy,state.seed)-.5)*grain*.22,0,1);
+      if(shift)v=clamp(v+shift,0,1);
+      const t=ditherThreshold(gx,gy,r);
+      const q=Math.floor(v*(levels-1)+t)/Math.max(1,levels-1);
+
+      let color=state.paper;
+      if(q>threshold+.20)color=state.ink;
+      else if(q>threshold-.02){
+        const accentField=Math.sin((x*3.3-y*2.1)*Math.PI+(rules.accentPhase??rules.phase))*.5+.5;
+        color=accentField<accent?state.accentColor:state.ink;
+      }else if(q>threshold-.24)color=state.gray;
+      // 4-bit also shows its 16 levels as mark size, like a print halftone: area follows tone,
+      // from small marks at the lightest drawn level (just above .26) to full size at the darkest.
+      const size=levels===16?Math.sqrt(.12+.88*clamp((q-.26)/.74,0,1)):1;
+
+      if(color!==state.paper)drawPixel(gx*cell,gy*cell,cell,color,1,v,size);
+    }
+  }
+  flushPixels(cell);
+
+  // Hard-edged accent blocks that remain pixel aligned (while drifting they travel cell by cell).
+  const rr=rng(state.seed+331),acc=state.drift&&state.drift.accents;
+  const blocks=1+Math.round(accent*5);
+  for(let i=0;i<blocks;i++){
+    const a=acc?acc[i]:null;
+    if(acc&&!a)break;
+    const bw=Math.round((4+(a?a.gw:rr())*10))*cell,bh=Math.round((2+(a?a.gh:rr())*8))*cell;
+    const bx=Math.round((a?a.gx:rr())*(res-bw/cell)+(a?a.ox*res:0))*cell,by=Math.round((a?a.gy:rr())*(res-bh/cell)+(a?a.oy*res:0))*cell;
+    ctx.save();ctx.globalAlpha=.25+accent*.55;ctx.fillStyle=state.accentColor;ctx.fillRect(bx,by,bw,bh);ctx.restore();
+  }
+
+  if(state.scanlines){
+    ctx.save();ctx.globalAlpha=state.scanlineStrength/100*.20;ctx.fillStyle=state.ink;
+    const step=Math.max(3,Math.round(cell*.7));
+    for(let y=0;y<H;y+=step*2)ctx.fillRect(0,y,W,Math.max(1,step*.22));
+    ctx.restore();
+  }
+
+  onRendered();
+}
+function randomize(){
+  const r=rng((Date.now()^Math.floor(performance.now()*100000))>>>0);
+  state.seed=Math.floor(10000+r()*89999);state.pattern="bayer";state.pixelShape=pick(["square","dot","slash","x","plus","all"],r);
+  state.resolution=Math.round(42+r()*78);state.bitDepth=Math.round(1+r()*3);state.pixelScale=Math.round(52+r()*46);
+  state.fieldComplexity=Math.round(36+r()*62);state.baseCircles=nativeCircleCount();state.blockScale=Math.round(28+r()*65);state.baseBlocks=nativeBlockCount();state.accentMix=Math.round(14+r()*48);
+  state.contrast=Math.round(45+r()*53);state.threshold=Math.round(36+r()*27);state.waveMix=Math.round(22+r()*70);
+  state.grain=Math.round(r()*38);
+  syncUI();render();
+}
+function nudge(){
+  const r=rng(state.seed+2027);state.seed=(state.seed+1+Math.floor(r()*61))%99999;
+  const d={resolution:6,bitDepth:1,pixelScale:5,fieldComplexity:5,blockScale:5,accentMix:4,contrast:5,threshold:3,waveMix:5,grain:4,scanlineStrength:4};
+  defs.forEach(([k,,min,max])=>{state[k]=clamp(Math.round(state[k]+(r()-.5)*d[k]*1.3),min,max);});
+  state.baseBlocks=nativeBlockCount();state.baseCircles=nativeCircleCount();   // a nudge is a new seed, so its shapes are settled afresh
+  syncUI();render();
+}
+
+/* ── Interface: controls ──────────────────────────────────── */
+const $=s=>document.querySelector(s);
+const DEFAULTS={...state};
+const reduceMotion=window.matchMedia("(prefers-reduced-motion: reduce)");
+const LABEL={
+  resolution:"Resolution",pixelScale:"Pixel",fieldComplexity:"Complexity",blockScale:"Block",
+  waveMix:"Wave mix",contrast:"Contrast",threshold:"Threshold",accentMix:"Accent mix",grain:"Grain"
+};
+const UNIT={};
+const SHAPES=[["square","Square"],["dot","Dot"],["slash","Slash"],["x","X"],["plus","Plus"],["all","All"]];
+const SHAPE_PHRASE={square:"square pixels",dot:"dot pixels",slash:"slash pixels",x:"x pixels",plus:"plus pixels",all:"all shapes"};
+const COLOR_NAME={ink:"Ink",accentColor:"Accent",gray:"Gray",paper:"Paper"};
+const SHAPE_ICON={
+  square:'<svg viewBox="0 0 14 14" aria-hidden="true"><rect x="2.6" y="2.6" width="8.8" height="8.8" rx="1.8" fill="currentColor"/></svg>',
+  dot:'<svg viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="4.7" fill="currentColor"/></svg>',
+  slash:'<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3.3 10.7 10.7 3.3" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>',
+  x:'<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3.5 3.5l7 7M10.5 3.5l-7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>',
+  plus:'<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 2.4v9.2M2.4 7h9.2" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>',
+  all:'<svg viewBox="0 0 14 14" aria-hidden="true"><rect x="1.4" y="1.4" width="4.4" height="4.4" rx="1" fill="currentColor"/><circle cx="10.4" cy="3.6" r="2.3" fill="currentColor"/><path d="M2 8.6l3.6 3.6M5.6 8.6 2 12.2M10.4 8.3v4.4M8.2 10.5h4.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>'
+};
+const rangeOf=key=>defs.find(d=>d[0]===key);
+
+/* Coalesce renders to one per frame while dragging. */
+let frameReq=0;
+function requestRender(){
+  if(frameReq)return;
+  frameReq=requestAnimationFrame(()=>{frameReq=0;render();});
+}
+function renderNow(){
+  if(frameReq){cancelAnimationFrame(frameReq);frameReq=0;}
+  render();
+}
+
+/* Pill slider: label, value and fill share one 34px row.
+   Pointer input is handled on the row (click or drag anywhere; on touch, a sideways drag or a tap
+   sets it and a vertical swipe still scrolls). The range input underneath keeps keyboard and
+   screen-reader support. */
+const sliders={};
+/* By default a pill edits the image state; the Animate speed passes its own target. */
+function pill(key,{target=state,range=rangeOf(key),label=LABEL[key],reset=DEFAULTS[key],after=edited}={}){
+  const [, ,min,max,step]=range;
+  const el=document.createElement("div");el.className="slider";
+  const id="ctl-"+key;
+  el.innerHTML=`<input type="range" id="${id}" min="${min}" max="${max}" step="${step}"><label for="${id}">${label}</label><output for="${id}"></output>`;
+  const input=el.querySelector("input"),out=el.querySelector("output");
+  const show=v=>{
+    input.value=v;
+    out.textContent=Math.round(v)+(UNIT[key]||"");
+    el.style.setProperty("--p",((v-min)/(max-min)).toFixed(4));
+  };
+  const commit=v=>{
+    v=clamp(Math.round(v/step)*step,min,max);
+    if(v===target[key])return;
+    target[key]=v;show(v);after(key);
+  };
+  const fromX=x=>{
+    const r=el.getBoundingClientRect();
+    return min+clamp((x-r.left-8)/(r.width-16),0,1)*(max-min);
+  };
+  let drag=null;
+  const grab=e=>{drag.live=true;el.setPointerCapture(e.pointerId);el.classList.add("dragging");};
+  const release=()=>{drag=null;el.classList.remove("dragging");};
+  el.addEventListener("pointerdown",e=>{
+    if(e.button!==0)return;
+    drag={id:e.pointerId,x:e.clientX,y:e.clientY,live:false};
+    if(e.pointerType==="mouse"){
+      e.preventDefault();input.focus({preventScroll:true});
+      grab(e);commit(fromX(e.clientX));
+    }
+  });
+  el.addEventListener("pointermove",e=>{
+    if(!drag||e.pointerId!==drag.id)return;
+    if(!drag.live){
+      const dx=Math.abs(e.clientX-drag.x),dy=Math.abs(e.clientY-drag.y);
+      if(dx<6||dx<dy)return;
+      grab(e);
+    }
+    commit(fromX(e.clientX));
+  });
+  el.addEventListener("pointerup",e=>{
+    if(!drag||e.pointerId!==drag.id)return;
+    if(!drag.live)commit(fromX(e.clientX));   // a tap sets the value
+    release();
+  });
+  el.addEventListener("pointercancel",e=>{if(drag&&e.pointerId===drag.id)release();});
+  el.addEventListener("dblclick",()=>{target[key]=reset;show(reset);after(key);});
+  input.addEventListener("input",()=>{target[key]=Number(input.value);show(target[key]);after(key);});
+  sliders[key]=show;
+  return el;
+}
+
+/* Segmented control with a gliding thumb. Options are [value, label, icon, title]; an option
+   with an empty label shows only its icon and takes its name from the title. Returns a sync function. */
+function segmented(el,options,onPick){
+  el.style.setProperty("--n",options.length);
+  el.innerHTML='<span class="glide" aria-hidden="true"></span>'+options.map(([v,label,icon,title])=>{
+    const iconOnly=label==="";
+    return `<button type="button" data-v="${v}" aria-pressed="false"${title?` title="${title}"`:""}${iconOnly&&title?` aria-label="${title}"`:""}>${icon||""}${iconOnly?"":`<span>${label}</span>`}</button>`;
+  }).join("");
+  const buttons=[...el.querySelectorAll("button")];
+  buttons.forEach(b=>b.addEventListener("click",()=>onPick(b.dataset.v)));
+  return value=>buttons.forEach((b,i)=>{
+    const on=b.dataset.v===String(value);
+    b.setAttribute("aria-pressed",String(on));
+    if(on)el.style.setProperty("--i",i);
+  });
+}
+
+/* A pill row holding a compact segmented control: Shape, Bit depth, Frame rate. */
+function choiceRow(id,label,options,onPick){
+  const row=document.createElement("div");row.className="pillrow";
+  row.innerHTML=`<span id="${id}-label">${label}</span><div class="seg mini" role="group" aria-labelledby="${id}-label"></div>`;
+  return {row,sync:segmented(row.querySelector(".seg"),options,onPick)};
+}
+
+const shapeChoice=choiceRow("shape","Shape",SHAPES.map(([v,name])=>[v,"",SHAPE_ICON[v],v==="all"?"All (each pixel by tone)":name]),v=>{
+  state.pixelShape=v;syncUI();edited();
+});
+const bitChoice=choiceRow("bits","Bit depth",[1,2,3,4].map(n=>[n,n,"",n===4?"16 levels, shown as mark size":`${2**n} levels`]),v=>{
+  state.bitDepth=Number(v);syncUI();edited();
+});
+
+$("#g-pixels").append(shapeChoice.row,pill("resolution"),bitChoice.row);
+$("#g-composition").append(pill("fieldComplexity"),pill("pixelScale"),pill("blockScale"),pill("waveMix"));
+/* Grain lives with tone: it jitters each cell's value before the threshold, the same place contrast acts. */
+$("#g-tone").append(pill("contrast"),pill("threshold"),pill("grain"),pill("accentMix"));
+
+/* Palette chips under the print. The interface borrows the accent and paper colors. */
+const swatches=[...document.querySelectorAll(".swatch")];
+swatches.forEach(sw=>{
+  const k=sw.dataset.key,input=sw.querySelector("input");
+  input.addEventListener("input",()=>{state[k]=input.value;paintPalette();edited();});
+});
+function luminance(hex){
+  const n=parseInt(hex.slice(1),16);
+  const ch=v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4);};
+  return .2126*ch((n>>16)&255)+.7152*ch((n>>8)&255)+.0722*ch(n&255);
+}
+function paintPalette(){
+  swatches.forEach(sw=>{
+    const k=sw.dataset.key;
+    sw.style.setProperty("--c",state[k]);
+    sw.title=`${COLOR_NAME[k]} ${state[k].toUpperCase()}`;
+  });
+  const root=document.documentElement.style;
+  root.setProperty("--accent",luminance(state.accentColor)>.7?"#1d1e22":state.accentColor);
+  root.setProperty("--paper",state.paper);
+}
+
+/* Replaces the original syncUI(); randomize() and nudge() call it. Controls built later
+   (the Animate section's frame rate) add themselves to syncHooks. */
+const syncHooks=[];
+function syncUI(){
+  Object.entries(sliders).forEach(([k,show])=>{if(k in state)show(state[k]);});
+  shapeChoice.sync(state.pixelShape);
+  bitChoice.sync(Math.round(state.bitDepth));
+  syncHooks.forEach(sync=>sync());
+  swatches.forEach(sw=>{sw.querySelector("input").value=state[sw.dataset.key];});
+  paintPalette();
+}
+
+/* Called at the end of every render(). */
+const seedEl=$("#seedValue"),metaEl=$("#capMeta");
+function onRendered(){
+  const res=Math.round(state.resolution);
+  const shape=SHAPE_PHRASE[state.pixelShape];
+  seedEl.textContent=state.seed;
+  metaEl.textContent=`${shape[0].toUpperCase()+shape.slice(1)}, ${res} × ${res} grid, ${Math.round(state.bitDepth)}-bit`;
+}
+
+/* ── Interface: variations, transitions, actions ──────────── */
+const strip=$("#history");
+const entries=[];
+const MAX_ENTRIES=12;
+let current=-1,thumbTimer=0;
+/* Animate state lives outside the image state: what moves, how fast, and the loop. */
+const anim={on:false,req:0,last:0,acc:0,pending:0,gap:0};
+
+/* Halve the 1800px canvas a few times before the final draw so fine dither averages out
+   instead of aliasing into moiré. */
+function paintThumb(cv){
+  let src=canvas,w=canvas.width;
+  while(w/2>=cv.width*2){
+    w=Math.round(w/2);
+    const half=document.createElement("canvas");half.width=half.height=w;
+    const hc=half.getContext("2d");hc.imageSmoothingQuality="high";hc.drawImage(src,0,0,w,w);
+    src=half;
+  }
+  const c=cv.getContext("2d");
+  c.imageSmoothingQuality="high";c.clearRect(0,0,cv.width,cv.height);c.drawImage(src,0,0,cv.width,cv.height);
+}
+function markCurrent(){
+  entries.forEach((e,i)=>{
+    e.btn.setAttribute("aria-current",String(i===current));
+    e.btn.title="Seed "+e.state.seed;
+    e.btn.setAttribute("aria-label","Variation with seed "+e.state.seed);
+  });
+  strip.hidden=entries.length<2;
+}
+function addEntry(){
+  const cv=document.createElement("canvas");cv.width=cv.height=96;paintThumb(cv);
+  const btn=document.createElement("button");btn.type="button";btn.className="thumb";btn.append(cv);
+  const entry={state:{...state},cv,btn};
+  btn.addEventListener("click",()=>goTo(entries.indexOf(entry)));
+  entries.push(entry);strip.prepend(btn);
+  if(entries.length>MAX_ENTRIES)entries.shift().btn.remove();
+  current=entries.length-1;
+  strip.scrollTop=0;strip.scrollLeft=0;
+  markCurrent();
+}
+/* Any tweak updates the variation you're on; its thumbnail catches up when you pause.
+   While animating, the loop is already redrawing, and the variation you started from is
+   left alone: pausing keeps the result as a new one. */
+function edited(){
+  if(anim.on)return;
+  requestRender();
+  if(current<0)return;
+  entries[current].state={...state};
+  clearTimeout(thumbTimer);
+  thumbTimer=setTimeout(()=>{thumbTimer=0;paintThumb(entries[current].cv);},260);
+}
+function flushPending(){
+  if(frameReq)renderNow();
+  if(thumbTimer){clearTimeout(thumbTimer);thumbTimer=0;paintThumb(entries[current].cv);}
+}
+
+/* Ordered-dither dissolve: the old image clears block by block in 8×8 Bayer order. */
+const fx=$("#fx"),fxc=fx.getContext("2d");
+const BAYER8=[
+   0,32, 8,40, 2,34,10,42, 48,16,56,24,50,18,58,26, 12,44, 4,36,14,46, 6,38, 60,28,52,20,62,30,54,22,
+   3,35,11,43, 1,33, 9,41, 51,19,59,27,49,17,57,25, 15,47, 7,39,13,45, 5,37, 63,31,55,23,61,29,53,21
+];
+let fxReq=0;
+function holdFrame(){
+  if(reduceMotion.matches)return false;
+  cancelAnimationFrame(fxReq);
+  fxc.globalCompositeOperation="destination-over";   // keep any dissolve already in flight
+  fxc.drawImage(canvas,0,0,fx.width,fx.height);
+  fxc.globalCompositeOperation="source-over";
+  return true;
+}
+function dissolve(duration=540){
+  const n=fx.width,res=Math.round(state.resolution);
+  const per=Math.max(1,Math.round(res/24)),count=Math.ceil(res/per);
+  const edges=Array.from({length:count+1},(_,i)=>Math.min(n,Math.round(i*per*n/res)));
+  let start=0,cleared=0;
+  const step=now=>{
+    start=start||now;   // time from the first painted frame, so a background tab still gets the full reveal
+    const t=Math.min(1,(now-start)/duration);
+    const eased=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+    const level=t>=1?64:Math.floor(eased*64);
+    if(level>cleared){
+      for(let by=0;by<count;by++)for(let bx=0;bx<count;bx++){
+        const rank=BAYER8[(by&7)*8+(bx&7)];
+        if(rank>=cleared&&rank<level)fxc.clearRect(edges[bx],edges[by],edges[bx+1]-edges[bx],edges[by+1]-edges[by]);
+      }
+      cleared=level;
+    }
+    if(t<1)fxReq=requestAnimationFrame(step);
+    else fxc.clearRect(0,0,n,n);
+  };
+  fxReq=requestAnimationFrame(step);
+}
+
+function goTo(i){
+  if(i<0||i===current)return;
+  flushPending();
+  const animate=holdFrame();
+  Object.assign(state,entries[i].state);
+  current=i;
+  syncUI();renderNow();markCurrent();
+  if(animate)dissolve(420);
+}
+/* A fresh seed starts at rest, as its own composition. */
+const atRest=()=>{state.drift=null;};
+function doRegenerate(){
+  flushPending();
+  const animate=holdFrame();
+  atRest();randomizeMotion();randomize();   // randomize() syncs the controls and redraws
+  addEntry();
+  if(animate)dissolve();
+}
+function doNudge(){
+  flushPending();
+  const animate=holdFrame();
+  atRest();nudge();
+  addEntry();
+  if(animate)dissolve(420);
+}
+
+/* ── Animate ──
+   The field flows through the frame (see Drift in the generator): shapes travel with their
+   layer's current, leave the canvas and are replaced by new ones coming in, so it never comes
+   back round. Each animation started from a still picks its own directions and coin tosses.
+   Speed: how fast it flows (0 holds it still). Range: how much varies on the way, from a steady
+   conveyor of unchanging shapes to a meandering current where shapes move at their own pace and
+   keep changing. Frame rate: standard rates; 12 gives a stepped, hand-animated feel.
+   The settings live in state, so each variation keeps its own, and Regenerate picks new ones. */
+const toggles=[$("#animate"),$("#animate-mini")];
+const ANIM_SLIDERS=[["animSpeed","Speed",0,100,30],["animRange","Range",0,100,30]];
+const FRAME_RATES=[[12,"Animation on twos"],[24,"Film"],[30,"Video"],[60,"Smooth"]];
+/* Changing a motion setting updates the variation you're on without redrawing it. While
+   animating it's left alone, like any other edit: pausing keeps the result as a new variation. */
+function remember(){if(!anim.on&&current>=0)entries[current].state={...state};}
+const fpsChoice=choiceRow("fps","Frame rate",FRAME_RATES.map(([n,use])=>[n,n,"",`${n} fps, ${use.toLowerCase()}`]),v=>{
+  state.fps=Number(v);fpsChoice.sync(state.fps);remember();
+});
+$("#g-animate").append(...ANIM_SLIDERS.map(([key,label,min,max,reset])=>
+  pill(key,{range:[key,label,min,max,1],label,reset,after:remember})),fpsChoice.row);
+syncHooks.push(()=>fpsChoice.sync(state.fps));
+/* Regenerate's share: Speed never lands on 0, so a new variation always moves. */
+function randomizeMotion(){
+  state.animSpeed=Math.round(15+Math.random()*55);
+  state.animRange=Math.round(Math.random()*85);
+  state.fps=pick(FRAME_RATES.map(([n])=>n),Math.random);
+}
+
+const flowSpeed=()=>state.animSpeed<=0?0:.03*Math.pow(2,(state.animSpeed-30)/15);   // canvas widths per second: 30 → 0.03
+function tick(now){
+  anim.req=requestAnimationFrame(tick);
+  const dt=anim.last?Math.min(now-anim.last,1000):0;
+  anim.last=now;anim.acc+=dt;anim.pending+=dt;
+  // Frame rate sets the cadence; heavy settings stretch it rather than stall the controls.
+  const interval=Math.max(1000/state.fps,anim.gap);
+  if(anim.acc<interval-1)return;
+  anim.acc=Math.min(anim.acc-interval,interval);
+  const tau=Math.min(anim.pending,1000)/1000*flowSpeed();
+  anim.pending=0;
+  if(!tau)return;
+  state.drift=stepDrift(state.drift||startDrift(),tau,state.animRange/100);   // a new object, so snapshots stay as they were
+  const t0=performance.now();
+  pixelBatch={};
+  try{renderNow();}finally{pixelBatch=null;}
+  anim.gap=(performance.now()-t0)*1.8;
+}
+function setAnimating(on){
+  if(on===anim.on)return;
+  if(on)flushPending();
+  anim.on=on;
+  toggles.forEach(b=>b.setAttribute("aria-pressed",String(on)));
+  if(on){anim.last=0;anim.acc=Infinity;anim.pending=0;anim.req=requestAnimationFrame(tick);return;}
+  cancelAnimationFrame(anim.req);
+  renderNow();
+  // Keep the paused frame as its own variation; the one you started from stays as it was.
+  if(current<0||JSON.stringify(state)!==JSON.stringify(entries[current].state))addEntry();
+}
+toggles.forEach(b=>b.addEventListener("click",()=>setAnimating(!anim.on)));
+/* Turning the print over. The back is the same sheet seen from behind, so the
+   pattern reads mirrored; the shadow narrows with the card as it goes edge-on. */
+const flipEl=$("#flip"),printEl=$(".print"),shadowEl=$(".shadow"),figureEl=$(".figure");
+const FLIP_MS=820,FLIP_EASE="cubic-bezier(.6,0,.2,1.06)";
+const SHADOW_FRAMES=Array.from({length:25},(_,i)=>({
+  offset:i/24,transform:`scaleX(${Math.max(.03,Math.abs(Math.cos(Math.PI*i/24))).toFixed(3)})`
+}));
+let flipped=false,turning=null;
+function setSide(back){
+  if(back===flipped)return;
+  flipped=back;
+  figureEl.classList.toggle("is-back",back);
+  flipEl.setAttribute("aria-pressed",String(back));
+  flipEl.title=back?"Click to see the front (F)":"Click to see the back (F)";
+  printEl.style.transform=back?"rotateY(180deg)":"none";   // resting pose once any turn ends
+  if(turning){turning.forEach(a=>a.reverse());return;}      // clicked mid-turn: go back the way it came
+  if(reduceMotion.matches)return;
+  const from=back?0:180,to=back?180:0,opts={duration:FLIP_MS,easing:FLIP_EASE};
+  turning=[
+    printEl.animate([{transform:`rotateY(${from}deg)`},{transform:`rotateY(${to}deg)`}],opts),
+    shadowEl.animate(SHADOW_FRAMES,opts)
+  ];
+  turning[0].onfinish=()=>{turning=null;};
+}
+flipEl.addEventListener("click",()=>setSide(!flipped));
+flipEl.addEventListener("keydown",e=>{
+  if(e.key==="Enter"||e.key===" "){e.preventDefault();setSide(!flipped);}
+});
+
+/* Export saves the side you're looking at; the back comes out mirrored. */
+let exportTimer=0;
+function doExport(){
+  flushPending();
+  const name=`pixies-${state.seed}${flipped?"-back":""}.png`;
+  if(flipped){
+    render();
+    const back=document.createElement("canvas");back.width=canvas.width;back.height=canvas.height;
+    const bc=back.getContext("2d");bc.translate(back.width,0);bc.scale(-1,1);bc.drawImage(canvas,0,0);
+    const a=document.createElement("a");a.download=name;a.href=back.toDataURL("image/png");a.click();
+  }else downloadCanvas(canvas,name,render);
+  const b=$("#export"),label=b.querySelector(".btn-label");
+  b.classList.add("done");label.textContent="Exported";
+  clearTimeout(exportTimer);
+  exportTimer=setTimeout(()=>{b.classList.remove("done");label.textContent="Export";},1600);
+}
+$("#regenerate").addEventListener("click",doRegenerate);
+$("#export").addEventListener("click",doExport);
+
+addEventListener("keydown",e=>{
+  if(e.defaultPrevented||e.isComposing)return;
+  const t=e.target,tag=t.tagName;
+  if(t.isContentEditable||tag==="TEXTAREA"||tag==="SELECT"||(tag==="INPUT"&&t.type!=="range"&&t.type!=="color"))return;
+  const k=e.key.toLowerCase();
+  if((e.metaKey||e.ctrlKey)&&!e.altKey&&k==="s"){e.preventDefault();if(!e.repeat)doExport();return;}
+  if(e.metaKey||e.ctrlKey||e.altKey||e.repeat)return;
+  if(k==="a"||(e.key===" "&&t===document.body)){e.preventDefault();setAnimating(!anim.on);}
+  else if(k==="r"){e.preventDefault();doRegenerate();}
+  else if(k==="n"){e.preventDefault();doNudge();}
+  else if(k==="f"){e.preventDefault();setSide(!flipped);}
+  else if(k==="e"){e.preventDefault();doExport();}
+});
+
+/* Shortcut line: when it wraps, hide the separator left dangling at the end of a line. */
+const keysEl=$(".keys");
+function tidyKeys(){
+  keysEl.querySelectorAll(".sep").forEach(sep=>{
+    sep.style.visibility="";
+    const next=sep.nextElementSibling;
+    if(next&&next.offsetTop>sep.offsetTop+2)sep.style.visibility="hidden";
+  });
+}
+addEventListener("resize",tidyKeys);
+if(document.fonts)document.fonts.ready.then(tidyKeys);
+
+syncUI();
+render();
+addEntry();
+tidyKeys();
+/* Opening moment: the first image resolves out of blank paper. */
+if(!reduceMotion.matches){
+  fxc.fillStyle=state.paper;fxc.fillRect(0,0,fx.width,fx.height);
+  dissolve(900);
+}
+</script>
+</body>
+</html>

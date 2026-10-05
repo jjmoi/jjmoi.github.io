@@ -1,0 +1,370 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BLUEBERRY SKIES</title>
+<style>
+:root{font-family:Helvetica,Arial,sans-serif;font-optical-sizing:auto;font-weight:600;color:#000;background:#fff}
+*{box-sizing:border-box}html,body{margin:0;height:100%;background:#fff;color:#000}body{overflow:hidden;text-transform:uppercase}
+button,input{font:inherit;text-transform:uppercase;color:#000}button{background:transparent;border:0;cursor:pointer}.iconbtn{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;padding:0;color:#fff}.iconbtn:hover{opacity:.55}.iconbtn svg{width:13px;height:13px;display:block}
+.app{position:relative;width:100vw;height:100vh;overflow:hidden}.stage{position:absolute;inset:0;background:#000;overflow:hidden}.canvaswrap{width:100%;height:100%}.canvaswrap canvas{display:block;width:100%;height:100%;background:#111}
+.panel{position:fixed;top:12px;left:12px;z-index:30;width:220px;max-height:calc(100vh - 24px);overflow:auto;padding:11px;border:0;background:transparent;transition:opacity .15s ease,transform .15s ease}.panel.is-hidden{opacity:0;pointer-events:none;transform:translateY(-5px)}
+.brand{font-size:13px;line-height:1;margin-bottom:24px;letter-spacing:-.02em;color:#fff}.section{padding:0;margin:0 0 18px}.section:first-of-type{padding-top:0}.control{margin:0 0 6px}.control:last-child{margin-bottom:0}
+.slider{position:relative;height:22px;display:flex;align-items:center;--thumb-left:0px}.slider::before,.slider::after{content:"";position:absolute;top:50%;height:.5px;background:#fff;transform:translateY(-50%);pointer-events:none;z-index:0}.slider::before{left:0;width:var(--thumb-left)}.slider::after{left:calc(var(--thumb-left) + 46px);right:0}.slider input[type=range]{position:relative;z-index:2;width:100%;appearance:none;height:22px;background:transparent;margin:0;padding:0;cursor:pointer}.slider input[type=range]::-webkit-slider-runnable-track{height:.5px;background:transparent}.slider input[type=range]::-webkit-slider-thumb{appearance:none;width:46px;height:17px;border:0;background:transparent;margin-top:-8.25px}.slider input[type=range]::-moz-range-track{height:.5px;background:transparent;border:0}.slider input[type=range]::-moz-range-progress{height:.5px;background:transparent}.slider input[type=range]::-moz-range-thumb{width:46px;height:17px;border:0;background:transparent}.thumb-label{position:absolute;z-index:3;top:2px;width:46px;height:17px;display:flex;align-items:center;justify-content:center;border:.5px solid #fff;background:transparent;color:#fff;font-size:8px;line-height:1;letter-spacing:.01em;text-align:center;pointer-events:none;white-space:nowrap}.slider input[type=range]:hover+.thumb-label{background:rgba(255,255,255,.12)}
+.swatches{display:flex;align-items:center;gap:7px;width:100%}.swatch{width:22px;height:22px}.swatch label{display:none}.swatch input[type=color]{display:block;width:22px;height:22px;min-height:22px;border:.5px solid #fff;padding:0;background:transparent;cursor:pointer;border-radius:50%;overflow:hidden}.swatch input[type=color]::-webkit-color-swatch-wrapper{padding:0;border-radius:50%}.swatch input[type=color]::-webkit-color-swatch{border:0;border-radius:50%}.swatch input[type=color]::-moz-color-swatch{border:0;border-radius:50%}.shuffle-text{margin-left:auto;padding:0;font-size:8px;line-height:1;color:#fff;text-align:right}
+.actions{padding-top:0;margin-top:27px}.actions .primary{width:100%;min-height:38px;padding:11px 8px;background:transparent;border:.5px solid #fff;color:#fff;font-size:9px}.actions .primary:hover{background:rgba(255,255,255,.12)}
+.legendhud{position:fixed;left:23px;bottom:18px;z-index:31;padding:0;background:transparent;color:#fff;transition:opacity .15s ease,transform .15s ease}.legendhud.is-hidden{opacity:0;pointer-events:none;transform:translateY(5px)}.shortcuts{display:flex;align-items:center;gap:12px;font-size:8px;line-height:1.15;white-space:nowrap;color:#fff}.shortcut{display:flex;align-items:center;gap:4px;min-width:0}.shortcut kbd{font:inherit;color:#fff}.shortcut span{color:#fff;white-space:nowrap}.status{margin-top:7px;font-size:8px;line-height:1;color:#fff}.status-dots{display:inline-block;width:12px;overflow:hidden;vertical-align:bottom;animation:dots 1.2s steps(4,end) infinite}@keyframes dots{0%{width:0}100%{width:12px}}
+@media(max-width:780px){.panel{top:8px;left:8px;width:min(220px,calc(100vw - 16px));max-height:calc(100vh - 16px)}.legendhud{left:19px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="panel" id="panel">
+    <div class="brand">BLUEBERRY SKIES</div>
+    <section class="section">
+      <div class="control slider"><input id="distortion" type="range" min="0" max="400" value="58"><span class="thumb-label" data-for="distortion">DISTORT</span></div>
+      <div class="control slider"><input id="blur" type="range" min="0" max="480" value="48"><span class="thumb-label" data-for="blur">BLUR</span></div>
+      <div class="control slider"><input id="density" type="range" min="1" max="48" value="7"><span class="thumb-label" data-for="density">DENSITY</span></div>
+      <div class="control slider"><input id="noise" type="range" min="0" max="50" value="6"><span class="thumb-label" data-for="noise">NOISE</span></div>
+      <div class="control slider"><input id="speed" type="range" min="10" max="800" value="135"><span class="thumb-label" data-for="speed">SPEED</span></div>
+    </section>
+
+    <section class="section">
+      <div class="swatches">
+        <div class="swatch"><input id="a" type="color" value="#ff4d00" aria-label="Color A"></div>
+        <div class="swatch"><input id="b" type="color" value="#6b4cff" aria-label="Color B"></div>
+        <div class="swatch"><input id="d" type="color" value="#00c2ff" aria-label="Color C"></div>
+        <div class="swatch"><input id="base" type="color" value="#4a4fa3" aria-label="Base color"></div>
+        <button type="button" id="shufflePalette" class="shuffle-text" aria-label="Shuffle colors" title="Shuffle colors">Shuffle</button>
+      </div>
+    </section>
+
+    <div class="actions">
+      <button type="button" id="randomize" class="primary">REGENERATE</button>
+    </div>
+  </aside>
+
+  <div class="legendhud" id="legendHud">
+    <div class="shortcuts" aria-label="Keyboard shortcuts">
+      <div class="shortcut"><kbd>R</kbd><span>Regen</span></div>
+      <div class="shortcut"><kbd>SPACE</kbd><span>Pause</span></div>
+      <div class="shortcut"><kbd>H</kbd><span>Hide UI</span></div>
+      <div class="shortcut"><kbd>S</kbd><span>Save PNG</span></div>
+    </div>
+    <div class="status" id="status">RUNNING</div>
+  </div>
+
+  <main class="stage"><div class="canvaswrap"><canvas id="c"></canvas></div></main>
+</div>
+
+<script>
+const qs=id=>document.getElementById(id);
+const canvas=qs('c');
+const gl=canvas.getContext('webgl',{antialias:false,preserveDrawingBuffer:false,alpha:false,powerPreference:'high-performance'});
+if(!gl) throw new Error('WebGL is required.');
+
+const vertexSource=`
+attribute vec2 a_position;
+void main(){gl_Position=vec4(a_position,0.0,1.0);}
+`;
+
+const fragmentSource=`
+precision highp float;
+uniform vec2 u_resolution;
+uniform float u_time;
+uniform float u_seed;
+uniform float u_distortion;
+uniform float u_blur;
+uniform float u_density;
+uniform float u_noise;
+uniform vec3 u_colorA;
+uniform vec3 u_colorB;
+uniform vec3 u_colorC;
+uniform vec3 u_base;
+
+float hash11(float p){
+  p=fract(p*.1031);
+  p*=p+33.33;
+  p*=p+p;
+  return fract(p);
+}
+float hash21(vec2 p){
+  vec3 p3=fract(vec3(p.xyx)*.1031);
+  p3+=dot(p3,p3.yzx+33.33);
+  return fract((p3.x+p3.y)*p3.z);
+}
+mat2 rot(float a){float c=cos(a),s=sin(a);return mat2(c,-s,s,c);}
+vec3 pickColor(float i){
+  float k=mod(i,3.0);
+  if(k<.5)return u_colorA;
+  if(k<1.5)return u_colorB;
+  return u_colorC;
+}
+float softBlob(vec2 p,vec2 center,vec2 scale,float angle,float softness){
+  vec2 q=rot(angle)*(p-center);
+  q/=scale;
+  float d=dot(q,q);
+  return exp(-d*mix(7.0,1.35,softness));
+}
+
+void main(){
+  vec2 uv=gl_FragCoord.xy/u_resolution.xy;
+  vec2 p=uv-.5;
+  p.x*=u_resolution.x/u_resolution.y;
+
+  float t=u_time*.55;
+  float soft=clamp(u_blur/480.0,0.0,1.0);
+  float dist=clamp(u_distortion,0.0,1.0);
+  vec3 col=u_base;
+
+  for(int ii=0;ii<48;ii++){
+    float i=float(ii);
+    if(i>=u_density) break;
+    float s=u_seed+i*17.173;
+    float r1=hash11(s+1.0),r2=hash11(s+2.0),r3=hash11(s+3.0),r4=hash11(s+4.0),r5=hash11(s+5.0);
+    float phase=6.2831853*hash11(s+8.0);
+    vec2 center=vec2((r1-.5)*1.5,(r2-.5)*1.05);
+    center+=vec2(sin(t*(.42+r3*.34)+phase),cos(t*(.36+r4*.32)+phase*1.31))*(.055+.11*dist);
+    vec2 scale=vec2(.20+r3*.42,.20+r4*.36);
+    scale*=1.15+vec2(r1,r2)*.35;
+    float angle=((r5-.5)*2.2*dist+sin(t*.32+phase)*.18*dist)*.35;
+    float w=softBlob(p,center,scale,angle,min(1.0,soft+.22));
+    w=pow(w,.72);
+    float alpha=clamp(w*(.56+r5*.28),0.0,.88);
+    col=mix(col,pickColor(i),alpha);
+  }
+
+  float glow=0.0;
+  for(int jj=0;jj<3;jj++){
+    float j=float(jj);
+    float s=u_seed+91.0+j*23.7;
+    vec2 gc=vec2((hash11(s)-.5)*1.45,(hash11(s+1.0)-.5)*.95);
+    gc+=vec2(sin(t*.34+j*1.7),cos(t*.29+j*1.3))*.11;
+    vec2 gq=p-gc;
+    float gd2=dot(gq,gq);
+    glow+=exp(-gd2*(7.0-4.0*soft));
+  }
+  col+=vec3(glow*.055);
+
+  float vignette=1.0-smoothstep(.38,.95,length(p))*0.08;
+  col*=vignette;
+  float grain=(hash21(gl_FragCoord.xy+vec2(mod(u_seed,997.0),mod(u_seed,619.0)))-0.5)*(u_noise/50.0)*.075;
+  col+=grain;
+  gl_FragColor=vec4(clamp(col,0.0,1.0),1.0);
+}
+`;
+
+function compile(type,source){
+  const shader=gl.createShader(type);gl.shaderSource(shader,source);gl.compileShader(shader);
+  if(!gl.getShaderParameter(shader,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(shader));
+  return shader;
+}
+function makeProgram(vs,fs){
+  const program=gl.createProgram();gl.attachShader(program,compile(gl.VERTEX_SHADER,vs));gl.attachShader(program,compile(gl.FRAGMENT_SHADER,fs));gl.linkProgram(program);
+  if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw new Error(gl.getProgramInfoLog(program));
+  return program;
+}
+
+const program=makeProgram(vertexSource,fragmentSource);
+gl.useProgram(program);
+const buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+const posLoc=gl.getAttribLocation(program,'a_position');gl.enableVertexAttribArray(posLoc);gl.vertexAttribPointer(posLoc,2,gl.FLOAT,false,0,0);
+const U={};['resolution','time','seed','distortion','blur','density','noise','colorA','colorB','colorC','base'].forEach(n=>U[n]=gl.getUniformLocation(program,'u_'+n));
+
+let seed=87021,paused=false,uiHidden=false,elapsed=0,lastStamp=performance.now();
+let rafId=0,resizeRaf=0,uniformsDirty=true;
+const THUMB_WIDTH=46;
+const BASE_DISPLAY_PIXELS=2500000;
+const MIN_DISPLAY_PIXELS=600000;
+const MAX_EXPORT_PIXELS=8500000;
+
+const controls={
+  distortion:qs('distortion'),blur:qs('blur'),density:qs('density'),noise:qs('noise'),speed:qs('speed'),
+  a:qs('a'),b:qs('b'),d:qs('d'),base:qs('base')
+};
+const labels={};
+document.querySelectorAll('.thumb-label').forEach(el=>labels[el.dataset.for]=el);
+const sliders=['distortion','blur','density','noise','speed'];
+const colors=['a','b','d','base'];
+const state={
+  distortion:+controls.distortion.value/400,
+  blur:+controls.blur.value,
+  density:+controls.density.value,
+  noise:+controls.noise.value,
+  speed:+controls.speed.value/100,
+  a:null,b:null,d:null,base:null
+};
+
+function hexToVec3(hex){
+  const n=parseInt(hex.slice(1),16);
+  return [(n>>16&255)/255,(n>>8&255)/255,(n&255)/255];
+}
+function syncColors(){
+  state.a=hexToVec3(controls.a.value);
+  state.b=hexToVec3(controls.b.value);
+  state.d=hexToVec3(controls.d.value);
+  state.base=hexToVec3(controls.base.value);
+}
+function setVec3(loc,v){gl.uniform3f(loc,v[0],v[1],v[2]);}
+function uploadStaticUniforms(){
+  gl.uniform1f(U.seed,seed%1000000);
+  gl.uniform1f(U.distortion,state.distortion);
+  gl.uniform1f(U.blur,state.blur);
+  gl.uniform1f(U.density,state.density);
+  gl.uniform1f(U.noise,state.noise);
+  setVec3(U.colorA,state.a);setVec3(U.colorB,state.b);setVec3(U.colorC,state.d);setVec3(U.base,state.base);
+  uniformsDirty=false;
+}
+function renderFrame(){
+  if(uniformsDirty)uploadStaticUniforms();
+  gl.uniform1f(U.time,elapsed);
+  gl.drawArrays(gl.TRIANGLES,0,3);
+}
+function positionThumbLabel(id){
+  const input=controls[id],label=labels[id];
+  const min=+input.min,max=+input.max,val=+input.value;
+  const ratio=(val-min)/(max-min||1);
+  const usable=Math.max(0,input.clientWidth-THUMB_WIDTH);
+  const left=Math.round(ratio*usable);
+  label.style.left=`${left}px`;
+  input.closest('.slider').style.setProperty('--thumb-left',`${left}px`);
+}
+function positionAllThumbLabels(){sliders.forEach(positionThumbLabel);}
+function displayDpr(){
+  const cssPixels=Math.max(1,window.innerWidth*window.innerHeight);
+  const densityFactor=Math.min(1,10/Math.max(1,state.density));
+  const pixelBudget=Math.max(MIN_DISPLAY_PIXELS,BASE_DISPLAY_PIXELS*densityFactor);
+  const byBudget=Math.sqrt(pixelBudget/cssPixels);
+  return Math.max(.25,Math.min(window.devicePixelRatio||1,1.5,byBudget));
+}
+function resizeGLBuffer(width,height){
+  if(canvas.width!==width)canvas.width=width;
+  if(canvas.height!==height)canvas.height=height;
+  gl.viewport(0,0,width,height);
+  gl.uniform2f(U.resolution,width,height);
+}
+function resizeCanvas(){
+  const dpr=displayDpr();
+  resizeGLBuffer(Math.max(1,Math.round(window.innerWidth*dpr)),Math.max(1,Math.round(window.innerHeight*dpr)));
+  positionAllThumbLabels();
+  renderFrame();
+}
+function queueResize(){
+  if(resizeRaf)return;
+  resizeRaf=requestAnimationFrame(()=>{resizeRaf=0;resizeCanvas();});
+}
+function animate(stamp){
+  const dt=Math.min((stamp-lastStamp)/1000,.05);lastStamp=stamp;
+  elapsed+=dt*state.speed;
+  renderFrame();
+  rafId=requestAnimationFrame(animate);
+}
+function startAnimation(){
+  if(paused||rafId)return;
+  lastStamp=performance.now();
+  rafId=requestAnimationFrame(function tick(stamp){rafId=0;animate(stamp);});
+}
+function stopAnimation(){
+  if(rafId){cancelAnimationFrame(rafId);rafId=0;}
+}
+function requestRender(){
+  uniformsDirty=true;
+  if(paused)renderFrame();
+}
+function syncRange(id){
+  const v=+controls[id].value;
+  if(id==='distortion')state.distortion=v/400;
+  else if(id==='speed')state.speed=v/100;
+  else state[id]=v;
+}
+function bindRange(id){
+  const e=controls[id];
+  e.addEventListener('input',()=>{
+    syncRange(id);
+    positionThumbLabel(id);
+    if(id==='density'){uniformsDirty=true;queueResize();}
+    else if(id!=='speed')requestRender();
+  },{passive:true});
+  positionThumbLabel(id);
+}
+function setRange(id,value){
+  controls[id].value=String(value);
+  syncRange(id);
+  positionThumbLabel(id);
+}
+function randInt(min,max){return Math.floor(min+Math.random()*(max-min+1));}
+function randomize(){
+  seed=Math.floor(Math.random()*1e9);
+  setRange('distortion',randInt(0,400));
+  setRange('blur',randInt(0,480));
+  setRange('density',randInt(1,48));
+  setRange('noise',randInt(0,50));
+  setRange('speed',randInt(20,720));
+  queueResize();
+  requestRender();
+}
+function nudge(){seed++;requestRender();}
+function shufflePalette(){
+  colors.forEach(id=>{controls[id].value='#'+Math.floor(Math.random()*0xffffff).toString(16).padStart(6,'0')});
+  syncColors();requestRender();
+}
+function updateStatus(){qs('status').innerHTML=paused?'PAUSED':'RUNNING<span class="status-dots">...</span>';}
+function togglePause(){
+  paused=!paused;
+  if(paused){stopAnimation();renderFrame();}else startAnimation();
+  updateStatus();
+}
+function toggleUI(){uiHidden=!uiHidden;qs('panel').classList.toggle('is-hidden',uiHidden);qs('legendHud').classList.toggle('is-hidden',uiHidden);}
+function exportSize(){
+  const cssW=Math.max(1,window.innerWidth),cssH=Math.max(1,window.innerHeight);
+  const cssPixels=cssW*cssH;
+  const budgetScale=Math.sqrt(MAX_EXPORT_PIXELS/cssPixels);
+  const scale=Math.max(1,Math.min(window.devicePixelRatio||1,2,budgetScale));
+  return [Math.round(cssW*scale),Math.round(cssH*scale)];
+}
+function savePNG(){
+  const displayW=canvas.width,displayH=canvas.height;
+  const [w,h]=exportSize();
+  resizeGLBuffer(w,h);renderFrame();
+  const pixels=new Uint8Array(w*h*4);
+  gl.readPixels(0,0,w,h,gl.RGBA,gl.UNSIGNED_BYTE,pixels);
+  const flipped=new Uint8ClampedArray(pixels.length);
+  const row=w*4;
+  for(let y=0;y<h;y++)flipped.set(pixels.subarray((h-1-y)*row,(h-y)*row),y*row);
+  const out=document.createElement('canvas');out.width=w;out.height=h;
+  out.getContext('2d').putImageData(new ImageData(flipped,w,h),0,0);
+  resizeGLBuffer(displayW,displayH);renderFrame();
+  out.toBlob(blob=>{
+    if(!blob)return;
+    const url=URL.createObjectURL(blob),a=document.createElement('a');
+    a.download='blueberry-skies.png';a.href=url;a.click();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+  },'image/png');
+}
+
+syncColors();
+sliders.forEach(bindRange);
+colors.forEach(id=>controls[id].addEventListener('input',()=>{syncColors();requestRender();},{passive:true}));
+qs('randomize').addEventListener('click',randomize);
+qs('shufflePalette').addEventListener('click',shufflePalette);
+window.addEventListener('resize',queueResize,{passive:true});
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden)stopAnimation();else if(!paused)startAnimation();
+});
+document.addEventListener('keydown',e=>{
+  if(e.metaKey||e.ctrlKey||e.altKey)return;
+  const t=e.target;if(t&&(/INPUT|TEXTAREA|SELECT/.test(t.tagName)||t.isContentEditable))return;
+  if(e.code==='Space'){e.preventDefault();togglePause();}
+  else if(e.code==='KeyR'){e.preventDefault();randomize();}
+  else if(e.code==='KeyN'){e.preventDefault();nudge();}
+  else if(e.code==='KeyH'){e.preventDefault();toggleUI();}
+  else if(e.code==='KeyS'){e.preventDefault();savePNG();}
+});
+
+updateStatus();
+resizeCanvas();
+startAnimation();
+</script>
+</body>
+</html>

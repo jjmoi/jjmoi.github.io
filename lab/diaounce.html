@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CG DIAGRAM GENERATOR</title><style>
+<title>Diaounce</title><style>
 :root{
   --ui:#ffffff;
   --ink:#0a0a0a;
@@ -23,14 +23,12 @@ button{border:0;background:none;cursor:pointer}
 .app{height:100vh;display:grid;grid-template-columns:var(--panel) 1fr}
 .panel{
   height:100vh;overflow:auto;padding:18px 18px 92px;
-  background:#fff;border-right:1px solid #000
+  background:#fff;border-right:0
 }
-.kicker{font-size:22px;line-height:.9;margin-bottom:3px}
 h1{font-size:15px;line-height:1;margin:0 0 8px}
-.desc{font-size:10px;line-height:1.15;max-width:280px;margin-bottom:18px}
-.rule{height:1px;background:#000;margin-bottom:14px}
+.desc{font-size:10px;line-height:1.15;max-width:280px;margin-bottom:34px}
 .section-title{
-  font-size:9px;line-height:1;margin:16px 0 9px;padding-top:12px;border-top:1px solid #000
+  font-size:9px;line-height:1;margin:30px 0 12px;padding-top:0;border-top:0
 }
 .row{
   display:grid;grid-template-columns:104px 1fr 38px;
@@ -49,20 +47,22 @@ input[type=range]::-moz-range-track{height:2px;background:#d5d5d5}
 input[type=range]::-moz-range-progress{height:2px;background:var(--accent)}
 input[type=range]::-moz-range-thumb{width:10px;height:10px;border:1px solid #cfcfcf;border-radius:50%;background:#fff}
 input[type=color]{
-  appearance:none;-webkit-appearance:none;width:24px;height:24px;padding:0;border:0;background:none;cursor:pointer
+  appearance:none;-webkit-appearance:none;width:18px;height:18px;padding:0;border:0;background:none;cursor:pointer
 }
 input[type=color]::-webkit-color-swatch-wrapper{padding:0}
 input[type=color]::-webkit-color-swatch{border:0;border-radius:0}
 input[type=color]::-moz-color-swatch{border:0;border-radius:0}
-.segmented{display:grid;gap:5px;margin:8px 0 12px}
+.segmented{display:grid;gap:0;margin:8px 0 12px;border:1px solid var(--line);overflow:hidden}
 .segmented.two{grid-template-columns:repeat(2,1fr)}
 .segmented.three{grid-template-columns:repeat(3,1fr)}
 .segmented.four{grid-template-columns:repeat(4,1fr)}
 .segmented button{
-  height:31px;border:1px solid var(--line);font-size:8px;background:#fff
+  height:31px;border:0;border-left:1px solid var(--line);font-size:8px;background:#fff
 }
-.segmented button.active{background:#0a0a0a;color:#fff;border-color:#0a0a0a}
-.palette{display:grid;grid-template-columns:104px 1fr;align-items:center;margin-top:12px}
+.segmented button:first-child{border-left:0}
+#lineStyles{margin-bottom:34px}
+.segmented button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.palette{display:grid;grid-template-columns:104px 1fr 38px;align-items:center;gap:8px;margin-top:12px}
 .palette label{font-size:9px}
 .swatches{display:flex;gap:5px}
 .seed-row{display:grid;grid-template-columns:104px 1fr;align-items:center;margin-top:10px}
@@ -81,8 +81,8 @@ input[type=color]::-moz-color-swatch{border:0;border-radius:0}
 .switch.on{background:var(--accent)}
 .switch.on::after{left:18px}
 .actions{
-  position:fixed;left:0;bottom:0;width:var(--panel);height:70px;background:#fff;border-top:1px solid #000;
-  display:grid;grid-template-columns:repeat(3,1fr);z-index:10;padding:13px 12px 15px;gap:7px
+  position:fixed;left:0;bottom:0;width:var(--panel);height:70px;background:#fff;
+  display:grid;grid-template-columns:1fr;z-index:10;padding:13px 12px 15px;gap:7px
 }
 .actions button{background:#f3f3f3;border-radius:4px;font-size:9px}
 .actions button:active{background:#000;color:#fff}
@@ -91,17 +91,20 @@ input[type=color]::-moz-color-swatch{border:0;border-radius:0}
   display:flex;align-items:center;justify-content:center;padding:34px
 }
 .canvas-shell{
-  width:min(82vh,calc(100vw - var(--panel) - 70px));aspect-ratio:1;
+  position:relative;width:min(82vh,calc(100vw - var(--panel) - 70px));aspect-ratio:1;
   display:flex;align-items:center;justify-content:center
 }
 canvas{
   display:block;max-width:100%;max-height:100%;background:var(--paper);
   box-shadow:0 0 0 1px rgba(0,0,0,.08)
 }
-.stage-meta,.stage-seed{
-  position:absolute;top:16px;font-size:9px;background:#fff;padding:5px 7px
+.stage-export{
+  position:absolute;top:12px;right:12px;z-index:2;width:28px;height:28px;padding:6px;
+  display:flex;align-items:center;justify-content:center;background:transparent;color:var(--ink);
+  text-decoration:none;opacity:0;pointer-events:none;transition:opacity .12s ease
 }
-.stage-meta{left:18px}.stage-seed{right:18px}
+.stage-export svg{display:block;width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.canvas-shell:hover .stage-export,.stage-export:focus-visible{opacity:1;pointer-events:auto}
 @media(max-width:720px){
   :root{--panel:292px}
   .panel{padding-left:14px;padding-right:14px}
@@ -109,46 +112,39 @@ canvas{
 }
 @media(max-width:600px){
   body{overflow:auto}.app{display:block}
-  .panel{height:auto;border-right:0;border-bottom:1px solid #000;padding-bottom:84px}
+  .panel{height:auto;border-right:0;border-bottom:0;padding-bottom:84px}
   .actions{width:100%}.stage{height:68vh}.canvas-shell{width:min(90vw,62vh)}
 }
 </style></head>
 <body>
 <div class="app">
 <aside class="panel">
-  <div class="kicker">07</div>
-  <h1>DIAGRAM GENERATOR</h1>
-  <div class="desc">CREATE SYSTEMS DIAGRAMS, NETWORKS, AND FLOWS.</div>
-  <div class="rule"></div>
-
-  <div class="section-title" style="margin-top:0;padding-top:0;border-top:0">LAYOUT</div>
+  <h1>Diaounce</h1>
+  <div class="desc">Network diagrams &amp; flows</div>
+  <div class="section-title" style="margin-top:0">LAYOUT</div>
   <div class="segmented four" id="layouts">
     <button data-layout="hierarchy">TREE</button><button data-layout="matrix">MATRIX</button>
     <button data-layout="radial">RADIAL</button><button data-layout="flow">FLOW</button>
   </div>
 
-  <div class="section-title">LINE STYLE</div>
-  <div class="segmented three" id="lineStyles">
-    <button data-line="straight">STRAIGHT</button><button data-line="elbow">ELBOW</button><button data-line="curve">CURVE</button>
+  <div class="section-title">STYLE</div>
+  <div class="segmented four" id="lineStyles">
+    <button data-line="straight">STRAIGHT</button><button data-line="elbow">ELBOW</button><button data-line="curve">CURVE</button><button data-line="handdrawn">HANDDRAWN</button>
   </div>
 
   <div id="controls"></div>
 
   <div class="toggle-row"><label>LABELS</label><button id="labelsToggle" class="switch on" aria-label="Labels"></button></div>
-  <div class="toggle-row"><label>ARROWS</label><button id="arrowsToggle" class="switch" aria-label="Arrows"></button></div>
 
-  <div class="section-title">COLOR</div>
   <div class="palette"><label>PALETTE</label><div class="swatches">
     <input id="ink" type="color" value="#111111"><input id="accentColor" type="color" value="#ef1749">
     <input id="gray" type="color" value="#b2b2ae"><input id="paper" type="color" value="#efede7">
   </div></div>
-  <div class="seed-row"><label>SEED</label><div class="seed-value" id="seedValue">19374</div></div>
 </aside>
 <main class="stage">
-  <div class="stage-meta">CG SYSTEM STUDY</div><div class="stage-seed" id="stageSeed">SEED 19374</div>
-  <div class="canvas-shell"><canvas id="canvas" width="1800" height="1800"></canvas></div>
+  <div class="canvas-shell"><button class="stage-export" id="export" aria-label="Download" title="Download"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path></svg></button><canvas id="canvas" width="1800" height="1800"></canvas></div>
 </main>
-<div class="actions"><button id="randomize">RANDOMIZE</button><button id="nudge">NUDGE</button><button id="export">EXPORT</button></div>
+<div class="actions"><button id="randomize">REGENERATE</button></div>
 </div>
 <script>
 "use strict";
@@ -200,17 +196,17 @@ function downloadCanvas(canvas,name,render){
 
 const canvas=document.getElementById("canvas"),ctx=canvas.getContext("2d"),W=canvas.width,H=canvas.height;
 const state={
-  seed:19374,layout:"hierarchy",lineStyle:"elbow",labels:true,arrows:false,
+  seed:19374,layout:"hierarchy",lineStyle:"elbow",labels:true,
   nodeCount:16,branching:3,nodeScale:58,lineWeight:28,spacing:64,connectionDensity:42,
-  hierarchyBias:72,accentMix:26,shapeMix:52,labelScale:42,jitter:10,
+  hierarchyBias:72,accentMix:26,shapeMix:52,labelScale:42,
   ink:"#111111",accentColor:"#ef1749",gray:"#b2b2ae",paper:"#efede7"
 };
 const defs=[
-  ["nodeCount","NODE COUNT",6,40,1],["branching","BRANCHING",1,5,1],["nodeScale","NODE SCALE",20,100,1],
-  ["lineWeight","LINE WEIGHT",10,100,1],["spacing","SPACING",20,100,1],
+  ["nodeCount","COUNT",6,40,1],["branching","BRANCHING",1,5,1],["nodeScale","SCALE",20,100,1],
+  ["lineWeight","WEIGHT",10,100,1],["spacing","SPACING",20,100,1],
   ["connectionDensity","CONNECTIONS",10,100,1],["hierarchyBias","HIERARCHY",0,100,1],
-  ["accentMix","ACCENT MIX",0,100,1],["shapeMix","SHAPE MIX",0,100,1],
-  ["labelScale","LABEL SCALE",20,100,1],["jitter","JITTER",0,45,1]
+  ["accentMix","ACCENT",0,100,1],["shapeMix","SHAPE",0,100,1],
+  ["labelScale","LABEL",20,100,1]
 ];
 defs.forEach(d=>makeSlider(document.getElementById("controls"),state,d,render));
 function syncUI(){
@@ -219,14 +215,10 @@ function syncUI(){
   document.querySelectorAll("#layouts button").forEach(b=>b.classList.toggle("active",b.dataset.layout===state.layout));
   document.querySelectorAll("#lineStyles button").forEach(b=>b.classList.toggle("active",b.dataset.line===state.lineStyle));
   document.getElementById("labelsToggle").classList.toggle("on",state.labels);
-  document.getElementById("arrowsToggle").classList.toggle("on",state.arrows);
-  document.getElementById("seedValue").textContent=state.seed;
-  document.getElementById("stageSeed").textContent="SEED "+state.seed;
 }
 document.querySelectorAll("#layouts button").forEach(b=>b.onclick=()=>{state.layout=b.dataset.layout;syncUI();render();});
 document.querySelectorAll("#lineStyles button").forEach(b=>b.onclick=()=>{state.lineStyle=b.dataset.line;syncUI();render();});
 document.getElementById("labelsToggle").onclick=()=>{state.labels=!state.labels;syncUI();render();};
-document.getElementById("arrowsToggle").onclick=()=>{state.arrows=!state.arrows;syncUI();render();};
 ["ink","accentColor","gray","paper"].forEach(k=>document.getElementById(k).oninput=e=>{state[k]=e.target.value;render();});
 
 function labelFor(i){
@@ -261,8 +253,8 @@ function buildHierarchy(r,n){
     band.forEach((node,i)=>{
       const x=margin+(W-2*margin)*(band.length===1?.5:i/(band.length-1));
       const y=margin+(H-2*margin)*(maxDepth===0?.5:d/maxDepth);
-      node.x=x+(r()-.5)*state.jitter/100*W*.06;
-      node.y=y+(r()-.5)*state.jitter/100*H*.045;
+      node.x=x;
+      node.y=y;
     });
   });
   const edges=nodes.filter(n=>n.parent!==null).map(n=>[n.parent,n.id]);
@@ -333,11 +325,6 @@ function buildGraph(){
   return graph;
 }
 
-function arrowHead(x1,y1,x2,y2,color){
-  const ang=Math.atan2(y2-y1,x2-x1),s=10+state.lineWeight*.06;
-  ctx.save();ctx.fillStyle=color;ctx.translate(x2,y2);ctx.rotate(ang);
-  ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(-s,-s*.45);ctx.lineTo(-s,s*.45);ctx.closePath();ctx.fill();ctx.restore();
-}
 function drawEdge(a,b){
   ctx.strokeStyle=hexAlpha(state.ink,.45);ctx.lineWidth=.8+state.lineWeight/100*4.2;ctx.beginPath();
   if(state.lineStyle==="curve"){
@@ -348,9 +335,22 @@ function drawEdge(a,b){
     ctx.moveTo(a.x,a.y);
     if(horizontalFirst){ctx.lineTo(b.x,a.y);ctx.lineTo(b.x,b.y);}
     else{ctx.lineTo(a.x,b.y);ctx.lineTo(b.x,b.y);}
+  }else if(state.lineStyle==="handdrawn"){
+    const edgeSeed=(state.seed + Math.round(a.x*13+a.y*17+b.x*19+b.y*23))>>>0;
+    const r=rng(edgeSeed);
+    const dx=b.x-a.x,dy=b.y-a.y,len=Math.hypot(dx,dy)||1;
+    const nx=-dy/len,ny=dx/len;
+    const steps=10;
+    ctx.moveTo(a.x,a.y);
+    for(let i=1;i<steps;i++){
+      const t=i/steps;
+      const taper=Math.sin(Math.PI*t);
+      const wobble=(r()-.5)*Math.min(22,len*.035)*taper;
+      ctx.lineTo(a.x+dx*t+nx*wobble,a.y+dy*t+ny*wobble);
+    }
+    ctx.lineTo(b.x,b.y);
   }else{ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);}
   ctx.stroke();
-  if(state.arrows)arrowHead(a.x,a.y,b.x,b.y,state.ink);
 }
 function drawNode(n,r){
   const s=n.size;
@@ -383,27 +383,18 @@ function render(){
   ctx.font="600 16px Helvetica,Arial,sans-serif";ctx.fillText("SYSTEM MAP",W*.055,H*.955);
   ctx.font="600 11px Helvetica,Arial,sans-serif";ctx.fillText(`NODES ${g.nodes.length} / ${state.layout.toUpperCase()} / ${state.seed}`,W*.055,H*.973);
   ctx.fillRect(W*.84,H*.952,W*.105,2);
-  document.getElementById("seedValue").textContent=state.seed;
-  document.getElementById("stageSeed").textContent="SEED "+state.seed;
 }
 
 function randomize(){
   const r=rng((Date.now()^Math.floor(performance.now()*100000))>>>0);
-  state.seed=Math.floor(10000+r()*89999);state.layout=pick(["hierarchy","matrix","radial","flow"],r);state.lineStyle=pick(["straight","elbow","curve"],r);
+  state.seed=Math.floor(10000+r()*89999);state.layout=pick(["hierarchy","matrix","radial","flow"],r);state.lineStyle=pick(["straight","elbow","curve","handdrawn"],r);
   state.nodeCount=Math.round(10+r()*24);state.branching=Math.round(2+r()*3);state.nodeScale=Math.round(35+r()*55);
   state.lineWeight=Math.round(16+r()*52);state.spacing=Math.round(42+r()*50);state.connectionDensity=Math.round(22+r()*62);
   state.hierarchyBias=Math.round(35+r()*64);state.accentMix=Math.round(10+r()*45);state.shapeMix=Math.round(28+r()*68);
-  state.labelScale=Math.round(28+r()*54);state.jitter=Math.round(r()*18);state.labels=r()>.18;state.arrows=r()>.72;
-  syncUI();render();
-}
-function nudge(){
-  const r=rng(state.seed+1507);state.seed=(state.seed+1+Math.floor(r()*67))%99999;
-  const d={nodeCount:2,branching:1,nodeScale:6,lineWeight:5,spacing:5,connectionDensity:6,hierarchyBias:5,accentMix:4,shapeMix:5,labelScale:4,jitter:3};
-  defs.forEach(([k,,min,max])=>{state[k]=clamp(Math.round(state[k]+(r()-.5)*d[k]*1.3),min,max);});
+  state.labelScale=Math.round(28+r()*54);state.labels=r()>.18;
   syncUI();render();
 }
 document.getElementById("randomize").onclick=randomize;
-document.getElementById("nudge").onclick=nudge;
-document.getElementById("export").onclick=()=>downloadCanvas(canvas,`cg-diagram-${state.seed}.png`,render);
+document.getElementById("export").onclick=()=>downloadCanvas(canvas,`diaounce-${state.seed}.png`,render);
 syncUI();render();
 </script></body></html>
