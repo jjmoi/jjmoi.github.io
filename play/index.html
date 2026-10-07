@@ -51,18 +51,20 @@
 	</style>
 	<!-- TIME -->
 	<script>
+	document.addEventListener("DOMContentLoaded", function () {
 		function updateTime() {
 			document.getElementById("time").textContent =
 				new Date().toLocaleTimeString([], {
-					hour: "2-digit",
-					minute: "2-digit"
+					hour: "numeric",
+					minute: "2-digit",
 					hour12: true
 				});
 		}
 
 		updateTime();
 		setInterval(updateTime, 1000);
-	</script>
+	});
+</script>
 </head>
 <body>
 	<!-- NAV -->
