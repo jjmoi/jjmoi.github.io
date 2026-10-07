@@ -25,25 +25,12 @@
 		::-moz-selection {background: black; color: #001;}
 		::selection {background: black; color: #001;}
 
-		/* PLAYGROUND */
-		.row .project-image {float: right;}
-		.project-copy::after {content: ""; display: table; clear: both;}
-		.project-copy .project-text,
-		.project-copy .project-arrow {width: 100%;}
-		.project-copy .project-arrow {text-align: left; padding-top: 30px;}
-		.project-text p+p {padding-top: 0;}
-
-		@media only screen and (max-width: 1500px) {
-			.project-copy .project-arrow {padding-top: 24px;}
-		}
+		/* TEMP */
+		#desktop-lastcase {padding-bottom: 590px;}
+		#rwd-lastcase {padding-bottom: 350px;}
 
 		@media only screen and (max-width: 1111px) {
-			.playground-title {display: none;}
-			.playground-project {padding-top: 0;}
-			.playground-project + .playground-project {margin-top: 120px;}
-			.row .project-image {float: left; margin-bottom: 20px;}
-			.project-copy .project-text {width: 90%;}
-			.project-copy .project-arrow {width: 10%; text-align: right; padding-top: 0;}
+			#rwd-lastcase {padding-bottom: 560px;}
 		}
 	</style>
 </head>
@@ -80,76 +67,69 @@
 		</div>
 	</div>
 	<!-- PLAYGROUND -->
-	<div class="container parasection first all-device playground">
-		<div class="row playground-title">
+	<div class="container parasection first all-device desktop">
+		<div class="row">
 			<div class="col-10">
 				<p>Playground</p>
 			</div>
 		</div>
-		<div class="row section-padtop playground-project">
-			<a href="04-ephemeral-software" class="col-5 resize project-image" id="blog">
+		<!-- PLAYGROUND DESKTOP -->
+		<div class="row section-padtop">
+			<a href="04-ephemeral-software" class="col-4" id="blog">
+				<p>Cell Field</p>
+				<p>Generative motion graphics tool for creating abstract cellular visuals for motion backgrounds, installations, and experimental image making.</p>
+				<p>→</p>
+			</a>
+			<div class="col-1"></div>
+			<a href="04-ephemeral-software" class="col-5 resize" id="blog">
 				<img src="img-04.png">
 			</a>
-			<a href="04-ephemeral-software" class="col-4 project-copy" id="blog">
-				<div class="row">
-					<div class="col-9-sm project-text">
-						<p>Cell Field</p>
-						<p>Generative motion graphics tool for creating abstract cellular visuals for motion backgrounds, installations, and experimental image making.</p>
-					</div>
-					<div class="col-1-sm project-arrow right">
-						<p>→</p>
-					</div>
-				</div>
-			</a>
 		</div>
-		<div class="row section-padtop playground-project">
-			<a href="07-minus-one-to-zero" class="col-5 resize project-image" id="blog">
+		<div class="row section-padtop">
+			<a href="07-minus-one-to-zero" class="col-4" id="blog">
+				<p>Diaounce</p>
+				<p>Technical diagramming tool for creating system architectures and flows by adjusting structure, density, hierarchy, connections, and node forms.</p>
+				<p>→</p>
+			</a>
+			<div class="col-1"></div>
+			<a href="07-minus-one-to-zero" class="col-5 resize" id="blog">
 				<img src="img-03.png">
 			</a>
-			<a href="07-minus-one-to-zero" class="col-4 project-copy" id="blog">
-				<div class="row">
-					<div class="col-9-sm project-text">
-						<p>Diaounce</p>
-						<p>Technical diagramming tool for creating system architectures and flows by adjusting structure, density, hierarchy, connections, and node forms.</p>
-					</div>
-					<div class="col-1-sm project-arrow right">
-						<p>→</p>
-					</div>
-				</div>
-			</a>
 		</div>
-		<div class="row section-padtop playground-project">
-			<a href="04-ephemeral-software" class="col-5 resize project-image" id="blog">
+	</div>
+
+	<!-- PLAYGROUND RWD -->
+	<div class="container parasection home rwd">
+		<a href="04-ephemeral-software" class="row">
+			<div class="col-10">
 				<img src="img-04.png">
-			</a>
-			<a href="04-ephemeral-software" class="col-4 project-copy" id="blog">
-				<div class="row">
-					<div class="col-9-sm project-text">
-						<p>Cell Field</p>
-						<p>Generative motion graphics tool for creating abstract cellular visuals for motion backgrounds, installations, and experimental image making.</p>
-					</div>
-					<div class="col-1-sm project-arrow right">
-						<p>→</p>
-					</div>
-				</div>
-			</a>
-		</div>
-		<div class="row section-padtop playground-project">
-			<a href="07-minus-one-to-zero" class="col-5 resize project-image" id="blog">
+			</div>
+		</a>
+		<a href="04-ephemeral-software" class="row blog-title">
+			<div class="col-9-sm">
+				<p>Cell Field</p>
+				<p>Generative motion graphics tool for creating abstract cellular visuals for motion backgrounds, installations, and experimental image making.</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>→</p>
+			</div>
+		</a>
+	</div>
+	<div class="container parasection home rwd">
+		<a href="07-minus-one-to-zero" class="row">
+			<div class="col-10">
 				<img src="img-03.png">
-			</a>
-			<a href="07-minus-one-to-zero" class="col-4 project-copy" id="blog">
-				<div class="row">
-					<div class="col-9-sm project-text">
-						<p>Diaounce</p>
-						<p>Technical diagramming tool for creating system architectures and flows by adjusting structure, density, hierarchy, connections, and node forms.</p>
-					</div>
-					<div class="col-1-sm project-arrow right">
-						<p>→</p>
-					</div>
-				</div>
-			</a>
-		</div>
+			</div>
+		</a>
+		<a href="07-minus-one-to-zero" class="row blog-title">
+			<div class="col-9-sm">
+				<p>Diaounce</p>
+				<p>Technical diagramming tool for creating system architectures and flows by adjusting structure, density, hierarchy, connections, and node forms.</p>
+			</div>
+			<div class="col-1-sm right">
+				<p>→</p>
+			</div>
+		</a>
 	</div>
 	<!-- FOOTER DESKTOP+RWD -->
 	<div class="container parasection all-device" id="footer-all-devices">
