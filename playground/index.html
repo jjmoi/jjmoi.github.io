@@ -13,9 +13,6 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<link rel="shortcut icon" type="image/x-icon" href="/img/thoughts.png">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Geist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="/css/grid.css">
 	<title>JJ → PLAYGROUND</title>
 	<style>
@@ -25,119 +22,102 @@
 		::-moz-selection {background: black; color: #001;}
 		::selection {background: black; color: #001;}
 
-		/* TEMP */
-		#desktop-lastcase {padding-bottom: 590px;}
-		#rwd-lastcase {padding-bottom: 350px;}
+		/* NAV */
+		.nav-logo {width: 50%;}
+
+		/* PLAYGROUND */
+		.row .project-image {float: right;}
+		.project-copy::after {content: ""; display: table; clear: both;}
+		.project-copy .project-text,
+		.project-copy .project-arrow {width: 100%;}
+		.project-copy .project-arrow {text-align: left; padding-top: 30px;}
+
+		/* RWD */
+		@media only screen and (max-width: 1500px) {
+			.project-copy .project-arrow {padding-top: 24px;}
+		}
 
 		@media only screen and (max-width: 1111px) {
-			#rwd-lastcase {padding-bottom: 560px;}
+			.nav {width: 92%;}
+			.nav-logo {width: 90%;}
+			.nav-work, .nav-playground, .nav-thoughts {display: none;}
+			.playground-title {display: none;}
+			.playground-project {padding-top: 0;}
+			.playground-project + .playground-project {margin-top: 120px;}
+			.row .project-image {float: left; margin-bottom: 20px;}
+			.project-copy .project-text {width: 90%;}
+			.project-copy .project-arrow {width: 10%; text-align: right; padding-top: 0;}
 		}
 	</style>
 </head>
 <body>
-	<!-- NAV DESKTOP -->
-	<div class="container nav desktop">
+	<!-- NAV -->
+	<div class="container nav">
 		<div class="row">
-			<div class="col-5">
+			<div class="col-5-sm nav-logo">
 				<a href="/">JJ</a>
 			</div>
-			<div class="col-1">
+			<div class="col-1-sm nav-work">
 				<a href="/">Work</a>
 			</div>
-			<div class="col-1">
+			<div class="col-1-sm nav-playground">
 				<a href="/playground">Playground</a>
 			</div>
-			<div class="col-1">
+			<div class="col-1-sm nav-thoughts">
 				<a href="/thoughts">Thoughts</a>
 			</div>
-			<div class="col-2 right">
-				<a href="/info">Info</a>
-			</div>
-		</div>
-	</div>
-	<!-- NAV RWD -->
-	<div class="container nav rwd">
-		<div class="row">
-			<div class="col-9-sm">
-				<a href="/folio">JJ</a>
-			</div>
-			<div class="col-1-sm right">
+			<div class="col-2-sm nav-info right">
 				<a href="/info">Info</a>
 			</div>
 		</div>
 	</div>
 	<!-- PLAYGROUND -->
-	<div class="container parasection first all-device desktop">
-		<div class="row">
+	<div class="container parasection first all-device playground">
+		<div class="row playground-title">
 			<div class="col-10">
 				<p>Playground</p>
 			</div>
 		</div>
-		<!-- PLAYGROUND DESKTOP -->
-		<div class="row section-padtop">
-			<a href="04-ephemeral-software" class="col-4" id="blog">
-				<p>Cell Field</p>
-				<p>Generative motion graphics tool for creating abstract cellular visuals for motion backgrounds, installations, and experimental image making.</p>
-				<p>→</p>
-			</a>
-			<div class="col-1"></div>
-			<a href="04-ephemeral-software" class="col-5 resize" id="blog">
+		<div class="row section-padtop playground-project">
+			<a href="04-ephemeral-software" class="col-5 resize project-image" id="blog">
 				<img src="img-04.png">
 			</a>
-		</div>
-		<div class="row section-padtop">
-			<a href="07-minus-one-to-zero" class="col-4" id="blog">
-				<p>Diaounce</p>
-				<p>Technical diagramming tool for creating system architectures and flows by adjusting structure, density, hierarchy, connections, and node forms.</p>
-				<p>→</p>
+			<a href="04-ephemeral-software" class="col-4 project-copy" id="blog">
+				<div class="row">
+					<div class="col-9-sm project-text">
+						<p>Cell Field</p>
+						<p>Generative motion graphics tool for creating abstract cellular visuals for motion backgrounds, installations, and experimental image making.</p>
+					</div>
+					<div class="col-1-sm project-arrow right">
+						<p>→</p>
+					</div>
+				</div>
 			</a>
-			<div class="col-1"></div>
-			<a href="07-minus-one-to-zero" class="col-5 resize" id="blog">
+		</div>
+		<div class="row section-padtop playground-project">
+			<a href="07-minus-one-to-zero" class="col-5 resize project-image" id="blog">
 				<img src="img-03.png">
 			</a>
+			<a href="07-minus-one-to-zero" class="col-4 project-copy" id="blog">
+				<div class="row">
+					<div class="col-9-sm project-text">
+						<p>Diaounce</p>
+						<p>Technical diagramming tool for creating system architectures and flows by adjusting structure, density, hierarchy, connections, and node forms.</p>
+					</div>
+					<div class="col-1-sm project-arrow right">
+						<p>→</p>
+					</div>
+				</div>
+			</a>
 		</div>
 	</div>
-
-	<!-- PLAYGROUND RWD -->
-	<div class="container parasection home rwd">
-		<a href="04-ephemeral-software" class="row">
-			<div class="col-10">
-				<img src="img-04.png">
-			</div>
-		</a>
-		<a href="04-ephemeral-software" class="row blog-title">
-			<div class="col-9-sm">
-				<p>Cell Field</p>
-				<p>Generative motion graphics tool for creating abstract cellular visuals for motion backgrounds, installations, and experimental image making.</p>
-			</div>
-			<div class="col-1-sm right">
-				<p>→</p>
-			</div>
-		</a>
-	</div>
-	<div class="container parasection home rwd">
-		<a href="07-minus-one-to-zero" class="row">
-			<div class="col-10">
-				<img src="img-03.png">
-			</div>
-		</a>
-		<a href="07-minus-one-to-zero" class="row blog-title">
-			<div class="col-9-sm">
-				<p>Diaounce</p>
-				<p>Technical diagramming tool for creating system architectures and flows by adjusting structure, density, hierarchy, connections, and node forms.</p>
-			</div>
-			<div class="col-1-sm right">
-				<p>→</p>
-			</div>
-		</a>
-	</div>
-	<!-- FOOTER DESKTOP+RWD -->
+	<!-- FOOTER -->
 	<div class="container parasection all-device" id="footer-all-devices">
 		<div class="row">
-			<div class="col-6-sm">
-				<a href="/">-1 → 0</a>
+			<div class="col-5-sm">
+				<p>-1 → 0</p>
 			</div>
-			<div class="col-2-sm right">
+			<div class="col-3-sm right">
 				<a href="https://www.google.com/maps/place/Mt+Hood/@45.373615,-122.0255409,10z" target="_blank">45°N 122°W</a>
 			</div>
 			<div class="col-2-sm right">
