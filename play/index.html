@@ -25,7 +25,7 @@
 		/* NAV */
 		.nav-logo {width: 50%;}
 
-		/* play */
+		/* PLAY */
 		.row .project-image {float: right;}
 		.project-copy::after {content: ""; display: table; clear: both;}
 		.project-copy .project-text,
@@ -49,6 +49,20 @@
 			.project-copy .project-arrow {width: 10%; text-align: right; padding-top: 0;}
 		}
 	</style>
+	<!-- TIME -->
+	<script>
+		function updateTime() {
+			document.getElementById("time").textContent =
+				new Date().toLocaleTimeString([], {
+					hour: "2-digit",
+					minute: "2-digit"
+					hour12: true
+				});
+		}
+
+		updateTime();
+		setInterval(updateTime, 1000);
+	</script>
 </head>
 <body>
 	<!-- NAV -->
@@ -71,7 +85,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- play -->
+	<!-- PLAY -->
 	<div class="container parasection first all-device play">
 		<div class="row play-title">
 			<div class="col-10">
@@ -126,17 +140,4 @@
 		</div>
 	</div>
 </body>
-<script>
-	function updateTime() {
-		document.getElementById("time").textContent =
-			new Date().toLocaleTimeString([], {
-				hour: "2-digit",
-				minute: "2-digit"
-				hour12: true
-			});
-	}
-
-	updateTime();
-	setInterval(updateTime, 1000);
-</script>
 </html>
