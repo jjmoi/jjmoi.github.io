@@ -51,21 +51,21 @@
 	</style>
 	<!-- TIME -->
 	<script>
-	document.addEventListener("DOMContentLoaded", function () {
-		function updateTime() {
-			document.getElementById("time").textContent =
-				new Date().toLocaleTimeString("en-US", {
-					timeZone: "America/Los_Angeles",
-					hour: "numeric",
-					minute: "2-digit",
-					hour24: true
-				});
-		}
+		document.addEventListener("DOMContentLoaded", function () {
+			function updateTime() {
+				document.getElementById("time").textContent =
+					new Date().toLocaleTimeString("en-US", {
+						timeZone: "America/Los_Angeles",
+						hour: "numeric",
+						minute: "2-digit",
+						hour12: false
+					});
+			}
 
-		updateTime();
-		setInterval(updateTime, 1000);
-	});
-</script>
+			updateTime();
+			setInterval(updateTime, 1000);
+		});
+	</script>
 </head>
 <body>
 	<!-- NAV -->
