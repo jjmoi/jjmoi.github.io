@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- v0.190118 -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-122843739-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'UA-122843739-1');
+	</script>
+	<meta name="robots" content="noindex"> <!-- No bots indexing -->
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="shortcut icon" type="image/x-icon" href="/img/thoughts.png">
+	<link rel="stylesheet" href="/css/grid.css">
+	<title>JJ → PLAY</title>
+	<style>
+		/* BACKGROUND */
+		html {background-color: black;}
+		body {height: auto; background-color: white;}
+		::-moz-selection {background: black; color: #001;}
+		::selection {background: black; color: #001;}
+
+		/* NAV */
+		.nav-logo {width: 50%;}
+
+		/* PLAY */
+		.row .project-image {float: right;}
+		.project-copy::after {content: ""; display: table; clear: both;}
+		.project-copy .project-text,
+		.project-copy .project-arrow {width: 100%;}
+		.project-copy .project-arrow {text-align: left; padding-top: 30px;}
+		#blog p+p {padding-top: 0;}
+
+		/* RWD */
+		@media only screen and (max-width: 1500px) {
+			.project-copy .project-arrow {padding-top: 24px;}
+		}
+
+		@media only screen and (max-width: 1111px) {
+			.nav {width: 92%;}
+			.nav-logo {width: 90%;}
+			.nav-work, .nav-play, .nav-work {display: none;}
+			.play-project {padding-top: 0;}
+			.play-project + .play-project {margin-top: 120px;}
+			.row .project-image {float: left; margin-bottom: 20px;}
+			.project-copy .project-text {width: 90%;}
+			.project-copy .project-arrow {width: 10%; text-align: right; padding-top: 0;}
+		}
+	</style>
+	<!-- TIME -->
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			function updateTime() {
+				document.getElementById("time").textContent =
+					new Date().toLocaleTimeString("en-US", {
+						timeZone: "America/Los_Angeles",
+						hour: "numeric",
+						minute: "2-digit",
+						hour12: false
+					});
+			}
+			updateTime();
+			setInterval(updateTime, 1000);
+		});
+	</script>
+</head>
+<body>
+	<!-- NAV -->
+	<div class="container nav">
+		<div class="row">
+			<div class="col-5-sm nav-logo">
+				<a href="/">JJ</a>
+			</div>
+			<div class="col-2-sm nav-work">
+				<a href="/">-1 → 0</a>
+			</div>
+			<div class="col-1-sm nav-work right">
+				<a href="/">Work</a>
+			</div>
+			<div class="col-1-sm nav-play right">
+				<a href="/play">Play</a>
+			</div>
+			<div class="col-1-sm nav-info right">
+				<a href="/info">Info</a>
+			</div>
+		</div>
+	</div>
+	<!-- PLAY -->
+	<div class="container parasection first all-device play">
+		<div class="row">
+			<div class="col-10">
+				<p>Play</p>
+			</div>
+		</div>
+		<div class="row section-padtop play-project">
+			<a href="strand" class="col-5 resize project-image" id="blog">
+				<img src="img-01.png">
+			</a>
+			<a href="strand" class="col-4 project-copy" id="blog">
+				<div class="row">
+					<div class="col-9-sm project-text">
+						<p>Strand</p>
+						<p>Particle based generative art instrument exploring recognizable protein structures and molecular patterns</p>
+					</div>
+					<div class="col-1-sm project-arrow right">
+						<p>→</p>
+					</div>
+				</div>
+			</a>
+		</div>
+		<div class="row section-padtop play-project">
+			<a href="y2kcg" class="col-5 resize project-image" id="blog">
+				<img src="img-02.png">
+			</a>
+			<a href="y2kcg" class="col-4 project-copy" id="blog">
+				<div class="row">
+					<div class="col-9-sm project-text">
+						<p>Y2KCG</p>
+						<p>Graphic art generator inspired by early computer graphics and Y2K aesthetics</p>
+					</div>
+					<div class="col-1-sm project-arrow right">
+						<p>→</p>
+					</div>
+				</div>
+			</a>
+		</div>
+		<!--
+		<div class="row section-padtop play-project">
+			<a href="thoughts" class="col-5 resize project-image" id="blog">
+				<img src="img-03.png">
+			</a>
+			<a href="thoughts" class="col-4 project-copy" id="blog">
+				<div class="row">
+					<div class="col-9-sm project-text">
+						<p>Thoughts</p>
+						<p>Repository of unfiltered thoughts on design, shared as executable prompts to save you from reading another AI slop literature</p>
+					</div>
+					<div class="col-1-sm project-arrow right">
+						<p>→</p>
+					</div>
+				</div>
+			</a>
+		</div>
+		-->
+		<div class="row section-padtop play-project">
+			<a href="pixies" class="col-5 resize project-image" id="blog">
+				<img src="img-04.png">
+			</a>
+			<a href="pixies" class="col-4 project-copy" id="blog">
+				<div class="row">
+					<div class="col-9-sm project-text">
+						<p>Pixies</p>
+						<p>Pattern and animation generator for low resolution bitmap compositions</p>
+					</div>
+					<div class="col-1-sm project-arrow right">
+						<p>→</p>
+					</div>
+				</div>
+			</a>
+		</div>
+		<div class="row section-padtop play-project">
+			<a href="sky" class="col-5 resize project-image" id="blog">
+				<img src="img-05.png">
+			</a>
+			<a href="sky" class="col-4 project-copy" id="blog">
+				<div class="row">
+					<div class="col-9-sm project-text">
+						<p>Sky</p>
+						<p>Animated gradient generator for cloudy color fields</p>
+					</div>
+					<div class="col-1-sm project-arrow right">
+						<p>→</p>
+					</div>
+				</div>
+			</a>
+		</div>
+		<div class="row section-padtop play-project">
+			<a href="dianounce" class="col-5 resize project-image" id="blog">
+				<img src="img-06.png">
+			</a>
+			<a href="dianounce" class="col-4 project-copy" id="blog">
+				<div class="row">
+					<div class="col-9-sm project-text">
+						<p>Dianounce</p>
+						<p>Technical diagramming tool for system architectures and network flows</p>
+					</div>
+					<div class="col-1-sm project-arrow right">
+						<p>→</p>
+					</div>
+				</div>
+			</a>
+		</div>
+	</div>
+	<!-- FOOTER -->
+	<div class="container parasection all-device" id="footer-all-devices">
+		<div class="row">
+			<div class="col-1-sm">
+				<a href="https://www.linkedin.com/in/jjmoi" target="_blank">LI</a>
+			</div>
+			<div class="col-1-sm">
+				<a href="https://x.com/goodnightjj" target="_blank">X</a>
+			</div>
+			<div class="col-3-sm">
+				<a href="https://www.instagram.com/goodnightjj" target="_blank">IG</a>
+			</div>
+			<div class="col-2-sm">
+				<a href="https://www.google.com/maps/place/Mt+Hood/@45.373615,-122.0255409,10z" target="_blank">45°N 122°W</a>
+			</div>
+			<div class="col-1-sm right">
+				<p id="time"></p>
+			</div>
+			<div class="col-2-sm right">
+				<p><span id="copyrights">©</span> 2046</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
