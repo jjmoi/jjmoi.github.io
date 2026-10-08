@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>JJ → STRAND</title>
+<title>Strand</title>
 <meta name="description" content="A particle-based generative art instrument exploring recognized protein structural motifs.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23110e1e'/%3E%3Ctext x='9' y='24' fill='%23e0cbd5' font-family='Georgia' font-size='25'%3ES%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,7 +28,7 @@ button, input, select { font: inherit; text-transform: inherit; }
 button { color: inherit; cursor: pointer; }
 button, input, select { -webkit-tap-highlight-color: transparent; }
 button:focus-visible, input:focus-visible, summary:focus-visible, canvas:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
-.select-wrap select:focus-visible, .swatch:focus-visible { outline: none; }
+.swatch:focus-visible, .form-option:focus-visible { outline: none; }
 button svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
 .stage { position: fixed; inset: 0; overflow: hidden; background: var(--stage); }
 #canvas { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; cursor: grab; outline-offset: -4px; }
@@ -40,10 +40,6 @@ h1 { margin: 6px 0 0; font-size: 10px; font-weight: 400; line-height: 1.1; lette
 .controls { position: absolute; top: 136px; bottom: 72px; left: 32px; width: 238px; padding: 0 8px 8px 0; overflow: auto hidden; scrollbar-width: none; overscroll-behavior: contain; background: none; border: 0; box-shadow: none; }
 .controls::-webkit-scrollbar { display: none; }
 .form-section { margin-top: 0; }
-.select-wrap { position: relative; }
-select { width: 100%; padding: 8px 28px 8px 0; appearance: none; color: var(--text); font-size: 10px; letter-spacing: 1.2px; background: transparent; border: 0; border-radius: 0; cursor: pointer; }
-select option { padding: 8px 14px; padding-inline: 14px; color: var(--text); font: inherit; letter-spacing: 1.2px; background: var(--option); }
-.select-arrow { position: absolute; top: 50%; right: 0; width: 12px; height: 12px; pointer-events: none; fill: none; stroke: currentColor; stroke-width: 1; transform: translateY(-50%); }
 details { margin-top: 10px; background: none; border: 0; }
 summary { display: flex; align-items: center; justify-content: space-between; padding: 1px 0 2px; color: var(--muted); font: inherit; font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase; list-style: none; cursor: pointer; user-select: none; }
 summary::-webkit-details-marker { display: none; }
@@ -58,9 +54,10 @@ output { color: var(--muted); font: inherit; font-variant-numeric: tabular-nums;
 .range-field input::-moz-range-thumb { width: 6px; height: 6px; background: var(--accent); border: 0; border-radius: 50%; }
 .range-field input:focus-visible { outline-offset: 1px; }
 .palette-label { margin: 8px 0 7px; font-size: 10px; letter-spacing: 1.2px; }
-.palettes { display: flex; flex-wrap: wrap; gap: 5px 13px; padding: 0; }
-.swatch { width: auto; height: auto; padding: 0 0 2px; color: var(--muted); font-size: 10px; letter-spacing: 1.2px; background: none; border: 0; border-bottom: 1px solid transparent; border-radius: 0; }
-.swatch.active { color: var(--text); border-bottom-color: currentColor; }
+.palettes, .form-options { display: flex; flex-wrap: wrap; gap: 5px 13px; padding: 0; }
+.form-options { padding-top: 8px; }
+.swatch, .form-option { width: auto; height: auto; padding: 0 0 2px; color: var(--muted); font-size: 10px; letter-spacing: 1.2px; background: none; border: 0; border-bottom: 1px solid transparent; border-radius: 0; }
+.swatch.active, .form-option.active { color: var(--text); border-bottom-color: currentColor; }
 .outline-button { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 8px 11px; color: var(--text); font-size: 10px; letter-spacing: 1.2px; background: transparent; border: 0; border-radius: 0; }
 .outline-button:hover { background: color-mix(in srgb, var(--text) 6%, transparent); }
 .viewport-tools { position: absolute; bottom: 22px; left: 50%; display: flex; align-items: center; justify-content: center; gap: 8px; white-space: nowrap; background: none; border: 0; transform: translateX(-50%); }
@@ -77,11 +74,11 @@ output { color: var(--muted); font: inherit; font-variant-numeric: tabular-nums;
   .specimen-label { margin-top: 13px; font-size: 10px; }
   h1 { max-width: 180px; font-size: 10px; }
   .controls { top: 124px; bottom: 110px; width: 177px; padding-right: 5px; }
-  .range-field label, .palette-label, select, .outline-button { font-size: 10px; }
+  .range-field label, .palette-label, .outline-button { font-size: 10px; }
   .range-field { margin-top: 6px; }
   .range-field output { font-size: 10px; }
   summary { font-size: 10px; letter-spacing: 1.2px; }
-  .palettes { gap: 5px 10px; }
+  .palettes, .form-options { gap: 5px 10px; }
   .viewport-tools { bottom: 12px; width: calc(100% - 20px); gap: 6px; flex-wrap: wrap; }
   .viewport-tools .outline-button { height: 34px; }
   .viewport-tools > #pause { min-width: 72px; height: 34px; }
@@ -95,15 +92,15 @@ output { color: var(--muted); font: inherit; font-variant-numeric: tabular-nums;
 <body>
 <main class="stage" id="stage">
 <canvas id="canvas" tabindex="0" aria-label="Animated three-dimensional protein motif made from particles. Drag to rotate, scroll or pinch to zoom. Arrow keys rotate; plus and minus zoom; Space pauses."></canvas>
-<div class="identity"><span class="brand">STRAND</span><div class="specimen-label">SPECIMEN <span id="specimen">001</span></div><h1 id="form-title">Alpha helix</h1></div>
+<div class="identity"><span class="brand">STRAND</span><div class="specimen-label">SPECIMEN <span id="specimen">001</span></div><h1 id="form-title">Helix</h1></div>
 <aside class="controls" aria-label="Artwork controls">
-<details class="form-section"><summary>Strand form <span class="disclosure" aria-hidden="true">+</span></summary><div class="section-fields"><label class="sr-only" for="form">Strand form</label><div class="select-wrap"><select id="form"><option value="alphaHelix">Alpha helix</option><option value="coiledCoil">Coiled-coil</option><option value="collagen">Collagen triple helix</option><option value="proteinKnot">Protein knot</option><option value="globule">Globule</option></select><svg class="select-arrow" viewBox="0 0 12 12" aria-hidden="true"><path d="m3 4.5 3 3 3-3"/></svg></div></div></details>
+<details class="form-section"><summary>Strand form <span class="disclosure" aria-hidden="true">+</span></summary><div class="section-fields"><div class="form-options" aria-label="Strand form"><button class="form-option" data-form="coiledCoil" aria-pressed="false">Coil</button><button class="form-option active" data-form="collagen" aria-pressed="true">Helix</button><button class="form-option" data-form="proteinKnot" aria-pressed="false">Knot</button><button class="form-option" data-form="globule" aria-pressed="false">Globule</button></div></div></details>
 <details><summary>Geometry <span class="disclosure" aria-hidden="true">+</span></summary><div class="section-fields">
-<div class="range-field"><label for="width">Width <output id="width-value"></output></label><input id="width" type="range" min="10" max="160" step="1" value="34"></div>
-<div class="range-field"><label for="ribbonTwist">Twist <output id="ribbonTwist-value"></output></label><input id="ribbonTwist" type="range" min="0" max="6" step="0.1" value="1.2"></div>
+<div class="range-field"><label for="width">Width <output id="width-value"></output></label><input id="width" type="range" min="10" max="160" step="1" value="20"></div>
+<div class="range-field"><label for="ribbonTwist">Twist <output id="ribbonTwist-value"></output></label><input id="ribbonTwist" type="range" min="0" max="6" step="0.1" value="0.65"></div>
 <div class="range-field"><label for="openings">Openings <output id="openings-value"></output></label><input id="openings" type="range" min="0" max="80" step="1" value="0"></div>
-<div class="range-field"><label for="twist">Coiling <output id="twist-value"></output></label><input id="twist" type="range" min="1" max="12" step="0.1" value="4.8"></div>
-<div class="range-field"><label for="fold">Folding <output id="fold-value"></output></label><input id="fold" type="range" min="0" max="100" step="1" value="22"></div>
+<div class="range-field"><label for="twist">Coiling <output id="twist-value"></output></label><input id="twist" type="range" min="1" max="12" step="0.1" value="2.7"></div>
+<div class="range-field"><label for="fold">Folding <output id="fold-value"></output></label><input id="fold" type="range" min="0" max="100" step="1" value="24"></div>
 </div></details>
 <details><summary>Particles <span class="disclosure" aria-hidden="true">+</span></summary><div class="section-fields">
 <div class="range-field"><label for="density">Density <output id="density-value"></output></label><input id="density" type="range" min="3000" max="60000" value="36000" step="1000"></div>
@@ -124,28 +121,21 @@ output { color: var(--muted); font: inherit; font-variant-numeric: tabular-nums;
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 </main>
 <script type="module">
+globalThis.__STRAND_WORKER_SOURCE__="const TAU = Math.PI * 2;\nconst forms = {\n  coiledCoil: 'Coil', collagen: 'Helix', proteinKnot: 'Knot', globule: 'Globule'\n};\nconst formSettings = {\n  coiledCoil:{twist:3.2,fold:35,width:28,layers:2,layerGap:0,ribbonTwist:1.1,openings:0},\n  collagen:{twist:2.7,fold:24,width:20,layers:3,layerGap:0,ribbonTwist:.65,openings:0},\n  proteinKnot:{twist:2.4,fold:58,width:31,layers:1,layerGap:0,ribbonTwist:1.7,openings:0},\n  globule:{twist:5.8,fold:68,width:27,layers:1,layerGap:0,ribbonTwist:1.4,openings:0}\n};\nfunction randomGenerator(seed){return function(){let t=seed+=0x6D2B79F5;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return ((t^t>>>14)>>>0)/4294967296;};}\nconst normalize=(x,y,z)=>{const m=Math.hypot(x,y,z);return m>1e-8?[x/m,y/m,z/m]:[1,0,0];};\nfunction path(t,s,layer=0){const u=t*TAU,f=s.fold/100;let r,phase;\n switch(s.form){\n case 'coiledCoil':{\n  phase=layer*Math.PI;const supercoil=u*s.twist+phase,r=.55+f*.18;\n  return [r*Math.cos(supercoil),(t-.5)*5.7,r*Math.sin(supercoil)];\n }\n case 'collagen':{\n  phase=layer*TAU/3;const triple=u*s.twist+phase,r=.47+f*.10;\n  return [r*Math.cos(triple),(t-.5)*5.8,r*Math.sin(triple)];\n }\n case 'proteinKnot':{\n  r=1.35+.48*Math.cos(3*u);return [r*Math.cos(2*u),r*Math.sin(2*u),(.78+f*.42)*Math.sin(3*u)];\n }\n case 'globule':{\n  const longitude=u*s.twist*.42,latitude=.72*Math.sin(3*u)+.26*Math.sin(7*u),radius=1.18+.18*Math.sin(5*u)+f*.12*Math.cos(9*u);\n  return [radius*Math.cos(latitude)*Math.cos(longitude),radius*Math.sin(latitude)+.18*Math.sin(11*u),radius*Math.cos(latitude)*Math.sin(longitude)];\n }\n default:throw Error('Unknown strand form');\n }\n}\nfunction createSurface(s){\n const resolution=1200,allFrames=[];\n for(let layer=0;layer<s.layers;layer++){\n  const positions=new Float64Array((resolution+1)*3),tangents=new Float64Array((resolution+1)*3),normals=new Float64Array((resolution+1)*3);let normal;\n  for(let i=0;i<=resolution;i++){\n   const t=i/resolution,p=path(t,s,layer),before=path(t-.0001,s,layer),after=path(t+.0001,s,layer),tangent=normalize(after[0]-before[0],after[1]-before[1],after[2]-before[2]),o=i*3;\n   if(!normal){normal=Math.abs(tangent[1])<.85?normalize(-tangent[2],0,tangent[0]):normalize(0,tangent[2],-tangent[1]);}\n   else{const projection=normal[0]*tangent[0]+normal[1]*tangent[1]+normal[2]*tangent[2];normal=normalize(normal[0]-tangent[0]*projection,normal[1]-tangent[1]*projection,normal[2]-tangent[2]*projection);}\n   positions.set(p,o);tangents.set(tangent,o);normals.set(normal,o);\n  }\n  const closed=s.form==='proteinKnot';\n  if(closed){const e=resolution*3,tx=tangents[0],ty=tangents[1],tz=tangents[2],fx=normals[0],fy=normals[1],fz=normals[2],ex=normals[e],ey=normals[e+1],ez=normals[e+2],cx=ey*fz-ez*fy,cy=ez*fx-ex*fz,cz=ex*fy-ey*fx,mismatch=Math.atan2(cx*tx+cy*ty+cz*tz,ex*fx+ey*fy+ez*fz);\n   for(let i=0;i<=resolution;i++){const o=i*3,ntx=tangents[o],nty=tangents[o+1],ntz=tangents[o+2],nx=normals[o],ny=normals[o+1],nz=normals[o+2],bx=nty*nz-ntz*ny,by=ntz*nx-ntx*nz,bz=ntx*ny-nty*nx,angle=mismatch*i/resolution,c=Math.cos(angle),q=Math.sin(angle);normals[o]=nx*c+bx*q;normals[o+1]=ny*c+by*q;normals[o+2]=nz*c+bz*q;}}\n  allFrames.push({positions,tangents,normals});\n }\n const current=new Float64Array(9),before=new Float64Array(9),after=new Float64Array(9);\n const sample=(t,v,layer,out)=>{\n  const q=Math.max(0,Math.min(1,t))*resolution,i=Math.min(resolution-1,Math.floor(q)),fraction=q-i;\n  const frames=allFrames[layer],a=i*3,b=a+3,p=frames.positions,ta=frames.tangents,na=frames.normals;\n  const px=p[a]+(p[b]-p[a])*fraction,py=p[a+1]+(p[b+1]-p[a+1])*fraction,pz=p[a+2]+(p[b+2]-p[a+2])*fraction;\n  let tx=ta[a]+(ta[b]-ta[a])*fraction,ty=ta[a+1]+(ta[b+1]-ta[a+1])*fraction,tz=ta[a+2]+(ta[b+2]-ta[a+2])*fraction,m=Math.hypot(tx,ty,tz)||1;tx/=m;ty/=m;tz/=m;\n  let nx=na[a]+(na[b]-na[a])*fraction,ny=na[a+1]+(na[b+1]-na[a+1])*fraction,nz=na[a+2]+(na[b+2]-na[a+2])*fraction,projection=nx*tx+ny*ty+nz*tz;nx-=tx*projection;ny-=ty*projection;nz-=tz*projection;m=Math.hypot(nx,ny,nz)||1;nx/=m;ny/=m;nz/=m;\n  let bx=ty*nz-tz*ny,by=tz*nx-tx*nz,bz=tx*ny-ty*nx;m=Math.hypot(bx,by,bz)||1;bx/=m;by/=m;bz/=m;\n  const theta=TAU*t*s.ribbonTwist,c=Math.cos(theta),sn=Math.sin(theta),wx=nx*c+bx*sn,wy=ny*c+by*sn,wz=nz*c+bz*sn,snx=-nx*sn+bx*c,sny=-ny*sn+by*c,snz=-nz*sn+bz*c;\n  const closed=s.form==='proteinKnot';\n  const width=s.width/100*(.82+.10*Math.sin(t*TAU*2+layer*.4))*(closed?1:(.58+.42*Math.pow(Math.sin(Math.PI*t),.3)));\n  const phase=t*TAU*(s.twist*.55)+v*2+layer*.5,wave=Math.sin(phase),amplitude=.11*s.fold/100,ruffle=amplitude*wave*(1-v*v),dRuffle=amplitude*(2*Math.cos(phase)*(1-v*v)-2*v*wave);\n  out[0]=px+wx*v*width+snx*ruffle;out[1]=py+wy*v*width+sny*ruffle;out[2]=pz+wz*v*width+snz*ruffle;\n  out[3]=wx*width+snx*dRuffle;out[4]=wy*width+sny*dRuffle;out[5]=wz*width+snz*dRuffle;out[6]=snx;out[7]=sny;out[8]=snz;\n };\n return (t,v,layer,out)=>{\n  const epsilon=.00025;sample(t,v,layer,current);sample(Math.max(0,t-epsilon),v,layer,before);sample(Math.min(1,t+epsilon),v,layer,after);\n  let tx=after[0]-before[0],ty=after[1]-before[1],tz=after[2]-before[2],m=Math.hypot(tx,ty,tz)||1;tx/=m;ty/=m;tz/=m;\n  let ax=current[3],ay=current[4],az=current[5];m=Math.hypot(ax,ay,az)||1;ax/=m;ay/=m;az/=m;\n  let nx=ty*az-tz*ay,ny=tz*ax-tx*az,nz=tx*ay-ty*ax;m=Math.hypot(nx,ny,nz)||1;nx/=m;ny/=m;nz/=m;\n  if(nx*current[6]+ny*current[7]+nz*current[8]<0){nx=-nx;ny=-ny;nz=-nz;}\n  out[0]=current[0];out[1]=current[1];out[2]=current[2];out[3]=nx;out[4]=ny;out[5]=nz;return out;\n };\n}\nfunction createHoles(s){\n const rand=randomGenerator(s.seed+901),amount=s.openings/100,count=amount===0?0:3+Math.round(amount*7);\n const base=Array.from({length:count},(_,index)=>({t:.10+(index+.25+rand()*.5)/Math.max(count,1)*.80,v:(rand()-.5)*.6,rt:.016+rand()*.014+amount*.020,rv:.12+rand()*.09+amount*.21}));\n return Array.from({length:s.layers},()=>base.map(hole=>({...hole,t:hole.t+(rand()-.5)*.009,v:hole.v+(rand()-.5)*.045})));\n}\nfunction insideHole(t,v,holes){return holes.some(h=>((t-h.t)/h.rt)**2+((v-h.v)/h.rv)**2<1);}\nfunction gaussianGenerator(rand){let spare=null;return ()=>{if(spare!==null){const value=spare;spare=null;return value;}const radius=Math.sqrt(-2*Math.log(Math.max(.00001,rand()))),angle=TAU*rand();spare=radius*Math.sin(angle);return radius*Math.cos(angle);};}\nfunction buildPoints(s,surface,holes){\n const stride=9,points=new Float32Array(s.density*stride),rand=randomGenerator(s.seed),gauss=gaussianGenerator(rand),vertex=new Float64Array(6);\n for(let i=0;i<s.density;i++){\n  const layer=Math.floor(rand()*s.layers);let t,v,tries=0;do{t=rand();v=rand()*2-1;tries++;}while(insideHole(t,v,holes[layer])&&tries<16);if(insideHole(t,v,holes[layer]))v=rand()<.5?-.99:.99;\n  surface(t,v,layer,vertex);const satellite=rand()<.045,spread=(.003+s.scatter*.001)*(satellite?5:1),o=i*stride;\n  points[o]=vertex[0]+gauss()*spread;points[o+1]=vertex[1]+gauss()*spread*.65;points[o+2]=vertex[2]+gauss()*spread;\n  points[o+3]=vertex[3];points[o+4]=vertex[4];points[o+5]=vertex[5];points[o+6]=t;points[o+7]=rand();points[o+8]=satellite?.3:.65+rand()*.35;\n }\n return {points,count:s.density};\n}\nfunction writeLineVertex(lines,offset,vertex,t,phase){lines[offset]=vertex[0];lines[offset+1]=vertex[1];lines[offset+2]=vertex[2];lines[offset+3]=vertex[3];lines[offset+4]=vertex[4];lines[offset+5]=vertex[5];lines[offset+6]=t;lines[offset+7]=phase;lines[offset+8]=.2;return offset+9;}\nfunction buildLines(s,surface,holes){\n const stride=9,fibers=Math.round(s.filaments*1.3),lines=new Float32Array(fibers*180*2*stride),rand=randomGenerator((s.seed^0x9E3779B9)>>>0),vertex=new Float64Array(6),previous=new Float64Array(6);let offset=0;\n for(let k=0;k<fibers;k++){\n  const layer=Math.floor(rand()*s.layers),v=rand()*2-1,phase=rand();let hasPrevious=false,previousT=0;\n  for(let j=0;j<=180;j++){\n   const t=j/180;if(insideHole(t,v,holes[layer])){hasPrevious=false;continue;}surface(t,v,layer,vertex);\n   if(hasPrevious){offset=writeLineVertex(lines,offset,previous,previousT,phase);offset=writeLineVertex(lines,offset,vertex,t,phase);}\n   previous.set(vertex);previousT=t;hasPrevious=true;\n  }\n }\n return {lines:new Float32Array(lines.buffer,0,offset),lineCount:offset/stride};\n}\nfunction buildGeometry(s,parts=['points','lines']){\n const requested=new Set(parts),surface=createSurface(s),holes=createHoles(s),result={};\n if(requested.has('points'))Object.assign(result,buildPoints(s,surface,holes));\n if(requested.has('lines'))Object.assign(result,buildLines(s,surface,holes));\n return result;\n}\n\nself.onmessage=event=>{\n const {revision,state,parts}=event.data;\n try{\n  const result=buildGeometry(state,parts),transfer=[];\n  if(result.points)transfer.push(result.points.buffer);\n  if(result.lines)transfer.push(result.lines.buffer);\n  self.postMessage({revision,parts,...result},transfer);\n }catch(error){self.postMessage({revision,parts,error:error instanceof Error?error.message:String(error)});}\n};\n";
 const TAU = Math.PI * 2;
 const forms = {
-  alphaHelix: 'Alpha helix', coiledCoil: 'Coiled-coil',
-  collagen: 'Collagen triple helix', proteinKnot: 'Protein knot', globule: 'Globule'
+  coiledCoil: 'Coil', collagen: 'Helix', proteinKnot: 'Knot', globule: 'Globule'
 };
 const formSettings = {
-  alphaHelix:{twist:4.8,fold:22,width:34,layers:1,layerGap:0,ribbonTwist:1.2,openings:0},
   coiledCoil:{twist:3.2,fold:35,width:28,layers:2,layerGap:0,ribbonTwist:1.1,openings:0},
   collagen:{twist:2.7,fold:24,width:20,layers:3,layerGap:0,ribbonTwist:.65,openings:0},
   proteinKnot:{twist:2.4,fold:58,width:31,layers:1,layerGap:0,ribbonTwist:1.7,openings:0},
   globule:{twist:5.8,fold:68,width:27,layers:1,layerGap:0,ribbonTwist:1.4,openings:0}
 };
 function randomGenerator(seed){return function(){let t=seed+=0x6D2B79F5;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return ((t^t>>>14)>>>0)/4294967296;};}
-const add=(a,b)=>a.map((v,i)=>v+b[i]);
-const mul=(a,s)=>a.map(v=>v*s);
-const dot=(a,b)=>a.reduce((s,v,i)=>s+v*b[i],0);
-const cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
-const norm=a=>{const m=Math.hypot(...a);return m>1e-8?mul(a,1/m):[1,0,0];};
-const lerp=(a,b,s)=>a.map((v,i)=>v+(b[i]-v)*s);
-function path(t,s,layer=0){const u=t*TAU,f=s.fold/100,a=u*s.twist;let r,phase;
+const normalize=(x,y,z)=>{const m=Math.hypot(x,y,z);return m>1e-8?[x/m,y/m,z/m]:[1,0,0];};
+function path(t,s,layer=0){const u=t*TAU,f=s.fold/100;let r,phase;
  switch(s.form){
- case 'alphaHelix':r=.72+f*.25;return [r*Math.cos(a),(t-.5)*5.8,r*Math.sin(a)];
  case 'coiledCoil':{
   phase=layer*Math.PI;const supercoil=u*s.twist+phase,r=.55+f*.18;
   return [r*Math.cos(supercoil),(t-.5)*5.7,r*Math.sin(supercoil)];
@@ -167,39 +157,40 @@ function path(t,s,layer=0){const u=t*TAU,f=s.fold/100,a=u*s.twist;let r,phase;
 function createSurface(s){
  const resolution=1200,allFrames=[];
  for(let layer=0;layer<s.layers;layer++){
-  const frames=[];let normal;
+  const positions=new Float64Array((resolution+1)*3),tangents=new Float64Array((resolution+1)*3),normals=new Float64Array((resolution+1)*3);let normal;
   for(let i=0;i<=resolution;i++){
-   const t=i/resolution,p=path(t,s,layer),before=path(t-.0001,s,layer),after=path(t+.0001,s,layer),tangent=norm(after.map((v,k)=>v-before[k]));
-   if(!normal){const axis=Math.abs(tangent[1])<.85?[0,1,0]:[1,0,0];normal=norm(cross(tangent,axis));}
-   else{const candidate=add(normal,mul(tangent,-dot(normal,tangent)));normal=Math.hypot(...candidate)>1e-7?norm(candidate):norm(cross(tangent,Math.abs(tangent[1])<.85?[0,1,0]:[1,0,0]));}
-   frames.push({p,tangent,normal:[...normal]});
+   const t=i/resolution,p=path(t,s,layer),before=path(t-.0001,s,layer),after=path(t+.0001,s,layer),tangent=normalize(after[0]-before[0],after[1]-before[1],after[2]-before[2]),o=i*3;
+   if(!normal){normal=Math.abs(tangent[1])<.85?normalize(-tangent[2],0,tangent[0]):normalize(0,tangent[2],-tangent[1]);}
+   else{const projection=normal[0]*tangent[0]+normal[1]*tangent[1]+normal[2]*tangent[2];normal=normalize(normal[0]-tangent[0]*projection,normal[1]-tangent[1]*projection,normal[2]-tangent[2]*projection);}
+   positions.set(p,o);tangents.set(tangent,o);normals.set(normal,o);
   }
   const closed=s.form==='proteinKnot';
-  if(closed){const first=frames[0],end=frames[resolution],mismatch=Math.atan2(dot(cross(end.normal,first.normal),first.tangent),dot(end.normal,first.normal));
-   for(let i=0;i<=resolution;i++){const frame=frames[i],binormal=cross(frame.tangent,frame.normal),angle=mismatch*i/resolution;frame.normal=add(mul(frame.normal,Math.cos(angle)),mul(binormal,Math.sin(angle)));}}
-  allFrames.push(frames);
+  if(closed){const e=resolution*3,tx=tangents[0],ty=tangents[1],tz=tangents[2],fx=normals[0],fy=normals[1],fz=normals[2],ex=normals[e],ey=normals[e+1],ez=normals[e+2],cx=ey*fz-ez*fy,cy=ez*fx-ex*fz,cz=ex*fy-ey*fx,mismatch=Math.atan2(cx*tx+cy*ty+cz*tz,ex*fx+ey*fy+ez*fz);
+   for(let i=0;i<=resolution;i++){const o=i*3,ntx=tangents[o],nty=tangents[o+1],ntz=tangents[o+2],nx=normals[o],ny=normals[o+1],nz=normals[o+2],bx=nty*nz-ntz*ny,by=ntz*nx-ntx*nz,bz=ntx*ny-nty*nx,angle=mismatch*i/resolution,c=Math.cos(angle),q=Math.sin(angle);normals[o]=nx*c+bx*q;normals[o+1]=ny*c+by*q;normals[o+2]=nz*c+bz*q;}}
+  allFrames.push({positions,tangents,normals});
  }
- const sample=(t,v,layer)=>{
+ const current=new Float64Array(9),before=new Float64Array(9),after=new Float64Array(9);
+ const sample=(t,v,layer,out)=>{
   const q=Math.max(0,Math.min(1,t))*resolution,i=Math.min(resolution-1,Math.floor(q)),fraction=q-i;
-  const frames=allFrames[layer];
-  const a=frames[i],b=frames[i+1],p=lerp(a.p,b.p,fraction),tangent=norm(lerp(a.tangent,b.tangent,fraction));
-  const n=norm(lerp(a.normal,b.normal,fraction)),binormal=norm(cross(tangent,n));
-  const theta=TAU*t*s.ribbonTwist;
-  const widthAxis=add(mul(n,Math.cos(theta)),mul(binormal,Math.sin(theta)));
-  const surfaceNormal=add(mul(n,-Math.sin(theta)),mul(binormal,Math.cos(theta)));
+  const frames=allFrames[layer],a=i*3,b=a+3,p=frames.positions,ta=frames.tangents,na=frames.normals;
+  const px=p[a]+(p[b]-p[a])*fraction,py=p[a+1]+(p[b+1]-p[a+1])*fraction,pz=p[a+2]+(p[b+2]-p[a+2])*fraction;
+  let tx=ta[a]+(ta[b]-ta[a])*fraction,ty=ta[a+1]+(ta[b+1]-ta[a+1])*fraction,tz=ta[a+2]+(ta[b+2]-ta[a+2])*fraction,m=Math.hypot(tx,ty,tz)||1;tx/=m;ty/=m;tz/=m;
+  let nx=na[a]+(na[b]-na[a])*fraction,ny=na[a+1]+(na[b+1]-na[a+1])*fraction,nz=na[a+2]+(na[b+2]-na[a+2])*fraction,projection=nx*tx+ny*ty+nz*tz;nx-=tx*projection;ny-=ty*projection;nz-=tz*projection;m=Math.hypot(nx,ny,nz)||1;nx/=m;ny/=m;nz/=m;
+  let bx=ty*nz-tz*ny,by=tz*nx-tx*nz,bz=tx*ny-ty*nx;m=Math.hypot(bx,by,bz)||1;bx/=m;by/=m;bz/=m;
+  const theta=TAU*t*s.ribbonTwist,c=Math.cos(theta),sn=Math.sin(theta),wx=nx*c+bx*sn,wy=ny*c+by*sn,wz=nz*c+bz*sn,snx=-nx*sn+bx*c,sny=-ny*sn+by*c,snz=-nz*sn+bz*c;
   const closed=s.form==='proteinKnot';
   const width=s.width/100*(.82+.10*Math.sin(t*TAU*2+layer*.4))*(closed?1:(.58+.42*Math.pow(Math.sin(Math.PI*t),.3)));
-  const layerOffset=0;
-  const ruffle=.11*Math.sin(t*TAU*(s.twist*.55)+v*2+layer*.5)*(1-v*v)*s.fold/100;
-  const position=add(add(p,mul(widthAxis,v*width)),mul(surfaceNormal,layerOffset+ruffle));
-  return {p:position,tangent,normal:surfaceNormal,t,v};
+  const phase=t*TAU*(s.twist*.55)+v*2+layer*.5,wave=Math.sin(phase),amplitude=.11*s.fold/100,ruffle=amplitude*wave*(1-v*v),dRuffle=amplitude*(2*Math.cos(phase)*(1-v*v)-2*v*wave);
+  out[0]=px+wx*v*width+snx*ruffle;out[1]=py+wy*v*width+sny*ruffle;out[2]=pz+wz*v*width+snz*ruffle;
+  out[3]=wx*width+snx*dRuffle;out[4]=wy*width+sny*dRuffle;out[5]=wz*width+snz*dRuffle;out[6]=snx;out[7]=sny;out[8]=snz;
  };
- return (t,v,layer)=>{
-  const vertex=sample(t,v,layer),epsilon=.00025,t0=Math.max(0,t-epsilon),t1=Math.min(1,t+epsilon);
-  const before=sample(t0,v,layer).p,after=sample(t1,v,layer).p,left=sample(t,v-epsilon,layer).p,right=sample(t,v+epsilon,layer).p;
-  const tangent=norm(after.map((value,k)=>value-before[k])),across=norm(right.map((value,k)=>value-left[k]));
-  let normal=norm(cross(tangent,across));if(dot(normal,vertex.normal)<0)normal=mul(normal,-1);
-  return {...vertex,tangent,normal};
+ return (t,v,layer,out)=>{
+  const epsilon=.00025;sample(t,v,layer,current);sample(Math.max(0,t-epsilon),v,layer,before);sample(Math.min(1,t+epsilon),v,layer,after);
+  let tx=after[0]-before[0],ty=after[1]-before[1],tz=after[2]-before[2],m=Math.hypot(tx,ty,tz)||1;tx/=m;ty/=m;tz/=m;
+  let ax=current[3],ay=current[4],az=current[5];m=Math.hypot(ax,ay,az)||1;ax/=m;ay/=m;az/=m;
+  let nx=ty*az-tz*ay,ny=tz*ax-tx*az,nz=tx*ay-ty*ax;m=Math.hypot(nx,ny,nz)||1;nx/=m;ny/=m;nz/=m;
+  if(nx*current[6]+ny*current[7]+nz*current[8]<0){nx=-nx;ny=-ny;nz=-nz;}
+  out[0]=current[0];out[1]=current[1];out[2]=current[2];out[3]=nx;out[4]=ny;out[5]=nz;return out;
  };
 }
 function createHoles(s){
@@ -208,33 +199,39 @@ function createHoles(s){
  return Array.from({length:s.layers},()=>base.map(hole=>({...hole,t:hole.t+(rand()-.5)*.009,v:hole.v+(rand()-.5)*.045})));
 }
 function insideHole(t,v,holes){return holes.some(h=>((t-h.t)/h.rt)**2+((v-h.v)/h.rv)**2<1);}
-function buildGeometry(s){
- const surface=createSurface(s),holes=createHoles(s),rand=randomGenerator(s.seed),gauss=()=>Math.sqrt(-2*Math.log(Math.max(.00001,rand())))*Math.cos(TAU*rand());
- const stride=13,points=new Float32Array(s.density*stride),lines=[];
- const write=(arr,offset,vertex,random,light)=>{arr.set([...vertex.p,...vertex.tangent,...vertex.normal,vertex.t,random,light,vertex.v],offset);};
+function gaussianGenerator(rand){let spare=null;return ()=>{if(spare!==null){const value=spare;spare=null;return value;}const radius=Math.sqrt(-2*Math.log(Math.max(.00001,rand()))),angle=TAU*rand();spare=radius*Math.sin(angle);return radius*Math.cos(angle);};}
+function buildPoints(s,surface,holes){
+ const stride=9,points=new Float32Array(s.density*stride),rand=randomGenerator(s.seed),gauss=gaussianGenerator(rand),vertex=new Float64Array(6);
  for(let i=0;i<s.density;i++){
-  const layer=Math.floor(rand()*s.layers);let t,v,tries=0;
-  do{t=rand();v=rand()*2-1;tries++;}while(insideHole(t,v,holes[layer])&&tries<16);
-  if(insideHole(t,v,holes[layer]))v=rand()<.5?-.99:.99;
-  const vertex=surface(t,v,layer),satellite=rand()<.045,spread=(.003+s.scatter*.001)*(satellite?5:1);
-  vertex.p=vertex.p.map((x,k)=>x+gauss()*spread*(k===1?.65:1));
-  write(points,i*stride,vertex,rand(),satellite?.3:.65+rand()*.35);
+  const layer=Math.floor(rand()*s.layers);let t,v,tries=0;do{t=rand();v=rand()*2-1;tries++;}while(insideHole(t,v,holes[layer])&&tries<16);if(insideHole(t,v,holes[layer]))v=rand()<.5?-.99:.99;
+  surface(t,v,layer,vertex);const satellite=rand()<.045,spread=(.003+s.scatter*.001)*(satellite?5:1),o=i*stride;
+  points[o]=vertex[0]+gauss()*spread;points[o+1]=vertex[1]+gauss()*spread*.65;points[o+2]=vertex[2]+gauss()*spread;
+  points[o+3]=vertex[3];points[o+4]=vertex[4];points[o+5]=vertex[5];points[o+6]=t;points[o+7]=rand();points[o+8]=satellite?.3:.65+rand()*.35;
  }
- // Longitudinal fibers respect the same openings as the particle surface.
- for(let k=0;k<Math.round(s.filaments*1.3);k++){
-  const layer=Math.floor(rand()*s.layers),v=rand()*2-1,phase=rand();let prev=null;
+ return {points,count:s.density};
+}
+function writeLineVertex(lines,offset,vertex,t,phase){lines[offset]=vertex[0];lines[offset+1]=vertex[1];lines[offset+2]=vertex[2];lines[offset+3]=vertex[3];lines[offset+4]=vertex[4];lines[offset+5]=vertex[5];lines[offset+6]=t;lines[offset+7]=phase;lines[offset+8]=.2;return offset+9;}
+function buildLines(s,surface,holes){
+ const stride=9,fibers=Math.round(s.filaments*1.3),lines=new Float32Array(fibers*180*2*stride),rand=randomGenerator((s.seed^0x9E3779B9)>>>0),vertex=new Float64Array(6),previous=new Float64Array(6);let offset=0;
+ for(let k=0;k<fibers;k++){
+  const layer=Math.floor(rand()*s.layers),v=rand()*2-1,phase=rand();let hasPrevious=false,previousT=0;
   for(let j=0;j<=180;j++){
-   const t=j/180;if(insideHole(t,v,holes[layer])){prev=null;continue;}
-   const next=surface(t,v,layer);
-   if(prev){for(const vertex of [prev,next])lines.push(...vertex.p,...vertex.tangent,...vertex.normal,vertex.t,phase,.2,vertex.v);}
-   prev=next;
+   const t=j/180;if(insideHole(t,v,holes[layer])){hasPrevious=false;continue;}surface(t,v,layer,vertex);
+   if(hasPrevious){offset=writeLineVertex(lines,offset,previous,previousT,phase);offset=writeLineVertex(lines,offset,vertex,t,phase);}
+   previous.set(vertex);previousT=t;hasPrevious=true;
   }
  }
- return {points,lines:new Float32Array(lines),count:s.density,lineCount:lines.length/stride};
+ return {lines:new Float32Array(lines.buffer,0,offset),lineCount:offset/stride};
+}
+function buildGeometry(s,parts=['points','lines']){
+ const requested=new Set(parts),surface=createSurface(s),holes=createHoles(s),result={};
+ if(requested.has('points'))Object.assign(result,buildPoints(s,surface,holes));
+ if(requested.has('lines'))Object.assign(result,buildLines(s,surface,holes));
+ return result;
 }
 
 const $=id=>document.getElementById(id);
-const defaults={form:'alphaHelix',...formSettings.alphaHelix,density:36000,size:1.8,sizeVariation:65,orientation:0,scatter:15,filaments:12,iridescence:82,hue:20,waveAmp:0,waveFrequency:1.2,waveSpeed:0,motion:5,seed:2749,palette:'cobalt'};
+const defaults={form:'collagen',...formSettings.collagen,density:36000,size:1.8,sizeVariation:65,scatter:15,filaments:12,iridescence:82,hue:20,motion:5,seed:2749,palette:'cobalt'};
 const state={...defaults};
 const palettes={
  ink:{name:'Ink',bg:'#101b25',fg:'#d8f4f7',a:'#b0e4e4',b:'#638cd7'},
@@ -244,53 +241,41 @@ const palettes={
 };
 const ranges={twist:[1,12],fold:[0,100],width:[10,160],ribbonTwist:[0,6],openings:[0,80],density:[3000,60000],size:[.4,5],sizeVariation:[0,100],scatter:[0,100],filaments:[0,100],iridescence:[0,100],hue:[0,360]};
 const integerKeys=['density'];
-const geometryKeys=['form','twist','fold','width','ribbonTwist','openings','density','scatter','filaments'];
+const structuralKeys=new Set(['form','twist','fold','width','ribbonTwist','openings']),pointKeys=new Set(['density','scatter']),lineKeys=new Set(['filaments']);
 const canvas=$('canvas');
-let gl=canvas.getContext('webgl',{alpha:false,antialias:true,preserveDrawingBuffer:true}),program,locations,pointBuffer,lineBuffer,geometry;
-let angleX=-.15,angleY=.42,angleZ=-.18,zoom=1,time=0,paused=false,dirty=true,last=0,frameId,buildTimer,specimen=1,contextLost=false,disposed=false;
+let gl=canvas.getContext('webgl',{alpha:false,depth:false,stencil:false,antialias:false,preserveDrawingBuffer:false}),program,locations,pointBuffer,lineBuffer,pointCount=0,lineCount=0;
+let angleX=-.15,angleY=.42,angleZ=-.18,zoom=4,time=0,paused=false,dirty=true,last=0,frameId,buildTimer,specimen=1,contextLost=false,disposed=false,viewportAspect=1,pixelRatio=1;
 const gestures=new Map();
 const rgb=hex=>[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16)/255);
+for(const palette of Object.values(palettes)){palette.bgRgb=rgb(palette.bg);palette.fgRgb=rgb(palette.fg);palette.aRgb=rgb(palette.a);palette.bRgb=rgb(palette.b);}
 const vertexShader=`
  precision highp float;
- attribute vec3 aPosition;attribute vec3 aTangent;attribute vec3 aNormal;attribute vec4 aData;
- uniform vec3 uRotation;uniform vec2 uViewport;uniform float uScale;uniform float uOffset;
- uniform float uSize;uniform float uVariation;uniform mediump float uOrientation;uniform float uPixel;
- uniform float uTime;uniform float uMotion;uniform mediump float uWaveAmp;uniform float uWaveFrequency;uniform float uWavePhase;
- varying mediump float vAlpha;varying mediump float vAlong;varying mediump float vFacing;varying mediump float vLight;varying mediump float vWave;varying mediump vec2 vDirection;
- vec3 rotate(vec3 p){float cx=cos(uRotation.x),sx=sin(uRotation.x),cy=cos(uRotation.y),sy=sin(uRotation.y),cz=cos(uRotation.z),sz=sin(uRotation.z);p=vec3(p.x,p.y*cx-p.z*sx,p.y*sx+p.z*cx);p=vec3(p.x*cy+p.z*sy,p.y,-p.x*sy+p.z*cy);return vec3(p.x*cz-p.y*sz,p.x*sz+p.y*cz,p.z);}
+ attribute vec3 aPosition;attribute vec3 aNormal;attribute vec3 aData;
+ uniform mat3 uRotationMatrix;uniform vec2 uViewport;uniform float uScale;
+ uniform float uSize;uniform float uVariation;uniform float uPixel;uniform float uTime;uniform float uMotion;
+ uniform vec3 uColor;uniform vec3 uTintA;uniform vec3 uTintB;uniform float uIridescence;uniform float uHue;
+ varying mediump float vAlpha;varying mediump vec3 vColor;
  void main(){
-  float phase=aData.x*uWaveFrequency*6.283185-uWavePhase;
-  float wave=sin(phase),randomPhase=aData.y*6.283185;
-  vec3 p=aPosition+aNormal*wave*uWaveAmp*.10;
+  float randomPhase=aData.y*6.283185;
+  vec3 p=aPosition;
   p+=vec3(sin(uTime*.24+randomPhase+p.y),cos(uTime*.19+randomPhase+p.z),sin(uTime*.16+randomPhase+p.x))*.025*uMotion;
-  vec3 normal=normalize(rotate(aNormal-aTangent*cos(phase)*uWaveAmp*.12));
-  vec3 tangent=rotate(aTangent+aNormal*cos(phase)*uWaveAmp*.12);
-  p=rotate(p);float perspective=9.5/(9.5-p.z);
-  vec2 xy=p.xy*uScale*perspective;xy.x*=uViewport.y/uViewport.x;xy.x+=uOffset;
+  vec3 normal=normalize(uRotationMatrix*aNormal);p=uRotationMatrix*p;float perspective=9.5/(9.5-p.z);
+  vec2 xy=p.xy*uScale*perspective;xy.x*=uViewport.y/uViewport.x;
   gl_Position=vec4(xy,0.,1.);
   float variation=mix(1.,.24+2.2*pow(aData.y,1.6),uVariation);
-  gl_PointSize=max(1.,uSize*uPixel*perspective*variation*sqrt(1.+uOrientation*3.));
-  vec2 direction=vec2(tangent.x,-tangent.y);vDirection=length(direction)>.001?normalize(direction):vec2(1.,0.);
-  vFacing=abs(normal.z);vLight=.46+.54*abs(dot(normal,normalize(vec3(-.55,.7,1.))));
-  vAlpha=(.3+aData.z*.56)*clamp(.78+p.z*.09,.35,1.15);vAlong=aData.x;vWave=wave;
+  gl_PointSize=max(1.,uSize*uPixel*perspective*variation);
+  float facing=abs(normal.z),light=.46+.54*abs(dot(normal,normalize(vec3(-.55,.7,1.)))),fresnel=pow(1.-facing,1.5),hue=facing*.8+aData.x*.52+uHue,band=.5+.5*sin(hue*6.283185);
+  vec3 tint=mix(uTintA,uTintB,band),spectral=.56+.44*cos(6.283185*(hue+vec3(.02,.35,.68))),color=mix(uColor,mix(tint,spectral,.26),uIridescence);
+  vColor=color*mix(.95,light+fresnel*.22,uIridescence);vAlpha=(.3+aData.z*.56)*clamp(.78+p.z*.09,.35,1.15);
  }
 `;
 const fragmentShader=`
  precision mediump float;
- uniform vec3 uColor;uniform vec3 uTintA;uniform vec3 uTintB;uniform float uIridescence;uniform float uHue;uniform mediump float uOrientation;uniform float uLine;uniform mediump float uWaveAmp;
- varying mediump float vAlpha;varying mediump float vAlong;varying mediump float vFacing;varying mediump float vLight;varying mediump float vWave;varying mediump vec2 vDirection;
+ uniform float uLine;varying mediump float vAlpha;varying mediump vec3 vColor;
  void main(){
   float alpha=vAlpha;
-  if(uLine<.5){vec2 q=gl_PointCoord-vec2(.5);vec2 d=normalize(vDirection);vec2 aligned=vec2(dot(q,d),dot(q,vec2(-d.y,d.x)));float distance=length(vec2(aligned.x,aligned.y*(1.+uOrientation*3.)));alpha*=1.-smoothstep(.26,.5,distance);if(alpha<.008)discard;}else{alpha*=.20;}
-  float fresnel=pow(1.-vFacing,1.5);
-  float hue=vFacing*.8+vAlong*.52+uHue+vWave*uWaveAmp*.006;
-  float band=.5+.5*sin(hue*6.283185);
-  vec3 tint=mix(uTintA,uTintB,band);
-  vec3 spectral=.56+.44*cos(6.283185*(hue+vec3(.02,.35,.68)));
-  tint=mix(tint,spectral,.26);
-  vec3 color=mix(uColor,tint,uIridescence);
-  color*=mix(.95,vLight+fresnel*.22,uIridescence);
-  gl_FragColor=vec4(color,alpha);
+  if(uLine<.5){float distance=length(gl_PointCoord-vec2(.5));alpha*=1.-smoothstep(.26,.5,distance);if(alpha<.008)discard;}else{alpha*=.20;}
+  gl_FragColor=vec4(vColor,alpha);
  }
 `;
 function compile(type,source){
@@ -299,50 +284,77 @@ function compile(type,source){
  if(!gl.getShaderParameter(shader,gl.COMPILE_STATUS)){const message=gl.getShaderInfoLog(shader)||'Unknown shader compilation failure';gl.deleteShader(shader);throw Error('Shader compilation: '+message);}
  return shader;
 }
+let geometryWorker,workerBusy=false,queuedRequest=null,revision=0,pendingParts=new Set();const requestedRevision={points:0,lines:0},rotationMatrix=new Float32Array(9);
+function ensureGeometryWorker(){
+ if(geometryWorker!==undefined)return geometryWorker;
+ geometryWorker=null;if(typeof Worker!=='function')return null;
+ try{
+  const inlineSource=globalThis.__STRAND_WORKER_SOURCE__;
+  geometryWorker=inlineSource?new Worker(URL.createObjectURL(new Blob([inlineSource],{type:'text/javascript'}))):new Worker(new URL('geometry-worker.js',document.baseURI),{type:'module'});
+  if(inlineSource)delete globalThis.__STRAND_WORKER_SOURCE__;
+  geometryWorker.onmessage=event=>handleGeometryResult(event.data);
+  geometryWorker.onerror=error=>{console.error(error);geometryWorker?.terminate();geometryWorker=null;workerBusy=false;queuedRequest=null;requestGeometry(['points','lines']);};
+ }catch(error){console.warn('Geometry worker unavailable; using the main thread.',error);geometryWorker=null;}
+ return geometryWorker;
+}
+function dispatchWorker(request){workerBusy=true;try{geometryWorker.postMessage(request);}catch(error){console.warn('Geometry worker could not start; using the main thread.',error);geometryWorker?.terminate();geometryWorker=null;workerBusy=false;const result=buildGeometry(request.state,request.parts);handleGeometryResult({...request,...result});}}
+function handleGeometryResult(result){
+ workerBusy=false;if(result.error){showError(Error('Geometry generation: '+result.error));return;}
+ if(!contextLost&&gl&&program){
+  if(result.points&&requestedRevision.points===result.revision){gl.bindBuffer(gl.ARRAY_BUFFER,pointBuffer);gl.bufferData(gl.ARRAY_BUFFER,result.points,gl.STATIC_DRAW);pointCount=result.count;result.points=null;dirty=true;}
+  if(result.lines&&requestedRevision.lines===result.revision){gl.bindBuffer(gl.ARRAY_BUFFER,lineBuffer);gl.bufferData(gl.ARRAY_BUFFER,result.lines,gl.STATIC_DRAW);lineCount=result.lineCount;result.lines=null;dirty=true;}
+ }
+ if(geometryWorker&&queuedRequest){const next=queuedRequest;queuedRequest=null;dispatchWorker(next);}
+}
+function requestGeometry(parts=['points','lines']){
+ clearTimeout(buildTimer);pendingParts.clear();let requested=[...new Set(parts)];const worker=ensureGeometryWorker();
+ if(worker&&workerBusy){if(queuedRequest)requested=[...new Set([...queuedRequest.parts,...requested])];const nextRevision=++revision;for(const part of requested)requestedRevision[part]=nextRevision;queuedRequest={revision:nextRevision,state:{...state},parts:requested};return;}
+ const nextRevision=++revision;for(const part of requested)requestedRevision[part]=nextRevision;const request={revision:nextRevision,state:{...state},parts:requested};
+ if(worker)dispatchWorker(request);else handleGeometryResult({...request,...buildGeometry(request.state,request.parts)});
+}
+function scheduleGeometry(parts){for(const part of parts)pendingParts.add(part);clearTimeout(buildTimer);buildTimer=setTimeout(()=>{const next=[...pendingParts];pendingParts.clear();requestGeometry(next);},60);}
 function initialize(){
  const vs=compile(gl.VERTEX_SHADER,vertexShader),fs=compile(gl.FRAGMENT_SHADER,fragmentShader);program=gl.createProgram();gl.attachShader(program,vs);gl.attachShader(program,fs);gl.linkProgram(program);gl.deleteShader(vs);gl.deleteShader(fs);
  if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error('Shader linking: '+(gl.getProgramInfoLog(program)||'Unknown linking failure'));gl.useProgram(program);locations={};$('error').hidden=true;
- ['Rotation','Viewport','Scale','Offset','Size','Variation','Orientation','Pixel','Time','Motion','WaveAmp','WaveFrequency','WavePhase','Color','TintA','TintB','Iridescence','Hue','Line'].forEach(key=>locations[key]=gl.getUniformLocation(program,'u'+key));
- ['Position','Tangent','Normal','Data'].forEach(key=>locations[key]=gl.getAttribLocation(program,'a'+key));
- pointBuffer=gl.createBuffer();lineBuffer=gl.createBuffer();gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);rebuild();
+ ['RotationMatrix','Viewport','Scale','Size','Variation','Pixel','Time','Motion','Color','TintA','TintB','Iridescence','Hue','Line'].forEach(key=>locations[key]=gl.getUniformLocation(program,'u'+key));
+ ['Position','Normal','Data'].forEach(key=>locations[key]=gl.getAttribLocation(program,'a'+key));
+ pointBuffer=gl.createBuffer();lineBuffer=gl.createBuffer();pointCount=0;lineCount=0;gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);requestGeometry(['points','lines']);
 }
-function rebuild(){if(!gl||!program||contextLost)return;clearTimeout(buildTimer);geometry=buildGeometry(state);gl.bindBuffer(gl.ARRAY_BUFFER,pointBuffer);gl.bufferData(gl.ARRAY_BUFFER,geometry.points,gl.STATIC_DRAW);gl.bindBuffer(gl.ARRAY_BUFFER,lineBuffer);gl.bufferData(gl.ARRAY_BUFFER,geometry.lines,gl.STATIC_DRAW);dirty=true;}
-function bind(buffer){gl.bindBuffer(gl.ARRAY_BUFFER,buffer);for(const [key,size,offset] of [['Position',3,0],['Tangent',3,12],['Normal',3,24],['Data',4,36]]){gl.enableVertexAttribArray(locations[key]);gl.vertexAttribPointer(locations[key],size,gl.FLOAT,false,52,offset);}}
-let wavePhase=0;
-function render(w=canvas.width,h=canvas.height,pixel=Math.min(devicePixelRatio||1,2),clean=false){
- if(!gl||!program||contextLost||!geometry)return;gl.viewport(0,0,w,h);const pal=palettes[state.palette];gl.clearColor(...rgb(pal.bg),1);gl.clear(gl.COLOR_BUFFER_BIT);gl.useProgram(program);
- const rect=canvas.getBoundingClientRect(),scale=Math.min(.275,Math.max(.1,rect.width/rect.height*.22))*zoom;
- gl.uniform3f(locations.Rotation,angleX,angleY,angleZ);gl.uniform2f(locations.Viewport,w,h);gl.uniform1f(locations.Scale,scale);gl.uniform1f(locations.Offset,0);
- for(const [key,value] of Object.entries({Size:state.size,Variation:state.sizeVariation/100,Orientation:state.orientation/100,Pixel:pixel,Time:time,Motion:state.motion/100,WaveAmp:state.waveAmp/100,WaveFrequency:state.waveFrequency,WavePhase:wavePhase,Iridescence:state.iridescence/100,Hue:state.hue/360}))gl.uniform1f(locations[key],value);
- gl.uniform3fv(locations.Color,rgb(pal.fg));gl.uniform3fv(locations.TintA,rgb(pal.a));gl.uniform3fv(locations.TintB,rgb(pal.b));
- if(geometry.lineCount){gl.uniform1f(locations.Line,1);bind(lineBuffer);gl.drawArrays(gl.LINES,0,geometry.lineCount);}gl.uniform1f(locations.Line,0);bind(pointBuffer);gl.drawArrays(gl.POINTS,0,geometry.count);dirty=false;
+function bind(buffer){gl.bindBuffer(gl.ARRAY_BUFFER,buffer);for(const [key,size,offset] of [['Position',3,0],['Normal',3,12],['Data',3,24]]){gl.enableVertexAttribArray(locations[key]);gl.vertexAttribPointer(locations[key],size,gl.FLOAT,false,36,offset);}}
+function setRotationMatrix(){const cx=Math.cos(angleX),sx=Math.sin(angleX),cy=Math.cos(angleY),sy=Math.sin(angleY),cz=Math.cos(angleZ),sz=Math.sin(angleZ);rotationMatrix.set([cz*cy,sz*cy,-sy,cz*sy*sx-sz*cx,sz*sy*sx+cz*cx,cy*sx,cz*sy*cx+sz*sx,sz*sy*cx-cz*sx,cy*cx]);}
+function render(){
+ if(!gl||!program||contextLost)return;const w=canvas.width,h=canvas.height,pal=palettes[state.palette],scale=Math.min(.275,Math.max(.1,viewportAspect*.22))*zoom;gl.viewport(0,0,w,h);gl.clearColor(...pal.bgRgb,1);gl.clear(gl.COLOR_BUFFER_BIT);gl.useProgram(program);setRotationMatrix();
+ gl.uniformMatrix3fv(locations.RotationMatrix,false,rotationMatrix);gl.uniform2f(locations.Viewport,w,h);gl.uniform1f(locations.Scale,scale);gl.uniform1f(locations.Size,state.size);gl.uniform1f(locations.Variation,state.sizeVariation/100);gl.uniform1f(locations.Pixel,pixelRatio);gl.uniform1f(locations.Time,time);gl.uniform1f(locations.Motion,state.motion/100);gl.uniform1f(locations.Iridescence,state.iridescence/100);gl.uniform1f(locations.Hue,state.hue/360);
+ gl.uniform3fv(locations.Color,pal.fgRgb);gl.uniform3fv(locations.TintA,pal.aRgb);gl.uniform3fv(locations.TintB,pal.bRgb);
+ if(lineCount){gl.uniform1f(locations.Line,1);bind(lineBuffer);gl.drawArrays(gl.LINES,0,lineCount);}if(pointCount){gl.uniform1f(locations.Line,0);bind(pointBuffer);gl.drawArrays(gl.POINTS,0,pointCount);}dirty=false;
 }
-function resize(){const rect=canvas.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);canvas.width=Math.max(1,Math.round(rect.width*d));canvas.height=Math.max(1,Math.round(rect.height*d));dirty=true;}
+function resize(){const rect=canvas.getBoundingClientRect(),area=Math.max(1,rect.width*rect.height),d=Math.min(devicePixelRatio||1,2,Math.sqrt(6000000/area)),width=Math.max(1,Math.round(rect.width*d)),height=Math.max(1,Math.round(rect.height*d));viewportAspect=rect.width/Math.max(1,rect.height);pixelRatio=d;if(canvas.width===width&&canvas.height===height)return;canvas.width=width;canvas.height=height;dirty=true;}
 function tick(now){if(disposed)return;const dt=Math.min((now-last)/1000||0,.05);last=now;if(!paused&&!document.hidden){time+=dt;if(gestures.size===0)angleY+=dt*.055;dirty=true;}if(dirty&&!document.hidden)render();frameId=requestAnimationFrame(tick);}
 function format(key,value){if(key==='density')return value.toLocaleString();if(key==='hue')return value+'°';if(['size','twist','ribbonTwist'].includes(key))return value.toFixed(1);return value+'%';}
 function sync(){
  for(const key of Object.keys(ranges)){const input=$(key);input.value=state[key];input.style.setProperty('--fill',100*(state[key]-ranges[key][0])/(ranges[key][1]-ranges[key][0])+'%');$(key+'-value').textContent=format(key,state[key]);}
- $('form').value=state.form;$('form-title').textContent=forms[state.form];$('specimen').textContent=String(specimen).padStart(3,'0');
+ $('form-title').textContent=forms[state.form];$('specimen').textContent=String(specimen).padStart(3,'0');
  const palette=palettes[state.palette],root=document.documentElement,uiColor=state.palette==='paper'?'#000':'#fff';root.style.setProperty('--text',uiColor);root.style.setProperty('--muted',uiColor);root.style.setProperty('--accent',uiColor);root.style.setProperty('--stage',palette.bg);root.style.setProperty('--option',palette.bg);root.style.setProperty('--line',uiColor==='#000'?'#00000040':'#ffffff40');root.style.colorScheme=state.palette==='paper'?'light':'dark';
- document.querySelectorAll('[data-palette]').forEach(button=>{const active=button.dataset.palette===state.palette;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));});
+ document.querySelectorAll('[data-form]').forEach(button=>{const active=button.dataset.form===state.form;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));});document.querySelectorAll('[data-palette]').forEach(button=>{const active=button.dataset.palette===state.palette;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));});
  $('pause').setAttribute('aria-label',paused?'Play animation':'Pause animation');$('pause').title=paused?'Play animation (Space)':'Pause animation (Space)';$('pause').textContent=paused?'Play':'Pause';
 }
-function update(key,value){state[key]=value;dirty=true;sync();if(geometryKeys.includes(key)){clearTimeout(buildTimer);buildTimer=setTimeout(rebuild,60);}}
+function geometryParts(key){if(structuralKeys.has(key))return ['points','lines'];if(pointKeys.has(key))return ['points'];if(lineKeys.has(key))return ['lines'];return [];}
+function update(key,value){state[key]=value;dirty=true;sync();const parts=geometryParts(key);if(parts.length)scheduleGeometry(parts);}
 for(const key of Object.keys(ranges))$(key).addEventListener('input',event=>update(key,Number(event.target.value)));
-function changeForm(form){if(!Object.hasOwn(forms,form))throw Error('Unknown strand form.');Object.assign(state,formSettings[form],{form});specimen++;clearTimeout(buildTimer);rebuild();sync();}
-$('form').addEventListener('change',event=>changeForm(event.target.value));
+function changeForm(form){if(!Object.hasOwn(forms,form))throw Error('Unknown strand form.');Object.assign(state,formSettings[form],{form});specimen++;requestGeometry(['points','lines']);sync();}
+document.querySelectorAll('[data-form]').forEach(button=>button.onclick=()=>changeForm(button.dataset.form));
 $('regenerate').onclick=()=>{
  const formNames=Object.keys(forms),paletteNames=Object.keys(palettes),form=formNames[Math.floor(Math.random()*formNames.length)];
- Object.assign(state,formSettings[form],{form,orientation:0,layerGap:0,waveAmp:0,waveSpeed:0,seed:1+Math.floor(Math.random()*999998)});
+ Object.assign(state,formSettings[form],{form,seed:1+Math.floor(Math.random()*999998)});
  const random=(min,max)=>min+Math.random()*(max-min);
  state.twist=Math.round(random(1,12)*10)/10;state.fold=Math.round(random(0,100));state.width=Math.round(random(10,160));state.ribbonTwist=Math.round(random(0,6)*10)/10;
  state.openings=Math.round(random(0,45));state.density=Math.round(random(12000,60000)/1000)*1000;state.size=Math.round(random(.7,3.5)*10)/10;state.sizeVariation=Math.round(random(0,100));
  state.scatter=Math.round(random(0,45));state.filaments=Math.round(random(0,65));state.iridescence=Math.round(random(20,100));state.hue=Math.round(random(0,360));state.palette=paletteNames[Math.floor(Math.random()*paletteNames.length)];
- zoom=Math.round(random(.5,4)*100)/100;specimen++;rebuild();sync();
+ zoom=Math.round(random(.5,5)*100)/100;specimen++;requestGeometry(['points','lines']);sync();
 };
 document.querySelectorAll('[data-palette]').forEach(button=>button.onclick=()=>update('palette',button.dataset.palette));
 function togglePause(){paused=!paused;dirty=true;sync();}
-function setZoom(value){zoom=Math.max(.4,Math.min(4,value));dirty=true;}
+function setZoom(value){zoom=Math.max(.4,Math.min(5,value));dirty=true;}
 $('pause').onclick=togglePause;
 canvas.addEventListener('pointerdown',event=>{canvas.setPointerCapture(event.pointerId);gestures.set(event.pointerId,{x:event.clientX,y:event.clientY});});
 canvas.addEventListener('pointermove',event=>{if(!gestures.has(event.pointerId))return;const old=gestures.get(event.pointerId),next={x:event.clientX,y:event.clientY};if(gestures.size===2){const other=[...gestures.entries()].find(([id])=>id!==event.pointerId)[1],before=Math.hypot(old.x-other.x,old.y-other.y),after=Math.hypot(next.x-other.x,next.y-other.y);if(before>.1)setZoom(zoom*after/before);}else{angleY+=(next.x-old.x)*.007;angleX+=(next.y-old.y)*.007;}gestures.set(event.pointerId,next);dirty=true;});
@@ -360,7 +372,7 @@ function configure(input){
   else if(key==='palette'){if(!Object.hasOwn(palettes,value))throw Error('Unknown palette.');next.palette=value;}
   else throw Error(`Unknown setting: ${key}`);
  }
- if(next.form!==state.form)specimen++;Object.assign(state,next);clearTimeout(buildTimer);rebuild();sync();render();return visibleState();
+ const changed=Object.keys(next).filter(key=>next[key]!==state[key]),parts=new Set();for(const key of changed)for(const part of geometryParts(key))parts.add(part);if(next.form!==state.form)specimen++;Object.assign(state,next);if(parts.size)requestGeometry([...parts]);sync();render();return visibleState();
 }
 function visibleState(){return {form:state.form,twist:state.twist,fold:state.fold,width:state.width,ribbonTwist:state.ribbonTwist,openings:state.openings,density:state.density,size:state.size,sizeVariation:state.sizeVariation,scatter:state.scatter,filaments:state.filaments,iridescence:state.iridescence,hue:state.hue,palette:state.palette,paused,zoom};}
 function registerTools(){const context=document.modelContext;if(!context?.registerTool)return;const lifecycle=new AbortController();
