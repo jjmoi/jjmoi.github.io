@@ -1,0 +1,3435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JJ → SONIC BRANDING</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+<style>
+  :root {
+    /* OP-1 body cream */
+    --bg: #e8e3d2;
+    --bg-panel: #ffffff;
+    --bg-inset: #e2ddc9;
+    --bg-hover: #ebe6d3;
+
+    --line: #cdc4ab;
+    --line-bright: #a19779;
+
+    --text: #1a1a1a;
+    --text-dim: #807a68;
+    --text-bright: #000000;
+    --text-label: #5e5849;
+
+    /* OP-1 orange */
+    --accent: #ff5a00;
+    --accent-dim: #ffa16b;
+    --accent-glow: rgba(255, 90, 0, 0.28);
+    --accent-faint: rgba(255, 90, 0, 0.10);
+
+    /* OP-1 tape tracks */
+    --op-a: #2e77e2;
+    --op-b: #1ca258;
+    --op-c: #e5342b;
+    --op-d: #f4b800;
+
+    /* LCD display */
+    --lcd-bg: #17130e;
+    --lcd-text: #ff9136;
+    --lcd-dim: rgba(255, 145, 54, 0.25);
+
+    /* signal / warn */
+    --warn: #f4a41e;
+    --danger: #e3342d;
+    --rec: #e3342d;
+    --led-green: #1ca258;
+
+    /* type */
+    --sans: 'Inter', 'Helvetica Neue', Helvetica, system-ui, Arial, sans-serif;
+    --mono: 'JetBrains Mono', 'IBM Plex Mono', 'SF Mono', Menlo, Consolas, monospace;
+    --size-xs: 10px;
+    --size-sm: 11px;
+    --size-md: 13px;
+    --size-lg: 15px;
+    --size-xl: 22px;
+    --size-display: 26px;
+
+    /* spacing */
+    --s-0: 2px;
+    --s-1: 4px;
+    --s-2: 8px;
+    --s-3: 12px;
+    --s-4: 16px;
+    --s-5: 24px;
+    --s-6: 32px;
+
+    /* radii — OP-1 tactile */
+    --r-0: 0px;
+    --r-1: 4px;
+    --r-2: 8px;
+    --r-3: 12px;
+    --r-pill: 999px;
+
+    /* timing */
+    --dur-fast: 100ms;
+    --dur-med: 200ms;
+
+    --glow: 0 0 0 3px var(--accent-glow);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: var(--size-md);
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: 0;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  body {
+    padding: var(--s-3);
+  }
+
+  ::selection { background: var(--accent-dim); color: var(--bg); }
+
+  .panel {
+    width: 100%;
+    max-width: none;
+    margin: 0 auto;
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 4px 16px rgba(0,0,0,0.06);
+    overflow: hidden;
+  }
+
+  /* === HEADER === */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--s-4) var(--s-5);
+    border-bottom: 1px solid var(--line);
+    gap: var(--s-4);
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+  }
+  .brand-mark {
+    width: 10px; height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px var(--accent-faint);
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.9; }
+    50% { opacity: 0.4; }
+  }
+  .brand-name {
+    font-size: 16px;
+    letter-spacing: -0.005em;
+    color: var(--text-bright);
+    font-weight: 600;
+  }
+  .brand-ver {
+    color: var(--text-bright);
+    font-family: var(--mono);
+    font-size: var(--size-xs);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    padding: 3px 8px;
+    background: var(--accent);
+    color: var(--bg-panel);
+    border-radius: 4px;
+  }
+
+  .mode-toggle {
+    display: flex;
+    border: 1px solid var(--line-bright);
+    background: var(--bg-inset);
+  }
+  .mode-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-dim);
+    font-family: var(--mono);
+    font-size: var(--size-sm);
+    letter-spacing: 0.18em;
+    padding: var(--s-2) var(--s-4);
+    cursor: pointer;
+    transition: all var(--dur-fast);
+    border-right: 1px solid var(--line-bright);
+  }
+  .mode-btn:last-child { border-right: none; }
+  .mode-btn:hover { color: var(--text); background: var(--bg-hover); }
+  .mode-btn[aria-pressed="true"] {
+    color: var(--accent);
+    background: var(--accent-faint);
+    text-shadow: 0 0 8px var(--accent-glow);
+  }
+
+  .sys-status {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+    font-family: var(--mono);
+    font-size: var(--size-xs);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--text);
+    text-transform: uppercase;
+  }
+  .status-led {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--led-green);
+    margin-right: var(--s-1);
+    box-shadow: 0 0 0 2px rgba(28, 162, 88, 0.22);
+  }
+  .status-led.off { background: var(--line-bright); box-shadow: none; }
+  .status-led.rec { background: var(--rec); box-shadow: 0 0 0 2px rgba(227, 52, 45, 0.24); animation: blink 0.8s steps(2) infinite; }
+  @keyframes blink { 50% { opacity: 0.2; } }
+
+  /* === SECTION HEADER === */
+  .sec-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--s-3) var(--s-4);
+    border-bottom: 1px solid var(--line);
+    background: transparent;
+  }
+  .sec-title {
+    font-size: var(--size-sm);
+    letter-spacing: 0.14em;
+    color: var(--text-bright);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .sec-meta {
+    font-family: var(--mono);
+    font-size: var(--size-xs);
+    letter-spacing: 0.04em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  /* === SEQUENCER === */
+  .seq {
+    padding: var(--s-4) var(--s-5);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .seq-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--s-2);
+    margin-bottom: var(--s-4);
+  }
+
+  .step {
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: var(--s-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+    min-height: 132px;
+    position: relative;
+    transition: border-color var(--dur-fast), background var(--dur-fast), box-shadow var(--dur-fast);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.7) inset, 0 1px 2px rgba(0,0,0,0.03);
+  }
+  .step[data-enabled="false"] {
+    opacity: 0.4;
+    background: var(--bg-inset);
+  }
+  .step.active {
+    border-color: var(--text-bright);
+  }
+  .step.playing {
+    background: var(--accent-faint);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+  }
+  /* OP-1 tape-color chip on the step number — cycles 4 colors */
+  .step[data-idx="0"] { --chip: var(--op-a); }
+  .step[data-idx="1"] { --chip: var(--op-b); }
+  .step[data-idx="2"] { --chip: var(--op-c); }
+  .step[data-idx="3"] { --chip: var(--op-d); }
+  .step[data-idx="4"] { --chip: var(--op-a); }
+  .step[data-idx="5"] { --chip: var(--op-b); }
+
+  .step-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-dim);
+    font-family: var(--mono);
+    font-size: var(--size-xs);
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+  .step-head > span:first-child {
+    display: inline-flex;
+    align-items: center;
+  }
+  .step-head > span:first-child::before {
+    content: '';
+    display: inline-block;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--chip, var(--text-dim));
+    margin-right: 6px;
+  }
+  .step-toggle {
+    width: 12px; height: 12px;
+    border: 1px solid var(--line-bright);
+    background: transparent;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 0;
+    transition: all var(--dur-fast);
+  }
+  .step-toggle:hover { border-color: var(--text-bright); }
+  .step[data-enabled="true"] .step-toggle {
+    background: var(--text-bright);
+    border-color: var(--text-bright);
+  }
+
+  .step-value {
+    font-family: var(--mono);
+    font-size: 30px;
+    color: var(--text-bright);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin: 4px 0 6px;
+  }
+  .step[data-enabled="false"] .step-value { color: var(--text-dim); }
+
+  .step select {
+    background: var(--bg-inset);
+    color: var(--text);
+    border: none;
+    border-radius: 4px;
+    padding: 5px var(--s-2);
+    font-family: var(--sans);
+    font-size: var(--size-sm);
+    font-weight: 500;
+    letter-spacing: 0;
+    text-transform: none;
+    width: 100%;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  .step select:hover { background: var(--bg-hover); color: var(--text-bright); }
+  .step select:focus { background: var(--accent); color: var(--bg-panel); }
+
+  .step-pitch-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-1);
+  }
+
+  .step .step-dur-sel {
+    margin-top: auto;
+    background: transparent;
+    color: var(--text-dim);
+    border: none;
+    border-top: 1px dashed var(--line);
+    border-radius: 0;
+    padding: 4px var(--s-1) 0;
+    font-family: var(--mono);
+    font-size: var(--size-xs);
+    letter-spacing: 0;
+    text-align: center;
+    text-align-last: center;
+  }
+  .step[data-enabled="true"] .step-dur-sel { color: var(--accent); font-weight: 600; }
+  .step .step-dur-sel:hover { color: var(--text-bright); }
+
+  .seq-controls {
+    display: flex;
+    gap: var(--s-5);
+    padding: var(--s-2) 0 0 0;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .field {
+    display: flex;
+    align-items: center;
+    gap: var(--s-2);
+  }
+  .field-label {
+    color: var(--text-label);
+    font-size: var(--size-xs);
+    letter-spacing: 0;
+    text-transform: lowercase;
+    font-weight: 400;
+  }
+  .stepper {
+    display: flex;
+    border: 1px solid var(--line);
+    background: var(--bg-panel);
+    border-radius: var(--r-pill);
+    align-items: stretch;
+    overflow: hidden;
+  }
+  .stepper button {
+    background: transparent;
+    border: none;
+    color: var(--text-dim);
+    width: 26px; height: 26px;
+    cursor: pointer;
+    font-family: var(--sans);
+    font-size: var(--size-md);
+    font-weight: 500;
+    transition: all var(--dur-fast);
+  }
+  .stepper button:hover { color: var(--accent); background: var(--bg-hover); }
+  .stepper button:disabled { opacity: 0.3; cursor: not-allowed; }
+  .stepper-val {
+    min-width: 36px;
+    padding: 0 var(--s-1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-bright);
+    font-family: var(--mono);
+    font-size: var(--size-sm);
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+
+  .select-inline {
+    background: var(--bg-panel);
+    color: var(--text-bright);
+    border: 1px solid var(--line);
+    border-radius: var(--r-pill);
+    padding: var(--s-1) var(--s-3);
+    font-family: var(--sans);
+    font-size: var(--size-sm);
+    font-weight: 500;
+    letter-spacing: 0;
+    outline: none;
+    cursor: pointer;
+    min-width: 94px;
+    height: 26px;
+  }
+  .select-inline:hover { border-color: var(--line-bright); }
+  .select-inline:focus { border-color: var(--accent); color: var(--accent); }
+
+  .btn-inline {
+    background: var(--bg-panel);
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: var(--r-pill);
+    padding: var(--s-1) var(--s-3);
+    height: 26px;
+    font-family: var(--sans);
+    font-size: var(--size-sm);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: lowercase;
+    cursor: pointer;
+    transition: all var(--dur-fast);
+  }
+  .btn-inline:hover { border-color: var(--accent); color: var(--accent); background: var(--bg-hover); }
+
+  /* === VIBES (primary interface) === */
+  .vibes {
+    padding: var(--s-3) var(--s-5) var(--s-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+  }
+  .vibes-main {
+    border-bottom: 1px solid var(--line);
+  }
+  .vibe-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--s-3);
+  }
+  @media (max-width: 880px) {
+    .vibe-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .btn-clear {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--line-bright);
+    border-radius: 0;
+    color: var(--text-dim);
+    font-family: var(--sans);
+    font-size: var(--size-xs);
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: lowercase;
+    padding: 0 2px 1px;
+    margin-left: var(--s-3);
+    cursor: pointer;
+    transition: all var(--dur-fast);
+  }
+  .btn-clear:hover { color: var(--danger); border-color: var(--danger); }
+  .vibe {
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: var(--size-md);
+    font-weight: 500;
+    letter-spacing: 0;
+    text-align: left;
+    padding: var(--s-2) var(--s-3);
+    cursor: pointer;
+    transition: all var(--dur-fast);
+    display: flex;
+    align-items: center;
+    gap: var(--s-2);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.7) inset;
+    text-transform: capitalize;
+  }
+  .vibe::before {
+    content: '';
+    display: inline-block;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--line-bright);
+    flex-shrink: 0;
+    transition: all var(--dur-fast);
+  }
+  .vibe:hover {
+    border-color: var(--text-bright);
+    background: var(--bg-hover);
+  }
+  .vibe[aria-pressed="true"] {
+    color: var(--bg-panel);
+    border-color: var(--accent);
+    background: var(--accent);
+    font-weight: 600;
+  }
+  .vibe[aria-pressed="true"]::before {
+    background: var(--bg-panel);
+  }
+
+  .vibe-hint {
+    color: var(--text-dim);
+    font-family: var(--sans);
+    font-size: var(--size-sm);
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.5;
+    margin-top: var(--s-4);
+    padding-top: var(--s-3);
+    border-top: none;
+  }
+
+  /* === COLLAPSIBLE (Signal Chain) === */
+  .collapsible {
+    border-top: 1px solid var(--line);
+  }
+  .collapsible-header {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--line);
+    padding: var(--s-3) var(--s-5);
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+    cursor: pointer;
+    font-family: var(--sans);
+    text-align: left;
+    color: var(--text);
+    transition: background var(--dur-fast);
+  }
+  .collapsible-header:hover {
+    background: var(--bg-hover);
+  }
+  .collapsible-header .sec-title {
+    color: var(--text);
+  }
+  .collapsible-header .sec-meta {
+    margin-left: auto;
+    color: var(--text-dim);
+  }
+  .collapsible-glyph {
+    display: inline-block;
+    width: 10px;
+    color: var(--text-label);
+    transition: transform var(--dur-fast), color var(--dur-fast);
+    font-size: var(--size-md);
+  }
+  .collapsible[data-open="true"] .collapsible-glyph {
+    transform: rotate(90deg);
+    color: var(--accent);
+  }
+  .collapsible[data-open="true"] .collapsible-header {
+    background: var(--bg-panel);
+  }
+  .collapsible .collapsible-body {
+    display: none;
+  }
+  .collapsible[data-open="true"] .collapsible-body {
+    display: flex;
+  }
+
+  /* === PARAMETERS === */
+  .params {
+    padding: var(--s-3) var(--s-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+    overflow-y: auto;
+  }
+
+  .param-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-1);
+  }
+  .group-title {
+    color: var(--text-bright);
+    font-size: var(--size-xs);
+    letter-spacing: 0.14em;
+    font-weight: 700;
+    padding-bottom: var(--s-2);
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--s-2);
+    text-transform: uppercase;
+  }
+  .group-title .led {
+    width: 4px; height: 4px;
+    background: var(--accent-dim);
+    border-radius: 50%;
+  }
+
+  .param-row {
+    display: grid;
+    grid-template-columns: 72px 72px 1fr;
+    gap: var(--s-3);
+    align-items: center;
+    padding: 3px 0;
+    transition: background var(--dur-med);
+  }
+  .param-row.changed {
+    animation: flash 0.6s ease-out;
+  }
+  @keyframes flash {
+    0% { background: var(--accent-faint); }
+    100% { background: transparent; }
+  }
+  .param-name {
+    color: var(--text-label);
+    font-size: var(--size-sm);
+    letter-spacing: 0;
+    text-transform: none;
+    font-weight: 500;
+  }
+  .param-value {
+    color: var(--text-bright);
+    font-family: var(--mono);
+    font-size: var(--size-sm);
+    font-weight: 600;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0;
+  }
+
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    width: 100%;
+    height: 18px;
+    outline: none;
+    cursor: pointer;
+  }
+  input[type="range"]::-webkit-slider-runnable-track {
+    height: 3px;
+    border-radius: var(--r-pill);
+    background: linear-gradient(to right,
+      var(--accent) 0%,
+      var(--accent) var(--fill, 0%),
+      var(--line) var(--fill, 0%),
+      var(--line) 100%);
+    border: none;
+  }
+  input[type="range"]::-moz-range-track {
+    height: 3px;
+    background: var(--line);
+    border-radius: var(--r-pill);
+    border: none;
+  }
+  input[type="range"]::-moz-range-progress {
+    background: var(--accent);
+    height: 3px;
+    border-radius: var(--r-pill);
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    background: var(--accent);
+    border: 2px solid var(--bg-panel);
+    border-radius: 50%;
+    margin-top: -6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    cursor: grab;
+  }
+  input[type="range"]::-moz-range-thumb {
+    width: 14px; height: 14px;
+    background: var(--accent);
+    border: 2px solid var(--bg-panel);
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    cursor: grab;
+  }
+  input[type="range"]:hover::-webkit-slider-thumb {
+    box-shadow: 0 0 0 4px var(--accent-glow);
+  }
+  input[type="range"]:active::-webkit-slider-thumb {
+    cursor: grabbing;
+  }
+  input[type="range"]:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .param-enum {
+    display: flex;
+    gap: 3px;
+    border: none;
+    background: var(--bg-inset);
+    border-radius: 6px;
+    padding: 3px;
+  }
+  .param-enum.enum-wrap {
+    flex-wrap: wrap;
+  }
+  .param-enum.enum-wrap button {
+    flex: 1 0 58px;
+  }
+  .param-enum button {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: var(--size-xs);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 5px var(--s-2);
+    cursor: pointer;
+    transition: all var(--dur-fast);
+    border-radius: 4px;
+    text-transform: uppercase;
+    min-width: 0;
+  }
+  .param-enum button:hover { color: var(--text-bright); background: var(--bg-panel); }
+  .param-enum button[aria-pressed="true"] {
+    color: var(--bg-panel);
+    background: var(--accent);
+    font-weight: 700;
+  }
+
+  /* === TRANSPORT === */
+  .transport {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--s-4) var(--s-5);
+    border-top: 1px solid var(--line);
+    background: transparent;
+    gap: var(--s-5);
+    flex-wrap: wrap;
+  }
+
+  .trans-left {
+    display: flex;
+    gap: var(--s-2);
+  }
+
+  .btn {
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: var(--size-sm);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 0 var(--s-4);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all var(--dur-fast);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    height: 40px;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.7) inset, 0 1px 2px rgba(0,0,0,0.04);
+  }
+  .btn:hover:not(:disabled) {
+    border-color: var(--text);
+    color: var(--text-bright);
+    background: var(--bg-hover);
+  }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .btn.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--bg-panel);
+    font-weight: 700;
+  }
+  .btn.primary:hover:not(:disabled) {
+    background: #e04f00;
+    border-color: #e04f00;
+    color: var(--bg-panel);
+  }
+  .btn.primary.playing {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: var(--bg-panel);
+    box-shadow: 0 0 0 3px var(--accent-glow), 0 1px 0 rgba(255,255,255,0.3) inset;
+  }
+
+  .btn-glyph {
+    display: inline-block;
+    width: 10px;
+    text-align: center;
+    font-size: 11px;
+  }
+
+  .meters {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+  }
+
+  .meter {
+    display: flex;
+    align-items: center;
+    gap: var(--s-2);
+    font-family: var(--mono);
+    font-size: var(--size-xs);
+    letter-spacing: 0.02em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+  .meter-bar {
+    width: 96px;
+    height: 6px;
+    background: var(--lcd-bg);
+    border: none;
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+  }
+  .meter-fill {
+    height: 100%;
+    background: linear-gradient(to right, var(--accent-dim), var(--accent));
+    width: 0%;
+    transition: width 60ms linear;
+  }
+  .meter-fill.peak { background: var(--warn); }
+  .meter-fill.clip { background: var(--danger); }
+  .meter-val {
+    color: var(--text-bright);
+    font-variant-numeric: tabular-nums;
+    min-width: 40px;
+    text-align: right;
+  }
+
+  .clock {
+    font-family: var(--mono);
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--lcd-text);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.04em;
+    padding: 8px 14px;
+    background: var(--lcd-bg);
+    border: 1px solid #2a2418;
+    border-radius: 6px;
+    min-width: 124px;
+    text-align: center;
+    text-shadow: 0 0 8px rgba(255, 145, 54, 0.4);
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+  }
+
+  .toast {
+    position: fixed;
+    bottom: var(--s-5);
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--text-bright);
+    border: none;
+    border-radius: var(--r-pill);
+    color: var(--bg-panel);
+    padding: var(--s-2) var(--s-4);
+    font-family: var(--sans);
+    font-size: var(--size-sm);
+    font-weight: 500;
+    letter-spacing: 0;
+    text-transform: lowercase;
+    opacity: 0;
+    pointer-events: none;
+    transition: all var(--dur-med);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 100;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  .toast.err { border-color: var(--danger); color: var(--danger); }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg-inset); }
+  ::-webkit-scrollbar-thumb { background: var(--line-bright); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent-dim); }
+
+  /* responsive */
+  @media (max-width: 880px) {
+    .seq-grid { grid-template-columns: repeat(3, 1fr); }
+    .transport { justify-content: center; }
+  }
+
+  /* focus */
+  button:focus-visible, select:focus-visible, input:focus-visible {
+    outline: 1px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .hidden { display: none !important; }
+
+</style>
+</head>
+<body>
+
+<div class="panel" role="application" aria-label="Tonal Panel">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">Sonic</span>
+    </div>
+
+    <div class="header-spacer" aria-hidden="true"></div>
+
+    <div class="sys-status">
+      <span><span class="status-led" id="audio-led"></span>AUDIO</span>
+      <span><span class="status-led off" id="rec-led"></span>REC</span>
+      <span id="ctx-rate">44.1KHZ</span>
+    </div>
+  </div>
+
+  <!-- SEQUENCER -->
+  <section class="seq" aria-label="Sequencer">
+    <div class="sec-head">
+      <span class="sec-title">Sequencer</span>
+      <span class="sec-meta" id="seq-meta">6 STEPS · 0.80s/STEP · 4.8s TOTAL</span>
+    </div>
+    <div style="padding: var(--s-3) 0;">
+      <div class="seq-grid" id="seq-grid"></div>
+    </div>
+  </section>
+
+  <!-- VIBES (primary interface) -->
+  <aside class="vibes vibes-main" aria-label="Vibe presets">
+    <div class="sec-head" style="margin: 0 calc(-1 * var(--s-4)) var(--s-4); padding: var(--s-3) var(--s-4);">
+      <span class="sec-title">Vibe</span>
+      <span class="sec-meta">
+        <span id="vibe-active">—</span>
+        <button id="clear-vibes" class="btn-clear" title="Clear all selected vibes">clear</button>
+      </span>
+    </div>
+    <div class="vibe-grid" id="vibe-grid"></div>
+    <div class="vibe-hint">
+      select one or several. the parameters below average.
+    </div>
+  </aside>
+
+  <!-- SIGNAL CHAIN (collapsible) -->
+  <section class="collapsible" data-open="false" aria-label="Signal chain parameters">
+    <button type="button" class="collapsible-header" id="toggle-signal-chain" aria-expanded="false" aria-controls="signal-chain-body">
+      <span class="collapsible-glyph" aria-hidden="true">▸</span>
+      <span class="sec-title">Signal Chain</span>
+      <span class="sec-meta">reverb · modulation · saturation · stereo</span>
+    </button>
+    <section class="params collapsible-body" id="signal-chain-body" aria-label="Parameters">
+
+      <div class="param-group">
+        <div class="group-title"><span>Reverb</span><span class="led"></span></div>
+        <div class="param-row" data-param="wet">
+          <span class="param-name">Wet</span>
+          <span class="param-value" data-out="wet">0.45</span>
+          <input type="range" min="0" max="1" step="0.01" value="0.45" data-bind="wet">
+        </div>
+        <div class="param-row" data-param="size">
+          <span class="param-name">Size</span>
+          <span class="param-value" data-out="size">3.2s</span>
+          <input type="range" min="0.3" max="8" step="0.1" value="3.2" data-bind="size">
+        </div>
+        <div class="param-row" data-param="preDelay">
+          <span class="param-name">Pre-Delay</span>
+          <span class="param-value" data-out="preDelay">25ms</span>
+          <input type="range" min="0" max="100" step="1" value="25" data-bind="preDelay">
+        </div>
+        <div class="param-row" data-param="damping">
+          <span class="param-name">Damping</span>
+          <span class="param-value" data-out="damping">0.50</span>
+          <input type="range" min="0" max="1" step="0.01" value="0.5" data-bind="damping">
+        </div>
+      </div>
+
+      <div class="param-group">
+        <div class="group-title"><span>Modulation</span><span class="led"></span></div>
+        <div class="param-row" data-param="chorusDepth">
+          <span class="param-name">Chorus D</span>
+          <span class="param-value" data-out="chorusDepth">0.30</span>
+          <input type="range" min="0" max="1" step="0.01" value="0.3" data-bind="chorusDepth">
+        </div>
+        <div class="param-row" data-param="chorusRate">
+          <span class="param-name">Chorus R</span>
+          <span class="param-value" data-out="chorusRate">0.50Hz</span>
+          <input type="range" min="0.05" max="3" step="0.01" value="0.5" data-bind="chorusRate">
+        </div>
+        <div class="param-row" data-param="unison">
+          <span class="param-name">Unison</span>
+          <span class="param-value" data-out="unison">3</span>
+          <input type="range" min="1" max="6" step="1" value="3" data-bind="unison">
+        </div>
+      </div>
+
+      <div class="param-group">
+        <div class="group-title"><span>Saturation</span><span class="led"></span></div>
+        <div class="param-row" data-param="drive">
+          <span class="param-name">Drive</span>
+          <span class="param-value" data-out="drive">0.15</span>
+          <input type="range" min="0" max="1" step="0.01" value="0.15" data-bind="drive">
+        </div>
+        <div class="param-row" data-param="tape">
+          <span class="param-name">Tape</span>
+          <span class="param-value" data-out="tape">0.30</span>
+          <input type="range" min="0" max="1" step="0.01" value="0.3" data-bind="tape">
+        </div>
+      </div>
+
+      <div class="param-group">
+        <div class="group-title"><span>Stereo</span><span class="led"></span></div>
+        <div class="param-row" data-param="width">
+          <span class="param-name">Width</span>
+          <span class="param-value" data-out="width">0.70</span>
+          <input type="range" min="0" max="1" step="0.01" value="0.7" data-bind="width">
+        </div>
+        <div class="param-row" data-param="motion">
+          <span class="param-name">Motion</span>
+          <span class="param-value" data-out="motion">0.08Hz</span>
+          <input type="range" min="0" max="1" step="0.01" value="0.08" data-bind="motion">
+        </div>
+      </div>
+
+    </section>
+  </section>
+
+  <!-- TRANSPORT -->
+  <div class="transport">
+    <div class="trans-left">
+      <button class="btn primary" id="btn-play">
+        <span class="btn-glyph" id="play-glyph">▶</span>PLAY
+      </button>
+      <button class="btn" id="btn-stop" disabled>
+        <span class="btn-glyph">■</span>STOP
+      </button>
+      <button class="btn" id="btn-export">
+        <span class="btn-glyph">↓</span>EXPORT WAV
+      </button>
+    </div>
+
+    <div class="meters">
+      <div class="meter">
+        <span>OUT L</span>
+        <div class="meter-bar"><div class="meter-fill" id="meter-l"></div></div>
+      </div>
+      <div class="meter">
+        <span>OUT R</span>
+        <div class="meter-bar"><div class="meter-fill" id="meter-r"></div></div>
+      </div>
+      <div class="clock" id="clock">00:00.00</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* =========================================================================
+   TONAL PANEL - single-file audio synthesis + export
+   ========================================================================= */
+
+// ---------- CONSTANTS ----------
+
+const NOTES = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+
+const SCALES = {
+  'major':     [0, 2, 4, 5, 7, 9, 11],
+  'minor':     [0, 2, 3, 5, 7, 8, 10],
+  'dorian':    [0, 2, 3, 5, 7, 9, 10],
+  'lydian':    [0, 2, 4, 6, 7, 9, 11],
+  'mixolydian':[0, 2, 4, 5, 7, 9, 10],
+  'phrygian':  [0, 1, 3, 5, 7, 8, 10],
+  'pent-maj':  [0, 2, 4, 7, 9],
+  'pent-min':  [0, 3, 5, 7, 10],
+};
+
+const CHARACTERS = [
+  'texture', 'pad', 'sub', 'choir',
+  'engine', 'reactor', 'space', 'data', 'quantum', 'pulse', 'gravity', 'bio', 'light', 'time',
+  'vibes', 'kalimba',
+  'pink-noise', 'white-noise', 'brown-noise', 'breath-noise',
+  'glass', 'bell', 'drip', 'wood', 'metal', 'pluck', 'zap',
+];
+// Hidden from the dropdown — triggers remain registered so existing steps still sound correct.
+const HIDDEN_CHARACTERS = new Set([
+  'pad', 'sub', 'choir', 'kalimba', 'glass', 'bell',
+  'wood', 'metal', 'pluck', 'zap', 'breath-noise', 'pink-noise',
+]);
+const CHARACTER_LABELS = {
+  texture:        'Texture',
+  pad:            'Pad',
+  sub:            'Sub',
+  choir:          'Choir',
+  engine:         'Engine',
+  reactor:        'Reactor',
+  space:          'Space',
+  data:           'Data',
+  quantum:        'Quantum',
+  pulse:          'Pulse',
+  gravity:        'Gravity',
+  bio:            'Bio',
+  light:          'Light',
+  time:           'Time',
+  vibes:          'Vibes',
+  kalimba:        'Kalimba',
+  'pink-noise':   'Pink',
+  'white-noise':  'White',
+  'brown-noise':  'Brown',
+  'breath-noise': 'Breath',
+  glass:          'Glass',
+  bell:           'Bell',
+  drip:           'Drip',
+  wood:           'Wood',
+  metal:          'Metal',
+  pluck:          'Pluck',
+  zap:            'Zap',
+};
+
+const VIBES = {
+  optimistic:   { noise:'pink',   sweep:'up',     attack:'smooth', wet:0.40, size:3.0, preDelay:20, damping:0.40, chorusDepth:0.30, chorusRate:0.50, unison:3, drive:0.10, tape:0.30, width:0.75, motion:0.08, stepDur:0.80 },
+  melancholia:  { noise:'brown',  sweep:'down',   attack:'smooth', wet:0.65, size:5.0, preDelay:50, damping:0.70, chorusDepth:0.40, chorusRate:0.25, unison:3, drive:0.05, tape:0.50, width:0.50, motion:0.03, stepDur:1.40 },
+  playful:      { noise:'white',  sweep:'up',     attack:'click',  wet:0.25, size:1.5, preDelay:5,  damping:0.25, chorusDepth:0.30, chorusRate:1.50, unison:2, drive:0.20, tape:0.15, width:0.70, motion:0.30, stepDur:0.50 },
+  intimate:     { noise:'breath', sweep:'static', attack:'smooth', wet:0.30, size:1.8, preDelay:15, damping:0.65, chorusDepth:0.20, chorusRate:0.50, unison:2, drive:0.10, tape:0.55, width:0.40, motion:0.05, stepDur:0.90 },
+  industrial:   { noise:'white',  sweep:'static', attack:'click',  wet:0.25, size:1.8, preDelay:10, damping:0.30, chorusDepth:0.15, chorusRate:0.90, unison:4, drive:0.55, tape:0.20, width:0.60, motion:0.12, stepDur:0.55 },
+  futuristic:   { noise:'white',  sweep:'up',     attack:'click',  wet:0.45, size:2.5, preDelay:15, damping:0.30, chorusDepth:0.40, chorusRate:1.00, unison:5, drive:0.20, tape:0.15, width:0.90, motion:0.18, stepDur:0.65 },
+  minimal:      { noise:'pink',   sweep:'static', attack:'smooth', wet:0.20, size:1.5, preDelay:10, damping:0.40, chorusDepth:0.10, chorusRate:0.30, unison:1, drive:0.05, tape:0.20, width:0.50, motion:0.03, stepDur:1.00 },
+
+  rebellious:   { noise:'white',  sweep:'down',   attack:'click',  wet:0.30, size:2.0, preDelay:10, damping:0.25, chorusDepth:0.20, chorusRate:1.10, unison:3, drive:0.50, tape:0.15, width:0.70, motion:0.15, stepDur:0.55 },
+  disruptive:   { noise:'white',  sweep:'down',   attack:'click',  wet:0.25, size:1.6, preDelay:8,  damping:0.25, chorusDepth:0.15, chorusRate:1.40, unison:4, drive:0.50, tape:0.10, width:0.85, motion:0.22, stepDur:0.50 },
+  ethereal:     { noise:'breath', sweep:'up',     attack:'smooth', wet:0.75, size:6.0, preDelay:55, damping:0.45, chorusDepth:0.50, chorusRate:0.25, unison:5, drive:0.05, tape:0.25, width:0.90, motion:0.04, stepDur:1.50 },
+  energetic:    { noise:'white',  sweep:'up',     attack:'click',  wet:0.25, size:1.8, preDelay:10, damping:0.30, chorusDepth:0.25, chorusRate:1.30, unison:4, drive:0.25, tape:0.15, width:0.80, motion:0.20, stepDur:0.50 },
+  calming:      { noise:'pink',   sweep:'static', attack:'smooth', wet:0.55, size:4.0, preDelay:40, damping:0.55, chorusDepth:0.20, chorusRate:0.25, unison:3, drive:0.05, tape:0.40, width:0.60, motion:0.04, stepDur:1.20 },
+  cinematic:    { noise:'pink',   sweep:'up',     attack:'smooth', wet:0.70, size:5.5, preDelay:50, damping:0.45, chorusDepth:0.40, chorusRate:0.30, unison:5, drive:0.15, tape:0.45, width:0.90, motion:0.06, stepDur:1.30 },
+  epic:         { noise:'brown',  sweep:'up',     attack:'smooth', wet:0.75, size:6.5, preDelay:55, damping:0.40, chorusDepth:0.45, chorusRate:0.25, unison:5, drive:0.20, tape:0.35, width:0.90, motion:0.05, stepDur:1.40 },
+  ambient:      { noise:'pink',   sweep:'static', attack:'smooth', wet:0.70, size:5.5, preDelay:50, damping:0.50, chorusDepth:0.35, chorusRate:0.20, unison:4, drive:0.05, tape:0.35, width:0.85, motion:0.03, stepDur:1.50 },
+  trance:       { noise:'white',  sweep:'up',     attack:'click',  wet:0.45, size:3.0, preDelay:20, damping:0.30, chorusDepth:0.40, chorusRate:1.20, unison:5, drive:0.15, tape:0.20, width:0.85, motion:0.15, stepDur:0.50 },
+};
+
+// ---------- STATE ----------
+
+const state = {
+  root: 'G',
+  scale: 'pent-maj',
+  numSteps: 6,
+  stepDur: 0.80,                // seconds per step
+
+  // step: {enabled, note, octave, character, dur}
+  steps: [],
+
+  // technical params
+  p: {
+    wet: 0.45,
+    size: 3.2,
+    preDelay: 25,           // ms
+    damping: 0.5,
+    chorusDepth: 0.3,
+    chorusRate: 0.5,
+    unison: 3,
+    drive: 0.15,
+    tape: 0.3,
+    width: 0.7,
+    motion: 0.08,
+  },
+
+  activeVibes: [],     // ordered list of active vibe names
+  playing: false,
+  currentStep: -1,
+  playStartTime: 0,
+  scheduled: [],
+};
+
+// ---------- UTIL ----------
+
+function noteToFreq(note, octave) {
+  const semi = NOTES.indexOf(note);
+  if (semi < 0) return 440;
+  const midi = 12 * (octave + 1) + semi;
+  return 440 * Math.pow(2, (midi - 69) / 12);
+}
+
+function noteToMidi(note, octave) {
+  return 12 * (octave + 1) + NOTES.indexOf(note);
+}
+
+function midiToFreq(m) { return 440 * Math.pow(2, (m - 69) / 12); }
+
+function fmt(val, unit = '', digits = 2) {
+  return Number(val).toFixed(digits) + unit;
+}
+
+function toast(msg, type = 'ok') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.toggle('err', type === 'err');
+  el.classList.add('show');
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => el.classList.remove('show'), 2400);
+}
+
+function formatClock(seconds) {
+  const total = Math.max(0, seconds);
+  const m = Math.floor(total / 60);
+  const s = Math.floor(total % 60);
+  const cs = Math.floor((total % 1) * 100);
+  return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}.${String(cs).padStart(2,'0')}`;
+}
+
+function flashRow(paramName) {
+  const row = document.querySelector(`.param-row[data-param="${paramName}"]`);
+  if (!row) return;
+  row.classList.remove('changed');
+  void row.offsetWidth;
+  row.classList.add('changed');
+}
+
+// Per-step duration preset values
+const DUR_PRESETS = [0.05, 0.1, 0.15, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 2.0, 2.5];
+
+function snapDur(v) {
+  return DUR_PRESETS.reduce((best, d) =>
+    Math.abs(d - v) < Math.abs(best - v) ? d : best, DUR_PRESETS[0]);
+}
+
+// ---------- INIT STEPS ----------
+
+function initSteps() {
+  state.steps = [];
+  const scaleArr = SCALES[state.scale];
+  const defaultDur = snapDur(state.stepDur);
+  const rootSemi = NOTES.indexOf(state.root);
+  for (let i = 0; i < 6; i++) {
+    const semi = (rootSemi + scaleArr[i % scaleArr.length]) % 12;
+    state.steps.push({
+      enabled: i < 4,
+      note: NOTES[semi],
+      octave: 4,
+      character: 'vibes',
+      dur: defaultDur,
+    });
+  }
+}
+
+function fillFromScale() {
+  const scaleArr = SCALES[state.scale];
+  const rootSemi = NOTES.indexOf(state.root);
+  let idx = 0;
+  for (let i = 0; i < state.numSteps; i++) {
+    const s = state.steps[i];
+    if (!s.enabled) continue;
+    const semiOffset = scaleArr[idx % scaleArr.length];
+    const totalSemi = rootSemi + semiOffset + Math.floor(idx / scaleArr.length) * 12;
+    const targetMidi = noteToMidi(state.root, 4) + semiOffset + Math.floor(idx / scaleArr.length) * 12;
+    s.note = NOTES[((targetMidi % 12) + 12) % 12];
+    s.octave = Math.floor(targetMidi / 12) - 1;
+    idx++;
+  }
+  renderSeq();
+}
+
+// ---------- RENDER ----------
+
+function render() {
+  renderSeq();
+  renderVibes();
+  renderParams();
+  updateSeqMeta();
+}
+
+function renderSeq() {
+  const grid = document.getElementById('seq-grid');
+  grid.innerHTML = '';
+  for (let i = 0; i < 6; i++) {
+    const step = state.steps[i];
+    const active = i < state.numSteps;
+    const el = document.createElement('div');
+    el.className = 'step' + (active ? ' active' : '');
+    el.dataset.enabled = step.enabled ? 'true' : 'false';
+    el.dataset.idx = i;
+
+    const head = document.createElement('div');
+    head.className = 'step-head';
+    head.innerHTML = `<span>${String(i+1).padStart(2,'0')}</span>`;
+    const toggle = document.createElement('button');
+    toggle.className = 'step-toggle';
+    toggle.setAttribute('aria-label', `Toggle step ${i+1}`);
+    toggle.addEventListener('click', () => {
+      step.enabled = !step.enabled;
+      renderSeq();
+    });
+    head.appendChild(toggle);
+    el.appendChild(head);
+
+    // note + octave label
+    const label = document.createElement('div');
+    label.className = 'step-value';
+    label.textContent = `${step.note}${step.octave}`;
+    el.appendChild(label);
+
+    // pitch row: NOTE | OCT
+    const pitchRow = document.createElement('div');
+    pitchRow.className = 'step-pitch-row';
+
+    const noteSel = document.createElement('select');
+    NOTES.forEach(n => {
+      const o = document.createElement('option');
+      o.value = n;
+      o.textContent = n;
+      if (n === step.note) o.selected = true;
+      noteSel.appendChild(o);
+    });
+    noteSel.addEventListener('change', () => {
+      step.note = noteSel.value;
+      renderSeq();
+    });
+    pitchRow.appendChild(noteSel);
+
+    const octSel = document.createElement('select');
+    for (let o = 2; o <= 6; o++) {
+      const opt = document.createElement('option');
+      opt.value = o;
+      opt.textContent = o;
+      if (o === step.octave) opt.selected = true;
+      octSel.appendChild(opt);
+    }
+    octSel.addEventListener('change', () => {
+      step.octave = +octSel.value;
+      renderSeq();
+    });
+    pitchRow.appendChild(octSel);
+    el.appendChild(pitchRow);
+
+    // character select
+    const charSel = document.createElement('select');
+    CHARACTERS.forEach(c => {
+      // skip hidden unless the current step happens to already use it
+      if (HIDDEN_CHARACTERS.has(c) && c !== step.character) return;
+      const o = document.createElement('option');
+      o.value = c;
+      o.textContent = CHARACTER_LABELS[c];
+      if (c === step.character) o.selected = true;
+      charSel.appendChild(o);
+    });
+    charSel.addEventListener('change', () => {
+      step.character = charSel.value;
+    });
+    el.appendChild(charSel);
+
+    // per-step duration
+    const durSel = document.createElement('select');
+    durSel.className = 'step-dur-sel';
+    DUR_PRESETS.forEach(d => {
+      const o = document.createElement('option');
+      o.value = d;
+      o.textContent = d.toFixed(2).replace(/0$/, '') + 's';
+      if (Math.abs(d - step.dur) < 0.01) o.selected = true;
+      durSel.appendChild(o);
+    });
+    durSel.addEventListener('change', () => {
+      step.dur = +durSel.value;
+      updateSeqMeta();
+    });
+    el.appendChild(durSel);
+
+    if (!active) el.style.opacity = '0.2';
+
+    grid.appendChild(el);
+  }
+}
+
+function renderVibes() {
+  const grid = document.getElementById('vibe-grid');
+  if (grid.children.length) return;
+  Object.keys(VIBES).forEach(name => {
+    const btn = document.createElement('button');
+    btn.className = 'vibe';
+    btn.dataset.vibe = name;
+    btn.setAttribute('aria-pressed', 'false');
+    btn.textContent = name;
+    btn.addEventListener('click', () => toggleVibe(name));
+    grid.appendChild(btn);
+  });
+}
+
+function renderParams() {
+  // sliders
+  document.querySelectorAll('input[type="range"][data-bind]').forEach(inp => {
+    const key = inp.dataset.bind;
+    inp.value = state.p[key];
+    updateSliderFill(inp);
+    const out = document.querySelector(`[data-out="${key}"]`);
+    if (out) out.textContent = formatOut(key, state.p[key]);
+  });
+  // enums
+  document.querySelectorAll('.param-enum[data-bind]').forEach(group => {
+    const key = group.dataset.bind;
+    group.querySelectorAll('button').forEach(b => {
+      b.setAttribute('aria-pressed', b.dataset.val === state.p[key] ? 'true' : 'false');
+    });
+  });
+  renderVibeSelection();
+}
+
+function renderVibeSelection() {
+  document.querySelectorAll('.vibe').forEach(v => {
+    v.setAttribute('aria-pressed', state.activeVibes.includes(v.dataset.vibe) ? 'true' : 'false');
+  });
+  const el = document.getElementById('vibe-active');
+  if (!el) return;
+  if (state.activeVibes.length === 0) el.textContent = '—';
+  else if (state.activeVibes.length === 1) el.textContent = state.activeVibes[0];
+  else el.textContent = `${state.activeVibes.length} vibes · blended`;
+}
+
+function formatOut(key, v) {
+  switch (key) {
+    case 'size': return fmt(v, 's', 1);
+    case 'preDelay': return `${Math.round(v)}ms`;
+    case 'chorusRate': return fmt(v, 'Hz', 2);
+    case 'motion': return fmt(v, 'Hz', 2);
+    case 'unison': return String(Math.round(v));
+    default: return fmt(v, '', 2);
+  }
+}
+
+function updateSliderFill(inp) {
+  const min = +inp.min, max = +inp.max, v = +inp.value;
+  const pct = ((v - min) / (max - min)) * 100;
+  inp.style.setProperty('--fill', pct + '%');
+}
+
+function totalSeqDuration() {
+  let sum = 0;
+  for (let i = 0; i < state.numSteps; i++) sum += state.steps[i].dur;
+  return sum;
+}
+
+function updateSeqMeta() {
+  const total = totalSeqDuration();
+  const durs = new Set(state.steps.slice(0, state.numSteps).map(s => s.dur.toFixed(2)));
+  const perStep = durs.size === 1
+    ? `${[...durs][0]}s/STEP`
+    : `VARIABLE`;
+  document.getElementById('seq-meta').textContent =
+    `${state.numSteps} STEPS · ${perStep} · ${total.toFixed(1)}s TOTAL`;
+}
+
+// ---------- VIBE ----------
+
+const NUMERIC_VIBE_KEYS = ['wet', 'size', 'preDelay', 'damping', 'chorusDepth', 'chorusRate', 'unison', 'drive', 'tape', 'width', 'motion'];
+
+function toggleVibe(name) {
+  if (!VIBES[name]) return;
+  const idx = state.activeVibes.indexOf(name);
+  if (idx >= 0) state.activeVibes.splice(idx, 1);
+  else state.activeVibes.push(name);
+  applyActiveVibes();
+}
+
+function clearVibes() {
+  state.activeVibes = [];
+  renderVibeSelection();
+}
+
+// Blend all currently-active vibes. Numeric keys average; enum keys majority-vote with last-added breaking ties.
+function applyActiveVibes() {
+  const selected = state.activeVibes;
+  if (selected.length === 0) {
+    renderVibeSelection();
+    return;
+  }
+  const n = selected.length;
+
+  NUMERIC_VIBE_KEYS.forEach(k => {
+    let sum = 0;
+    selected.forEach(name => sum += VIBES[name][k]);
+    let val = sum / n;
+    if (k === 'unison' || k === 'preDelay') val = Math.round(val);
+    state.p[k] = +val.toFixed(3);
+    flashRow(k);
+  });
+
+  // step duration
+  const durAvg = selected.reduce((acc, name) => acc + VIBES[name].stepDur, 0) / n;
+  state.stepDur = +durAvg.toFixed(2);
+  const snap = snapDur(durAvg);
+  state.steps.forEach(s => s.dur = snap);
+  flashRow('stepDur');
+
+  renderSeq();
+  renderParams();
+  updateSeqMeta();
+  if (state.playing && liveChain) applyLiveParams();
+}
+
+// ---------- EVENTS ----------
+
+function bindEvents() {
+  // clear vibes
+  document.getElementById('clear-vibes').addEventListener('click', clearVibes);
+
+  // signal chain collapse
+  document.getElementById('toggle-signal-chain').addEventListener('click', () => {
+    const section = document.getElementById('toggle-signal-chain').closest('.collapsible');
+    const open = section.dataset.open === 'true';
+    section.dataset.open = open ? 'false' : 'true';
+    document.getElementById('toggle-signal-chain').setAttribute('aria-expanded', String(!open));
+  });
+
+
+  // sliders — manual edits clear active vibe blend
+  document.querySelectorAll('input[type="range"][data-bind]').forEach(inp => {
+    inp.addEventListener('input', () => {
+      const key = inp.dataset.bind;
+      state.p[key] = +inp.value;
+      updateSliderFill(inp);
+      const out = document.querySelector(`[data-out="${key}"]`);
+      if (out) out.textContent = formatOut(key, +inp.value);
+      clearVibes();
+      if (state.playing && liveChain) applyLiveParams();
+    });
+  });
+
+  // enum buttons — manual edits clear active vibe blend
+  document.querySelectorAll('.param-enum[data-bind] button').forEach(b => {
+    b.addEventListener('click', () => {
+      const group = b.parentElement;
+      const key = group.dataset.bind;
+      state.p[key] = b.dataset.val;
+      group.querySelectorAll('button').forEach(x =>
+        x.setAttribute('aria-pressed', x === b ? 'true' : 'false'));
+      clearVibes();
+      if (state.playing && liveChain) applyLiveParams();
+    });
+  });
+
+  // transport
+  document.getElementById('btn-play').addEventListener('click', onPlay);
+  document.getElementById('btn-stop').addEventListener('click', onStop);
+  document.getElementById('btn-export').addEventListener('click', onExport);
+
+  // keyboard
+  window.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'SELECT' || e.target.tagName === 'INPUT') return;
+    if (e.code === 'Space') { e.preventDefault(); state.playing ? onStop() : onPlay(); }
+    if (e.key === 'e' || e.key === 'E') onExport();
+  });
+}
+
+// ---------- SOUND ENGINE ----------
+// Factory: creates the full signal graph on whatever Tone context is active.
+
+function createNoise(type) {
+  if (type === 'breath') {
+    // breath = filtered white with slow filter wobble
+    const n = new Tone.Noise('white');
+    n.start();
+    const filt = new Tone.Filter({ type: 'bandpass', frequency: 900, Q: 2 });
+    const lfo = new Tone.LFO({ frequency: 0.6, min: 400, max: 1400 }).start();
+    lfo.connect(filt.frequency);
+    n.connect(filt);
+    return { output: filt, stop: () => { n.stop(); n.dispose(); filt.dispose(); lfo.dispose(); } };
+  } else {
+    const n = new Tone.Noise(type);
+    n.start();
+    return { output: n, stop: () => { n.stop(); n.dispose(); } };
+  }
+}
+
+// Dispatch the correct onset generator. Noise types use a filter-swept noise path;
+// tonal/textural types produce their own material.
+function scheduleOnset(bus, p, time) {
+  const handler = ONSET_HANDLERS[p.noise] || scheduleNoiseOnset;
+  handler(bus, p, time);
+}
+
+function scheduleNoiseOnset(bus, p, time) {
+  const env = new Tone.AmplitudeEnvelope({
+    attack:  p.attack === 'click' ? 0.002 : 0.08,
+    decay:   p.attack === 'click' ? 0.15 : 0.4,
+    sustain: 0,
+    release: 0.3,
+  });
+  const filt = new Tone.Filter({ type: 'bandpass', frequency: 1000, Q: 1.5 });
+  const gain = new Tone.Gain(p.attack === 'click' ? 0.45 : 0.3);
+  const n = createNoise(p.noise);
+  n.output.connect(filt);
+  filt.connect(env);
+  env.connect(gain);
+  gain.connect(bus);
+
+  if (p.sweep === 'up') {
+    filt.frequency.setValueAtTime(200, time);
+    filt.frequency.exponentialRampToValueAtTime(4000, time + 0.6);
+  } else if (p.sweep === 'down') {
+    filt.frequency.setValueAtTime(4500, time);
+    filt.frequency.exponentialRampToValueAtTime(250, time + 0.7);
+  } else {
+    filt.frequency.setValueAtTime(1200, time);
+  }
+
+  env.triggerAttackRelease(p.attack === 'click' ? 0.08 : 0.5, time);
+
+  setTimeout(() => {
+    try { n.stop(); env.dispose(); filt.dispose(); gain.dispose(); } catch(e){}
+  }, 3000);
+}
+
+// Glass — inharmonic partials, bright, short decay
+function scheduleGlassOnset(bus, p, time) {
+  const env = new Tone.AmplitudeEnvelope({
+    attack:  p.attack === 'click' ? 0.001 : 0.025,
+    decay:   p.attack === 'click' ? 0.45 : 0.7,
+    sustain: 0,
+    release: 0.3,
+  });
+  const gain = new Tone.Gain(p.attack === 'click' ? 0.22 : 0.18);
+
+  // fundamental shifted by sweep
+  let base = 1200;
+  if (p.sweep === 'up') base = 900;     // rise toward 1200+
+  else if (p.sweep === 'down') base = 1600; // fall from 1600
+  const partials = [1, 2.76, 5.41, 8.93];
+  const amps = [1.0, 0.55, 0.32, 0.14];
+  const oscs = [], partGains = [];
+
+  partials.forEach((ratio, i) => {
+    const o = new Tone.Oscillator(base * ratio, 'sine');
+    const g = new Tone.Gain(amps[i]);
+    o.connect(g);
+    g.connect(env);
+    o.start(time);
+    o.stop(time + 1.2);
+    oscs.push(o);
+    partGains.push(g);
+  });
+
+  if (p.sweep === 'up') {
+    oscs.forEach((o, i) => {
+      o.frequency.setValueAtTime(base * partials[i] * 0.85, time);
+      o.frequency.exponentialRampToValueAtTime(base * partials[i] * 1.05, time + 0.12);
+    });
+  } else if (p.sweep === 'down') {
+    oscs.forEach((o, i) => {
+      o.frequency.setValueAtTime(base * partials[i] * 1.15, time);
+      o.frequency.exponentialRampToValueAtTime(base * partials[i] * 0.95, time + 0.15);
+    });
+  }
+
+  env.connect(gain);
+  gain.connect(bus);
+  env.triggerAttackRelease(0.35, time);
+
+  setTimeout(() => {
+    try {
+      oscs.forEach(o => { o.stop(); o.dispose(); });
+      partGains.forEach(g => g.dispose());
+      env.dispose(); gain.dispose();
+    } catch(e){}
+  }, 3000);
+}
+
+// Bell — FM-synthesized, long resonance
+function scheduleBellOnset(bus, p, time) {
+  const synth = new Tone.FMSynth({
+    harmonicity: 3.01,
+    modulationIndex: 12,
+    oscillator: { type: 'sine' },
+    envelope: {
+      attack: p.attack === 'click' ? 0.001 : 0.015,
+      decay: 1.6,
+      sustain: 0,
+      release: 1.2,
+    },
+    modulation: { type: 'sine' },
+    modulationEnvelope: {
+      attack: 0.001,
+      decay: 0.25,
+      sustain: 0,
+      release: 0.4,
+    },
+  });
+  const gain = new Tone.Gain(p.attack === 'click' ? 0.16 : 0.13);
+  synth.connect(gain);
+  gain.connect(bus);
+
+  let freq = 520;
+  if (p.sweep === 'up') freq = 760;
+  else if (p.sweep === 'down') freq = 340;
+
+  synth.triggerAttackRelease(freq, 2.2, time);
+
+  setTimeout(() => {
+    try { synth.dispose(); gain.dispose(); } catch(e){}
+  }, 4500);
+}
+
+// Drip — sine with fast downward pitch glide
+function scheduleDripOnset(bus, p, time) {
+  const osc = new Tone.Oscillator(1800, 'sine');
+  const env = new Tone.AmplitudeEnvelope({
+    attack: p.attack === 'click' ? 0.001 : 0.01,
+    decay:  p.attack === 'click' ? 0.18 : 0.28,
+    sustain: 0,
+    release: 0.12,
+  });
+  const gain = new Tone.Gain(0.3);
+  osc.connect(env);
+  env.connect(gain);
+  gain.connect(bus);
+
+  let startF = 2400, endF = 420;
+  if (p.sweep === 'up') { startF = 420; endF = 2400; }   // reversed: rising drip
+  else if (p.sweep === 'static') { startF = 1100; endF = 950; }
+
+  osc.frequency.setValueAtTime(startF, time);
+  osc.frequency.exponentialRampToValueAtTime(endF, time + 0.14);
+  osc.start(time);
+  osc.stop(time + 0.5);
+
+  env.triggerAttackRelease(0.22, time);
+
+  setTimeout(() => {
+    try { osc.dispose(); env.dispose(); gain.dispose(); } catch(e){}
+  }, 2000);
+}
+
+// Crackle — random micro-bursts of filtered noise (vinyl-style)
+function scheduleCrackleOnset(bus, p, time) {
+  const gain = new Tone.Gain(p.attack === 'click' ? 0.28 : 0.22);
+  gain.connect(bus);
+  const dur = p.attack === 'click' ? 0.25 : 0.55;
+  const count = p.attack === 'click' ? 8 : 16;
+
+  // base filter frequency follows sweep
+  let fBase = 2500;
+  if (p.sweep === 'up') fBase = 1500;
+  else if (p.sweep === 'down') fBase = 3500;
+  const fSpread = 2500;
+
+  const nodes = [];
+  for (let i = 0; i < count; i++) {
+    const t = time + Math.random() * dur;
+    const n = new Tone.Noise('white');
+    const env = new Tone.AmplitudeEnvelope({
+      attack: 0.0005,
+      decay: 0.015 + Math.random() * 0.025,
+      sustain: 0,
+      release: 0.01,
+    });
+    const filt = new Tone.Filter({ type: 'highpass', frequency: fBase + (Math.random() - 0.5) * fSpread, Q: 0.7 });
+    n.connect(filt); filt.connect(env); env.connect(gain);
+    n.start(t); n.stop(t + 0.06);
+    env.triggerAttackRelease(0.01 + Math.random() * 0.015, t);
+    nodes.push(n, filt, env);
+  }
+  setTimeout(() => {
+    try {
+      nodes.forEach(nd => { try { if (nd.stop) nd.stop(); nd.dispose(); } catch(e){} });
+      gain.dispose();
+    } catch(e){}
+  }, 2500);
+}
+
+// Wood — warm pitched click, marimba-like
+function scheduleWoodOnset(bus, p, time) {
+  const synth = new Tone.Synth({
+    oscillator: { type: 'triangle' },
+    envelope: {
+      attack: p.attack === 'click' ? 0.001 : 0.008,
+      decay: 0.22,
+      sustain: 0,
+      release: 0.12,
+    },
+  });
+  const filt = new Tone.Filter({ type: 'bandpass', frequency: 900, Q: 1.8 });
+  const click = new Tone.Noise('white');
+  const clickEnv = new Tone.AmplitudeEnvelope({ attack: 0.0005, decay: 0.008, sustain: 0, release: 0.005 });
+  const clickFilt = new Tone.Filter({ type: 'highpass', frequency: 3000 });
+  const clickGain = new Tone.Gain(p.attack === 'click' ? 0.22 : 0.1);
+  const gain = new Tone.Gain(0.3);
+
+  synth.connect(filt); filt.connect(gain);
+  click.connect(clickFilt); clickFilt.connect(clickEnv); clickEnv.connect(clickGain); clickGain.connect(gain);
+  gain.connect(bus);
+
+  let freq = 650;
+  if (p.sweep === 'up') freq = 880;
+  else if (p.sweep === 'down') freq = 440;
+
+  click.start(time); click.stop(time + 0.05);
+  clickEnv.triggerAttackRelease(0.01, time);
+  synth.triggerAttackRelease(freq, 0.2, time + 0.002);
+
+  setTimeout(() => {
+    try { synth.dispose(); filt.dispose(); click.dispose(); clickFilt.dispose(); clickEnv.dispose(); clickGain.dispose(); gain.dispose(); } catch(e){}
+  }, 2000);
+}
+
+// Metal — industrial metallic strike
+function scheduleMetalOnset(bus, p, time) {
+  const metal = new Tone.MetalSynth({
+    envelope: {
+      attack: p.attack === 'click' ? 0.001 : 0.005,
+      decay: p.attack === 'click' ? 0.5 : 0.9,
+      release: 0.4,
+    },
+    harmonicity: 5.1,
+    modulationIndex: 32,
+    resonance: 4000,
+    octaves: 1.5,
+  });
+  const gain = new Tone.Gain(0.06); // MetalSynth is hot
+  metal.connect(gain);
+  gain.connect(bus);
+
+  let freq = 380;
+  if (p.sweep === 'up') freq = 560;
+  else if (p.sweep === 'down') freq = 240;
+  metal.frequency.value = freq;
+  metal.triggerAttackRelease(0.5, time);
+
+  setTimeout(() => {
+    try { metal.dispose(); gain.dispose(); } catch(e){}
+  }, 2500);
+}
+
+// Pluck — Karplus-Strong string pluck
+function schedulePluckOnset(bus, p, time) {
+  const pluck = new Tone.PluckSynth({
+    attackNoise: p.attack === 'click' ? 2 : 0.8,
+    dampening: p.sweep === 'down' ? 2200 : (p.sweep === 'up' ? 6000 : 4000),
+    resonance: 0.86,
+    release: 1,
+  });
+  const gain = new Tone.Gain(0.4);
+  pluck.connect(gain);
+  gain.connect(bus);
+
+  let freq = 440;
+  if (p.sweep === 'up') freq = 660;
+  else if (p.sweep === 'down') freq = 220;
+  pluck.triggerAttack(freq, time);
+
+  setTimeout(() => {
+    try { pluck.dispose(); gain.dispose(); } catch(e){}
+  }, 3500);
+}
+
+// Zap — sawtooth with fast pitch drop + drive
+function scheduleZapOnset(bus, p, time) {
+  const osc = new Tone.Oscillator(2000, 'sawtooth');
+  const env = new Tone.AmplitudeEnvelope({
+    attack: p.attack === 'click' ? 0.001 : 0.008,
+    decay: 0.18,
+    sustain: 0,
+    release: 0.06,
+  });
+  const dist = new Tone.Distortion(0.45);
+  const filt = new Tone.Filter({ type: 'lowpass', frequency: 6000, Q: 0.8 });
+  const gain = new Tone.Gain(0.16);
+  osc.connect(dist); dist.connect(filt); filt.connect(env); env.connect(gain);
+  gain.connect(bus);
+
+  let startF = 2800, endF = 600;
+  if (p.sweep === 'up') { startF = 500; endF = 3200; }
+  else if (p.sweep === 'static') { startF = 1600; endF = 1400; }
+
+  osc.frequency.setValueAtTime(startF, time);
+  osc.frequency.exponentialRampToValueAtTime(endF, time + 0.11);
+  osc.start(time);
+  osc.stop(time + 0.3);
+  env.triggerAttackRelease(0.15, time);
+
+  setTimeout(() => {
+    try { osc.dispose(); dist.dispose(); filt.dispose(); env.dispose(); gain.dispose(); } catch(e){}
+  }, 2000);
+}
+
+// Onset dispatch map — any source not listed falls through to noise path
+const ONSET_HANDLERS = {
+  pink:    scheduleNoiseOnset,
+  white:   scheduleNoiseOnset,
+  brown:   scheduleNoiseOnset,
+  breath:  scheduleNoiseOnset,
+  crackle: scheduleCrackleOnset,
+  glass:   scheduleGlassOnset,
+  bell:    scheduleBellOnset,
+  drip:    scheduleDripOnset,
+  wood:    scheduleWoodOnset,
+  metal:   scheduleMetalOnset,
+  pluck:   schedulePluckOnset,
+  zap:     scheduleZapOnset,
+};
+
+function buildChain() {
+  // FX chain (shared)
+  const reverb = new Tone.Reverb({
+    decay: state.p.size,
+    wet: state.p.wet,
+    preDelay: state.p.preDelay / 1000,
+  });
+
+  // damping: lowpass before reverb
+  const dampingFreq = 18000 - state.p.damping * 14000;
+  const dampingFilt = new Tone.Filter({ type: 'lowpass', frequency: dampingFreq, Q: 0.3 });
+
+  const chorus = new Tone.Chorus({
+    frequency: state.p.chorusRate,
+    depth: state.p.chorusDepth,
+    delayTime: 3.5,
+    wet: state.p.chorusDepth > 0 ? 0.7 : 0,
+  }).start();
+
+  const drive = new Tone.Distortion({
+    distortion: state.p.drive,
+    oversample: '2x',
+    wet: state.p.drive > 0.02 ? 1 : 0,
+  });
+
+  // tape: high-shelf cut + subtle compression flavor via Chebyshev low order
+  const tapeFilt = new Tone.Filter({
+    type: 'highshelf',
+    frequency: 4000,
+    gain: -state.p.tape * 12,
+  });
+  const tapeCheb = new Tone.Chebyshev({ order: 2, wet: state.p.tape * 0.4 });
+
+  const widener = new Tone.StereoWidener(state.p.width);
+
+  const autopan = new Tone.AutoPanner({ frequency: Math.max(0.01, state.p.motion), depth: Math.min(1, state.p.motion * 2) }).start();
+  if (state.p.motion <= 0.005) autopan.depth.value = 0;
+
+  const masterLimiter = new Tone.Limiter(-1);
+  const masterGain = new Tone.Gain(0.85);
+
+  // route: bus -> chorus -> drive -> tapeFilt -> tapeCheb -> widener -> autopan -> dampingFilt -> reverb -> limiter -> dest
+  const bus = new Tone.Gain(1);
+  bus.chain(chorus, drive, tapeFilt, tapeCheb, widener, autopan, dampingFilt, reverb, masterLimiter, masterGain, Tone.getDestination());
+
+  return {
+    bus,
+    reverb, dampingFilt, chorus, drive, tapeFilt, tapeCheb, widener, autopan,
+    masterGain, masterLimiter,
+    disposables: [reverb, dampingFilt, chorus, drive, tapeFilt, tapeCheb, widener, autopan, masterLimiter, masterGain, bus],
+    async ready() {
+      await reverb.ready;
+    },
+    applyParams(p) {
+      reverb.wet.rampTo(p.wet, 0.2);
+      reverb.decay = p.size;
+      reverb.preDelay = p.preDelay / 1000;
+      const df = 18000 - p.damping * 14000;
+      dampingFilt.frequency.rampTo(df, 0.1);
+      chorus.frequency.rampTo(p.chorusRate, 0.1);
+      chorus.depth = p.chorusDepth;
+      chorus.wet.rampTo(p.chorusDepth > 0 ? 0.7 : 0, 0.1);
+      drive.distortion = p.drive;
+      drive.wet.rampTo(p.drive > 0.02 ? 1 : 0, 0.1);
+      tapeFilt.gain.rampTo(-p.tape * 12, 0.1);
+      tapeCheb.wet.rampTo(p.tape * 0.4, 0.1);
+      widener.width.rampTo(p.width, 0.1);
+      autopan.frequency.rampTo(Math.max(0.01, p.motion), 0.1);
+      autopan.depth.value = p.motion <= 0.005 ? 0 : Math.min(1, p.motion * 2);
+    },
+    dispose() {
+      this.disposables.forEach(d => { try { d.dispose(); } catch(e){} });
+    },
+  };
+}
+
+// Trigger one step into the bus
+function triggerStep(chain, stepIdx, p, stepDur, time) {
+  const step = state.steps[stepIdx];
+  if (!step.enabled) return;
+
+  const bus = chain.bus;
+  const midi = noteToMidi(step.note, step.octave);
+
+  const fn = CHARACTER_TRIGGERS[step.character] || triggerVibraphoneNote;
+  fn(bus, midi, p, stepDur, time);
+}
+
+function triggerMelodicNote(bus, rootMidi, p, stepDur, time) {
+  const holdTime = Math.max(0.8, stepDur * 0.95);
+
+  // sus2 pad: root, +2, +7
+  const padMidi = [rootMidi, rootMidi + 2, rootMidi + 7];
+  const padGain = new Tone.Gain(0.35).connect(bus);
+
+  const synth = new Tone.PolySynth(Tone.Synth, {
+    oscillator: {
+      type: p.unison > 1 ? 'fatsawtooth' : 'triangle',
+      count: Math.min(8, Math.max(1, p.unison)),
+      spread: 18,
+    },
+    envelope: {
+      attack: 0.35,
+      decay: 0.4,
+      sustain: 0.7,
+      release: 1.8,
+    },
+  });
+
+  const padFilt = new Tone.Filter({ type: 'lowpass', frequency: 2600, Q: 0.6 });
+  synth.connect(padFilt);
+  padFilt.connect(padGain);
+
+  const freqs = padMidi.map(m => midiToFreq(m));
+  synth.triggerAttackRelease(freqs, holdTime, time);
+
+  // internal voice rise — one voice pitches up from -12 to +7 semi over ~holdTime
+  const riseSynth = new Tone.MonoSynth({
+    oscillator: { type: 'sawtooth' },
+    envelope: { attack: 0.6, decay: 0.3, sustain: 0.8, release: 1.5 },
+    filter: { Q: 0.3 },
+    filterEnvelope: { attack: 0.8, decay: 0.2, sustain: 1, release: 1, baseFrequency: 400, octaves: 3 },
+  });
+  const riseGain = new Tone.Gain(0.18).connect(bus);
+  riseSynth.connect(riseGain);
+  const riseStartFreq = midiToFreq(rootMidi - 12);
+  const riseEndFreq = midiToFreq(rootMidi + 7);
+  riseSynth.frequency.setValueAtTime(riseStartFreq, time);
+  riseSynth.frequency.exponentialRampToValueAtTime(riseEndFreq, time + holdTime * 0.8);
+  riseSynth.triggerAttackRelease(riseStartFreq, holdTime, time);
+
+  // sub
+  const sub = new Tone.Oscillator(midiToFreq(rootMidi - 24), 'sine').start(time);
+  const subEnv = new Tone.AmplitudeEnvelope({ attack: 0.2, decay: 0.3, sustain: 0.8, release: 1.2 });
+  const subGain = new Tone.Gain(0.35).connect(bus);
+  sub.connect(subEnv);
+  subEnv.connect(subGain);
+  subEnv.triggerAttackRelease(holdTime, time);
+
+  // cleanup (wall-clock; offline render finishes much faster than this delay)
+  const cleanupMs = (holdTime + 3.0) * 1000;
+  setTimeout(() => {
+    try {
+      synth.dispose(); padFilt.dispose(); padGain.dispose();
+      riseSynth.dispose(); riseGain.dispose();
+      sub.stop(); sub.dispose(); subEnv.dispose(); subGain.dispose();
+    } catch(e){}
+  }, cleanupMs);
+}
+
+// Texture — resonant filtered noise pitched to the note + faint sine reinforcement
+function triggerTextureNote(bus, rootMidi, p, stepDur, time) {
+  const holdTime = Math.max(0.6, stepDur * 0.9);
+  const freq = midiToFreq(rootMidi);
+
+  const n2 = createNoise('pink');
+  const resFilt = new Tone.Filter({ type: 'bandpass', frequency: freq, Q: 10 });
+  const env = new Tone.AmplitudeEnvelope({ attack: 0.4, decay: 0.5, sustain: 0.5, release: 1.2 });
+  const g = new Tone.Gain(0.28).connect(bus);
+  n2.output.connect(resFilt);
+  resFilt.connect(env);
+  env.connect(g);
+  env.triggerAttackRelease(holdTime, time);
+
+  // faint sine reinforcement at the note for clearer pitch
+  const sine = new Tone.Oscillator(freq, 'sine').start(time);
+  const sineEnv = new Tone.AmplitudeEnvelope({ attack: 0.5, decay: 0.4, sustain: 0.6, release: 1.2 });
+  const sineGain = new Tone.Gain(0.08).connect(bus);
+  sine.connect(sineEnv);
+  sineEnv.connect(sineGain);
+  sineEnv.triggerAttackRelease(holdTime, time);
+
+  // sub oct for body
+  const sub = new Tone.Oscillator(midiToFreq(rootMidi - 12), 'sine').start(time);
+  const subEnv = new Tone.AmplitudeEnvelope({ attack: 0.4, decay: 0.4, sustain: 0.7, release: 1.2 });
+  const subGain = new Tone.Gain(0.2).connect(bus);
+  sub.connect(subEnv);
+  subEnv.connect(subGain);
+  subEnv.triggerAttackRelease(holdTime, time);
+
+  setTimeout(() => {
+    try {
+      n2.stop(); resFilt.dispose(); env.dispose(); g.dispose();
+      sine.stop(); sine.dispose(); sineEnv.dispose(); sineGain.dispose();
+      sub.stop(); sub.dispose(); subEnv.dispose(); subGain.dispose();
+    } catch(e){}
+  }, (holdTime + 3.0) * 1000);
+}
+
+// Cluster — micro-cluster built around the selected note (min2, maj2, tritone spread)
+function triggerClusterNote(bus, rootMidi, p, stepDur, time) {
+  const holdTime = Math.max(0.6, stepDur * 0.9);
+
+  const offsets = [-1, 0, 1, 3, 6];  // semitones around the note
+  const midis = offsets.map(o => rootMidi + o);
+
+  const synth = new Tone.PolySynth(Tone.Synth, {
+    oscillator: { type: 'fatsawtooth', count: Math.max(1, p.unison), spread: 25 },
+    envelope: { attack: 0.4, decay: 0.5, sustain: 0.6, release: 1.5 },
+  });
+  const filt = new Tone.Filter({ type: 'lowpass', frequency: 2200, Q: 0.8 });
+  const g = new Tone.Gain(0.16).connect(bus);
+  synth.connect(filt);
+  filt.connect(g);
+  synth.triggerAttackRelease(midis.map(midiToFreq), holdTime, time);
+
+  // sub at -24 for weight
+  const sub = new Tone.Oscillator(midiToFreq(rootMidi - 24), 'sine').start(time);
+  const subEnv = new Tone.AmplitudeEnvelope({ attack: 0.3, decay: 0.3, sustain: 0.7, release: 1.2 });
+  const subGain = new Tone.Gain(0.28).connect(bus);
+  sub.connect(subEnv);
+  subEnv.connect(subGain);
+  subEnv.triggerAttackRelease(holdTime, time);
+
+  setTimeout(() => {
+    try { synth.dispose(); filt.dispose(); g.dispose(); sub.stop(); sub.dispose(); subEnv.dispose(); subGain.dispose(); } catch(e){}
+  }, (holdTime + 3.0) * 1000);
+}
+
+// Hit — transient membrane pitched to the note + high metallic shimmer at +24
+function triggerHitNote(bus, rootMidi, p, stepDur, time) {
+  const hit = new Tone.MembraneSynth({
+    pitchDecay: 0.08,
+    octaves: 4,
+    envelope: { attack: 0.001, decay: 0.4, sustain: 0, release: 0.5 },
+  });
+  const g = new Tone.Gain(0.32).connect(bus);
+  hit.connect(g);
+  hit.triggerAttackRelease(midiToFreq(rootMidi), 0.3, time);
+
+  const shim = new Tone.MetalSynth({
+    envelope: { attack: 0.001, decay: 0.5, release: 0.6 },
+    harmonicity: 5.1, modulationIndex: 16, resonance: 3000, octaves: 1.5,
+  });
+  shim.frequency.value = midiToFreq(rootMidi + 24);
+  const shimG = new Tone.Gain(0.04).connect(bus);
+  shim.connect(shimG);
+  shim.triggerAttackRelease(0.25, time);
+
+  setTimeout(() => {
+    try { hit.dispose(); g.dispose(); shim.dispose(); shimG.dispose(); } catch(e){}
+  }, 2500);
+}
+
+// Breath pad — airy sustained pad, filtered noise + soft triangle dyad
+function triggerBreathPadNote(bus, rootMidi, p, stepDur, time) {
+  const holdTime = Math.max(1.0, stepDur * 0.95);
+  const freq = midiToFreq(rootMidi);
+
+  const noise = new Tone.Noise('white').start(time);
+  const nFilt = new Tone.Filter({ type: 'bandpass', frequency: freq, Q: 6 });
+  const nEnv = new Tone.AmplitudeEnvelope({ attack: 0.7, decay: 0.4, sustain: 0.55, release: 1.8 });
+  const nGain = new Tone.Gain(0.2).connect(bus);
+  noise.connect(nFilt); nFilt.connect(nEnv); nEnv.connect(nGain);
+  nEnv.triggerAttackRelease(holdTime, time);
+
+  const synth = new Tone.PolySynth(Tone.Synth, {
+    oscillator: { type: 'triangle' },
+    envelope: { attack: 0.9, decay: 0.5, sustain: 0.7, release: 2.0 },
+  });
+  const pFilt = new Tone.Filter({ type: 'lowpass', frequency: 2400, Q: 0.4 });
+  const pGain = new Tone.Gain(0.22).connect(bus);
+  synth.connect(pFilt); pFilt.connect(pGain);
+  synth.triggerAttackRelease([freq, midiToFreq(rootMidi + 12)], holdTime, time);
+
+  setTimeout(() => {
+    try {
+      noise.stop(); noise.dispose(); nFilt.dispose(); nEnv.dispose(); nGain.dispose();
+      synth.dispose(); pFilt.dispose(); pGain.dispose();
+    } catch(e){}
+  }, (holdTime + 3.5) * 1000);
+}
+
+// Bowed string — fatsaw w/ vibrato + bow scratch onset
+function triggerBowedStringNote(bus, rootMidi, p, stepDur, time) {
+  const holdTime = Math.max(0.9, stepDur * 0.95);
+  const freq = midiToFreq(rootMidi);
+
+  // bow scratch
+  const scratch = new Tone.Noise('white').start(time);
+  const sFilt = new Tone.Filter({ type: 'bandpass', frequency: freq * 3, Q: 4 });
+  const sEnv = new Tone.AmplitudeEnvelope({ attack: 0.06, decay: 0.35, sustain: 0, release: 0.2 });
+  const sGain = new Tone.Gain(0.07).connect(bus);
+  scratch.connect(sFilt); sFilt.connect(sEnv); sEnv.connect(sGain);
+  sEnv.triggerAttackRelease(0.25, time);
+
+  const synth = new Tone.MonoSynth({
+    oscillator: { type: 'fatsawtooth', count: 3, spread: 14 },
+    envelope: { attack: 0.35, decay: 0.4, sustain: 0.8, release: 1.4 },
+    filter: { Q: 1 },
+    filterEnvelope: { attack: 0.3, decay: 0.2, sustain: 1, release: 1, baseFrequency: 500, octaves: 3 },
+  });
+  const vibrato = new Tone.Vibrato({ frequency: 5.2, depth: 0.045 });
+  const gain = new Tone.Gain(0.28).connect(bus);
+  synth.connect(vibrato); vibrato.connect(gain);
+  synth.triggerAttackRelease(freq, holdTime, time);
+
+  setTimeout(() => {
+    try {
+      scratch.stop(); scratch.dispose(); sFilt.dispose(); sEnv.dispose(); sGain.dispose();
+      synth.dispose(); vibrato.dispose(); gain.dispose();
+    } catch(e){}
+  }, (holdTime + 3.0) * 1000);
+}
+
+// Singing bowls — inharmonic sine partials with slight detune for shimmer/beating
+function triggerSingingBowlsNote(bus, rootMidi, p, stepDur, time) {
+  const holdTime = Math.max(1.6, stepDur * 1.3);
+  const freq = midiToFreq(rootMidi);
+
+  const partials = [1, 2.05, 3.6, 5.25, 7.8];
+  const amps     = [1.0, 0.68, 0.42, 0.22, 0.11];
+  const detunes  = [0, 0.35, -0.45, 0.6, -0.5];
+  const gain = new Tone.Gain(0.18).connect(bus);
+
+  const nodes = [];
+  partials.forEach((ratio, i) => {
+    const osc = new Tone.Oscillator(freq * ratio + detunes[i], 'sine');
+    const env = new Tone.AmplitudeEnvelope({
+      attack: 0.012 + i * 0.002,
+      decay: holdTime * 0.6 + i * 0.15,
+      sustain: 0.12,
+      release: holdTime * 0.9,
+    });
+    const g = new Tone.Gain(amps[i] * 0.85);
+    osc.connect(env); env.connect(g); g.connect(gain);
+    osc.start(time);
+    env.triggerAttackRelease(holdTime * 0.45, time);
+    nodes.push(osc, env, g);
+  });
+
+  setTimeout(() => {
+    try { nodes.forEach(n => { try { if (n.stop) n.stop(); n.dispose(); } catch(e){} }); gain.dispose(); } catch(e){}
+  }, (holdTime + 4.0) * 1000);
+}
+
+// Analog drone — thick detuned saws + slow filter LFO
+function triggerAnalogDroneNote(bus, rootMidi, p, stepDur, time) {
+  const holdTime = Math.max(1.2, stepDur * 0.95);
+  const freq = midiToFreq(rootMidi);
+
+  const synth = new Tone.PolySynth(Tone.Synth, {
+    oscillator: { type: 'fatsawtooth', count: 5, spread: 42 },
+    envelope: { attack: 0.55, decay: 0.3, sustain: 0.85, release: 1.8 },
+  });
+  const filt = new Tone.Filter({ type: 'lowpass', frequency: 1400, Q: 2.5 });
+  const lfo = new Tone.LFO({ frequency: 0.25, min: 900, max: 2200 }).start(time);
+  lfo.connect(filt.frequency);
+  const gain = new Tone.Gain(0.17).connect(bus);
+  synth.connect(filt); filt.connect(gain);
+  synth.triggerAttackRelease([freq, midiToFreq(rootMidi - 12)], holdTime, time);
+
+  setTimeout(() => {
+    try { synth.dispose(); filt.dispose(); lfo.dispose(); gain.dispose(); } catch(e){}
+  }, (holdTime + 3.5) * 1000);
+}
+
+// Felt piano — hammer noise + triangle body through soft lowpass
+function triggerFeltPianoNote(bus, rootMidi, p, stepDur, time) {
+  const holdTime = Math.max(0.6, stepDur * 0.85);
+  const freq = midiToFreq(rootMidi);
+
+  // hammer
+  const hammer = new Tone.Noise('pink').start(time);
+  const hFilt = new Tone.Filter({ type: 'bandpass', frequency: freq * 2.2, Q: 2.5 });
+  const hEnv = new Tone.AmplitudeEnvelope({ attack: 0.001, decay: 0.045, sustain: 0, release: 0.02 });
+  const hGain = new Tone.Gain(0.1).connect(bus);
+  hammer.connect(hFilt); hFilt.connect(hEnv); hEnv.connect(hGain);
+  hEnv.triggerAttackRelease(0.04, time);
+
+  // body
+  const synth = new Tone.Synth({
+    oscillator: { type: 'triangle' },
+    envelope: { attack: 0.003, decay: 0.9, sustain: 0.28, release: 0.6 },
+  });
+  const felt = new Tone.Filter({ type: 'lowpass', frequency: 1700, Q: 0.3 });
+  const gain = new Tone.Gain(0.32).connect(bus);
+  synth.connect(felt); felt.connect(gain);
+  synth.triggerAttackRelease(freq, holdTime, time);
+
+  // sub sine for warmth
+  const sub = new Tone.Oscillator(midiToFreq(rootMidi - 12), 'sine').start(time);
+  const subEnv = new Tone.AmplitudeEnvelope({ attack: 0.008, decay: 0.6, sustain: 0.35, release: 0.6 });
+  const subGain = new Tone.Gain(0.1).connect(bus);
+  sub.connect(subEnv); subEnv.connect(subGain);
+  subEnv.triggerAttackRelease(holdTime, time);
+
+  setTimeout(() => {
+    try {
+      hammer.stop(); hammer.dispose(); hFilt.dispose(); hEnv.dispose(); hGain.dispose();
+      synth.dispose(); felt.dispose(); gain.dispose();
+      sub.stop(); sub.dispose(); subEnv.dispose(); subGain.dispose();
+    } catch(e){}
+  }, (holdTime + 3.0) * 1000);
+}
+
+// Vibraphone — mallet click + sine fundamental + 4th partial with tremolo
+function triggerVibraphoneNote(bus, rootMidi, p, stepDur, time) {
+  const holdTime = Math.max(0.8, stepDur * 0.95);
+  const freq = midiToFreq(rootMidi);
+
+  // mallet click
+  const click = new Tone.Noise('white').start(time);
+  const cFilt = new Tone.Filter({ type: 'highpass', frequency: 2600 });
+  const cEnv = new Tone.AmplitudeEnvelope({ attack: 0.0005, decay: 0.009, sustain: 0, release: 0.005 });
+  const cGain = new Tone.Gain(0.08).connect(bus);
+  click.connect(cFilt); cFilt.connect(cEnv); cEnv.connect(cGain);
+  cEnv.triggerAttackRelease(0.012, time);
+
+  // tremolo (vibraphone motor) — both partials route through it
+  const tremolo = new Tone.Tremolo({ frequency: 6, depth: 0.4 }).start(time);
+  const postTrem = new Tone.Gain(1).connect(bus);
+  tremolo.connect(postTrem);
+
+  // fundamental
+  const fund = new Tone.Oscillator(freq, 'sine').start(time);
+  const fEnv = new Tone.AmplitudeEnvelope({ attack: 0.003, decay: 1.2, sustain: 0.18, release: 0.7 });
+  const fGain = new Tone.Gain(0.3);
+  fund.connect(fEnv); fEnv.connect(fGain); fGain.connect(tremolo);
+  fEnv.triggerAttackRelease(holdTime, time);
+
+  // 4th harmonic (vibraphone tube resonance) — also through tremolo
+  const harm = new Tone.Oscillator(freq * 4, 'sine').start(time);
+  const hEnv2 = new Tone.AmplitudeEnvelope({ attack: 0.003, decay: 0.5, sustain: 0.05, release: 0.35 });
+  const hGain2 = new Tone.Gain(0.08);
+  harm.connect(hEnv2); hEnv2.connect(hGain2); hGain2.connect(tremolo);
+  hEnv2.triggerAttackRelease(holdTime * 0.5, time);
+
+  setTimeout(() => {
+    try {
+      click.stop(); click.dispose(); cFilt.dispose(); cEnv.dispose(); cGain.dispose();
+      fund.stop(); fund.dispose(); fEnv.dispose(); fGain.dispose();
+      harm.stop(); harm.dispose(); hEnv2.dispose(); hGain2.dispose();
+      tremolo.dispose(); postTrem.dispose();
+    } catch(e){}
+  }, (holdTime + 3.5) * 1000);
+}
+
+// ---- Former onset sources, promoted to pitched characters ----
+
+// Pitched noise — peaking filter adds a resonant peak at the note but lets the
+// rest of the noise spectrum through, so pink / white / brown stay distinguishable.
+function triggerPitchedNoiseCharNote(bus, rootMidi, noiseType, stepDur, time) {
+  const freq = midiToFreq(rootMidi);
+  const holdTime = Math.max(0.4, stepDur * 0.9);
+  const n = new Tone.Noise(noiseType).start(time);
+  const peak = new Tone.Filter({ type: 'peaking', frequency: freq, Q: 9, gain: 22 });
+  const env = new Tone.AmplitudeEnvelope({ attack: 0.06, decay: 0.25, sustain: 0.55, release: 0.6 });
+  const gain = new Tone.Gain(0.32).connect(bus);
+  n.connect(peak); peak.connect(env); env.connect(gain);
+  env.triggerAttackRelease(holdTime, time);
+  setTimeout(() => {
+    try { n.stop(); n.dispose(); peak.dispose(); env.dispose(); gain.dispose(); } catch(e){}
+  }, (holdTime + 3) * 1000);
+}
+function triggerPinkCharNote(bus, rootMidi, p, stepDur, time)  { triggerPitchedNoiseCharNote(bus, rootMidi, 'pink',  stepDur, time); }
+function triggerWhiteCharNote(bus, rootMidi, p, stepDur, time) { triggerPitchedNoiseCharNote(bus, rootMidi, 'white', stepDur, time); }
+function triggerBrownCharNote(bus, rootMidi, p, stepDur, time) { triggerPitchedNoiseCharNote(bus, rootMidi, 'brown', stepDur, time); }
+
+// Breath — white noise with a peaking resonance at the note (preserves airy
+// character) plus a gentle low-cut so it doesn't rumble.
+function triggerBreathCharNote(bus, rootMidi, p, stepDur, time) {
+  const freq = midiToFreq(rootMidi);
+  const holdTime = Math.max(0.5, stepDur * 0.9);
+  const n = new Tone.Noise('white').start(time);
+  const lowcut = new Tone.Filter({ type: 'highpass', frequency: freq * 0.6 });
+  const peak = new Tone.Filter({ type: 'peaking', frequency: freq, Q: 6, gain: 18 });
+  const env = new Tone.AmplitudeEnvelope({ attack: 0.18, decay: 0.35, sustain: 0.55, release: 0.8 });
+  const gain = new Tone.Gain(0.32).connect(bus);
+  n.connect(lowcut); lowcut.connect(peak); peak.connect(env); env.connect(gain);
+  env.triggerAttackRelease(holdTime, time);
+  setTimeout(() => {
+    try { n.stop(); n.dispose(); lowcut.dispose(); peak.dispose(); env.dispose(); gain.dispose(); } catch(e){}
+  }, (holdTime + 3) * 1000);
+}
+
+function triggerCrackleCharNote(bus, rootMidi, p, stepDur, time) {
+  const freq = midiToFreq(rootMidi);
+  const holdTime = Math.max(0.4, stepDur * 0.9);
+  const count = 18;
+  const gain = new Tone.Gain(0.25).connect(bus);
+  const nodes = [];
+  for (let i = 0; i < count; i++) {
+    const t = time + Math.random() * holdTime * 0.8;
+    const n = new Tone.Noise('white');
+    const env = new Tone.AmplitudeEnvelope({ attack: 0.0005, decay: 0.015 + Math.random() * 0.025, sustain: 0, release: 0.01 });
+    const filtFreq = freq * (2 + Math.random() * 6);
+    const filt = new Tone.Filter({ type: 'bandpass', frequency: filtFreq, Q: 1.5 });
+    n.connect(filt); filt.connect(env); env.connect(gain);
+    n.start(t); n.stop(t + 0.06);
+    env.triggerAttackRelease(0.01, t);
+    nodes.push(n, filt, env);
+  }
+  setTimeout(() => {
+    nodes.forEach(nd => { try { nd.dispose(); } catch(e){} });
+    try { gain.dispose(); } catch(e){}
+  }, (holdTime + 3) * 1000);
+}
+
+function triggerGlassCharNote(bus, rootMidi, p, stepDur, time) {
+  const freq = midiToFreq(rootMidi);
+  const gain = new Tone.Gain(0.2).connect(bus);
+
+  // strike — brief bright noise burst at onset ("ting")
+  const strike = new Tone.Noise('white').start(time);
+  const strikeFilt = new Tone.Filter({ type: 'highpass', frequency: freq * 3 });
+  const strikeEnv = new Tone.AmplitudeEnvelope({ attack: 0.0005, decay: 0.03, sustain: 0, release: 0.02 });
+  const strikeGain = new Tone.Gain(0.18);
+  strike.connect(strikeFilt); strikeFilt.connect(strikeEnv); strikeEnv.connect(strikeGain); strikeGain.connect(gain);
+  strikeEnv.triggerAttackRelease(0.025, time);
+
+  // each partial has its own envelope — higher ones decay faster (physical glass behavior)
+  const partials = [1, 2.76, 5.41, 8.93];
+  const amps     = [1.0, 0.45, 0.22, 0.10];
+  const decays   = [1.8, 1.2, 0.7, 0.4];
+  const oscs = [], envs = [], partGains = [];
+  partials.forEach((ratio, i) => {
+    const o = new Tone.Oscillator(freq * ratio, 'sine');
+    const e = new Tone.AmplitudeEnvelope({ attack: 0.001, decay: decays[i], sustain: 0, release: 0.2 });
+    const g = new Tone.Gain(amps[i] * 0.35);
+    o.connect(e); e.connect(g); g.connect(gain);
+    o.start(time); o.stop(time + decays[i] + 0.5);
+    e.triggerAttackRelease(0.05, time);
+    oscs.push(o); envs.push(e); partGains.push(g);
+  });
+
+  setTimeout(() => {
+    try {
+      strike.stop(); strike.dispose(); strikeFilt.dispose(); strikeEnv.dispose(); strikeGain.dispose();
+      oscs.forEach(o => o.dispose()); envs.forEach(e => e.dispose()); partGains.forEach(g => g.dispose());
+      gain.dispose();
+    } catch(e){}
+  }, 3500);
+}
+
+function triggerBellCharNote(bus, rootMidi, p, stepDur, time) {
+  const synth = new Tone.FMSynth({
+    harmonicity: 3.01, modulationIndex: 12,
+    oscillator: { type: 'sine' },
+    envelope: { attack: 0.015, decay: 1.6, sustain: 0, release: 1.2 },
+    modulation: { type: 'sine' },
+    modulationEnvelope: { attack: 0.001, decay: 0.25, sustain: 0, release: 0.4 },
+  });
+  const gain = new Tone.Gain(0.14);
+  synth.connect(gain); gain.connect(bus);
+  synth.triggerAttackRelease(midiToFreq(rootMidi), 2.2, time);
+  setTimeout(() => { try { synth.dispose(); gain.dispose(); } catch(e){} }, 4500);
+}
+
+// Water drip — cavity acoustics: brief noise plop, then a sine that RISES in pitch
+// (as the underwater air cavity shrinks after impact). The signature "bloop" contour.
+function triggerDripCharNote(bus, rootMidi, p, stepDur, time) {
+  const freq = midiToFreq(rootMidi);
+  const gain = new Tone.Gain(0.4).connect(bus);
+
+  // Tight splash at onset
+  const plop = new Tone.Noise('pink').start(time);
+  const plopFilt = new Tone.Filter({ type: 'bandpass', frequency: freq * 3, Q: 2.5 });
+  const plopEnv = new Tone.AmplitudeEnvelope({ attack: 0.0005, decay: 0.014, sustain: 0, release: 0.008 });
+  const plopGain = new Tone.Gain(0.3);
+  plop.connect(plopFilt); plopFilt.connect(plopEnv); plopEnv.connect(plopGain); plopGain.connect(gain);
+  plopEnv.triggerAttackRelease(0.012, time);
+
+  // Cavity tone — rises below → above the note (the signature water-drop "bloop")
+  const osc = new Tone.Oscillator(freq * 0.6, 'sine');
+  const env = new Tone.AmplitudeEnvelope({ attack: 0.004, decay: 0.14, sustain: 0, release: 0.05 });
+  const oGain = new Tone.Gain(0.85);
+  osc.connect(env); env.connect(oGain); oGain.connect(gain);
+  osc.frequency.setValueAtTime(freq * 0.6, time);
+  osc.frequency.exponentialRampToValueAtTime(freq * 1.5, time + 0.08);
+  osc.start(time); osc.stop(time + 0.35);
+  env.triggerAttackRelease(0.12, time);
+
+  setTimeout(() => {
+    try {
+      plop.stop(); plop.dispose(); plopFilt.dispose(); plopEnv.dispose(); plopGain.dispose();
+      osc.dispose(); env.dispose(); oGain.dispose(); gain.dispose();
+    } catch(e){}
+  }, 1500);
+}
+
+function triggerWoodCharNote(bus, rootMidi, p, stepDur, time) {
+  const freq = midiToFreq(rootMidi);
+  const gain = new Tone.Gain(0.35).connect(bus);
+
+  // wooden body: fundamental + 2nd + 3rd harmonics, each with short decay (wood = fast decay, inharmonic-ish character)
+  const partials = [1, 2, 3.4];
+  const amps     = [1.0, 0.55, 0.22];
+  const decays   = [0.22, 0.16, 0.1];
+  const oscs = [], envs = [], partGains = [];
+  partials.forEach((ratio, i) => {
+    const o = new Tone.Oscillator(freq * ratio, 'triangle');
+    const e = new Tone.AmplitudeEnvelope({ attack: 0.002, decay: decays[i], sustain: 0, release: 0.08 });
+    const g = new Tone.Gain(amps[i] * 0.3);
+    o.connect(e); e.connect(g); g.connect(gain);
+    o.start(time); o.stop(time + decays[i] + 0.3);
+    e.triggerAttackRelease(0.04, time);
+    oscs.push(o); envs.push(e); partGains.push(g);
+  });
+
+  // bright "tock" transient
+  const click = new Tone.Noise('white').start(time);
+  const clickEnv = new Tone.AmplitudeEnvelope({ attack: 0.0005, decay: 0.012, sustain: 0, release: 0.008 });
+  const clickFilt = new Tone.Filter({ type: 'highpass', frequency: freq * 6, Q: 0.8 });
+  const clickGain = new Tone.Gain(0.22);
+  click.connect(clickFilt); clickFilt.connect(clickEnv); clickEnv.connect(clickGain); clickGain.connect(gain);
+  clickEnv.triggerAttackRelease(0.015, time);
+
+  setTimeout(() => {
+    try {
+      oscs.forEach(o => o.dispose()); envs.forEach(e => e.dispose()); partGains.forEach(g => g.dispose());
+      click.stop(); click.dispose(); clickFilt.dispose(); clickEnv.dispose(); clickGain.dispose();
+      gain.dispose();
+    } catch(e){}
+  }, 2000);
+}
+
+function triggerMetalCharNote(bus, rootMidi, p, stepDur, time) {
+  const metal = new Tone.MetalSynth({
+    envelope: { attack: 0.005, decay: 0.9, release: 0.4 },
+    harmonicity: 5.1, modulationIndex: 32, resonance: 4000, octaves: 1.5,
+  });
+  const gain = new Tone.Gain(0.06);
+  metal.connect(gain); gain.connect(bus);
+  metal.frequency.value = midiToFreq(rootMidi);
+  metal.triggerAttackRelease(0.5, time);
+  setTimeout(() => { try { metal.dispose(); gain.dispose(); } catch(e){} }, 2500);
+}
+
+function triggerPluckCharNote(bus, rootMidi, p, stepDur, time) {
+  const pluck = new Tone.PluckSynth({
+    attackNoise: 2.5,
+    dampening: 3500,
+    resonance: 0.92,
+    release: 1,
+  });
+  const gain = new Tone.Gain(0.7);
+  pluck.connect(gain); gain.connect(bus);
+  pluck.triggerAttack(midiToFreq(rootMidi), time);
+  setTimeout(() => { try { pluck.dispose(); gain.dispose(); } catch(e){} }, 3500);
+}
+
+// Zap — distorted saw with fast pitch drop + crackling noise burst for electrical sizzle
+function triggerZapCharNote(bus, rootMidi, p, stepDur, time) {
+  const freq = midiToFreq(rootMidi);
+  const gain = new Tone.Gain(0.18).connect(bus);
+
+  // pitched saw with downward glide + distortion
+  const osc = new Tone.Oscillator(freq * 4, 'sawtooth');
+  const env = new Tone.AmplitudeEnvelope({ attack: 0.004, decay: 0.18, sustain: 0, release: 0.06 });
+  const dist = new Tone.Distortion(0.5);
+  const filt = new Tone.Filter({ type: 'lowpass', frequency: 6500, Q: 0.8 });
+  const oGain = new Tone.Gain(0.85);
+  osc.connect(dist); dist.connect(filt); filt.connect(env); env.connect(oGain); oGain.connect(gain);
+  osc.frequency.setValueAtTime(freq * 4, time);
+  osc.frequency.exponentialRampToValueAtTime(freq, time + 0.10);
+  osc.start(time); osc.stop(time + 0.3);
+  env.triggerAttackRelease(0.15, time);
+
+  // electrical sizzle — brief bandpassed white noise at high freq
+  const sizzle = new Tone.Noise('white').start(time);
+  const sizFilt = new Tone.Filter({ type: 'bandpass', frequency: freq * 6, Q: 1.8 });
+  const sizEnv = new Tone.AmplitudeEnvelope({ attack: 0.001, decay: 0.09, sustain: 0, release: 0.04 });
+  const sizGain = new Tone.Gain(0.28);
+  sizzle.connect(sizFilt); sizFilt.connect(sizEnv); sizEnv.connect(sizGain); sizGain.connect(gain);
+  sizEnv.triggerAttackRelease(0.08, time);
+
+  setTimeout(() => {
+    try {
+      osc.dispose(); dist.dispose(); filt.dispose(); env.dispose(); oGain.dispose();
+      sizzle.stop(); sizzle.dispose(); sizFilt.dispose(); sizEnv.dispose(); sizGain.dispose();
+      gain.dispose();
+    } catch(e){}
+  }, 2000);
+}
+
+// Pad — long-sustained polyphonic fatsaw pad with gentle lowpass, plays note + octave
+function triggerPadCharNote(bus, rootMidi, p, stepDur, time) {
+  const holdTime = Math.max(1.0, stepDur * 0.95);
+  const freq = midiToFreq(rootMidi);
+  const synth = new Tone.PolySynth(Tone.Synth, {
+    oscillator: { type: 'fatsawtooth', count: 3, spread: 22 },
+    envelope: { attack: 0.55, decay: 0.5, sustain: 0.75, release: 2.0 },
+  });
+  const filt = new Tone.Filter({ type: 'lowpass', frequency: 2400, Q: 0.4 });
+  const gain = new Tone.Gain(0.17).connect(bus);
+  synth.connect(filt); filt.connect(gain);
+  synth.triggerAttackRelease([freq, midiToFreq(rootMidi + 12)], holdTime, time);
+  setTimeout(() => {
+    try { synth.dispose(); filt.dispose(); gain.dispose(); } catch(e){}
+  }, (holdTime + 3.5) * 1000);
+}
+
+// Sub — deep pure sine 2 octaves below the note for low-end weight
+function triggerSubCharNote(bus, rootMidi, p, stepDur, time) {
+  const holdTime = Math.max(0.7, stepDur * 0.95);
+  // clamp to a sensible sub range; drop 2 oct but never below MIDI 24 (~C1 ≈ 33Hz)
+  const subMidi = Math.max(24, rootMidi - 24);
+  const freq = midiToFreq(subMidi);
+  const osc = new Tone.Oscillator(freq, 'sine').start(time);
+  const env = new Tone.AmplitudeEnvelope({ attack: 0.04, decay: 0.3, sustain: 0.88, release: 0.7 });
+  const gain = new Tone.Gain(0.55).connect(bus);
+  osc.connect(env); env.connect(gain);
+  env.triggerAttackRelease(holdTime, time);
+  setTimeout(() => {
+    try { osc.stop(); osc.dispose(); env.dispose(); gain.dispose(); } catch(e){}
+  }, (holdTime + 2.5) * 1000);
+}
+
+// Choir — fatsaw through dual formant peaking filters for "ahh" vowel, with vibrato
+function triggerChoirCharNote(bus, rootMidi, p, stepDur, time) {
+  const holdTime = Math.max(0.9, stepDur * 0.95);
+  const freq = midiToFreq(rootMidi);
+  const synth = new Tone.MonoSynth({
+    oscillator: { type: 'fatsawtooth', count: 3, spread: 16 },
+    envelope: { attack: 0.35, decay: 0.3, sustain: 0.7, release: 1.2 },
+    filter: { Q: 1 },
+    filterEnvelope: { attack: 0.25, decay: 0.3, sustain: 0.8, release: 1.0, baseFrequency: 380, octaves: 2 },
+  });
+  const vibrato = new Tone.Vibrato({ frequency: 5, depth: 0.028 });
+  // "ahh" vowel formants: F1 ≈ 800Hz, F2 ≈ 1200Hz
+  const f1 = new Tone.Filter({ type: 'peaking', frequency: 800, Q: 4, gain: 14 });
+  const f2 = new Tone.Filter({ type: 'peaking', frequency: 1200, Q: 4, gain: 10 });
+  const highCut = new Tone.Filter({ type: 'lowpass', frequency: 3200, Q: 0.5 });
+  const gain = new Tone.Gain(0.22).connect(bus);
+  synth.connect(vibrato); vibrato.connect(f1); f1.connect(f2); f2.connect(highCut); highCut.connect(gain);
+  synth.triggerAttackRelease(freq, holdTime, time);
+  setTimeout(() => {
+    try { synth.dispose(); vibrato.dispose(); f1.dispose(); f2.dispose(); highCut.dispose(); gain.dispose(); } catch(e){}
+  }, (holdTime + 3) * 1000);
+}
+
+// Kalimba — thumb piano. Inharmonic partials [1, 2.3, 4.1, 6.2] with short decays,
+// sharp click at strike. Brighter and more percussive than vibes, warmer than metal.
+function triggerKalimbaCharNote(bus, rootMidi, p, stepDur, time) {
+  const freq = midiToFreq(rootMidi);
+  const gain = new Tone.Gain(0.3).connect(bus);
+
+  // thumb-strike click
+  const click = new Tone.Noise('white').start(time);
+  const clickFilt = new Tone.Filter({ type: 'highpass', frequency: freq * 5 });
+  const clickEnv = new Tone.AmplitudeEnvelope({ attack: 0.0005, decay: 0.009, sustain: 0, release: 0.005 });
+  const clickGain = new Tone.Gain(0.14);
+  click.connect(clickFilt); clickFilt.connect(clickEnv); clickEnv.connect(clickGain); clickGain.connect(gain);
+  clickEnv.triggerAttackRelease(0.012, time);
+
+  // inharmonic tine partials
+  const partials = [1, 2.3, 4.1, 6.2];
+  const amps     = [1.0, 0.4, 0.18, 0.08];
+  const decays   = [0.9, 0.55, 0.3, 0.18];
+  const oscs = [], envs = [], partGains = [];
+  partials.forEach((ratio, i) => {
+    const o = new Tone.Oscillator(freq * ratio, 'sine');
+    const e = new Tone.AmplitudeEnvelope({ attack: 0.002, decay: decays[i], sustain: 0, release: 0.12 });
+    const g = new Tone.Gain(amps[i] * 0.4);
+    o.connect(e); e.connect(g); g.connect(gain);
+    o.start(time); o.stop(time + decays[i] + 0.3);
+    e.triggerAttackRelease(0.04, time);
+    oscs.push(o); envs.push(e); partGains.push(g);
+  });
+
+  setTimeout(() => {
+    try {
+      click.stop(); click.dispose(); clickFilt.dispose(); clickEnv.dispose(); clickGain.dispose();
+      oscs.forEach(o => o.dispose()); envs.forEach(e => e.dispose()); partGains.forEach(g => g.dispose());
+      gain.dispose();
+    } catch(e){}
+  }, 2000);
+}
+
+// Engine — detuned saws 1 octave below the note + distortion + square-wave LFO chop
+// for the "chug" of a firing engine. Mid-low range, mechanical grit.
+function triggerEngineCharNote(bus, rootMidi, p, stepDur, time) {
+  const holdTime = Math.max(0.7, stepDur * 0.95);
+  // drop one octave for proper engine range, clamp so it doesn't vanish
+  const engMidi = Math.max(28, rootMidi - 12);
+  const freq = midiToFreq(engMidi);
+  const gain = new Tone.Gain(0.22).connect(bus);
+
+  // detuned saw duo
+  const osc1 = new Tone.Oscillator(freq, 'sawtooth').start(time);
+  const osc2 = new Tone.Oscillator(freq * 1.007, 'sawtooth').start(time);
+  const oscMix = new Tone.Gain(0.5);
+  osc1.connect(oscMix); osc2.connect(oscMix);
+
+  // distortion + lowpass for mechanical body
+  const dist = new Tone.Distortion(0.38);
+  const filt = new Tone.Filter({ type: 'lowpass', frequency: 1100, Q: 1.8 });
+
+  // firing-rhythm chop (square LFO, ~11Hz)
+  const chop = new Tone.Gain(0);
+  const chopLfo = new Tone.LFO({ frequency: 11, min: 0.35, max: 1.0, type: 'square' }).start(time);
+  chopLfo.connect(chop.gain);
+
+  // main amp envelope
+  const env = new Tone.AmplitudeEnvelope({ attack: 0.06, decay: 0.2, sustain: 0.9, release: 0.3 });
+
+  oscMix.connect(dist); dist.connect(filt); filt.connect(chop); chop.connect(env); env.connect(gain);
+  env.triggerAttackRelease(holdTime, time);
+
+  // mechanical clatter — filtered pink noise synced to the chop
+  const noise = new Tone.Noise('pink').start(time);
+  const nFilt = new Tone.Filter({ type: 'bandpass', frequency: 900, Q: 2 });
+  const nChop = new Tone.Gain(0);
+  const nChopLfo = new Tone.LFO({ frequency: 11, min: 0, max: 0.28, type: 'square' }).start(time);
+  nChopLfo.connect(nChop.gain);
+  const nEnv = new Tone.AmplitudeEnvelope({ attack: 0.08, decay: 0.2, sustain: 0.9, release: 0.3 });
+  const nGain = new Tone.Gain(0.6);
+  noise.connect(nFilt); nFilt.connect(nChop); nChop.connect(nEnv); nEnv.connect(nGain); nGain.connect(gain);
+  nEnv.triggerAttackRelease(holdTime, time);
+
+  setTimeout(() => {
+    try {
+      osc1.stop(); osc1.dispose(); osc2.stop(); osc2.dispose(); oscMix.dispose();
+      dist.dispose(); filt.dispose(); chop.dispose(); chopLfo.dispose(); env.dispose();
+      noise.stop(); noise.dispose(); nFilt.dispose(); nChop.dispose(); nChopLfo.dispose(); nEnv.dispose(); nGain.dispose();
+      gain.dispose();
+    } catch(e){}
+  }, (holdTime + 2.5) * 1000);
+}
+
+// Reactor — nuclear power plant: deep sub hum + turbine whine + cooling-fan whirr + steam hiss
+function triggerReactorCharNote(bus, rootMidi, p, stepDur, time) {
+  const holdTime = Math.max(1.2, stepDur * 0.95);
+  const freq = midiToFreq(rootMidi);
+  const gain = new Tone.Gain(0.2).connect(bus);
+
+  // deep reactor hum, 2 octaves below the note
+  const subMidi = Math.max(24, rootMidi - 24);
+  const subFreq = midiToFreq(subMidi);
+  const hum1 = new Tone.Oscillator(subFreq, 'sawtooth').start(time);
+  const hum2 = new Tone.Oscillator(subFreq * 1.004, 'sawtooth').start(time);
+  const humMix = new Tone.Gain(0.35);
+  hum1.connect(humMix); hum2.connect(humMix);
+  const humFilt = new Tone.Filter({ type: 'lowpass', frequency: 420, Q: 2 });
+  const humEnv = new Tone.AmplitudeEnvelope({ attack: 0.6, decay: 0.3, sustain: 0.92, release: 1.0 });
+  humMix.connect(humFilt); humFilt.connect(humEnv); humEnv.connect(gain);
+  humEnv.triggerAttackRelease(holdTime, time);
+
+  // turbine whine — beating saws at note
+  const whine1 = new Tone.Oscillator(freq, 'sawtooth').start(time);
+  const whine2 = new Tone.Oscillator(freq * 1.009, 'sawtooth').start(time);
+  const whineMix = new Tone.Gain(0.12);
+  whine1.connect(whineMix); whine2.connect(whineMix);
+  const whineFilt = new Tone.Filter({ type: 'bandpass', frequency: freq * 2.2, Q: 4 });
+  const whineEnv = new Tone.AmplitudeEnvelope({ attack: 0.8, decay: 0.3, sustain: 0.75, release: 1.2 });
+  whineMix.connect(whineFilt); whineFilt.connect(whineEnv); whineEnv.connect(gain);
+  whineEnv.triggerAttackRelease(holdTime, time);
+
+  // cooling-fan whirr — triangle at note+12, LFO on pitch for fan rotation wobble
+  const fan = new Tone.Oscillator(freq * 2, 'triangle').start(time);
+  const fanLfo = new Tone.LFO({ frequency: 2.5, min: freq * 1.96, max: freq * 2.04 }).start(time);
+  fanLfo.connect(fan.frequency);
+  const fanEnv = new Tone.AmplitudeEnvelope({ attack: 1.0, decay: 0.3, sustain: 0.4, release: 1.0 });
+  const fanGain = new Tone.Gain(0.07);
+  fan.connect(fanEnv); fanEnv.connect(fanGain); fanGain.connect(gain);
+  fanEnv.triggerAttackRelease(holdTime, time);
+
+  // steam hiss
+  const steam = new Tone.Noise('pink').start(time);
+  const steamFilt = new Tone.Filter({ type: 'bandpass', frequency: 1800, Q: 1.3 });
+  const steamEnv = new Tone.AmplitudeEnvelope({ attack: 0.5, decay: 0.3, sustain: 0.35, release: 0.8 });
+  const steamGain = new Tone.Gain(0.1);
+  steam.connect(steamFilt); steamFilt.connect(steamEnv); steamEnv.connect(steamGain); steamGain.connect(gain);
+  steamEnv.triggerAttackRelease(holdTime, time);
+
+  setTimeout(() => {
+    try {
+      hum1.stop(); hum1.dispose(); hum2.stop(); hum2.dispose(); humMix.dispose(); humFilt.dispose(); humEnv.dispose();
+      whine1.stop(); whine1.dispose(); whine2.stop(); whine2.dispose(); whineMix.dispose(); whineFilt.dispose(); whineEnv.dispose();
+      fan.stop(); fan.dispose(); fanLfo.dispose(); fanEnv.dispose(); fanGain.dispose();
+      steam.stop(); steam.dispose(); steamFilt.dispose(); steamEnv.dispose(); steamGain.dispose();
+      gain.dispose();
+    } catch(e){}
+  }, (holdTime + 3) * 1000);
+}
+
+// Space — deep, ethereal: sine drones at note + octave with slow wide vibrato,
+// ring-modulated 5th for alien character, cosmic-wind noise with sweeping filter
+function triggerSpaceCharNote(bus, rootMidi, p, stepDur, time) {
+  const holdTime = Math.max(1.5, stepDur * 0.95);
+  const freq = midiToFreq(rootMidi);
+  const gain = new Tone.Gain(0.2).connect(bus);
+
+  // base sine at note with slow wide vibrato
+  const base = new Tone.Oscillator(freq, 'sine').start(time);
+  const baseLfo = new Tone.LFO({ frequency: 0.3, min: freq * 0.982, max: freq * 1.018 }).start(time);
+  baseLfo.connect(base.frequency);
+  const baseEnv = new Tone.AmplitudeEnvelope({ attack: 1.0, decay: 0.5, sustain: 0.7, release: 2.0 });
+  const baseGain = new Tone.Gain(0.5);
+  base.connect(baseEnv); baseEnv.connect(baseGain); baseGain.connect(gain);
+  baseEnv.triggerAttackRelease(holdTime, time);
+
+  // octave up — different slow vibrato rate for drifting phase
+  const oct = new Tone.Oscillator(freq * 2, 'sine').start(time);
+  const octLfo = new Tone.LFO({ frequency: 0.22, min: freq * 1.97, max: freq * 2.03 }).start(time);
+  octLfo.connect(oct.frequency);
+  const octEnv = new Tone.AmplitudeEnvelope({ attack: 1.4, decay: 0.5, sustain: 0.5, release: 2.0 });
+  const octGain = new Tone.Gain(0.28);
+  oct.connect(octEnv); octEnv.connect(octGain); octGain.connect(gain);
+  octEnv.triggerAttackRelease(holdTime, time);
+
+  // 5th ring-modulated by a subharmonic for alien metallic shimmer
+  const fifth = new Tone.Oscillator(freq * 1.5, 'sine').start(time);
+  const ringCarrier = new Tone.Oscillator(freq * 0.5, 'sine').start(time);
+  const ringVCA = new Tone.Gain(0);
+  ringCarrier.connect(ringVCA.gain);
+  const fifthEnv = new Tone.AmplitudeEnvelope({ attack: 1.2, decay: 0.5, sustain: 0.4, release: 2.0 });
+  const fifthGain = new Tone.Gain(0.18);
+  fifth.connect(ringVCA); ringVCA.connect(fifthEnv); fifthEnv.connect(fifthGain); fifthGain.connect(gain);
+  fifthEnv.triggerAttackRelease(holdTime, time);
+
+  // cosmic wind — filtered noise with very slow filter sweep
+  const wind = new Tone.Noise('pink').start(time);
+  const windFilt = new Tone.Filter({ type: 'bandpass', frequency: freq * 4, Q: 2 });
+  const windLfo = new Tone.LFO({ frequency: 0.12, min: freq * 2, max: freq * 8 }).start(time);
+  windLfo.connect(windFilt.frequency);
+  const windEnv = new Tone.AmplitudeEnvelope({ attack: 1.5, decay: 0.5, sustain: 0.3, release: 2.0 });
+  const windGain = new Tone.Gain(0.1);
+  wind.connect(windFilt); windFilt.connect(windEnv); windEnv.connect(windGain); windGain.connect(gain);
+  windEnv.triggerAttackRelease(holdTime, time);
+
+  setTimeout(() => {
+    try {
+      base.stop(); base.dispose(); baseLfo.dispose(); baseEnv.dispose(); baseGain.dispose();
+      oct.stop(); oct.dispose(); octLfo.dispose(); octEnv.dispose(); octGain.dispose();
+      fifth.stop(); fifth.dispose(); ringCarrier.stop(); ringCarrier.dispose(); ringVCA.dispose(); fifthEnv.dispose(); fifthGain.dispose();
+      wind.stop(); wind.dispose(); windFilt.dispose(); windLfo.dispose(); windEnv.dispose(); windGain.dispose();
+      gain.dispose();
+    } catch(e){}
+  }, (holdTime + 3.5) * 1000);
+}
+
+// Data — server room: beating fan drones + sporadic high-freq ticks (data access) + airflow hiss
+function triggerDataCharNote(bus, rootMidi, p, stepDur, time) {
+  const holdTime = Math.max(1.0, stepDur * 0.95);
+  const freq = midiToFreq(rootMidi);
+  const gain = new Tone.Gain(0.2).connect(bus);
+
+  // three detuned triangle drones (fans at slightly different speeds)
+  const fan1 = new Tone.Oscillator(freq, 'triangle').start(time);
+  const fan2 = new Tone.Oscillator(freq * 1.012, 'triangle').start(time);
+  const fan3 = new Tone.Oscillator(freq * 0.503, 'triangle').start(time);
+  const fanMix = new Tone.Gain(0.3);
+  fan1.connect(fanMix); fan2.connect(fanMix); fan3.connect(fanMix);
+  const fanFilt = new Tone.Filter({ type: 'lowpass', frequency: 2000, Q: 0.8 });
+  const fanEnv = new Tone.AmplitudeEnvelope({ attack: 0.5, decay: 0.3, sustain: 0.85, release: 0.8 });
+  fanMix.connect(fanFilt); fanFilt.connect(fanEnv); fanEnv.connect(gain);
+  fanEnv.triggerAttackRelease(holdTime, time);
+
+  // sporadic data ticks
+  const tickCount = Math.max(4, Math.floor(holdTime * 5));
+  const tickNodes = [];
+  for (let i = 0; i < tickCount; i++) {
+    const tickTime = time + 0.1 + (i / tickCount) * holdTime + (Math.random() - 0.5) * 0.08;
+    const tick = new Tone.Noise('white');
+    const tickFilt = new Tone.Filter({ type: 'highpass', frequency: 5000 + Math.random() * 3500 });
+    const tickEnv = new Tone.AmplitudeEnvelope({ attack: 0.0005, decay: 0.01, sustain: 0, release: 0.005 });
+    const tickGain = new Tone.Gain(0.12);
+    tick.connect(tickFilt); tickFilt.connect(tickEnv); tickEnv.connect(tickGain); tickGain.connect(gain);
+    tick.start(tickTime); tick.stop(tickTime + 0.04);
+    tickEnv.triggerAttackRelease(0.01, tickTime);
+    tickNodes.push(tick, tickFilt, tickEnv, tickGain);
+  }
+
+  // airflow hiss
+  const hiss = new Tone.Noise('pink').start(time);
+  const hissFilt = new Tone.Filter({ type: 'highpass', frequency: 3500 });
+  const hissEnv = new Tone.AmplitudeEnvelope({ attack: 0.6, decay: 0.3, sustain: 0.4, release: 0.8 });
+  const hissGain = new Tone.Gain(0.08);
+  hiss.connect(hissFilt); hissFilt.connect(hissEnv); hissEnv.connect(hissGain); hissGain.connect(gain);
+  hissEnv.triggerAttackRelease(holdTime, time);
+
+  setTimeout(() => {
+    try {
+      fan1.stop(); fan1.dispose(); fan2.stop(); fan2.dispose(); fan3.stop(); fan3.dispose();
+      fanMix.dispose(); fanFilt.dispose(); fanEnv.dispose();
+      tickNodes.forEach(n => { try { if (n.stop) n.stop(); n.dispose(); } catch(e){} });
+      hiss.stop(); hiss.dispose(); hissFilt.dispose(); hissEnv.dispose(); hissGain.dispose();
+      gain.dispose();
+    } catch(e){}
+  }, (holdTime + 2.5) * 1000);
+}
+
+// Quantum — sine stack at 1/2/3/5/7 harmonics; each partial has its OWN random slow
+// pitch wobble (the "uncertainty"), plus a high crystalline shimmer.
+function triggerQuantumCharNote(bus, rootMidi, p, stepDur, time) {
+  const holdTime = Math.max(1.0, stepDur * 0.95);
+  const freq = midiToFreq(rootMidi);
+  const gain = new Tone.Gain(0.2).connect(bus);
+
+  const partials = [1, 2, 3, 5, 7];
+  const amps     = [1.0, 0.45, 0.28, 0.18, 0.12];
+  const oscs = [], lfos = [], envs = [], partGains = [];
+  partials.forEach((ratio, i) => {
+    const o = new Tone.Oscillator(freq * ratio, 'sine').start(time);
+    const lfoRate = 1.5 + Math.random() * 3;
+    const wobble = 0.004 + Math.random() * 0.008;
+    const lfo = new Tone.LFO({ frequency: lfoRate, min: freq * ratio * (1 - wobble), max: freq * ratio * (1 + wobble) }).start(time);
+    lfo.connect(o.frequency);
+    const e = new Tone.AmplitudeEnvelope({ attack: 0.4 + i * 0.1, decay: 0.3, sustain: 0.6 - i * 0.05, release: 1.5 });
+    const g = new Tone.Gain(amps[i] * 0.3);
+    o.connect(e); e.connect(g); g.connect(gain);
+    e.triggerAttackRelease(holdTime, time);
+    oscs.push(o); lfos.push(lfo); envs.push(e); partGains.push(g);
+  });
+
+  // crystalline shimmer — 8× the note with rapid wobble
+  const shim = new Tone.Oscillator(freq * 8, 'sine').start(time);
+  const shimLfo = new Tone.LFO({ frequency: 7, min: freq * 7.8, max: freq * 8.2 }).start(time);
+  shimLfo.connect(shim.frequency);
+  const shimEnv = new Tone.AmplitudeEnvelope({ attack: 0.8, decay: 0.3, sustain: 0.3, release: 1.0 });
+  const shimGain = new Tone.Gain(0.05);
+  shim.connect(shimEnv); shimEnv.connect(shimGain); shimGain.connect(gain);
+  shimEnv.triggerAttackRelease(holdTime, time);
+
+  setTimeout(() => {
+    try {
+      oscs.forEach(o => { o.stop(); o.dispose(); });
+      lfos.forEach(l => l.dispose());
+      envs.forEach(e => e.dispose());
+      partGains.forEach(g => g.dispose());
+      shim.stop(); shim.dispose(); shimLfo.dispose(); shimEnv.dispose(); shimGain.dispose();
+      gain.dispose();
+    } catch(e){}
+  }, (holdTime + 3) * 1000);
+}
+
+// Pulse — radar/sonar ping: subharmonic rumble + repeating sine pings at 2× the note
+// with subtle Doppler pitch drop on each ping.
+function triggerPulseCharNote(bus, rootMidi, p, stepDur, time) {
+  const holdTime = Math.max(0.6, stepDur * 0.95);
+  const freq = midiToFreq(rootMidi);
+  const gain = new Tone.Gain(0.28).connect(bus);
+
+  // low rumble bed
+  const rumble = new Tone.Oscillator(freq * 0.25, 'sine').start(time);
+  const rumbleEnv = new Tone.AmplitudeEnvelope({ attack: 0.1, decay: 0.3, sustain: 0.5, release: 0.3 });
+  const rumbleGain = new Tone.Gain(0.3);
+  rumble.connect(rumbleEnv); rumbleEnv.connect(rumbleGain); rumbleGain.connect(gain);
+  rumbleEnv.triggerAttackRelease(holdTime, time);
+
+  // repeating pings
+  const pingCount = Math.max(1, Math.floor(holdTime * 2));
+  const pingNodes = [];
+  for (let i = 0; i < pingCount; i++) {
+    const pingTime = time + (i / pingCount) * holdTime + 0.02;
+    const ping = new Tone.Oscillator(freq * 2, 'sine');
+    const pingEnv = new Tone.AmplitudeEnvelope({ attack: 0.005, decay: 0.4, sustain: 0, release: 0.1 });
+    const pingGain = new Tone.Gain(0.38);
+    ping.connect(pingEnv); pingEnv.connect(pingGain); pingGain.connect(gain);
+    ping.frequency.setValueAtTime(freq * 2.02, pingTime);
+    ping.frequency.exponentialRampToValueAtTime(freq * 1.98, pingTime + 0.3);
+    ping.start(pingTime); ping.stop(pingTime + 0.5);
+    pingEnv.triggerAttackRelease(0.35, pingTime);
+    pingNodes.push(ping, pingEnv, pingGain);
+  }
+
+  setTimeout(() => {
+    try {
+      rumble.stop(); rumble.dispose(); rumbleEnv.dispose(); rumbleGain.dispose();
+      pingNodes.forEach(n => { try { if (n.stop) n.stop(); n.dispose(); } catch(e){} });
+      gain.dispose();
+    } catch(e){}
+  }, (holdTime + 2) * 1000);
+}
+
+// Gravity — massive sub-bass: sine 2 octaves down with slow pitch drift + slow amplitude
+// pulsing + brown-noise rumble underneath. The "weight" voice.
+function triggerGravityCharNote(bus, rootMidi, p, stepDur, time) {
+  const holdTime = Math.max(1.5, stepDur * 0.95);
+  const subMidi = Math.max(24, rootMidi - 24);
+  const freq = midiToFreq(subMidi);
+  const gain = new Tone.Gain(0.3).connect(bus);
+
+  const osc = new Tone.Oscillator(freq, 'sine').start(time);
+  const pitchLfo = new Tone.LFO({ frequency: 0.08, min: freq * 0.97, max: freq * 1.03 }).start(time);
+  pitchLfo.connect(osc.frequency);
+  const env = new Tone.AmplitudeEnvelope({ attack: 0.8, decay: 0.5, sustain: 0.9, release: 1.5 });
+  const ampLfo = new Tone.LFO({ frequency: 0.15, min: 0.5, max: 1.0 }).start(time);
+  const ampVCA = new Tone.Gain(0);
+  ampLfo.connect(ampVCA.gain);
+  const oscGain = new Tone.Gain(0.8);
+  osc.connect(env); env.connect(ampVCA); ampVCA.connect(oscGain); oscGain.connect(gain);
+  env.triggerAttackRelease(holdTime, time);
+
+  // octave up for definition
+  const harm = new Tone.Oscillator(freq * 2, 'sine').start(time);
+  const harmLfo = new Tone.LFO({ frequency: 0.11, min: freq * 1.97, max: freq * 2.03 }).start(time);
+  harmLfo.connect(harm.frequency);
+  const harmEnv = new Tone.AmplitudeEnvelope({ attack: 1.2, decay: 0.5, sustain: 0.5, release: 1.5 });
+  const harmGain = new Tone.Gain(0.25);
+  harm.connect(harmEnv); harmEnv.connect(harmGain); harmGain.connect(gain);
+  harmEnv.triggerAttackRelease(holdTime, time);
+
+  // brown-noise rumble
+  const rumble = new Tone.Noise('brown').start(time);
+  const rumbleFilt = new Tone.Filter({ type: 'lowpass', frequency: freq * 3, Q: 3 });
+  const rumbleEnv = new Tone.AmplitudeEnvelope({ attack: 1.0, decay: 0.5, sustain: 0.3, release: 1.0 });
+  const rumbleGain = new Tone.Gain(0.18);
+  rumble.connect(rumbleFilt); rumbleFilt.connect(rumbleEnv); rumbleEnv.connect(rumbleGain); rumbleGain.connect(gain);
+  rumbleEnv.triggerAttackRelease(holdTime, time);
+
+  setTimeout(() => {
+    try {
+      osc.stop(); osc.dispose(); pitchLfo.dispose(); env.dispose();
+      ampLfo.dispose(); ampVCA.dispose(); oscGain.dispose();
+      harm.stop(); harm.dispose(); harmLfo.dispose(); harmEnv.dispose(); harmGain.dispose();
+      rumble.stop(); rumble.dispose(); rumbleFilt.dispose(); rumbleEnv.dispose(); rumbleGain.dispose();
+      gain.dispose();
+    } catch(e){}
+  }, (holdTime + 2.5) * 1000);
+}
+
+// Bio — warm organic body + heartbeat-like double thumps (lub-dub) at ~78bpm,
+// with a slow breath-rhythm amplitude modulation on the sustained tone.
+function triggerBioCharNote(bus, rootMidi, p, stepDur, time) {
+  const holdTime = Math.max(1.0, stepDur * 0.95);
+  const freq = midiToFreq(rootMidi);
+  const gain = new Tone.Gain(0.22).connect(bus);
+
+  // warm triangle body
+  const osc = new Tone.Oscillator(freq, 'triangle').start(time);
+  const breatheLfo = new Tone.LFO({ frequency: 0.25, min: 0.5, max: 1 }).start(time);
+  const breatheVCA = new Tone.Gain(0);
+  breatheLfo.connect(breatheVCA.gain);
+  const env = new Tone.AmplitudeEnvelope({ attack: 0.4, decay: 0.3, sustain: 0.7, release: 1.0 });
+  const oscGain = new Tone.Gain(0.5);
+  osc.connect(env); env.connect(breatheVCA); breatheVCA.connect(oscGain); oscGain.connect(gain);
+  env.triggerAttackRelease(holdTime, time);
+
+  // heartbeats (lub-dub)
+  const beatRate = 1.3;
+  const beatCount = Math.floor(holdTime * beatRate);
+  const beatNodes = [];
+  for (let i = 0; i < beatCount; i++) {
+    const beatTime = time + i / beatRate + 0.1;
+    [0, 0.15].forEach((offset, idx) => {
+      const thump = new Tone.MembraneSynth({
+        pitchDecay: 0.05,
+        octaves: 3,
+        envelope: { attack: 0.001, decay: 0.15, sustain: 0, release: 0.1 },
+      });
+      const thumpGain = new Tone.Gain(idx === 0 ? 0.18 : 0.12);
+      thump.connect(thumpGain); thumpGain.connect(gain);
+      thump.triggerAttackRelease(freq * 0.25, 0.1, beatTime + offset);
+      beatNodes.push(thump, thumpGain);
+    });
+  }
+
+  setTimeout(() => {
+    try {
+      osc.stop(); osc.dispose(); breatheLfo.dispose(); breatheVCA.dispose(); env.dispose(); oscGain.dispose();
+      beatNodes.forEach(n => { try { n.dispose(); } catch(e){} });
+      gain.dispose();
+    } catch(e){}
+  }, (holdTime + 2) * 1000);
+}
+
+// Light — bright sine stack on odd harmonics (1/3/5/7/9/12) + a brief high sparkle at onset.
+function triggerLightCharNote(bus, rootMidi, p, stepDur, time) {
+  const holdTime = Math.max(0.8, stepDur * 0.95);
+  const freq = midiToFreq(rootMidi);
+  const gain = new Tone.Gain(0.18).connect(bus);
+
+  const env = new Tone.AmplitudeEnvelope({ attack: 0.25, decay: 0.3, sustain: 0.7, release: 0.8 });
+  env.connect(gain);
+
+  const partials = [1, 3, 5, 7, 9, 12];
+  const amps     = [0.5, 0.32, 0.22, 0.14, 0.09, 0.06];
+  const oscs = [], partGains = [];
+  partials.forEach((ratio, i) => {
+    const o = new Tone.Oscillator(freq * ratio, 'sine').start(time);
+    const g = new Tone.Gain(amps[i] * 0.4);
+    o.connect(g); g.connect(env);
+    oscs.push(o); partGains.push(g);
+  });
+
+  // bright sparkle at onset
+  const sparkle = new Tone.Oscillator(freq * 16, 'sine').start(time);
+  const sparkleEnv = new Tone.AmplitudeEnvelope({ attack: 0.002, decay: 0.08, sustain: 0, release: 0.05 });
+  const sparkleGain = new Tone.Gain(0.1);
+  sparkle.connect(sparkleEnv); sparkleEnv.connect(sparkleGain); sparkleGain.connect(gain);
+  sparkleEnv.triggerAttackRelease(0.1, time);
+
+  env.triggerAttackRelease(holdTime, time);
+
+  setTimeout(() => {
+    try {
+      oscs.forEach(o => { o.stop(); o.dispose(); });
+      partGains.forEach(g => g.dispose());
+      sparkle.stop(); sparkle.dispose(); sparkleEnv.dispose(); sparkleGain.dispose();
+      env.dispose(); gain.dispose();
+    } catch(e){}
+  }, (holdTime + 2) * 1000);
+}
+
+// Time — clock: alternating tick-tock (triangle bodies + high-freq clicks) at 1Hz,
+// plus a subtle sustained pendulum tone.
+function triggerTimeCharNote(bus, rootMidi, p, stepDur, time) {
+  const holdTime = Math.max(1.0, stepDur * 0.95);
+  const freq = midiToFreq(rootMidi);
+  const gain = new Tone.Gain(0.22).connect(bus);
+
+  const tickRate = 1.0;
+  const tickCount = Math.max(1, Math.floor(holdTime * tickRate) + 1);
+  const nodes = [];
+  for (let i = 0; i < tickCount; i++) {
+    const tickTime = time + i / tickRate;
+    const isTick = i % 2 === 0;
+    const tickFreq = freq * (isTick ? 1 : 0.75);
+    // wooden body
+    const body = new Tone.Oscillator(tickFreq * 4, 'triangle');
+    const bodyEnv = new Tone.AmplitudeEnvelope({ attack: 0.002, decay: 0.08, sustain: 0, release: 0.05 });
+    const bodyGain = new Tone.Gain(0.28);
+    body.connect(bodyEnv); bodyEnv.connect(bodyGain); bodyGain.connect(gain);
+    body.start(tickTime); body.stop(tickTime + 0.15);
+    bodyEnv.triggerAttackRelease(0.08, tickTime);
+    nodes.push(body, bodyEnv, bodyGain);
+    // sharp click
+    const click = new Tone.Noise('white');
+    const clickFilt = new Tone.Filter({ type: 'highpass', frequency: 4000 });
+    const clickEnv = new Tone.AmplitudeEnvelope({ attack: 0.0005, decay: 0.006, sustain: 0, release: 0.003 });
+    const clickGain = new Tone.Gain(0.11);
+    click.connect(clickFilt); clickFilt.connect(clickEnv); clickEnv.connect(clickGain); clickGain.connect(gain);
+    click.start(tickTime); click.stop(tickTime + 0.03);
+    clickEnv.triggerAttackRelease(0.008, tickTime);
+    nodes.push(click, clickFilt, clickEnv, clickGain);
+  }
+
+  // pendulum undertone
+  const pendulum = new Tone.Oscillator(freq, 'sine').start(time);
+  const pendulumEnv = new Tone.AmplitudeEnvelope({ attack: 0.5, decay: 0.3, sustain: 0.15, release: 0.5 });
+  const pendulumGain = new Tone.Gain(0.1);
+  pendulum.connect(pendulumEnv); pendulumEnv.connect(pendulumGain); pendulumGain.connect(gain);
+  pendulumEnv.triggerAttackRelease(holdTime, time);
+
+  setTimeout(() => {
+    try {
+      nodes.forEach(n => { try { if (n.stop) n.stop(); n.dispose(); } catch(e){} });
+      pendulum.stop(); pendulum.dispose(); pendulumEnv.dispose(); pendulumGain.dispose();
+      gain.dispose();
+    } catch(e){}
+  }, (holdTime + 2) * 1000);
+}
+
+// Character dispatch — step.character → trigger function
+const CHARACTER_TRIGGERS = {
+  'texture':      triggerTextureNote,
+  'pad':          triggerPadCharNote,
+  'sub':          triggerSubCharNote,
+  'choir':        triggerChoirCharNote,
+  'engine':       triggerEngineCharNote,
+  'reactor':      triggerReactorCharNote,
+  'space':        triggerSpaceCharNote,
+  'data':         triggerDataCharNote,
+  'quantum':      triggerQuantumCharNote,
+  'pulse':        triggerPulseCharNote,
+  'gravity':      triggerGravityCharNote,
+  'bio':          triggerBioCharNote,
+  'light':        triggerLightCharNote,
+  'time':         triggerTimeCharNote,
+  'vibes':        triggerVibraphoneNote,
+  'kalimba':      triggerKalimbaCharNote,
+  'pink-noise':   triggerPinkCharNote,
+  'white-noise':  triggerWhiteCharNote,
+  'brown-noise':  triggerBrownCharNote,
+  'breath-noise': triggerBreathCharNote,
+  'glass':        triggerGlassCharNote,
+  'bell':         triggerBellCharNote,
+  'drip':         triggerDripCharNote,
+  'wood':         triggerWoodCharNote,
+  'metal':        triggerMetalCharNote,
+  'pluck':        triggerPluckCharNote,
+  'zap':          triggerZapCharNote,
+};
+
+// ---------- LIVE PLAYBACK ----------
+
+let liveChain = null;
+let liveMeter = null;
+let playTimerRAF = null;
+
+async function onPlay() {
+  if (state.playing) return;
+  await Tone.start();
+  document.getElementById('audio-led').classList.remove('off');
+
+  // fresh chain each play
+  if (liveChain) { liveChain.dispose(); liveChain = null; }
+  liveChain = buildChain();
+  await liveChain.ready();
+
+  // meter
+  if (!liveMeter) liveMeter = new Tone.Meter({ channels: 2 });
+  liveChain.masterGain.connect(liveMeter);
+
+  const total = totalSeqDuration();
+  state.playStartTime = Tone.now();
+
+  Tone.Transport.stop();
+  Tone.Transport.cancel();
+  Tone.Transport.position = 0;
+
+  let acc = 0.05;
+  for (let i = 0; i < state.numSteps; i++) {
+    const stepDur = state.steps[i].dur;
+    const offset = acc;
+    Tone.Transport.scheduleOnce((time) => {
+      state.currentStep = i;
+      highlightStep(i);
+      triggerStep(liveChain, i, state.p, stepDur, time);
+    }, offset);
+    acc += stepDur;
+  }
+
+  // stop at end
+  Tone.Transport.scheduleOnce(() => {
+    setTimeout(() => { if (state.playing) onStop(true); }, 2500);
+  }, total + 0.05);
+
+  Tone.Transport.start();
+  state.playing = true;
+  document.getElementById('btn-play').classList.add('playing');
+  document.getElementById('btn-play').querySelector('#play-glyph').textContent = '▮▮';
+  document.getElementById('btn-play').lastChild.textContent = 'PLAYING';
+  document.getElementById('btn-stop').disabled = false;
+
+  // meter + clock loop
+  const loop = () => {
+    if (!state.playing) return;
+    const now = Tone.now() - state.playStartTime;
+    document.getElementById('clock').textContent = formatClock(now);
+    const v = liveMeter.getValue();
+    const l = Array.isArray(v) ? v[0] : v;
+    const r = Array.isArray(v) ? v[1] : v;
+    setMeter('meter-l', l);
+    setMeter('meter-r', r);
+    playTimerRAF = requestAnimationFrame(loop);
+  };
+  loop();
+}
+
+function onStop(auto = false) {
+  if (!state.playing) return;
+  Tone.Transport.stop();
+  Tone.Transport.cancel();
+  state.playing = false;
+  state.currentStep = -1;
+  cancelAnimationFrame(playTimerRAF);
+  clearHighlight();
+  document.getElementById('btn-play').classList.remove('playing');
+  document.getElementById('btn-play').querySelector('#play-glyph').textContent = '▶';
+  document.getElementById('btn-play').lastChild.textContent = 'PLAY';
+  document.getElementById('btn-stop').disabled = true;
+  document.getElementById('clock').textContent = '00:00.00';
+  setMeter('meter-l', -60);
+  setMeter('meter-r', -60);
+  // leave chain alive briefly for tail
+  setTimeout(() => {
+    if (!state.playing && liveChain) {
+      try { liveChain.dispose(); } catch(e){}
+      liveChain = null;
+    }
+  }, 2500);
+}
+
+function applyLiveParams() {
+  if (!liveChain) return;
+  liveChain.applyParams(state.p);
+}
+
+function setMeter(id, db) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  // db is typically -60..0
+  const norm = Math.max(0, Math.min(1, (db + 60) / 60));
+  el.style.width = (norm * 100) + '%';
+  el.classList.toggle('peak', db > -6 && db <= -1);
+  el.classList.toggle('clip', db > -1);
+}
+
+function highlightStep(i) {
+  document.querySelectorAll('.step').forEach((el, idx) => {
+    el.classList.toggle('playing', idx === i);
+  });
+}
+
+function clearHighlight() {
+  document.querySelectorAll('.step').forEach(el => el.classList.remove('playing'));
+}
+
+// ---------- EXPORT WAV ----------
+
+async function onExport() {
+  const totalSeq = totalSeqDuration();
+  const tail = 3.5;
+  const duration = totalSeq + tail;
+
+  toast('Rendering ' + duration.toFixed(1) + 's...');
+  const btn = document.getElementById('btn-export');
+  btn.disabled = true;
+  document.getElementById('rec-led').classList.remove('off');
+  document.getElementById('rec-led').classList.add('rec');
+
+  try {
+    const toneBuf = await Tone.Offline(async () => {
+      const chain = buildChain();
+      await chain.ready();
+
+      let acc = 0.05;
+      for (let i = 0; i < state.numSteps; i++) {
+        const stepDur = state.steps[i].dur;
+        const offset = acc;
+        Tone.Transport.scheduleOnce((time) => {
+          triggerStep(chain, i, state.p, stepDur, time);
+        }, offset);
+        acc += stepDur;
+      }
+
+      Tone.Transport.start();
+    }, duration, 2, 44100);
+
+    const audioBuffer = toneBuf.get ? toneBuf.get() : toneBuf._buffer;
+
+    const blob = bufferToWav(audioBuffer);
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    const stamp = new Date().toISOString().replace(/[:.]/g,'-').slice(0,19);
+    a.href = url;
+    const vibeTag = state.activeVibes.length === 0 ? 'custom'
+      : state.activeVibes.length === 1 ? state.activeVibes[0]
+      : `mix${state.activeVibes.length}-${state.activeVibes.slice(0,2).join('-')}`;
+    a.download = `sonic-${vibeTag}-${stamp}.wav`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    toast('Exported · ' + duration.toFixed(1) + 's');
+  } catch (err) {
+    console.error(err);
+    toast('Export failed: ' + err.message, 'err');
+  } finally {
+    btn.disabled = false;
+    document.getElementById('rec-led').classList.remove('rec');
+    document.getElementById('rec-led').classList.add('off');
+  }
+}
+
+function bufferToWav(buffer) {
+  const numChannels = buffer.numberOfChannels;
+  const sampleRate = buffer.sampleRate;
+  const format = 1;
+  const bitDepth = 16;
+  const bytesPerSample = bitDepth / 8;
+
+  const dataLength = buffer.length * numChannels * bytesPerSample;
+  const totalLength = 44 + dataLength;
+  const ab = new ArrayBuffer(totalLength);
+  const view = new DataView(ab);
+
+  let offset = 0;
+  function str(s) { for (let i=0; i<s.length; i++) view.setUint8(offset++, s.charCodeAt(i)); }
+  function u32(v) { view.setUint32(offset, v, true); offset += 4; }
+  function u16(v) { view.setUint16(offset, v, true); offset += 2; }
+
+  str('RIFF');
+  u32(36 + dataLength);
+  str('WAVE');
+  str('fmt ');
+  u32(16);
+  u16(format);
+  u16(numChannels);
+  u32(sampleRate);
+  u32(sampleRate * numChannels * bytesPerSample);
+  u16(numChannels * bytesPerSample);
+  u16(bitDepth);
+  str('data');
+  u32(dataLength);
+
+  const channels = [];
+  for (let c = 0; c < numChannels; c++) channels.push(buffer.getChannelData(c));
+
+  for (let i = 0; i < buffer.length; i++) {
+    for (let c = 0; c < numChannels; c++) {
+      let s = Math.max(-1, Math.min(1, channels[c][i]));
+      view.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
+      offset += 2;
+    }
+  }
+
+  return new Blob([ab], { type: 'audio/wav' });
+}
+
+// ---------- BOOT ----------
+
+function boot() {
+  initSteps();
+  bindEvents();
+  render();
+  // default vibe
+  toggleVibe('optimistic');
+  document.getElementById('ctx-rate').textContent = (Tone.context.sampleRate / 1000).toFixed(1) + 'kHz';
+}
+
+boot();
+
+</script>
+</body>
+</html>
