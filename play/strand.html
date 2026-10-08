@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Strand</title>
+<meta name="description" content="A particle-based generative art instrument exploring recognized protein structural motifs.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23110e1e'/%3E%3Ctext x='9' y='24' fill='%23e0cbd5' font-family='Georgia' font-size='25'%3ES%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: dark;
+  --stage: #172c76;
+  --text: #fff;
+  --muted: #fff;
+  --line: #ffffff40;
+  --accent: #fff;
+  --option: #172c76;
+  font-family: "Fragment Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 1.2px;
+}
+* { box-sizing: border-box; }
+html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+body { color: var(--text); text-transform: uppercase; background: var(--stage); }
+button, input, select { font: inherit; text-transform: inherit; }
+button { color: inherit; cursor: pointer; }
+button, input, select { -webkit-tap-highlight-color: transparent; }
+button:focus-visible, input:focus-visible, summary:focus-visible, canvas:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.select-wrap select:focus-visible, .swatch:focus-visible { outline: none; }
+button svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
+.stage { position: fixed; inset: 0; overflow: hidden; background: var(--stage); }
+#canvas { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; cursor: grab; outline-offset: -4px; }
+#canvas:active { cursor: grabbing; }
+.identity { position: absolute; top: 28px; left: 32px; pointer-events: none; }
+.brand { font-size: 10px; font-weight: 400; letter-spacing: 1.2px; }
+.specimen-label { margin-top: 14px; color: var(--muted); font: inherit; }
+h1 { margin: 6px 0 0; font-size: 10px; font-weight: 400; line-height: 1.1; letter-spacing: 1.2px; }
+.controls { position: absolute; top: 136px; bottom: 72px; left: 32px; width: 238px; padding: 0 8px 8px 0; overflow: auto hidden; scrollbar-width: none; overscroll-behavior: contain; background: none; border: 0; box-shadow: none; }
+.controls::-webkit-scrollbar { display: none; }
+.form-section { margin-top: 0; }
+.select-wrap { position: relative; }
+select { width: 100%; padding: 8px 28px 8px 0; appearance: none; color: var(--text); font-size: 10px; letter-spacing: 1.2px; background: transparent; border: 0; border-radius: 0; cursor: pointer; }
+select option { padding: 8px 14px; padding-inline: 14px; color: var(--text); font: inherit; letter-spacing: 1.2px; background: var(--option); }
+.select-arrow { position: absolute; top: 50%; right: 0; width: 12px; height: 12px; pointer-events: none; fill: none; stroke: currentColor; stroke-width: 1; transform: translateY(-50%); }
+details { margin-top: 10px; background: none; border: 0; }
+summary { display: flex; align-items: center; justify-content: space-between; padding: 1px 0 2px; color: var(--muted); font: inherit; font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase; list-style: none; cursor: pointer; user-select: none; }
+summary::-webkit-details-marker { display: none; }
+.disclosure { font-family: inherit; font-size: 10px; line-height: 1; transition: transform .2s; }
+details[open] .disclosure { transform: rotate(45deg); }
+.section-fields { padding-top: 0; }
+.range-field { margin-top: 6px; }
+.range-field label { display: flex; align-items: center; justify-content: space-between; gap: 10px; color: var(--text); font-size: 10px; line-height: 1.05; letter-spacing: 1.2px; }
+output { color: var(--muted); font: inherit; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.range-field input { display: block; width: 100%; height: 10px; margin: 2px 0 0; appearance: none; background: linear-gradient(to right, var(--accent) var(--fill, 50%), var(--line) var(--fill, 50%)) center / 100% 1px no-repeat; border: 0; cursor: pointer; }
+.range-field input::-webkit-slider-thumb { width: 6px; height: 6px; appearance: none; background: var(--accent); border: 0; border-radius: 50%; }
+.range-field input::-moz-range-thumb { width: 6px; height: 6px; background: var(--accent); border: 0; border-radius: 50%; }
+.range-field input:focus-visible { outline-offset: 1px; }
+.palette-label { margin: 8px 0 7px; font-size: 10px; letter-spacing: 1.2px; }
+.palettes { display: flex; flex-wrap: wrap; gap: 5px 13px; padding: 0; }
+.swatch { width: auto; height: auto; padding: 0 0 2px; color: var(--muted); font-size: 10px; letter-spacing: 1.2px; background: none; border: 0; border-bottom: 1px solid transparent; border-radius: 0; }
+.swatch.active { color: var(--text); border-bottom-color: currentColor; }
+.outline-button { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 8px 11px; color: var(--text); font-size: 10px; letter-spacing: 1.2px; background: transparent; border: 0; border-radius: 0; }
+.outline-button:hover { background: color-mix(in srgb, var(--text) 6%, transparent); }
+.viewport-tools { position: absolute; bottom: 22px; left: 50%; display: flex; align-items: center; justify-content: center; gap: 8px; white-space: nowrap; background: none; border: 0; transform: translateX(-50%); }
+.viewport-tools > #pause { min-width: 74px; height: 38px; }
+.toast { position: fixed; bottom: 76px; left: 50%; z-index: 8; max-width: 85vw; padding: 10px 14px; color: var(--text); font-size: 10px; letter-spacing: 1.2px; pointer-events: none; background: var(--option); border: 1px solid var(--line); border-radius: 4px; opacity: 0; transition: .2s; transform: translate(-50%, 12px); }
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+#error { position: absolute; top: 40%; right: 10%; left: 36%; padding: 20px; color: var(--text); font-size: 10px; line-height: 1.6; letter-spacing: 1.2px; background: var(--option); border: 1px solid var(--line); }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+@media (min-width: 1600px) { .identity, .controls { left: 42px; } .controls { width: 256px; } .identity { top: 34px; } }
+@media (max-width: 700px) {
+  .identity, .controls { left: 17px; }
+  .identity { top: 20px; }
+  .brand { font-size: 10px; letter-spacing: 1.2px; }
+  .specimen-label { margin-top: 13px; font-size: 10px; }
+  h1 { max-width: 180px; font-size: 10px; }
+  .controls { top: 124px; bottom: 110px; width: 177px; padding-right: 5px; }
+  .range-field label, .palette-label, select, .outline-button { font-size: 10px; }
+  .range-field { margin-top: 6px; }
+  .range-field output { font-size: 10px; }
+  summary { font-size: 10px; letter-spacing: 1.2px; }
+  .palettes { gap: 5px 10px; }
+  .viewport-tools { bottom: 12px; width: calc(100% - 20px); gap: 6px; flex-wrap: wrap; }
+  .viewport-tools .outline-button { height: 34px; }
+  .viewport-tools > #pause { min-width: 72px; height: 34px; }
+  .toast { bottom: 90px; }
+  #error { top: 35%; right: 18px; left: 18px; z-index: 10; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+</style>
+</head>
+<body>
+<main class="stage" id="stage">
+<canvas id="canvas" tabindex="0" aria-label="Animated three-dimensional protein motif made from particles. Drag to rotate, scroll or pinch to zoom. Arrow keys rotate; plus and minus zoom; Space pauses."></canvas>
+<div class="identity"><span class="brand">STRAND</span><div class="specimen-label">SPECIMEN <span id="specimen">001</span></div><h1 id="form-title">Alpha helix</h1></div>
+<aside class="controls" aria-label="Artwork controls">
+<details class="form-section"><summary>Strand form <span class="disclosure" aria-hidden="true">+</span></summary><div class="section-fields"><label class="sr-only" for="form">Strand form</label><div class="select-wrap"><select id="form"><option value="alphaHelix">Alpha helix</option><option value="coiledCoil">Coiled-coil</option><option value="collagen">Collagen triple helix</option><option value="proteinKnot">Protein knot</option><option value="globule">Globule</option></select><svg class="select-arrow" viewBox="0 0 12 12" aria-hidden="true"><path d="m3 4.5 3 3 3-3"/></svg></div></div></details>
+<details><summary>Geometry <span class="disclosure" aria-hidden="true">+</span></summary><div class="section-fields">
+<div class="range-field"><label for="width">Width <output id="width-value"></output></label><input id="width" type="range" min="10" max="160" step="1" value="34"></div>
+<div class="range-field"><label for="ribbonTwist">Twist <output id="ribbonTwist-value"></output></label><input id="ribbonTwist" type="range" min="0" max="6" step="0.1" value="1.2"></div>
+<div class="range-field"><label for="openings">Openings <output id="openings-value"></output></label><input id="openings" type="range" min="0" max="80" step="1" value="0"></div>
+<div class="range-field"><label for="twist">Coiling <output id="twist-value"></output></label><input id="twist" type="range" min="1" max="12" step="0.1" value="4.8"></div>
+<div class="range-field"><label for="fold">Folding <output id="fold-value"></output></label><input id="fold" type="range" min="0" max="100" step="1" value="22"></div>
+</div></details>
+<details><summary>Particles <span class="disclosure" aria-hidden="true">+</span></summary><div class="section-fields">
+<div class="range-field"><label for="density">Density <output id="density-value"></output></label><input id="density" type="range" min="3000" max="60000" value="36000" step="1000"></div>
+<div class="range-field"><label for="size">Point size <output id="size-value"></output></label><input id="size" type="range" min="0.4" max="5" value="1.8" step="0.1"></div>
+<div class="range-field"><label for="sizeVariation">Size variation <output id="sizeVariation-value"></output></label><input id="sizeVariation" type="range" min="0" max="100" value="65" step="1"></div>
+<div class="range-field"><label for="scatter">Dispersion <output id="scatter-value"></output></label><input id="scatter" type="range" min="0" max="100" value="15" step="1"></div>
+<div class="range-field"><label for="filaments">Filaments <output id="filaments-value"></output></label><input id="filaments" type="range" min="0" max="100" value="12" step="1"></div>
+</div></details>
+<details><summary>Iridescent shading <span class="disclosure" aria-hidden="true">+</span></summary><div class="section-fields">
+<div class="range-field"><label for="iridescence">Iridescence <output id="iridescence-value"></output></label><input id="iridescence" type="range" min="0" max="100" value="82" step="1"></div>
+<div class="range-field"><label for="hue">Color shift <output id="hue-value"></output></label><input id="hue" type="range" min="0" max="360" value="20" step="1"></div>
+<div class="palette-label">Color study</div>
+<div class="palettes" aria-label="Color palette"><button class="swatch active" data-palette="cobalt" aria-pressed="true">Cobalt</button><button class="swatch" data-palette="paper" aria-pressed="false">Paper</button><button class="swatch" data-palette="ember" aria-pressed="false">Ember</button><button class="swatch" data-palette="ink" aria-pressed="false">Ink</button></div>
+</div></details>
+</aside>
+<div class="viewport-tools" aria-label="Generation and playback"><button id="regenerate" class="outline-button">Regenerate</button><button id="pause" class="outline-button" aria-label="Pause animation" title="Pause animation (Space)">Pause</button></div>
+<div id="error" hidden role="alert"></div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+</main>
+<script type="module">
+const TAU = Math.PI * 2;
+const forms = {
+  alphaHelix: 'Alpha helix', coiledCoil: 'Coiled-coil',
+  collagen: 'Collagen triple helix', proteinKnot: 'Protein knot', globule: 'Globule'
+};
+const formSettings = {
+  alphaHelix:{twist:4.8,fold:22,width:34,layers:1,layerGap:0,ribbonTwist:1.2,openings:0},
+  coiledCoil:{twist:3.2,fold:35,width:28,layers:2,layerGap:0,ribbonTwist:1.1,openings:0},
+  collagen:{twist:2.7,fold:24,width:20,layers:3,layerGap:0,ribbonTwist:.65,openings:0},
+  proteinKnot:{twist:2.4,fold:58,width:31,layers:1,layerGap:0,ribbonTwist:1.7,openings:0},
+  globule:{twist:5.8,fold:68,width:27,layers:1,layerGap:0,ribbonTwist:1.4,openings:0}
+};
+function randomGenerator(seed){return function(){let t=seed+=0x6D2B79F5;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return ((t^t>>>14)>>>0)/4294967296;};}
+const add=(a,b)=>a.map((v,i)=>v+b[i]);
+const mul=(a,s)=>a.map(v=>v*s);
+const dot=(a,b)=>a.reduce((s,v,i)=>s+v*b[i],0);
+const cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+const norm=a=>{const m=Math.hypot(...a);return m>1e-8?mul(a,1/m):[1,0,0];};
+const lerp=(a,b,s)=>a.map((v,i)=>v+(b[i]-v)*s);
+function path(t,s,layer=0){const u=t*TAU,f=s.fold/100,a=u*s.twist;let r,phase;
+ switch(s.form){
+ case 'alphaHelix':r=.72+f*.25;return [r*Math.cos(a),(t-.5)*5.8,r*Math.sin(a)];
+ case 'coiledCoil':{
+  phase=layer*Math.PI;const supercoil=u*s.twist+phase,r=.55+f*.18;
+  return [r*Math.cos(supercoil),(t-.5)*5.7,r*Math.sin(supercoil)];
+ }
+ case 'collagen':{
+  phase=layer*TAU/3;const triple=u*s.twist+phase,r=.47+f*.10;
+  return [r*Math.cos(triple),(t-.5)*5.8,r*Math.sin(triple)];
+ }
+ case 'proteinKnot':{
+  r=1.35+.48*Math.cos(3*u);return [r*Math.cos(2*u),r*Math.sin(2*u),(.78+f*.42)*Math.sin(3*u)];
+ }
+ case 'globule':{
+  const longitude=u*s.twist*.42,latitude=.72*Math.sin(3*u)+.26*Math.sin(7*u),radius=1.18+.18*Math.sin(5*u)+f*.12*Math.cos(9*u);
+  return [radius*Math.cos(latitude)*Math.cos(longitude),radius*Math.sin(latitude)+.18*Math.sin(11*u),radius*Math.cos(latitude)*Math.sin(longitude)];
+ }
+ default:throw Error('Unknown strand form');
+ }
+}
+function createSurface(s){
+ const resolution=1200,allFrames=[];
+ for(let layer=0;layer<s.layers;layer++){
+  const frames=[];let normal;
+  for(let i=0;i<=resolution;i++){
+   const t=i/resolution,p=path(t,s,layer),before=path(t-.0001,s,layer),after=path(t+.0001,s,layer),tangent=norm(after.map((v,k)=>v-before[k]));
+   if(!normal){const axis=Math.abs(tangent[1])<.85?[0,1,0]:[1,0,0];normal=norm(cross(tangent,axis));}
+   else{const candidate=add(normal,mul(tangent,-dot(normal,tangent)));normal=Math.hypot(...candidate)>1e-7?norm(candidate):norm(cross(tangent,Math.abs(tangent[1])<.85?[0,1,0]:[1,0,0]));}
+   frames.push({p,tangent,normal:[...normal]});
+  }
+  const closed=s.form==='proteinKnot';
+  if(closed){const first=frames[0],end=frames[resolution],mismatch=Math.atan2(dot(cross(end.normal,first.normal),first.tangent),dot(end.normal,first.normal));
+   for(let i=0;i<=resolution;i++){const frame=frames[i],binormal=cross(frame.tangent,frame.normal),angle=mismatch*i/resolution;frame.normal=add(mul(frame.normal,Math.cos(angle)),mul(binormal,Math.sin(angle)));}}
+  allFrames.push(frames);
+ }
+ const sample=(t,v,layer)=>{
+  const q=Math.max(0,Math.min(1,t))*resolution,i=Math.min(resolution-1,Math.floor(q)),fraction=q-i;
+  const frames=allFrames[layer];
+  const a=frames[i],b=frames[i+1],p=lerp(a.p,b.p,fraction),tangent=norm(lerp(a.tangent,b.tangent,fraction));
+  const n=norm(lerp(a.normal,b.normal,fraction)),binormal=norm(cross(tangent,n));
+  const theta=TAU*t*s.ribbonTwist;
+  const widthAxis=add(mul(n,Math.cos(theta)),mul(binormal,Math.sin(theta)));
+  const surfaceNormal=add(mul(n,-Math.sin(theta)),mul(binormal,Math.cos(theta)));
+  const closed=s.form==='proteinKnot';
+  const width=s.width/100*(.82+.10*Math.sin(t*TAU*2+layer*.4))*(closed?1:(.58+.42*Math.pow(Math.sin(Math.PI*t),.3)));
+  const layerOffset=0;
+  const ruffle=.11*Math.sin(t*TAU*(s.twist*.55)+v*2+layer*.5)*(1-v*v)*s.fold/100;
+  const position=add(add(p,mul(widthAxis,v*width)),mul(surfaceNormal,layerOffset+ruffle));
+  return {p:position,tangent,normal:surfaceNormal,t,v};
+ };
+ return (t,v,layer)=>{
+  const vertex=sample(t,v,layer),epsilon=.00025,t0=Math.max(0,t-epsilon),t1=Math.min(1,t+epsilon);
+  const before=sample(t0,v,layer).p,after=sample(t1,v,layer).p,left=sample(t,v-epsilon,layer).p,right=sample(t,v+epsilon,layer).p;
+  const tangent=norm(after.map((value,k)=>value-before[k])),across=norm(right.map((value,k)=>value-left[k]));
+  let normal=norm(cross(tangent,across));if(dot(normal,vertex.normal)<0)normal=mul(normal,-1);
+  return {...vertex,tangent,normal};
+ };
+}
+function createHoles(s){
+ const rand=randomGenerator(s.seed+901),amount=s.openings/100,count=amount===0?0:3+Math.round(amount*7);
+ const base=Array.from({length:count},(_,index)=>({t:.10+(index+.25+rand()*.5)/Math.max(count,1)*.80,v:(rand()-.5)*.6,rt:.016+rand()*.014+amount*.020,rv:.12+rand()*.09+amount*.21}));
+ return Array.from({length:s.layers},()=>base.map(hole=>({...hole,t:hole.t+(rand()-.5)*.009,v:hole.v+(rand()-.5)*.045})));
+}
+function insideHole(t,v,holes){return holes.some(h=>((t-h.t)/h.rt)**2+((v-h.v)/h.rv)**2<1);}
+function buildGeometry(s){
+ const surface=createSurface(s),holes=createHoles(s),rand=randomGenerator(s.seed),gauss=()=>Math.sqrt(-2*Math.log(Math.max(.00001,rand())))*Math.cos(TAU*rand());
+ const stride=13,points=new Float32Array(s.density*stride),lines=[];
+ const write=(arr,offset,vertex,random,light)=>{arr.set([...vertex.p,...vertex.tangent,...vertex.normal,vertex.t,random,light,vertex.v],offset);};
+ for(let i=0;i<s.density;i++){
+  const layer=Math.floor(rand()*s.layers);let t,v,tries=0;
+  do{t=rand();v=rand()*2-1;tries++;}while(insideHole(t,v,holes[layer])&&tries<16);
+  if(insideHole(t,v,holes[layer]))v=rand()<.5?-.99:.99;
+  const vertex=surface(t,v,layer),satellite=rand()<.045,spread=(.003+s.scatter*.001)*(satellite?5:1);
+  vertex.p=vertex.p.map((x,k)=>x+gauss()*spread*(k===1?.65:1));
+  write(points,i*stride,vertex,rand(),satellite?.3:.65+rand()*.35);
+ }
+ // Longitudinal fibers respect the same openings as the particle surface.
+ for(let k=0;k<Math.round(s.filaments*1.3);k++){
+  const layer=Math.floor(rand()*s.layers),v=rand()*2-1,phase=rand();let prev=null;
+  for(let j=0;j<=180;j++){
+   const t=j/180;if(insideHole(t,v,holes[layer])){prev=null;continue;}
+   const next=surface(t,v,layer);
+   if(prev){for(const vertex of [prev,next])lines.push(...vertex.p,...vertex.tangent,...vertex.normal,vertex.t,phase,.2,vertex.v);}
+   prev=next;
+  }
+ }
+ return {points,lines:new Float32Array(lines),count:s.density,lineCount:lines.length/stride};
+}
+
+const $=id=>document.getElementById(id);
+const defaults={form:'alphaHelix',...formSettings.alphaHelix,density:36000,size:1.8,sizeVariation:65,orientation:0,scatter:15,filaments:12,iridescence:82,hue:20,waveAmp:0,waveFrequency:1.2,waveSpeed:0,motion:5,seed:2749,palette:'cobalt'};
+const state={...defaults};
+const palettes={
+ ink:{name:'Ink',bg:'#101b25',fg:'#d8f4f7',a:'#b0e4e4',b:'#638cd7'},
+ cobalt:{name:'Cobalt',bg:'#172c76',fg:'#e7ebff',a:'#a2c5ff',b:'#f5aadf'},
+ paper:{name:'Paper',bg:'#e8e6dd',fg:'#304b4b',a:'#3c817b',b:'#67519d'},
+ ember:{name:'Ember',bg:'#421f29',fg:'#ffe4d2',a:'#ec9360',b:'#ca92d9'}
+};
+const ranges={twist:[1,12],fold:[0,100],width:[10,160],ribbonTwist:[0,6],openings:[0,80],density:[3000,60000],size:[.4,5],sizeVariation:[0,100],scatter:[0,100],filaments:[0,100],iridescence:[0,100],hue:[0,360]};
+const integerKeys=['density'];
+const geometryKeys=['form','twist','fold','width','ribbonTwist','openings','density','scatter','filaments'];
+const canvas=$('canvas');
+let gl=canvas.getContext('webgl',{alpha:false,antialias:true,preserveDrawingBuffer:true}),program,locations,pointBuffer,lineBuffer,geometry;
+let angleX=-.15,angleY=.42,angleZ=-.18,zoom=1,time=0,paused=false,dirty=true,last=0,frameId,buildTimer,specimen=1,contextLost=false,disposed=false;
+const gestures=new Map();
+const rgb=hex=>[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16)/255);
+const vertexShader=`
+ precision highp float;
+ attribute vec3 aPosition;attribute vec3 aTangent;attribute vec3 aNormal;attribute vec4 aData;
+ uniform vec3 uRotation;uniform vec2 uViewport;uniform float uScale;uniform float uOffset;
+ uniform float uSize;uniform float uVariation;uniform mediump float uOrientation;uniform float uPixel;
+ uniform float uTime;uniform float uMotion;uniform mediump float uWaveAmp;uniform float uWaveFrequency;uniform float uWavePhase;
+ varying mediump float vAlpha;varying mediump float vAlong;varying mediump float vFacing;varying mediump float vLight;varying mediump float vWave;varying mediump vec2 vDirection;
+ vec3 rotate(vec3 p){float cx=cos(uRotation.x),sx=sin(uRotation.x),cy=cos(uRotation.y),sy=sin(uRotation.y),cz=cos(uRotation.z),sz=sin(uRotation.z);p=vec3(p.x,p.y*cx-p.z*sx,p.y*sx+p.z*cx);p=vec3(p.x*cy+p.z*sy,p.y,-p.x*sy+p.z*cy);return vec3(p.x*cz-p.y*sz,p.x*sz+p.y*cz,p.z);}
+ void main(){
+  float phase=aData.x*uWaveFrequency*6.283185-uWavePhase;
+  float wave=sin(phase),randomPhase=aData.y*6.283185;
+  vec3 p=aPosition+aNormal*wave*uWaveAmp*.10;
+  p+=vec3(sin(uTime*.24+randomPhase+p.y),cos(uTime*.19+randomPhase+p.z),sin(uTime*.16+randomPhase+p.x))*.025*uMotion;
+  vec3 normal=normalize(rotate(aNormal-aTangent*cos(phase)*uWaveAmp*.12));
+  vec3 tangent=rotate(aTangent+aNormal*cos(phase)*uWaveAmp*.12);
+  p=rotate(p);float perspective=9.5/(9.5-p.z);
+  vec2 xy=p.xy*uScale*perspective;xy.x*=uViewport.y/uViewport.x;xy.x+=uOffset;
+  gl_Position=vec4(xy,0.,1.);
+  float variation=mix(1.,.24+2.2*pow(aData.y,1.6),uVariation);
+  gl_PointSize=max(1.,uSize*uPixel*perspective*variation*sqrt(1.+uOrientation*3.));
+  vec2 direction=vec2(tangent.x,-tangent.y);vDirection=length(direction)>.001?normalize(direction):vec2(1.,0.);
+  vFacing=abs(normal.z);vLight=.46+.54*abs(dot(normal,normalize(vec3(-.55,.7,1.))));
+  vAlpha=(.3+aData.z*.56)*clamp(.78+p.z*.09,.35,1.15);vAlong=aData.x;vWave=wave;
+ }
+`;
+const fragmentShader=`
+ precision mediump float;
+ uniform vec3 uColor;uniform vec3 uTintA;uniform vec3 uTintB;uniform float uIridescence;uniform float uHue;uniform mediump float uOrientation;uniform float uLine;uniform mediump float uWaveAmp;
+ varying mediump float vAlpha;varying mediump float vAlong;varying mediump float vFacing;varying mediump float vLight;varying mediump float vWave;varying mediump vec2 vDirection;
+ void main(){
+  float alpha=vAlpha;
+  if(uLine<.5){vec2 q=gl_PointCoord-vec2(.5);vec2 d=normalize(vDirection);vec2 aligned=vec2(dot(q,d),dot(q,vec2(-d.y,d.x)));float distance=length(vec2(aligned.x,aligned.y*(1.+uOrientation*3.)));alpha*=1.-smoothstep(.26,.5,distance);if(alpha<.008)discard;}else{alpha*=.20;}
+  float fresnel=pow(1.-vFacing,1.5);
+  float hue=vFacing*.8+vAlong*.52+uHue+vWave*uWaveAmp*.006;
+  float band=.5+.5*sin(hue*6.283185);
+  vec3 tint=mix(uTintA,uTintB,band);
+  vec3 spectral=.56+.44*cos(6.283185*(hue+vec3(.02,.35,.68)));
+  tint=mix(tint,spectral,.26);
+  vec3 color=mix(uColor,tint,uIridescence);
+  color*=mix(.95,vLight+fresnel*.22,uIridescence);
+  gl_FragColor=vec4(color,alpha);
+ }
+`;
+function compile(type,source){
+ const shader=gl.createShader(type);if(!shader)throw Error('Could not allocate the drawing shader.');
+ gl.shaderSource(shader,source);gl.compileShader(shader);
+ if(!gl.getShaderParameter(shader,gl.COMPILE_STATUS)){const message=gl.getShaderInfoLog(shader)||'Unknown shader compilation failure';gl.deleteShader(shader);throw Error('Shader compilation: '+message);}
+ return shader;
+}
+function initialize(){
+ const vs=compile(gl.VERTEX_SHADER,vertexShader),fs=compile(gl.FRAGMENT_SHADER,fragmentShader);program=gl.createProgram();gl.attachShader(program,vs);gl.attachShader(program,fs);gl.linkProgram(program);gl.deleteShader(vs);gl.deleteShader(fs);
+ if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error('Shader linking: '+(gl.getProgramInfoLog(program)||'Unknown linking failure'));gl.useProgram(program);locations={};$('error').hidden=true;
+ ['Rotation','Viewport','Scale','Offset','Size','Variation','Orientation','Pixel','Time','Motion','WaveAmp','WaveFrequency','WavePhase','Color','TintA','TintB','Iridescence','Hue','Line'].forEach(key=>locations[key]=gl.getUniformLocation(program,'u'+key));
+ ['Position','Tangent','Normal','Data'].forEach(key=>locations[key]=gl.getAttribLocation(program,'a'+key));
+ pointBuffer=gl.createBuffer();lineBuffer=gl.createBuffer();gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);rebuild();
+}
+function rebuild(){if(!gl||!program||contextLost)return;clearTimeout(buildTimer);geometry=buildGeometry(state);gl.bindBuffer(gl.ARRAY_BUFFER,pointBuffer);gl.bufferData(gl.ARRAY_BUFFER,geometry.points,gl.STATIC_DRAW);gl.bindBuffer(gl.ARRAY_BUFFER,lineBuffer);gl.bufferData(gl.ARRAY_BUFFER,geometry.lines,gl.STATIC_DRAW);dirty=true;}
+function bind(buffer){gl.bindBuffer(gl.ARRAY_BUFFER,buffer);for(const [key,size,offset] of [['Position',3,0],['Tangent',3,12],['Normal',3,24],['Data',4,36]]){gl.enableVertexAttribArray(locations[key]);gl.vertexAttribPointer(locations[key],size,gl.FLOAT,false,52,offset);}}
+let wavePhase=0;
+function render(w=canvas.width,h=canvas.height,pixel=Math.min(devicePixelRatio||1,2),clean=false){
+ if(!gl||!program||contextLost||!geometry)return;gl.viewport(0,0,w,h);const pal=palettes[state.palette];gl.clearColor(...rgb(pal.bg),1);gl.clear(gl.COLOR_BUFFER_BIT);gl.useProgram(program);
+ const rect=canvas.getBoundingClientRect(),scale=Math.min(.275,Math.max(.1,rect.width/rect.height*.22))*zoom;
+ gl.uniform3f(locations.Rotation,angleX,angleY,angleZ);gl.uniform2f(locations.Viewport,w,h);gl.uniform1f(locations.Scale,scale);gl.uniform1f(locations.Offset,0);
+ for(const [key,value] of Object.entries({Size:state.size,Variation:state.sizeVariation/100,Orientation:state.orientation/100,Pixel:pixel,Time:time,Motion:state.motion/100,WaveAmp:state.waveAmp/100,WaveFrequency:state.waveFrequency,WavePhase:wavePhase,Iridescence:state.iridescence/100,Hue:state.hue/360}))gl.uniform1f(locations[key],value);
+ gl.uniform3fv(locations.Color,rgb(pal.fg));gl.uniform3fv(locations.TintA,rgb(pal.a));gl.uniform3fv(locations.TintB,rgb(pal.b));
+ if(geometry.lineCount){gl.uniform1f(locations.Line,1);bind(lineBuffer);gl.drawArrays(gl.LINES,0,geometry.lineCount);}gl.uniform1f(locations.Line,0);bind(pointBuffer);gl.drawArrays(gl.POINTS,0,geometry.count);dirty=false;
+}
+function resize(){const rect=canvas.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);canvas.width=Math.max(1,Math.round(rect.width*d));canvas.height=Math.max(1,Math.round(rect.height*d));dirty=true;}
+function tick(now){if(disposed)return;const dt=Math.min((now-last)/1000||0,.05);last=now;if(!paused&&!document.hidden){time+=dt;if(gestures.size===0)angleY+=dt*.055;dirty=true;}if(dirty&&!document.hidden)render();frameId=requestAnimationFrame(tick);}
+function format(key,value){if(key==='density')return value.toLocaleString();if(key==='hue')return value+'°';if(['size','twist','ribbonTwist'].includes(key))return value.toFixed(1);return value+'%';}
+function sync(){
+ for(const key of Object.keys(ranges)){const input=$(key);input.value=state[key];input.style.setProperty('--fill',100*(state[key]-ranges[key][0])/(ranges[key][1]-ranges[key][0])+'%');$(key+'-value').textContent=format(key,state[key]);}
+ $('form').value=state.form;$('form-title').textContent=forms[state.form];$('specimen').textContent=String(specimen).padStart(3,'0');
+ const palette=palettes[state.palette],root=document.documentElement,uiColor=state.palette==='paper'?'#000':'#fff';root.style.setProperty('--text',uiColor);root.style.setProperty('--muted',uiColor);root.style.setProperty('--accent',uiColor);root.style.setProperty('--stage',palette.bg);root.style.setProperty('--option',palette.bg);root.style.setProperty('--line',uiColor==='#000'?'#00000040':'#ffffff40');root.style.colorScheme=state.palette==='paper'?'light':'dark';
+ document.querySelectorAll('[data-palette]').forEach(button=>{const active=button.dataset.palette===state.palette;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));});
+ $('pause').setAttribute('aria-label',paused?'Play animation':'Pause animation');$('pause').title=paused?'Play animation (Space)':'Pause animation (Space)';$('pause').textContent=paused?'Play':'Pause';
+}
+function update(key,value){state[key]=value;dirty=true;sync();if(geometryKeys.includes(key)){clearTimeout(buildTimer);buildTimer=setTimeout(rebuild,60);}}
+for(const key of Object.keys(ranges))$(key).addEventListener('input',event=>update(key,Number(event.target.value)));
+function changeForm(form){if(!Object.hasOwn(forms,form))throw Error('Unknown strand form.');Object.assign(state,formSettings[form],{form});specimen++;clearTimeout(buildTimer);rebuild();sync();}
+$('form').addEventListener('change',event=>changeForm(event.target.value));
+$('regenerate').onclick=()=>{
+ const formNames=Object.keys(forms),paletteNames=Object.keys(palettes),form=formNames[Math.floor(Math.random()*formNames.length)];
+ Object.assign(state,formSettings[form],{form,orientation:0,layerGap:0,waveAmp:0,waveSpeed:0,seed:1+Math.floor(Math.random()*999998)});
+ const random=(min,max)=>min+Math.random()*(max-min);
+ state.twist=Math.round(random(1,12)*10)/10;state.fold=Math.round(random(0,100));state.width=Math.round(random(10,160));state.ribbonTwist=Math.round(random(0,6)*10)/10;
+ state.openings=Math.round(random(0,45));state.density=Math.round(random(12000,60000)/1000)*1000;state.size=Math.round(random(.7,3.5)*10)/10;state.sizeVariation=Math.round(random(0,100));
+ state.scatter=Math.round(random(0,45));state.filaments=Math.round(random(0,65));state.iridescence=Math.round(random(20,100));state.hue=Math.round(random(0,360));state.palette=paletteNames[Math.floor(Math.random()*paletteNames.length)];
+ zoom=Math.round(random(.5,4)*100)/100;specimen++;rebuild();sync();
+};
+document.querySelectorAll('[data-palette]').forEach(button=>button.onclick=()=>update('palette',button.dataset.palette));
+function togglePause(){paused=!paused;dirty=true;sync();}
+function setZoom(value){zoom=Math.max(.4,Math.min(4,value));dirty=true;}
+$('pause').onclick=togglePause;
+canvas.addEventListener('pointerdown',event=>{canvas.setPointerCapture(event.pointerId);gestures.set(event.pointerId,{x:event.clientX,y:event.clientY});});
+canvas.addEventListener('pointermove',event=>{if(!gestures.has(event.pointerId))return;const old=gestures.get(event.pointerId),next={x:event.clientX,y:event.clientY};if(gestures.size===2){const other=[...gestures.entries()].find(([id])=>id!==event.pointerId)[1],before=Math.hypot(old.x-other.x,old.y-other.y),after=Math.hypot(next.x-other.x,next.y-other.y);if(before>.1)setZoom(zoom*after/before);}else{angleY+=(next.x-old.x)*.007;angleX+=(next.y-old.y)*.007;}gestures.set(event.pointerId,next);dirty=true;});
+for(const event of ['pointerup','pointercancel','lostpointercapture'])canvas.addEventListener(event,e=>gestures.delete(e.pointerId));
+canvas.addEventListener('wheel',event=>{event.preventDefault();setZoom(zoom*Math.exp(-event.deltaY*.001));},{passive:false});
+canvas.addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','=','-',' '].includes(event.key))return;event.preventDefault();if(event.key==='ArrowLeft')angleY-=.12;if(event.key==='ArrowRight')angleY+=.12;if(event.key==='ArrowUp')angleX-=.12;if(event.key==='ArrowDown')angleX+=.12;if(event.key==='+'||event.key==='=')setZoom(zoom*1.1);if(event.key==='-')setZoom(zoom/1.1);if(event.key===' ')togglePause();dirty=true;});
+let toastTimer;function toast(message){$('toast').textContent=message;$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('show'),4000);}
+function configure(input){
+ if(!input||typeof input!=='object'||Array.isArray(input))throw Error('Provide a settings object.');
+ const next={...state};
+ if(Object.hasOwn(input,'form')){if(!Object.hasOwn(forms,input.form))throw Error('Unknown strand form.');if(input.form!==state.form)Object.assign(next,formSettings[input.form]);}
+ for(const [key,value] of Object.entries(input)){
+  if(Object.hasOwn(ranges,key)){const [min,max]=ranges[key];if(typeof value!=='number'||!Number.isFinite(value)||value<min||value>max)throw Error(`${key} must be between ${min} and ${max}.`);if(integerKeys.includes(key)&&!Number.isInteger(value))throw Error(`${key} must be a whole number.`);next[key]=value;}
+  else if(key==='form')next.form=value;
+  else if(key==='palette'){if(!Object.hasOwn(palettes,value))throw Error('Unknown palette.');next.palette=value;}
+  else throw Error(`Unknown setting: ${key}`);
+ }
+ if(next.form!==state.form)specimen++;Object.assign(state,next);clearTimeout(buildTimer);rebuild();sync();render();return visibleState();
+}
+function visibleState(){return {form:state.form,twist:state.twist,fold:state.fold,width:state.width,ribbonTwist:state.ribbonTwist,openings:state.openings,density:state.density,size:state.size,sizeVariation:state.sizeVariation,scatter:state.scatter,filaments:state.filaments,iridescence:state.iridescence,hue:state.hue,palette:state.palette,paused,zoom};}
+function registerTools(){const context=document.modelContext;if(!context?.registerTool)return;const lifecycle=new AbortController();
+ const settingsSchema={type:'object',properties:{form:{type:'string',enum:Object.keys(forms)},palette:{type:'string',enum:Object.keys(palettes)},...Object.fromEntries(Object.entries(ranges).map(([key,[minimum,maximum]])=>[key,{type:integerKeys.includes(key)?'integer':'number',minimum,maximum}]))},additionalProperties:false};
+ const definitions=[{name:'get_particle_studio_state',title:'Read Strand settings',description:'Read the visible protein motif, geometry, particles, iridescence and playback state.',inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:{readOnlyHint:true},execute:visibleState},{name:'configure_particle_studio',title:'Configure Strand artwork',description:'Update the visible protein motif, geometry, particles, color and shading. Changing form loads its structural defaults, then applies any other provided settings. Rotation runs whenever playback is active.',inputSchema:settingsSchema,annotations:{readOnlyHint:false},execute:configure}];
+ for(const definition of definitions){try{Promise.resolve(context.registerTool(definition,{signal:lifecycle.signal})).catch(()=>{});}catch{}}
+ window.addEventListener('pagehide',()=>lifecycle.abort(),{once:true});
+}
+canvas.addEventListener('webglcontextlost',event=>{event.preventDefault();contextLost=true;cancelAnimationFrame(frameId);toast('The drawing surface paused. Restoring it…');});
+canvas.addEventListener('webglcontextrestored',()=>{try{contextLost=false;initialize();resize();last=0;frameId=requestAnimationFrame(tick);}catch(error){showError(error);}});
+function showError(error){
+ const message=error instanceof Error?error.message:String(error);$('error').hidden=false;
+ $('error').textContent=!gl
+  ? 'WebGL is unavailable in this browser. Try opening this HTML file in your regular browser. In Chrome, enable Settings → System → Use graphics acceleration when available, then relaunch Chrome.'
+  : 'The drawing code could not start. This does not mean hardware acceleration is disabled. Error details: '+message;
+ console.error(error);
+}
+window.addEventListener('pagehide',()=>{disposed=true;cancelAnimationFrame(frameId);clearTimeout(buildTimer);});
+window.addEventListener('pageshow',event=>{if(event.persisted){disposed=false;dirty=true;last=0;registerTools();frameId=requestAnimationFrame(tick);}});
+try{sync();if(!gl)throw Error('WebGL unavailable');initialize();new ResizeObserver(resize).observe(canvas);resize();frameId=requestAnimationFrame(tick);registerTools();}catch(error){showError(error);}
+
+</script>
+</body>
+</html>
