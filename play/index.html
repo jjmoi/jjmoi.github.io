@@ -41,7 +41,7 @@
 		@media only screen and (max-width: 1111px) {
 			.nav {width: 92%;}
 			.nav-logo {width: 90%;}
-			.nav-work, .nav-play, .nav-thoughts {display: none;}
+			.nav-work, .nav-play, .nav-work {display: none;}
 			.play-project {padding-top: 0;}
 			.play-project + .play-project {margin-top: 120px;}
 			.row .project-image {float: left; margin-bottom: 20px;}
@@ -54,7 +54,8 @@
 	document.addEventListener("DOMContentLoaded", function () {
 		function updateTime() {
 			document.getElementById("time").textContent =
-				new Date().toLocaleTimeString([], {
+				new Date().toLocaleTimeString("en-US", {
+					timeZone: "America/Los_Angeles",
 					hour: "numeric",
 					minute: "2-digit",
 					hour12: true
@@ -76,7 +77,7 @@
 			<div class="col-2-sm nav-work">
 				<a href="/">-1 → 0</a>
 			</div>
-			<div class="col-1-sm nav-thoughts right">
+			<div class="col-1-sm nav-work right">
 				<a href="/">Work</a>
 			</div>
 			<div class="col-1-sm nav-play right">
@@ -124,6 +125,34 @@
 						<p>→</p>
 					</div>
 				</div>
+			</a>
+		</div>
+		<div class="row section-padtop play-project">
+			<a href="04-ephemeral-software" class="col-5" id="blog" style="padding-right: 8px;">
+				<img src="img-04.png">
+				<p>Cell Field</p>
+				<p>Generative motion graphics tool for creating abstract cellular visuals for motion backgrounds, installations, and experimental image making.</p>
+				<p>→</p>
+			</a>
+			<a href="04-ephemeral-software" class="col-5" id="blog" style="padding-left: 8px;">
+				<img src="img-06.png">
+				<p>Dianounce</p>
+				<p>Technical diagramming tool for creating system architectures and flows by adjusting structure, density, hierarchy, connections, and node forms.</p>
+				<p>→</p>
+			</a>
+		</div>
+		<div class="row section-padtop play-project">
+			<a href="04-ephemeral-software" class="col-5" id="blog" style="padding-right: 8px;">
+				<img src="img-02.png">
+				<p>Cell Field</p>
+				<p>Generative motion graphics tool for creating abstract cellular visuals for motion backgrounds, installations, and experimental image making.</p>
+				<p>→</p>
+			</a>
+			<a href="04-ephemeral-software" class="col-5" id="blog" style="padding-left: 8px;">
+				<img src="img-01.png">
+				<p>Dianounce</p>
+				<p>Technical diagramming tool for creating system architectures and flows by adjusting structure, density, hierarchy, connections, and node forms.</p>
+				<p>→</p>
 			</a>
 		</div>
 	</div>
