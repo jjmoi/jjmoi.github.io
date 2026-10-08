@@ -28,6 +28,7 @@
 		/* TEMP */
 		#desktop-lastcase {padding-bottom: 590px;}
 		#rwd-lastcase {padding-bottom: 350px;}
+		#listing p+p, #listing-desktop p+p, #listing-rwd p+p {padding-top: 0;}
 
 		@media only screen and (max-width: 1111px) {
 			#rwd-lastcase {padding-bottom: 560px;}
@@ -67,7 +68,7 @@
 		</div>
 	</div>
 	<!-- THOUGHTS -->
-	<div class="container parasection first all-device desktop">
+	<div class="container parasection first all-device desktop" id="listing-desktop">
 		<div class="row">
 			<div class="col-10">
 				<p>Thoughts</p>
@@ -166,7 +167,7 @@
 	</div>
 
 	<!-- THOUGHTS RWD -->
-	<div class="container parasection home rwd">
+	<div class="container parasection home rwd" id="listing-rwd">
 		<a href="04-ephemeral-software" class="row">
 			<div class="col-10">
 				<img src="img-04.png">
