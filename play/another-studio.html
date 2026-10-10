@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Another Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><text y=%2214%22 font-size=%2214%22>🐕</text></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-sheet="half">
+  <header class="topbar win">
+    <h1 class="logo">Another Studio</h1>
+    <div class="clock" id="clock" aria-live="polite">—</div>
+    <div class="controls" role="group" aria-label="Simulation speed">
+      <button id="pause" class="btn" aria-pressed="false" title="Pause (space)">❚❚</button>
+      <button class="btn speed" data-speed="1" aria-pressed="true">1×</button>
+      <button class="btn speed" data-speed="10" aria-pressed="false">10×</button>
+      <button class="btn speed" data-speed="100" aria-pressed="false">100×</button>
+      <button id="speed-cycle" class="btn speed-cycle" title="Change speed">1×</button>
+    </div>
+    <button id="menu" class="btn menu" aria-expanded="false" aria-controls="more" aria-label="More">☰</button>
+    <div class="controls more" id="more">
+      <button id="skip" class="btn" title="Fast-forward to 11:30 tomorrow">⏭ Next day</button>
+      <button id="sound" class="btn" aria-pressed="false" title="Lo-fi music and sound effects">🔇 Sound</button>
+      <button id="god" class="btn god" aria-pressed="false" title="Command people, whisper thoughts, change needs, trigger events">😇 God Mode</button>
+      <button id="reset" class="btn" title="Wipe the saved world and start over on Day 100">🧨 Reset</button>
+    </div>
+  </header>
+
+  <div class="banner" id="banner" role="status" hidden></div>
+
+  <main class="layout">
+    <section class="stage" id="stage">
+      <canvas id="map" aria-label="Map of Another Studio. Select a person to inspect them, or a wall or table to browse work."></canvas>
+      <div class="tooltip win" id="tooltip" hidden></div>
+      <div class="hud win" id="hud" hidden></div>
+      <div class="toasts" id="toasts" aria-live="polite"></div>
+      <div class="dpad" id="dpad" hidden aria-label="Possession controls">
+        <div class="pad">
+          <button class="btn" data-key="ArrowUp" aria-label="Up">▲</button>
+          <button class="btn" data-key="ArrowLeft" aria-label="Left">◀</button>
+          <button class="btn" data-key="ArrowRight" aria-label="Right">▶</button>
+          <button class="btn" data-key="ArrowDown" aria-label="Down">▼</button>
+        </div>
+        <div class="acts">
+          <button class="btn" data-key="e">Use</button>
+          <button class="btn" data-key="t">Talk</button>
+          <button class="btn" data-key="Escape">Let go</button>
+        </div>
+      </div>
+    </section>
+
+    <aside class="panel win" id="panel">
+      <button class="sheet-handle" id="sheet-handle" aria-label="Resize the panel"><span></span></button>
+      <section class="summary" id="summary" aria-label="Studio at a glance"></section>
+      <nav class="tabs" role="tablist">
+        <button class="tab" role="tab" data-tab="feed" aria-selected="true">Feed</button>
+        <button class="tab" role="tab" data-tab="projects" aria-selected="false">Projects</button>
+        <button class="tab" role="tab" data-tab="team" aria-selected="false">Team</button>
+      </nav>
+      <div class="filters" id="filters">
+        <button class="chip" data-filter="work" aria-pressed="false">Work</button>
+        <button class="chip" data-filter="chat" aria-pressed="false">Chat</button>
+        <button class="chip" data-filter="life" aria-pressed="false">Life</button>
+        <button class="chip" data-filter="all" aria-pressed="true">All</button>
+        <div class="feed-tools">
+          <select id="feed-person" aria-label="Show one person's story"><option value="">Everyone</option></select>
+          <input id="feed-q" type="search" placeholder="Search the feed" aria-label="Search the feed">
+        </div>
+      </div>
+      <div class="view" id="view-feed"></div>
+      <div class="view" id="view-team" hidden></div>
+      <div class="view" id="view-projects" hidden></div>
+      <div class="view" id="view-wall" hidden></div>
+      <div class="view" id="view-inspect" hidden></div>
+    </aside>
+  </main>
+
+  <div class="lightbox" id="modal" hidden role="dialog" aria-modal="true"><div class="win modal-body" id="modal-body"></div></div>
+  <div class="skipping" id="skipping" hidden role="status"><div class="win">Skipping to tomorrow…</div></div>
+  <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Artifact"><div class="win" id="lightbox-body"></div></div>
+
+  <script src="another-studio.js"></script>
+  <noscript>Another Studio needs JavaScript.</noscript>
+</body>
+</html>
