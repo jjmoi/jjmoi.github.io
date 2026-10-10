@@ -60,6 +60,7 @@
     --text-xl: clamp(1.4rem, 2.4vw, 1.9rem);
     --text-lg: clamp(1.15rem, 1.8vw, 1.45rem);
     --text-md: 1.05rem;
+    --text-intro: calc(var(--text-md) + 2pt);
     --text-sm: 0.875rem;
     --text-xs: 0.75rem;
     --text-label: clamp(0.95rem, 1.4vw, 1.25rem);
@@ -90,9 +91,6 @@
 
     /* sizes */
     --size-page-max: 1240px;
-    --size-slider: 84px;
-    --size-thumb: 14px;
-    --size-lamp: 10px;
     --size-meter-h: 2px;
     --size-score-h: clamp(64px, 11vh, 112px);
 
@@ -162,7 +160,7 @@
   @media (min-height: 520px) { body { overflow: hidden; } }
 
   /* ---------- header + song picker ---------- */
-  header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2) var(--space-4); }
+  header { display: flex; justify-content: center; }
   h1 { font-family: var(--font-display); font-weight: 400; font-size: var(--text-title); line-height: var(--leading-tight); margin: 0; }
   h1 em { color: var(--color-gold-soft); }
   .songs { display: inline-flex; flex-wrap: wrap; justify-content: center; gap: var(--space-1); }
@@ -173,10 +171,12 @@
     color: var(--color-cream-dim); font-family: var(--font-display);
     transition: color var(--dur-fast), background var(--dur-fast);
   }
-  .song .t { font-size: var(--text-lg); line-height: 1.1; }
+  .song .t { font-size: var(--text-md); line-height: 1.1; }
   .song .c { font-size: var(--text-xs); font-style: italic; }
-  .song:hover { color: var(--color-cream); }
-  .song[aria-checked="true"] { color: var(--color-ink); background: var(--color-gold-soft); }
+  .desk .song { color: var(--color-ink-soft); }
+  .desk .song:hover { color: var(--color-ink); background: var(--color-ink-ghost); }
+  .desk .song[aria-checked="true"] { color: var(--color-parchment); background: var(--color-ink); }
+  .desk .songs { flex: 1; justify-content: center; }
 
   /* ---------- gilded proscenium ---------- */
   .proscenium {
@@ -267,7 +267,24 @@
     animation: ripple var(--dur-ripple) var(--ease-out) forwards;
   }
   @keyframes ripple { to { transform: translate(-50%, -50%) scale(1); opacity: 0; } }
-  .stage.playing { cursor: crosshair; }
+  /* the baton is the cursor: over the open stage it leaves the podium and follows the pointer */
+  .stage { touch-action: none; }
+  .stage.hovering:not(.closed), .stage.hovering:not(.closed) * { cursor: none; }
+  .stage.hovering:not(.closed) .conductor .baton { opacity: 0; }
+  .guide { position: absolute; inset: 0; z-index: 8; pointer-events: none; }
+  .guide-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .guide-svg #guideOrigin { fill: none; stroke: var(--color-gold-light); stroke-width: var(--border-thick); opacity: 0; transition: opacity var(--dur-fast); }
+  .stage.holding .guide-svg #guideOrigin { opacity: 1; }
+  .guide-baton { /* the handle sits on the pointer; the tip leans with the stroke */
+    position: absolute; left: calc(var(--hx) * 1px); top: calc(var(--hy) * 1px);
+    font-size: var(--text-conductor); line-height: 1;
+    transform-origin: 15% 85%;
+    transform: translate(-15%, -85%) rotate(calc(var(--tilt, 0) * 1deg));
+    filter: drop-shadow(0 var(--space-1) var(--space-2) var(--color-shadow));
+    opacity: 0;
+  }
+  .stage.hovering:not(.closed) .guide-baton, .stage.holding .guide-baton { opacity: 1; }
+  .section-label.focus { color: var(--color-gold-light); background: var(--color-ink-ghost); box-shadow: 0 0 var(--space-5) var(--color-glow); }
 
   /* stage curtains */
   .drape {
@@ -341,6 +358,13 @@
   .overlay.hidden { opacity: 0; pointer-events: none; }
   .overlay p.sub { font-family: var(--font-display); font-style: italic; font-size: var(--text-lg); color: var(--color-gold-light); margin: var(--space-4) 0 0; }
   .btn-hero { background: var(--color-scrim); }
+  .overlay p.intro {
+    /* same parchment and ink as the score */
+    max-width: 34em; margin: var(--space-6) auto 0; padding: var(--space-4) var(--space-6);
+    font-size: var(--text-intro); line-height: 1.45; font-style: italic; color: var(--color-ink); letter-spacing: 0.4px;
+  }
+  .overlay p.intro { box-shadow: none; }
+  .overlay p.intro::before { display: none; } /* parchment without the engraved double rule or shadow */
   .overlay .error { color: var(--color-gold-light); font-family: var(--font-ui); font-size: var(--text-sm); margin: var(--space-3) 0 0; }
   .btn-hero {
     font-family: var(--font-display); font-size: var(--text-hero); line-height: 1.1;
@@ -369,7 +393,7 @@
   }
   .paper :focus-visible { outline-color: var(--color-focus-ink); }
 
-  .desk { flex: none; padding: var(--space-3) var(--space-5); display: grid; gap: var(--space-2); }
+  .desk { flex: none; padding: var(--space-5) var(--space-6); display: grid; gap: var(--space-3); } /* clear of the engraved rule inset */
   .staff { display: block; width: 100%; height: var(--size-score-h); }
   .staff-wrap { position: relative; overflow: hidden; }
   .staff-layer { position: absolute; inset: 0; width: 100%; height: 100%; }
@@ -396,7 +420,7 @@
   .staff .playhead { stroke: var(--color-oxblood); stroke-width: 1.2; stroke-dasharray: 2 3; }
 
   .desk-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); }
-  .group { display: flex; gap: var(--space-2); margin-left: auto; }
+  #resetBtn { margin-left: auto; }
   .btn {
     display: inline-flex; align-items: center; justify-content: center;
     padding: var(--space-2) var(--space-4);
@@ -409,49 +433,6 @@
   .btn:active { transform: scale(0.97); }
   .btn.primary { background: var(--color-ink); color: var(--color-parchment); min-width: 6em; }
   .btn.primary:hover { background: var(--color-ink-soft); }
-  /* switch: lamp + explicit state word */
-  .btn.switch { gap: var(--space-2); }
-  .btn.switch .lamp {
-    width: var(--size-lamp); height: var(--size-lamp); border-radius: 50%;
-    border: var(--border-thick) solid var(--color-ink-faint); background: transparent;
-    transition: background var(--dur-fast), border-color var(--dur-fast), box-shadow var(--dur-fast);
-  }
-  .btn.switch .state {
-    min-width: 2.2em; padding: 0 var(--space-2); border-radius: var(--radius-pill);
-    font-size: var(--text-sm); font-style: italic; text-align: center;
-    background: var(--color-ink-ghost); color: var(--color-ink-soft);
-  }
-  .btn.switch[aria-checked="true"] { border-color: var(--color-oxblood); }
-  .btn.switch[aria-checked="true"] .lamp { background: var(--color-oxblood); border-color: var(--color-oxblood); box-shadow: 0 0 var(--space-2) var(--color-oxblood); }
-  .btn.switch[aria-checked="true"] .state { background: var(--color-oxblood); color: var(--color-parchment); font-style: normal; }
-  .btn.chaos { background: var(--color-oxblood); border-color: var(--color-oxblood); color: var(--color-parchment); }
-  .btn.chaos:hover { background: var(--color-oxblood-deep); }
-
-  .field { display: flex; align-items: center; gap: var(--space-2); }
-  .field .lbl { font-family: var(--font-display); font-size: var(--text-md); }
-  .field output { min-width: 6.6em; font-family: var(--font-display); font-style: italic; font-size: var(--text-md); color: var(--color-oxblood); font-variant-numeric: tabular-nums; }
-  #dynOut, #humanOut, #reverbOut { min-width: 2.2em; }
-  .field input { width: var(--size-slider); }
-
-  input[type="range"] { -webkit-appearance: none; appearance: none; height: var(--size-thumb); background: transparent; cursor: pointer; }
-  input[type="range"]::-webkit-slider-runnable-track { height: var(--border-hair); background: var(--color-ink); }
-  input[type="range"]::-moz-range-track { height: var(--border-hair); background: var(--color-ink); }
-  input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none; width: var(--size-thumb); height: var(--size-thumb); margin-top: calc(var(--size-thumb) / -2);
-    background: var(--color-parchment); border: var(--border-thick) solid var(--color-oxblood); transform: rotate(45deg); border-radius: var(--radius-xs);
-  }
-  input[type="range"]::-moz-range-thumb { width: var(--size-thumb); height: var(--size-thumb); background: var(--color-parchment); border: var(--border-thick) solid var(--color-oxblood); transform: rotate(45deg); border-radius: var(--radius-xs); }
-  input[type="range"]:disabled { opacity: 0.45; cursor: default; }
-
-  .more { position: relative; }
-  .more summary { list-style: none; }
-  .more summary::-webkit-details-marker { display: none; }
-  .more[open] summary { background: var(--color-ink-ghost); }
-  .more-panel {
-    position: absolute; z-index: 20; bottom: calc(100% + var(--space-2)); left: 0;
-    display: grid; gap: var(--space-3); padding: var(--space-4) var(--space-5);
-    border-radius: var(--radius-sm); white-space: nowrap;
-  }
   .receipt { font-family: var(--font-display); font-style: italic; font-size: var(--text-sm); color: var(--color-ink-soft); margin: 0; }
   .receipt b { font-style: normal; font-weight: 400; color: var(--color-ink); }
 
@@ -461,8 +442,8 @@
     .now { font-size: var(--text-sm); }
     #nowVerse { display: none; }
     .now span:last-child { max-width: none; margin-left: auto; }
-    .group { margin-left: 0; }
-    .song { padding: var(--space-2) var(--space-3); }
+    .song { padding: var(--space-1) var(--space-2); }
+    .desk .songs { order: -1; flex-basis: 100%; flex-wrap: nowrap; }
   }
 </style>
 </head>
@@ -473,11 +454,10 @@
 <main>
   <header>
     <h1>The <em>Emoji</em> Philharmonic</h1>
-    <div class="songs" role="radiogroup" aria-label="Choose a piece" id="songPicker"></div>
   </header>
 
   <div class="proscenium">
-    <section class="stage closed" id="stage" aria-label="Orchestra stage. While playing, tap on each beat to set the tempo and drag up or down for dynamics. Select an instrument to hear it alone, or a section name to silence it.">
+    <section class="stage closed" id="stage" aria-label="Hold the mouse and beat the baton back and forth: your pace sets the tempo and the strokes sets the dynamics; start near an instrument section cues it louder.">
       <svg class="risers" id="risers" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg>
       <div class="now" aria-hidden="true">
         <span id="nowVerse"></span>
@@ -487,34 +467,30 @@
         <span class="who" id="conductor"><span class="baton" id="baton">🪄</span></span>
         <div class="podium"></div>
       </div>
+      <div class="guide" id="guide" aria-hidden="true">
+        <svg class="guide-svg" id="guideSvg"><circle id="guideOrigin" r="6"/></svg>
+        <span class="guide-baton" id="guideBaton">🪄</span>
+      </div>
       <div class="drape left" aria-hidden="true"></div>
       <div class="drape right" aria-hidden="true"></div>
       <div class="overlay" id="overlay">
         <div>
-          <button class="btn-hero" id="startBtn">Raise the baton</button>
-          <p class="sub" id="overlaySub" hidden>Or choose another piece above.</p>
+          <button class="btn-hero" id="startBtn">Are you dragging?</button>
+          <p class="sub intro paper" id="overlayIntro">Hold the mouse and beat the baton back and forth. Pace sets the tempo and strokes sets the dynamics; start near an instrument cues it louder.</p>
           <p class="error" id="audioError" hidden>This browser can't synthesize audio. Open the page in Chrome, Safari, or Firefox.</p>
         </div>
       </div>
     </section>
   </div>
 
-  <section class="paper desk" aria-label="Score and controls">
-    <div class="staff staff-wrap" id="staff" aria-hidden="true"><svg class="staff-layer" id="staffBack"></svg><div class="roll" id="roll"><svg id="rollSvg"></svg></div><svg class="staff-layer" id="staffFront"></svg></div>
+  <section class="paper desk" aria-label="Programme, score and controls">
     <div class="desk-row">
       <button class="btn primary" id="playBtn" aria-label="Play">▶ Play</button>
-      <label class="field"><span class="lbl">Tempo</span><input type="range" id="tempo" min="60" max="180" value="104"><output id="tempoOut">104</output></label>
-      <label class="field"><span class="lbl">Dynamics</span><input type="range" id="dyn" min="20" max="100" value="75"><output id="dynOut">mf</output></label>
-      <details class="more" id="more">
-        <summary class="btn">More</summary>
-        <div class="more-panel paper">
-          <label class="field"><span class="lbl">Human feel</span><input type="range" id="human" min="0" max="100" value="45"><output id="humanOut">45%</output></label>
-          <label class="field"><span class="lbl">Hall reverb</span><input type="range" id="reverb" min="0" max="100" value="38"><output id="reverbOut">38%</output></label>
-        </div>
-      </details>
-      <span class="group"><button class="btn chaos" id="chaosBtn">Chaos</button><button class="btn" id="resetBtn">Restore</button></span>
+      <div class="songs" role="radiogroup" aria-label="Choose a piece" id="songPicker"></div>
+      <button class="btn" id="resetBtn" title="Back to the written tempo and dynamics, every section in">Restore</button>
     </div>
-    <p class="receipt" id="receipt" role="status" aria-live="polite">Tap the stage on each beat to conduct · drag up or down for dynamics · select an instrument to hear it alone.</p>
+    <div class="staff staff-wrap" id="staff" aria-hidden="true"><svg class="staff-layer" id="staffBack"></svg><div class="roll" id="roll"><svg id="rollSvg"></svg></div><svg class="staff-layer" id="staffFront"></svg></div>
+    <p class="receipt" id="receipt" role="status" aria-live="polite"></p>
   </section>
 </main>
 
@@ -840,13 +816,13 @@ function buildScore() {
    STATE
    ============================================================ */
 const DEFAULTS = () => ({
-  tempo: SONG.tempo, dyn: .75, human: .45, reverb: .38,
+  tempo: SONG.tempo, dyn: .75, human: 1, reverb: .75,
   transpose: 0, minor: false, swing: 0,
   muted: { brass:false, strings:false, percussion:false, keys:false, winds:false },
   brassBright: 1, vibRate: 5.6, vibDepth: 1, windBreath: 1, windBright: 1, percPitch: 1, keysHarm: 1,
 });
 let S = DEFAULTS();
-let solo = null, ended = false, started = false, callTimers = [];
+let solo = null, focusSec = null, ended = false, started = false, callTimers = [];
 let ctx = null, nodes = null, playing = false, step = 0, nextTime = 0, timer = null;
 let curBpm = S.tempo, curDyn = S.dyn, curBeat = 0, beatTimeline = [];
 
@@ -978,11 +954,16 @@ function playBuf(mu, t, buf, vel, releaseAt, stopAt) {
 const KEYS_LEN = 2.4;
 const keyFreq = f => Math.round(f * 4);
 function applyReverb() { if (!nodes) return; const t = ctx.currentTime; nodes.dry.gain.setTargetAtTime(1 - S.reverb * .45, t, .05); nodes.wet.gain.setTargetAtTime(S.reverb * 1.6, t, .05); }
+const FOCUS_BOOST = 1.8, FOCUS_DIP = .7;
 const soloMu = () => solo == null ? null : MUSICIANS[solo];
 const audible = mu => solo == null ? !S.muted[mu.section] : mu === soloMu();
 function applyMutes() {
   if (!nodes) return; const t = ctx.currentTime, sm = soloMu();
-  SECTIONS.forEach(s => nodes.sec[s.id].gain.setTargetAtTime((sm ? sm.section === s.id : !S.muted[s.id]) ? 1 : 0, t, .06));
+  const level = s => { // solo > mute > cue: a cued section comes forward, the rest step back a little
+    if (!(sm ? sm.section === s.id : !S.muted[s.id])) return 0;
+    return sm || !focusSec ? 1 : s.id === focusSec ? FOCUS_BOOST : FOCUS_DIP;
+  };
+  SECTIONS.forEach(s => nodes.sec[s.id].gain.setTargetAtTime(level(s), t, .08));
   MUSICIANS.forEach(mu => mu.vol.gain.setTargetAtTime(!sm || mu === sm ? 1 : 0, t, .06));
 }
 
@@ -1209,10 +1190,12 @@ function curtainCall() {
   playing = false; updatePlayBtn();
   stage.classList.add('bowing'); applause();
   say(`Bravo! <b>${SONG.title}</b> is over. Choose <b>Encore</b> to hear it again.`);
+  // all notes off once the final chord has rung out: nothing can keep sounding past the bow
+  callTimers.push(setTimeout(() => { const t = ctx.currentTime; MUSICIANS.forEach(mu => mu.vol.gain.setTargetAtTime(0, t, .25)); }, 1200));
   callTimers.push(setTimeout(() => stage.classList.add('closed'), 2600));
   callTimers.push(setTimeout(() => {
     stage.classList.remove('bowing');
-    $('startBtn').textContent = 'Encore'; $('overlaySub').hidden = false; $('overlay').classList.remove('hidden');
+    $('startBtn').textContent = 'Encore'; $('overlay').classList.remove('hidden');
   }, 2600 + 1700));
 }
 function rewind() {
@@ -1227,7 +1210,8 @@ async function play() {
   if (ended) rewind();
   applyMutes(); prewarm();
   const opening = stage.classList.contains('closed');
-  stage.classList.remove('closed'); $('overlay').classList.add('hidden'); started = true;
+  stage.classList.remove('closed'); $('overlay').classList.add('hidden'); if (!started) say('Hold the mouse and beat the baton back and forth: your pace sets the tempo and the strokes sets the dynamics; start near an instrument section cues it louder.');
+  started = true; $('overlayIntro').hidden = true;
   playing = true; nextTime = ctx.currentTime + (opening ? .6 : .08);
   timer = setInterval(scheduler, 25); scheduler();
   updatePlayBtn(); return true;
@@ -1505,51 +1489,21 @@ function keyName(verse) { const t = SONG.transpose[verse] + S.transpose; return 
    ============================================================ */
 function updatePlayBtn() { wake(); stage.classList.toggle('playing', playing); const b = $('playBtn'); b.textContent = playing ? '❚❚ Pause' : '▶ Play'; b.setAttribute('aria-label', playing ? 'Pause' : 'Play'); }
 function syncControls() {
-  $('tempo').value = S.tempo; $('tempoOut').textContent = `${tempoTerm(S.tempo)} ♩ = ${S.tempo}`;
-  $('human').value = Math.round(S.human * 100); $('humanOut').textContent = Math.round(S.human * 100) + '%';
-  $('reverb').value = Math.round(S.reverb * 100); $('reverbOut').textContent = Math.round(S.reverb * 100) + '%';
-  $('dyn').value = Math.round(S.dyn * 100); $('dynOut').textContent = dynMark(S.dyn);
   if (!playing) { $('nowMeta').innerHTML = `${tempoTerm(S.tempo)} ♩ = ${S.tempo}`; }
   syncSections();
 }
 $('startBtn').addEventListener('click', () => play());
 $('playBtn').addEventListener('click', () => { if (playing) pause(); else play(); });
-$('tempo').addEventListener('input', e => { S.tempo = +e.target.value; $('tempoOut').textContent = `${tempoTerm(S.tempo)} ♩ = ${S.tempo}`; if (!playing) curBpm = S.tempo; });
-$('dyn').addEventListener('input', e => { S.dyn = +e.target.value / 100; curDyn = S.dyn; $('dynOut').textContent = dynMark(S.dyn); });
-$('human').addEventListener('input', e => { S.human = +e.target.value / 100; $('humanOut').textContent = e.target.value + '%'; });
-$('reverb').addEventListener('input', e => { S.reverb = +e.target.value / 100; $('reverbOut').textContent = e.target.value + '%'; applyReverb(); });
 
 const say = html => { $('receipt').innerHTML = html; };
 const pick = a => a[Math.floor(Math.random() * a.length)];
 const rnd = (a, b) => a + Math.random() * (b - a);
-function chaos() {
-  S.tempo = Math.round(rnd(66, 172));
-  S.transpose = Math.floor(rnd(-5, 7));
-  S.minor = Math.random() < .45;
-  S.swing = Math.random() < .45 ? rnd(.15, .4) : 0;
-  S.human = rnd(.15, 1);
-  S.reverb = rnd(.1, .85);
-  S.brassBright = rnd(.35, 1.8);
-  S.vibRate = rnd(3.5, 9);
-  S.vibDepth = rnd(.3, 3);
-  S.windBreath = rnd(.2, 3.5);
-  S.windBright = rnd(.5, 1.8);
-  S.percPitch = rnd(.6, 1.7);
-  S.keysHarm = rnd(.2, 2.5);
-  SECTIONS.forEach(s => S.muted[s.id] = Math.random() < .25);
-  if (SECTIONS.filter(s => !S.muted[s.id]).length < 2) { S.muted.strings = false; S.muted.keys = false; }
-  MUSICIANS.forEach(mu => { mu.octShift = Math.random() < .2 ? pick([-1, 1]) : 0; mu.lean = (Math.random() * 2 - 1) * 20; mu.swayAmt = rnd(.4, 1.4); });
-  applyReverb(); applyMutes(); applyTimbre(); prewarm(); syncControls();
-  const muted = SECTIONS.filter(s => S.muted[s.id]).map(s => s.name);
-  const jumpers = MUSICIANS.filter(m => m.octShift).length;
-  say(`Capriccio: <b>${keyName(0)}</b> · <b>${tempoTerm(S.tempo)} ♩ = ${S.tempo}</b>${S.swing ? ' · <b>swung</b>' : ''} · woodwinds <b>${S.windBreath > 2 ? 'gasping for air' : S.windBreath < .6 ? 'crisp' : 'breathy'}</b> · ${jumpers} players jumped an octave · ${muted.length ? '<b>' + muted.join(', ') + '</b> sitting out' : 'all sections in'}.`);
-}
 function reset() {
   S = DEFAULTS(); curDyn = S.dyn;
   MUSICIANS.forEach(mu => mu.octShift = 0);
   if (solo != null) setSolo(null);
   applyReverb(); applyMutes(); applyTimbre(); prewarm(); syncControls();
-  say(`Score restored: ${keyName(0)}, <i>${tempoTerm(SONG.tempo)}</i> ♩ = ${SONG.tempo}, every section in.`);
+  say(`Restored: ${keyName(0)}, <i>${tempoTerm(SONG.tempo)}</i> ♩ = ${SONG.tempo}, every section in.`);
 }
 /* ---------------- conduct it yourself ---------------- */
 let taps = [], drag = null;
@@ -1567,27 +1521,92 @@ function conductTap(x = 50, y = 84) {
   if (taps.length >= 2) {
     const avg = (taps[taps.length - 1] - taps[0]) / (taps.length - 1);
     S.tempo = Math.round(Math.max(50, Math.min(200, 60 / avg)));
-    $('tempo').value = Math.min(180, Math.max(60, S.tempo)); $('tempoOut').textContent = `${tempoTerm(S.tempo)} ♩ = ${S.tempo}`;
   }
   // pull the orchestra toward the tap: halve the phase error
   const b = currentBeat(now).beat, err = b - Math.round(b);
   if (Math.abs(err) < .35) nextTime += err * (60 / curBpm) * .5;
 }
+const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+const G = { svg: $('guideSvg'), origin: $('guideOrigin'), baton: $('guideBaton') };
+function conductReadout() { return `${tempoTerm(S.tempo)} ♩ = ${S.tempo} · <i>${dynMark(S.dyn)}</i>`; }
+let suppressClick = false, tilt = 0, lastX = null;
+const stageXY = e => { const r = stage.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top, r }; };
+function placeBaton(x, y) {
+  if (lastX != null) tilt += (clamp((x - lastX) * 1.6, -28, 28) - tilt) * .35; // lean into the stroke
+  lastX = x;
+  G.baton.style.setProperty('--hx', x.toFixed(0)); G.baton.style.setProperty('--hy', y.toFixed(0)); G.baton.style.setProperty('--tilt', tilt.toFixed(1));
+}
+function sectionAt(x, y, r) { // the section nearest the press point, if it's close enough to be "on" it
+  let best = null, bestD = Math.min(r.width, r.height) * .1;
+  MUSICIANS.forEach(mu => { const d = Math.hypot(mu.x / 100 * r.width - x, mu.y / 100 * r.height - y); if (d < bestD) { bestD = d; best = mu.section; } });
+  SECTIONS.forEach(sec => { const d = Math.hypot(sec.lx / 100 * r.width - x, sec.ly / 100 * r.height - y); if (d < bestD) { bestD = d; best = sec.id; } });
+  return best;
+}
+function setFocus(id) {
+  if (focusSec === id) return; focusSec = id; applyMutes();
+  SECTIONS.forEach(sec => sec.label.classList.toggle('focus', sec.id === id));
+}
+const HYST = 10, MIN_STROKE = 24; // px: a turn must travel back 10 px, and a stroke must span 24 px, to count as a beat
+function strokeBeat(amp, x, y) {
+  const now = ctx.currentTime;
+  if (amp < MIN_STROKE || now - drag.lastBeat < .2) return; // one beat per stroke, even when both axes turn at once
+  drag.lastBeat = now; drag.beats.push(now); if (drag.beats.length > 5) drag.beats.shift();
+  if (drag.beats.length >= 2) { // tempo = the pace of your strokes (median of recent intervals)
+    const iv = drag.beats.slice(1).map((t, i) => t - drag.beats[i]).filter(v => v < 2).sort((a, b) => a - b);
+    if (iv.length) S.tempo = Math.round(clamp(60 / iv[iv.length >> 1], 40, 220));
+  }
+  // volume = the size of your strokes
+  S.dyn = clamp(S.dyn * .5 + clamp(amp / (drag.h * .45), .15, 1) * .5, .15, 1); curDyn = S.dyn;
+  // the beat lands on the turn: pull the band halfway toward it
+  const b = currentBeat(now).beat, err = b - Math.round(b);
+  if (Math.abs(err) < .35) nextTime += err * (60 / curBpm) * .5;
+  ripple(x / drag.w * 100, y / drag.h * 100); wake();
+}
+function conductMove(x, y) {
+  const dx = x - drag.x0, dy = y - drag.y0;
+  if (!drag.moved) {
+    if (Math.hypot(dx, dy) < 8) return;
+    drag.moved = true; stage.classList.add('conducted');
+    if (drag.onButton) { stage.setPointerCapture(drag.id); suppressClick = true; } // a drag that starts on an instrument conducts, not solos
+    if (drag.focus) setFocus(drag.focus);
+  }
+  for (const k of ['x', 'y']) { // a beat is a turn-around on either axis
+    const a = drag.ax[k], v = k === 'x' ? x : y;
+    if (!a.dir) { if (Math.abs(v - a.ext) > HYST) { a.dir = Math.sign(v - a.ext); a.ext = v; } continue; }
+    if ((v - a.ext) * a.dir > 0) a.ext = v;
+    else if (Math.abs(v - a.ext) > HYST) { const amp = Math.abs(a.ext - a.prev); a.prev = a.ext; a.dir = -a.dir; a.ext = v; strokeBeat(amp, x, y); }
+  }
+}
+stage.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') stage.classList.add('hovering'); });
+stage.addEventListener('pointerleave', () => { stage.classList.remove('hovering'); lastX = null; });
 stage.addEventListener('pointerdown', e => {
-  if (e.target.closest('button, .overlay') || !playing) return;
-  const r = stage.getBoundingClientRect();
-  drag = { y0: e.clientY, dyn0: S.dyn, moved: false, x: (e.clientX - r.left) / r.width * 100, y: (e.clientY - r.top) / r.height * 100, h: r.height };
-  stage.setPointerCapture(e.pointerId);
+  suppressClick = false;
+  if (e.target.closest('.overlay') || !playing || e.button > 0) return;
+  const { x, y, r } = stageXY(e), onButton = !!e.target.closest('button');
+  drag = { x0: x, y0: y, t0: performance.now(), moved: false, onButton, id: e.pointerId, w: r.width, h: r.height,
+    ax: { x: { ext: x, prev: x, dir: 0 }, y: { ext: y, prev: y, dir: 0 } }, beats: [], lastBeat: -1, focus: sectionAt(x, y, r) };
+  if (!onButton) stage.setPointerCapture(e.pointerId);
+  G.svg.setAttribute('viewBox', `0 0 ${r.width} ${r.height}`); G.origin.setAttribute('cx', x); G.origin.setAttribute('cy', y);
+  stage.classList.add('holding'); placeBaton(x, y);
 });
 stage.addEventListener('pointermove', e => {
-  if (!drag) return; const dy = e.clientY - drag.y0;
-  if (!drag.moved && Math.abs(dy) < 6) return;
-  if (!drag.moved) { drag.moved = true; stage.classList.add('conducted'); wake(); }
-  S.dyn = Math.max(.2, Math.min(1, drag.dyn0 - dy / drag.h * 1.4)); curDyn = S.dyn;
-  $('dyn').value = Math.round(S.dyn * 100); $('dynOut').textContent = dynMark(S.dyn);
+  const { x, y } = stageXY(e); placeBaton(x, y);
+  if (drag) conductMove(x, y);
 });
-stage.addEventListener('pointerup', () => { if (drag && !drag.moved) conductTap(drag.x, drag.y); drag = null; });
-stage.addEventListener('pointercancel', () => { drag = null; });
+stage.addEventListener('click', e => { if (suppressClick) { e.stopPropagation(); e.preventDefault(); suppressClick = false; } }, true);
+function endHold() {
+  if (!drag) return;
+  if (!drag.moved && !drag.onButton && performance.now() - drag.t0 < 250) conductTap(drag.x0 / drag.w * 100, drag.y0 / drag.h * 100); // a quick click is a beat tap
+  else if (drag.moved) say(`Conducting at ${conductReadout()}. The band keeps your tempo until you conduct again; Restore returns to the written tempo.`);
+  setFocus(null); stage.classList.remove('holding'); drag = null;
+}
+stage.addEventListener('pointerup', endHold);
+stage.addEventListener('pointercancel', endHold);
+// keyboard: arrows conduct while the music plays
+function nudge(dTempo, dDyn) {
+  S.tempo = Math.round(clamp(S.tempo + dTempo, 40, 220)); S.dyn = clamp(S.dyn + dDyn, .15, 1); curDyn = S.dyn;
+  say(`Conducting at ${conductReadout()}.`); wake();
+}
 
 /* ---------------- song picker ---------------- */
 function buildPicker() {
@@ -1615,7 +1634,7 @@ async function loadSong(song) {
   const wasPlaying = playing;
   if (playing) { playing = false; clearInterval(timer); }
   setSong(song); buildScore(); rewind();
-  if (!wasPlaying) { stage.classList.add('closed'); $('startBtn').textContent = 'Raise the baton'; $('overlaySub').hidden = true; $('overlay').classList.remove('hidden'); }
+  if (!wasPlaying) { stage.classList.add('closed'); $('startBtn').textContent = 'Are you dragging?'; $('overlay').classList.remove('hidden'); }
   S.tempo = song.tempo; curBpm = song.tempo;
   MUSICIANS.forEach(mu => mu.queue.length = 0);
   buildScoreStrip(); syncPicker(); syncControls();
@@ -1624,8 +1643,6 @@ async function loadSong(song) {
   if (wasPlaying) await play(); else updatePlayBtn();
 }
 
-document.addEventListener('click', e => { const m = $('more'); if (m.open && !m.contains(e.target)) m.open = false; });
-$('chaosBtn').addEventListener('click', chaos);
 $('resetBtn').addEventListener('click', reset);
 document.addEventListener('keydown', e => {
   if (e.target.matches('input, textarea') || e.metaKey || e.ctrlKey || e.altKey) return;
@@ -1634,7 +1651,10 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && solo != null) { setSolo(null); say('The full orchestra is back.'); return; }
   if (e.code === 'Space' && !e.target.matches('button')) { e.preventDefault(); $('playBtn').click(); }
   else if ((e.key === 't' || e.key === 'T') && playing) conductTap();
-  else if (e.key === 'c' || e.key === 'C') chaos();
+  else if (playing && !e.target.closest('#songPicker') && e.key.startsWith('Arrow')) {
+    e.preventDefault();
+    ({ ArrowLeft: () => nudge(-4, 0), ArrowRight: () => nudge(4, 0), ArrowUp: () => nudge(0, .05), ArrowDown: () => nudge(0, -.05) })[e.key]?.();
+  }
   else if (e.key === 'r' || e.key === 'R') reset();
 });
 
