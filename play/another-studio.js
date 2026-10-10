@@ -15771,6 +15771,7 @@ const { Brain } = __mods["sim/brain.js"];
 const world = __mods["sim/world.js"];
 const { PERSONAS } = __mods["sim/personas.js"];
 const KEY = 'another-studio-offline:v6'; // v6: real-date calendar
+const SAVE_KEY = KEY;
 
 // The time machine is gone; clear its old IndexedDB snapshots once.
 try { indexedDB.deleteDatabase('another-studio-timemachine'); } catch { /* not available */ }
@@ -15868,7 +15869,7 @@ function createLocalSim() {
   };
 }
 
-return { get createLocalSim() { return createLocalSim; } };
+return { get SAVE_KEY() { return SAVE_KEY; }, get createLocalSim() { return createLocalSim; } };
 })();
 
 // ---- audio.js
@@ -15951,7 +15952,32 @@ const sfx = {
   pop() { if (!audio.on) return; tone(880, ac.currentTime, 0.06, 'square', 0.04, sfxGain, 1.5); },
 };
 
-return { get audio() { return audio; }, get setSound() { return setSound; }, get sfx() { return sfx; } };
+// The title-screen prelude: a rising and falling harp arpeggio over four chords, the way
+// the early Final Fantasy games opened. Plays once per call; returns the time it takes.
+function prelude() {
+  ensure(); ac.resume();
+  const t0 = ac.currentTime + 0.05, step = 0.11;
+  const out = ac.createGain(); out.gain.value = 0.55; out.connect(master);
+  const echo = ac.createDelay(); echo.delayTime.value = 0.24; const fb = ac.createGain(); fb.gain.value = 0.3;
+  out.connect(echo); echo.connect(fb); fb.connect(echo); fb.connect(master);
+  master.gain.setTargetAtTime(0.5, ac.currentTime, 0.05);
+  // C, Am, F, G: each chord climbs four octaves of its arpeggio and falls back
+  const chords = [[48, 52, 55, 59], [45, 48, 52, 55], [41, 45, 48, 52], [43, 47, 50, 55]];
+  let i = 0;
+  for (let rep = 0; rep < 2; rep++) for (const ch of chords) {
+    const up = []; for (let o = 0; o < 4; o++) for (const n of ch) up.push(n + o * 12);
+    for (const n of [...up, ...up.slice(1, -1).reverse()]) {
+      const t = t0 + i++ * step;
+      tone(mtof(n), t, 0.9, 'triangle', 0.07, out);
+      tone(mtof(n) * 2, t, 0.25, 'sine', 0.015, out);
+    }
+  }
+  return i * step + 1;
+}
+// A menu blip, like moving the cursor in a command window.
+function blip(hi = false) { if (!ac) return; tone(hi ? 1320 : 990, ac.currentTime, 0.05, 'square', 0.04, sfxGain); }
+
+return { get audio() { return audio; }, get setSound() { return setSound; }, get sfx() { return sfx; }, get prelude() { return prelude; }, get blip() { return blip; } };
 })();
 
 // ---- export.js
@@ -16107,8 +16133,8 @@ __mods["game.js"] = (async function () {
 const { C, S, T, SH, sprite, avatarURL, drawTile, drawObject } = __mods["sprites.js"];
 const { renderArtifact, CASE_PAGES } = __mods["artifacts.js"];
 const { creditName, PHASES: PHASE_NAMES, AWARDS, dowOf, dateOf } = __mods["sim/studio.js"];
-const { createLocalSim } = __mods["local.js"];
-const { setSound, sfx, audio } = __mods["audio.js"];
+const { createLocalSim, SAVE_KEY } = __mods["local.js"];
+const { setSound, sfx, audio, prelude, blip } = __mods["audio.js"];
 const { downloadDataURL, buildPDF, toJPEG } = __mods["export.js"];
 const { SCENARIOS } = __mods["sim/scenarios.js"];
 const { CHAT_CHOICES } = __mods["sim/brain.js"];
@@ -16127,6 +16153,7 @@ let filter = 'all', tab = 'feed', inspectTimer = null, inspectSub = 'memories', 
 const disp = {}; // smoothed display positions
 
 // ------------------------------------------------------------------ boot
+const hadSave = !!localStorage.getItem(SAVE_KEY); // read before the new sim writes one
 await Promise.all([document.fonts.load('16px "DotGothic16"')]).catch(() => {});
 const local = createLocalSim();
 window.anotherStudio = local; // handy for poking at the sim from the console
@@ -17695,6 +17722,96 @@ function scenarioBlock() {
     ${sc.goals.map(g => `<div class="goal ${g.met ? 'met' : ''}"><span>${esc(g.label)}</span><span>${g.value}${g.max ? ` (max ${g.target})` : ` / ${g.target}`}</span></div>`).join('')}</div>`;
 }
 $('#summary').addEventListener('click', e => { if (e.target.closest('[data-endscen]')) { local.sim().endScenario(); renderSummary(); } });
+
+// ------------------------------------------------------------------ title screen
+// Opens every visit, like the early Final Fantasy games: a starfield and a turning
+// crystal, "Press any key", a short prologue that fades in line by line (with the harp
+// prelude), then the party walks in and a command window offers Continue / New Game /
+// Sound. The studio waits, paused, until you choose.
+{
+  const title = $('#title'), press = $('#title-press'), pro = $('#title-prologue'), menu = $('#title-menu'), party = $('#title-party');
+  const wasPaused = local.sim().paused;
+  control({ paused: true });
+  // stars that twinkle, and now and then one that falls
+  const sky = $('#title-stars'), sx = sky.getContext('2d');
+  const fit = () => { sky.width = Math.ceil(innerWidth / 3); sky.height = Math.ceil(innerHeight / 3); };
+  fit(); addEventListener('resize', fit);
+  const stars = Array.from({ length: 140 }, () => ({ x: Math.random(), y: Math.random() * 0.85, p: Math.random() * 6.3, s: Math.random() < 0.15 ? 2 : 1 }));
+  let shooter = null, raf = 0;
+  const twinkle = t => {
+    if (title.hidden) return;
+    sx.clearRect(0, 0, sky.width, sky.height);
+    for (const st of stars) { sx.globalAlpha = 0.35 + 0.65 * Math.abs(Math.sin(t / 900 + st.p)); sx.fillStyle = st.s > 1 ? cssVar('--title-gold-hi') : cssVar('--ui-text'); sx.fillRect(Math.round(st.x * sky.width), Math.round(st.y * sky.height), st.s, st.s); }
+    if (!shooter && Math.random() < 0.004) shooter = { x: Math.random() * sky.width, y: Math.random() * sky.height * 0.4, life: 1 };
+    if (shooter) { sx.globalAlpha = shooter.life; sx.fillStyle = cssVar('--ui-text'); for (let k = 0; k < 6; k++) sx.fillRect(Math.round(shooter.x - k * 2), Math.round(shooter.y - k), 1, 1); shooter.x += 3; shooter.y += 1.5; shooter.life -= 0.03; if (shooter.life <= 0) shooter = null; }
+    sx.globalAlpha = 1;
+    raf = requestAnimationFrame(twinkle);
+  };
+  raf = requestAnimationFrame(twinkle);
+  // the party: everyone at the studio, walking in place
+  const cast = world.personas.filter(p => local.sim().agents.has(p.id));
+  const walkers = cast.map(p => { const c = document.createElement('canvas'); c.width = 16; c.height = SH; c.title = p.short; party.append(c); return { p, c }; });
+  let step = 0;
+  const walk = setInterval(() => { step++; for (const { p, c } of walkers) { const g = c.getContext('2d'); g.clearRect(0, 0, 16, SH); g.drawImage(sprite(p, p.look.dog ? 'right' : 'down', p.look.dog ? (step % 2) + 1 : (step % 2) + 1), 0, 0); } }, 260);
+  // the prologue
+  const LINES = [
+    'In a small studio on a quiet street, a handful of designers make beautiful things.',
+    'They have deadlines, dreams, and one very good dog.',
+  ];
+  let stage = 'press', timers = [];
+  const snapNow = local.sim().snapshot();
+  const items = [
+    ...(hadSave ? [{ act: 'continue', label: 'Continue', meta: snapNow.clock }] : [{ act: 'continue', label: 'Begin', meta: `${snapNow.clock} · a fresh studio` }]),
+    ...(hadSave ? [{ act: 'new', label: 'New Game', meta: 'Start over on Day 100' }] : []),
+  ];
+  let sel = 0, armedNew = false;
+  const drawMenu = () => {
+    menu.querySelector('ul').innerHTML = items.map((it, i) => `<li role="menuitem" data-i="${i}" class="${i === sel ? 'on' : ''}${it.act === 'new' && armedNew ? ' warn' : ''}">${esc(it.act === 'new' && armedNew ? 'Erase this world? Choose again' : typeof it.label === 'function' ? it.label() : it.label)}${it.meta ? `<span class="meta">${esc(it.meta)}</span>` : ''}</li>`).join('');
+  };
+  const showMenu = () => {
+    if (stage === 'menu') return;
+    stage = 'menu'; timers.forEach(clearTimeout);
+    pro.innerHTML = ''; press.hidden = true; menu.hidden = false; party.classList.add('show'); drawMenu();
+  };
+  const begin = () => {
+    stage = 'prologue'; press.hidden = true;
+    try { prelude(); } catch { /* audio blocked: the words carry it */ }
+    LINES.forEach((l, i) => timers.push(setTimeout(() => { const p = document.createElement('p'); p.textContent = l; pro.append(p); if (i === 2) party.classList.add('show'); }, 600 + i * 2100)));
+    // when the story ends, wait for the player (no prompt, no automatic jump)
+    timers.push(setTimeout(() => { if (stage === 'prologue') stage = 'told'; }, 600 + LINES.length * 2100 + 600)); // the story stays up until you press a key or click
+  };
+  const close = () => {
+    title.classList.add('leaving'); clearInterval(walk);
+    setTimeout(() => { title.hidden = true; cancelAnimationFrame(raf); }, 900);
+    control({ paused: wasPaused });
+    removeEventListener('keydown', onKey, true);
+  };
+  const choose = i => {
+    const it = items[i]; blip(true);
+    if (it.act === 'continue') return close();
+    if (it.act === 'new') {
+      if (!armedNew) { armedNew = true; return drawMenu(); }
+      closeInspect(true); local.reset(); setTab(tab); control({ paused: false }); close();
+    }
+  };
+  const move = d => { sel = (sel + d + items.length) % items.length; armedNew = false; blip(); drawMenu(); };
+  const onKey = e => {
+    if (title.hidden) return;
+    e.stopPropagation(); e.preventDefault();
+    if (stage === 'press') return begin();
+    if (stage === 'prologue' || stage === 'told') return showMenu();
+    if (e.key === 'ArrowDown' || e.key === 's') move(1);
+    else if (e.key === 'ArrowUp' || e.key === 'w') move(-1);
+    else if (e.key === 'Enter' || e.key === ' ') choose(sel);
+  };
+  addEventListener('keydown', onKey, true); // runs before the game's own keys
+  title.addEventListener('click', e => {
+    if (stage === 'press') return begin();
+    if (stage === 'prologue' || stage === 'told') return showMenu();
+    const li = e.target.closest('[data-i]'); if (li) { sel = Number(li.dataset.i); choose(sel); }
+  });
+  menu.addEventListener('mousemove', e => { const li = e.target.closest('[data-i]'); if (li && Number(li.dataset.i) !== sel) { sel = Number(li.dataset.i); armedNew = false; blip(); drawMenu(); } }); // hovering moves the cursor, with its blip
+}
 
 return {  };
 })();

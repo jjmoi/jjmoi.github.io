@@ -597,3 +597,61 @@ kbd { font-family: var(--font-ui); border: 1px solid var(--ui-win-border); borde
 .radar-key .k-mine, .radar-key .k-expect { display: inline-block; width: var(--space-3); height: var(--space-1); vertical-align: middle; background: var(--ui-accent); }
 .radar-key .k-expect { background: none; border-top: 2px dashed var(--ui-muted); }
 #lightbox .cs-scroll img.cs-pending { aspect-ratio: 960 / 534; background: var(--art-paper); }
+
+/* ===== Title screen ====================================================== */
+:root {
+  --title-sky-top: #02030f;
+  --title-sky-mid: #0a1240;
+  --title-sky-bottom: #1d2f7a;
+  --title-gold-hi: #fff4c4;
+  --title-gold: #e6c86e;
+  --title-gold-lo: #9a6b22;
+  --title-crystal-hi: #e8fbff;
+  --title-crystal: #6fd3e8;
+  --title-crystal-lo: #1f6f9e;
+  --title-glow: rgba(111, 211, 232, 0.55);
+  --title-logo-size: clamp(36px, 7vw, 76px);
+  --title-crystal-w: 68px;
+  --title-fade: 1.4s;
+}
+.title { position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; overflow: hidden;
+  background: linear-gradient(var(--title-sky-top), var(--title-sky-mid) 55%, var(--title-sky-bottom)); color: var(--ui-text); transition: opacity 0.9s ease; }
+.title.leaving { opacity: 0; pointer-events: none; }
+.title[hidden] { display: none; }
+.title-stars { position: absolute; inset: 0; width: 100%; height: 100%; image-rendering: pixelated; }
+.title-inner { position: relative; display: flex; flex-direction: column; align-items: center; gap: var(--space-3); text-align: center; padding: var(--space-5); width: min(720px, 100%); }
+/* the crystal: a cut gem that floats and turns, with a soft glow */
+.crystal { position: relative; width: var(--title-crystal-w); height: calc(var(--title-crystal-w) * 1.9); animation: crystal-float 4s ease-in-out infinite; filter: drop-shadow(0 0 var(--space-4) var(--title-glow)); }
+.crystal i, .crystal s { position: absolute; inset: 0; display: block; }
+.crystal i { background: linear-gradient(100deg, var(--title-crystal-hi), var(--title-crystal) 45%, var(--title-crystal-lo)); clip-path: polygon(50% 0, 100% 34%, 50% 100%, 0 34%); animation: crystal-turn 6s ease-in-out infinite; }
+.crystal s { background: rgba(255, 255, 255, 0.35); clip-path: polygon(50% 0, 70% 34%, 50% 100%, 30% 34%); mix-blend-mode: overlay; }
+@keyframes crystal-float { 50% { transform: translateY(calc(var(--space-2) * -1)); } }
+@keyframes crystal-turn { 50% { transform: scaleX(0.72); filter: brightness(1.15); } }
+/* the logo: gold, beveled, with a deep shadow, in the pixel face */
+.title-logo { margin: 0; font-family: var(--font-ui); font-size: var(--title-logo-size); letter-spacing: 0.06em; line-height: 1;
+  background: linear-gradient(var(--title-gold-hi) 15%, var(--title-gold) 50%, var(--title-gold-lo) 85%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 3px 0 var(--ui-win-border-dark)) drop-shadow(0 0 var(--space-3) rgba(230, 200, 110, 0.35)); }
+.title-sub { margin: 0; font-size: var(--text-md); color: var(--title-crystal-hi); letter-spacing: 0.08em; opacity: 0.85; }
+.title-stage { min-height: 9.5rem; display: flex; flex-direction: column; gap: var(--space-4); align-items: center; justify-content: center; width: 100%; }
+.title-press { margin: 0; font-family: var(--font-ui); font-size: var(--text-md); color: var(--ui-text); letter-spacing: 0.2em; animation: press-blink 1.2s steps(2, start) infinite; }
+@keyframes press-blink { to { visibility: hidden; } }
+.title-press[hidden] { display: none; }
+.title-prologue { display: flex; flex-direction: column; gap: var(--space-2); font-size: var(--text-md); line-height: 1.5; }
+.title-prologue p { margin: 0; opacity: 0; animation: prologue-in var(--title-fade) ease forwards; text-shadow: 0 2px 0 var(--ui-text-shadow); }
+@keyframes prologue-in { to { opacity: 1; } }
+/* the command window, with the classic pointing-hand cursor */
+.title-menu { min-width: 280px; padding: var(--space-3) var(--space-5); text-align: left; animation: prologue-in 0.5s ease forwards; }
+.title-menu ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-1); }
+.title-menu li { position: relative; padding: var(--space-1) var(--space-2) var(--space-1) var(--space-5); font-family: var(--font-ui); font-size: var(--text-md); cursor: pointer; border-radius: var(--radius-1); }
+.title-menu li .meta { display: block; font-family: var(--font-body); font-size: var(--text-xs); color: var(--ui-muted); }
+.title-menu li[aria-disabled="true"] { color: var(--ui-muted); }
+.title-menu li.on::before { content: '☛'; position: absolute; left: 0; top: var(--space-1); color: var(--ui-text); animation: hand-nudge 0.6s ease-in-out infinite; }
+.title-menu li.warn { color: var(--ui-bad); }
+@keyframes hand-nudge { 50% { transform: translateX(calc(var(--space-1) * -1)); } }
+/* the party, walking in place */
+.title-party { margin-top: var(--space-5); display: flex; gap: var(--space-2); justify-content: center; flex-wrap: wrap; min-height: 72px; opacity: 0; transition: opacity 1s ease; }
+.title-party.show { opacity: 1; }
+.title-party canvas { width: 32px; height: 48px; image-rendering: pixelated; }
+.title-copy { margin: var(--space-3) 0 0; font-size: var(--text-xs); color: var(--ui-muted); letter-spacing: 0.08em; }
+@media (prefers-reduced-motion: reduce) { .crystal, .crystal i, .title-press, .title-menu li.on::before { animation: none; } }
+@media (max-height: 640px) { :root { --title-crystal-w: 44px; } .title-inner { gap: var(--space-2); } .title-stage { min-height: 7rem; } }
