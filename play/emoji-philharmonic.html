@@ -3,8 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>JJ → EMOJI PHILHARMONIC</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><text y=%2214%22 font-size=%2214%22>🎻</text></svg>">
+<title>JJ → Emoji Philharmonic</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -43,7 +42,7 @@
     --color-light-edge: rgba(255, 214, 150, 0);
     --color-spot-edge: rgba(255, 214, 150, 0);
     --color-chandelier: rgba(255, 220, 160, 0.10);
-    --color-riser: rgba(240, 207, 138, 0.14);
+    --color-riser: rgba(240, 207, 138, 0.07);
     --color-scrim: rgba(17, 6, 5, 0.86);
     --color-shadow: rgba(0, 0, 0, 0.55);
     --color-shadow-soft: rgba(42, 26, 16, 0.25);
@@ -64,7 +63,7 @@
     --text-intro: calc(var(--text-md) + 2pt);
     --text-sm: 0.875rem;
     --text-xs: 0.75rem;
-    --text-label: clamp(0.95rem, 1.4vw, 1.25rem);
+    --text-label: clamp(0.85rem, 1.2vw, 1.1rem);
     --text-emoji: clamp(1.5rem, 3.1vw, 2.7rem);
     --text-conductor: clamp(2.2rem, 4.4vw, 3.6rem);
     --tracking-caps: 0.22em;
@@ -105,13 +104,11 @@
     --dur-float: 1400ms;
     --dur-curtain: 1600ms;
     --dur-bow: 700ms;
-    --dur-ripple: 700ms;
     --bow-angle: 32deg;
     --bow-dip: 6px;
     --stagger-bow: 14ms;
     --size-light-w: 38%;
     --size-light-h: 44%;
-    --size-ripple: 64px;
     --glow-lead-1: 0 0 6px var(--color-gold-light);
     --glow-lead-2: 0 0 16px var(--color-gold);
     --float-distance: -56px;
@@ -166,20 +163,31 @@
   h1 em { color: var(--color-gold-soft); }
   .songs { display: inline-flex; flex-wrap: wrap; justify-content: center; gap: var(--space-1); }
   .song {
-    display: grid; justify-items: center; gap: 0;
+    display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; gap: 0;
     padding: var(--space-2) var(--space-4); border: 0; border-radius: var(--radius-pill);
     background: none; cursor: pointer;
     color: var(--color-cream-dim); font-family: var(--font-display);
     transition: color var(--dur-fast), background var(--dur-fast);
   }
   .song .t { font-size: var(--text-md); line-height: 1.1; }
-  .song .c { font-size: var(--text-xs); font-style: italic; }
   .desk .song { color: var(--color-ink-soft); }
-  .desk .song:hover { color: var(--color-ink); background: var(--color-ink-ghost); }
-  .desk .song[aria-checked="true"] { color: var(--color-parchment); background: var(--color-ink); }
-  .desk .songs { flex: 1; justify-content: flex-start; min-width: 0; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: thin; }
-  .desk .song { flex: 0 0 auto; padding: var(--space-1) var(--space-2); }
-  .desk .song .t { font-size: var(--text-sm); }
+  .desk .song:hover:not([aria-checked="true"]) { color: var(--color-ink); background: var(--color-ink-ghost); }
+  .desk .song[aria-checked="true"] { color: var(--color-parchment); background: transparent; }
+  .desk .songs { position: relative; isolation: isolate; justify-self: center; justify-content: center; min-width: 0; max-width: 100%; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: thin; }
+  .desk .song { position: relative; z-index: 1; flex: 0 0 auto; padding: var(--space-1) 20px; transition: color 280ms ease, background var(--dur-fast); }
+  .song-indicator {
+    position: absolute; top: 0; left: 0; z-index: 0; pointer-events: none;
+    border-radius: var(--radius-pill); background: var(--color-ink);
+  }
+  .song-indicator.is-ready {
+    transition: transform 440ms cubic-bezier(.22, 1, .36, 1),
+                width 440ms cubic-bezier(.22, 1, .36, 1),
+                height 440ms cubic-bezier(.22, 1, .36, 1);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .song-indicator.is-ready { transition: none; }
+  }
+  .desk .song .t { display: block; font-size: var(--text-sm); line-height: 1; text-align: center; }
 
   /* ---------- gilded proscenium ---------- */
   .proscenium {
@@ -239,9 +247,7 @@
   .musician.muted { opacity: 0.32; filter: grayscale(0.9); }
   .musician.lead .inst { filter: drop-shadow(var(--glow-lead-1)) drop-shadow(var(--glow-lead-2)); transition-delay: 0s; }
   .stage.soloing .musician:not(.solo) { opacity: 0.22; filter: grayscale(0.85); }
-  .stage.cue-active:not(.soloing) .musician:not(.cuing) { opacity: 0.18; filter: grayscale(0.85); }
   .stage.cue-active:not(.soloing) .musician.cuing .inst { filter: drop-shadow(0 0 8px var(--color-gold-light)) drop-shadow(0 0 18px var(--color-gold)); }
-  .stage.cue-active:not(.soloing) .light:not(.cuing) { opacity: calc(var(--level, 0) * 0.12); }
   .stage.cue-active:not(.soloing) .light.cuing { filter: brightness(1.6); }
   .musician.solo { z-index: 6; }
   .musician.solo::after {
@@ -251,7 +257,7 @@
     font-family: var(--font-display); font-size: var(--text-sm);
   }
   .stage.bowing .musician .inst { transform: rotate(var(--bow-angle)) translateY(var(--bow-dip)); }
-  .stage.bowing .conductor .baton { transform: rotate(70deg); }
+  .stage.bowing .conductor .baton { transform: scaleX(-1) rotate(70deg); }
 
   /* section spotlights — brightness follows each section's real output */
   .light {
@@ -265,36 +271,32 @@
   }
 
   /* tap-to-conduct */
-  .ripple {
-    position: absolute; z-index: 7; pointer-events: none;
-    left: calc(var(--x) * 1%); top: calc(var(--y) * 1%);
-    width: var(--size-ripple); height: var(--size-ripple); border-radius: 50%;
-    border: var(--border-thick) solid var(--color-gold-light);
-    transform: translate(-50%, -50%) scale(0.2);
-    animation: ripple var(--dur-ripple) var(--ease-out) forwards;
-  }
-  @keyframes ripple { to { transform: translate(-50%, -50%) scale(1); opacity: 0; } }
   /* the baton is the cursor: over the open stage it leaves the podium and follows the pointer */
   .stage { touch-action: none; }
+  /* Stage text, emojis, and controls must never enter native selection or drag mode. */
+  .stage, .stage * {
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
+  }
   .stage.hovering:not(.closed), .stage.hovering:not(.closed) * { cursor: none; }
   .stage.hovering:not(.closed) .conductor .baton { opacity: 0; }
   .stroke-trail { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 7; pointer-events: none; }
   .guide { position: absolute; inset: 0; z-index: 8; pointer-events: none; }
-  .guide-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-  .guide-svg #guideOrigin { fill: none; stroke: var(--color-gold-light); stroke-width: var(--border-thick); opacity: 0; transition: opacity var(--dur-fast); }
-  .stage.holding .guide-svg #guideOrigin { opacity: 1; }
-  .guide-baton { /* the handle sits on the pointer; the tip leans with the stroke */
+  .guide-baton { /* the flipped sparkle tip, not the handle, sits exactly on the pointer */
     position: absolute; left: calc(var(--hx) * 1px); top: calc(var(--hy) * 1px);
     font-size: var(--text-conductor); line-height: 1;
-    transform-origin: 15% 85%;
-    transform: translate(-15%, -85%) rotate(calc(var(--tilt, 0) * 1deg));
+    transform-origin: 16% 10%;
+    transform: translate(-16%, -10%) rotate(calc(var(--tilt, 0) * 1deg));
     filter: drop-shadow(0 var(--space-1) var(--space-2) var(--color-shadow));
     opacity: 0;
   }
   .stage.hovering:not(.closed) .guide-baton, .stage.holding .guide-baton { opacity: 1; }
+  .wand-glyph { display: block; transform: scaleX(-1); }
+  .wand-tip { position: absolute; left: 16%; top: 10%; width: 0; height: 0; pointer-events: none; }
   .section-label.focus { color: var(--color-ink); background: var(--color-gold-light); box-shadow: 0 0 12px var(--color-glow), 0 0 26px var(--color-gold); text-shadow: none; }
-  .stage.cue-active .section-label:not(.focus) { opacity: 0.4; }
-  .section-label.focus::after { content: ""; position: absolute; inset: -5px; border: 1px solid var(--color-gold-light); border-radius: var(--radius-pill); pointer-events: none; }
+  .section-label.focus:hover { color: var(--color-ink); background: #fff4d4; box-shadow: 0 0 14px var(--color-gold-light), 0 0 30px var(--color-gold); }
 
   /* stage curtains */
   .drape {
@@ -326,7 +328,7 @@
     transform: translate(-50%, -50%);
     font-family: var(--font-display); font-style: italic; font-size: var(--text-label);
     color: var(--color-gold-soft);
-    background: none; border: 0; padding: var(--space-1) var(--space-3); border-radius: var(--radius-pill);
+    background: none; border: 0; padding: var(--space-1) var(--space-2); border-radius: var(--radius-pill);
     cursor: pointer; white-space: nowrap;
     text-shadow: 0 var(--border-hair) var(--space-2) var(--color-shadow);
     transition: color var(--dur-fast), background var(--dur-fast), box-shadow var(--dur-med);
@@ -341,8 +343,16 @@
     background: linear-gradient(180deg, var(--color-wood-light), var(--color-wood-dark));
     border-top: var(--border-thick) solid var(--color-gold);
   }
-  .conductor .who { display: inline-block; position: relative; transform: translateY(calc(var(--bob, 0) * var(--bob-distance) * 0.5)); }
-  .conductor .baton { display: inline-block; font-size: var(--text-conductor); transform-origin: 15% 85%; transform: rotate(calc(var(--baton, 0) * 1deg)); }
+  .conductor .who {
+    display: inline-block; position: relative;
+    /* Shift only the wand, never the podium, when the conductor looks around. */
+    transform: translate3d(var(--look-x, 0px), calc(var(--bob, 0) * var(--bob-distance) * 0.5 + var(--look-y, 0px)), 0);
+  }
+  .conductor .baton {
+    display: inline-block; position: relative; left: 0.12em;
+    font-size: var(--text-conductor); transform-origin: 15% 85%;
+    transform: scaleX(-1) rotate(calc(var(--baton, 0) * 1deg));
+  }
 
   .now {
     position: absolute; bottom: var(--space-3); left: var(--space-5); right: var(--space-5); z-index: 5;
@@ -429,8 +439,10 @@
   .staff stop { stop-color: var(--color-parchment); }
   .staff .playhead { stroke: var(--color-oxblood); stroke-width: 1.2; stroke-dasharray: 2 3; }
 
-  .desk-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); }
-  #resetBtn { margin-left: auto; }
+  .desk-row { --control-height: calc(var(--text-md) * 1.15 + var(--space-4) + 2px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, auto) minmax(0, 1fr); align-items: center; gap: var(--space-3); }
+  .desk-row > .btn, .desk .song { height: var(--control-height); }
+  #playBtn { justify-self: start; }
+  #resetBtn { justify-self: end; margin-left: 0; }
   .btn {
     display: inline-flex; align-items: center; justify-content: center;
     padding: var(--space-2) var(--space-4);
@@ -443,17 +455,29 @@
   .btn:active { transform: scale(0.97); }
   .btn.primary { background: var(--color-ink); color: var(--color-parchment); min-width: 6em; }
   .btn.primary:hover { background: var(--color-ink-soft); }
+  #playBtn { gap: .45em; }
+  #playBtn .transport-icon { width: .76em; height: .76em; flex: none; display: block; fill: currentColor; }
+  #playBtn[data-playing="true"] .play-icon,
+  #playBtn[data-playing="false"] .pause-icon { display: none; }
   .receipt { font-family: var(--font-display); font-style: italic; font-size: var(--text-sm); color: var(--color-ink-soft); margin: 0; }
   .receipt b { font-style: normal; font-weight: 400; color: var(--color-ink); }
 
+  @media (min-width: 721px) and (max-width: 1100px) {
+    .desk-row { grid-template-columns: 1fr 1fr; }
+    .desk .songs { grid-row: 1; grid-column: 1 / -1; justify-self: center; }
+    #playBtn { grid-row: 2; grid-column: 1; }
+    #resetBtn { grid-row: 2; grid-column: 2; }
+  }
   @media (max-width: 720px) {
     main { padding-left: var(--space-4); padding-right: var(--space-4); }
     .curtain { display: none; }
     .now { font-size: var(--text-sm); }
     #nowVerse { display: none; }
     .now span:last-child { max-width: none; margin-left: auto; }
-    .song { padding: var(--space-1) var(--space-2); }
-    .desk .songs { order: -1; flex-basis: 100%; flex-wrap: nowrap; }
+    .desk .song { padding: var(--space-1) var(--space-3); }
+    .desk-row { display: flex; flex-wrap: wrap; }
+    .desk .songs { order: -1; flex: 0 0 100%; justify-content: flex-start; flex-wrap: nowrap; }
+    #resetBtn { margin-left: auto; }
   }
 </style>
 </head>
@@ -467,7 +491,7 @@
   </header>
 
   <div class="proscenium">
-    <section class="stage closed" id="stage" aria-label="Drag the baton to conduct pace, tempo, and dynamics. Click an instrument section name to lock its focus, click again to unlock, or drag across another name to move focus.">
+    <section class="stage closed" id="stage" aria-label="Drag the baton to conduct pace, tempo, and dynamics. Click instrument section names to cue them louder. Drag across section names to toggle their cues. All five sections can remain cued until you unlock them individually. Other sections play at their normal volume.">
       <svg class="risers" id="risers" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg>
       <div class="now" aria-hidden="true">
         <span id="nowVerse"></span>
@@ -479,15 +503,14 @@
       </div>
       <canvas class="stroke-trail" id="strokeTrail" aria-hidden="true"></canvas>
       <div class="guide" id="guide" aria-hidden="true">
-        <svg class="guide-svg" id="guideSvg"><circle id="guideOrigin" r="6"/></svg>
-        <span class="guide-baton" id="guideBaton">🪄</span>
+        <span class="guide-baton" id="guideBaton"><span class="wand-glyph" aria-hidden="true">🪄</span><span class="wand-tip" id="wandTip" aria-hidden="true"></span></span>
       </div>
       <div class="drape left" aria-hidden="true"></div>
       <div class="drape right" aria-hidden="true"></div>
       <div class="overlay" id="overlay">
         <div>
           <button class="btn-hero" id="startBtn">Are you dragging?</button>
-          <p class="sub intro paper" id="overlayIntro">Conduct the orchestra by dragging the baton to control pace, tempo, and dynamics. Select an instrument section name to focus.</p>
+          <p class="sub intro paper" id="overlayIntro">Conduct the orchestra by dragging the baton to control pace, tempo, and dynamics. Select section names to cue them louder without quieting the others.</p>
           <p class="error" id="audioError" hidden>This browser can't synthesize audio. Open the page in Chrome, Safari, or Firefox.</p>
         </div>
       </div>
@@ -496,9 +519,13 @@
 
   <section class="paper desk" aria-label="Programme, score and controls">
     <div class="desk-row">
-      <button class="btn primary" id="playBtn" aria-label="Play">▶ Play</button>
+      <button class="btn primary" id="playBtn" aria-label="Play" data-playing="false">
+        <svg class="transport-icon play-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4.5 2.8 13 8 4.5 13.2Z"/></svg>
+        <svg class="transport-icon pause-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="3.4" y="2.8" width="2" height="10.4"/><rect x="10.6" y="2.8" width="2" height="10.4"/></svg>
+        <span class="transport-label">Play</span>
+      </button>
       <div class="songs" role="radiogroup" aria-label="Choose a piece" id="songPicker"></div>
-      <button class="btn" id="resetBtn" title="Back to the written tempo and dynamics, every section in">Restore</button>
+      <button class="btn" id="resetBtn" title="Restore original tempo, dynamics, and instrument balance.">Restore</button>
     </div>
     <div class="staff staff-wrap" id="staff" aria-hidden="true"><svg class="staff-layer" id="staffBack"></svg><div class="roll" id="roll"><svg id="rollSvg"></svg></div><svg class="staff-layer" id="staffFront"></svg></div>
     <p class="receipt" id="receipt" role="status" aria-live="polite"></p>
@@ -518,7 +545,7 @@ const CHORDS = {
   'F#m':[6,[0,3,7]], C:[0,[0,4,7]], Am:[9,[0,3,7]], D7:[2,[0,4,7,10]],
   Db:[1,[0,4,7]], Ab:[8,[0,4,7]], Ebm:[3,[0,3,7]], Bbm:[10,[0,3,7]],
   Gb:[6,[0,4,7]], Fm:[5,[0,3,7]], F:[5,[0,4,7]], Dm:[2,[0,3,7]],
-  G7:[7,[0,4,7,10]], Gdim:[7,[0,3,6]], Fdim:[5,[0,3,6]], C7:[0,[0,4,7,10]],
+  G7:[7,[0,4,7,10]], Gdim:[7,[0,3,6]], Fdim:[5,[0,3,6]], C7:[0,[0,4,7,10]], E7:[4,[0,4,7,10]],
 };
 const pcs = c => CHORDS[c][1].map(i => (CHORDS[c][0] + i) % 12);
 const toneNear = (c, deg, center) => {
@@ -648,52 +675,53 @@ const CLAIR = (() => {
   };
 })();
 
-/* ---- Prelude in C major, BWV 846 (J. S. Bach) — broken-chord figuration ---- */
-const BACH = (() => {
-  // Repeated eight-note figures trace the prelude's first sixteen harmonic bars.
-  const groups = [
-    [67,72,76], [69,74,77], [67,74,77], [67,72,76],
-    [69,76,81], [66,69,74], [67,74,79], [64,67,72],
-    [64,67,72], [62,66,72], [62,67,71], [64,67,73],
-    [62,69,74], [62,65,71], [60,67,72], [69,72,77],
+/* ---- Aquarium, Le Carnaval des animaux (Saint-Saëns), adapted orchestral theme ---- */
+const AQUARIUM = (() => {
+  // The original melody's E–D#–E–D#–E–A figure remains audible under piano/harp ripples.
+  // Each passage is a sixteen-bar adaptation for the interactive orchestra's score system.
+  const phraseA = [
+    [[76,.75],[75,.25],[76,.75],[75,.25],[76,1],[69,1]],
+    [[76,.75],[75,.25],[76,.5],[79,.5],[76,1],[69,1]],
+    [[76,1],[74,.5],[72,.5],[71,1],[69,1]],
+    [[72,.5],[71,.5],[69,1],[68,.5],[69,.5],[76,1]],
   ];
-  const bars = groups.map((g, i) => Array.from({ length: 8 }, (_, n) => [g[n % (i === 2 ? 3 : 3)], .5]));
-  const verse = { melody: barsMelody(bars, 4), harmony: words('C C Dm Dm G7 G7 C C Am Am D7 D7 G G C C Am Am D7 D7 G G Gdim Gdim Dm Dm Fdim Fdim C C F F') };
+  const phraseB = [
+    [[76,.75],[75,.25],[76,.75],[75,.25],[76,1],[69,1]],
+    [[79,.5],[76,.5],[75,.5],[76,.5],[81,1],[76,1]],
+    [[74,1],[72,.5],[71,.5],[69,1],[68,1]],
+    [[69,1.5],[72,.5],[71,1],[69,1]],
+  ];
+  const phraseC = [
+    [[69,.75],[68,.25],[69,.75],[68,.25],[69,1],[62,1]],
+    [[69,.75],[68,.25],[69,.5],[72,.5],[69,1],[62,1]],
+    [[72,.5],[74,.5],[76,1],[79,1],[76,1]],
+    [[75,.5],[76,.5],[79,.5],[76,.5],[72,1],[69,1]],
+  ];
+  const phraseD = [
+    [[76,.75],[75,.25],[76,.75],[75,.25],[76,1],[81,1]],
+    [[79,.5],[76,.5],[75,.5],[76,.5],[74,1],[72,1]],
+    [[71,1],[72,1],[68,1],[71,1]],
+    [[69,2],[76,1],[69,1]],
+  ];
+  const harmony = words('Am E7 Am E7 F C Dm E7 Am E7 F C Dm Am E7 Am');
+  const verse = { melody: barsMelody([...phraseA, ...phraseB, ...phraseC, ...phraseD], 4), harmony };
   return {
-    id: 'bach', no: 'No. 5', title: 'Prelude in C', short: 'J. S. Bach', composer: 'Johann Sebastian Bach',
-    work: 'The Well-Tempered Clavier, Book I, BWV 846 — Prelude No. 1 (arpeggio arrangement)', cartouche: 'Bach',
-    bpb: 4, slot: 2, tempo: 76, tonicPc: 0, tonic: 'C', codaMel: 72, codaWritten: 72, shift: 0, sharps: 0, pxb: 31,
+    id: 'aquarium', no: 'No. 5', title: 'Aquarium', short: 'Saint-Saëns', composer: 'Camille Saint-Saëns',
+    work: 'Le Carnaval des animaux — VII. Aquarium (theme adapted for the interactive orchestra)', cartouche: 'Saint-Saëns',
+    bpb: 4, slot: 4, tempo: 72, tonicPc: 9, tonic: 'Am', tonicLabel: 'A', minorKey: true,
+    codaMel: 69, codaWritten: 69, shift: 0, sharps: 0, pxb: 35,
     transpose: [0, 0, 0, 0], verses: [verse, verse, verse],
-    captions: ['<i>Arpeggiato</i> — flowing keyboard', '<i>Legato</i> — strings echo the pattern', '<i>Tutti</i> — full contrapuntal colors', '<i>Coda, sostenuto</i>'],
-    marks: ['arpeggiato', 'legato', 'tutti', 'sostenuto'], dyn: ['p', 'mp', 'mf', 'p'],
+    overrides: { // preserve the movement's watery texture, with percussion mostly resting
+      'Bass drum': [null, null, null], 'Snare': [null, null, null],
+      'Timpani II': [null, null, null], 'Timpani I': [null, null, 'timp1'],
+      'Trombone I': [null, null, null], 'Trombone II': [null, null, null],
+    },
+    captions: ['<i>Andantino</i> — crystalline piano and flute', '<i>Fluide</i> — shimmering strings and harp', '<i>Dolcissimo</i> — the floating melody returns', '<i>Coda, morendo</i>'],
+    marks: ['andantino', 'fluide', 'dolcissimo', 'morendo'], dyn: ['pp', 'p', 'mp', 'pp'],
   };
 })();
 
-/* ---- Eine kleine Nachtmusik (Mozart), I. Allegro ---- */
-const MOZART = (() => {
-  const theme = [
-    [[79,1],[null,.5],[74,.5],[79,1],[null,.5],[74,.5]],
-    [[79,.5],[74,.5],[79,.5],[83,.5],[86,1],[null,1]],
-    [[84,1],[null,.5],[81,.5],[84,1],[null,.5],[81,.5]],
-    [[84,.5],[81,.5],[78,.5],[81,.5],[74,1],[null,1]],
-    [[79,.5],[81,.5],[83,.5],[84,.5],[86,1],[83,1]],
-    [[84,.5],[83,.5],[81,.5],[79,.5],[78,1],[74,1]],
-    [[76,.5],[78,.5],[79,.5],[81,.5],[79,1],[76,1]],
-    [[74,.5],[76,.5],[78,.5],[74,.5],[79,2]],
-  ];
-  const verse = { melody: barsMelody([...theme, ...theme], 4), harmony: words('G G D D C C D7 D7 G G D D C D7 G G') };
-  // One chord per bar in this march-like theme.
-  return {
-    id: 'mozart', no: 'No. 6', title: 'Eine kleine Nachtmusik', short: 'Mozart', composer: 'Wolfgang Amadeus Mozart',
-    work: 'Serenade No. 13 in G major, K. 525 — I. Allegro (opening theme)', cartouche: 'Mozart',
-    bpb: 4, slot: 4, tempo: 144, tonicPc: 7, tonic: 'G', codaMel: 79, codaWritten: 79, shift: 0, sharps: 1, pxb: 34,
-    transpose: [0, 0, 0, 0], verses: [verse, verse, verse],
-    captions: ['<i>Allegro</i> — the signature fanfare', '<i>Giocoso</i> — woodwinds answer', '<i>Tutti, brillante</i> — the orchestra returns', '<i>Coda, con brio</i>'],
-    marks: ['allegro', 'giocoso', 'brillante', 'con brio'], dyn: ['f', 'mp', 'ff', 'f'],
-  };
-})();
-
-const SONGS = [ODE, CANON, MINUET, CLAIR, BACH, MOZART];
+const SONGS = [ODE, CANON, CLAIR, AQUARIUM, MINUET];
 const REHEARSAL = 'ABCDEFGHIJKLM';
 const TEMPO_TERMS = [[60, 'Largo'], [66, 'Larghetto'], [76, 'Adagio'], [108, 'Andante'], [120, 'Moderato'], [156, 'Allegro'], [176, 'Vivace'], [999, 'Presto']];
 const tempoTerm = bpm => TEMPO_TERMS.find(([x]) => bpm < x)[1];
@@ -711,12 +739,14 @@ setSong(ODE);
    ORCHESTRA — 5 sections of instruments
    part spec per verse: role string, [role, fromBar], or null
    ============================================================ */
+// Each row keeps its curved riser while the two upper corners frame the orchestra.
+// The lower center stays open so the conductor has room to move.
 const SECTIONS = [
-  { id:'brass', name:'Brass', it:'Ottoni', icon:'🎺', key:'1', row:{ ax:44, ay:50, a0:30, a1:72 } },
-  { id:'strings', name:'Strings', it:'Archi', icon:'🎻', key:'2', row:{ ax:30, ay:28, a0:-64, a1:64 } },
-  { id:'percussion', name:'Percussion', it:'Percussioni', icon:'🥁', key:'3', row:{ ax:20, ay:60, a0:-26, a1:26 } },
-  { id:'keys', name:'Keys', it:'Tastiere', icon:'🎹', key:'4', row:{ ax:44, ay:50, a0:-72, a1:-30 } },
-  { id:'winds', name:'Woodwinds', it:'Legni', icon:'🪈', key:'5', row:{ ax:40, ay:86, a0:-38, a1:38 } },
+  { id:'brass', name:'Brass', it:'Ottoni', icon:'🎺', key:'1', row:{ ax:44, ay:50, a0:30, a1:72, dx:0, dy:-14, sx:1 } },
+  { id:'strings', name:'Strings', it:'Archi', icon:'🎻', key:'2', row:{ ax:30, ay:28, a0:-40, a1:64, dx:0, dy:-13, sx:1 } },
+  { id:'percussion', name:'Percussion', it:'Percussioni', icon:'🥁', key:'3', row:{ ax:20, ay:60, a0:-26, a1:26, dx:26, dy:-14, sx:1 } },
+  { id:'keys', name:'Keys', it:'Tastiere', icon:'🎹', key:'4', row:{ ax:44, ay:50, a0:-72, a1:-30, dx:0, dy:-14, sx:1 } },
+  { id:'winds', name:'Woodwinds', it:'Legni', icon:'🪈', key:'5', row:{ ax:40, ay:86, a0:-38, a1:38, dx:-26, dy:8, sx:.63 } },
 ];
 const M = (section, name, inst, voice, parts, o = {}) => ({ section, name, inst, voice, parts, oct: 0, center: 62, gain: 1, ...o });
 const MUSICIANS = [
@@ -737,18 +767,17 @@ const MUSICIANS = [
   M('strings','Viola','🎻','strings',['pad2','pad2','pulse2'],{ center:57, gain:.6 }),
   M('strings','Cello','🎻','strings',['bass','bass','bass4'],{ center:45, gain:.85 }),
   M('strings','Cello','🎻','strings',[['bass',8],'bass','bass'],{ center:40, gain:.75 }),
-  M('strings','Harp I','🪉','harp',['harpArp','harpArp','harpRun'],{ center:50, gain:.75, spot:[6, 86] }),
-  M('strings','Harp II','🪉','harp',[['harpDown',8],'harpDown','harpGliss'],{ center:62, gain:.6, spot:[11.5, 85] }),
-  M('strings','Harp III','🪉','harp',[null,['harpArp',8],'harpGliss'],{ center:43, gain:.6, spot:[17, 84] }),
+  M('strings','Harp I','🪉','harp',['harpArp','harpArp','harpRun'],{ center:50, gain:.75, spot:[9, 78] }),
+  M('strings','Harp II','🪉','harp',[['harpDown',8],'harpDown','harpGliss'],{ center:62, gain:.6, spot:[16, 73] }),
+  M('strings','Harp III','🪉','harp',[null,['harpArp',8],'harpGliss'],{ center:43, gain:.6, spot:[23, 68] }),
   // percussion — noise + bandpass
   M('percussion','Timpani I','🪘','perc',['timp1','timp1','timp1'],{ center:45, gain:1 }),
   M('percussion','Timpani II','🪘','perc',[null,'timp2','timp2'],{ center:40, gain:.9 }),
   M('percussion','Bass drum','🥁','perc',[null,'kick','kick'],{ gain:1 }),
   M('percussion','Snare','🥁','perc',[null,'snare','snare'],{ gain:.8 }),
   // keys — triangle + harmonics
-  M('keys','Piano RH','🎹','piano',['arp','block','arpHi'],{ center:62, gain:.7 }),
-  M('keys','Piano II','🎹','piano',[null,['arp',8],'arp'],{ center:55, gain:.55 }),
-  M('keys','Piano LH','🎹','piano',['bass','bass','bass'],{ center:38, gain:.7 }),
+  M('keys','Piano I','🎹','piano',[null,['arp',8],'arp'],{ center:55, gain:.55 }),
+  M('keys','Piano II','🎹','piano',['arp','block','arpHi'],{ center:62, gain:.5 }),
   M('keys','Celesta','🎹','celesta',[['melody',8],null,'melody'],{ oct:24, gain:.45 }),
   M('keys','Organ','🎹','organ',[null,'padChord','padChord'],{ center:55, gain:.35 }),
   M('keys','Organ pedal','🎹','organ',[null,['bass',8],'bass'],{ center:33, gain:.5 }),
@@ -912,7 +941,9 @@ const DEFAULTS = () => ({
   brassBright: 1, vibRate: 5.6, vibDepth: 1, windBreath: 1, windBright: 1, percPitch: 1, keysHarm: 1,
 });
 let S = DEFAULTS();
-let solo = null, focusSec = null, ended = false, started = false, callTimers = [];
+let solo = null, focusSecs = new Set(), ended = false, started = false, callTimers = [];
+const CUE_UNLOCK_DELAY_MS = 1000;
+const focusLockedAt = new Map();
 let ctx = null, nodes = null, playing = false, step = 0, nextTime = 0, timer = null;
 let curBpm = S.tempo, curDyn = S.dyn, curBeat = 0, beatTimeline = [];
 
@@ -1044,14 +1075,14 @@ function playBuf(mu, t, buf, vel, releaseAt, stopAt) {
 const KEYS_LEN = 2.4;
 const keyFreq = f => Math.round(f * 4);
 function applyReverb() { if (!nodes) return; const t = ctx.currentTime; nodes.dry.gain.setTargetAtTime(1 - S.reverb * .45, t, .05); nodes.wet.gain.setTargetAtTime(S.reverb * 1.6, t, .05); }
-const FOCUS_BOOST = 1.5, FOCUS_DIP = .28;
+const FOCUS_BOOST = 1.8;
 const soloMu = () => solo == null ? null : MUSICIANS[solo];
 const audible = mu => solo == null ? !S.muted[mu.section] : mu === soloMu();
 function applyMutes() {
   if (!nodes) return; const t = ctx.currentTime, sm = soloMu();
-  const level = s => { // solo > mute > cue: a cued section comes forward, the rest step back a little
+  const level = s => { // cue boosts only its section; other sections remain at their normal volume
     if (!(sm ? sm.section === s.id : !S.muted[s.id])) return 0;
-    return sm || !focusSec ? 1 : s.id === focusSec ? FOCUS_BOOST : FOCUS_DIP;
+    return !sm && focusSecs.has(s.id) ? FOCUS_BOOST : 1;
   };
   SECTIONS.forEach(s => nodes.sec[s.id].gain.setTargetAtTime(level(s), t, .08));
   MUSICIANS.forEach(mu => mu.vol.gain.setTargetAtTime(!sm || mu === sm ? 1 : 0, t, .06));
@@ -1233,9 +1264,15 @@ function scheduleStep(s, t) {
 }
 function scheduler() {
   while (nextTime < ctx.currentTime + .14) {
-    if (step >= LOOP_STEPS) { // the final bar is done: take a bow
-      clearInterval(timer); ended = true;
-      callTimers.push(setTimeout(curtainCall, Math.max(0, nextTime - ctx.currentTime) * 1000));
+    if (step >= LOOP_STEPS) {
+      // All pieces share an open stage. Only the final piece gets the curtain call.
+      clearInterval(timer); timer = null; ended = true;
+      const finishMs = Math.max(0, nextTime - ctx.currentTime) * 1000;
+      if (SONGS.indexOf(SONG) < SONGS.length - 1) {
+        callTimers.push(setTimeout(advanceSong, finishMs + 650));
+      } else {
+        callTimers.push(setTimeout(curtainCall, finishMs));
+      }
       return;
     }
     scheduleStep(step, nextTime);
@@ -1276,10 +1313,26 @@ function prewarm() {
     }
   }
 }
+function advanceSong() {
+  // Scheduled from the previous score's last beat. The curtain stays open and
+  // the sound system stays active. Preserve manually cued sections between songs.
+  if (!playing || document.hidden || !ended) return;
+  const next = SONGS[SONGS.indexOf(SONG) + 1];
+  if (!next) return;
+  setSong(next); buildScore(); rewind();
+  S.tempo = next.tempo; curBpm = next.tempo;
+  buildScoreStrip(); syncPicker(); syncControls();
+  UI.nowVerse.innerHTML = ''; pNowVerse = ''; prewarm();
+  nextTime = ctx.currentTime + .15;
+  timer = setInterval(scheduler, 25); scheduler();
+  say(`Now playing <b>${next.title}</b> by ${next.composer}.`);
+  wake();
+}
 function curtainCall() {
+  if (document.hidden || !ended) return;
   playing = false; updatePlayBtn();
   stage.classList.add('bowing'); applause();
-  say(`Bravo! <b>${SONG.title}</b> is over. Choose <b>Encore</b> to hear it again.`);
+  say(`Bravo! The concert has finished. Choose <b>Encore</b> to replay the programme.`);
   // all notes off once the final chord has rung out: nothing can keep sounding past the bow
   callTimers.push(setTimeout(() => { const t = ctx.currentTime; MUSICIANS.forEach(mu => mu.vol.gain.setTargetAtTime(0, t, .25)); }, 1200));
   callTimers.push(setTimeout(() => stage.classList.add('closed'), 2600));
@@ -1304,14 +1357,17 @@ async function play() {
   if (ended) rewind();
   applyMutes(); prewarm();
   const opening = stage.classList.contains('closed');
-  stage.classList.remove('closed'); $('overlay').classList.add('hidden'); if (!started) say('Drag the baton to conduct pace, tempo, and dynamics. Select an instrument section name to focus.');
+  stage.classList.remove('closed'); $('overlay').classList.add('hidden'); if (!started) say('Drag the baton to control tempo and dynamics. Select section names to cue them louder.');
   started = true; $('overlayIntro').hidden = true;
   playing = true; nextTime = ctx.currentTime + (opening ? .6 : .08);
   timer = setInterval(scheduler, 25); scheduler();
   updatePlayBtn(); return true;
 }
 function pause() {
-  playing = false; clearInterval(timer);
+  const wasPlaying = playing;
+  playing = false; clearInterval(timer); timer = null;
+  // Cancel a pending next song, but never strand the already-started final curtain call.
+  if (wasPlaying) { callTimers.forEach(clearTimeout); callTimers = []; }
   if (nodes) {
     const t = ctx.currentTime;
     nodes.master.gain.cancelScheduledValues(t);
@@ -1331,23 +1387,92 @@ const DYN_MARKS = [[.3, 'pp'], [.45, 'p'], [.6, 'mp'], [.75, 'mf'], [.9, 'f'], [
 const dynMark = v => DYN_MARKS.find(([x]) => v < x)[1];
 const NOTE_NAMES = ['C','C♯','D','E♭','E','F','F♯','G','A♭','A','B♭','B'];
 
+// All string players share the exact same Bezier curve as their riser.
+// Spacing is distributed by arc length rather than by angle or X alone.
+const STRINGS_ARC = [
+  [[5, 85], [11, 82], [17, 77], [23, 72]],
+  [[23, 72], [31, 61], [41, 56], [50, 56]],
+  [[50, 56], [59, 56], [69, 61], [77, 72]],
+  [[77, 72], [83, 78], [89, 82], [95, 85]],
+];
+const stringsRiserPath = 'M 5 85 ' + STRINGS_ARC.map(s =>
+  `C ${s[1][0]} ${s[1][1]} ${s[2][0]} ${s[2][1]} ${s[3][0]} ${s[3][1]}`
+).join(' ');
+function cubicCoordinate(segment, t, axis) {
+  const u = 1 - t;
+  return u*u*u*segment[0][axis] + 3*u*u*t*segment[1][axis] +
+    3*u*t*t*segment[2][axis] + t*t*t*segment[3][axis];
+}
+function stringsRiserY(x) {
+  const segment = STRINGS_ARC.find(s => x <= s[3][0]) || STRINGS_ARC[STRINGS_ARC.length - 1];
+  let lo = 0, hi = 1;
+  for (let i = 0; i < 22; i++) {
+    const t = (lo + hi) / 2;
+    if (cubicCoordinate(segment, t, 0) < x) lo = t;
+    else hi = t;
+  }
+  return cubicCoordinate(segment, (lo + hi) / 2, 1);
+}
+function stringsArcSlots(start, end, count) {
+  const points = [{ x: start, distance: 0 }];
+  const steps = 240;
+  let distance = 0, prevY = stringsRiserY(start);
+  for (let i = 1; i <= steps; i++) {
+    const x = start + (end - start) * i / steps;
+    const y = stringsRiserY(x);
+    distance += Math.hypot((end - start) / steps, y - prevY);
+    points.push({ x, distance }); prevY = y;
+  }
+  return Array.from({ length: count }, (_, index) => {
+    const target = distance * (count === 1 ? .5 : index / (count - 1));
+    const i = points.findIndex(p => p.distance >= target);
+    if (i <= 0) return start;
+    const a = points[i - 1], b = points[i];
+    return a.x + (b.x - a.x) * (target - a.distance) / (b.distance - a.distance);
+  });
+}
+
 function layout() {
   const risers = $('risers'); let paths = '';
   SECTIONS.forEach(sec => {
-    const list = MUSICIANS.filter(m => m.section === sec.id && !m.spot), { ax, ay, a0, a1 } = sec.row;
-    MUSICIANS.filter(m => m.section === sec.id && m.spot).forEach(mu => { [mu.x, mu.y] = mu.spot; mu.pan = -.85; mu.depth = 1; });
+    const list = MUSICIANS.filter(m => m.section === sec.id && !m.spot), { ax, ay, a0, a1, dx, dy, sx } = sec.row;
+    const placed = (x, y) => [50 + (x - 50) * sx + dx, y + dy];
+    const harpX = [9, 16.5, 24];
+    MUSICIANS.filter(m => m.section === sec.id && m.spot).forEach((mu, i) => {
+      // Harps run up the left wing, stopping before the first violin.
+      if (sec.id === 'strings') {
+        mu.x = harpX[i]; mu.y = stringsRiserY(mu.x) - 5;
+      } else [mu.x, mu.y] = mu.spot;
+      mu.pan = Math.max(-.85, Math.min(.85, (mu.x - 50) / 50)); mu.depth = 1;
+    });
+    // Fill the right wing, without crowding the harps or leaving an empty tail.
+    const stringsSlots = sec.id === 'strings' ? stringsArcSlots(36, 91, list.length) : null;
     list.forEach((mu, i) => {
-      const th = (a0 + (a1 - a0) * (list.length === 1 ? .5 : i / (list.length - 1))) * Math.PI / 180;
-      mu.x = 50 + Math.sin(th) * ax; mu.y = 92 - Math.cos(th) * ay;
+      if (stringsSlots) {
+        mu.x = stringsSlots[i]; mu.y = stringsRiserY(mu.x) - 5;
+      } else {
+        const th = (a0 + (a1 - a0) * (list.length === 1 ? .5 : i / (list.length - 1))) * Math.PI / 180;
+        [mu.x, mu.y] = placed(50 + Math.sin(th) * ax, 92 - Math.cos(th) * ay);
+      }
       mu.pan = Math.max(-.85, Math.min(.85, (mu.x - 50) / 50));
       mu.depth = 1 - (1 - mu.y / 92) * .28;
     });
     const mid = ((a0 + a1) / 2) * Math.PI / 180;
     const inward = sec.id === 'strings' ? -11 : sec.id === 'winds' ? -11 : sec.id === 'percussion' ? -11 : 9;
-    sec.lx = 50 + Math.sin(mid) * (ax + (inward > 0 ? -inward * .6 : 0)); sec.ly = 92 - Math.cos(mid) * ay + (inward > 0 ? inward : -inward);
-    // riser arc under the row
+    [sec.lx, sec.ly] = placed(50 + Math.sin(mid) * (ax + (inward > 0 ? -inward * .6 : 0)), 92 - Math.cos(mid) * ay + (inward > 0 ? inward : -inward));
+    if (sec.id === 'strings') sec.lx = 50; // Center the Strings label on its full-width arc.
+    // Extend the Strings riser beneath the three harps on both wings.
+    // Other sections keep their own original curved risers.
     let d = '';
-    for (let k = 0; k <= 24; k++) { const th = (a0 - 6 + (a1 - a0 + 12) * k / 24) * Math.PI / 180; d += (k ? 'L' : 'M') + (50 + Math.sin(th) * (ax + 1.5)).toFixed(2) + ' ' + (92 - Math.cos(th) * ay + 5).toFixed(2); }
+    if (sec.id === 'strings') {
+      d = stringsRiserPath;
+    } else {
+      for (let k = 0; k <= 24; k++) {
+        const th = (a0 - 6 + (a1 - a0 + 12) * k / 24) * Math.PI / 180;
+        const [x, y] = placed(50 + Math.sin(th) * (ax + 1.5), 92 - Math.cos(th) * ay + 5);
+        d += (k ? 'L' : 'M') + x.toFixed(2) + ' ' + y.toFixed(2);
+      }
+    }
     paths += `<path d="${d}"/>`;
   });
   risers.innerHTML = paths;
@@ -1373,7 +1498,8 @@ function layout() {
     const b = document.createElement('button');
     b.className = 'section-label'; b.textContent = sec.name;
     b.style.setProperty('--x', sec.lx.toFixed(2)); b.style.setProperty('--y', sec.ly.toFixed(2));
-    b.setAttribute('aria-pressed', 'false'); b.setAttribute('aria-label', `${sec.name}: cue focus`);
+    if (sec.id === 'keys' || sec.id === 'brass') b.style.top = `calc(${sec.ly.toFixed(2)}% - 20px)`;
+    b.setAttribute('aria-pressed', 'false'); b.setAttribute('aria-label', `${sec.name}: click to cue louder`);
     b.addEventListener('click', e => { if (e.shiftKey) toggleSection(sec.id); else toggleFocus(sec.id); });
     stage.appendChild(b); sec.label = b;
   });
@@ -1406,9 +1532,9 @@ function syncSections() {
     const on = !S.muted[sec.id];
     if (!sec.label) return;
     sec.label.classList.toggle('muted', !on);
-    sec.label.setAttribute('aria-pressed', String(focusSec === sec.id));
-    sec.label.setAttribute('aria-label', `${sec.name}: ${focusSec === sec.id ? 'focused, click to unlock' : 'click to focus'}. Shift-click to ${on ? 'mute' : 'unmute'}.`);
-    sec.label.title = focusSec === sec.id ? `Unfocus ${sec.name}` : `Focus ${sec.name} (Shift-click to ${on ? 'mute' : 'unmute'})`;
+    sec.label.setAttribute('aria-pressed', String(focusSecs.has(sec.id)));
+    sec.label.setAttribute('aria-label', `${sec.name}: ${focusSecs.has(sec.id) ? 'cued louder, click to unlock' : 'click to cue louder'}. Multiple sections can be cued. Shift-click to ${on ? 'mute' : 'unmute'}.`);
+    sec.label.title = focusSecs.has(sec.id) ? `Stop cueing ${sec.name}` : `Add ${sec.name} to cue (Shift-click to ${on ? 'mute' : 'unmute'})`;
   });
   MUSICIANS.forEach(mu => mu.el && mu.el.classList.toggle('muted', S.muted[mu.section]));
 }
@@ -1531,6 +1657,34 @@ matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', readMo
 const UI = { roll: $('roll'), baton: $('baton'), conductor: $('conductor'), nowVerse: $('nowVerse'), nowMeta: $('nowMeta') };
 let rafId = 0, idleFrames = 0, lastLightT = 0, pAng = 99, pCBob = 99, pNowVerse = '', pNowMeta = '';
 const LIGHT_GAIN = 26;
+/* When the pointer leaves the stage, the conductor looks toward the sections
+   playing a phrase, or toward whichever sections the visitor has cued. */
+const reducedConductorMotion = matchMedia('(prefers-reduced-motion: reduce)');
+let attentionMeasure = -1, attentionSignature = '', attentionSection = null;
+let lookX = 0, lookY = 0, lastLookTime = 0, writtenLookX = 99, writtenLookY = 99;
+function conductorAttention(beat) {
+  const measure = Math.floor(Math.max(0, beat) / (BPB * 2)); // new focus every two bars
+  const signature = [...focusSecs].sort().join(',') + '|' + SECTIONS.filter(s => S.muted[s.id]).map(s => s.id).join(',');
+  if (measure !== attentionMeasure || signature !== attentionSignature) {
+    attentionMeasure = measure; attentionSignature = signature;
+    let candidates = SECTIONS.filter(s => focusSecs.has(s.id) && !S.muted[s.id]);
+    if (!candidates.length) {
+      // Prefer instruments actually entering or playing during these two bars.
+      const weights = new Map(SECTIONS.map(s => [s.id, 0]));
+      const from = measure * BPB * 2 * STEPS_PER_BEAT;
+      const to = Math.min(LOOP_STEPS, from + BPB * 2 * STEPS_PER_BEAT);
+      for (let i = from; i < to; i++) for (const e of SCORE[i]) {
+        const section = MUSICIANS[e.mi].section;
+        if (!S.muted[section]) weights.set(section, weights.get(section) + (e.lead ? 3 : 1) * Math.min(1.2, e.vel || 1));
+      }
+      candidates = SECTIONS.filter(s => !S.muted[s.id] && weights.get(s.id) > 0)
+        .sort((a, b) => weights.get(b.id) - weights.get(a.id)).slice(0, 3);
+    }
+    // Rotate deliberately among active groups instead of flickering on each note.
+    attentionSection = candidates.length ? candidates[measure % candidates.length] : null;
+  }
+  return attentionSection;
+}
 function frame() {
   rafId = 0;
   const now = ctx ? ctx.currentTime : performance.now() / 1000;
@@ -1568,6 +1722,28 @@ function frame() {
   const cbob = playing ? Math.exp(-ph * 5) * curDyn : 0;
   if (Math.abs(ang - pAng) > .3) { pAng = ang; UI.baton.style.setProperty('--baton', ang.toFixed(1)); }
   if (Math.abs(cbob - pCBob) > .004) { pCBob = cbob; UI.conductor.style.setProperty('--bob', cbob.toFixed(3)); }
+  // Subtle side-to-side attention on the podium only when auto-conducting.
+  // Manual conducting retains complete control of the cursor baton.
+  let targetX = 0, targetY = 0;
+  if (playing && !stage.classList.contains('hovering') && !drag && !reducedConductorMotion.matches) {
+    const attention = conductorAttention(cb.beat);
+    if (attention) {
+      targetX = Math.max(-1, Math.min(1, (attention.lx - 50) / 30)) * Math.min(24, stage.clientWidth * .035);
+      targetY = -2 - Math.max(0, 80 - attention.ly) / 80 * 4;
+    }
+  }
+  const frameTime = performance.now();
+  const frameDelay = lastLookTime ? Math.min(80, frameTime - lastLookTime) : 16;
+  lastLookTime = frameTime;
+  const ease = 1 - Math.exp(-frameDelay / 470); // glide into each section's direction
+  lookX += (targetX - lookX) * ease;
+  lookY += (targetY - lookY) * ease;
+  if (Math.abs(lookX - writtenLookX) > .1) {
+    writtenLookX = lookX; UI.conductor.style.setProperty('--look-x', lookX.toFixed(1) + 'px');
+  }
+  if (Math.abs(lookY - writtenLookY) > .1) {
+    writtenLookY = lookY; UI.conductor.style.setProperty('--look-y', lookY.toFixed(1) + 'px');
+  }
   // now line
   if (playing && cb.info) {
     const i = sectionOfStep(Math.floor(cb.beat * STEPS_PER_BEAT) % LOOP_STEPS);
@@ -1583,17 +1759,26 @@ function frame() {
   rafId = idleFrames < 90 ? requestAnimationFrame(frame) : 0;
 }
 function wake() { idleFrames = 0; if (!rafId) rafId = requestAnimationFrame(frame); }
-function keyName(verse) { const t = SONG.transpose[verse] + S.transpose; return `${t === 0 && SONG.tonicLabel ? SONG.tonicLabel : NOTE_NAMES[(((SONG.tonicPc + t) % 12) + 12) % 12]} ${S.minor ? 'minor' : 'major'}`; }
+function keyName(verse) { const t = SONG.transpose[verse] + S.transpose; return `${t === 0 && SONG.tonicLabel ? SONG.tonicLabel : NOTE_NAMES[(((SONG.tonicPc + t) % 12) + 12) % 12]} ${S.minor || SONG.minorKey ? 'minor' : 'major'}`; }
 
 /* ============================================================
    CONTROLS
    ============================================================ */
-function updatePlayBtn() { wake(); stage.classList.toggle('playing', playing); const b = $('playBtn'); b.textContent = playing ? '❚❚ Pause' : '▶ Play'; b.setAttribute('aria-label', playing ? 'Pause' : 'Play'); }
+function updatePlayBtn() {
+  wake(); stage.classList.toggle('playing', playing);
+  const b = $('playBtn'), label = playing ? 'Pause' : 'Play';
+  b.dataset.playing = String(playing);
+  b.querySelector('.transport-label').textContent = label;
+  b.setAttribute('aria-label', label);
+}
 function syncControls() {
   if (!playing) { $('nowMeta').innerHTML = `${tempoTerm(S.tempo)} ♩ = ${S.tempo}`; }
   syncSections();
 }
-$('startBtn').addEventListener('click', () => play());
+$('startBtn').addEventListener('click', () => {
+  if (ended && SONG === SONGS[SONGS.length - 1]) loadSong(SONGS[0]);
+  else play();
+});
 $('playBtn').addEventListener('click', () => { if (playing) pause(); else play(); });
 // Silence the orchestra when the tab is hidden or another window takes focus.
 document.addEventListener('visibilitychange', () => { if (document.hidden) pause(); });
@@ -1607,18 +1792,36 @@ function reset() {
   MUSICIANS.forEach(mu => mu.octShift = 0);
   if (solo != null) setSolo(null);
   setFocus(null); applyReverb(); applyMutes(); applyTimbre(); prewarm(); syncControls();
-  say(`Restored: ${keyName(0)}, <i>${tempoTerm(SONG.tempo)}</i> ♩ = ${SONG.tempo}, every section in.`);
+  say(`Restored original tempo, dynamics, and instrument balance.`);
 }
 /* ---------------- conduct it yourself ---------------- */
 let taps = [], drag = null;
-function ripple(x, y) {
-  const r = document.createElement('span'); r.className = 'ripple'; r.setAttribute('aria-hidden', 'true');
-  r.style.setProperty('--x', x.toFixed(2)); r.style.setProperty('--y', y.toFixed(2));
-  r.addEventListener('animationend', () => r.remove()); stage.appendChild(r);
+async function stageKnock() {
+  // A brief, dry click with a faint wooden tick; no lingering snare-like noise.
+  // Route directly to the destination so it works before playback begins.
+  if (!ctx) { try { initAudio(); } catch { $('audioError').hidden = false; return; } }
+  if (ctx.state === 'suspended') await ctx.resume();
+  if (playing || document.hidden) return;
+  const t = ctx.currentTime;
+  const noise = ctx.createBufferSource(), highpass = ctx.createBiquadFilter(), ng = ctx.createGain();
+  noise.buffer = nodes.noise;
+  highpass.type = 'highpass'; highpass.frequency.value = 2200; highpass.Q.value = .7;
+  ng.gain.setValueAtTime(.0001, t);
+  ng.gain.exponentialRampToValueAtTime(.105, t + .001);
+  ng.gain.exponentialRampToValueAtTime(.0001, t + .018);
+  noise.connect(highpass); highpass.connect(ng); ng.connect(ctx.destination);
+  noise.start(t, Math.random()); noise.stop(t + .022);
+  const tick = ctx.createOscillator(), tg = ctx.createGain();
+  tick.type = 'sine'; tick.frequency.setValueAtTime(650, t);
+  tick.frequency.exponentialRampToValueAtTime(380, t + .021);
+  tg.gain.setValueAtTime(.035, t);
+  tg.gain.exponentialRampToValueAtTime(.0001, t + .024);
+  tick.connect(tg); tg.connect(ctx.destination);
+  tick.start(t); tick.stop(t + .025);
 }
 function conductTap(x = 50, y = 84) {
   if (!playing) return;
-  stage.classList.add('conducted'); ripple(x, y);
+  stage.classList.add('conducted');
   const now = ctx.currentTime;
   if (taps.length && now - taps[taps.length - 1] > 2) taps = [];
   taps.push(now); if (taps.length > 5) taps.shift();
@@ -1631,7 +1834,7 @@ function conductTap(x = 50, y = 84) {
   if (Math.abs(err) < .35) nextTime += err * (60 / curBpm) * .5;
 }
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
-const G = { svg: $('guideSvg'), origin: $('guideOrigin'), baton: $('guideBaton') };
+const G = { baton: $('guideBaton'), tip: $('wandTip') };
 /* Baton trace: a short, fading stroke trail makes timing and amplitude legible. */
 const trailCanvas = $('strokeTrail'), trailCtx = trailCanvas.getContext('2d');
 let trail = [], trailFrame = 0, trailScale = 1;
@@ -1650,23 +1853,31 @@ function paintTrail(now) {
   const c = trailCtx, w = trailCanvas.width, h = trailCanvas.height;
   c.clearRect(0, 0, w, h);
   trail = trail.filter(pt => now - pt.t < TRAIL_LIFE);
-  c.lineCap = 'round'; c.lineJoin = 'round';
-  for (let i = 1; i < trail.length; i++) {
-    const a = trail[i-1], b = trail[i], age = (now - b.t) / TRAIL_LIFE;
-    const alpha = Math.pow(1 - age, 1.5), speed = Math.hypot(b.x-a.x, b.y-a.y);
-    if (speed < .25) continue;
-    c.beginPath(); c.moveTo(a.x*trailScale, a.y*trailScale); c.lineTo(b.x*trailScale,b.y*trailScale);
-    c.strokeStyle = `rgba(246, 220, 154, ${(.22 * alpha).toFixed(3)})`; c.lineWidth = 12 * trailScale * alpha; c.stroke();
-    c.strokeStyle = `rgba(255, 239, 185, ${(.85 * alpha).toFixed(3)})`; c.lineWidth = (1 + 2.2 * alpha) * trailScale; c.stroke();
-  }
-  if (drag && trail.length) { // bright leading point attached to the wand
-    const p = trail[trail.length-1];
-    c.beginPath(); c.arc(p.x*trailScale, p.y*trailScale, 3.2*trailScale, 0, Math.PI*2);
-    c.fillStyle = 'rgba(255,239,185,.85)'; c.fill();
+  // No rounded segment caps or wide halo strokes: they rendered as visible circles.
+  // A continuous thin stroke preserves the gesture without dotted artifacts.
+  if (trail.length > 1) {
+    c.lineCap = 'butt';
+    c.lineJoin = 'bevel';
+    c.lineWidth = 2 * trailScale;
+    for (let i = 1; i < trail.length; i++) {
+      const a = trail[i - 1], b = trail[i];
+      const age = (now - b.t) / TRAIL_LIFE;
+      const alpha = Math.pow(1 - age, 1.5);
+      if (Math.hypot(b.x - a.x, b.y - a.y) < .25) continue;
+      c.beginPath();
+      c.moveTo(a.x * trailScale, a.y * trailScale);
+      c.lineTo(b.x * trailScale, b.y * trailScale);
+      c.strokeStyle = `rgba(255, 239, 185, ${(.85 * alpha).toFixed(3)})`;
+      c.stroke();
+    }
   }
   if (trail.length) trailFrame = requestAnimationFrame(paintTrail);
 }
-function trailPoint(x,y) {
+function trailPoint() {
+  // Trail originates from the flipped sparkle tip, which is anchored at the pointer during rotation.
+  const tip = G.tip.getBoundingClientRect(), bounds = stage.getBoundingClientRect();
+  const x = tip.left - bounds.left, y = tip.top - bounds.top;
+  if (!Number.isFinite(x) || !Number.isFinite(y)) return;
   trail.push({x,y,t:performance.now()});
   if (trail.length > 140) trail.shift();
   if (!trailFrame) trailFrame = requestAnimationFrame(paintTrail);
@@ -1691,21 +1902,37 @@ function labelAt(clientX, clientY) {
     return clientX >= r.left && clientX <= r.right && clientY >= r.top && clientY <= r.bottom;
   })?.id || null;
 }
-function setFocus(id) {
-  if (focusSec === id) return;
-  focusSec = id;
-  if (id && S.muted[id]) S.muted[id] = false;
-  stage.classList.toggle('cue-active', id != null);
+function syncFocus() {
+  stage.classList.toggle('cue-active', focusSecs.size > 0);
   SECTIONS.forEach(sec => {
-    sec.label.classList.toggle('focus', sec.id === id);
-    sec.light.classList.toggle('cuing', sec.id === id);
+    const cued = focusSecs.has(sec.id);
+    sec.label.classList.toggle('focus', cued);
+    sec.light.classList.toggle('cuing', cued);
   });
-  MUSICIANS.forEach(mu => mu.el.classList.toggle('cuing', mu.section === id));
+  MUSICIANS.forEach(mu => mu.el.classList.toggle('cuing', focusSecs.has(mu.section)));
   applyMutes(); syncSections(); wake();
-  if (id) say(`<b>${SECTIONS.find(s => s.id === id).name}</b> focused. Click again to unlock, or drag across another section name.`);
-  else say('All sections are back in focus.');
 }
-function toggleFocus(id) { setFocus(focusSec === id ? null : id); }
+function setFocus(id) { // used when restoring the orchestra or changing songs
+  focusSecs.clear(); focusLockedAt.clear();
+  if (id != null) { focusSecs.add(id); focusLockedAt.set(id, performance.now()); }
+  syncFocus();
+}
+function cueSection(id) { // cue locks stay on, including when every section is selected
+  if (focusSecs.has(id)) return;
+  if (S.muted[id]) S.muted[id] = false;
+  focusSecs.add(id);
+  focusLockedAt.set(id, performance.now());
+  syncFocus();
+  say(`<b>${SECTIONS.find(s => s.id === id).name}</b> added to the cue. ${focusSecs.size} of ${SECTIONS.length} sections cued louder; all others retain normal volume.`);
+}
+function toggleFocus(id) {
+  if (focusSecs.has(id)) {
+    if (performance.now() - (focusLockedAt.get(id) ?? 0) < CUE_UNLOCK_DELAY_MS) return;
+    focusSecs.delete(id); focusLockedAt.delete(id);
+    syncFocus();
+    say(`<b>${SECTIONS.find(s => s.id === id).name}</b> cue unlocked. ${focusSecs.size} section${focusSecs.size === 1 ? '' : 's'} remain cued.`);
+  } else cueSection(id);
+}
 const HYST = 10, MIN_STROKE = 24; // px: a turn must travel back 10 px, and a stroke must span 24 px, to count as a beat
 function strokeBeat(amp, x, y) {
   const now = ctx.currentTime;
@@ -1720,7 +1947,7 @@ function strokeBeat(amp, x, y) {
   // the beat lands on the turn: pull the band halfway toward it
   const b = currentBeat(now).beat, err = b - Math.round(b);
   if (Math.abs(err) < .35) nextTime += err * (60 / curBpm) * .5;
-  ripple(x / drag.w * 100, y / drag.h * 100); wake();
+  wake();
 }
 function conductMove(x, y) {
   const dx = x - drag.x0, dy = y - drag.y0;
@@ -1736,26 +1963,34 @@ function conductMove(x, y) {
     else if (Math.abs(v - a.ext) > HYST) { const amp = Math.abs(a.ext - a.prev); a.prev = a.ext; a.dir = -a.dir; a.ext = v; strokeBeat(amp, x, y); }
   }
 }
+stage.addEventListener('dragstart', e => e.preventDefault());
+stage.addEventListener('selectstart', e => e.preventDefault());
 stage.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') stage.classList.add('hovering'); });
 stage.addEventListener('pointerleave', () => { stage.classList.remove('hovering'); lastX = null; });
 stage.addEventListener('pointerdown', e => {
   suppressClick = false;
-  if (e.target.closest('.overlay') || !playing || e.button > 0) return;
+  if (e.button > 0) return;
+  if (!playing) {
+    // The intro overlay is transparent: a click on empty scenery knocks even
+    // while the curtains are shut. Buttons, instructions and players stay quiet.
+    if (!e.target.closest('button, .intro, .error, .musician, .section-label')) stageKnock();
+    return;
+  }
+  if (e.target.closest('.overlay')) return;
   const { x, y, r } = stageXY(e), onButton = !!e.target.closest('button');
   drag = { x0: x, y0: y, t0: performance.now(), moved: false, onButton, id: e.pointerId, w: r.width, h: r.height,
-    ax: { x: { ext: x, prev: x, dir: 0 }, y: { ext: y, prev: y, dir: 0 } }, beats: [], lastBeat: -1, hovered: null };
+    ax: { x: { ext: x, prev: x, dir: 0 }, y: { ext: y, prev: y, dir: 0 } }, beats: [], lastBeat: -1, hovered: labelAt(e.clientX, e.clientY) };
   if (!onButton) stage.setPointerCapture(e.pointerId);
-  G.svg.setAttribute('viewBox', `0 0 ${r.width} ${r.height}`); G.origin.setAttribute('cx', x); G.origin.setAttribute('cy', y);
-  stage.classList.add('holding'); placeBaton(x, y); trailPoint(x, y);
+  stage.classList.add('holding'); placeBaton(x, y); trailPoint();
 });
 stage.addEventListener('pointermove', e => {
   const { x, y } = stageXY(e); placeBaton(x, y);
   if (drag && e.pointerId === drag.id) {
-    trailPoint(x, y);
+    trailPoint();
     conductMove(x, y);
     if (drag.moved) {
       const hit = labelAt(e.clientX, e.clientY);
-      if (hit !== drag.hovered) { drag.hovered = hit; if (hit) setFocus(hit); }
+      if (hit !== drag.hovered) { drag.hovered = hit; if (hit) toggleFocus(hit); }
     }
   }
 });
@@ -1780,7 +2015,7 @@ function buildPicker() {
   SONGS.forEach((song, i) => {
     const b = document.createElement('button');
     b.className = 'song'; b.setAttribute('role', 'radio');
-    b.innerHTML = `<span class="t">${song.title}</span><span class="c">${song.short}</span>`;
+    b.innerHTML = `<span class="t">${song.title}</span>`;
     b.addEventListener('click', () => loadSong(song));
     b.addEventListener('keydown', e => {
       const d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
@@ -1789,23 +2024,49 @@ function buildPicker() {
     });
     wrap.appendChild(b); song.btn = b;
   });
+  // A single pill moves behind the buttons instead of the active fill flashing.
+  const indicator = document.createElement('span');
+  indicator.className = 'song-indicator';
+  indicator.setAttribute('aria-hidden', 'true');
+  wrap.prepend(indicator);
   syncPicker();
+  if (!window.pickerResizeObserver && typeof ResizeObserver !== 'undefined') {
+    window.pickerResizeObserver = new ResizeObserver(() => positionPickerIndicator(false));
+    window.pickerResizeObserver.observe(wrap);
+    SONGS.forEach(song => window.pickerResizeObserver.observe(song.btn));
+  }
+  if (document.fonts) document.fonts.ready.then(() => positionPickerIndicator(false));
+  window.addEventListener('resize', () => positionPickerIndicator(false), { passive: true });
+}
+function positionPickerIndicator(animate = true) {
+  const wrap = $('songPicker'), active = SONG.btn, indicator = wrap.querySelector('.song-indicator');
+  if (!active || !indicator) return;
+  if (!animate) indicator.classList.remove('is-ready');
+  indicator.style.width = `${active.offsetWidth}px`;
+  indicator.style.height = `${active.offsetHeight}px`;
+  indicator.style.transform = `translate3d(${active.offsetLeft}px, ${active.offsetTop}px, 0)`;
+  if (!animate) requestAnimationFrame(() => indicator.classList.add('is-ready'));
 }
 function syncPicker() {
   SONGS.forEach(song => { const on = song === SONG; song.btn.setAttribute('aria-checked', String(on)); song.btn.tabIndex = on ? 0 : -1; });
+  positionPickerIndicator();
+  const wrap = $('songPicker'), active = SONG.btn;
+  if (wrap.scrollWidth > wrap.clientWidth) {
+    const left = Math.max(0, active.offsetLeft + active.offsetWidth / 2 - wrap.clientWidth / 2);
+    wrap.scrollTo({ left, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+  }
 }
 async function loadSong(song) {
   if (song === SONG) return;
-  const wasPlaying = playing;
-  if (playing) pause();
+  // A manual selection cancels any queued autoplay or finale transition.
+  if (playing || ended) pause();
   setFocus(null); setSong(song); buildScore(); rewind();
-  if (!wasPlaying) { stage.classList.add('closed'); $('startBtn').textContent = 'Are you dragging?'; $('overlay').classList.remove('hidden'); }
   S.tempo = song.tempo; curBpm = song.tempo;
   MUSICIANS.forEach(mu => mu.queue.length = 0);
   buildScoreStrip(); syncPicker(); syncControls();
   UI.nowVerse.innerHTML = ''; pNowVerse = ''; prewarm();
   say(`Now playing <b>${song.title}</b> by ${song.composer}, in ${keyName(0)}, ${SONG.meterTop || BPB}/${SONG.meterBottom || 4} time.`);
-  if (wasPlaying) await play(); else updatePlayBtn();
+  await play(); // Selecting any new piece starts it immediately, even from the intro or pause state.
 }
 
 $('resetBtn').addEventListener('click', reset);

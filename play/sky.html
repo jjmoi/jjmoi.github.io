@@ -53,7 +53,7 @@ button,input{font:inherit;text-transform:uppercase;color:#000}button:focus,input
       <div class="shortcut"><kbd>H</kbd><span>Hide UI</span></div>
       <div class="shortcut"><kbd>S</kbd><span>Save PNG</span></div>
     </div>
-    <div class="status" id="status">SKY BE DRIFTING...</div>
+    <div class="status" id="status">CLOUDS BE DRIFTING...</div>
   </div>
 
   <main class="stage"><div class="canvaswrap"><canvas id="c"></canvas></div></main>
@@ -354,7 +354,7 @@ function shufflePalette(){
   });
   syncColors();requestRender();
 }
-function updateStatus(){qs('status').innerHTML=paused?'PAUSED':'SKY BE DRIFTING<span class="status-dots">...</span>';}
+function updateStatus(){qs('status').innerHTML=paused?'PAUSED':'CLOUDS BE DRIFTING<span class="status-dots">...</span>';}
 function togglePause(){
   paused=!paused;
   if(paused){stopAnimation();renderFrame();}else startAnimation();

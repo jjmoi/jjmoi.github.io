@@ -17746,7 +17746,7 @@ $('#summary').addEventListener('click', e => { if (e.target.closest('[data-endsc
   const wasPaused = local.sim().paused;
   control({ paused: true });
   // The opening song starts on the sprite-only splash and continues through
-  // the title and story. Gameplay always begins muted.
+  // the title and story, and stays on when the studio opens.
   setSound(true);
   syncSoundControl();
   const unlockAudio = () => resumeSound();
@@ -17963,8 +17963,8 @@ $('#summary').addEventListener('click', e => { if (e.target.closest('[data-endsc
   const close = (restorePaused = wasPaused) => {
     if (stage === 'closing') return;
     stage = 'closing';
-    // Keep the selection sound, then mute the studio before revealing it.
-    setSound(false);
+    // Keep sound on for both Continue and New Simulation.
+    if (!audio.on) setSound(true);
     syncSoundControl();
     document.removeEventListener('pointerdown', unlockAudio, true);
     document.removeEventListener('keydown', unlockAudio, true);
