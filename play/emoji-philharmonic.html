@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>JJ → EMOJI PHILHARMONIC</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><text y=%2214%22 font-size=%2214%22>🎻</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -56,7 +57,7 @@
     --font-ui: "Instrument Sans", system-ui, sans-serif;
     --font-music: "Apple Symbols", "Noto Music", "Segoe UI Symbol", serif;
     --text-hero: clamp(2.4rem, 5vw, 4.2rem);
-    --text-title: clamp(1.7rem, 3vw, 2.6rem);
+    --text-title: clamp(1.7rem, 3vw, 2rem);
     --text-xl: clamp(1.4rem, 2.4vw, 1.9rem);
     --text-lg: clamp(1.15rem, 1.8vw, 1.45rem);
     --text-md: 1.05rem;
@@ -161,7 +162,7 @@
 
   /* ---------- header + song picker ---------- */
   header { display: flex; justify-content: center; }
-  h1 { font-family: var(--font-display); font-weight: 400; font-size: var(--text-title); line-height: var(--leading-tight); margin: 0; }
+  h1 { font-family: var(--font-display); font-weight: 400; font-size: var(--text-title); line-height: var(--leading-tight); margin: 0; padding: 10px 0; }
   h1 em { color: var(--color-gold-soft); }
   .songs { display: inline-flex; flex-wrap: wrap; justify-content: center; gap: var(--space-1); }
   .song {
@@ -176,7 +177,9 @@
   .desk .song { color: var(--color-ink-soft); }
   .desk .song:hover { color: var(--color-ink); background: var(--color-ink-ghost); }
   .desk .song[aria-checked="true"] { color: var(--color-parchment); background: var(--color-ink); }
-  .desk .songs { flex: 1; justify-content: center; }
+  .desk .songs { flex: 1; justify-content: flex-start; min-width: 0; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: thin; }
+  .desk .song { flex: 0 0 auto; padding: var(--space-1) var(--space-2); }
+  .desk .song .t { font-size: var(--text-sm); }
 
   /* ---------- gilded proscenium ---------- */
   .proscenium {
@@ -236,6 +239,10 @@
   .musician.muted { opacity: 0.32; filter: grayscale(0.9); }
   .musician.lead .inst { filter: drop-shadow(var(--glow-lead-1)) drop-shadow(var(--glow-lead-2)); transition-delay: 0s; }
   .stage.soloing .musician:not(.solo) { opacity: 0.22; filter: grayscale(0.85); }
+  .stage.cue-active:not(.soloing) .musician:not(.cuing) { opacity: 0.18; filter: grayscale(0.85); }
+  .stage.cue-active:not(.soloing) .musician.cuing .inst { filter: drop-shadow(0 0 8px var(--color-gold-light)) drop-shadow(0 0 18px var(--color-gold)); }
+  .stage.cue-active:not(.soloing) .light:not(.cuing) { opacity: calc(var(--level, 0) * 0.12); }
+  .stage.cue-active:not(.soloing) .light.cuing { filter: brightness(1.6); }
   .musician.solo { z-index: 6; }
   .musician.solo::after {
     content: attr(data-name); position: absolute; left: 50%; bottom: 100%; transform: translate(-50%, calc(var(--space-1) * -1));
@@ -271,6 +278,7 @@
   .stage { touch-action: none; }
   .stage.hovering:not(.closed), .stage.hovering:not(.closed) * { cursor: none; }
   .stage.hovering:not(.closed) .conductor .baton { opacity: 0; }
+  .stroke-trail { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 7; pointer-events: none; }
   .guide { position: absolute; inset: 0; z-index: 8; pointer-events: none; }
   .guide-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
   .guide-svg #guideOrigin { fill: none; stroke: var(--color-gold-light); stroke-width: var(--border-thick); opacity: 0; transition: opacity var(--dur-fast); }
@@ -284,7 +292,9 @@
     opacity: 0;
   }
   .stage.hovering:not(.closed) .guide-baton, .stage.holding .guide-baton { opacity: 1; }
-  .section-label.focus { color: var(--color-gold-light); background: var(--color-ink-ghost); box-shadow: 0 0 var(--space-5) var(--color-glow); }
+  .section-label.focus { color: var(--color-ink); background: var(--color-gold-light); box-shadow: 0 0 12px var(--color-glow), 0 0 26px var(--color-gold); text-shadow: none; }
+  .stage.cue-active .section-label:not(.focus) { opacity: 0.4; }
+  .section-label.focus::after { content: ""; position: absolute; inset: -5px; border: 1px solid var(--color-gold-light); border-radius: var(--radius-pill); pointer-events: none; }
 
   /* stage curtains */
   .drape {
@@ -321,8 +331,8 @@
     text-shadow: 0 var(--border-hair) var(--space-2) var(--color-shadow);
     transition: color var(--dur-fast), background var(--dur-fast), box-shadow var(--dur-med);
   }
-  .section-label:hover { background: var(--color-ink-ghost); }
-  .section-label[aria-pressed="false"] { color: var(--color-muted-label); text-decoration: line-through; }
+  .section-label:hover { background: var(--color-ink-ghost); opacity: 1 !important; }
+  .section-label.muted { text-decoration: line-through; }
 
   .conductor { position: absolute; left: 50%; bottom: 0; z-index: 4; transform: translate(-50%, 0); line-height: 1; text-align: center; }
   .podium {
@@ -453,11 +463,11 @@
 
 <main>
   <header>
-    <h1>The <em>Emoji</em> Philharmonic</h1>
+    <h1>Emoji Philharmonic</h1>
   </header>
 
   <div class="proscenium">
-    <section class="stage closed" id="stage" aria-label="Hold the mouse and beat the baton back and forth: your pace sets the tempo and the strokes sets the dynamics; start near an instrument section cues it louder.">
+    <section class="stage closed" id="stage" aria-label="Drag the baton to conduct pace, tempo, and dynamics. Click an instrument section name to lock its focus, click again to unlock, or drag across another name to move focus.">
       <svg class="risers" id="risers" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg>
       <div class="now" aria-hidden="true">
         <span id="nowVerse"></span>
@@ -467,6 +477,7 @@
         <span class="who" id="conductor"><span class="baton" id="baton">🪄</span></span>
         <div class="podium"></div>
       </div>
+      <canvas class="stroke-trail" id="strokeTrail" aria-hidden="true"></canvas>
       <div class="guide" id="guide" aria-hidden="true">
         <svg class="guide-svg" id="guideSvg"><circle id="guideOrigin" r="6"/></svg>
         <span class="guide-baton" id="guideBaton">🪄</span>
@@ -476,7 +487,7 @@
       <div class="overlay" id="overlay">
         <div>
           <button class="btn-hero" id="startBtn">Are you dragging?</button>
-          <p class="sub intro paper" id="overlayIntro">Hold the mouse and beat the baton back and forth. Pace sets the tempo and strokes sets the dynamics; start near an instrument cues it louder.</p>
+          <p class="sub intro paper" id="overlayIntro">Conduct the orchestra by dragging the baton to control pace, tempo, and dynamics. Select an instrument section name to focus.</p>
           <p class="error" id="audioError" hidden>This browser can't synthesize audio. Open the page in Chrome, Safari, or Firefox.</p>
         </div>
       </div>
@@ -505,6 +516,9 @@ const STEPS_PER_BEAT = 8, VERSE_BARS = 16, CODA_BARS = 2, PHRASE_BARS = 4;
 const CHORDS = {
   D:[2,[0,4,7]], A:[9,[0,4,7,10]], G:[7,[0,4,7]], Bm:[11,[0,3,7]], Em:[4,[0,3,7]],
   'F#m':[6,[0,3,7]], C:[0,[0,4,7]], Am:[9,[0,3,7]], D7:[2,[0,4,7,10]],
+  Db:[1,[0,4,7]], Ab:[8,[0,4,7]], Ebm:[3,[0,3,7]], Bbm:[10,[0,3,7]],
+  Gb:[6,[0,4,7]], Fm:[5,[0,3,7]], F:[5,[0,4,7]], Dm:[2,[0,3,7]],
+  G7:[7,[0,4,7,10]], Gdim:[7,[0,3,6]], Fdim:[5,[0,3,6]], C7:[0,[0,4,7,10]],
 };
 const pcs = c => CHORDS[c][1].map(i => (CHORDS[c][0] + i) % 12);
 const toneNear = (c, deg, center) => {
@@ -516,6 +530,10 @@ const below = (c, m) => { const p = pcs(c); for (let t = m - 3; t > m - 15; t--)
 const chordTones = (c, center) => { const out = []; const p = pcs(c); for (let t = center; t < center + 12; t++) if (p.includes(t % 12)) out.push(t); return out; };
 const line = (arr, start = 0) => { let b = start; return arr.map(([m, d]) => { const n = { b, m, d }; b += d; return n; }); };
 const words = s => s.trim().split(/\s+/);
+const barsMelody = (bars, beats) => bars.flatMap((bar, i) => {
+  let offset = i * beats;
+  return bar.flatMap(([m, d]) => { const event = m == null ? [] : [{ b: offset, m, d }]; offset += d; return event; });
+});
 
 /* ---- Ode to Joy (Beethoven) ---- */
 const ODE = (() => {
@@ -603,7 +621,79 @@ const MINUET = (() => {
   };
 })();
 
-const SONGS = [ODE, CANON, MINUET];
+/* ---- Clair de lune (Debussy), opening theme reorchestrated in a lilting 9/8 ---- */
+const CLAIR = (() => {
+  // Each bar is three dotted-quarter pulses, matching the conducting model.
+  // Adapted from the opening melodic phrases.  The original piano writing is 9/8.
+  const bars = [
+    [[80,1.5],[77,1.5]], [[75,1],[77,1],[75,1]],
+    [[73,.6],[75,.6],[73,.6],[77,.6],[73,.6]], [[72,1],[73,1],[72,1]],
+    [[70,.375],[72,.375],[70,.375],[75,.375],[70,.375],[68,.375],[70,.375],[68,.375]],
+    [[66,.75],[68,.75],[66,.75],[65,.75]],
+    [[65,.375],[66,.375],[65,.375],[70,.375],[65,.375],[63,.375],[65,.375],[63,.375]],
+    [[61,.75],[63,.75],[61,.75],[60,.75]],
+    [[68,1],[80,1],[77,1]], [[75,1],[77,1],[75,1]],
+    [[73,.75],[75,.75],[80,.75],[77,.75]], [[75,.75],[77,.75],[75,.75],[73,.75]],
+    [[73,.6],[75,.6],[82,.6],[80,.6],[77,.6]], [[77,.5],[75,.5],[77,.5],[75,.5],[73,.5],[70,.5]],
+    [[77,.5],[75,.5],[75,.5],[75,.5],[73,.5],[73,.5]], [[73,.5],[72,.5],[72,.5],[72,.5],[73,.5],[70,.5]],
+  ];
+  const verse = { melody: barsMelody(bars, 3), harmony: words('Db Ab Db Ab Db Gb Ab Db Bbm Fm Ebm Ab Db Ab Ab Db Bbm Gb Db Ab Db Fm Bbm Ab Gb Db Ab Db Db Ab Bbm Ab') };
+  return {
+    id: 'clair', no: 'No. 4', title: 'Clair de lune', short: 'Debussy', composer: 'Claude Debussy',
+    work: 'Suite bergamasque, L. 75 — III. Clair de lune (opening theme, orchestral arrangement)', cartouche: 'Debussy',
+    bpb: 3, meterTop: 9, meterBottom: 8, slot: 1.5, tempo: 64, tonicPc: 1, tonic: 'Db', tonicLabel: 'D♭', codaMel: 73, codaWritten: 73, shift: 0, sharps: 0, flats: 5, pxb: 35,
+    transpose: [0, 0, 0, 0], verses: [verse, verse, verse],
+    captions: ['<i>Andante très expressif</i> — a distant melody', '<i>Dolcissimo</i> — winds and harp', '<i>Appassionato</i> — the full orchestra', '<i>Coda, perdendosi</i>'],
+    marks: ['très expressif', 'dolcissimo', 'appassionato', 'perdendosi'], dyn: ['pp', 'p', 'mf', 'pp'],
+  };
+})();
+
+/* ---- Prelude in C major, BWV 846 (J. S. Bach) — broken-chord figuration ---- */
+const BACH = (() => {
+  // Repeated eight-note figures trace the prelude's first sixteen harmonic bars.
+  const groups = [
+    [67,72,76], [69,74,77], [67,74,77], [67,72,76],
+    [69,76,81], [66,69,74], [67,74,79], [64,67,72],
+    [64,67,72], [62,66,72], [62,67,71], [64,67,73],
+    [62,69,74], [62,65,71], [60,67,72], [69,72,77],
+  ];
+  const bars = groups.map((g, i) => Array.from({ length: 8 }, (_, n) => [g[n % (i === 2 ? 3 : 3)], .5]));
+  const verse = { melody: barsMelody(bars, 4), harmony: words('C C Dm Dm G7 G7 C C Am Am D7 D7 G G C C Am Am D7 D7 G G Gdim Gdim Dm Dm Fdim Fdim C C F F') };
+  return {
+    id: 'bach', no: 'No. 5', title: 'Prelude in C', short: 'J. S. Bach', composer: 'Johann Sebastian Bach',
+    work: 'The Well-Tempered Clavier, Book I, BWV 846 — Prelude No. 1 (arpeggio arrangement)', cartouche: 'Bach',
+    bpb: 4, slot: 2, tempo: 76, tonicPc: 0, tonic: 'C', codaMel: 72, codaWritten: 72, shift: 0, sharps: 0, pxb: 31,
+    transpose: [0, 0, 0, 0], verses: [verse, verse, verse],
+    captions: ['<i>Arpeggiato</i> — flowing keyboard', '<i>Legato</i> — strings echo the pattern', '<i>Tutti</i> — full contrapuntal colors', '<i>Coda, sostenuto</i>'],
+    marks: ['arpeggiato', 'legato', 'tutti', 'sostenuto'], dyn: ['p', 'mp', 'mf', 'p'],
+  };
+})();
+
+/* ---- Eine kleine Nachtmusik (Mozart), I. Allegro ---- */
+const MOZART = (() => {
+  const theme = [
+    [[79,1],[null,.5],[74,.5],[79,1],[null,.5],[74,.5]],
+    [[79,.5],[74,.5],[79,.5],[83,.5],[86,1],[null,1]],
+    [[84,1],[null,.5],[81,.5],[84,1],[null,.5],[81,.5]],
+    [[84,.5],[81,.5],[78,.5],[81,.5],[74,1],[null,1]],
+    [[79,.5],[81,.5],[83,.5],[84,.5],[86,1],[83,1]],
+    [[84,.5],[83,.5],[81,.5],[79,.5],[78,1],[74,1]],
+    [[76,.5],[78,.5],[79,.5],[81,.5],[79,1],[76,1]],
+    [[74,.5],[76,.5],[78,.5],[74,.5],[79,2]],
+  ];
+  const verse = { melody: barsMelody([...theme, ...theme], 4), harmony: words('G G D D C C D7 D7 G G D D C D7 G G') };
+  // One chord per bar in this march-like theme.
+  return {
+    id: 'mozart', no: 'No. 6', title: 'Eine kleine Nachtmusik', short: 'Mozart', composer: 'Wolfgang Amadeus Mozart',
+    work: 'Serenade No. 13 in G major, K. 525 — I. Allegro (opening theme)', cartouche: 'Mozart',
+    bpb: 4, slot: 4, tempo: 144, tonicPc: 7, tonic: 'G', codaMel: 79, codaWritten: 79, shift: 0, sharps: 1, pxb: 34,
+    transpose: [0, 0, 0, 0], verses: [verse, verse, verse],
+    captions: ['<i>Allegro</i> — the signature fanfare', '<i>Giocoso</i> — woodwinds answer', '<i>Tutti, brillante</i> — the orchestra returns', '<i>Coda, con brio</i>'],
+    marks: ['allegro', 'giocoso', 'brillante', 'con brio'], dyn: ['f', 'mp', 'ff', 'f'],
+  };
+})();
+
+const SONGS = [ODE, CANON, MINUET, CLAIR, BACH, MOZART];
 const REHEARSAL = 'ABCDEFGHIJKLM';
 const TEMPO_TERMS = [[60, 'Largo'], [66, 'Larghetto'], [76, 'Adagio'], [108, 'Andante'], [120, 'Moderato'], [156, 'Allegro'], [176, 'Vivace'], [999, 'Presto']];
 const tempoTerm = bpm => TEMPO_TERMS.find(([x]) => bpm < x)[1];
@@ -954,7 +1044,7 @@ function playBuf(mu, t, buf, vel, releaseAt, stopAt) {
 const KEYS_LEN = 2.4;
 const keyFreq = f => Math.round(f * 4);
 function applyReverb() { if (!nodes) return; const t = ctx.currentTime; nodes.dry.gain.setTargetAtTime(1 - S.reverb * .45, t, .05); nodes.wet.gain.setTargetAtTime(S.reverb * 1.6, t, .05); }
-const FOCUS_BOOST = 1.8, FOCUS_DIP = .7;
+const FOCUS_BOOST = 1.5, FOCUS_DIP = .28;
 const soloMu = () => solo == null ? null : MUSICIANS[solo];
 const audible = mu => solo == null ? !S.muted[mu.section] : mu === soloMu();
 function applyMutes() {
@@ -1207,10 +1297,14 @@ function rewind() {
 async function play() {
   if (!ctx) { try { initAudio(); } catch (err) { $('audioError').hidden = false; return false; } }
   if (ctx.state === 'suspended') await ctx.resume();
+  if (document.hidden) return false;
+  // Restore the output only when playback explicitly resumes.
+  nodes.master.gain.cancelScheduledValues(ctx.currentTime);
+  nodes.master.gain.setTargetAtTime(.9, ctx.currentTime, .04);
   if (ended) rewind();
   applyMutes(); prewarm();
   const opening = stage.classList.contains('closed');
-  stage.classList.remove('closed'); $('overlay').classList.add('hidden'); if (!started) say('Hold the mouse and beat the baton back and forth: your pace sets the tempo and the strokes sets the dynamics; start near an instrument section cues it louder.');
+  stage.classList.remove('closed'); $('overlay').classList.add('hidden'); if (!started) say('Drag the baton to conduct pace, tempo, and dynamics. Select an instrument section name to focus.');
   started = true; $('overlayIntro').hidden = true;
   playing = true; nextTime = ctx.currentTime + (opening ? .6 : .08);
   timer = setInterval(scheduler, 25); scheduler();
@@ -1218,8 +1312,13 @@ async function play() {
 }
 function pause() {
   playing = false; clearInterval(timer);
-  if (nodes) { const t = ctx.currentTime; nodes.master.gain.setTargetAtTime(0, t, .08); setTimeout(() => nodes.master.gain.setTargetAtTime(.9, ctx.currentTime, .01), 600); }
+  if (nodes) {
+    const t = ctx.currentTime;
+    nodes.master.gain.cancelScheduledValues(t);
+    nodes.master.gain.setTargetAtTime(0, t, .02);
+  }
   MUSICIANS.forEach(mu => mu.queue.length = 0);
+  clearTrail();
   updatePlayBtn();
 }
 
@@ -1274,8 +1373,8 @@ function layout() {
     const b = document.createElement('button');
     b.className = 'section-label'; b.textContent = sec.name;
     b.style.setProperty('--x', sec.lx.toFixed(2)); b.style.setProperty('--y', sec.ly.toFixed(2));
-    b.setAttribute('aria-pressed', String(!S.muted[sec.id])); b.setAttribute('aria-label', `${sec.name}: toggle mute`);
-    b.addEventListener('click', () => toggleSection(sec.id));
+    b.setAttribute('aria-pressed', 'false'); b.setAttribute('aria-label', `${sec.name}: cue focus`);
+    b.addEventListener('click', e => { if (e.shiftKey) toggleSection(sec.id); else toggleFocus(sec.id); });
     stage.appendChild(b); sec.label = b;
   });
 }
@@ -1306,16 +1405,17 @@ function syncSections() {
   SECTIONS.forEach(sec => {
     const on = !S.muted[sec.id];
     if (!sec.label) return;
-    sec.label.setAttribute('aria-pressed', String(on));
-    sec.label.setAttribute('aria-label', `${sec.name}: ${on ? 'playing' : 'silenced'}. Press to ${on ? 'silence' : 'bring back'}.`);
-    sec.label.title = on ? `Silence ${sec.name}` : `Bring back ${sec.name}`;
+    sec.label.classList.toggle('muted', !on);
+    sec.label.setAttribute('aria-pressed', String(focusSec === sec.id));
+    sec.label.setAttribute('aria-label', `${sec.name}: ${focusSec === sec.id ? 'focused, click to unlock' : 'click to focus'}. Shift-click to ${on ? 'mute' : 'unmute'}.`);
+    sec.label.title = focusSec === sec.id ? `Unfocus ${sec.name}` : `Focus ${sec.name} (Shift-click to ${on ? 'mute' : 'unmute'})`;
   });
   MUSICIANS.forEach(mu => mu.el && mu.el.classList.toggle('muted', S.muted[mu.section]));
 }
 
 /* ---------------- the score strip ---------------- */
 const SVGNS = 'http://www.w3.org/2000/svg';
-let PXB = 34; const PH = 150, STAFF_H = 110, CLEF_W = 92;
+let PXB = 34; const PH = 150, STAFF_H = 110, CLEF_W = 104;
 const LETTER = { 0:0, 1:0, 2:1, 3:2, 4:2, 5:3, 6:3, 7:4, 8:5, 9:5, 10:6, 11:6 };
 const stepOf = m => (Math.floor(m / 12) - 1) * 7 + LETTER[((m % 12) + 12) % 12] - 30; // 0 = E4, bottom line
 const yOf = st => 70 - st * 5;
@@ -1380,8 +1480,9 @@ function buildScoreStrip() {
   el('line', { class: 'bar', x1: 0.5, x2: 0.5, y1: 30, y2: 70 }, svg);
   el('text', { class: 'glyph', x: 4, y: 79, 'font-size': 66 }, svg, '𝄞');
   [[42, 34], [50, 49]].slice(0, SONG.sharps).forEach(([x, y]) => el('text', { class: 'glyph', x, y, 'font-size': 20 }, svg, '♯'));
-  el('text', { class: 'num', x: 70, y: 48, 'font-size': 24, 'text-anchor': 'middle' }, svg, String(BPB));
-  el('text', { class: 'num', x: 70, y: 68, 'font-size': 24, 'text-anchor': 'middle' }, svg, '4');
+  [[40, 48], [48, 33], [56, 53], [64, 38], [72, 58]].slice(0, SONG.flats || 0).forEach(([x, y]) => el('text', { class: 'glyph', x, y, 'font-size': 20 }, svg, '♭'));
+  el('text', { class: 'num', x: 89, y: 48, 'font-size': 24, 'text-anchor': 'middle' }, svg, String(SONG.meterTop || BPB));
+  el('text', { class: 'num', x: 89, y: 68, 'font-size': 24, 'text-anchor': 'middle' }, svg, String(SONG.meterBottom || 4));
   el('rect', { class: 'fade', x: W - 90, y: 0, width: 90, height: STAFF_H }, svg);
   el('line', { class: 'playhead', x1: PH, x2: PH, y1: 22, y2: 80 }, svg);
   drawScore(curBeat);
@@ -1482,7 +1583,7 @@ function frame() {
   rafId = idleFrames < 90 ? requestAnimationFrame(frame) : 0;
 }
 function wake() { idleFrames = 0; if (!rafId) rafId = requestAnimationFrame(frame); }
-function keyName(verse) { const t = SONG.transpose[verse] + S.transpose; return `${NOTE_NAMES[(((SONG.tonicPc + t) % 12) + 12) % 12]} ${S.minor ? 'minor' : 'major'}`; }
+function keyName(verse) { const t = SONG.transpose[verse] + S.transpose; return `${t === 0 && SONG.tonicLabel ? SONG.tonicLabel : NOTE_NAMES[(((SONG.tonicPc + t) % 12) + 12) % 12]} ${S.minor ? 'minor' : 'major'}`; }
 
 /* ============================================================
    CONTROLS
@@ -1494,6 +1595,9 @@ function syncControls() {
 }
 $('startBtn').addEventListener('click', () => play());
 $('playBtn').addEventListener('click', () => { if (playing) pause(); else play(); });
+// Silence the orchestra when the tab is hidden or another window takes focus.
+document.addEventListener('visibilitychange', () => { if (document.hidden) pause(); });
+window.addEventListener('blur', () => { if (ctx) pause(); });
 
 const say = html => { $('receipt').innerHTML = html; };
 const pick = a => a[Math.floor(Math.random() * a.length)];
@@ -1502,7 +1606,7 @@ function reset() {
   S = DEFAULTS(); curDyn = S.dyn;
   MUSICIANS.forEach(mu => mu.octShift = 0);
   if (solo != null) setSolo(null);
-  applyReverb(); applyMutes(); applyTimbre(); prewarm(); syncControls();
+  setFocus(null); applyReverb(); applyMutes(); applyTimbre(); prewarm(); syncControls();
   say(`Restored: ${keyName(0)}, <i>${tempoTerm(SONG.tempo)}</i> ♩ = ${SONG.tempo}, every section in.`);
 }
 /* ---------------- conduct it yourself ---------------- */
@@ -1528,6 +1632,51 @@ function conductTap(x = 50, y = 84) {
 }
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 const G = { svg: $('guideSvg'), origin: $('guideOrigin'), baton: $('guideBaton') };
+/* Baton trace: a short, fading stroke trail makes timing and amplitude legible. */
+const trailCanvas = $('strokeTrail'), trailCtx = trailCanvas.getContext('2d');
+let trail = [], trailFrame = 0, trailScale = 1;
+const TRAIL_LIFE = matchMedia('(prefers-reduced-motion: reduce)').matches ? 350 : 950;
+function trailSize() {
+  const rect = stage.getBoundingClientRect(), dpr = Math.min(2, devicePixelRatio || 1);
+  const w = Math.round(rect.width * dpr), h = Math.round(rect.height * dpr);
+  if (trailCanvas.width !== w || trailCanvas.height !== h) {
+    trailCanvas.width = w; trailCanvas.height = h;
+  }
+  trailScale = dpr;
+}
+function paintTrail(now) {
+  trailFrame = 0;
+  trailSize();
+  const c = trailCtx, w = trailCanvas.width, h = trailCanvas.height;
+  c.clearRect(0, 0, w, h);
+  trail = trail.filter(pt => now - pt.t < TRAIL_LIFE);
+  c.lineCap = 'round'; c.lineJoin = 'round';
+  for (let i = 1; i < trail.length; i++) {
+    const a = trail[i-1], b = trail[i], age = (now - b.t) / TRAIL_LIFE;
+    const alpha = Math.pow(1 - age, 1.5), speed = Math.hypot(b.x-a.x, b.y-a.y);
+    if (speed < .25) continue;
+    c.beginPath(); c.moveTo(a.x*trailScale, a.y*trailScale); c.lineTo(b.x*trailScale,b.y*trailScale);
+    c.strokeStyle = `rgba(246, 220, 154, ${(.22 * alpha).toFixed(3)})`; c.lineWidth = 12 * trailScale * alpha; c.stroke();
+    c.strokeStyle = `rgba(255, 239, 185, ${(.85 * alpha).toFixed(3)})`; c.lineWidth = (1 + 2.2 * alpha) * trailScale; c.stroke();
+  }
+  if (drag && trail.length) { // bright leading point attached to the wand
+    const p = trail[trail.length-1];
+    c.beginPath(); c.arc(p.x*trailScale, p.y*trailScale, 3.2*trailScale, 0, Math.PI*2);
+    c.fillStyle = 'rgba(255,239,185,.85)'; c.fill();
+  }
+  if (trail.length) trailFrame = requestAnimationFrame(paintTrail);
+}
+function trailPoint(x,y) {
+  trail.push({x,y,t:performance.now()});
+  if (trail.length > 140) trail.shift();
+  if (!trailFrame) trailFrame = requestAnimationFrame(paintTrail);
+}
+function clearTrail() {
+  trail = [];
+  if (trailFrame) cancelAnimationFrame(trailFrame);
+  trailFrame = 0; trailCtx.clearRect(0,0,trailCanvas.width,trailCanvas.height);
+}
+
 function conductReadout() { return `${tempoTerm(S.tempo)} ♩ = ${S.tempo} · <i>${dynMark(S.dyn)}</i>`; }
 let suppressClick = false, tilt = 0, lastX = null;
 const stageXY = e => { const r = stage.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top, r }; };
@@ -1536,16 +1685,27 @@ function placeBaton(x, y) {
   lastX = x;
   G.baton.style.setProperty('--hx', x.toFixed(0)); G.baton.style.setProperty('--hy', y.toFixed(0)); G.baton.style.setProperty('--tilt', tilt.toFixed(1));
 }
-function sectionAt(x, y, r) { // the section nearest the press point, if it's close enough to be "on" it
-  let best = null, bestD = Math.min(r.width, r.height) * .1;
-  MUSICIANS.forEach(mu => { const d = Math.hypot(mu.x / 100 * r.width - x, mu.y / 100 * r.height - y); if (d < bestD) { bestD = d; best = mu.section; } });
-  SECTIONS.forEach(sec => { const d = Math.hypot(sec.lx / 100 * r.width - x, sec.ly / 100 * r.height - y); if (d < bestD) { bestD = d; best = sec.id; } });
-  return best;
+function labelAt(clientX, clientY) {
+  return SECTIONS.find(sec => {
+    const r = sec.label.getBoundingClientRect();
+    return clientX >= r.left && clientX <= r.right && clientY >= r.top && clientY <= r.bottom;
+  })?.id || null;
 }
 function setFocus(id) {
-  if (focusSec === id) return; focusSec = id; applyMutes();
-  SECTIONS.forEach(sec => sec.label.classList.toggle('focus', sec.id === id));
+  if (focusSec === id) return;
+  focusSec = id;
+  if (id && S.muted[id]) S.muted[id] = false;
+  stage.classList.toggle('cue-active', id != null);
+  SECTIONS.forEach(sec => {
+    sec.label.classList.toggle('focus', sec.id === id);
+    sec.light.classList.toggle('cuing', sec.id === id);
+  });
+  MUSICIANS.forEach(mu => mu.el.classList.toggle('cuing', mu.section === id));
+  applyMutes(); syncSections(); wake();
+  if (id) say(`<b>${SECTIONS.find(s => s.id === id).name}</b> focused. Click again to unlock, or drag across another section name.`);
+  else say('All sections are back in focus.');
 }
+function toggleFocus(id) { setFocus(focusSec === id ? null : id); }
 const HYST = 10, MIN_STROKE = 24; // px: a turn must travel back 10 px, and a stroke must span 24 px, to count as a beat
 function strokeBeat(amp, x, y) {
   const now = ctx.currentTime;
@@ -1568,7 +1728,6 @@ function conductMove(x, y) {
     if (Math.hypot(dx, dy) < 8) return;
     drag.moved = true; stage.classList.add('conducted');
     if (drag.onButton) { stage.setPointerCapture(drag.id); suppressClick = true; } // a drag that starts on an instrument conducts, not solos
-    if (drag.focus) setFocus(drag.focus);
   }
   for (const k of ['x', 'y']) { // a beat is a turn-around on either axis
     const a = drag.ax[k], v = k === 'x' ? x : y;
@@ -1584,21 +1743,28 @@ stage.addEventListener('pointerdown', e => {
   if (e.target.closest('.overlay') || !playing || e.button > 0) return;
   const { x, y, r } = stageXY(e), onButton = !!e.target.closest('button');
   drag = { x0: x, y0: y, t0: performance.now(), moved: false, onButton, id: e.pointerId, w: r.width, h: r.height,
-    ax: { x: { ext: x, prev: x, dir: 0 }, y: { ext: y, prev: y, dir: 0 } }, beats: [], lastBeat: -1, focus: sectionAt(x, y, r) };
+    ax: { x: { ext: x, prev: x, dir: 0 }, y: { ext: y, prev: y, dir: 0 } }, beats: [], lastBeat: -1, hovered: null };
   if (!onButton) stage.setPointerCapture(e.pointerId);
   G.svg.setAttribute('viewBox', `0 0 ${r.width} ${r.height}`); G.origin.setAttribute('cx', x); G.origin.setAttribute('cy', y);
-  stage.classList.add('holding'); placeBaton(x, y);
+  stage.classList.add('holding'); placeBaton(x, y); trailPoint(x, y);
 });
 stage.addEventListener('pointermove', e => {
   const { x, y } = stageXY(e); placeBaton(x, y);
-  if (drag) conductMove(x, y);
+  if (drag && e.pointerId === drag.id) {
+    trailPoint(x, y);
+    conductMove(x, y);
+    if (drag.moved) {
+      const hit = labelAt(e.clientX, e.clientY);
+      if (hit !== drag.hovered) { drag.hovered = hit; if (hit) setFocus(hit); }
+    }
+  }
 });
 stage.addEventListener('click', e => { if (suppressClick) { e.stopPropagation(); e.preventDefault(); suppressClick = false; } }, true);
 function endHold() {
   if (!drag) return;
   if (!drag.moved && !drag.onButton && performance.now() - drag.t0 < 250) conductTap(drag.x0 / drag.w * 100, drag.y0 / drag.h * 100); // a quick click is a beat tap
   else if (drag.moved) say(`Conducting at ${conductReadout()}. The band keeps your tempo until you conduct again; Restore returns to the written tempo.`);
-  setFocus(null); stage.classList.remove('holding'); drag = null;
+  stage.classList.remove('holding'); drag = null;
 }
 stage.addEventListener('pointerup', endHold);
 stage.addEventListener('pointercancel', endHold);
@@ -1627,19 +1793,18 @@ function buildPicker() {
 }
 function syncPicker() {
   SONGS.forEach(song => { const on = song === SONG; song.btn.setAttribute('aria-checked', String(on)); song.btn.tabIndex = on ? 0 : -1; });
-  document.title = `The Emoji Philharmonic — ${SONG.title}`;
 }
 async function loadSong(song) {
   if (song === SONG) return;
   const wasPlaying = playing;
-  if (playing) { playing = false; clearInterval(timer); }
-  setSong(song); buildScore(); rewind();
+  if (playing) pause();
+  setFocus(null); setSong(song); buildScore(); rewind();
   if (!wasPlaying) { stage.classList.add('closed'); $('startBtn').textContent = 'Are you dragging?'; $('overlay').classList.remove('hidden'); }
   S.tempo = song.tempo; curBpm = song.tempo;
   MUSICIANS.forEach(mu => mu.queue.length = 0);
   buildScoreStrip(); syncPicker(); syncControls();
   UI.nowVerse.innerHTML = ''; pNowVerse = ''; prewarm();
-  say(`Now playing <b>${song.title}</b> by ${song.composer}, in ${keyName(0)}, ${BPB}/4 time.`);
+  say(`Now playing <b>${song.title}</b> by ${song.composer}, in ${keyName(0)}, ${SONG.meterTop || BPB}/${SONG.meterBottom || 4} time.`);
   if (wasPlaying) await play(); else updatePlayBtn();
 }
 
@@ -1647,7 +1812,7 @@ $('resetBtn').addEventListener('click', reset);
 document.addEventListener('keydown', e => {
   if (e.target.matches('input, textarea') || e.metaKey || e.ctrlKey || e.altKey) return;
   const sec = SECTIONS.find(s => s.key === e.key);
-  if (sec) { toggleSection(sec.id); return; }
+  if (sec) { if (e.shiftKey) toggleSection(sec.id); else toggleFocus(sec.id); return; }
   if (e.key === 'Escape' && solo != null) { setSolo(null); say('The full orchestra is back.'); return; }
   if (e.code === 'Space' && !e.target.matches('button')) { e.preventDefault(); $('playBtn').click(); }
   else if ((e.key === 't' || e.key === 'T') && playing) conductTap();

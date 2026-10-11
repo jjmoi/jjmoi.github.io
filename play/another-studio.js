@@ -17755,10 +17755,140 @@ $('#summary').addEventListener('click', e => { if (e.target.closest('[data-endsc
   const sky = $('#title-stars'), sx = sky.getContext('2d');
   const fit = () => { sky.width = Math.ceil(innerWidth / 3); sky.height = Math.ceil(innerHeight / 3); };
   fit(); addEventListener('resize', fit);
-  const stars = Array.from({ length: 140 }, () => ({ x: Math.random(), y: Math.random() * 0.85, p: Math.random() * 6.3, s: Math.random() < 0.15 ? 2 : 1 }));
+  const stars = Array.from({ length: 64 }, () => ({ x: Math.random(), y: Math.random() * 0.85, p: Math.random() * 6.3, s: Math.random() < 0.15 ? 2 : 1 }));
+  // Rotate a faceted gem, but rasterize it onto the same tiny pixel grid used
+  // for the 16-bit studio sprites. Never draw subpixel SVG paths or gradients.
+  const crystal = $('#title-crystal');
+  const crystalCanvas = crystal.querySelector('canvas');
+  const crystalCtx = crystalCanvas.getContext('2d');
+  const CW = 34, CH = 64, sides = 8;
+  crystalCanvas.width = CW;
+  crystalCanvas.height = CH;
+  crystalCtx.imageSmoothingEnabled = false;
+
+  // Discrete, hand-picked SNES-style shades. Every pixel is one opaque color.
+  const upperPalette = ['#112c53', '#19466e', '#206489', '#2887a7',
+    '#36a8c2', '#62c9d9', '#9ce5e8', '#e2f8f4'];
+  const lowerPalette = ['#0a1b3f', '#102b52', '#19416b', '#205b81',
+    '#287896', '#3b95ae', '#60b7c8', '#a7dfe2'];
+  const edgeColor = '#0a2446';
+  const colors = [...upperPalette, ...lowerPalette, edgeColor].map(hex => {
+    const n = parseInt(hex.slice(1), 16);
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  });
+  const OUTLINE = 16;
+  const facetTones = [.16, -.22, .24, -.13, .27, -.18, .18, -.11];
+  let spinAngle = .22, spinSpeed = 0, drag = null, crystalTime = 0;
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const clamp = (value, lo, hi) => Math.max(lo, Math.min(hi, value));
+  const paintCrystal = () => {
+    const pixels = new Int8Array(CW * CH).fill(-1);
+    const rim = Array.from({ length: sides }, (_, i) => {
+      const a = spinAngle + i * Math.PI * 2 / sides;
+      return { x: 17 + Math.cos(a) * 15, y: 23 + Math.sin(a) * 1.1 };
+    });
+
+    // Point-in-triangle at each pixel center makes all boundaries truly stepped.
+    // Adjacent triangular faces share vertices, preserving the rotating gem.
+    const face = (tipX, tipY, a, b, paletteOffset, shade) => {
+      const minX = Math.max(0, Math.floor(Math.min(tipX, a.x, b.x)));
+      const maxX = Math.min(CW - 1, Math.ceil(Math.max(tipX, a.x, b.x)));
+      const minY = Math.max(0, Math.floor(Math.min(tipY, a.y, b.y)));
+      const maxY = Math.min(CH - 1, Math.ceil(Math.max(tipY, a.y, b.y)));
+      const edge = (ax, ay, bx, by, x, y) =>
+        (x - ax) * (by - ay) - (y - ay) * (bx - ax);
+      const brightness = clamp(Math.round(shade * 6.5), 0, 7);
+      for (let y = minY; y <= maxY; y++) for (let x = minX; x <= maxX; x++) {
+        const px = x + .5, py = y + .5;
+        const e1 = edge(tipX, tipY, a.x, a.y, px, py);
+        const e2 = edge(a.x, a.y, b.x, b.y, px, py);
+        const e3 = edge(b.x, b.y, tipX, tipY, px, py);
+        if (!((e1 >= 0 && e2 >= 0 && e3 >= 0) || (e1 <= 0 && e2 <= 0 && e3 <= 0))) continue;
+        // A few clustered highlight pixels add 16-bit texture, no blur or noise.
+        const highlight = brightness >= 5 && y > 6 && y < 27 &&
+          (x + y * 2) % 11 === 0 && (x + y) % 3 === 0 ? 1 : 0;
+        pixels[y * CW + x] = paletteOffset + Math.min(7, brightness + highlight);
+      }
+    };
+
+    for (let i = 0; i < sides; i++) {
+      const next = (i + 1) % sides;
+      const mid = spinAngle + (i + .5) * Math.PI * 2 / sides;
+      if (Math.sin(mid) <= 0) continue;
+      const a = rim[i], b = rim[next];
+      const light = clamp(.56 - Math.cos(mid) * .22 + Math.sin(mid) * .16 + facetTones[i], .12, 1.08);
+      face(17, 62, a, b, 8, light * .88);
+      face(17, 1, a, b, 0, light);
+    }
+
+    // A single-pixel outline is a 2px outline at the displayed size.
+    // Apply outside the filled shape, so the face colors stay intact.
+    const body = pixels.slice();
+    for (let y = 1; y < CH - 1; y++) for (let x = 1; x < CW - 1; x++) {
+      const k = y * CW + x;
+      if (body[k] !== -1) continue;
+      if (body[k - 1] !== -1 || body[k + 1] !== -1 ||
+          body[k - CW] !== -1 || body[k + CW] !== -1) pixels[k] = OUTLINE;
+    }
+
+    const frame = crystalCtx.createImageData(CW, CH);
+    for (let k = 0; k < pixels.length; k++) {
+      const id = pixels[k];
+      if (id < 0) continue;
+      const rgb = colors[id], offset = k * 4;
+      frame.data[offset] = rgb[0];
+      frame.data[offset + 1] = rgb[1];
+      frame.data[offset + 2] = rgb[2];
+      frame.data[offset + 3] = 255;
+    }
+    crystalCtx.putImageData(frame, 0, 0);
+  };
+  crystal.addEventListener('pointerdown', e => {
+    if (e.button !== 0) return;
+    crystal.focus({ preventScroll: true });
+    crystal.setPointerCapture(e.pointerId);
+    drag = { id: e.pointerId, x: e.clientX, time: e.timeStamp };
+    spinSpeed = 0;
+    crystal.classList.add('dragging');
+  });
+  crystal.addEventListener('pointermove', e => {
+    if (!drag || drag.id !== e.pointerId) return;
+    const dx = e.clientX - drag.x;
+    spinAngle += dx * .019;
+    spinSpeed = clamp(dx * .014, -.2, .2);
+    drag.x = e.clientX;
+    drag.time = e.timeStamp;
+    paintCrystal();
+  });
+  const releaseCrystal = e => {
+    if (!drag || drag.id !== e.pointerId) return;
+    drag = null;
+    crystal.classList.remove('dragging');
+    if (crystal.hasPointerCapture(e.pointerId)) crystal.releasePointerCapture(e.pointerId);
+  };
+  crystal.addEventListener('pointerup', releaseCrystal);
+  crystal.addEventListener('pointercancel', releaseCrystal);
+  crystal.addEventListener('lostpointercapture', releaseCrystal);
+  const crystalSpin = direction => {
+    spinAngle += direction * (Math.PI / 9);
+    spinSpeed = direction * .055;
+    paintCrystal();
+  };
+  const animateCrystal = t => {
+    const dt = crystalTime ? Math.min(40, t - crystalTime) : 16;
+    crystalTime = t;
+    if (!drag) {
+      if (!reduceMotion.matches) spinAngle += dt * .00034 + spinSpeed * dt / 16;
+      spinSpeed *= Math.pow(.94, dt / 16);
+      paintCrystal();
+    }
+  };
+  paintCrystal();
+
   let shooter = null, raf = 0;
   const twinkle = t => {
     if (title.hidden) return;
+    animateCrystal(t);
     sx.clearRect(0, 0, sky.width, sky.height);
     for (const st of stars) { sx.globalAlpha = 0.35 + 0.65 * Math.abs(Math.sin(t / 900 + st.p)); sx.fillStyle = st.s > 1 ? cssVar('--title-gold-hi') : cssVar('--ui-text'); sx.fillRect(Math.round(st.x * sky.width), Math.round(st.y * sky.height), st.s, st.s); }
     if (!shooter && Math.random() < 0.004) shooter = { x: Math.random() * sky.width, y: Math.random() * sky.height * 0.4, life: 1 };
@@ -17788,25 +17918,25 @@ $('#summary').addEventListener('click', e => { if (e.target.closest('[data-endsc
   const walk = setInterval(drawWalkers, 260);
 
   const LINES = [
-    'In a small studio on a quiet street, passionated designers comes together to make wonderful things. They share deadlines, dreams, hopes and fears, and a very good dog.',
+    'In a small studio on a quiet street, a group of passionate designers share dreams and fears, deadlines, and one very good dog.',
   ];
   let stage = 'splash', timers = [];
   const snapNow = local.sim().snapshot();
   const items = [
     ...(hadSave ? [{ act: 'continue', label: 'Continue', meta: snapNow.clock.replace(/^(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)(?:, )?/, '') }] : []),
-    { act: hadSave ? 'new' : 'continue', label: hadSave ? 'New Game' : 'Start', meta: hadSave ? 'Start over on Day 100' : `${snapNow.clock} · a fresh studio` },
+    { act: hadSave ? 'new' : 'continue', label: hadSave ? 'New Simulation' : 'Start', meta: hadSave ? 'Start over on Day 100' : `${snapNow.clock} · a fresh studio` },
   ];
-  let sel = 0, armedNew = false;
+  let sel = 0;
   const drawMenu = () => {
-    menu.innerHTML = items.map((it, i) => `<button type="button" data-i="${i}" class="btn title-action${i === sel ? ' on' : ''}${it.act === 'new' && armedNew ? ' warn' : ''}">${esc(it.act === 'new' && armedNew ? 'Erase this world? Press again' : it.label)}${it.meta ? `<span class="meta">${esc(it.meta)}</span>` : ''}</button>`).join('');
+    menu.innerHTML = items.map((it, i) => `<button type="button" data-i="${i}" class="btn title-action${i === sel ? ' on' : ''}">${esc(it.label)}${it.meta ? `<span class="meta">${esc(it.meta)}</span>` : ''}</button>`).join('');
     // Hovering either option always plays the retro menu sound, including the
     // option selected by default. Avoid rebuilding on hover (and losing focus).
     for (const button of menu.querySelectorAll('button[data-i]')) {
       button.addEventListener('pointerenter', () => {
         if (stage !== 'menu') return;
         blip();
-        sel = Number(button.dataset.i);
-        armedNew = false;
+        const next = Number(button.dataset.i);
+        sel = next;
         menu.querySelectorAll('button[data-i]').forEach(b => b.classList.toggle('on', b === button));
       });
     }
@@ -17830,7 +17960,7 @@ $('#summary').addEventListener('click', e => { if (e.target.closest('[data-endsc
     // Show the controls exactly when the last sentence has fully faded in.
     timers.push(setTimeout(showMenu, lead + (LINES.length - 1) * stagger + fade));
   };
-  const close = () => {
+  const close = (restorePaused = wasPaused) => {
     if (stage === 'closing') return;
     stage = 'closing';
     // Keep the selection sound, then mute the studio before revealing it.
@@ -17842,7 +17972,7 @@ $('#summary').addEventListener('click', e => { if (e.target.closest('[data-endsc
     clearInterval(walk);
     timers.forEach(clearTimeout);
     setTimeout(() => { title.hidden = true; cancelAnimationFrame(raf); }, 900);
-    control({ paused: wasPaused });
+    control({ paused: restorePaused });
     removeEventListener('keydown', onKey, true);
   };
   const choose = i => {
@@ -17852,19 +17982,28 @@ $('#summary').addEventListener('click', e => { if (e.target.closest('[data-endsc
     blip(true);
     if (it.act === 'continue') return close();
     if (it.act === 'new') {
-      if (!armedNew) { armedNew = true; sel = i; return drawMenu(); }
-      closeInspect(true); local.reset(); setTab(tab); control({ paused: false }); close();
+      closeInspect(true); local.reset(); setTab(tab); close(false);
     }
   };
-  const move = d => { sel = (sel + d + items.length) % items.length; armedNew = false; blip(); drawMenu(); };
+  const move = d => { sel = (sel + d + items.length) % items.length; blip(); drawMenu(); };
   const onKey = e => {
     if (title.hidden || stage === 'closing') return;
     e.stopPropagation(); e.preventDefault();
+    if (document.activeElement === crystal && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
+      crystalSpin(e.key === 'ArrowLeft' ? -1 : 1);
+      return;
+    }
+    if (e.key === 'Tab') {
+      const targets = [crystal, ...(stage === 'menu' ? menu.querySelectorAll('button[data-i]') : [])];
+      const current = targets.indexOf(document.activeElement);
+      const next = (current + (e.shiftKey ? -1 : 1) + targets.length) % targets.length;
+      targets[next].focus();
+      return;
+    }
     if (stage !== 'menu') return;
     if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === 's') move(1);
     else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'w') move(-1);
     else if (e.key === 'Enter' || e.key === ' ') choose(sel);
-    else if (e.key === 'Tab') { move(e.shiftKey ? -1 : 1); menu.querySelectorAll('button')[sel]?.focus(); }
   };
   addEventListener('keydown', onKey, true);
   menu.addEventListener('click', e => { const button = e.target.closest('button[data-i]'); if (button) choose(Number(button.dataset.i)); });

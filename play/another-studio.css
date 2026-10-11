@@ -630,13 +630,22 @@ kbd { font-family: var(--font-ui); border: 1px solid var(--ui-win-border); borde
 .splash-party canvas { width: 32px; height: 48px; flex: none; image-rendering: pixelated; }
 .title-stars { position: absolute; inset: 0; width: 100%; height: 100%; image-rendering: pixelated; }
 .title-inner { position: relative; display: flex; flex-direction: column; align-items: center; gap: var(--space-3); text-align: center; padding: var(--space-5); width: min(720px, 100%); }
-/* the crystal: a cut gem that floats and turns, with a soft glow */
-.crystal { position: relative; width: var(--title-crystal-w); height: calc(var(--title-crystal-w) * 1.9); animation: crystal-float 4s ease-in-out infinite; filter: drop-shadow(0 0 var(--space-4) var(--title-glow)); }
-.crystal i, .crystal s { position: absolute; inset: 0; display: block; }
-.crystal i { background: linear-gradient(100deg, var(--title-crystal-hi), var(--title-crystal) 45%, var(--title-crystal-lo)); clip-path: polygon(50% 0, 100% 34%, 50% 100%, 0 34%); animation: crystal-turn 6s ease-in-out infinite; }
-.crystal s { background: rgba(255, 255, 255, 0.35); clip-path: polygon(50% 0, 70% 34%, 50% 100%, 30% 34%); mix-blend-mode: overlay; }
+/* 16-bit crystal: low-resolution pixels, crisp silhouette and hard-edged facets. */
+.crystal {
+  position: relative;
+  width: var(--title-crystal-w);
+  height: calc(var(--title-crystal-w) * 1.9);
+  animation: crystal-float 4s ease-in-out infinite;
+  filter: drop-shadow(2px 3px 0 #081735);
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.crystal:focus, .crystal:focus-visible { outline: none; box-shadow: none; }
+.crystal.dragging { cursor: grabbing; }
+.crystal canvas { display: block; width: 100%; height: 100%; image-rendering: crisp-edges; image-rendering: pixelated; pointer-events: none; }
 @keyframes crystal-float { 50% { transform: translateY(calc(var(--space-2) * -1)); } }
-@keyframes crystal-turn { 50% { transform: scaleX(0.72); filter: brightness(1.15); } }
 /* the logo: gold, beveled, with a deep shadow, in the pixel face */
 .title-logo { margin: 0; font-family: var(--font-ui); font-size: var(--title-logo-size); letter-spacing: 0.06em; line-height: 1;
   background: linear-gradient(var(--title-gold-hi) 15%, var(--title-gold) 50%, var(--title-gold-lo) 85%); -webkit-background-clip: text; background-clip: text; color: transparent;
@@ -648,11 +657,10 @@ kbd { font-family: var(--font-ui); border: 1px solid var(--ui-win-border); borde
 @keyframes prologue-in { to { opacity: 1; } }
 /* Actions appear in place, directly under the completed story. */
 .title-menu { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: var(--space-3); width: 100%; margin-top: calc(var(--space-4) * 2); animation: prologue-in 0.35s ease forwards; }
-.title-action { width: 212px; flex: 0 0 212px; min-height: var(--tap); padding: var(--space-2) var(--space-4); font-size: var(--text-md); text-align: center; }
+.title-action { width: 264px; flex: 0 0 264px; min-height: var(--tap); padding: var(--space-2) var(--space-4); font-size: var(--text-md); text-align: center; white-space: nowrap; }
 .title-action .meta { display: block; font-size: var(--text-xs); color: var(--ui-muted); margin-top: var(--space-1); }
 .title-action.on { border-color: var(--title-gold); }
-.title-action.warn { color: var(--ui-bad); }
 .title-action:hover, .title-action:focus-visible { background: var(--ui-win-hover); }
 .title-copy { max-width: 640px; margin: var(--space-3) 0 0; font-size: var(--text-xs); line-height: 1.6; color: var(--ui-muted); letter-spacing: 0; }
-@media (prefers-reduced-motion: reduce) { .crystal, .crystal i { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .crystal { animation: none; } }
 @media (max-height: 640px) { :root { --title-crystal-w: 44px; } .title-inner { gap: var(--space-2); } .title-stage { min-height: 10rem; padding-top: var(--space-2); } }
