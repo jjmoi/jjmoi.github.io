@@ -15931,17 +15931,26 @@ function crackle() {
 }
 
 function setSound(on) {
-  audio.on = on;
-  if (on) {
+  // Never enable audio in a hidden tab. Returning to the tab never auto-unmutes.
+  audio.on = !!on && !document.hidden;
+  if (audio.on) {
     ensure(); ac.resume();
     nextNote = ac.currentTime + 0.1;
     if (!timer) timer = setInterval(schedule, 100);
     if (!crackleSrc) crackle();
     master.gain.setTargetAtTime(0.5, ac.currentTime, 0.2);
   } else if (ac) {
-    master.gain.setTargetAtTime(0, ac.currentTime, 0.15);
     clearInterval(timer); timer = null;
+    master.gain.cancelScheduledValues(ac.currentTime);
+    master.gain.setValueAtTime(0, ac.currentTime);
+    ac.suspend();
   }
+}
+
+// Browsers may defer autoplay until the first interaction. The request to play
+// starts with the sprite splash; resume the same song on a user's first gesture.
+function resumeSound() {
+  if (audio.on && ac?.state === 'suspended' && !document.hidden) ac.resume();
 }
 
 const sfx = {
@@ -15955,6 +15964,7 @@ const sfx = {
 // The title-screen prelude: a rising and falling harp arpeggio over four chords, the way
 // the early Final Fantasy games opened. Plays once per call; returns the time it takes.
 function prelude() {
+  if (!audio.on || document.hidden) return 0;
   ensure(); ac.resume();
   const t0 = ac.currentTime + 0.05, step = 0.11;
   const out = ac.createGain(); out.gain.value = 0.55; out.connect(master);
@@ -15975,9 +15985,9 @@ function prelude() {
   return i * step + 1;
 }
 // A menu blip, like moving the cursor in a command window.
-function blip(hi = false) { if (!ac) return; tone(hi ? 1320 : 990, ac.currentTime, 0.05, 'square', 0.04, sfxGain); }
+function blip(hi = false) { if (!audio.on || !ac || document.hidden) return; tone(hi ? 1320 : 990, ac.currentTime, 0.05, 'square', 0.04, sfxGain); }
 
-return { get audio() { return audio; }, get setSound() { return setSound; }, get sfx() { return sfx; }, get prelude() { return prelude; }, get blip() { return blip; } };
+return { get audio() { return audio; }, get setSound() { return setSound; }, get sfx() { return sfx; }, get prelude() { return prelude; }, get blip() { return blip; }, get resumeSound() { return resumeSound; } };
 })();
 
 // ---- export.js
@@ -16134,7 +16144,7 @@ const { C, S, T, SH, sprite, avatarURL, drawTile, drawObject } = __mods["sprites
 const { renderArtifact, CASE_PAGES } = __mods["artifacts.js"];
 const { creditName, PHASES: PHASE_NAMES, AWARDS, dowOf, dateOf } = __mods["sim/studio.js"];
 const { createLocalSim, SAVE_KEY } = __mods["local.js"];
-const { setSound, sfx, audio, prelude, blip } = __mods["audio.js"];
+const { setSound, sfx, audio, prelude, blip, resumeSound } = __mods["audio.js"];
 const { downloadDataURL, buildPDF, toJPEG } = __mods["export.js"];
 const { SCENARIOS } = __mods["sim/scenarios.js"];
 const { CHAT_CHOICES } = __mods["sim/brain.js"];
@@ -16814,11 +16824,15 @@ $('#reset').onclick = () => {
   ] });
 };
 for (const btn of document.querySelectorAll('.speed')) btn.onclick = () => control({ speed: Number(btn.dataset.speed) });
-$('#sound').onclick = () => {
-  setSound(!audio.on);
+const syncSoundControl = () => {
   $('#sound').setAttribute('aria-pressed', String(audio.on));
   $('#sound').textContent = audio.on ? '🔊 Sound' : '🔇 Sound';
 };
+$('#sound').onclick = () => { setSound(!audio.on); syncSoundControl(); };
+const muteWhenAway = () => { if (audio.on) { setSound(false); syncSoundControl(); } };
+document.addEventListener('visibilitychange', () => { if (document.hidden) muteWhenAway(); });
+window.addEventListener('blur', muteWhenAway);
+syncSoundControl();
 // Sound effects driven by what's happening on the map.
 function playSfx(prev, msg) {
   if (!audio.on || !prev || msg.init) return;
@@ -17723,16 +17737,21 @@ function scenarioBlock() {
 }
 $('#summary').addEventListener('click', e => { if (e.target.closest('[data-endscen]')) { local.sim().endScenario(); renderSummary(); } });
 
-// ------------------------------------------------------------------ title screen
-// Opens every visit, like the early Final Fantasy games: a starfield and a turning
-// crystal, "Press any key", a short prologue that fades in line by line (with the harp
-// prelude), then the party walks in and a command window offers Continue / New Game /
-// Sound. The studio waits, paused, until you choose.
+// ------------------------------------------------------------------ opening sequence
+// On every visit: centered animated character sprites alone for 2.5 seconds,
+// fade to the title, then reveal the story and its choices without an extra step.
 {
-  const title = $('#title'), press = $('#title-press'), pro = $('#title-prologue'), menu = $('#title-menu'), party = $('#title-party');
+  const splash = $('#splash'), title = $('#title');
+  const pro = $('#title-prologue'), menu = $('#title-menu'), party = $('#splash-party');
   const wasPaused = local.sim().paused;
   control({ paused: true });
-  // stars that twinkle, and now and then one that falls
+  // The opening song starts on the sprite-only splash and continues through
+  // the title and story. Gameplay always begins muted.
+  setSound(true);
+  syncSoundControl();
+  const unlockAudio = () => resumeSound();
+  document.addEventListener('pointerdown', unlockAudio, { capture: true });
+  document.addEventListener('keydown', unlockAudio, { capture: true });
   const sky = $('#title-stars'), sx = sky.getContext('2d');
   const fit = () => { sky.width = Math.ceil(innerWidth / 3); sky.height = Math.ceil(innerHeight / 3); };
   fit(); addEventListener('resize', fit);
@@ -17748,69 +17767,124 @@ $('#summary').addEventListener('click', e => { if (e.target.closest('[data-endsc
     raf = requestAnimationFrame(twinkle);
   };
   raf = requestAnimationFrame(twinkle);
-  // the party: everyone at the studio, walking in place
+
+  // Draw the original game sprites at their native resolution, then enlarge in CSS.
   const cast = world.personas.filter(p => local.sim().agents.has(p.id));
-  const walkers = cast.map(p => { const c = document.createElement('canvas'); c.width = 16; c.height = SH; c.title = p.short; party.append(c); return { p, c }; });
-  let step = 0;
-  const walk = setInterval(() => { step++; for (const { p, c } of walkers) { const g = c.getContext('2d'); g.clearRect(0, 0, 16, SH); g.drawImage(sprite(p, p.look.dog ? 'right' : 'down', p.look.dog ? (step % 2) + 1 : (step % 2) + 1), 0, 0); } }, 260);
-  // the prologue
+  const walkers = cast.map(p => {
+    const canvas = document.createElement('canvas');
+    canvas.width = 16; canvas.height = SH;
+    party.append(canvas);
+    return { p, canvas, ctx: canvas.getContext('2d') };
+  });
+  let walkStep = 0;
+  const drawWalkers = () => {
+    for (const { p, canvas, ctx } of walkers) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(sprite(p, p.look.dog ? 'right' : 'down', walkStep % 2 + 1), 0, 0);
+    }
+    walkStep++;
+  };
+  drawWalkers();
+  const walk = setInterval(drawWalkers, 260);
+
   const LINES = [
-    'In a small studio on a quiet street, a handful of designers make beautiful things.',
-    'They have deadlines, dreams, and one very good dog.',
+    'In a small studio on a quiet street, passionated designers comes together to make wonderful things. They share deadlines, dreams, hopes and fears, and a very good dog.',
   ];
-  let stage = 'press', timers = [];
+  let stage = 'splash', timers = [];
   const snapNow = local.sim().snapshot();
   const items = [
-    ...(hadSave ? [{ act: 'continue', label: 'Continue', meta: snapNow.clock }] : [{ act: 'continue', label: 'Begin', meta: `${snapNow.clock} · a fresh studio` }]),
-    ...(hadSave ? [{ act: 'new', label: 'New Game', meta: 'Start over on Day 100' }] : []),
+    ...(hadSave ? [{ act: 'continue', label: 'Continue', meta: snapNow.clock.replace(/^(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)(?:, )?/, '') }] : []),
+    { act: hadSave ? 'new' : 'continue', label: hadSave ? 'New Game' : 'Start', meta: hadSave ? 'Start over on Day 100' : `${snapNow.clock} · a fresh studio` },
   ];
   let sel = 0, armedNew = false;
   const drawMenu = () => {
-    menu.querySelector('ul').innerHTML = items.map((it, i) => `<li role="menuitem" data-i="${i}" class="${i === sel ? 'on' : ''}${it.act === 'new' && armedNew ? ' warn' : ''}">${esc(it.act === 'new' && armedNew ? 'Erase this world? Choose again' : typeof it.label === 'function' ? it.label() : it.label)}${it.meta ? `<span class="meta">${esc(it.meta)}</span>` : ''}</li>`).join('');
+    menu.innerHTML = items.map((it, i) => `<button type="button" data-i="${i}" class="btn title-action${i === sel ? ' on' : ''}${it.act === 'new' && armedNew ? ' warn' : ''}">${esc(it.act === 'new' && armedNew ? 'Erase this world? Press again' : it.label)}${it.meta ? `<span class="meta">${esc(it.meta)}</span>` : ''}</button>`).join('');
+    // Hovering either option always plays the retro menu sound, including the
+    // option selected by default. Avoid rebuilding on hover (and losing focus).
+    for (const button of menu.querySelectorAll('button[data-i]')) {
+      button.addEventListener('pointerenter', () => {
+        if (stage !== 'menu') return;
+        blip();
+        sel = Number(button.dataset.i);
+        armedNew = false;
+        menu.querySelectorAll('button[data-i]').forEach(b => b.classList.toggle('on', b === button));
+      });
+    }
   };
   const showMenu = () => {
-    if (stage === 'menu') return;
-    stage = 'menu'; timers.forEach(clearTimeout);
-    pro.innerHTML = ''; press.hidden = true; menu.hidden = false; party.classList.add('show'); drawMenu();
+    if (stage !== 'prologue') return;
+    stage = 'menu';
+    drawMenu();
+    menu.hidden = false; // Keep the entire story visible, with choices directly below it.
   };
   const begin = () => {
-    stage = 'prologue'; press.hidden = true;
-    try { prelude(); } catch { /* audio blocked: the words carry it */ }
-    LINES.forEach((l, i) => timers.push(setTimeout(() => { const p = document.createElement('p'); p.textContent = l; pro.append(p); if (i === 2) party.classList.add('show'); }, 600 + i * 2100)));
-    // when the story ends, wait for the player (no prompt, no automatic jump)
-    timers.push(setTimeout(() => { if (stage === 'prologue') stage = 'told'; }, 600 + LINES.length * 2100 + 600)); // the story stays up until you press a key or click
+    if (stage !== 'title') return;
+    stage = 'prologue';
+    const lead = 600, stagger = 2100, fade = 1400;
+    LINES.forEach((line, i) => timers.push(setTimeout(() => {
+      if (stage !== 'prologue') return;
+      const p = document.createElement('p');
+      p.textContent = line;
+      pro.append(p);
+    }, lead + i * stagger)));
+    // Show the controls exactly when the last sentence has fully faded in.
+    timers.push(setTimeout(showMenu, lead + (LINES.length - 1) * stagger + fade));
   };
   const close = () => {
-    title.classList.add('leaving'); clearInterval(walk);
+    if (stage === 'closing') return;
+    stage = 'closing';
+    // Keep the selection sound, then mute the studio before revealing it.
+    setSound(false);
+    syncSoundControl();
+    document.removeEventListener('pointerdown', unlockAudio, true);
+    document.removeEventListener('keydown', unlockAudio, true);
+    title.classList.add('leaving');
+    clearInterval(walk);
+    timers.forEach(clearTimeout);
     setTimeout(() => { title.hidden = true; cancelAnimationFrame(raf); }, 900);
     control({ paused: wasPaused });
     removeEventListener('keydown', onKey, true);
   };
   const choose = i => {
-    const it = items[i]; blip(true);
+    if (stage !== 'menu') return;
+    const it = items[i];
+    if (!it) return;
+    blip(true);
     if (it.act === 'continue') return close();
     if (it.act === 'new') {
-      if (!armedNew) { armedNew = true; return drawMenu(); }
+      if (!armedNew) { armedNew = true; sel = i; return drawMenu(); }
       closeInspect(true); local.reset(); setTab(tab); control({ paused: false }); close();
     }
   };
   const move = d => { sel = (sel + d + items.length) % items.length; armedNew = false; blip(); drawMenu(); };
   const onKey = e => {
-    if (title.hidden) return;
+    if (title.hidden || stage === 'closing') return;
     e.stopPropagation(); e.preventDefault();
-    if (stage === 'press') return begin();
-    if (stage === 'prologue' || stage === 'told') return showMenu();
-    if (e.key === 'ArrowDown' || e.key === 's') move(1);
-    else if (e.key === 'ArrowUp' || e.key === 'w') move(-1);
+    if (stage !== 'menu') return;
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === 's') move(1);
+    else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'w') move(-1);
     else if (e.key === 'Enter' || e.key === ' ') choose(sel);
+    else if (e.key === 'Tab') { move(e.shiftKey ? -1 : 1); menu.querySelectorAll('button')[sel]?.focus(); }
   };
-  addEventListener('keydown', onKey, true); // runs before the game's own keys
-  title.addEventListener('click', e => {
-    if (stage === 'press') return begin();
-    if (stage === 'prologue' || stage === 'told') return showMenu();
-    const li = e.target.closest('[data-i]'); if (li) { sel = Number(li.dataset.i); choose(sel); }
+  addEventListener('keydown', onKey, true);
+  menu.addEventListener('click', e => { const button = e.target.closest('button[data-i]'); if (button) choose(Number(button.dataset.i)); });
+  menu.addEventListener('focusin', e => {
+    const button = e.target.closest('button[data-i]');
+    if (button) sel = Number(button.dataset.i);
   });
-  menu.addEventListener('mousemove', e => { const li = e.target.closest('[data-i]'); if (li && Number(li.dataset.i) !== sel) { sel = Number(li.dataset.i); armedNew = false; blip(); drawMenu(); } }); // hovering moves the cursor, with its blip
+
+  // The sprite-only splash is displayed from first paint. Keep it for 2.5 s,
+  // fade it away, then reveal the title and start the story automatically.
+  timers.push(setTimeout(() => {
+    splash.classList.add('leaving');
+    timers.push(setTimeout(() => {
+      splash.hidden = true;
+      clearInterval(walk);
+      title.classList.remove('awaiting-splash');
+      stage = 'title';
+      timers.push(setTimeout(begin, 450));
+    }, 450));
+  }, 2500));
 }
 
 return {  };

@@ -78,21 +78,22 @@
     </aside>
   </main>
 
+  <!-- Sprite-only opening, before the title and story appear. -->
+  <div class="splash" id="splash" aria-label="Loading Another Studio">
+    <div class="splash-party" id="splash-party" aria-hidden="true"></div>
+  </div>
+
   <!-- Title screen, in the spirit of the early Final Fantasy games -->
-  <div class="title" id="title" role="dialog" aria-modal="true" aria-label="Another Studio">
+  <div class="title awaiting-splash" id="title" role="dialog" aria-modal="true" aria-label="Another Studio">
     <canvas class="title-stars" id="title-stars"></canvas>
     <div class="title-inner">
       <div class="crystal" aria-hidden="true"><i></i><s></s></div>
       <h1 class="title-logo">Another Studio</h1>
       <div class="title-stage">
-        <p class="title-press" id="title-press">Press any key</p>
         <div class="title-prologue" id="title-prologue" aria-live="polite"></div>
-        <div class="win title-menu" id="title-menu" hidden>
-          <ul role="menu"></ul>
-        </div>
+        <div class="title-menu" id="title-menu" aria-label="Choose how to play" hidden></div>
       </div>
-      <div class="title-party" id="title-party" aria-hidden="true"></div>
-      <p class="title-copy">© Another Studio · a little life, simulated</p>
+      <p class="title-copy">A simulacra where generative agents collaborate on design projects while questioning their own existence through autonomous interactions and natural language</p>
     </div>
   </div>
   <div class="lightbox" id="modal" hidden role="dialog" aria-modal="true"><div class="win modal-body" id="modal-body"></div></div>
