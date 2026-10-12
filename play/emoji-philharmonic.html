@@ -42,7 +42,7 @@
     --color-light-edge: rgba(255, 214, 150, 0);
     --color-spot-edge: rgba(255, 214, 150, 0);
     --color-chandelier: rgba(255, 220, 160, 0.10);
-    --color-riser: rgba(240, 207, 138, 0.07);
+    --color-riser: rgba(240, 207, 138, 0.025);
     --color-scrim: rgba(17, 6, 5, 0.86);
     --color-shadow: rgba(0, 0, 0, 0.55);
     --color-shadow-soft: rgba(42, 26, 16, 0.25);
@@ -93,6 +93,7 @@
     --size-page-max: 1240px;
     --size-meter-h: 2px;
     --size-score-h: clamp(64px, 11vh, 112px);
+    --status-height: 32px;
 
     /* motion */
     --bob-distance: -12px;
@@ -280,10 +281,12 @@
     -webkit-user-drag: none;
     -webkit-touch-callout: none;
   }
-  .stage.hovering:not(.closed), .stage.hovering:not(.closed) * { cursor: none; }
-  .stage.hovering:not(.closed) .conductor .baton { opacity: 0; }
+  /* The pointer baton is available immediately, including while the intro curtains are closed. */
+  .stage.hovering, .stage.hovering * { cursor: none; }
+  .stage.hovering .conductor .baton { opacity: 0; }
   .stroke-trail { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 7; pointer-events: none; }
-  .guide { position: absolute; inset: 0; z-index: 8; pointer-events: none; }
+  /* Keep the pointer baton above the closed curtains and introductory overlay. */
+  .guide { position: absolute; inset: 0; z-index: 11; pointer-events: none; }
   .guide-baton { /* the flipped sparkle tip, not the handle, sits exactly on the pointer */
     position: absolute; left: calc(var(--hx) * 1px); top: calc(var(--hy) * 1px);
     font-size: var(--text-conductor); line-height: 1;
@@ -292,11 +295,12 @@
     filter: drop-shadow(0 var(--space-1) var(--space-2) var(--color-shadow));
     opacity: 0;
   }
-  .stage.hovering:not(.closed) .guide-baton, .stage.holding .guide-baton { opacity: 1; }
+  .stage.hovering .guide-baton, .stage.holding .guide-baton { opacity: 1; }
   .wand-glyph { display: block; transform: scaleX(-1); }
   .wand-tip { position: absolute; left: 16%; top: 10%; width: 0; height: 0; pointer-events: none; }
   .section-label.focus { color: var(--color-ink); background: var(--color-gold-light); box-shadow: 0 0 12px var(--color-glow), 0 0 26px var(--color-gold); text-shadow: none; }
   .section-label.focus:hover { color: var(--color-ink); background: #fff4d4; box-shadow: 0 0 14px var(--color-gold-light), 0 0 30px var(--color-gold); }
+  .section-label.nearby { color: var(--color-gold-light); background: rgba(217,165,74,.18); box-shadow: 0 0 14px rgba(217,165,74,.4); }
 
   /* stage curtains */
   .drape {
@@ -346,12 +350,13 @@
   .conductor .who {
     display: inline-block; position: relative;
     /* Shift only the wand, never the podium, when the conductor looks around. */
-    transform: translate3d(var(--look-x, 0px), calc(var(--bob, 0) * var(--bob-distance) * 0.5 + var(--look-y, 0px)), 0);
+    transform: translate3d(var(--look-x, 0px), calc(var(--bob, 0) * var(--bob-distance) * 0.5 + var(--look-y, 0px) + var(--jump-y, 0px)), 0);
   }
   .conductor .baton {
     display: inline-block; position: relative; left: 0.12em;
     font-size: var(--text-conductor); transform-origin: 15% 85%;
-    transform: scaleX(-1) rotate(calc(var(--baton, 0) * 1deg));
+    /* The outer rotation is clockwise on screen, even though the emoji is mirrored. */
+    transform: rotate(var(--jump-rotation, 0deg)) scaleX(-1) rotate(calc(var(--baton, 0) * 1deg));
   }
 
   .now {
@@ -413,11 +418,29 @@
   }
   .paper :focus-visible { outline-color: var(--color-focus-ink); }
 
-  .desk { flex: none; padding: var(--space-5) var(--space-6); display: grid; gap: var(--space-3); } /* clear of the engraved rule inset */
+  .desk { flex: none; padding: var(--space-5) var(--space-6); display: grid; grid-template-rows: auto var(--size-score-h) var(--status-height); gap: var(--space-3); } /* fixed status row prevents message length from resizing the programme */
   .staff { display: block; width: 100%; height: var(--size-score-h); }
-  .staff-wrap { position: relative; overflow: hidden; }
+  .staff-wrap {
+    position: relative;
+    overflow: hidden;
+    /* Fade all notation and staff lines before their final pixel is clipped.
+       Masking instead of painting parchment over the SVG avoids a visible seam. */
+    -webkit-mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 122px), transparent calc(100% - 16px));
+    mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 122px), transparent calc(100% - 16px));
+  }
   .staff-layer { position: absolute; inset: 0; width: 100%; height: 100%; }
-  .roll { position: absolute; top: 0; left: 0; height: 100%; will-change: transform; } /* slides on the compositor, no relayout */
+  #staffBack { z-index: 0; }
+  /* Clip the moving score in its own fixed viewport, never against the left page edge.
+     The fixed clef, key, and meter remain fully visible in a separate front layer. */
+  .score-window {
+    position: absolute; top: 0; right: 0; bottom: 0;
+    left: var(--score-head-px, 90px);
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+  }
+  .roll { position: absolute; top: 0; left: calc(-1 * var(--score-head-px, 90px)); height: 100%; will-change: transform; } /* slides on the compositor, no relayout */
+  #staffFront { z-index: 2; pointer-events: none; }
   .roll svg { display: block; height: 100%; }
   .staff .line { stroke: var(--color-ink); stroke-width: 1.1; }
   .staff .bar { stroke: var(--color-ink); stroke-width: 1; }
@@ -435,8 +458,6 @@
   .staff .rm text { fill: var(--color-ink); font-family: var(--font-display); }
   .staff .mark { fill: var(--color-ink-soft); font-family: var(--font-display); font-style: italic; }
   .staff .paperbg { fill: var(--color-parchment); }
-  .staff .fade { fill: url(#fadeGrad); }
-  .staff stop { stop-color: var(--color-parchment); }
   .staff .playhead { stroke: var(--color-oxblood); stroke-width: 1.2; stroke-dasharray: 2 3; }
 
   .desk-row { --control-height: calc(var(--text-md) * 1.15 + var(--space-4) + 2px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, auto) minmax(0, 1fr); align-items: center; gap: var(--space-3); }
@@ -455,12 +476,16 @@
   .btn:active { transform: scale(0.97); }
   .btn.primary { background: var(--color-ink); color: var(--color-parchment); min-width: 6em; }
   .btn.primary:hover { background: var(--color-ink-soft); }
-  #playBtn { gap: .45em; }
-  #playBtn .transport-icon { width: .76em; height: .76em; flex: none; display: block; fill: currentColor; }
+  #playBtn { width: var(--control-height); min-width: var(--control-height); padding: 0; gap: 0; }
+  #playBtn .transport-icon { width: 1em; height: 1em; flex: none; display: block; fill: currentColor; }
   #playBtn[data-playing="true"] .play-icon,
   #playBtn[data-playing="false"] .pause-icon { display: none; }
-  .receipt { font-family: var(--font-display); font-style: italic; font-size: var(--text-sm); color: var(--color-ink-soft); margin: 0; }
+  .status-row { display: flex; align-items: center; min-width: 0; min-height: 0; gap: var(--space-4); overflow: hidden; }
+  .receipt { flex: 1 1 0; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: var(--font-display); font-style: italic; font-size: var(--text-sm); color: var(--color-ink-soft); margin: 0; }
   .receipt b { font-style: normal; font-weight: 400; color: var(--color-ink); }
+  @media (max-width: 980px) {
+    :root { --status-height: 48px; }
+  }
 
   @media (min-width: 721px) and (max-width: 1100px) {
     .desk-row { grid-template-columns: 1fr 1fr; }
@@ -491,7 +516,7 @@
   </header>
 
   <div class="proscenium">
-    <section class="stage closed" id="stage" aria-label="Drag the baton to conduct pace, tempo, and dynamics. Click instrument section names to cue them louder. Drag across section names to toggle their cues. All five sections can remain cued until you unlock them individually. Other sections play at their normal volume.">
+    <section class="stage closed" id="stage" aria-label="Drag the baton to conduct tempo and dynamics. Move near an instrument section to cue it louder briefly. Click a section name to lock its cue.">
       <svg class="risers" id="risers" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg>
       <div class="now" aria-hidden="true">
         <span id="nowVerse"></span>
@@ -510,8 +535,8 @@
       <div class="overlay" id="overlay">
         <div>
           <button class="btn-hero" id="startBtn">Are you dragging?</button>
-          <p class="sub intro paper" id="overlayIntro">Conduct the orchestra by dragging the baton to control pace, tempo, and dynamics. Select section names to cue them louder without quieting the others.</p>
-          <p class="error" id="audioError" hidden>This browser can't synthesize audio. Open the page in Chrome, Safari, or Firefox.</p>
+          <p class="sub intro paper" id="overlayIntro">Conduct the orchestra with your baton to set the tempo and shape the dynamics. Move near an instrument section to cue it briefly.</p>
+          <p class="error" id="audioError" hidden>This browser can’t synthesize audio. Open the page in Chrome, Safari, or Firefox.</p>
         </div>
       </div>
     </section>
@@ -522,13 +547,14 @@
       <button class="btn primary" id="playBtn" aria-label="Play" data-playing="false">
         <svg class="transport-icon play-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4.5 2.8 13 8 4.5 13.2Z"/></svg>
         <svg class="transport-icon pause-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="3.4" y="2.8" width="2" height="10.4"/><rect x="10.6" y="2.8" width="2" height="10.4"/></svg>
-        <span class="transport-label">Play</span>
       </button>
       <div class="songs" role="radiogroup" aria-label="Choose a piece" id="songPicker"></div>
       <button class="btn" id="resetBtn" title="Restore original tempo, dynamics, and instrument balance.">Restore</button>
     </div>
-    <div class="staff staff-wrap" id="staff" aria-hidden="true"><svg class="staff-layer" id="staffBack"></svg><div class="roll" id="roll"><svg id="rollSvg"></svg></div><svg class="staff-layer" id="staffFront"></svg></div>
-    <p class="receipt" id="receipt" role="status" aria-live="polite"></p>
+    <div class="staff staff-wrap" id="staff" aria-hidden="true"><svg class="staff-layer" id="staffBack"></svg><div class="score-window"><div class="roll" id="roll"><svg id="rollSvg"></svg></div></div><svg class="staff-layer" id="staffFront"></svg></div>
+    <div class="status-row">
+      <p class="receipt" id="receipt" role="status" aria-live="polite">Drag to conduct. Click section names to lock a cue.</p>
+    </div>
   </section>
 </main>
 
@@ -941,7 +967,7 @@ const DEFAULTS = () => ({
   brassBright: 1, vibRate: 5.6, vibDepth: 1, windBreath: 1, windBright: 1, percPitch: 1, keysHarm: 1,
 });
 let S = DEFAULTS();
-let solo = null, focusSecs = new Set(), ended = false, started = false, callTimers = [];
+let solo = null, focusSecs = new Set(), nearSection = null, ended = false, started = false, callTimers = [];
 const CUE_UNLOCK_DELAY_MS = 1000;
 const focusLockedAt = new Map();
 let ctx = null, nodes = null, playing = false, step = 0, nextTime = 0, timer = null;
@@ -1082,7 +1108,7 @@ function applyMutes() {
   if (!nodes) return; const t = ctx.currentTime, sm = soloMu();
   const level = s => { // cue boosts only its section; other sections remain at their normal volume
     if (!(sm ? sm.section === s.id : !S.muted[s.id])) return 0;
-    return !sm && focusSecs.has(s.id) ? FOCUS_BOOST : 1;
+    return !sm && (focusSecs.has(s.id) || nearSection === s.id) ? FOCUS_BOOST : 1;
   };
   SECTIONS.forEach(s => nodes.sec[s.id].gain.setTargetAtTime(level(s), t, .08));
   MUSICIANS.forEach(mu => mu.vol.gain.setTargetAtTime(!sm || mu === sm ? 1 : 0, t, .06));
@@ -1357,13 +1383,14 @@ async function play() {
   if (ended) rewind();
   applyMutes(); prewarm();
   const opening = stage.classList.contains('closed');
-  stage.classList.remove('closed'); $('overlay').classList.add('hidden'); if (!started) say('Drag the baton to control tempo and dynamics. Select section names to cue them louder.');
+  stage.classList.remove('closed'); $('overlay').classList.add('hidden'); if (!started) say('Drag to conduct. Move near an instrument section to cue it; click its name to lock.');
   started = true; $('overlayIntro').hidden = true;
   playing = true; nextTime = ctx.currentTime + (opening ? .6 : .08);
   timer = setInterval(scheduler, 25); scheduler();
   updatePlayBtn(); return true;
 }
 function pause() {
+  setNearSection(null);
   const wasPlaying = playing;
   playing = false; clearInterval(timer); timer = null;
   // Cancel a pending next song, but never strand the already-started final curtain call.
@@ -1437,7 +1464,7 @@ function layout() {
   SECTIONS.forEach(sec => {
     const list = MUSICIANS.filter(m => m.section === sec.id && !m.spot), { ax, ay, a0, a1, dx, dy, sx } = sec.row;
     const placed = (x, y) => [50 + (x - 50) * sx + dx, y + dy];
-    const harpX = [9, 16.5, 24];
+    const harpX = [12, 17.5, 23];
     MUSICIANS.filter(m => m.section === sec.id && m.spot).forEach((mu, i) => {
       // Harps run up the left wing, stopping before the first violin.
       if (sec.id === 'strings') {
@@ -1553,18 +1580,18 @@ function el(tag, attrs, parent, text) {
   if (parent) parent.appendChild(n); return n;
 }
 function buildScoreStrip() {
-  // three layers: staff lines (back) · scrolling notes (roll) · clef, fade and playhead (front)
+  // three layers: staff lines (back) · scrolling notes (roll) · clef and playhead (front)
   const wrap = $('staff'), H = Math.max(1, wrap.clientHeight), W = Math.max(420, Math.round(STAFF_H * wrap.clientWidth / H));
   const back = $('staffBack'), front = $('staffFront'), rollSvg = $('rollSvg');
   [back, front].forEach(v => { v.setAttribute('viewBox', `0 0 ${W} ${STAFF_H}`); v.innerHTML = ''; });
   rollSvg.innerHTML = ''; activeIdx = 0; activeNote = null; pShift = ''; rollScale = H / STAFF_H;
-  for (let i = 0; i < 5; i++) el('line', { class: 'line', x1: 0, x2: W, y1: 30 + i * 10, y2: 30 + i * 10 }, back);
+  wrap.style.setProperty('--score-head-px', `${(CLEF_W * rollScale).toFixed(2)}px`);
+  for (let i = 0; i < 5; i++) el('line', { class: 'line', x1: 2, x2: W, y1: 30 + i * 10, y2: 30 + i * 10 }, back);
   const g = scoreGroup = el('g', {}, rollSvg);
   PXB = SONG.pxb;
   const rollW = (LOOP_BEATS + 2) * PXB + 40;
   rollSvg.setAttribute('viewBox', `0 0 ${rollW} ${STAFF_H}`); rollSvg.style.width = `${rollW * rollScale}px`;
-  const svg = front, defs = el('defs', {}, svg), lg = el('linearGradient', { id: 'fadeGrad', x1: 0, x2: 1, y1: 0, y2: 0 }, defs);
-  el('stop', { offset: 0, 'stop-opacity': 0 }, lg); el('stop', { offset: 1, 'stop-opacity': 1 }, lg);
+  const svg = front;
   // notes: three verses + coda
   const notes = GLOBAL_MELODY.map(n => ({ b: n.b, m: n.w, d: n.d, up: SONG.transpose[n.verse] ? 1 : 0 }));
   notes.push({ b: VERSE_BEATS * 3, m: SONG.codaWritten, d: BPB * 2 - 2, up: SONG.transpose[3] ? 1 : 0 });
@@ -1602,14 +1629,13 @@ function buildScoreStrip() {
   }
   // fixed head: clef, key, time — on paper so scrolling notes slide beneath
   el('rect', { class: 'paperbg', x: 0, y: 0, width: CLEF_W, height: STAFF_H }, svg);
-  for (let i = 0; i < 5; i++) el('line', { class: 'line', x1: 0, x2: CLEF_W, y1: 30 + i * 10, y2: 30 + i * 10 }, svg);
-  el('line', { class: 'bar', x1: 0.5, x2: 0.5, y1: 30, y2: 70 }, svg);
+  for (let i = 0; i < 5; i++) el('line', { class: 'line', x1: 2, x2: CLEF_W, y1: 30 + i * 10, y2: 30 + i * 10 }, svg);
+  el('line', { class: 'bar', x1: 2, x2: 2, y1: 30, y2: 70 }, svg);
   el('text', { class: 'glyph', x: 4, y: 79, 'font-size': 66 }, svg, '𝄞');
   [[42, 34], [50, 49]].slice(0, SONG.sharps).forEach(([x, y]) => el('text', { class: 'glyph', x, y, 'font-size': 20 }, svg, '♯'));
   [[40, 48], [48, 33], [56, 53], [64, 38], [72, 58]].slice(0, SONG.flats || 0).forEach(([x, y]) => el('text', { class: 'glyph', x, y, 'font-size': 20 }, svg, '♭'));
   el('text', { class: 'num', x: 89, y: 48, 'font-size': 24, 'text-anchor': 'middle' }, svg, String(SONG.meterTop || BPB));
   el('text', { class: 'num', x: 89, y: 68, 'font-size': 24, 'text-anchor': 'middle' }, svg, String(SONG.meterBottom || 4));
-  el('rect', { class: 'fade', x: W - 90, y: 0, width: 90, height: STAFF_H }, svg);
   el('line', { class: 'playhead', x1: PH, x2: PH, y1: 22, y2: 80 }, svg);
   drawScore(curBeat);
 }
@@ -1662,6 +1688,11 @@ const LIGHT_GAIN = 26;
 const reducedConductorMotion = matchMedia('(prefers-reduced-motion: reduce)');
 let attentionMeasure = -1, attentionSignature = '', attentionSection = null;
 let lookX = 0, lookY = 0, lastLookTime = 0, writtenLookX = 99, writtenLookY = 99;
+// Occasional hop during automatic conducting, scheduled in beats so it tracks tempo.
+let nextJumpBeat = BPB * 3, jumpStartBeat = -Infinity, jumpHeight = 38;
+let nextJumpTilt = 5 + Math.random() * 10, activeJumpTilt = 0, jumpBatonAng = -20;
+const JUMP_DURATION = 1.4, JUMP_ASCENT = .61, JUMP_HOLD = .17, JUMP_RECOVER = .3;
+let lastJumpBeat = 0, writtenJumpY = 99, writtenJumpRotation = 99;
 function conductorAttention(beat) {
   const measure = Math.floor(Math.max(0, beat) / (BPB * 2)); // new focus every two bars
   const signature = [...focusSecs].sort().join(',') + '|' + SECTIONS.filter(s => S.muted[s.id]).map(s => s.id).join(',');
@@ -1720,8 +1751,65 @@ function frame() {
   const patt = BPB === 3 ? [-38, 26, 4] : [-38, 22, -6, 30]; const from = patt[Math.floor(bf)], to = patt[(Math.floor(bf) + 1) % BPB];
   const ang = playing ? from + (to - from) * (1 - Math.cos(ph * Math.PI)) / 2 : -20;
   const cbob = playing ? Math.exp(-ph * 5) * curDyn : 0;
-  if (Math.abs(ang - pAng) > .3) { pAng = ang; UI.baton.style.setProperty('--baton', ang.toFixed(1)); }
-  if (Math.abs(cbob - pCBob) > .004) { pCBob = cbob; UI.conductor.style.setProperty('--bob', cbob.toFixed(3)); }
+  const autoConducting = playing && !stage.classList.contains('hovering') && !drag && !reducedConductorMotion.matches;
+  // Occasional straight vertical jump, with a slow, accelerating ascent and a fast descent.
+  // Discard an old schedule after a rewind or song change.
+  if (cb.beat < lastJumpBeat - 1) {
+    nextJumpBeat = cb.beat + BPB * 3;
+    jumpStartBeat = -Infinity;
+  }
+  lastJumpBeat = cb.beat;
+  if (autoConducting && cb.beat >= nextJumpBeat) {
+    jumpStartBeat = cb.beat;
+    jumpHeight = 38 + Math.random() * 39; // up to 77px
+    jumpBatonAng = ang; // hold the conducting gesture steady while airborne
+    activeJumpTilt = nextJumpTilt;
+    nextJumpTilt = 5 + Math.random() * 10;
+    nextJumpBeat = cb.beat + BPB * (2 + Math.floor(Math.random() * 3));
+  }
+  let jumpY = 0, jumpActive = false;
+  if (autoConducting) {
+    const progress = (cb.beat - jumpStartBeat) / JUMP_DURATION;
+    if (progress >= 0 && progress < 1) {
+      jumpActive = true;
+      // Ease upward, linger briefly at full height, then descend quickly.
+      const rise = progress < JUMP_ASCENT
+        ? Math.pow(progress / JUMP_ASCENT, 2)
+        : progress < JUMP_ASCENT + JUMP_HOLD
+          ? 1
+          : Math.pow(1 - (progress - JUMP_ASCENT - JUMP_HOLD) / (1 - JUMP_ASCENT - JUMP_HOLD), 2);
+      jumpY = -jumpHeight * rise;
+    }
+  }
+  // Prepare with a 5–15° clockwise rotation just before takeoff.
+  // Hold that posture during the straight vertical jump, and smoothly release on landing.
+  let jumpRotation = 0;
+  if (autoConducting) {
+    if (jumpActive) jumpRotation = activeJumpTilt;
+    else if (cb.beat < jumpStartBeat + JUMP_DURATION + JUMP_RECOVER && cb.beat >= jumpStartBeat + JUMP_DURATION) {
+      const land = clamp((cb.beat - jumpStartBeat - JUMP_DURATION) / JUMP_RECOVER, 0, 1);
+      jumpRotation = activeJumpTilt * (1 - land * land * (3 - 2 * land));
+    } else {
+      const prep = clamp((cb.beat - nextJumpBeat + .45) / .45, 0, 1);
+      jumpRotation = nextJumpTilt * prep * prep * (3 - 2 * prep);
+    }
+  }
+  const batonAng = jumpActive ? jumpBatonAng : ang;
+  if (Math.abs(batonAng - pAng) > .3) {
+    pAng = batonAng; UI.baton.style.setProperty('--baton', batonAng.toFixed(1));
+  }
+  if (Math.abs(jumpRotation - writtenJumpRotation) > .15) {
+    writtenJumpRotation = jumpRotation;
+    UI.baton.style.setProperty('--jump-rotation', jumpRotation.toFixed(1) + 'deg');
+  }
+  // Freeze the usual swaying and gaze changes while airborne: the jump stays vertical.
+  if (!jumpActive && Math.abs(cbob - pCBob) > .004) {
+    pCBob = cbob; UI.conductor.style.setProperty('--bob', cbob.toFixed(3));
+  }
+  if (Math.abs(jumpY - writtenJumpY) > .15) {
+    writtenJumpY = jumpY;
+    UI.conductor.style.setProperty('--jump-y', jumpY.toFixed(1) + 'px');
+  }
   // Subtle side-to-side attention on the podium only when auto-conducting.
   // Manual conducting retains complete control of the cursor baton.
   let targetX = 0, targetY = 0;
@@ -1735,7 +1823,7 @@ function frame() {
   const frameTime = performance.now();
   const frameDelay = lastLookTime ? Math.min(80, frameTime - lastLookTime) : 16;
   lastLookTime = frameTime;
-  const ease = 1 - Math.exp(-frameDelay / 470); // glide into each section's direction
+  const ease = jumpActive ? 0 : 1 - Math.exp(-frameDelay / 470); // keep X and Y fixed during each vertical jump
   lookX += (targetX - lookX) * ease;
   lookY += (targetY - lookY) * ease;
   if (Math.abs(lookX - writtenLookX) > .1) {
@@ -1768,7 +1856,6 @@ function updatePlayBtn() {
   wake(); stage.classList.toggle('playing', playing);
   const b = $('playBtn'), label = playing ? 'Pause' : 'Play';
   b.dataset.playing = String(playing);
-  b.querySelector('.transport-label').textContent = label;
   b.setAttribute('aria-label', label);
 }
 function syncControls() {
@@ -1797,27 +1884,60 @@ function reset() {
 /* ---------------- conduct it yourself ---------------- */
 let taps = [], drag = null;
 async function stageKnock() {
-  // A brief, dry click with a faint wooden tick; no lingering snare-like noise.
-  // Route directly to the destination so it works before playback begins.
+  // A dry wooden baton tip striking the podium: a sharp contact click,
+  // short inharmonic wooden resonances, and barely audible early reflections.
+  // Runs directly to the speakers, including before the orchestra starts.
   if (!ctx) { try { initAudio(); } catch { $('audioError').hidden = false; return; } }
   if (ctx.state === 'suspended') await ctx.resume();
   if (playing || document.hidden) return;
+
   const t = ctx.currentTime;
-  const noise = ctx.createBufferSource(), highpass = ctx.createBiquadFilter(), ng = ctx.createGain();
-  noise.buffer = nodes.noise;
-  highpass.type = 'highpass'; highpass.frequency.value = 2200; highpass.Q.value = .7;
-  ng.gain.setValueAtTime(.0001, t);
-  ng.gain.exponentialRampToValueAtTime(.105, t + .001);
-  ng.gain.exponentialRampToValueAtTime(.0001, t + .018);
-  noise.connect(highpass); highpass.connect(ng); ng.connect(ctx.destination);
-  noise.start(t, Math.random()); noise.stop(t + .022);
-  const tick = ctx.createOscillator(), tg = ctx.createGain();
-  tick.type = 'sine'; tick.frequency.setValueAtTime(650, t);
-  tick.frequency.exponentialRampToValueAtTime(380, t + .021);
-  tg.gain.setValueAtTime(.035, t);
-  tg.gain.exponentialRampToValueAtTime(.0001, t + .024);
-  tick.connect(tg); tg.connect(ctx.destination);
-  tick.start(t); tick.stop(t + .025);
+  const pitch = .965 + Math.random() * .07; // tiny natural differences between strikes
+  const force = .94 + Math.random() * .12;
+  const dry = ctx.createGain();
+  dry.gain.value = force;
+  dry.connect(ctx.destination);
+
+  // Two very faint room reflections. No feedback or lingering reverberant tail.
+  for (const [delayTime, level] of [[.032, .055], [.061, .025]]) {
+    const delay = ctx.createDelay(.12), reflection = ctx.createGain();
+    delay.delayTime.value = delayTime;
+    reflection.gain.value = level;
+    dry.connect(delay); delay.connect(reflection); reflection.connect(ctx.destination);
+  }
+
+  // Contact: a bright, 2 ms attack that stops almost immediately (not a snare hiss).
+  const snap = ctx.createBufferSource(), snapFilter = ctx.createBiquadFilter(), snapAmp = ctx.createGain();
+  snap.buffer = nodes.noise;
+  snapFilter.type = 'bandpass'; snapFilter.frequency.value = 2500 * pitch; snapFilter.Q.value = .65;
+  snapAmp.gain.setValueAtTime(.0001, t);
+  snapAmp.gain.exponentialRampToValueAtTime(.25, t + .0015);
+  snapAmp.gain.exponentialRampToValueAtTime(.0001, t + .013);
+  snap.connect(snapFilter); snapFilter.connect(snapAmp); snapAmp.connect(dry);
+  snap.start(t, Math.random() * 1.7); snap.stop(t + .016);
+
+  // Wood grain/body: soft filtered impact with a short, muted decay.
+  const grain = ctx.createBufferSource(), grainFilter = ctx.createBiquadFilter(), grainAmp = ctx.createGain();
+  grain.buffer = nodes.noise;
+  grainFilter.type = 'bandpass'; grainFilter.frequency.value = 480 * pitch; grainFilter.Q.value = .8;
+  grainAmp.gain.setValueAtTime(.0001, t);
+  grainAmp.gain.exponentialRampToValueAtTime(.12, t + .002);
+  grainAmp.gain.exponentialRampToValueAtTime(.0001, t + .055);
+  grain.connect(grainFilter); grainFilter.connect(grainAmp); grainAmp.connect(dry);
+  grain.start(t, Math.random() * 1.7); grain.stop(t + .062);
+
+  // Inharmonic partials decay at different rates, giving a hollow 'tok' rather than a note.
+  for (const [hz, level, decay] of [[250, .12, .072], [415, .063, .043], [690, .022, .026]]) {
+    const osc = ctx.createOscillator(), amp = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(hz * pitch, t);
+    osc.frequency.exponentialRampToValueAtTime(hz * pitch * .96, t + .026);
+    amp.gain.setValueAtTime(.0001, t);
+    amp.gain.exponentialRampToValueAtTime(level, t + .002);
+    amp.gain.exponentialRampToValueAtTime(.0001, t + decay);
+    osc.connect(amp); amp.connect(dry);
+    osc.start(t); osc.stop(t + decay + .003);
+  }
 }
 function conductTap(x = 50, y = 84) {
   if (!playing) return;
@@ -1896,24 +2016,39 @@ function placeBaton(x, y) {
   lastX = x;
   G.baton.style.setProperty('--hx', x.toFixed(0)); G.baton.style.setProperty('--hy', y.toFixed(0)); G.baton.style.setProperty('--tilt', tilt.toFixed(1));
 }
-function labelAt(clientX, clientY) {
-  return SECTIONS.find(sec => {
-    const r = sec.label.getBoundingClientRect();
-    return clientX >= r.left && clientX <= r.right && clientY >= r.top && clientY <= r.bottom;
-  })?.id || null;
-}
 function syncFocus() {
-  stage.classList.toggle('cue-active', focusSecs.size > 0);
+  stage.classList.toggle('cue-active', focusSecs.size > 0 || nearSection != null);
   SECTIONS.forEach(sec => {
-    const cued = focusSecs.has(sec.id);
-    sec.label.classList.toggle('focus', cued);
+    const locked = focusSecs.has(sec.id), cued = locked || nearSection === sec.id;
+    sec.label.classList.toggle('focus', locked);
+    sec.label.classList.toggle('nearby', !locked && nearSection === sec.id);
     sec.light.classList.toggle('cuing', cued);
   });
-  MUSICIANS.forEach(mu => mu.el.classList.toggle('cuing', focusSecs.has(mu.section)));
+  MUSICIANS.forEach(mu => mu.el.classList.toggle('cuing', focusSecs.has(mu.section) || nearSection === mu.section));
   applyMutes(); syncSections(); wake();
 }
+function setNearSection(id) {
+  if (id === nearSection) return;
+  nearSection = id;
+  syncFocus();
+}
+// While conducting, the closest musicians define the transient cue; labels do not lock it.
+function nearbySection(x, y, r) {
+  const radius = Math.min(105, Math.max(50, Math.min(r.width, r.height) * .20));
+  let best = radius, found = null;
+  for (const mu of MUSICIANS) {
+    const dist = Math.hypot(x - mu.x * r.width / 100, y - mu.y * r.height / 100);
+    if (dist < best) { best = dist; found = mu.section; }
+  }
+  for (const sec of SECTIONS) {
+    const rect = sec.label.getBoundingClientRect();
+    const dist = Math.hypot(x - (rect.left + rect.width / 2 - r.left), y - (rect.top + rect.height / 2 - r.top));
+    if (dist < best) { best = dist; found = sec.id; }
+  }
+  return found;
+}
 function setFocus(id) { // used when restoring the orchestra or changing songs
-  focusSecs.clear(); focusLockedAt.clear();
+  nearSection = null; focusSecs.clear(); focusLockedAt.clear();
   if (id != null) { focusSecs.add(id); focusLockedAt.set(id, performance.now()); }
   syncFocus();
 }
@@ -1965,21 +2100,27 @@ function conductMove(x, y) {
 }
 stage.addEventListener('dragstart', e => e.preventDefault());
 stage.addEventListener('selectstart', e => e.preventDefault());
-stage.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') stage.classList.add('hovering'); });
-stage.addEventListener('pointerleave', () => { stage.classList.remove('hovering'); lastX = null; });
+stage.addEventListener('pointerenter', e => {
+  if (e.pointerType === 'mouse' || e.pointerType === 'pen') {
+    stage.classList.add('hovering');
+    const { x, y } = stageXY(e);
+    placeBaton(x, y); // visible on entry, even before the first pointermove
+  }
+});
+stage.addEventListener('pointerleave', () => { stage.classList.remove('hovering'); lastX = null; setNearSection(null); });
 stage.addEventListener('pointerdown', e => {
   suppressClick = false;
   if (e.button > 0) return;
   if (!playing) {
-    // The intro overlay is transparent: a click on empty scenery knocks even
-    // while the curtains are shut. Buttons, instructions and players stay quiet.
-    if (!e.target.closest('button, .intro, .error, .musician, .section-label')) stageKnock();
+    // Any noninteractive part of the intro stage, including the instructions,
+    // makes the baton tap sound without starting the music.
+    if (!e.target.closest('button, .error')) stageKnock();
     return;
   }
   if (e.target.closest('.overlay')) return;
   const { x, y, r } = stageXY(e), onButton = !!e.target.closest('button');
   drag = { x0: x, y0: y, t0: performance.now(), moved: false, onButton, id: e.pointerId, w: r.width, h: r.height,
-    ax: { x: { ext: x, prev: x, dir: 0 }, y: { ext: y, prev: y, dir: 0 } }, beats: [], lastBeat: -1, hovered: labelAt(e.clientX, e.clientY) };
+    ax: { x: { ext: x, prev: x, dir: 0 }, y: { ext: y, prev: y, dir: 0 } }, beats: [], lastBeat: -1 };
   if (!onButton) stage.setPointerCapture(e.pointerId);
   stage.classList.add('holding'); placeBaton(x, y); trailPoint();
 });
@@ -1988,21 +2129,40 @@ stage.addEventListener('pointermove', e => {
   if (drag && e.pointerId === drag.id) {
     trailPoint();
     conductMove(x, y);
-    if (drag.moved) {
-      const hit = labelAt(e.clientX, e.clientY);
-      if (hit !== drag.hovered) { drag.hovered = hit; if (hit) toggleFocus(hit); }
-    }
+    if (drag.moved) setNearSection(nearbySection(x, y, stage.getBoundingClientRect()));
   }
 });
 stage.addEventListener('click', e => { if (suppressClick) { e.stopPropagation(); e.preventDefault(); suppressClick = false; } }, true);
 function endHold() {
-  if (!drag) return;
+  if (!drag) { setNearSection(null); return; }
   if (!drag.moved && !drag.onButton && performance.now() - drag.t0 < 250) conductTap(drag.x0 / drag.w * 100, drag.y0 / drag.h * 100); // a quick click is a beat tap
-  else if (drag.moved) say(`Conducting at ${conductReadout()}. The band keeps your tempo until you conduct again; Restore returns to the written tempo.`);
-  stage.classList.remove('holding'); drag = null;
+  else if (drag.moved) say(`Conducting at ${conductReadout()}. The band keeps your tempo until you conduct again.`);
+  stage.classList.remove('holding'); drag = null; setNearSection(null);
 }
 stage.addEventListener('pointerup', endHold);
 stage.addEventListener('pointercancel', endHold);
+// N advances to the next rehearsal mark (A through M) and then to the next piece.
+async function nextSegment() {
+  const current = playing && ctx ? currentBeat(ctx.currentTime).beat : curBeat;
+  const nextBar = (Math.floor(Math.max(0, current) / (PHRASE_BARS * BPB)) + 1) * PHRASE_BARS;
+  if (nextBar >= VERSE_BARS * 3 + CODA_BARS) {
+    const next = SONGS[(SONGS.indexOf(SONG) + 1) % SONGS.length];
+    await loadSong(next);
+    return;
+  }
+  const wasPlaying = playing;
+  if (wasPlaying) pause();
+  else { callTimers.forEach(clearTimeout); callTimers = []; }
+  ended = false;
+  step = nextBar * BPB * STEPS_PER_BEAT;
+  curBeat = nextBar * BPB;
+  beatTimeline = []; lastVerse = -1; pNowVerse = ''; UI.nowVerse.innerHTML = '';
+  MUSICIANS.forEach(mu => { mu.queue.length = 0; mu.leadUntil = 0; });
+  if (wasPlaying) await play();
+  else { UI.nowVerse.innerHTML = `<span class="rmark">${REHEARSAL[nextBar / PHRASE_BARS]}</span><i>${SONG.marks[Math.min(3, Math.floor(nextBar / VERSE_BARS))]}</i>`; }
+  say(`Jumped to section <b>${REHEARSAL[nextBar / PHRASE_BARS]}</b>.`);
+  wake();
+}
 // keyboard: arrows conduct while the music plays
 function nudge(dTempo, dDyn) {
   S.tempo = Math.round(clamp(S.tempo + dTempo, 40, 220)); S.dyn = clamp(S.dyn + dDyn, .15, 1); curDyn = S.dyn;
@@ -2077,6 +2237,7 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && solo != null) { setSolo(null); say('The full orchestra is back.'); return; }
   if (e.code === 'Space' && !e.target.matches('button')) { e.preventDefault(); $('playBtn').click(); }
   else if ((e.key === 't' || e.key === 'T') && playing) conductTap();
+  else if (e.key === 'n' || e.key === 'N') { e.preventDefault(); nextSegment(); }
   else if (playing && !e.target.closest('#songPicker') && e.key.startsWith('Arrow')) {
     e.preventDefault();
     ({ ArrowLeft: () => nudge(-4, 0), ArrowRight: () => nudge(4, 0), ArrowUp: () => nudge(0, .05), ArrowDown: () => nudge(0, -.05) })[e.key]?.();
