@@ -63,7 +63,7 @@ input[type=color]::-moz-color-swatch{border:0;border-radius:0}
   height:31px;border:0;border-left:1px solid var(--line);font-size:8px;background:#fff
 }
 .segmented button:first-child{border-left:0}
-#lineStyles{margin-bottom:34px}
+#aspectModes{margin-bottom:34px}
 .segmented button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
 .palette{display:grid;grid-template-columns:104px 1fr 38px;align-items:center;gap:8px;margin-top:12px}
 .palette label{font-size:9px}
@@ -94,11 +94,13 @@ input[type=color]::-moz-color-swatch{border:0;border-radius:0}
   display:flex;align-items:center;justify-content:center;padding:34px
 }
 .canvas-shell{
-  position:relative;width:min(82vh,calc(100vw - var(--panel) - 70px));aspect-ratio:1;
+  --canvas-ratio:1;
+  position:relative;width:min(calc(82vh * var(--canvas-ratio)),calc(100vw - var(--panel) - 70px));
+  aspect-ratio:var(--canvas-ratio);
   display:flex;align-items:center;justify-content:center
 }
 canvas{
-  display:block;max-width:100%;max-height:100%;background:var(--paper);
+  display:block;width:100%;height:100%;background:var(--paper);
   box-shadow:0 0 0 1px rgba(0,0,0,.08)
 }
 .stage-export{
@@ -146,8 +148,8 @@ canvas{
   .mobile-panel-actions button:active{background:#000;color:#fff}
   .stage{flex:1;min-height:0;width:100%;padding:16px}
   .canvas-shell{
-    width:min(calc(100vw - 32px),calc(100dvh - 94px));max-width:100%;
-    aspect-ratio:1;
+    width:min(calc(100vw - 32px),calc((100dvh - 94px) * var(--canvas-ratio)));max-width:100%;
+    aspect-ratio:var(--canvas-ratio);
   }
   .stage-export,.actions{display:none}
 }
@@ -164,8 +166,8 @@ canvas{
 </nav>
 <aside class="panel" id="configPanel">
   <div class="mobile-panel-head"><span>CONFIG</span><button id="configClose" type="button">CLOSE</button></div>
-  <h1>DIANOUNCE</h1>
-  <div class="desc">NETWORK DIAGRAMS &amp; FLOWS</div>
+  <h1>Dianounce</h1>
+  <div class="desc">Network diagrams &amp; flows</div>
   <div class="section-title layout-title">LAYOUT</div>
   <div class="segmented four" id="layouts">
     <button data-layout="hierarchy">TREE</button><button data-layout="matrix">MATRIX</button>
@@ -175,6 +177,11 @@ canvas{
   <div class="section-title">STYLE</div>
   <div class="segmented four" id="lineStyles">
     <button data-line="straight">STRAIGHT</button><button data-line="elbow">ELBOW</button><button data-line="curve">CURVE</button><button data-line="handdrawn">HANDDRAWN</button>
+  </div>
+
+  <div class="section-title">FORMAT</div>
+  <div class="segmented two" id="aspectModes" role="group" aria-label="Canvas format">
+    <button type="button" data-aspect="1:1">1:1</button><button type="button" data-aspect="16:9">16:9</button>
   </div>
 
   <div id="controls"></div>
@@ -243,9 +250,18 @@ function downloadCanvas(canvas,name,render){
   a.download=name;a.href=canvas.toDataURL("image/png");a.click();
 }
 
-const canvas=document.getElementById("canvas"),ctx=canvas.getContext("2d"),W=canvas.width,H=canvas.height;
+const canvas=document.getElementById("canvas"),ctx=canvas.getContext("2d");
+const canvasShell=document.querySelector(".canvas-shell");
+let W=canvas.width,H=canvas.height;
+function applyAspect(){
+  const wide=state.aspect==="16:9";
+  canvas.width=wide?3200:1800;
+  canvas.height=1800;
+  W=canvas.width;H=canvas.height;
+  canvasShell.style.setProperty("--canvas-ratio",String(W/H));
+}
 const state={
-  seed:19374,layout:"flow",lineStyle:"curve",labels:true,
+  seed:19374,layout:"flow",lineStyle:"curve",aspect:"1:1",labels:true,
   nodeCount:32,branching:2,nodeScale:47,lineWeight:30,spacing:41,connectionDensity:34,
   hierarchyBias:33,accentMix:100,shapeMix:71,labelScale:61,
   ink:"#111111",accentColor:"#ef1749",gray:"#b2b2ae",paper:"#efede7"
@@ -278,10 +294,18 @@ function syncUI(){
   ["ink","accentColor","gray","paper"].forEach(k=>document.getElementById(k).value=state[k]);
   document.querySelectorAll("#layouts button").forEach(b=>b.classList.toggle("active",b.dataset.layout===state.layout));
   document.querySelectorAll("#lineStyles button").forEach(b=>b.classList.toggle("active",b.dataset.line===state.lineStyle));
+  document.querySelectorAll("#aspectModes button").forEach(b=>{
+    const active=b.dataset.aspect===state.aspect;
+    b.classList.toggle("active",active);
+    b.setAttribute("aria-pressed",String(active));
+  });
   document.getElementById("labelsToggle").classList.toggle("on",state.labels);
 }
 document.querySelectorAll("#layouts button").forEach(b=>b.onclick=()=>{state.layout=b.dataset.layout;syncUI();render();});
 document.querySelectorAll("#lineStyles button").forEach(b=>b.onclick=()=>{state.lineStyle=b.dataset.line;syncUI();render();});
+document.querySelectorAll("#aspectModes button").forEach(b=>b.onclick=()=>{
+  state.aspect=b.dataset.aspect;applyAspect();syncUI();render();
+});
 document.getElementById("labelsToggle").onclick=()=>{state.labels=!state.labels;syncUI();render();};
 ["ink","accentColor","gray","paper"].forEach(k=>document.getElementById(k).oninput=e=>{state[k]=e.target.value;render();});
 
@@ -312,11 +336,12 @@ function buildHierarchy(r,n){
   const maxDepth=Math.max(...nodes.map(n=>n.depth));
   const bands=Array.from({length:maxDepth+1},()=>[]);
   nodes.forEach(n=>bands[n.depth].push(n));
-  const margin=W*(.09+(100-state.spacing)/100*.035);
+  const marginX=W*(.09+(100-state.spacing)/100*.035);
+  const marginY=H*(.09+(100-state.spacing)/100*.035);
   bands.forEach((band,d)=>{
     band.forEach((node,i)=>{
-      const x=margin+(W-2*margin)*(band.length===1?.5:i/(band.length-1));
-      const y=margin+(H-2*margin)*(maxDepth===0?.5:d/maxDepth);
+      const x=marginX+(W-2*marginX)*(band.length===1?.5:i/(band.length-1));
+      const y=marginY+(H-2*marginY)*(maxDepth===0?.5:d/maxDepth);
       node.x=x;
       node.y=y;
     });
@@ -326,11 +351,11 @@ function buildHierarchy(r,n){
 }
 
 function buildMatrix(r,n){
-  const cols=Math.ceil(Math.sqrt(n)),rows=Math.ceil(n/cols),m=W*.11;
+  const cols=Math.ceil(Math.sqrt(n)),rows=Math.ceil(n/cols),mx=W*.11,my=H*.11;
   const nodes=[];
   for(let i=0;i<n;i++){
     const c=i%cols,rr=Math.floor(i/cols);
-    nodes.push({id:i,x:m+(W-2*m)*(cols===1?.5:c/(cols-1)),y:m+(H-2*m)*(rows===1?.5:rr/(rows-1))});
+    nodes.push({id:i,x:mx+(W-2*mx)*(cols===1?.5:c/(cols-1)),y:my+(H-2*my)*(rows===1?.5:rr/(rows-1))});
   }
   const edges=[];
   for(let i=0;i<n;i++){
@@ -343,14 +368,14 @@ function buildMatrix(r,n){
 
 function buildRadial(r,n){
   const nodes=[{id:0,x:W*.5,y:H*.5}],edges=[];
-  const rings=Math.max(1,Math.ceil((n-1)/8)),m=W*.13;
+  const rings=Math.max(1,Math.ceil((n-1)/8));
   for(let i=1;i<n;i++){
     const ring=1+((i-1)%rings);
     const index=Math.floor((i-1)/rings);
     const count=Math.ceil((n-1)/rings);
     const ang=(index/count)*Math.PI*2+ring*.38;
-    const radius=(W*.34)*(ring/rings);
-    nodes.push({id:i,x:W*.5+Math.cos(ang)*radius,y:H*.5+Math.sin(ang)*radius});
+    const radiusX=(W*.34)*(ring/rings),radiusY=(H*.34)*(ring/rings);
+    nodes.push({id:i,x:W*.5+Math.cos(ang)*radiusX,y:H*.5+Math.sin(ang)*radiusY});
     edges.push([0,i]);
     if(i>1 && r()<state.connectionDensity/150)edges.push([i-1,i]);
   }
@@ -361,9 +386,9 @@ function buildFlow(r,n){
   const cols=clamp(Math.round(3+state.hierarchyBias/25),3,7);
   const groups=Array.from({length:cols},()=>[]);
   for(let i=0;i<n;i++)groups[i%cols].push(i);
-  const nodes=Array(n),m=W*.10;
+  const nodes=Array(n),mx=W*.10,my=H*.10;
   groups.forEach((g,c)=>g.forEach((id,j)=>{
-    nodes[id]={id,x:m+(W-2*m)*(c/(cols-1)),y:m+(H-2*m)*(g.length===1?.5:j/(g.length-1))};
+    nodes[id]={id,x:mx+(W-2*mx)*(c/(cols-1)),y:my+(H-2*my)*(g.length===1?.5:j/(g.length-1))};
   }));
   const edges=[];
   for(let c=0;c<cols-1;c++){
@@ -383,7 +408,7 @@ function buildGraph(){
   let graph=state.layout==="matrix"?buildMatrix(r,n):state.layout==="radial"?buildRadial(r,n):state.layout==="flow"?buildFlow(r,n):buildHierarchy(r,n);
   graph.nodes.forEach((node,i)=>{
     node.shape=nodeShape(i,r);
-    node.size=(W*.018+W*.030*state.nodeScale/100)*(i===0?1.9:(.75+r()*.75));
+    node.size=(H*.018+H*.030*state.nodeScale/100)*(i===0?1.9:(.75+r()*.75));
     node.color=(r()<state.accentMix/100*.30)?state.accentColor:(r()<.16?state.gray:state.ink);
   });
   return graph;
@@ -437,7 +462,11 @@ function render(){
 
   // Registration grid: intentionally faint and sparse.
   ctx.strokeStyle=hexAlpha(state.ink,.07);ctx.lineWidth=1;
-  for(let i=1;i<10;i++){const p=i*W/10;ctx.beginPath();ctx.moveTo(p,W*.04);ctx.lineTo(p,H*.96);ctx.stroke();ctx.beginPath();ctx.moveTo(W*.04,p);ctx.lineTo(W*.96,p);ctx.stroke();}
+  for(let i=1;i<10;i++){
+    const x=i*W/10,y=i*H/10;
+    ctx.beginPath();ctx.moveTo(x,H*.04);ctx.lineTo(x,H*.96);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(W*.04,y);ctx.lineTo(W*.96,y);ctx.stroke();
+  }
 
   g.edges.forEach(([a,b])=>drawEdge(g.nodes[a],g.nodes[b]));
   g.nodes.forEach(n=>drawNode(n,r));
@@ -456,7 +485,7 @@ function randomize(){
   syncUI();render();
 }
 document.getElementById("randomize").onclick=randomize;
-const exportImage=()=>downloadCanvas(canvas,`dianounce-${state.seed}.png`,render);
+const exportImage=()=>downloadCanvas(canvas,`dianounce-${state.seed}-${state.aspect.replace(":","x")}.png`,render);
 document.getElementById("export").onclick=exportImage;
 
 const configPanel=document.getElementById("configPanel");
@@ -495,5 +524,5 @@ document.addEventListener("keydown",e=>{
 });
 document.getElementById("mobileRandomize").onclick=()=>{randomize();setConfig(false);};
 document.getElementById("mobileExport").onclick=()=>{exportImage();setConfig(false);};
-syncUI();render();
+applyAspect();syncUI();render();
 </script></body></html>
