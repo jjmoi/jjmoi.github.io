@@ -458,7 +458,7 @@ const canvas=document.getElementById("canvas"),ctx=canvas.getContext("2d"),W=can
 const state={
   seed:72016,pattern:"bayer",pixelShape:"dot",scanlines:false,
   resolution:123,bitDepth:2,pixelScale:86,fieldComplexity:62,blockScale:40,
-  accentMix:49,contrast:72,threshold:32,waveMix:74,grain:19,scanlineStrength:22,
+  accentMix:20,contrast:72,threshold:50,waveMix:74,grain:19,scanlineStrength:22,
   ink:"#101010",accentColor:"#15ef74",gray:"#aaa9a5",paper:"#efede7",
   drift:null,
   animSpeed:32,animRange:47,fps:60
@@ -1189,14 +1189,17 @@ function tidyKeys(){
 addEventListener("resize",tidyKeys);
 if(document.fonts)document.fonts.ready.then(tidyKeys);
 
-/* Start near the pictured composition. Each numeric slider gets an independent
-   randomized window spanning 20–40% of its full range, centered on its preset.
-   Segmented choices (2-bit and 60 fps) stay fixed for consistent output. */
+/* Randomize numeric controls on load. Most use a window spanning 20–40% of
+   their slider range. Threshold varies by up to 20–30% around 50 (35–65),
+   and Accent mix by up to 20–30% around 20 (14–26).
+   Segmented choices (2-bit and 60 fps) stay fixed. */
 function randomizeStartupSliders(){
   const slidersAtStart=[...defs.filter(([key])=>key!=="bitDepth"),...ANIM_SLIDERS];
   for(const [key,,min,max] of slidersAtStart){
     const baseline=DEFAULTS[key];
-    const halfWindow=(max-min)*(.20+Math.random()*.20)/2;
+    const halfWindow=(key==="threshold"||key==="accentMix")
+      ? baseline*(.20+Math.random()*.10)
+      : (max-min)*(.20+Math.random()*.20)/2;
     const low=Math.max(min,baseline-halfWindow);
     const high=Math.min(max,baseline+halfWindow);
     state[key]=Math.round(low+Math.random()*(high-low));
