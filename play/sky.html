@@ -24,11 +24,12 @@ button,input{font:inherit;text-transform:uppercase;color:#000}button:focus,input
   <aside class="panel" id="panel">
     <div class="brand">SKY</div>
     <section class="section">
-      <div class="control slider"><input id="distortion" type="range" min="0" max="400" value="272"><span class="thumb-label" data-for="distortion">DISTORT</span></div>
-      <div class="control slider"><input id="blur" type="range" min="0" max="480" value="149"><span class="thumb-label" data-for="blur">BLUR</span></div>
-      <div class="control slider"><input id="density" type="range" min="1" max="48" value="12"><span class="thumb-label" data-for="density">DENSITY</span></div>
-      <div class="control slider"><input id="noise" type="range" min="0" max="50" value="41"><span class="thumb-label" data-for="noise">NOISE</span></div>
-      <div class="control slider"><input id="speed" type="range" min="10" max="800" value="595"><span class="thumb-label" data-for="speed">SPEED</span></div>
+      <div class="control slider"><input id="density" type="range" min="1" max="48" value="12" aria-label="Density"><span class="thumb-label" data-for="density">DENSITY</span></div>
+      <div class="control slider"><input id="scale" type="range" min="0" max="100" value="50" aria-label="Scale"><span class="thumb-label" data-for="scale">SCALE</span></div>
+      <div class="control slider"><input id="distortion" type="range" min="0" max="400" value="272" aria-label="Distort"><span class="thumb-label" data-for="distortion">DISTORT</span></div>
+      <div class="control slider"><input id="blur" type="range" min="0" max="480" value="149" aria-label="Blur"><span class="thumb-label" data-for="blur">BLUR</span></div>
+      <div class="control slider"><input id="noise" type="range" min="0" max="50" value="41" aria-label="Noise"><span class="thumb-label" data-for="noise">NOISE</span></div>
+      <div class="control slider"><input id="speed" type="range" min="10" max="800" value="595" aria-label="Speed"><span class="thumb-label" data-for="speed">SPEED</span></div>
     </section>
 
     <section class="section">
@@ -78,11 +79,14 @@ uniform float u_seed;
 uniform float u_distortion;
 uniform float u_blur;
 uniform float u_density;
+uniform float u_scale;
 uniform float u_noise;
 uniform vec3 u_colorA;
 uniform vec3 u_colorB;
 uniform vec3 u_colorC;
 uniform vec3 u_base;
+
+#define PI 3.14159265359
 
 float hash11(float p){
   p=fract(p*.1031);
@@ -102,69 +106,103 @@ vec3 pickColor(float i){
   if(k<1.5)return u_colorB;
   return u_colorC;
 }
-// Subtle, slowly drifting contour variations keep each blob organic and smooth.
-float organicBlob(vec2 p,vec2 center,vec2 scale,float angle,float softness,float seed,float time,float distortion){
-  vec2 q=rot(angle)*(p-center)/scale;
-  float drift=time*.16;
-  float warp=.06+.10*distortion;
-  vec2 warped=q;
-  warped.x+=warp*(.60*sin(q.y*2.5+seed*1.31+drift)
-                  +.28*sin(q.x*1.8+q.y*2.3-seed*.77-drift*.8));
-  warped.y+=warp*(.60*cos(q.x*2.3+seed*.93-drift*.9)
-                  +.28*cos(q.x*2.1-q.y*1.9+seed*1.19+drift*.7));
-  float theta=atan(warped.y,warped.x);
-  float contour=1.0
-    +(.0475+.0375*distortion)*sin(theta*3.0+seed*.97+drift*.65)
-    +(.0235+.0265*distortion)*cos(theta*5.0-seed*1.72-drift*.47)
-    +.0275*sin(theta*2.0+seed*1.22+drift*.33);
-  float radius=length(warped)/max(.48,contour);
-  return exp(-radius*radius*mix(7.0,1.35,softness));
+
+// Smooth gradient noise supplies broad organic turbulence.
+float noise2(vec2 p){
+  vec2 i=floor(p),f=fract(p);
+  f=f*f*(3.0-2.0*f);
+  float a=hash21(i),b=hash21(i+vec2(1.,0.));
+  float c=hash21(i+vec2(0.,1.)),d=hash21(i+vec2(1.,1.));
+  return mix(mix(a,b,f.x),mix(c,d,f.x),f.y);
+}
+float fbm(vec2 p){
+  float n=0.0;
+  n+=.54*noise2(p); p=rot(.63)*p*2.03+4.7;
+  n+=.29*noise2(p); p=rot(-.42)*p*2.14-3.4;
+  n+=.17*noise2(p);
+  return n;
 }
 
 void main(){
   vec2 uv=gl_FragCoord.xy/u_resolution.xy;
-  vec2 p=uv-.5;
-  p.x*=u_resolution.x/u_resolution.y;
+  float aspect=u_resolution.x/u_resolution.y;
+  vec2 p=(uv-.5)*vec2(aspect,1.);
+  float t=u_time*.22;
+  float dist=clamp(u_distortion,0.,1.);
+  float crowd=clamp((u_density-10.)/35.,0.,1.);
+  float soft=clamp(u_blur/480.,0.,1.);
+  // Neutral at 50, half size at 0, double size at 100.
+  float scaleMultiplier=exp2((clamp(u_scale,0.,1.)-.5)*2.);
+  float seed=mod(u_seed,1000000.);
 
-  float t=u_time*.55;
-  float soft=clamp(u_blur/480.0,0.0,1.0);
-  float dist=clamp(u_distortion,0.0,1.0);
+  // Low frequency displacement bends entire swathes in a consistent direction.
+  // Higher frequency detail creates folds and irregular boundaries.
+  vec2 fieldP=p*1.4+vec2(seed*.00119,seed*.00073);
+  vec2 flow=vec2(fbm(fieldP*1.3+vec2(t*.13,-t*.08)),
+                 fbm(rot(1.4)*fieldP*1.5+vec2(-t*.09,t*.12)))-.5;
+  vec2 curl=vec2(fbm(fieldP*3.5+vec2(.8,t*.2)),
+                 fbm(fieldP*3.2+vec2(-2.3,-t*.15)))-.5;
+  vec2 domain=p+flow*(.09+.41*dist)+curl*(.025+.13*dist);
+  domain+=vec2(.038*sin(p.y*8.3+t*.33),.038*cos(p.x*6.5-t*.29))*dist;
+
+  // Very broad atmospheric fields give the composition its underlying light.
   vec3 col=u_base;
+  for(int bg=0;bg<5;bg++){
+    float j=float(bg);
+    float s=seed*.017+j*91.733;
+    float h1=hash11(s+1.),h2=hash11(s+2.),h3=hash11(s+3.);
+    vec2 c=vec2((h1-.5)*(aspect+1.1),(h2-.5)*1.6);
+    c+=vec2(sin(t*.12+s),cos(t*.1+s))*.08;
+    vec2 q=rot((h3-.5)*2.7)*(domain-c);
+    q/=vec2(.54+h2*.85,.47+h1*.85);
+    float a=exp(-dot(q,q)*(1.0+.9*(1.-soft)));
+    col=mix(col,pickColor(j+floor(h3*3.)),a*(.35+.29*h3));
+  }
 
+  // Organic pigment clouds, softly diffusing into one another.
+  // No ribbon centerlines, liquid folds, hard contours, or outlined boundaries.
   for(int ii=0;ii<48;ii++){
     float i=float(ii);
-    if(i>=u_density) break;
-    float s=u_seed+i*17.173;
-    float r1=hash11(s+1.0),r2=hash11(s+2.0),r3=hash11(s+3.0),r4=hash11(s+4.0),r5=hash11(s+5.0);
-    float phase=6.2831853*hash11(s+8.0);
-    vec2 center=vec2((r1-.5)*1.5,(r2-.5)*1.05);
-    center+=vec2(sin(t*(.42+r3*.34)+phase),cos(t*(.36+r4*.32)+phase*1.31))*(.055+.11*dist);
-    vec2 scale=vec2(.20+r3*.42,.20+r4*.36);
-    scale*=1.15+vec2(r1,r2)*.35;
-    float angle=((r5-.5)*2.2*dist+sin(t*.32+phase)*.18*dist)*.35;
-    float w=organicBlob(p,center,scale,angle,min(1.0,soft+.22),s,t,dist);
-    w=pow(w,.72);
-    float alpha=clamp(w*(.56+r5*.28),0.0,.88);
-    col=mix(col,pickColor(i),alpha);
+    if(i>=u_density)break;
+    float s=seed*.01337+i*17.173;
+    float r1=hash11(s+1.),r2=hash11(s+2.),r3=hash11(s+3.);
+    float r4=hash11(s+4.),r5=hash11(s+5.),r6=hash11(s+6.);
+    float phase=r6*PI*2.;
+    vec2 c=vec2((r1-.5)*(aspect+1.05),(r2-.5)*1.64);
+    c+=vec2(sin(t*(.21+r3*.24)+phase),cos(t*(.15+r4*.2)+phase))*(.06+.11*dist);
+    float angle=(r5-.5)*PI*1.85+sin(t*.09+phase)*.15;
+    vec2 q=rot(angle)*(domain-c);
+
+    // Elliptical underpainting is reshaped with low-frequency fluid turbulence.
+    // Individual clouds vary from broad pools to long, translucent plumes.
+    float size=(.60+r3*.65)*mix(1.,.73,crowd)*scaleMultiplier;
+    float elong=mix(1.0,2.9,r4);
+    vec2 shapeScale=vec2(size*(.33+.37*r2)*elong,
+                         size*(.30+.46*r1)/sqrt(elong));
+    vec2 w=q/max(shapeScale,vec2(.035));
+    vec2 bend=vec2(fbm(w*.69+vec2(phase,t*.055)),
+                   fbm(rot(1.09)*w*.76+vec2(-t*.055,phase)))-.5;
+    w+=bend*(.15+.64*dist);
+    w+=vec2(sin(w.y*1.47+phase+t*.08),cos(w.x*1.3-phase-t*.06))*(.08+.19*dist);
+
+    // Gaussian falloff keeps every boundary atmospheric, not contour-like.
+    float radius=dot(w,w);
+    float body=exp(-radius*mix(2.3,.68,soft));
+    float veil=exp(-radius*mix(.86,.23,soft));
+    float pigment=mix(body,veil,.19+.23*soft);
+    float opacity=(.43+.38*r5)*mix(1.,.45,crowd);
+    col=mix(col,pickColor(i),clamp(pigment*opacity,0.,.95));
   }
 
-  float glow=0.0;
-  for(int jj=0;jj<3;jj++){
-    float j=float(jj);
-    float s=u_seed+91.0+j*23.7;
-    vec2 gc=vec2((hash11(s)-.5)*1.45,(hash11(s+1.0)-.5)*.95);
-    gc+=vec2(sin(t*.34+j*1.7),cos(t*.29+j*1.3))*.11;
-    vec2 gq=p-gc;
-    float gd2=dot(gq,gq);
-    glow+=exp(-gd2*(7.0-4.0*soft));
-  }
-  col+=vec3(glow*.055);
-
-  float vignette=1.0-smoothstep(.38,.95,length(p))*0.08;
-  col*=vignette;
-  float grain=(hash21(gl_FragCoord.xy+vec2(mod(u_seed,997.0),mod(u_seed,619.0)))-0.5)*(u_noise/50.0)*.075;
+  // Luminous pigment diffusion, subtle film texture, and optical falloff.
+  float light=fbm(domain*2.1+vec2(t*.055,seed*.0009));
+  col=mix(col,col*vec3(1.055,1.018,.987),.21+.28*light);
+  float micro=hash21(gl_FragCoord.xy+vec2(mod(seed,997.),mod(seed,619.)))-.5;
+  float fine=hash21(floor(gl_FragCoord.xy*.48)+vec2(seed*.01,0.))-.5;
+  float grain=(micro*.73+fine*.27)*(u_noise/50.)*.115;
   col+=grain;
-  gl_FragColor=vec4(clamp(col,0.0,1.0),1.0);
+  float vignette=1.-.065*smoothstep(.28,1.12,length(p));
+  gl_FragColor=vec4(clamp(col*vignette,0.,1.),1.);
 }
 `;
 
@@ -183,7 +221,7 @@ const program=makeProgram(vertexSource,fragmentSource);
 gl.useProgram(program);
 const buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
 const posLoc=gl.getAttribLocation(program,'a_position');gl.enableVertexAttribArray(posLoc);gl.vertexAttribPointer(posLoc,2,gl.FLOAT,false,0,0);
-const U={};['resolution','time','seed','distortion','blur','density','noise','colorA','colorB','colorC','base'].forEach(n=>U[n]=gl.getUniformLocation(program,'u_'+n));
+const U={};['resolution','time','seed','distortion','blur','density','scale','noise','colorA','colorB','colorC','base'].forEach(n=>U[n]=gl.getUniformLocation(program,'u_'+n));
 
 let seed=87021,paused=false,uiHidden=false,elapsed=0,lastStamp=performance.now();
 let rafId=0,resizeRaf=0,uniformsDirty=true;
@@ -193,17 +231,18 @@ const MIN_DISPLAY_PIXELS=600000;
 const MAX_EXPORT_PIXELS=8500000;
 
 const controls={
-  distortion:qs('distortion'),blur:qs('blur'),density:qs('density'),noise:qs('noise'),speed:qs('speed'),
+  distortion:qs('distortion'),blur:qs('blur'),density:qs('density'),scale:qs('scale'),noise:qs('noise'),speed:qs('speed'),
   a:qs('a'),b:qs('b'),d:qs('d'),base:qs('base')
 };
 const labels={};
 document.querySelectorAll('.thumb-label').forEach(el=>labels[el.dataset.for]=el);
-const sliders=['distortion','blur','density','noise','speed'];
+const sliders=['density','scale','distortion','blur','noise','speed'];
 const colors=['a','b','d','base'];
 const state={
   distortion:+controls.distortion.value/400,
   blur:+controls.blur.value,
   density:+controls.density.value,
+  scale:+controls.scale.value/100,
   noise:+controls.noise.value,
   speed:+controls.speed.value/100,
   a:null,b:null,d:null,base:null
@@ -225,6 +264,7 @@ function uploadStaticUniforms(){
   gl.uniform1f(U.distortion,state.distortion);
   gl.uniform1f(U.blur,state.blur);
   gl.uniform1f(U.density,state.density);
+  gl.uniform1f(U.scale,state.scale);
   gl.uniform1f(U.noise,state.noise);
   setVec3(U.colorA,state.a);setVec3(U.colorB,state.b);setVec3(U.colorC,state.d);setVec3(U.base,state.base);
   uniformsDirty=false;
@@ -287,7 +327,8 @@ function requestRender(){
 }
 function syncRange(id){
   const v=+controls[id].value;
-  if(id==='distortion')state.distortion=v/400;
+  if(id==='scale')state.scale=v/100;
+  else if(id==='distortion')state.distortion=v/400;
   else if(id==='speed')state.speed=v/100;
   else state[id]=v;
 }
@@ -310,9 +351,10 @@ function randInt(min,max){return Math.floor(min+Math.random()*(max-min+1));}
 // Randomize each initial slider within its specified percentage of the full track.
 function randomizeInitialSliders(){
   const ranges={
-    distortion:[12,68],
-    blur:[6,36],
-    density:[15,44],
+    distortion:[34,82],
+    blur:[13,49],
+    density:[17,45],
+    scale:[38,62],
     noise:[72,88],
     speed:[62,78]
   };
@@ -329,6 +371,7 @@ function randomize(){
   setRange('distortion',randInt(0,400));
   setRange('blur',randInt(0,480));
   setRange('density',randInt(1,48));
+  setRange('scale',randInt(0,100));
   setRange('noise',randInt(0,50));
   setRange('speed',randInt(20,720));
   queueResize();
@@ -346,12 +389,28 @@ function randomHslColor(minLightness,maxLightness){
   };
   return '#'+[channel(0),channel(8),channel(4)].map(v=>v.toString(16).padStart(2,'0')).join('');
 }
+// Color families inspired by light leaks, prismatic film, and dyed clouds.
+// Keep the colors editable in the existing four swatches.
+const palettes=[
+  ['#ff5a19','#fa2e91','#32c4f2','#e4c6b5'],
+  ['#fe672b','#302c95','#0bc4ef','#f2dfcc'],
+  ['#fa7a57','#744bf3','#42b0ff','#f5c6e0'],
+  ['#97b9ff','#8d37f5','#5ce3f3','#92a5f9'],
+  ['#ff6b00','#ff0d66','#ffd5a5','#edc9e4'],
+  ['#ffad08','#ff4b69','#45eec5','#0942a1'],
+  ['#fd6243','#ef6dcd','#93d2ff','#f1d8bf'],
+  ['#2251cc','#009da3','#ffe02d','#b3cee0'],
+  ['#f86556','#5141ab','#75dcff','#dfc7eb'],
+  ['#b785ff','#00c9e9','#ffb13b','#f3cbde'],
+  ['#c8eaff','#7a5cff','#00bbd9','#a6dbfa'],
+  ['#ff4e50','#ef8a42','#9d83fd','#e9bfec']
+];
+let paletteIndex=-1;
 function shufflePalette(){
-  const darkIndex=Math.floor(Math.random()*colors.length);
-  colors.forEach((id,index)=>{
-    // Exactly three colors use 40–70% HSL lightness; the fourth uses 20–40%.
-    controls[id].value=index===darkIndex?randomHslColor(.205,.395):randomHslColor(.405,.695);
-  });
+  let next=Math.floor(Math.random()*palettes.length);
+  if(next===paletteIndex)next=(next+1)%palettes.length;
+  paletteIndex=next;
+  colors.forEach((id,index)=>controls[id].value=palettes[next][index]);
   syncColors();requestRender();
 }
 function updateStatus(){qs('status').innerHTML=paused?'PAUSED':'CLOUDS BE DRIFTING<span class="status-dots">...</span>';}
