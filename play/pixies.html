@@ -457,11 +457,11 @@ function downloadCanvas(canvas,name,render){
 const canvas=document.getElementById("canvas"),ctx=canvas.getContext("2d"),W=canvas.width,H=canvas.height;
 const state={
   seed:72016,pattern:"bayer",pixelShape:"dot",scanlines:false,
-  resolution:76,bitDepth:2,pixelScale:78,fieldComplexity:66,blockScale:52,
-  accentMix:34,contrast:72,threshold:50,waveMix:48,grain:18,scanlineStrength:22,
+  resolution:123,bitDepth:2,pixelScale:86,fieldComplexity:62,blockScale:40,
+  accentMix:49,contrast:72,threshold:32,waveMix:74,grain:19,scanlineStrength:22,
   ink:"#101010",accentColor:"#15ef74",gray:"#aaa9a5",paper:"#efede7",
   drift:null,
-  animSpeed:30,animRange:30,fps:24
+  animSpeed:32,animRange:47,fps:60
 };
 /* Block and Complexity set how many blocks and blobs there are, as in the original, but dragging
    them no longer reshuffles the picture. An image's own blocks and blobs (state.baseBlocks and
@@ -1067,7 +1067,7 @@ function doNudge(){
    keep changing. Frame rate: standard rates; 12 gives a stepped, hand-animated feel.
    The settings live in state, so each variation keeps its own, and Regenerate picks new ones. */
 const toggles=[$("#animate"),$("#animate-mini")];
-const ANIM_SLIDERS=[["animSpeed","Speed",0,100,30],["animRange","Range",0,100,30]];
+const ANIM_SLIDERS=[["animSpeed","Speed",0,100,32],["animRange","Range",0,100,47]];
 const FRAME_RATES=[[12,"Animation on twos"],[24,"Film"],[30,"Video"],[60,"Smooth"]];
 /* Changing a motion setting updates the variation you're on without redrawing it. While
    animating it's left alone, like any other edit: pausing keeps the result as a new variation. */
@@ -1189,6 +1189,22 @@ function tidyKeys(){
 addEventListener("resize",tidyKeys);
 if(document.fonts)document.fonts.ready.then(tidyKeys);
 
+/* Start near the pictured composition. Each numeric slider gets an independent
+   randomized window spanning 20–40% of its full range, centered on its preset.
+   Segmented choices (2-bit and 60 fps) stay fixed for consistent output. */
+function randomizeStartupSliders(){
+  const slidersAtStart=[...defs.filter(([key])=>key!=="bitDepth"),...ANIM_SLIDERS];
+  for(const [key,,min,max] of slidersAtStart){
+    const baseline=DEFAULTS[key];
+    const halfWindow=(max-min)*(.20+Math.random()*.20)/2;
+    const low=Math.max(min,baseline-halfWindow);
+    const high=Math.min(max,baseline+halfWindow);
+    state[key]=Math.round(low+Math.random()*(high-low));
+  }
+  state.baseBlocks=nativeBlockCount();
+  state.baseCircles=nativeCircleCount();
+}
+randomizeStartupSliders();
 syncUI();
 render();
 addEntry();
@@ -1198,6 +1214,8 @@ if(!reduceMotion.matches){
   fxc.fillStyle=state.paper;fxc.fillRect(0,0,fx.width,fx.height);
   dissolve(900);
 }
+// Begin animating as soon as the first composition is ready.
+setAnimating(true);
 </script>
 </body>
 </html>
