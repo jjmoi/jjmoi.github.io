@@ -22,6 +22,10 @@
   .brand{font-weight:900;letter-spacing:.04em;font-size:13px}.brand b{color:var(--cyan)}
   .meta{font:10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:#bfb5c5;letter-spacing:.08em}
   .topactions{margin-left:auto;display:flex;gap:6px}
+  .controlsLauncher,.mobileControlsHead{display:none}
+  .controlsLauncher{margin-left:auto}
+  .mobileControlsHead{align-items:center;justify-content:space-between;gap:12px}
+  .mobileControlsTitle{font-size:13px;font-weight:900;letter-spacing:.04em}
   .btn{height:28px;border:1px solid #756a79;background:#312738;color:#fff;padding:0 10px;cursor:pointer;font:700 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.07em;text-transform:uppercase}
   .btn:hover{background:#43364b}.btn.primary{background:var(--mag);border-color:#f08dbd}.btn.primary:hover{background:#c6377d}
   .workspace{display:grid;grid-template-columns:310px minmax(0,1fr);min-height:0}
@@ -31,7 +35,7 @@
   .canvasWrap{width:min(100%,1120px);display:grid;gap:8px;position:relative;top:-40px}
   canvas{display:block;width:100%;height:auto;background:#fff;border:1px solid #9e94a5;box-shadow:0 12px 30px rgba(43,31,47,.12);image-rendering:auto}
   .readout{display:flex;flex-wrap:wrap;gap:12px;font:10px/1.25 ui-monospace,SFMono-Regular,Menlo,monospace;color:#5d5363;text-transform:uppercase}
-  .section{border-top:1px solid #c7becb;padding-top:10px;margin-top:10px}.section:first-child{border-top:0;padding-top:0;margin-top:0}
+  .section{border-top:1px solid #c7becb;padding-top:10px;margin-top:10px}.controls > .section:first-of-type{border-top:0;padding-top:0;margin-top:0}
   .section h2{margin:0 0 8px;font:900 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;text-transform:uppercase;color:#514757}
   .sectionHead{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:8px}.sectionHead h2{margin:0}
 .previewActions{position:fixed;left:calc(310px + (100vw - 310px)/2);bottom:18px;transform:translateX(-50%);z-index:50;display:flex;justify-content:center;gap:6px;width:max-content;max-width:calc(100vw - 32px);margin:0;padding:6px;background:#fff;border:0;box-shadow:0 8px 20px rgba(32,24,35,.22)}
@@ -52,39 +56,65 @@
   .swatchHex{font:9px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:#756a79;text-transform:uppercase;text-align:right}
     .hint{margin:8px 0 0;font:10px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;color:#7b707f}
   .toggle{display:flex;align-items:center;gap:8px;font:10px ui-monospace,SFMono-Regular,Menlo,monospace;color:#544b59;text-transform:uppercase}.toggle input{accent-color:#000}
-  @media(max-width:820px){.workspace{grid-template-columns:1fr}.controls{border-right:0;border-bottom:1px solid var(--line);max-height:none}.preview{padding:10px}.topbar{height:auto;min-height:48px;flex-wrap:wrap;padding:8px 10px}.topactions{width:100%;margin-left:0}.topactions .btn{flex:1}.previewActions{left:10px;right:10px;bottom:10px;transform:none;width:auto;max-width:none}.previewActions .btn{flex:1;min-width:0}.row,.colorRow{grid-template-columns:104px 1fr 38px}}
+  @media(max-width:820px){
+    .app{grid-template-rows:auto minmax(0,1fr)}
+    .workspace{grid-template-columns:minmax(0,1fr)}
+    .topbar{height:48px;min-height:48px;padding:0 12px}
+    .controlsLauncher{display:block}
+    .controls{display:none}
+    .controls.is-open{display:block;position:fixed;inset:0;z-index:100;height:100vh;height:100dvh;overflow-y:auto;overscroll-behavior:contain;border:0;background:var(--panel);padding:0 14px calc(28px + env(safe-area-inset-bottom,0px))}
+    .mobileControlsHead{display:flex;position:sticky;top:0;z-index:1;min-height:56px;margin:0 -14px 14px;padding:0 14px;background:var(--panel);border-bottom:1px solid var(--line)}
+    .mobileControlsHead .btn{min-width:70px}
+    .controls .section{max-width:700px;margin-left:auto;margin-right:auto}
+    .preview{min-height:calc(100vh - 48px);min-height:calc(100dvh - 48px);padding:14px 10px 90px;align-items:start;align-content:start}
+    .canvasWrap{top:0;width:100%}
+    .previewActions{left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px));transform:none;width:auto;max-width:none}
+    .previewActions .btn{flex:1;min-width:0}
+    .row,.colorRow{grid-template-columns:104px minmax(0,1fr) 40px;min-height:36px}
+    input[type="range"]{min-height:32px}
+    input[type="color"]{height:34px}
+  }
 </style>
 </head>
 <body>
 <div class="app" id="app">
   <header class="topbar">
     <div class="brand">Y2KCG</div>
+    <button class="btn controlsLauncher" id="controlsOpen" type="button" aria-controls="controlsPanel" aria-expanded="false">Controls</button>
   </header>
 
   <div class="workspace">
-    <aside class="controls" aria-label="Generator controls">
-      <section class="section">
-        <h2>Canvas</h2>
-        <div class="row"><label for="width">Width</label><input id="width" type="range" min="320" max="1920" step="10" value="1920"><span class="value" data-for="width"></span></div>
-        <div class="row"><label for="height">Height</label><input id="height" type="range" min="240" max="1200" step="10" value="1200"><span class="value" data-for="height"></span></div>
-      </section>
+    <aside class="controls" id="controlsPanel" aria-label="Generator controls">
+      <div class="mobileControlsHead">
+        <span class="mobileControlsTitle" id="controlsHeading">Controls</span>
+        <button class="btn" id="controlsClose" type="button" aria-label="Close controls">Close</button>
+      </div>
+      <!-- Dimensions stay editable internally, without visible canvas controls. -->
+      <input id="width" type="hidden" value="1920">
+      <input id="height" type="hidden" value="1200">
 
       <section class="section">
         <h2>Composition</h2>
         <div class="row"><label for="density">Density</label><input id="density" type="range" min="20" max="360" step="1" value="160"><span class="value" data-for="density"></span></div>
-        <div class="row"><label for="shapeSize">Shape size</label><input id="shapeSize" type="range" min="25" max="220" step="1" value="100"><span class="value" data-for="shapeSize"></span></div>
-        <div class="row"><label for="randomness">Randomness</label><input id="randomness" type="range" min="0" max="100" step="1" value="62"><span class="value" data-for="randomness"></span></div>
-        <div class="row"><label for="angleJitter">Angle jitter</label><input id="angleJitter" type="range" min="0" max="90" step="1" value="32"><span class="value" data-for="angleJitter"></span></div>
+        <div class="row"><label for="scale">Scale</label><input id="scale" type="range" min="100" max="300" step="1" value="100"><span class="value" data-for="scale"></span></div>
+        <div class="row"><label for="scatter">Scatter</label><input id="scatter" type="range" min="0" max="100" step="1" value="49"><span class="value" data-for="scatter"></span></div>
+        <div class="row"><label for="angleJitter">Angle</label><input id="angleJitter" type="range" min="45" max="90" step="1" value="45"><span class="value" data-for="angleJitter"></span></div>
         <div class="row"><label for="originX">Origin X</label><input id="originX" type="range" min="0" max="100" step="1" value="58"><span class="value" data-for="originX"></span></div>
         <div class="row"><label for="originY">Origin Y</label><input id="originY" type="range" min="0" max="100" step="1" value="40"><span class="value" data-for="originY"></span></div>
       </section>
 
       <section class="section">
         <h2>Texture</h2>
-        <div class="row"><label for="curves">Curves</label><input id="curves" type="range" min="0" max="60" step="1" value="18"><span class="value" data-for="curves"></span></div>
-        <div class="row"><label for="stretch">Pixel stretch</label><input id="stretch" type="range" min="0" max="18" step="1" value="5"><span class="value" data-for="stretch"></span></div>
+        <div class="row"><label for="strokes">Strokes</label><input id="strokes" type="range" min="0" max="60" step="1" value="18"><span class="value" data-for="strokes"></span></div>
+        <div class="row"><label for="stretch">Stretch</label><input id="stretch" type="range" min="0" max="18" step="1" value="5"><span class="value" data-for="stretch"></span></div>
         <div class="row"><label for="hatch">Hatching</label><input id="hatch" type="range" min="0" max="100" step="1" value="16"><span class="value" data-for="hatch"></span></div>
-        <div class="row"><label for="lines">Line forms</label><input id="lines" type="range" min="0" max="100" step="1" value="12"><span class="value" data-for="lines"></span></div>
+        <div class="row"><label for="lines">Lines</label><input id="lines" type="range" min="0" max="100" step="1" value="12"><span class="value" data-for="lines"></span></div>
+      </section>
+
+      <section class="section" aria-label="Motion controls">
+        <div class="sectionHead"><h2>Motion</h2><button class="linkBtn" id="motionToggle" type="button" aria-pressed="false">Pause</button></div>
+        <div class="row"><label for="motionGlitch">Glitches</label><input id="motionGlitch" type="range" min="0" max="100" step="1" value="32"><span class="value" data-for="motionGlitch"></span></div>
+        <div class="row"><label for="motionSpeed">Speed</label><input id="motionSpeed" type="range" min="100" max="300" step="5" value="100"><span class="value" data-for="motionSpeed"></span></div>
       </section>
 
       <section class="section">
@@ -120,92 +150,272 @@
 </div>
 <script>
 (() => {
+  'use strict';
   const root = document.getElementById('app');
   const canvas = root.querySelector('#canvas');
   const ctx = canvas.getContext('2d');
   const q = id => root.querySelector('#' + id);
-  const ids = ['width','height','density','shapeSize','randomness','angleJitter','originX','originY','curves','stretch','hatch','lines','bg1','bg2','bg3','c1','c2','c3','c4','c5','hatchColor'];
+  const mobileQuery = window.matchMedia('(max-width: 820px)');
+  const controlsPanel = q('controlsPanel');
+  const controlsOpen = q('controlsOpen');
+  const controlsClose = q('controlsClose');
+  let controlsMenuOpen = false;
+  function setControlsMenu(open, restoreFocus=true){
+    controlsMenuOpen = Boolean(open && mobileQuery.matches);
+    controlsPanel.classList.toggle('is-open',controlsMenuOpen);
+    controlsOpen.setAttribute('aria-expanded',String(controlsMenuOpen));
+    if(controlsMenuOpen){
+      controlsPanel.setAttribute('role','dialog');
+      controlsPanel.setAttribute('aria-modal','true');
+      controlsPanel.setAttribute('aria-labelledby','controlsHeading');
+      document.body.style.overflow='hidden';
+      controlsPanel.scrollTop=0;
+      controlsClose.focus();
+    }else{
+      controlsPanel.removeAttribute('role');
+      controlsPanel.removeAttribute('aria-modal');
+      controlsPanel.removeAttribute('aria-labelledby');
+      document.body.style.overflow='';
+      if(restoreFocus && mobileQuery.matches) controlsOpen.focus();
+    }
+  }
+  controlsOpen.addEventListener('click',()=>setControlsMenu(true));
+  controlsClose.addEventListener('click',()=>setControlsMenu(false));
+  mobileQuery.addEventListener?.('change',()=>{if(controlsMenuOpen)setControlsMenu(false,false);});
+  document.addEventListener('keydown',event=>{
+    if(!controlsMenuOpen)return;
+    if(event.key==='Escape'){event.preventDefault();setControlsMenu(false);return;}
+    if(event.key!=='Tab')return;
+    const focusable=[...controlsPanel.querySelectorAll('button:not(:disabled),input:not([type="hidden"]):not(:disabled),select:not(:disabled),a[href]')]
+      .filter(el=>el.getClientRects().length);
+    if(!focusable.length)return;
+    const first=focusable[0],last=focusable[focusable.length-1];
+    if(event.shiftKey && document.activeElement===first){event.preventDefault();last.focus();}
+    else if(!event.shiftKey && document.activeElement===last){event.preventDefault();first.focus();}
+  });
+  const ids = ['width','height','density','scale','scatter','angleJitter','originX','originY','strokes','stretch','hatch','lines','bg1','bg2','bg3','c1','c2','c3','c4','c5','hatchColor'];
+  const motionIds = ['motionGlitch','motionSpeed'];
+  const defaults = Object.fromEntries([...ids,...motionIds].map(id => [id,q(id).value]));
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let currentSeed = 16170;
   let dirs = [308,126,92];
-  const defaults = Object.fromEntries(ids.map(id => [id, q(id).value]));
+  let scene = null;
+  let transition = null;
+  let clock = 0;
+  let paused = reducedMotion.matches;
+  let lastTimestamp = 0;
+  let lastDrawTimestamp = 0;
+  const glitch = {next:2.5,until:0,seed:0};
 
-  function clamp(n,a,b){ return Math.min(b,Math.max(a,n)); }
-  function num(id){ const el=q(id); const n=Number(el.value); return Number.isFinite(n)?n:Number(defaults[id]); }
-  function seeded(seed){ let a=(seed>>>0)||1; return () => { a=(a+0x6D2B79F5)>>>0; let t=Math.imul(a^(a>>>15),1|a); t=(t+Math.imul(t^(t>>>7),61|t))^t; return ((t^(t>>>14))>>>0)/4294967296; }; }
-  function deg(v){ return v*Math.PI/180; }
+  function clamp(n,a,b){return Math.min(b,Math.max(a,n));}
+  function num(id){const v=Number(q(id).value);return Number.isFinite(v)?v:Number(defaults[id]);}
+  function deg(v){return v*Math.PI/180;}
+  function seeded(seed){let a=(seed>>>0)||1;return () => {a=(a+0x6D2B79F5)>>>0;let t=Math.imul(a^(a>>>15),1|a);t=(t+Math.imul(t^(t>>>7),61|t))^t;return ((t^(t>>>14))>>>0)/4294967296;};}
+  function smoothstep(v){return v*v*(3-2*v);}
+  function hash(n,seed){let v=(Math.imul(n|0,374761393)+Math.imul(seed|0,668265263))|0;v=Math.imul(v^(v>>>13),1274126177);return ((v^(v>>>16))>>>0)/4294967295;}
+  // Interpolated seeded noise never repeats at a fixed period.
+  function noise(time,seed){const i=Math.floor(time),f=smoothstep(time-i);return ((hash(i,seed)*(1-f)+hash(i+1,seed)*f)*2-1);}
+  // Removed sliders retain their prior default strengths.
+  function motion(){return {
+    glitch:num('motionGlitch')/100,
+    bg:.45,regen:.70,
+    speed:num('motionSpeed')/100
+  };}
+  function settings(){return {
+    seed:currentSeed>>>0,
+    width:clamp(Math.floor(num('width')),320,1920),height:clamp(Math.floor(num('height')),240,1200),
+    density:clamp(Math.floor(num('density')),20,360),size:clamp(num('scale')/100,1,3),
+    scatter:.25+.75*clamp(num('scatter')/100,0,1),angleJitter:deg(clamp(num('angleJitter'),45,90)),
+    ox:clamp(num('originX')/100,0,1),oy:clamp(num('originY')/100,0,1),opacity:.8,
+    dirs:dirs.map(deg),strokes:clamp(Math.floor(num('strokes')),0,60),stretch:clamp(Math.floor(num('stretch')),0,18),
+    hatch:clamp(num('hatch')/100,0,1),lines:clamp(num('lines')/100,0,1),
+    bg:[q('bg1').value,q('bg2').value,q('bg3').value],
+    pal:[q('c1').value,q('c2').value,q('c3').value,q('c4').value,q('c5').value],
+    hatchColor:q('hatchColor').value
+  };}
 
-  function settings(){
-    return {
-      seed: currentSeed >>> 0,
-      width: clamp(Math.floor(num('width')),320,1920), height:clamp(Math.floor(num('height')),240,1200),
-      density:clamp(Math.floor(num('density')),20,360), size:clamp(num('shapeSize')/100,.25,2.2),
-      randomness:clamp(num('randomness')/100,0,1), angleJitter:deg(clamp(num('angleJitter'),0,90)),
-      ox:clamp(num('originX')/100,0,1), oy:clamp(num('originY')/100,0,1), opacity:.8,
-      dirs:dirs.map(deg), curves:clamp(Math.floor(num('curves')),0,60), stretch:clamp(Math.floor(num('stretch')),0,18),
-      hatch:clamp(num('hatch')/100,0,1), lines:clamp(num('lines')/100,0,1),
-      bg:[q('bg1').value,q('bg2').value,q('bg3').value], pal:[q('c1').value,q('c2').value,q('c3').value,q('c4').value,q('c5').value], hatchColor:q('hatchColor').value
-    };
-  }
-
-  function polygon(ctx, pts){ ctx.beginPath(); pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1])); ctx.closePath(); }
+  function polygon(context,pts){context.beginPath();pts.forEach((p,i) => i?context.lineTo(p[0],p[1]):context.moveTo(p[0],p[1]));context.closePath();}
   function makePlanes(r,s){
-    const out=[], sc=s.height/600, randomness=s.randomness;
-    const cx=s.width*s.ox, cy=s.height*s.oy;
+    const out=[],sc=s.height/600,scatter=s.scatter,cx=s.width*s.ox,cy=s.height*s.oy;
     for(let i=0;i<s.density;i++){
       const dir=s.dirs[(r()*s.dirs.length)|0];
-      const a=dir+(r()-.5)*s.angleJitter*(.15+.85*randomness);
+      const a=dir+(r()-.5)*s.angleJitter*(.15+.85*scatter);
       const dx=Math.cos(a),dy=Math.sin(a),nx=-dy,ny=dx;
-      const radial=(30+Math.pow(r(),.65)*(s.width*.34))*s.size*(.55+.8*randomness);
-      const x0=cx+dx*radial+(r()-.5)*80*sc*randomness;
-      const y0=cy+dy*radial+(r()-.5)*80*sc*randomness;
-      const L=(18+Math.pow(r(),1.45)*260)*sc*s.size*(.55+.9*randomness);
-      const width=(3+Math.pow(r(),1.9)*52)*sc*s.size*(.5+.9*randomness)*(r()<.5?1:-1);
-      const skew=(r()-.35)*L*.42*randomness;
+      const radial=(30+Math.pow(r(),.65)*(s.width*.34))*s.size*(.55+.8*scatter);
+      const x0=cx+dx*radial+(r()-.5)*80*sc*scatter;
+      const y0=cy+dy*radial+(r()-.5)*80*sc*scatter;
+      const L=(18+Math.pow(r(),1.45)*260)*sc*s.size;
+      const width=(3+Math.pow(r(),1.9)*52)*sc*s.size*(r()<.5?1:-1);
+      const skew=(r()-.35)*L*.26;
       const pts=[[x0,y0],[x0+dx*L,y0+dy*L],[x0+dx*(L+skew)+nx*width,y0+dy*(L+skew)+ny*width],[x0+dx*skew*.45+nx*width*.72,y0+dy*skew*.45+ny*width*.72]];
-      const k=r(), hatchCut=s.hatch, lineCut=Math.min(1,hatchCut+s.lines);
-      out.push({pts,col:s.pal[(r()*s.pal.length)|0],alpha:(.24+r()*.7)*s.opacity,kind:k<hatchCut?'hatch':k<lineCut?'line':'fill',gap:2+((r()*5)|0),hatch:s.hatchColor});
+      const k=r(),hatchCut=s.hatch,lineCut=Math.min(1,hatchCut+s.lines);
+      const col=s.pal[(r()*s.pal.length)|0],alpha=(.24+r()*.7)*s.opacity;
+      const kind=k<hatchCut?'hatch':k<lineCut?'line':'fill',gap=2+((r()*5)|0);
+      out.push({pts,col,alpha,kind,gap,hatch:s.hatchColor});
     }
     return out;
   }
-  function drawPlane(p){
-    ctx.save(); polygon(ctx,p.pts); ctx.globalAlpha=p.alpha;
-    if(p.kind==='line'){ctx.strokeStyle=p.col;ctx.lineWidth=Math.max(1,canvas.height/700);ctx.stroke();ctx.restore();return;}
+  function makeStrokes(r,s){
+    const strokes=[],sc=s.height/600,cx=s.width*s.ox,cy=s.height*s.oy;
+    for(let i=0;i<s.strokes;i++){
+      const a=s.dirs[(r()*s.dirs.length)|0]+(r()-.5)*s.angleJitter*2;
+      const len=(100+r()*420)*sc*s.size;
+      const alpha=(.2+r()*.58)*s.opacity,col=s.pal[(r()*s.pal.length)|0];
+      // Every perspective stroke begins at the exact same vanishing point.
+      strokes.push({x:cx,y:cy,endX:cx+Math.cos(a)*len,endY:cy+Math.sin(a)*len,alpha,col});
+    }
+    return strokes;
+  }
+  function makeStretches(r,s){
+    const stretches=[];
+    for(let i=0;i<s.stretch;i++){
+      const sx=(r()*s.width)|0,x=(r()*s.width)|0,y=(r()*s.height*.55)|0;
+      const w=Math.max(2,(r()*s.width*.09)|0),h=Math.max(8,(s.height*.22+r()*s.height*.68)|0);
+      stretches.push({sx,x,y,w,h,alpha:(.28+r()*.48)*s.opacity});
+    }
+    return stretches;
+  }
+  function makeScene(){
+    const s=settings(),r=seeded(s.seed);
+    return {s,planes:makePlanes(r,s),strokes:makeStrokes(r,s),stretches:makeStretches(r,s),bornAt:clock};
+  }
+  function drawPlane(p,s){
+    ctx.save();
+    polygon(ctx,p.pts);ctx.globalAlpha*=p.alpha;
+    const vx=s.width*s.ox,vy=s.height*s.oy;
+    if(p.kind==='line'){
+      // Outline quads created disconnected angular segments. Render one ray instead.
+      // Its far endpoint comes from the shard, but its origin is exact.
+      const tip=p.pts.reduce((far,point)=>
+        (point[0]-vx)**2+(point[1]-vy)**2 > (far[0]-vx)**2+(far[1]-vy)**2 ? point : far
+      );
+      ctx.strokeStyle=p.col;ctx.lineWidth=Math.max(1,s.height/700);
+      ctx.beginPath();ctx.moveTo(vx,vy);ctx.lineTo(tip[0],tip[1]);ctx.stroke();ctx.restore();return;
+    }
     ctx.fillStyle=p.col;ctx.fill();
     if(p.kind==='hatch'){
-      ctx.clip();ctx.globalAlpha=.8*p.alpha;ctx.strokeStyle=p.hatch;ctx.lineWidth=Math.max(1,canvas.height/700);
-      const xs=p.pts.map(v=>v[0]),ys=p.pts.map(v=>v[1]);const mx=(Math.min(...xs)+Math.max(...xs))/2,my=(Math.min(...ys)+Math.max(...ys))/2;const R=Math.hypot(Math.max(...xs)-Math.min(...xs),Math.max(...ys)-Math.min(...ys))/2+4;const a=Math.atan2(p.pts[1][1]-p.pts[0][1],p.pts[1][0]-p.pts[0][0]),c=Math.cos(a),ss=Math.sin(a);
-      ctx.beginPath();for(let t=-R;t<=R;t+=p.gap){const px=mx+c*t,py=my+ss*t;ctx.moveTo(px-ss*R,py+c*R);ctx.lineTo(px+ss*R,py-c*R);}ctx.stroke();
+      // Perspective hatching: each clipped hatch ray, if extended, passes
+      // through the very same vanishing point as the primary strokes.
+      ctx.clip();ctx.globalAlpha*=.8;ctx.strokeStyle=p.hatch;ctx.lineWidth=Math.max(1,s.height/700);
+      const mx=p.pts.reduce((sum,point)=>sum+point[0],0)/p.pts.length;
+      const my=p.pts.reduce((sum,point)=>sum+point[1],0)/p.pts.length;
+      const base=Math.atan2(my-vy,mx-vx);
+      const offsets=p.pts.map(point=>{
+        const a=Math.atan2(point[1]-vy,point[0]-vx)-base;
+        return Math.atan2(Math.sin(a),Math.cos(a));
+      });
+      const lo=Math.min(...offsets),hi=Math.max(...offsets);
+      const radius=Math.max(20,Math.hypot(mx-vx,my-vy));
+      const step=Math.max(.003,p.gap/radius);
+      const count=Math.min(100,Math.max(1,Math.ceil((hi-lo)/step)));
+      const reach=Math.hypot(s.width,s.height)*2;
+      ctx.beginPath();
+      for(let i=0;i<=count;i++){
+        const a=base+lo+(hi-lo)*i/count;
+        ctx.moveTo(vx,vy);
+        ctx.lineTo(vx+Math.cos(a)*reach,vy+Math.sin(a)*reach);
+      }
+      ctx.stroke();
     }
     ctx.restore();
   }
-  function drawCurves(r,s){
-    const sc=s.height/600,cx=s.width*s.ox,cy=s.height*s.oy;ctx.save();ctx.lineWidth=Math.max(1,s.height/700);
-    for(let i=0;i<s.curves;i++){
-      const a=s.dirs[(r()*s.dirs.length)|0]+(r()-.5)*s.angleJitter*2;const len=(100+r()*420)*sc*s.size;const bend=a+(r()-.5)*1.5*s.randomness;
-      ctx.globalAlpha=(.2+r()*.58)*s.opacity;ctx.strokeStyle=s.pal[(r()*s.pal.length)|0];ctx.beginPath();ctx.moveTo(cx+(r()-.5)*40*sc*s.randomness,cy+(r()-.5)*40*sc*s.randomness);ctx.quadraticCurveTo(cx+Math.cos(bend)*len*.5,cy+Math.sin(bend)*len*.5,cx+Math.cos(a)*len,cy+Math.sin(a)*len);ctx.stroke();
-    }ctx.restore();
+  function drawStroke(stroke,s){
+    ctx.save();ctx.globalAlpha*=stroke.alpha;ctx.strokeStyle=stroke.col;ctx.lineWidth=Math.max(1,s.height/700);
+    ctx.beginPath();ctx.moveTo(stroke.x,stroke.y);ctx.lineTo(stroke.endX,stroke.endY);
+    ctx.stroke();ctx.restore();
   }
-  function pixelStretch(r,s){
+  function drawStretches(stretches,s){
     ctx.save();ctx.imageSmoothingEnabled=false;
-    for(let i=0;i<s.stretch;i++){
-      const sx=(r()*s.width)|0, x=(r()*s.width)|0, y=(r()*s.height*.55)|0, w=Math.max(2,(r()*s.width*.09)|0), h=Math.max(8,(s.height*.22+r()*s.height*.68)|0);
-      ctx.globalAlpha=(.28+r()*.48)*s.opacity;ctx.drawImage(canvas,sx,y,1,Math.min(h,s.height-y),x,y,w,Math.min(h,s.height-y));
-    }ctx.restore();
+    for(const p of stretches){
+      const h=Math.min(p.h,s.height-p.y);
+      if(h<=0) continue;
+      ctx.globalAlpha=p.alpha;
+      ctx.drawImage(canvas,p.sx,p.y,1,h,p.x,p.y,p.w,h);
+    }
+    ctx.restore();
   }
-  function render(){
-    const s=settings();
-    if(canvas.width!==s.width) canvas.width=s.width;if(canvas.height!==s.height) canvas.height=s.height;
-    const r=seeded(s.seed), g=ctx.createLinearGradient(0,0,0,s.height);g.addColorStop(0,s.bg[0]);g.addColorStop(.5,s.bg[1]);g.addColorStop(1,s.bg[2]);ctx.globalAlpha=1;ctx.fillStyle=g;ctx.fillRect(0,0,s.width,s.height);
-    const planes=makePlanes(r,s);planes.forEach(drawPlane);drawCurves(r,s);pixelStretch(r,s);
-    q('readout').textContent=`SEED 0X${s.seed.toString(16).toUpperCase().padStart(8,'0')}   ${s.width}×${s.height}   ${planes.length} PLANES`;
-    updateLabels();
+  function drawBackground(s,t,m,alpha=1){
+    ctx.save();ctx.globalAlpha=alpha;
+    // Sample a continuously growing noise coordinate. This is not a repeating animation loop.
+    const move=m.bg;
+    const dx=noise(t*.065+s.seed*.00004,512)*s.width*.30*move;
+    const dy=noise(t*.053+s.seed*.00007,719)*s.height*.20*move;
+    const slant=noise(t*.045+s.seed*.0001,307)*s.width*.17*move;
+    const g=ctx.createLinearGradient(s.width*.5+dx-slant,dy,s.width*.5+dx+slant,s.height+dy);
+    g.addColorStop(0,s.bg[0]);g.addColorStop(.5,s.bg[1]);g.addColorStop(1,s.bg[2]);
+    ctx.fillStyle=g;ctx.fillRect(0,0,s.width,s.height);ctx.restore();
+  }
+  function drawScene(subject,m,scale=1,opacity=1){
+    if(opacity<=0) return;
+    const s=subject.s;
+    ctx.save();ctx.globalAlpha=opacity;
+    if(scale!==1){
+      const cx=s.width*s.ox,cy=s.height*s.oy;
+      ctx.translate(cx,cy);ctx.scale(scale,scale);ctx.translate(-cx,-cy);
+    }
+    subject.planes.forEach(p=>drawPlane(p,s));
+    subject.strokes.forEach(stroke=>drawStroke(stroke,s));
+    ctx.restore();
+    // Stretch is a texture pass, not part of the scale transform.
+    if(scale>.95 && opacity>.9) drawStretches(subject.stretches,s);
+  }
+  function drawGlitch(m){
+    if(m.glitch<=0 || clock>=glitch.until || transition) return;
+    const s=scene.s,r=seeded(glitch.seed+Math.floor(clock*30));
+    const count=2+Math.floor(m.glitch*9);
+    ctx.save();ctx.imageSmoothingEnabled=false;
+    for(let i=0;i<count;i++){
+      const y=Math.floor(r()*s.height),h=Math.max(2,Math.floor((4+r()*30)*s.height/1200*(.35+m.glitch)));
+      const actualH=Math.min(h,s.height-y),offset=(r()-.5)*s.width*.085*m.glitch;
+      if(actualH<=0) continue;
+      ctx.globalAlpha=.48+r()*.48;
+      ctx.drawImage(canvas,0,y,s.width,actualH,offset,y,s.width,actualH);
+    }
+    ctx.restore();
+  }
+  function renderFrame(){
+    if(!scene) return;
+    const s=scene.s,m=motion();
+    if(canvas.width!==s.width)canvas.width=s.width;
+    if(canvas.height!==s.height)canvas.height=s.height;
+    ctx.clearRect(0,0,s.width,s.height);
+    const tr=transition;
+    if(tr){
+      const p=clamp((clock-tr.start)/tr.duration,0,1);
+      drawBackground(tr.from.s,Math.max(0,clock-tr.from.bornAt),m,1);
+      drawBackground(s,Math.max(0,clock-scene.bornAt),m,p);
+      if(p<.46){
+        const x=p/.46,close=1-m.regen*.985*Math.pow(x,2.2);
+        drawScene(tr.from,m,Math.max(.015,close),1-smoothstep(x));
+      }else{
+        const x=(p-.46)/.54;
+        const back=1+2.4*Math.pow(x-1,3)+1.4*Math.pow(x-1,2);
+        drawScene(scene,m,Math.max(.015,1+m.regen*(back-1)),smoothstep(Math.min(1,x*2.5)));
+      }
+      if(p>=1)transition=null;
+    }else{
+      drawBackground(s,Math.max(0,clock-scene.bornAt),m);
+      drawScene(scene,m);
+    }
+    drawGlitch(m);
   }
   function updateLabels(){
-    root.querySelectorAll('[data-for]').forEach(el=>{const id=el.dataset.for,v=num(id);el.textContent=(['originX','originY','randomness','hatch','lines'].includes(id)?Math.round(v)+'%':id==='angleJitter'?Math.round(v)+'°':Math.round(v));});
+    root.querySelectorAll('[data-for]').forEach(el=>{
+      const id=el.dataset.for,v=num(id);
+      el.textContent=id==='motionSpeed'?(v/100).toFixed(v%100===0?0:2).replace(/0$/,'').replace(/\.$/,'')+'×':
+        (['originX','originY','scatter','hatch','lines',...motionIds.filter(x=>x!=='motionSpeed')].includes(id)?Math.round(v)+'%':
+        id==='angleJitter'?Math.round(v)+'°':Math.round(v));
+    });
     root.querySelectorAll('[data-hex]').forEach(el=>el.textContent=q(el.dataset.hex).value.replace('#','').toUpperCase());
   }
-  function newSeed(){ currentSeed=(Math.random()*0xFFFFFFFF)>>>0; }
-  function nudge(){ dirs=dirs.map(d=>(d+(Math.random()-.5)*54+360)%360); q('randomness').value=String(clamp(num('randomness')+(Math.random()-.5)*24,0,100)); render(); }
+  function updateReadout(){
+    if(!scene)return;
+    const s=scene.s;
+    q('readout').textContent=`SEED 0X${s.seed.toString(16).toUpperCase().padStart(8,'0')}   ${s.width}×${s.height}   ${scene.planes.length} PLANES`;
+  }
+  function rebuild(){transition=null;scene=makeScene();updateReadout();renderFrame();}
+  function newSeed(){currentSeed=(Math.random()*0xFFFFFFFF)>>>0;}
+  function nudge(){dirs=dirs.map(d=>(d+(Math.random()-.5)*54+360)%360);q('scatter').value=String(clamp(num('scatter')+(Math.random()-.5)*24,0,100));updateLabels();rebuild();}
   function randomizeBackground(){
     const base=Math.random()*360;
     q('bg1').value=hslToHex((base+Math.random()*18)%360,18+Math.random()*26,92+Math.random()*6);
@@ -213,26 +423,68 @@
     q('bg3').value=hslToHex((base+55+Math.random()*110)%360,48+Math.random()*42,45+Math.random()*28);
   }
   function randomizeRange(id){
-    const el=q(id), min=Number(el.min), max=Number(el.max), step=Number(el.step)||1;
-    const steps=Math.floor((max-min)/step);
-    el.value=String(min+Math.floor(Math.random()*(steps+1))*step);
+    const el=q(id),min=Number(el.min),max=Number(el.max),step=Number(el.step)||1;
+    el.value=String(min+Math.floor(Math.random()*(Math.floor((max-min)/step)+1))*step);
   }
-  function randomize(){
-    newSeed();
-    dirs=dirs.map(()=>Math.random()*360);
-    ['density','shapeSize','randomness','angleJitter','originX','originY','curves','stretch','hatch','lines'].forEach(randomizeRange);
-    randomizeBackground();
-    shufflePalette(false);
-    render();
+  function randomize(animate=true){
+    const old=scene;
+    newSeed();dirs=dirs.map(()=>Math.random()*360);
+    ['density','scale','scatter','angleJitter','originX','originY','strokes','stretch','hatch','lines'].forEach(randomizeRange);
+    randomizeBackground();shufflePalette(false);
+    scene=makeScene();
+    const strength=motion().regen;
+    if(animate && old && strength>0 && !paused && !reducedMotion.matches){
+      // Fixed collapse/burst intensity and duration preserve the original regeneration effect.
+      transition={from:old,start:clock,duration:.55+1.4*strength};
+    }else transition=null;
+    updateLabels();updateReadout();renderFrame();
   }
   function shufflePalette(shouldRender=true){
-    const base=Math.random()*360; for(let i=1;i<=5;i++){const h=(base+(i-1)*(28+Math.random()*58))%360,s=45+Math.random()*45,l=38+Math.random()*45;q('c'+i).value=hslToHex(h,s,l);} q('hatchColor').value=q('c4').value; if(shouldRender) render();
+    const base=Math.random()*360;
+    for(let i=1;i<=5;i++){
+      const h=(base+(i-1)*(28+Math.random()*58))%360,s=45+Math.random()*45,l=38+Math.random()*45;
+      q('c'+i).value=hslToHex(h,s,l);
+    }
+    q('hatchColor').value=q('c4').value;
+    if(shouldRender){updateLabels();rebuild();}
   }
-  function hslToHex(h,s,l){s/=100;l/=100;const k=n=>(n+h/30)%12,a=s*Math.min(l,1-l),f=n=>l-a*Math.max(-1,Math.min(k(n)-3,Math.min(9-k(n),1)));return '#'+[f(0),f(8),f(4)].map(x=>Math.round(255*x).toString(16).padStart(2,'0')).join('');}
-  ids.forEach(id=>q(id).addEventListener('input',render));
-  q('randomize').addEventListener('click',randomize);q('nudge').addEventListener('click',nudge);q('shuffleBackground').addEventListener('click',()=>{randomizeBackground();render();});q('shufflePalette').addEventListener('click',()=>shufflePalette(true));
-  q('download').addEventListener('click',()=>{const s=settings(),a=document.createElement('a');a.download=`oxblood-${s.seed}-${s.width}x${s.height}.png`;a.href=canvas.toDataURL('image/png');a.click();});
-  randomize(); // Generate a fresh composition on every page load or reload.
+  function hslToHex(h,s,l){s/=100;l/=100;const k=n=>(n+h/30)%12,a=s*Math.min(l,1-l),f=n=>l-a*Math.max(-1,Math.min(k(n)-3,Math.min(9-k(n),1)));return '#'+[f(0),f(8),f(4)].map(x=>Math.round(x*255).toString(16).padStart(2,'0')).join('');}
+  function updatePauseButton(){const el=q('motionToggle');el.textContent=paused?'Play':'Pause';el.setAttribute('aria-pressed',String(paused));}
+  function tick(timestamp){
+    if(!lastTimestamp)lastTimestamp=timestamp;
+    const realDelta=clamp((timestamp-lastTimestamp)/1000,0,.08);
+    lastTimestamp=timestamp;
+    if(!document.hidden && !paused){
+      clock+=realDelta*motion().speed;
+      const strength=motion().glitch;
+      if(strength>0 && clock>=glitch.next){
+        glitch.until=clock+(.09+Math.random()*.13)*(0.6+strength*.6);
+        glitch.seed=(Math.random()*0x7fffffff)|0;
+        glitch.next=clock+Math.max(.7,(2+Math.random()*6)/(0.32+strength*1.8));
+      }
+      if(timestamp-lastDrawTimestamp>32){renderFrame();lastDrawTimestamp=timestamp;}
+    }
+    requestAnimationFrame(tick);
+  }
+
+  ids.forEach(id=>q(id).addEventListener('input',()=>{updateLabels();rebuild();}));
+  motionIds.forEach(id=>q(id).addEventListener('input',()=>{updateLabels();renderFrame();}));
+  q('randomize').addEventListener('click',()=>randomize(true));
+  q('nudge').addEventListener('click',nudge);
+  q('shuffleBackground').addEventListener('click',()=>{randomizeBackground();updateLabels();rebuild();});
+  q('shufflePalette').addEventListener('click',()=>shufflePalette(true));
+  q('motionToggle').addEventListener('click',()=>{paused=!paused;lastTimestamp=0;updatePauseButton();renderFrame();});
+  q('download').addEventListener('click',()=>{
+    renderFrame();
+    const s=scene.s,a=document.createElement('a');
+    a.download=`y2kcg-${s.seed}-${s.width}x${s.height}.png`;
+    a.href=canvas.toDataURL('image/png');a.click();
+  });
+  document.addEventListener('visibilitychange',()=>{lastTimestamp=0;});
+  reducedMotion.addEventListener?.('change',event=>{if(event.matches){paused=true;updatePauseButton();}});
+  updatePauseButton();
+  randomize(false); // Fresh composition at load. No repeated animation timeline.
+  requestAnimationFrame(tick);
 })();
 </script>
 </body>

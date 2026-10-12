@@ -37,7 +37,7 @@ button svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke
 .brand { font-size: 10px; font-weight: 400; letter-spacing: 1.2px; }
 .specimen-label { margin-top: 14px; color: var(--muted); font: inherit; }
 h1 { margin: 6px 0 0; font-size: 10px; font-weight: 400; line-height: 1.1; letter-spacing: 1.2px; }
-.controls { position: absolute; top: 136px; bottom: 72px; left: 32px; width: 238px; padding: 0 8px 8px 0; overflow: auto hidden; scrollbar-width: none; overscroll-behavior: contain; background: none; border: 0; box-shadow: none; }
+.controls { position: absolute; top: 136px; bottom: 72px; left: 32px; width: 220px; padding: 0 8px 8px 0; overflow: auto hidden; scrollbar-width: none; overscroll-behavior: contain; background: none; border: 0; box-shadow: none; }
 .controls::-webkit-scrollbar { display: none; }
 .form-section { margin-top: 0; }
 details { margin-top: 10px; background: none; border: 0; }
@@ -66,14 +66,14 @@ output { color: var(--muted); font: inherit; font-variant-numeric: tabular-nums;
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 #error { position: absolute; top: 40%; right: 10%; left: 36%; padding: 20px; color: var(--text); font-size: 10px; line-height: 1.6; letter-spacing: 1.2px; background: var(--option); border: 1px solid var(--line); }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
-@media (min-width: 1600px) { .identity, .controls { left: 42px; } .controls { width: 256px; } .identity { top: 34px; } }
+@media (min-width: 1600px) { .identity, .controls { left: 42px; } .controls { width: 220px; } .identity { top: 34px; } }
 @media (max-width: 700px) {
   .identity, .controls { left: 17px; }
   .identity { top: 20px; }
   .brand { font-size: 10px; letter-spacing: 1.2px; }
   .specimen-label { margin-top: 13px; font-size: 10px; }
   h1 { max-width: 180px; font-size: 10px; }
-  .controls { top: 124px; bottom: 110px; width: 177px; padding-right: 5px; }
+  .controls { top: 124px; bottom: 110px; width: 220px; padding-right: 5px; }
   .range-field label, .palette-label, .outline-button { font-size: 10px; }
   .range-field { margin-top: 6px; }
   .range-field output { font-size: 10px; }
@@ -94,7 +94,7 @@ output { color: var(--muted); font: inherit; font-variant-numeric: tabular-nums;
 <canvas id="canvas" tabindex="0" aria-label="Animated three-dimensional protein motif made from particles. Drag to rotate, scroll or pinch to zoom. Arrow keys rotate; plus and minus zoom; Space pauses."></canvas>
 <div class="identity"><span class="brand">STRAND</span><div class="specimen-label">SPECIMEN <span id="specimen">001</span></div><h1 id="form-title">Helix</h1></div>
 <aside class="controls" aria-label="Artwork controls">
-<details class="form-section"><summary>Strand form <span class="disclosure" aria-hidden="true">+</span></summary><div class="section-fields"><div class="form-options" aria-label="Strand form"><button class="form-option" data-form="coiledCoil" aria-pressed="false">Coil</button><button class="form-option active" data-form="collagen" aria-pressed="true">Helix</button><button class="form-option" data-form="proteinKnot" aria-pressed="false">Knot</button><button class="form-option" data-form="globule" aria-pressed="false">Globule</button></div></div></details>
+<details class="form-section"><summary>Form <span class="disclosure" aria-hidden="true">+</span></summary><div class="section-fields"><div class="form-options" aria-label="Form"><button class="form-option" data-form="coiledCoil" aria-pressed="false">Coil</button><button class="form-option active" data-form="collagen" aria-pressed="true">Helix</button><button class="form-option" data-form="proteinKnot" aria-pressed="false">Knot</button><button class="form-option" data-form="globule" aria-pressed="false">Globule</button></div></div></details>
 <details><summary>Geometry <span class="disclosure" aria-hidden="true">+</span></summary><div class="section-fields">
 <div class="range-field"><label for="width">Width <output id="width-value"></output></label><input id="width" type="range" min="10" max="160" step="1" value="20"></div>
 <div class="range-field"><label for="ribbonTwist">Twist <output id="ribbonTwist-value"></output></label><input id="ribbonTwist" type="range" min="0" max="6" step="0.1" value="0.65"></div>
@@ -244,7 +244,7 @@ const integerKeys=['density'];
 const structuralKeys=new Set(['form','twist','fold','width','ribbonTwist','openings']),pointKeys=new Set(['density','scatter']),lineKeys=new Set(['filaments']);
 const canvas=$('canvas');
 let gl=canvas.getContext('webgl',{alpha:false,depth:false,stencil:false,antialias:false,preserveDrawingBuffer:false}),program,locations,pointBuffer,lineBuffer,pointCount=0,lineCount=0;
-let angleX=-.15,angleY=.42,angleZ=-.18,zoom=4,time=0,paused=false,dirty=true,last=0,frameId,buildTimer,specimen=1,contextLost=false,disposed=false,viewportAspect=1,pixelRatio=1;
+let angleX=-.15,angleY=.42,angleZ=-.18,zoom=5,time=0,paused=false,dirty=true,last=0,frameId,buildTimer,specimen=1,contextLost=false,disposed=false,viewportAspect=1,pixelRatio=1;
 const gestures=new Map();
 const rgb=hex=>[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16)/255);
 for(const palette of Object.values(palettes)){palette.bgRgb=rgb(palette.bg);palette.fgRgb=rgb(palette.fg);palette.aRgb=rgb(palette.a);palette.bRgb=rgb(palette.b);}
@@ -329,7 +329,7 @@ function render(){
  if(lineCount){gl.uniform1f(locations.Line,1);bind(lineBuffer);gl.drawArrays(gl.LINES,0,lineCount);}if(pointCount){gl.uniform1f(locations.Line,0);bind(pointBuffer);gl.drawArrays(gl.POINTS,0,pointCount);}dirty=false;
 }
 function resize(){const rect=canvas.getBoundingClientRect(),area=Math.max(1,rect.width*rect.height),d=Math.min(devicePixelRatio||1,2,Math.sqrt(6000000/area)),width=Math.max(1,Math.round(rect.width*d)),height=Math.max(1,Math.round(rect.height*d));viewportAspect=rect.width/Math.max(1,rect.height);pixelRatio=d;if(canvas.width===width&&canvas.height===height)return;canvas.width=width;canvas.height=height;dirty=true;}
-function tick(now){if(disposed)return;const dt=Math.min((now-last)/1000||0,.05);last=now;if(!paused&&!document.hidden){time+=dt;if(gestures.size===0)angleY+=dt*.055;dirty=true;}if(dirty&&!document.hidden)render();frameId=requestAnimationFrame(tick);}
+function tick(now){if(disposed)return;const dt=Math.min((now-last)/1000||0,.05);last=now;if(!paused&&!document.hidden){time+=dt*1.05;if(gestures.size===0)angleY+=dt*.055*1.05;dirty=true;}if(dirty&&!document.hidden)render();frameId=requestAnimationFrame(tick);}
 function format(key,value){if(key==='density')return value.toLocaleString();if(key==='hue')return value+'°';if(['size','twist','ribbonTwist'].includes(key))return value.toFixed(1);return value+'%';}
 function sync(){
  for(const key of Object.keys(ranges)){const input=$(key);input.value=state[key];input.style.setProperty('--fill',100*(state[key]-ranges[key][0])/(ranges[key][1]-ranges[key][0])+'%');$(key+'-value').textContent=format(key,state[key]);}
@@ -350,11 +350,11 @@ $('regenerate').onclick=()=>{
  state.twist=Math.round(random(1,12)*10)/10;state.fold=Math.round(random(0,100));state.width=Math.round(random(10,160));state.ribbonTwist=Math.round(random(0,6)*10)/10;
  state.openings=Math.round(random(0,45));state.density=Math.round(random(12000,60000)/1000)*1000;state.size=Math.round(random(.7,3.5)*10)/10;state.sizeVariation=Math.round(random(0,100));
  state.scatter=Math.round(random(0,45));state.filaments=Math.round(random(0,65));state.iridescence=Math.round(random(20,100));state.hue=Math.round(random(0,360));state.palette=paletteNames[Math.floor(Math.random()*paletteNames.length)];
- zoom=Math.round(random(.5,5)*100)/100;specimen++;requestGeometry(['points','lines']);sync();
+ zoom=Math.round(random(1,6)*100)/100;specimen++;requestGeometry(['points','lines']);sync();
 };
 document.querySelectorAll('[data-palette]').forEach(button=>button.onclick=()=>update('palette',button.dataset.palette));
 function togglePause(){paused=!paused;dirty=true;sync();}
-function setZoom(value){zoom=Math.max(.4,Math.min(5,value));dirty=true;}
+function setZoom(value){zoom=Math.max(1,Math.min(6,value));dirty=true;}
 $('pause').onclick=togglePause;
 canvas.addEventListener('pointerdown',event=>{canvas.setPointerCapture(event.pointerId);gestures.set(event.pointerId,{x:event.clientX,y:event.clientY});});
 canvas.addEventListener('pointermove',event=>{if(!gestures.has(event.pointerId))return;const old=gestures.get(event.pointerId),next={x:event.clientX,y:event.clientY};if(gestures.size===2){const other=[...gestures.entries()].find(([id])=>id!==event.pointerId)[1],before=Math.hypot(old.x-other.x,old.y-other.y),after=Math.hypot(next.x-other.x,next.y-other.y);if(before>.1)setZoom(zoom*after/before);}else{angleY+=(next.x-old.x)*.007;angleX+=(next.y-old.y)*.007;}gestures.set(event.pointerId,next);dirty=true;});

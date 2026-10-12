@@ -22,6 +22,7 @@ button,input,select{
   font:inherit;font-weight:600;font-optical-sizing:auto;text-transform:uppercase;color:var(--ink)
 }
 button{border:0;background:none;cursor:pointer}
+.mobile-nav,.mobile-panel-head,.mobile-panel-actions{display:none}
 .app{height:100vh;display:grid;grid-template-columns:var(--panel) 1fr}
 .panel{
   height:100vh;overflow:auto;padding:18px 18px 92px;
@@ -107,23 +108,65 @@ canvas{
 }
 .stage-export svg{display:block;width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .canvas-shell:hover .stage-export,.stage-export:focus-visible{opacity:1;pointer-events:auto}
-@media(max-width:720px){
-  :root{--panel:292px}
-  .panel{padding-left:14px;padding-right:14px}
-  .stage{padding:18px}
+/* Small screens: prioritize the artwork, with settings in a fullscreen sheet. */
+@media(max-width:800px){
+  .app{display:flex;flex-direction:column;height:100vh;height:100dvh}
+  .mobile-nav{
+    display:flex;align-items:center;justify-content:space-between;
+    flex:0 0 54px;padding:0 18px;background:#fff;
+  }
+  .mobile-nav span,.mobile-nav button,.mobile-panel-head span,.mobile-panel-head button{
+    font-size:11px;line-height:1;text-transform:uppercase;
+  }
+  .mobile-nav button,.mobile-panel-head button{padding:12px 0 12px 16px}
+  .panel{display:none}
+  body.config-open .panel{
+    display:block;position:fixed;inset:0;z-index:50;
+    width:100%;height:100vh;height:100dvh;max-width:none;
+    overflow-y:auto;overscroll-behavior:contain;
+    padding:0 18px calc(102px + env(safe-area-inset-bottom));
+    background:#fff;border:0;
+  }
+  .mobile-panel-head{
+    display:flex;position:sticky;top:0;z-index:1;
+    align-items:center;justify-content:space-between;height:54px;
+    margin:0 -18px;padding:0 18px;background:#fff;
+  }
+  .panel h1,.panel .desc{display:none}
+  .panel .layout-title{margin-top:24px}
+  .row{grid-template-columns:104px minmax(0,1fr) 38px}
+  .mobile-panel-actions{
+    display:grid;position:fixed;bottom:0;left:0;right:0;
+    grid-template-columns:1fr 1fr;gap:8px;z-index:2;
+    padding:12px 18px calc(14px + env(safe-area-inset-bottom));background:#fff;
+  }
+  .mobile-panel-actions button{
+    min-height:44px;background:#f3f3f3;border-radius:4px;font-size:9px;
+  }
+  .mobile-panel-actions button:active{background:#000;color:#fff}
+  .stage{flex:1;min-height:0;width:100%;padding:16px}
+  .canvas-shell{
+    width:min(calc(100vw - 32px),calc(100dvh - 94px));max-width:100%;
+    aspect-ratio:1;
+  }
+  .stage-export,.actions{display:none}
 }
-@media(max-width:600px){
-  body{overflow:auto}.app{display:block}
-  .panel{height:auto;border-right:0;border-bottom:0;padding-bottom:84px}
-  .actions{width:100%}.stage{height:68vh}.canvas-shell{width:min(90vw,62vh)}
+@media(max-width:360px){
+  .segmented button{font-size:7px}
+  .row{grid-template-columns:90px minmax(0,1fr) 34px}
+  .palette{grid-template-columns:90px 1fr 34px}
 }
 </style></head>
 <body>
 <div class="app">
-<aside class="panel">
-  <h1>Dianounce</h1>
-  <div class="desc">Network diagrams &amp; flows</div>
-  <div class="section-title" style="margin-top:0">LAYOUT</div>
+<nav class="mobile-nav" aria-label="Main navigation">
+  <span>DIANOUNCE</span><button id="configOpen" type="button" aria-controls="configPanel" aria-expanded="false">CONFIG</button>
+</nav>
+<aside class="panel" id="configPanel">
+  <div class="mobile-panel-head"><span>CONFIG</span><button id="configClose" type="button">CLOSE</button></div>
+  <h1>DIANOUNCE</h1>
+  <div class="desc">NETWORK DIAGRAMS &amp; FLOWS</div>
+  <div class="section-title layout-title">LAYOUT</div>
   <div class="segmented four" id="layouts">
     <button data-layout="hierarchy">TREE</button><button data-layout="matrix">MATRIX</button>
     <button data-layout="radial">RADIAL</button><button data-layout="flow">FLOW</button>
@@ -142,6 +185,10 @@ canvas{
     <input id="ink" type="color" value="#111111"><input id="accentColor" type="color" value="#ef1749">
     <input id="gray" type="color" value="#b2b2ae"><input id="paper" type="color" value="#efede7">
   </div></div>
+  <div class="mobile-panel-actions">
+    <button id="mobileRandomize" type="button">REGENERATE</button>
+    <button id="mobileExport" type="button">DOWNLOAD PNG</button>
+  </div>
 </aside>
 <main class="stage">
   <div class="canvas-shell"><button class="stage-export" id="export" aria-label="Download" title="Download"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path></svg></button><canvas id="canvas" width="1800" height="1800"></canvas></div>
@@ -198,9 +245,9 @@ function downloadCanvas(canvas,name,render){
 
 const canvas=document.getElementById("canvas"),ctx=canvas.getContext("2d"),W=canvas.width,H=canvas.height;
 const state={
-  seed:19374,layout:"hierarchy",lineStyle:"elbow",labels:true,
-  nodeCount:16,branching:3,nodeScale:58,lineWeight:28,spacing:64,connectionDensity:42,
-  hierarchyBias:72,accentMix:26,shapeMix:52,labelScale:42,
+  seed:19374,layout:"flow",lineStyle:"curve",labels:true,
+  nodeCount:32,branching:2,nodeScale:47,lineWeight:30,spacing:41,connectionDensity:34,
+  hierarchyBias:33,accentMix:100,shapeMix:71,labelScale:61,
   ink:"#111111",accentColor:"#ef1749",gray:"#b2b2ae",paper:"#efede7"
 };
 const defs=[
@@ -210,6 +257,21 @@ const defs=[
   ["accentMix","ACCENT",0,100,1],["shapeMix","SHAPE",0,100,1],
   ["labelScale","LABEL",20,100,1]
 ];
+// Screenshot values are the center of a randomized 20–40% slider travel window.
+const baseline={
+  nodeCount:32,branching:2,nodeScale:47,lineWeight:30,spacing:41,
+  connectionDensity:34,hierarchyBias:33,accentMix:100,shapeMix:71,labelScale:61
+};
+function randomizeSliderValues(r){
+  defs.forEach(([key,,min,max,step])=>{
+    const halfWindow=(max-min)*(.20+r()*.20)/2;
+    const lower=Math.max(min,baseline[key]-halfWindow);
+    const upper=Math.min(max,baseline[key]+halfWindow);
+    const picked=lower+r()*(upper-lower);
+    state[key]=clamp(min+Math.round((picked-min)/step)*step,min,max);
+  });
+}
+randomizeSliderValues(Math.random);
 defs.forEach(d=>makeSlider(document.getElementById("controls"),state,d,render));
 function syncUI(){
   syncSliders(state,defs);
@@ -390,13 +452,48 @@ function render(){
 function randomize(){
   const r=rng((Date.now()^Math.floor(performance.now()*100000))>>>0);
   state.seed=Math.floor(10000+r()*89999);state.layout=pick(["hierarchy","matrix","radial","flow"],r);state.lineStyle=pick(["straight","elbow","curve","handdrawn"],r);
-  state.nodeCount=Math.round(10+r()*24);state.branching=Math.round(2+r()*3);state.nodeScale=Math.round(35+r()*55);
-  state.lineWeight=Math.round(16+r()*52);state.spacing=Math.round(42+r()*50);state.connectionDensity=Math.round(22+r()*62);
-  state.hierarchyBias=Math.round(35+r()*64);state.accentMix=Math.round(10+r()*45);state.shapeMix=Math.round(28+r()*68);
-  state.labelScale=Math.round(28+r()*54);state.labels=r()>.18;
+  randomizeSliderValues(r);state.labels=r()>.18;
   syncUI();render();
 }
 document.getElementById("randomize").onclick=randomize;
-document.getElementById("export").onclick=()=>downloadCanvas(canvas,`dianounce-${state.seed}.png`,render);
+const exportImage=()=>downloadCanvas(canvas,`dianounce-${state.seed}.png`,render);
+document.getElementById("export").onclick=exportImage;
+
+const configPanel=document.getElementById("configPanel");
+const configOpen=document.getElementById("configOpen");
+const configClose=document.getElementById("configClose");
+const compactScreen=window.matchMedia("(max-width:800px)");
+function setConfig(open){
+  const isOpen=Boolean(open && compactScreen.matches);
+  const wasOpen=document.body.classList.contains("config-open");
+  document.body.classList.toggle("config-open",isOpen);
+  configOpen.setAttribute("aria-expanded",String(isOpen));
+  if(isOpen){
+    configPanel.setAttribute("role","dialog");
+    configPanel.setAttribute("aria-modal","true");
+    configPanel.setAttribute("aria-label","Configuration");
+    configPanel.scrollTop=0;
+    configClose.focus();
+  }else{
+    configPanel.removeAttribute("role");
+    configPanel.removeAttribute("aria-modal");
+    configPanel.removeAttribute("aria-label");
+    if(wasOpen && compactScreen.matches)configOpen.focus();
+  }
+}
+configOpen.onclick=()=>setConfig(true);
+configClose.onclick=()=>setConfig(false);
+compactScreen.addEventListener("change",()=>setConfig(false));
+document.addEventListener("keydown",e=>{
+  if(!document.body.classList.contains("config-open"))return;
+  if(e.key==="Escape"){e.preventDefault();setConfig(false);return;}
+  if(e.key!=="Tab")return;
+  const focusable=Array.from(configPanel.querySelectorAll("button,input")).filter(el=>el.getClientRects().length);
+  const first=focusable[0],last=focusable[focusable.length-1];
+  if(e.shiftKey && document.activeElement===first){e.preventDefault();last.focus();}
+  else if(!e.shiftKey && document.activeElement===last){e.preventDefault();first.focus();}
+});
+document.getElementById("mobileRandomize").onclick=()=>{randomize();setConfig(false);};
+document.getElementById("mobileExport").onclick=()=>{exportImage();setConfig(false);};
 syncUI();render();
 </script></body></html>
