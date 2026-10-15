@@ -401,6 +401,52 @@ function drawObject(ctx, o) {
       f('pinball-field', 3, -3, 10, 12); f('gold', 5, -1, 2, 2); f('sky', 9, 1, 2, 2); f('red', 6, 4, 2, 2); f('white', 7, 7, 2, 1);
       f('outline', 3, 14, 2, 2); f('outline', 11, 14, 2, 2);
       break;
+    case 'ddr': { // a dance cabinet: tall marquee, screen, speakers, and the arrow pad on the floor in front
+      shadow(1, 12, w - 2, 4);
+      f('outline', 1, -16, w - 2, 30); f('plum', 2, -15, w - 4, 28); f(S('plum', 1.25), 2, -15, 1, 28);
+      f('outline', 3, -14, w - 6, 5); f('pink', 4, -13, w - 8, 3); f('white', 6, -12, 3, 1); f('mustard', 12, -12, 4, 1); f('white', 18, -12, 2, 1);
+      f('outline', 3, -8, w - 6, 13); f('navy', 4, -7, w - 8, 11);
+      f('sky', 7, -5, 2, 2); f('pink', 13, -3, 2, 2); f('mustard', 19, -5, 2, 2); f('green', 10, 0, 2, 2); f('white', 16, 1, 2, 1); f(S('navy', 1.6), 4, -7, w - 8, 1);
+      f('red', 2, 6, 3, 2); f('red', w - 5, 6, 3, 2); f('outline', 5, 7, w - 10, 1);
+      f('outline', 2, 13, 3, 3); f('outline', w - 5, 13, 3, 3);
+      // the pad, on the next row
+      f('outline', 0, 16, w, 16); f('metal', 1, 17, w - 2, 14); f(S('metal', 0.85), 1, 17, w - 2, 1);
+      for (const [ax, ay, k] of [[2, 22, 'sky'], [12, 22, 'sky'], [7, 17, 'pink'], [7, 27, 'pink'], [17, 22, 'mustard'], [22, 17, 'pink'], [22, 27, 'pink'], [27, 22, 'sky']]) { f('outline', ax, ay, 4, 4); f(k, ax + 1, ay + 1, 2, 2); }
+      f('outline', 7, 22, 4, 4); f('outline', 22, 22, 4, 4);
+      break;
+    }
+    case 'bookcase': { // a tall shelf of design books, spines in a sober order
+      shadow(1, 12, w, 4);
+      f('outline', 0, -8, w, 22); f('wood-dark', 1, -7, w - 2, 20); f('wood', 1, -7, w - 2, 1); f('wood', 1, 1, w - 2, 1); f('wood', 1, 9, w - 2, 1);
+      const spines = ['white', 'navy', 'red', 'mustard', 'black', 'white', 'teal', 'orange', 'navy', 'white', 'plum', 'green', 'red', 'black', 'mustard', 'sky'];
+      for (let i = 0; i < Math.floor((w - 4) / 2); i++) { const k = spines[(i + o.x) % spines.length], h = 5 + (i * 7) % 3; f(k, 2 + i * 2, -6 + (7 - h), 2, h); if (i % 3 === 0) f(S(k, 0.6), 2 + i * 2, -6 + (7 - h), 1, h); }
+      for (let i = 0; i < Math.floor((w - 4) / 2); i++) { const k = spines[(i * 5 + o.x) % spines.length], h = 5 + (i * 11) % 3; if (i === 6 || i === 7) continue; f(k, 2 + i * 2, 2 + (7 - h), 2, h); }
+      f('white', 2, 10, 5, 3); f('red', 8, 10, 3, 3); f('navy', 12, 10, 6, 3); f('mustard', 19, 10, 4, 3); f('black', 24, 11, 5, 2);
+      break;
+    }
+    case 'dummy': { // a Wing Chun wooden dummy: post, three arms, a leg, on a frame
+      shadow(3, 12, 10, 4);
+      f('outline', 1, 10, 14, 5); f('wood-dark', 2, 11, 12, 3); f('wood', 2, 11, 12, 1);
+      f('outline', 6, -10, 5, 22); f('wood', 7, -9, 3, 20); f(S('wood', 1.2), 7, -9, 1, 20); f('wood-dark', 9, -9, 1, 20);
+      f('outline', 1, -6, 6, 3); f('wood-light', 2, -5, 5, 1); f('outline', 10, -4, 6, 3); f('wood-light', 10, -3, 5, 1);
+      f('outline', 1, 0, 6, 3); f('wood-light', 2, 1, 5, 1); f('outline', 9, 5, 5, 6); f('wood-light', 10, 6, 2, 1); f('wood-light', 12, 8, 1, 2);
+      f('brass', 8, -7, 1, 1); f('brass', 8, -1, 1, 1);
+      break;
+    }
+    case 'bearflag': { // a California bear flag tacked over the window: white field, red stripe, a brown bear, a red star
+      f('outline', 1, 1, 14, 12); f('white', 2, 2, 12, 10); f('red', 2, 10, 12, 2);
+      f('red', 3, 3, 1, 1); f('wood-dark', 6, 5, 5, 3); f('wood-dark', 5, 6, 1, 2); f('wood-dark', 10, 4, 2, 2); f('wood-dark', 7, 8, 1, 1); f('wood-dark', 9, 8, 1, 1);
+      f('leaf', 4, 8, 8, 1); f('outline', 2, 1, 1, 1); f('outline', 13, 1, 1, 1); f('brass', 2, 2, 1, 1); f('brass', 13, 2, 1, 1);
+      break;
+    }
+    case 'mailbox': { // a red post box on legs, with a slot and a little flag
+      shadow(3, 13, 10, 3);
+      f('outline', 4, 8, 2, 7); f('outline', 10, 8, 2, 7); f('metal-dark', 5, 9, 1, 5); f('metal-dark', 11, 9, 1, 5);
+      f('outline', 2, -4, 12, 13); f('red', 3, -3, 10, 11); f(S('red', 1.3), 3, -3, 10, 2); f(S('red', 0.7), 3, 6, 10, 2);
+      f('outline', 5, 0, 6, 1); f('white', 5, 3, 6, 2); f('outline', 6, 4, 4, 1);
+      f('outline', 13, -6, 1, 6); f('mustard', 13, -6, 3, 2);
+      break;
+    }
     case 'chair':
       shadow(4, 12, 9, 3);
       f('outline', 4, 5, 8, 9); f('chair', 5, 6, 6, 6); f(S('chair', 1.25), 5, 6, 6, 1); f('outline', 7, 13, 2, 2);
@@ -470,7 +516,8 @@ function drawObject(ctx, o) {
       f('outline', 4, 4, 8, 10); f('desk', 5, 9, 6, 4); f('outline', 4, 2, 8, 4); f('desk-top', 5, 3, 6, 2); f('outline', 5, 13, 1, 2); f('outline', 10, 13, 1, 2);
       break;
     case 'dchair_right': case 'dchair_left': case 'dchair_right_red': case 'dchair_left_red': { // dining chair seen side-on, facing the table
-      const r = o.sprite.startsWith('dchair_right'), odd = o.sprite.endsWith('_red'), wood = odd ? 'mustard' : 'desk', top = odd ? S('mustard', 1.2) : 'desk-top'; // the odd one out is yellow
+      // three light-oak chairs and one odd red one
+      const r = o.sprite.startsWith('dchair_right'), odd = o.sprite.endsWith('_red'), wood = odd ? 'red' : 'desk-edge', top = odd ? S('red', 1.2) : S('desk-top', 1.1);
       shadow(4, 12, 9, 3);
       f('outline', 4, 7, 9, 6); f(wood, 5, 8, 7, 4); f(top, 5, 8, 7, 1);
       f('outline', r ? 3 : 11, 0, 3, 13); f(top, r ? 4 : 12, 1, 1, 11);
@@ -500,7 +547,7 @@ function drawObject(ctx, o) {
       shadow(1, 12, w, 4);
       f('outline', 0, 0, w, 15); f('desk', 1, 5, w - 2, 9); f('desk-top', 1, 1, w - 2, 4); f(S('desk-top', 1.15), 1, 1, w - 2, 1);
       // the monitor faces whoever sits behind the counter, so visitors see its back
-      f('outline', 6, -5, 11, 7); f('monitor', 7, -4, 9, 5); f(S('monitor', 1.2), 7, -4, 9, 1); f('white', 11, -2, 1, 1); f('outline', 10, 1, 3, 1);
+      f('outline', 19, -5, 11, 7); f('monitor', 20, -4, 9, 5); f(S('monitor', 1.2), 20, -4, 9, 1); f('white', 24, -2, 1, 1); f('outline', 23, 1, 3, 1);
       f('white', w - 12, -1, 5, 3);
       break;
     case 'bar_cart':
@@ -981,6 +1028,30 @@ const CLIENT_POOL = [
   { client: 'Halcyon Hotels', name: 'Halcyon Guest Experience', type: 'service', brief: 'A boutique hotel group wants a guest experience from booking email to room key card.', contact: { name: 'Celeste Moreau', title: 'Brand Director', temper: 'glamorous, exacting about details', picky: 0.75, look: { skin: 'skin2', hair: 'hair-brown', style: 'bun', shirt: 'red', pants: 'black' } } },
 ];
 
+// The people who come back. Lola and the laid-off come to visit; Rafa comes from the other side
+// of a pitch, since he took the Ditto job; Priya left on good terms before the layoffs, went to
+// a biotech, and comes back with a brief and a budget.
+const RETURNS = {
+  lola: { id: 'office_manager', name: 'Dolores "Lola" Martínez', short: 'Lola', title: 'Office manager, formerly · now runs a bookshop in Harborview', look: { skin: 'skin4', hair: 'hair-black', style: 'bun', shirt: 'mustard', pants: 'denim' }, want: ['cos', 'dog', 'ceo', 'junior_designer'], spot: 'dog_bed', act: 'here to see Pica. Only Pica, she says.' },
+  rafa: { id: 'art_director', name: 'Rafael Oliveira', short: 'Rafa', title: 'Art Director, Studio Ditto · formerly ours', look: { skin: 'skin3', hair: 'hair-brown', style: 'curly', shirt: 'black', pants: 'ink' }, want: ['design_director', 'head_design', 'copywriter', 'ceo'], spot: 'waiting_bench', act: 'dropping by from Studio Ditto, with pastries, after pitching against us' },
+  priya: { id: 'cpo', name: 'Priya Raman', short: 'Priya', title: 'Head of Product, Helix Foundry · formerly our CPO', look: { skin: 'skin4', hair: 'hair-black', style: 'long', shirt: 'teal', pants: 'ink' }, want: ['ceo', 'head_design', 'ux_researcher', 'cos'], spot: 'meeting_table', act: 'here with a brief. And a budget. And, she says, no pitch.' },
+  grace: { id: 'design_manager', name: 'Grace Mwangi', short: 'Grace', title: 'Design Manager, formerly · now freelance', look: { skin: 'skin6', hair: 'hair-black', style: 'short', shirt: 'orange', pants: 'khaki' }, want: ['head_design', 'cos', 'ux_researcher'], spot: 'dining_table', act: 'in for lunch, like it never stopped' },
+  ikaika: { id: 'lead_designer', name: 'Ikaika Kahananui', short: 'Ikaika', title: 'Lead Designer, formerly · now teaching', look: { skin: 'skin5', hair: 'hair-black', style: 'long', shirt: 'sky', pants: 'denim' }, want: ['ux_researcher', 'senior_designer', 'junior_designer'], spot: 'reading_chair', act: 'back to see what happened to Swatchbook' },
+  val: { id: 'account_exec', name: 'Valentina Rossi', short: 'Val', title: 'Account Executive, formerly · now client-side at Tidewater', look: { skin: 'skin2', hair: 'hair-brown', style: 'bob', shirt: 'red', pants: 'black' }, want: ['ceo', 'cos', 'copywriter'], spot: 'waiting_bench', act: 'in the neighborhood, with news about the museum' },
+  oksana: { id: 'senior_designer_2', name: 'Oksana Kovalenko', short: 'Oksana', title: 'Senior Designer, formerly · now at Studio Ditto', look: { skin: 'skin1', hair: 'hair-blonde', style: 'bob', shirt: 'plum', pants: 'ink' }, want: ['senior_designer', 'design_director', 'head_design'], spot: 'crit_rug', act: 'in for crit, as a guest, if they\'ll have her' },
+};
+const HELIX_BRIEF = {
+  client: 'Helix Foundry', name: 'Helix Discovery Platform', type: 'enterprise', domain: 'biotech', fee: 150000, font: 5, motif: 6,
+  brief: 'A generative drug-discovery platform: AI designs, scores and tests millions of candidate compounds in silico, and the platform has to show chemists which ten to make this week, and why, in a way they trust.',
+  contact: { name: 'Priya Raman', title: 'Head of Product, Helix Foundry', temper: 'a former colleague; knows every shortcut the studio takes and will not allow one', picky: 0.55, look: { skin: 'skin4', hair: 'hair-black', style: 'long', shirt: 'teal', pants: 'ink' } },
+  story: { sector: 'Deep tech · Generative drug discovery', line: 'Make the ten that matter.', insight: 'chemists don\'t distrust the model; they distrust a number with no story behind it',
+    context: 'Helix\'s platform generates and screens millions of candidate molecules a week. The output reached the chemists as ranked spreadsheets, and the chemists, reasonably, kept making the compounds they already understood.',
+    goals: ['Show why a candidate ranks where it does, in chemistry, not in scores', 'Turn a million candidates into ten decisions a week', 'Let a chemist overrule the model and have the model learn from it'],
+    strategy: 'We designed around the weekly decision: a shortlist with the reasoning on the surface, the evidence one click down, and every override fed back into the next run.',
+    outcome: 'Chemists started synthesizing the model\'s candidates, and the platform became the Monday meeting instead of the thing argued about at the Monday meeting.',
+    metrics: [['3×', 'model-proposed compounds taken to synthesis'], ['11 days → 2', 'from candidate list to decision'], ['92%', 'of chemists using it weekly']] },
+};
+
 const INTERNAL_POOL = [
   { client: 'Another Studio (incubator)', name: 'Swatchbook', type: 'internal product', brief: 'Incubated app: a color-palette tool for designers. Goal this quarter: ship a beta with a team tier. Noor took it over after Ikaika left.' },
   { client: 'Another Studio', name: 'Another Typeface', type: 'self-initiated', brief: 'A free studio typeface family. Kenji\'s pet project.' },
@@ -1248,7 +1319,7 @@ class Studio {
     const p = {
       id: `p${this.nextProjectId++}`,
       name: spec.name, client: spec.client, type: spec.type, brief: spec.brief,
-      internal: spec.client.startsWith('Another Studio'), contact: spec.contact ?? null,
+      internal: spec.client.startsWith('Another Studio'), contact: spec.contact ?? null, fee: spec.fee ?? null,
       phase: 0, progress: 0, quality: 55, team, lead: team[0],
       log: [], createdAt: t, dueDay: Math.floor(t / 1440) + dueDays,
       submittedTo: null, awaitingReview: false, reviews: [], revisionRound: 0,
@@ -1437,6 +1508,18 @@ class Studio {
       const spec = CLIENT_POOL[(this.clientIdx + i) % CLIENT_POOL.length];
       if (!taken.has(spec.name)) { this.clientIdx += i + 1; return spec; }
     }
+    // Every client has been pitched once. The ones the studio delivered for come back with the next job.
+    const FOLLOW = { brand: ['Annual Report', 'Launch Campaign', 'Website', 'Signage'], product: ['v2', 'Onboarding', 'Admin Console', 'Watch App'], packaging: ['Holiday Range', 'Second Line', 'Gift Set'], wayfinding: ['Phase Two', 'Transit Maps', 'Night Signage'], exhibition: ['Catalogue', 'Children\'s Guide', 'Touring Show'], service: ['Loyalty', 'Guest App', 'Spa Identity'], campaign: ['Year Two', 'Winter Season'], enterprise: ['Mobile', 'Analytics', 'Onboarding'] };
+    const happy = this.projects.filter(p => p.phase >= 4 && !p.lost && !p.internal && p.contact && CLIENT_POOL.some(c => c.client === p.client));
+    for (let k = 0; k < happy.length * 40; k++) {
+      const base = happy[(this.clientIdx + k) % happy.length], spec = CLIENT_POOL.find(c => c.client === base.client);
+      const short = spec.client.replace(/ (Botanical Garden|Bikes|Food Co\.|Records|Health|Museum|Labs|Bank|Festival|Transit|Bookshop|Hotels)$/, '').replace(/^City of /, '');
+      const opts = FOLLOW[spec.type] ?? ['Next'], idx = Math.floor(k / happy.length);
+      const name = `${short} ${opts[idx % opts.length]}${idx >= opts.length ? ` ${Math.floor(idx / opts.length) + 1}` : ''}`;
+      if (taken.has(name)) continue;
+      this.clientIdx += k + 1;
+      return { ...spec, name, brief: `${spec.contact.name.split(' ')[0]} is back: ${spec.client} wants "${name}" next, on the strength of "${base.name}". Same team if possible.`, followOn: base.name };
+    }
     return null;
   }
 
@@ -1554,7 +1637,7 @@ class Studio {
   }
 }
 
-return { get PHASES() { return PHASES; }, get CULTURE() { return CULTURE; }, get FORMER() { return FORMER; }, get LAYOFF() { return LAYOFF; }, get CLIENT_POOL() { return CLIENT_POOL; }, get INTERNAL_POOL() { return INTERNAL_POOL; }, get LAYOFF_DAY() { return LAYOFF_DAY; }, get AWARDS() { return AWARDS; }, get RITUALS() { return RITUALS; }, get PALETTES() { return PALETTES; }, get FONTS() { return FONTS; }, get MOTIFS() { return MOTIFS; }, get WORKSTREAMS() { return WORKSTREAMS; }, get DAY_NAMES() { return DAY_NAMES; }, get CAL() { return CAL; }, get setCalendar() { return setCalendar; }, get dowOf() { return dowOf; }, get dateOf() { return dateOf; }, get clockLabel() { return clockLabel; }, get isWeekend() { return isWeekend; }, get seasonOf() { return seasonOf; }, get weatherOf() { return weatherOf; }, get holidayOf() { return holidayOf; }, get decorOf() { return decorOf; }, get creditName() { return creditName; }, get Studio() { return Studio; } };
+return { get PHASES() { return PHASES; }, get CULTURE() { return CULTURE; }, get FORMER() { return FORMER; }, get LAYOFF() { return LAYOFF; }, get CLIENT_POOL() { return CLIENT_POOL; }, get INTERNAL_POOL() { return INTERNAL_POOL; }, get RETURNS() { return RETURNS; }, get HELIX_BRIEF() { return HELIX_BRIEF; }, get LAYOFF_DAY() { return LAYOFF_DAY; }, get AWARDS() { return AWARDS; }, get RITUALS() { return RITUALS; }, get PALETTES() { return PALETTES; }, get FONTS() { return FONTS; }, get MOTIFS() { return MOTIFS; }, get WORKSTREAMS() { return WORKSTREAMS; }, get DAY_NAMES() { return DAY_NAMES; }, get CAL() { return CAL; }, get setCalendar() { return setCalendar; }, get dowOf() { return dowOf; }, get dateOf() { return dateOf; }, get clockLabel() { return clockLabel; }, get isWeekend() { return isWeekend; }, get seasonOf() { return seasonOf; }, get weatherOf() { return weatherOf; }, get holidayOf() { return holidayOf; }, get decorOf() { return decorOf; }, get creditName() { return creditName; }, get Studio() { return Studio; } };
 })();
 
 // ---- sim/library/ceo.js
@@ -1722,13 +1805,13 @@ const __default = {
       "Lunch. Then I'll be kind again.",
       "Felix packed me jollof. That man is a saint.",
       "Eating standing up. Very founder of me.",
-      "I'll steal one of Tomás's color-coded snacks.",
+      "I'll steal one of Tomás' color-coded snacks.",
       "Pica is watching my sandwich like a client watches a budget.",
       "My mother would be appalled by this desk lunch.",
       "Food first. Brilliant ideas come after rice.",
       "If I skip lunch again Tomás will put it on the tracker.",
       "Half a sandwich, two emails. Balance.",
-      "The kitchen smells like Marcus's greens. Heaven.",
+      "The kitchen smells like Marcus' greens. Heaven.",
     ],
     coffee: [
       "Tomás descaled it. It tastes like a fresh start.",
@@ -1756,7 +1839,7 @@ const __default = {
     ],
     fun: [
       "Space Kerning. That left flipper is a character flaw.",
-      "I'll never beat Marcus's score. I'll die trying.",
+      "I'll never beat Marcus' score. I'll die trying.",
       "Old annuals. Our work in here still makes me blush.",
       "Ping-pong is crit with a ball.",
       "Our first ever brochure. Dreadful. I love it.",
@@ -2264,7 +2347,7 @@ const __default = {
       "I'll fix the sticky flipper one day. Not today.",
       "Archive shelf. Lola organized these by year. Bless her.",
       "Video call Daniela from the phone booth. Wave at Luna.",
-      "Marcus's high score mocks me every single day.",
+      "Marcus' high score mocks me every single day.",
       "Old project binders. Everything Lola labeled is still perfect.",
       "Ping-pong is basically logistics with a paddle.",
       "Two minutes of fun is a scheduled break. It's allowed.",
@@ -2356,23 +2439,23 @@ const __default = {
     ],
   },
   events: [
-    { id: "tomas-luna-crawling", first: "Luna crawled. Backwards, into the couch. But she crawled! I have eleven videos.", third: "Tomás's daughter Luna started crawling", v: 2 },
-    { id: "tomas-luna-first-tooth", first: "Luna's first tooth came through. She bit me with it immediately. Proud.", third: "Tomás's daughter Luna got her first tooth", v: 2 },
-    { id: "tomas-luna-ear-infection", first: "Luna has an ear infection. She screamed till four. Daniela and I are zombies.", third: "Tomás's daughter Luna has an ear infection", v: -2 },
-    { id: "tomas-daniela-promotion", first: "Daniela got made charge nurse. She acted calm on the phone and then screamed in the car.", third: "Tomás's wife Daniela got promoted to charge nurse", v: 2 },
+    { id: "tomas-luna-crawling", first: "Luna crawled. Backwards, into the couch. But she crawled! I have eleven videos.", third: "Tomás' daughter Luna started crawling", v: 2 },
+    { id: "tomas-luna-first-tooth", first: "Luna's first tooth came through. She bit me with it immediately. Proud.", third: "Tomás' daughter Luna got her first tooth", v: 2 },
+    { id: "tomas-luna-ear-infection", first: "Luna has an ear infection. She screamed till four. Daniela and I are zombies.", third: "Tomás' daughter Luna has an ear infection", v: -2 },
+    { id: "tomas-daniela-promotion", first: "Daniela got made charge nurse. She acted calm on the phone and then screamed in the car.", third: "Tomás' wife Daniela got promoted to charge nurse", v: 2 },
     { id: "tomas-salsa-night", first: "Daniela and I went salsa dancing. First time since Luna. My hips remembered.", third: "Tomás went salsa dancing with Daniela for the first time in ages", v: 2 },
-    { id: "tomas-dad-letter", first: "My dad sent a card for Luna. Just signed 'Abuelo.' I don't know what to do with it.", third: "Tomás's estranged dad sent a card for baby Luna", v: 0 },
-    { id: "tomas-dad-visit", first: "My dad wants to meet Luna. I said maybe. I've been staring at that word all day.", third: "Tomás's dad wants to meet baby Luna", v: -1 },
+    { id: "tomas-dad-letter", first: "My dad sent a card for Luna. Just signed 'Abuelo.' I don't know what to do with it.", third: "Tomás' estranged dad sent a card for baby Luna", v: 0 },
+    { id: "tomas-dad-visit", first: "My dad wants to meet Luna. I said maybe. I've been staring at that word all day.", third: "Tomás' dad wants to meet baby Luna", v: -1 },
     { id: "tomas-pica-vet", first: "Pica ate a sock. Vet says she'll pass it. I'm checking. Constantly.", third: "Tomás had to take Pica to the vet after she ate a sock", v: -1 },
-    { id: "tomas-full-night", first: "Luna slept eight hours. EIGHT. I woke up thinking something was wrong. Nothing was wrong.", third: "Tomás's baby slept through the night for the first time", v: 2 },
-    { id: "tomas-car-battery", first: "Car battery died in the daycare parking lot. Ex-logistics officer. No jumper cables. Humbling.", third: "Tomás's car battery died at daycare", v: -1 },
+    { id: "tomas-full-night", first: "Luna slept eight hours. EIGHT. I woke up thinking something was wrong. Nothing was wrong.", third: "Tomás' baby slept through the night for the first time", v: 2 },
+    { id: "tomas-car-battery", first: "Car battery died in the daycare parking lot. Ex-logistics officer. No jumper cables. Humbling.", third: "Tomás' car battery died at daycare", v: -1 },
     { id: "tomas-business-class", first: "Signed up for a night class on running a small business. Don't tell Adaeze. Okay, tell her.", third: "Tomás signed up for a small-business night class", v: 1 },
-    { id: "tomas-mom-visit", first: "My mom's flying in from El Paso to help with Luna for a week. I could cry. I did cry.", third: "Tomás's mom is visiting from El Paso to help with the baby", v: 2 },
-    { id: "tomas-luna-laugh", first: "Luna laughed at Pica sneezing. A real belly laugh. Pica did it again on purpose.", third: "Tomás's daughter Luna had her first big laugh at Pica", v: 2 },
+    { id: "tomas-mom-visit", first: "My mom's flying in from El Paso to help with Luna for a week. I could cry. I did cry.", third: "Tomás' mom is visiting from El Paso to help with the baby", v: 2 },
+    { id: "tomas-luna-laugh", first: "Luna laughed at Pica sneezing. A real belly laugh. Pica did it again on purpose.", third: "Tomás' daughter Luna had her first big laugh at Pica", v: 2 },
     { id: "tomas-missed-checkup", first: "I missed Luna's checkup for a client call. Daniela said it's fine. It's not fine.", third: "Tomás missed Luna's checkup because of work", v: -2 },
     { id: "tomas-army-reunion", first: "My old unit had a reunion call. Everyone's got kids now. We compared diaper logistics.", third: "Tomás had a reunion call with his old Army unit", v: 1 },
     { id: "tomas-color-pens", first: "Daniela bought me a sixty-color pen set. I spent an hour just organizing it. Best night.", third: "Tomás got a sixty-color pen set and was thrilled", v: 1 },
-    { id: "tomas-budget-scare", first: "Daycare raised its fees. I rebuilt our family budget at midnight. It works. Barely.", third: "Tomás's daycare fees went up", v: -1 },
+    { id: "tomas-budget-scare", first: "Daycare raised its fees. I rebuilt our family budget at midnight. It works. Barely.", third: "Tomás' daycare fees went up", v: -1 },
     { id: "tomas-wedding-anniversary", first: "Daniela and I hit five years. We celebrated with takeout and a nap. Romance.", third: "Tomás and Daniela had their fifth anniversary", v: 1 },
     { id: "tomas-zine-draft", first: "Finished the first full draft of the studio operating manual. It has illustrations. Kind of.", third: "Tomás finished a draft of the studio operating manual", v: 1 },
     { id: "tomas-dad-call-two", first: "Called my dad back. We talked about baseball for twenty minutes. Neither of us mentioned anything real.", third: "Tomás called his dad back", v: 0 },
@@ -2751,7 +2834,7 @@ const __default = {
     ],
     fun: [
       "Space Kerning. The left flipper sticks. Use the right.",
-      "Marcus's high score is untouchable. Try anyway.",
+      "Marcus' high score is untouchable. Try anyway.",
       "Ping-pong. Footwork is just spacing at speed.",
       "Archive shelf. Old work, old type, old friends.",
       "The 1979 pinball font is terrible. I love it.",
@@ -3732,7 +3815,7 @@ const __default = {
       "Sofa. Silence. Then back to the cave.",
     ],
     fun: [
-      "Space Kerning. Marcus's score is not untouchable.",
+      "Space Kerning. Marcus' score is not untouchable.",
       "That left flipper is sticky. That's my excuse.",
       "Ping-pong. Hit something that isn't a deadline.",
       "The archive shelf. Oksana's old specimens are in here.",
@@ -4714,7 +4797,7 @@ const __default = {
       "My brain is full. Let it settle like glaze.",
     ],
     fun: [
-      "Space Kerning. Marcus's high score is safe from me.",
+      "Space Kerning. Marcus' high score is safe from me.",
       "Case study shelf. Old projects are an ethnography of us.",
       "Ping-pong. Mostly I study how people trash-talk.",
       "The left flipper sticks. Every ball is an argument.",
@@ -5302,19 +5385,19 @@ const __default = {
     ],
   },
   events: [
-    { id: "marcus-open-mic-packed", first: "Open mic was packed last night. Standing room. Somebody cried during a haiku.", third: "Marcus's open mic was packed to the walls", v: 2 },
-    { id: "marcus-mentee-scholarship", first: "One of my kids got a writing scholarship. Full ride. I had to sit down.", third: "Marcus's teen mentee got a full writing scholarship", v: 2 },
+    { id: "marcus-open-mic-packed", first: "Open mic was packed last night. Standing room. Somebody cried during a haiku.", third: "Marcus' open mic was packed to the walls", v: 2 },
+    { id: "marcus-mentee-scholarship", first: "One of my kids got a writing scholarship. Full ride. I had to sit down.", third: "Marcus' teen mentee got a full writing scholarship", v: 2 },
     { id: "marcus-plant-died", first: "Lost a fern this week. Overwatered it. I loved it too hard.", third: "Marcus lost one of his plants to overwatering", v: -1 },
-    { id: "marcus-grandma-call", first: "Grandma called to read me a poem she wrote. She's been hiding a whole notebook.", third: "Marcus's grandma has been secretly writing poems", v: 2 },
+    { id: "marcus-grandma-call", first: "Grandma called to read me a poem she wrote. She's been hiding a whole notebook.", third: "Marcus' grandma has been secretly writing poems", v: 2 },
     { id: "marcus-chapbook-proof", first: "My chapbook proof came in the mail. Thirty-two pages. I've read it eleven times.", third: "Marcus got the proof copy of his chapbook", v: 2 },
-    { id: "marcus-press-rejection", first: "Small press passed on the collection. Kind letter, though. Kindest no I've ever gotten.", third: "Marcus's poetry collection got turned down by a small press", v: -2 },
+    { id: "marcus-press-rejection", first: "Small press passed on the collection. Kind letter, though. Kindest no I've ever gotten.", third: "Marcus' poetry collection got turned down by a small press", v: -2 },
     { id: "marcus-battle-reunion", first: "Ran into an old battle rap rival downtown. We hugged. Time is wild.", third: "Marcus ran into an old battle rap rival", v: 1 },
     { id: "marcus-new-monstera", first: "Bought a new plant. Promised myself I wouldn't. That's forty-two.", third: "Marcus bought yet another plant", v: 1 },
-    { id: "marcus-tagline-killed", first: "The line I loved got cut in legal review. They want 'optimize.' I'm in mourning.", third: "Marcus's favorite tagline got killed in legal review", v: -2 },
+    { id: "marcus-tagline-killed", first: "The line I loved got cut in legal review. They want 'optimize.' I'm in mourning.", third: "Marcus' favorite tagline got killed in legal review", v: -2 },
     { id: "marcus-atlanta-trip", first: "Booked a flight home to Atlanta for the long weekend. Grandma's making peach cobbler.", third: "Marcus is flying home to Atlanta", v: 2 },
     { id: "marcus-ankle", first: "Rolled my ankle on the open-mic stage. Finished the poem first. Priorities.", third: "Marcus rolled his ankle on stage", v: -1 },
     { id: "marcus-magazine-poem", first: "A literary magazine took one of my poems. A real one, with paper.", third: "Marcus got a poem into a literary magazine", v: 2 },
-    { id: "marcus-car-repair", first: "Car needs a new transmission. That's my poetry fund, gone.", third: "Marcus's car needs an expensive repair", v: -1 },
+    { id: "marcus-car-repair", first: "Car needs a new transmission. That's my poetry fund, gone.", third: "Marcus' car needs an expensive repair", v: -1 },
     { id: "marcus-hannah-book", first: "Hannah lent me a book that rearranged my brain. I've underlined half of it.", third: "Marcus can't stop talking about a book Hannah lent him", v: 1 },
     { id: "marcus-mentee-quit", first: "One of my kids stopped coming to the program. I keep texting. Nothing.", third: "Marcus is worried about a teen who left his program", v: -2 },
     { id: "marcus-church-choir", first: "Sang with the choir at my cousin's wedding. Didn't miss a note. Okay, one note.", third: "Marcus sang with the choir at a family wedding", v: 1 },
@@ -5545,6 +5628,10 @@ const __default = {
     "*curls into a croissant shape*",
     "*watches the door, just in case*",
     "Boof! *very small, very proud*",
+    "*looks directly at you. Not at anyone in the room. At you.*",
+    "*stares at the empty corner above the front door, where nothing is, for a long time*",
+    "*tries to say something. It comes out as a boof. She looks apologetic.*",
+    "*barks once at the ceiling, then at you, then lies down as if that settled it*",
   ],
   thoughts: {
     work: [
@@ -5613,7 +5700,7 @@ const __default = {
       "Daniela smells like the hospital and hugs.",
       "Luna dropped a cracker. Luna is my favorite.",
       "Waiting by the door. Maybe Lola today.",
-      "Tomás's slipper. Warm. Sleeping on it.",
+      "Tomás' slipper. Warm. Sleeping on it.",
       "Night walk. Smells. So many smells.",
       "Luna is crying. Sit by Luna until she stops.",
       "Couch. Blanket. Tomás. Perfect.",
@@ -5835,7 +5922,7 @@ const __default = {
       "Feet up. Nobody's watching. Hopefully.",
     ],
     fun: [
-      "Pinball. That left flipper sticks. Marcus's score is safe.",
+      "Pinball. That left flipper sticks. Marcus' score is safe.",
       "Ping-pong. Five-a-side reflexes, finally useful.",
       "The archive shelf. Who made all this beautiful stuff?",
       "Space Kerning, 1979. Older than my mother's car.",
@@ -6317,7 +6404,7 @@ const __default = {
     ],
     fun: [
       "Space Kerning. The flipper lag is maybe four frames.",
-      "Pinball. I'll never touch Marcus's score. That's freeing.",
+      "Pinball. I'll never touch Marcus' score. That's freeing.",
       "Ping-pong. Pure timing practice. I'm terrible at it.",
       "Archive shelf. Old title cards someone made here. Lovely.",
       "Phone booth. Call Nikhil, say nothing important.",
@@ -6799,7 +6886,7 @@ const __default = {
     fun: [
       "Space Kerning. That left flipper's cooked.",
       "Ping-pong. Rugby hands, terrible paddle.",
-      "Pinball. Marcus's score is safe from me forever.",
+      "Pinball. Marcus' score is safe from me forever.",
       "Archive shelf. Whoa, who did these posters?",
       "Phone booth. Quick call to my cousin.",
       "Old projects. I want my name on that shelf one day.",
@@ -7279,7 +7366,7 @@ const __default = {
     ],
     fun: [
       "Pinball. The left flipper is sticky, like every printer.",
-      "Marcus's high score is safe from me.",
+      "Marcus' high score is safe from me.",
       "Ping-pong. I'm terrible, and I don't care.",
       "The archive shelf. Who produced all this?",
       "Old projects. Somebody hit every date on these.",
@@ -7759,7 +7846,7 @@ const __default = {
       "Ten minutes. Then I'll be clever again.",
     ],
     fun: [
-      "Pinball. Marcus's high score mocks me.",
+      "Pinball. Marcus' high score mocks me.",
       "The left flipper's sticky. Excuses ready.",
       "Ping-pong with whoever's free. Loser makes tea.",
       "Archive shelf. Old briefs are pure gossip.",
@@ -8240,7 +8327,7 @@ const __default = {
       "Short nap, then big ideas.",
     ],
     fun: [
-      "Pinball! Marcus's score is a myth.",
+      "Pinball! Marcus' score is a myth.",
       "That left flipper is sticky. It's cursed.",
       "Ping-pong. I serve with chaos.",
       "Archive shelf. Old projects are treasure.",
@@ -9448,6 +9535,16 @@ const DOMAIN_QUOTES = {
     '"I trust the score when it shows its homework."',
   ],
 };
+DOMAIN_QUOTES.biotech = [
+  '"The model proposed a molecule with eleven rings. Eleven. I printed it and put it on the fridge."',
+  '"I don\'t need a score. I need to know what it would have told a chemist in 1998."',
+  '"Show me the three it almost picked instead. That\'s where the thinking is."',
+  '"If it\'s confident, I want to know what it\'s confident about. Confidence is not a number."',
+  '"We made the model\'s number four last week. It worked. Nobody has said this out loud."',
+  '"A million candidates is not a shortlist. Ten is a shortlist."',
+  '"I trust it more when it shows me what it rejected."',
+  '"My team calls the platform \'the spreadsheet that had a nightmare.\' We\'d like a new name."',
+];
 const quotesFor = d => DOMAIN_QUOTES[d.project?.domain] ?? QUOTES;
 const QUOTES = ['"I just want to know it\'s going to work."', '"I come here to slow down."', '"I don\'t read instructions. Ever."', '"If it looks expensive, I assume it\'s not for me."', '"My daughter set it up for me."', '"I trust it when it feels made by people."'];
 
@@ -9462,12 +9559,13 @@ function box(ctx, x, y, w, h, fill, r = 0) { ctx.fillStyle = fill; if (r) { rr(c
 function stroke(ctx, x, y, w, h, color, lw = 1, r = 0) { ctx.strokeStyle = color; ctx.lineWidth = lw; if (r) { rr(ctx, x, y, w, h, r); ctx.stroke(); } else ctx.strokeRect(x + 0.5, y + 0.5, w - 1, h - 1); }
 function line(ctx, x1, y1, x2, y2, color, lw = 1, dash = null) { ctx.strokeStyle = color; ctx.lineWidth = lw; ctx.setLineDash(dash ?? []); ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke(); ctx.setLineDash([]); }
 function shadow(ctx, on, blur = 24, y = 10) { ctx.shadowColor = on ? ART.shadow : 'transparent'; ctx.shadowBlur = on ? blur : 0; ctx.shadowOffsetY = on ? y : 0; }
+const AP_POSS = /\b([A-ZÀ-Ý][a-zà-ÿ]+s)'s\b/g; // AP style: Marcus' computer, Tomás' chair
 function text(ctx, s, x, y, size, font, color, { align = 'left', weight = '', track = 0, base = 'alphabetic', italic = false } = {}) {
   ctx.font = `${italic ? 'italic ' : ''}${weight} ${size}px ${font}`; ctx.fillStyle = color; ctx.textAlign = align; ctx.textBaseline = base;
-  ctx.letterSpacing = `${track}px`; ctx.fillText(s, x, y); ctx.letterSpacing = '0px';
+  ctx.letterSpacing = `${track}px`; ctx.fillText(String(s).replace(AP_POSS, "$1'"), x, y); ctx.letterSpacing = '0px';
 }
 function fit(ctx, s, size, font, maxW, weight = '', track = 0) { let z = size; for (; z > 8; z--) { ctx.font = `${weight} ${z}px ${font}`; ctx.letterSpacing = `${track}px`; if (ctx.measureText(s).width <= maxW) break; } ctx.letterSpacing = '0px'; return z; }
-function wrap(ctx, s, maxW, size, font, weight = '') { ctx.font = `${weight} ${size}px ${font}`; const out = []; let ln = ''; for (const w of s.split(' ')) { const t = ln ? `${ln} ${w}` : w; if (ctx.measureText(t).width > maxW && ln) { out.push(ln); ln = w; } else ln = t; } if (ln) out.push(ln); return out; }
+function wrap(ctx, s, maxW, size, font, weight = '') { ctx.font = `${weight} ${size}px ${font}`; const out = []; let ln = ''; for (const w of String(s).replace(AP_POSS, "$1'").split(' ')) { const t = ln ? `${ln} ${w}` : w; if (ctx.measureText(t).width > maxW && ln) { out.push(ln); ln = w; } else ln = t; } if (ln) out.push(ln); return out; }
 function para(ctx, s, x, y, maxW, size, font, color, lh = 1.45, maxLines = 99) { wrap(ctx, s, maxW, size, font).slice(0, maxLines).forEach((l, i) => text(ctx, l, x, y + i * size * lh, size, font, color)); }
 function bars(ctx, x, y, w, n, color, gap, R) { for (let i = 0; i < n; i++) box(ctx, x, y + i * gap, w * (i === n - 1 ? 0.55 : 0.82 + R() * 0.18), Math.max(2, gap * 0.28), color, 1); }
 function quote(a) { return /"([^"]+)"/.exec(a.note ?? '')?.[1]; }
@@ -11521,10 +11619,580 @@ function remember(key, url, scale) {
     if (v.tier === tier && k !== key) { cache.delete(k); used[tier] -= v.url.length; }
   }
 }
+// ------------------------------------------------------------------ still lifes
+// Illustrations of the studio's non-work objects, drawn close up: the pinball table,
+// the last coffee pulled, the snack shelf, the breakfast nook, each award, the magazines,
+// Pica's bed and the inside of the fridge. Each reads what it needs from a.data.
+const IL = {
+  wood: '#8a6142', woodHi: '#b48a60', woodLo: '#5f3f2a', paper: '#efe9dc', ink: '#1d1b24', muted: '#6f6b78', white: '#fbf8f2',
+  cream: '#f4e9cf', red: '#c4483e', orange: '#e0893c', mustard: '#d9b24a', green: '#4f8a52', teal: '#2f8f8f', sky: '#7aa7d6', navy: '#2d3b6b',
+  plum: '#6b3fa0', pink: '#e09ab6', brown: '#5b3a24', silver: '#c9ccd4', gold: '#d8b45c', goldLo: '#9a6b22', goldHi: '#fff1b8', black: '#23222b',
+  steel: '#9aa0ae', steelLo: '#5f6573', glass: '#d7e6ee', chrome: '#e6e8ee', tan: '#c99b6e', wool: '#b84a4f', plaid: '#9a4a4f',
+};
+const illBg = (ctx, c, top, bottom) => { const g = ctx.createLinearGradient(0, c.y, 0, c.y + c.h); g.addColorStop(0, top); g.addColorStop(1, bottom); box(ctx, c.x, c.y, c.w, c.h, g); };
+// a wooden surface with planks and a soft key light
+const illWood = (ctx, c, tone = IL.wood) => {
+  illBg(ctx, c, lighten(tone, 0.12), darken(tone, 0.15));
+  for (let i = 1; i < 6; i++) line(ctx, c.x, c.y + c.h * i / 6, c.x + c.w, c.y + c.h * i / 6, alpha(darken(tone, 0.4), 0.35), 2);
+  for (let i = 0; i < 40; i++) { const y = c.y + (i * 37) % c.h, x = c.x + (i * 211) % c.w; line(ctx, x, y, x + 60 + (i % 5) * 30, y + 1, alpha(lighten(tone, 0.3), 0.25), 1); }
+  const key = ctx.createRadialGradient(c.x + c.w * 0.3, c.y, 10, c.x + c.w * 0.3, c.y, c.w * 0.9); key.addColorStop(0, alpha(IL.white, 0.22)); key.addColorStop(1, alpha(IL.white, 0)); box(ctx, c.x, c.y, c.w, c.h, key);
+};
+const illLabel = (ctx, x, y, s, font, size = 13, color = IL.ink, { align = 'left', italic = false } = {}) => text(ctx, s, x, y, size, font, color, { align, italic });
+// a little tented card with a note, in handwriting
+const illCard = (ctx, x, y, w, lines, tilt = -0.03) => {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(tilt);
+  const h = 22 + lines.length * 20;
+  shadow(ctx, true, 10, 4); box(ctx, 0, 0, w, h, IL.white, 3); shadow(ctx, false);
+  lines.forEach((l, i) => text(ctx, l, 12, 24 + i * 20, 15, HAND, i ? IL.muted : IL.ink));
+  ctx.restore();
+};
+const ell = (ctx, x, y, rx, ry, fill, rot = 0) => { ctx.fillStyle = fill; ctx.beginPath(); ctx.ellipse(x, y, rx, ry, rot, 0, Math.PI * 2); ctx.fill(); };
+const disc = (ctx, x, y, r, fill) => { ctx.fillStyle = fill; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill(); };
+const ring = (ctx, x, y, r, color, lw) => { ctx.strokeStyle = color; ctx.lineWidth = lw; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.stroke(); };
+
+// The pinball table, seen from above: backglass, playfield, flippers, and the score board.
+K.pinball = (ctx, d, c) => {
+  const D = d.a.data ?? {}, body = D.body ?? IL.plum, glass = D.glass ?? '#1f2a5a', field = D.field ?? '#2e6a5e', acc = D.accent ?? IL.gold;
+  illBg(ctx, c, '#15131c', '#0b0a10');
+  const cx = c.x + c.w * 0.36, top = c.y + 14;
+  // backbox
+  const bw = 330, bh = 150, bx = cx - bw / 2;
+  shadow(ctx, true, 26, 10); box(ctx, bx - 10, top, bw + 20, bh, body, 6); shadow(ctx, false);
+  box(ctx, bx, top + 8, bw, bh - 24, glass, 4);
+  ctx.save(); rr(ctx, bx, top + 8, bw, bh - 24, 4); ctx.clip();
+  if (D.machine === 'pinball2') { for (let i = 0; i <= bw; i += 18) line(ctx, bx + i, top, bx + i, top + bh, alpha(acc, 0.35), 1); for (let j = 0; j <= bh; j += 18) line(ctx, bx, top + j, bx + bw, top + j, alpha(acc, 0.35), 1); }
+  else for (let i = 0; i < 60; i++) { const sx = bx + (i * 97) % bw, sy = top + 10 + (i * 53) % (bh - 28); disc(ctx, sx, sy, i % 7 ? 1 : 2, alpha(IL.white, 0.5 + (i % 3) * 0.2)); }
+  disc(ctx, bx + 60, top + 70, 26, alpha(acc, 0.9)); disc(ctx, bx + 60, top + 70, 20, glass); disc(ctx, bx + bw - 70, top + 55, 14, D.machine === 'pinball2' ? IL.orange : IL.pink);
+  const tz = fit(ctx, D.name ?? 'SPACE KERNING', 30, '"Avenir Next", Avenir, sans-serif', bw - 60, '800', 3);
+  text(ctx, D.name ?? 'SPACE KERNING', cx + 2, top + 72, tz, '"Avenir Next", Avenir, sans-serif', alpha(acc, 0.5), { align: 'center', weight: '800', track: 3 });
+  text(ctx, D.name ?? 'SPACE KERNING', cx, top + 70, tz, '"Avenir Next", Avenir, sans-serif', IL.white, { align: 'center', weight: '800', track: 3 });
+  text(ctx, D.year ?? '1979', cx, top + 96, 11, MONO, alpha(IL.white, 0.7), { align: 'center', track: 2 });
+  // the score display on the backbox
+  box(ctx, bx + 20, top + bh - 42, bw - 40, 22, '#07060b', 3);
+  const hs = D.scores?.[0];
+  text(ctx, hs ? `HIGH ${hs[0]}  ${hs[1].toLocaleString()}` : 'INSERT COIN', cx, top + bh - 26, 13, MONO, IL.orange, { align: 'center', track: 2 });
+  ctx.restore();
+  // playfield
+  const pw = 300, ph = c.h - bh - 36, px = cx - pw / 2, py = top + bh + 10;
+  shadow(ctx, true, 20, 8); box(ctx, px - 12, py, pw + 24, ph, darken(body, 0.2), 8); shadow(ctx, false);
+  ctx.save(); rr(ctx, px, py + 8, pw, ph - 16, 6); ctx.clip();
+  box(ctx, px, py, pw, ph, field);
+  halftone(ctx, px, py, pw, ph * 0.5, alpha(IL.white, 0.06), 8);
+  // lanes at the top
+  for (let i = 0; i < 4; i++) { const lx = px + 50 + i * 55; line(ctx, lx, py + 10, lx, py + 70, alpha(IL.white, 0.5), 2); text(ctx, (D.machine === 'pinball2' ? 'GRID' : 'KERN')[i], lx + 27, py + 60, 14, '"Avenir Next", Avenir, sans-serif', i < 2 ? acc : alpha(IL.white, 0.5), { align: 'center', weight: '700' }); }
+  // bumpers
+  [[px + 90, py + 120], [px + 210, py + 120], [px + 150, py + 190]].forEach(([x, y], i) => { ring(ctx, x, y, 26, alpha(IL.white, 0.9), 3); disc(ctx, x, y, 20, [IL.red, acc, IL.sky][i]); disc(ctx, x - 5, y - 6, 5, alpha(IL.white, 0.6)); });
+  // drop targets
+  for (let i = 0; i < 3; i++) box(ctx, px + pw - 60, py + 110 + i * 22, 12, 16, i === 1 ? IL.white : acc, 2);
+  // slingshots
+  ctx.fillStyle = alpha(IL.white, 0.85); ctx.beginPath(); ctx.moveTo(px + 40, py + ph - 130); ctx.lineTo(px + 40, py + ph - 80); ctx.lineTo(px + 85, py + ph - 70); ctx.closePath(); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(px + pw - 70, py + ph - 130); ctx.lineTo(px + pw - 70, py + ph - 80); ctx.lineTo(px + pw - 115, py + ph - 70); ctx.closePath(); ctx.fill();
+  // outlanes and plunger lane
+  line(ctx, px + pw - 28, py + 60, px + pw - 28, py + ph, alpha(IL.white, 0.5), 2);
+  box(ctx, px + pw - 22, py + ph - 40, 10, 22, IL.steel, 3); disc(ctx, px + pw - 17, py + ph - 44, 7, IL.red);
+  // flippers
+  ctx.save(); ctx.translate(px + 78, py + ph - 44); ctx.rotate(0.42); box(ctx, 0, -7, 54, 14, IL.white, 7); box(ctx, 2, -5, 48, 4, alpha(acc, 0.8), 2); ctx.restore();
+  ctx.save(); ctx.translate(px + pw - 78, py + ph - 44); ctx.rotate(-0.42); box(ctx, -54, -7, 54, 14, IL.white, 7); box(ctx, -52, -5, 48, 4, alpha(acc, 0.8), 2); ctx.restore();
+  if (D.machine !== 'pinball2') text(ctx, 'sticky', px + 92, py + ph - 10, 12, HAND, alpha(IL.white, 0.7), { align: 'center' });
+  // the ball
+  const ball = ctx.createRadialGradient(px + 150 - 3, py + 250 - 3, 1, px + 150, py + 250, 10); ball.addColorStop(0, IL.white); ball.addColorStop(0.5, IL.silver); ball.addColorStop(1, IL.steelLo);
+  disc(ctx, px + 150, py + 250, 9, ball);
+  ctx.restore();
+  // score board beside the machine
+  const sx = c.x + c.w * 0.66, sw = c.w * 0.34 - 14;
+  text(ctx, 'HIGH SCORES', sx, c.y + 36, 12, MONO, IL.orange, { track: 3 });
+  (D.scores ?? []).slice(0, 6).forEach(([who, n], i) => {
+    text(ctx, `${i + 1}.`, sx, c.y + 70 + i * 32, 16, MONO, alpha(IL.white, 0.6));
+    text(ctx, who.toUpperCase(), sx + 30, c.y + 70 + i * 32, 16, MONO, i ? IL.white : acc);
+    text(ctx, n.toLocaleString(), sx + sw, c.y + 70 + i * 32, 16, MONO, i ? alpha(IL.white, 0.85) : acc, { align: 'right' });
+    line(ctx, sx, c.y + 78 + i * 32, sx + sw, c.y + 78 + i * 32, alpha(IL.white, 0.12));
+  });
+  if (D.note) para(ctx, D.note, sx, c.y + 290, sw, 13, HAND, alpha(IL.white, 0.8), 1.5, 5);
+  if (D.plays) text(ctx, `${D.plays} games played`, sx, c.y + c.h - 14, 11, MONO, alpha(IL.white, 0.5));
+};
+
+// The last coffee pulled: a cup on its saucer, crema on top, steam, and a note on who pulled it.
+K.coffee = (ctx, d, c) => {
+  const D = d.a.data ?? {};
+  illWood(ctx, c, '#7a5a3e');
+  const cx = c.x + c.w * 0.42, cy = c.y + c.h * 0.56;
+  // saucer
+  ctx.fillStyle = alpha(IL.ink, 0.28); ctx.filter = 'blur(8px)'; ell(ctx, cx + 14, cy + 54, 150, 48, alpha(IL.ink, 0.35)); ctx.filter = 'none';
+  ell(ctx, cx, cy + 40, 138, 44, IL.white); ell(ctx, cx, cy + 40, 128, 36, '#efe9df'); ell(ctx, cx, cy + 40, 70, 22, alpha(IL.ink, 0.08));
+  // cup body (a wide cappuccino cup) with a handle
+  ctx.strokeStyle = IL.white; ctx.lineWidth = 22; ctx.beginPath(); ctx.arc(cx + 118, cy - 6, 34, -1.1, 1.1); ctx.stroke();
+  ctx.strokeStyle = '#e4ded3'; ctx.lineWidth = 6; ctx.beginPath(); ctx.arc(cx + 118, cy - 6, 34, -0.9, 0.9); ctx.stroke();
+  const cup = ctx.createLinearGradient(cx - 110, 0, cx + 110, 0); cup.addColorStop(0, '#e3ddd1'); cup.addColorStop(0.4, IL.white); cup.addColorStop(1, '#d2cbbf');
+  ctx.fillStyle = cup; ctx.beginPath(); ctx.moveTo(cx - 110, cy - 28); ctx.bezierCurveTo(cx - 108, cy + 40, cx - 60, cy + 58, cx, cy + 58); ctx.bezierCurveTo(cx + 60, cy + 58, cx + 108, cy + 40, cx + 110, cy - 28); ctx.closePath(); ctx.fill();
+  ell(ctx, cx, cy - 28, 110, 34, IL.white); ell(ctx, cx, cy - 28, 100, 28, '#d6cfc3');
+  // the coffee and its crema
+  ell(ctx, cx, cy - 26, 96, 26, '#3b2416');
+  const crema = ctx.createRadialGradient(cx - 20, cy - 32, 4, cx, cy - 26, 100); crema.addColorStop(0, '#d9a56a'); crema.addColorStop(0.7, '#b67a45'); crema.addColorStop(1, '#8a5530');
+  ell(ctx, cx, cy - 26, 94, 25, crema);
+  // a rosetta poured into the crema
+  ctx.strokeStyle = alpha(IL.white, 0.9); ctx.lineWidth = 3; ctx.lineCap = 'round';
+  for (let i = 0; i < 6; i++) { const y = cy - 44 + i * 6, w = 30 - i * 3; ctx.beginPath(); ctx.moveTo(cx - w, y); ctx.quadraticCurveTo(cx, y + 6, cx + w, y); ctx.stroke(); }
+  ctx.beginPath(); ctx.moveTo(cx, cy - 48); ctx.lineTo(cx, cy - 6); ctx.stroke();
+  // steam
+  ctx.strokeStyle = alpha(IL.white, 0.55); ctx.lineWidth = 4;
+  for (let i = -1; i <= 1; i++) { ctx.beginPath(); const sx = cx + i * 34; ctx.moveTo(sx, cy - 70); ctx.bezierCurveTo(sx - 14, cy - 100, sx + 14, cy - 125, sx, cy - 160); ctx.stroke(); }
+  // a spoon and two sugar cubes
+  ctx.save(); ctx.translate(cx + 150, cy + 70); ctx.rotate(-0.35); box(ctx, 0, -3, 110, 6, IL.steel, 3); ell(ctx, 118, 0, 16, 11, IL.steel); ell(ctx, 118, -1, 11, 7, IL.chrome); ctx.restore();
+  for (const [x, y] of [[cx - 190, cy + 60], [cx - 168, cy + 72]]) { box(ctx, x, y, 22, 18, IL.white, 2); box(ctx, x, y - 6, 22, 8, '#f6f3ec', 2); stroke(ctx, x, y - 6, 22, 24, alpha(IL.ink, 0.15), 1, 2); }
+  // a couple of beans
+  for (const [x, y, r] of [[cx - 160, cy + 12, 0.4], [cx + 180, cy - 40, -0.6]]) { ctx.save(); ctx.translate(x, y); ctx.rotate(r); ell(ctx, 0, 0, 10, 7, '#3b2416'); line(ctx, -7, 0, 7, 0, '#6b4a30', 1.5); ctx.restore(); }
+  // the note
+  illCard(ctx, c.x + c.w - 250, c.y + 40, 220, [D.who ? `Pulled by ${D.who}` : 'Nobody has pulled a shot yet', D.when ?? 'Machine is warm.', D.shots ? `${D.shots} shots so far` : 'Descale on Fridays.'], 0.04);
+  grain(ctx, c.x, c.y, c.w, c.h, 0.08);
+};
+
+// The snack shelf: two planks, the week's survivors.
+K.snacks = (ctx, d, c) => {
+  const D = d.a.data ?? {};
+  illBg(ctx, c, '#e9e2d4', '#d8d0c0');
+  const plank = y => { shadow(ctx, true, 14, 6); box(ctx, c.x + 20, y, c.w - 40, 14, IL.wood, 2); shadow(ctx, false); box(ctx, c.x + 20, y, c.w - 40, 3, lighten(IL.wood, 0.25)); };
+  const y1 = c.y + c.h * 0.46, y2 = c.y + c.h - 46;
+  plank(y1); plank(y2);
+  // top plank: crackers (gone by Tuesday), chips, a jar of nuts, the decoy box
+  let x = c.x + 44;
+  if (!D.crackersGone) { box(ctx, x, y1 - 118, 90, 118, IL.red, 3); box(ctx, x + 10, y1 - 106, 70, 44, IL.cream, 2); text(ctx, 'GOOD', x + 45, y1 - 80, 14, '"Avenir Next", Avenir, sans-serif', IL.red, { align: 'center', weight: '800' }); text(ctx, 'CRACKERS', x + 45, y1 - 66, 10, '"Avenir Next", Avenir, sans-serif', IL.red, { align: 'center', weight: '700' }); for (let i = 0; i < 3; i++) disc(ctx, x + 25 + i * 20, y1 - 30, 9, IL.mustard); }
+  else { text(ctx, 'the good crackers', x + 45, y1 - 40, 13, HAND, IL.muted, { align: 'center', italic: true }); text(ctx, 'were here', x + 45, y1 - 22, 13, HAND, IL.muted, { align: 'center', italic: true }); }
+  x += 112;
+  ctx.save(); ctx.translate(x, y1); ctx.rotate(-0.06); ctx.fillStyle = IL.sky; ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(8, -140); ctx.lineTo(92, -148); ctx.lineTo(100, 0); ctx.closePath(); ctx.fill();
+  for (let i = 0; i < 5; i++) line(ctx, 10, -20 - i * 25, 90, -24 - i * 25, alpha(IL.white, 0.25), 2);
+  text(ctx, 'SALT &', 50, -90, 13, '"Avenir Next", Avenir, sans-serif', IL.white, { align: 'center', weight: '800' }); text(ctx, 'VINEGAR', 50, -74, 13, '"Avenir Next", Avenir, sans-serif', IL.white, { align: 'center', weight: '800' }); ctx.restore();
+  x += 122;
+  box(ctx, x, y1 - 110, 84, 110, '#e8c994', 10); box(ctx, x + 6, y1 - 118, 72, 16, IL.brown, 4); ctx.save(); rr(ctx, x + 4, y1 - 100, 76, 80, 6); ctx.clip(); for (let i = 0; i < 40; i++) ell(ctx, x + 8 + (i * 29) % 70, y1 - 92 + (i * 17) % 70, 7, 5, i % 2 ? '#b07b4f' : '#c99b6e', i); ctx.restore();
+  box(ctx, x + 14, y1 - 62, 56, 22, IL.white, 2); text(ctx, 'ALMONDS', x + 42, y1 - 47, 10, '"Avenir Next", Avenir, sans-serif', IL.ink, { align: 'center', weight: '700' });
+  x += 106;
+  box(ctx, x, y1 - 96, 110, 96, IL.green, 3); box(ctx, x + 10, y1 - 84, 90, 70, lighten(IL.green, 0.7), 2);
+  text(ctx, 'KALE CHIPS', x + 55, y1 - 50, 13, '"Avenir Next", Avenir, sans-serif', IL.green, { align: 'center', weight: '800' }); text(ctx, '(decoy)', x + 55, y1 - 30, 12, HAND, IL.muted, { align: 'center' });
+  x += 130;
+  // clementines in a bowl
+  ell(ctx, x + 60, y1 - 6, 64, 18, '#4f5f8f'); for (const [ox, oy] of [[22, -40], [62, -46], [100, -38], [42, -22], [82, -20]]) { disc(ctx, x + ox, y1 + oy, 19, IL.orange); disc(ctx, x + ox - 6, y1 + oy - 7, 5, alpha(IL.white, 0.35)); box(ctx, x + ox - 1, y1 + oy - 22, 2, 6, IL.green); }
+  ell(ctx, x + 60, y1 - 8, 70, 22, alpha('#4f5f8f', 0.0)); ctx.fillStyle = '#4f5f8f'; ctx.beginPath(); ctx.ellipse(x + 60, y1 - 8, 70, 20, 0, 0, Math.PI); ctx.fill();
+  // the bear with the bottle, far right of the top plank
+  { const bx = c.x + c.w - 78, by = y1; disc(ctx, bx, by - 58, 26, IL.tan); disc(ctx, bx - 20, by - 76, 9, IL.tan); disc(ctx, bx + 20, by - 76, 9, IL.tan); disc(ctx, bx - 20, by - 76, 5, '#e8c9a8'); disc(ctx, bx + 20, by - 76, 5, '#e8c9a8');
+    ell(ctx, bx, by - 24, 30, 26, IL.tan); ell(ctx, bx, by - 20, 18, 16, '#e8c9a8'); disc(ctx, bx - 30, by - 30, 9, IL.tan); disc(ctx, bx + 30, by - 30, 9, IL.tan); disc(ctx, bx - 18, by - 2, 10, IL.tan); disc(ctx, bx + 18, by - 2, 10, IL.tan);
+    disc(ctx, bx - 8, by - 62, 2.5, IL.ink); disc(ctx, bx + 8, by - 62, 2.5, IL.ink); disc(ctx, bx, by - 52, 4, IL.ink); line(ctx, bx - 5, by - 46, bx + 5, by - 46, IL.ink, 1.5);
+    ctx.save(); ctx.translate(bx + 30, by - 30); ctx.rotate(-0.35); box(ctx, -8, -34, 16, 46, '#5b3a24', 4); box(ctx, -4, -46, 8, 14, '#5b3a24', 2); box(ctx, -4, -48, 8, 4, IL.gold, 1); box(ctx, -6, -22, 12, 16, IL.cream, 1); text(ctx, 'RYE', 0, -11, 7, '"Avenir Next", Avenir, sans-serif', IL.ink, { align: 'center', weight: '800' }); ctx.restore();
+    text(ctx, 'from a client. unexplained.', bx, by + 12, 10, HAND, IL.muted, { align: 'center' }); }
+  // bottom plank: rice cakes, licorice, granola bars by color, a tin of mints
+  x = c.x + 44;
+  for (let i = 0; i < 4; i++) { ell(ctx, x + 50, y2 - 10 - i * 14, 48, 16, i % 2 ? '#e9dcc0' : '#f1e6cf'); ell(ctx, x + 50, y2 - 12 - i * 14, 44, 12, '#f6ecd6'); } text(ctx, 'rice cakes (always)', x + 50, y2 + 10, 11, HAND, IL.muted, { align: 'center' });
+  x += 130;
+  box(ctx, x, y2 - 108, 86, 108, IL.black, 4); box(ctx, x + 8, y2 - 96, 70, 52, alpha(IL.white, 0.1), 2); for (let i = 0; i < 4; i++) { ctx.strokeStyle = IL.black; ctx.lineWidth = 6; ring(ctx, x + 24 + (i % 2) * 36, y2 - 80 + Math.floor(i / 2) * 26, 9, '#3a3842', 5); }
+  text(ctx, 'SALT', x + 43, y2 - 30, 12, '"Avenir Next", Avenir, sans-serif', IL.mustard, { align: 'center', weight: '800' }); text(ctx, 'LAKRITS', x + 43, y2 - 16, 10, '"Avenir Next", Avenir, sans-serif', IL.mustard, { align: 'center', weight: '700' });
+  text(ctx, 'SOFIA’S. DO NOT.', x + 43, y2 + 10, 11, HAND, IL.red, { align: 'center' });
+  x += 112;
+  ['#b8474a', '#d9813c', '#c9a13c', '#4f8a52', '#2f8f8f', '#45608f', '#7c4a8e'].forEach((col, i) => { ctx.save(); ctx.translate(x + i * 22, y2 - 6); ctx.rotate(-0.08); box(ctx, 0, -86, 18, 86, col, 3); box(ctx, 3, -60, 12, 30, alpha(IL.white, 0.85), 2); ctx.restore(); });
+  text(ctx, 'granola, color-coded (Tomás)', x + 76, y2 + 10, 11, HAND, IL.muted, { align: 'center' });
+  x += 190;
+  box(ctx, x, y2 - 30, 70, 30, IL.steel, 6); box(ctx, x, y2 - 34, 70, 8, IL.chrome, 4); text(ctx, 'MINTS', x + 35, y2 - 10, 10, '"Avenir Next", Avenir, sans-serif', IL.ink, { align: 'center', weight: '700' });
+  x += 92;
+  if (D.cake) { box(ctx, x, y2 - 50, 90, 50, '#f0d9c4', 3); box(ctx, x, y2 - 50, 90, 12, IL.pink, 3); text(ctx, 'half a cake', x + 45, y2 + 10, 11, HAND, IL.muted, { align: 'center' }); text(ctx, 'morale', x + 45, y2 - 22, 12, HAND, IL.ink, { align: 'center' }); }
+  // the rule, taped to the wall
+  illCard(ctx, c.x + c.w - 240, c.y + 24, 210, ['Supply run: Mondays.', D.day ?? '', 'Take what you need.'], 0.03);
+  grain(ctx, c.x, c.y, c.w, c.h, 0.06);
+};
+
+// The breakfast nook: the round table, the bench, whatever was eaten most recently.
+K.nook = (ctx, d, c) => {
+  const D = d.a.data ?? {};
+  illBg(ctx, c, '#efe6d4', '#e5d8c0');
+  // bench cushions along the back
+  box(ctx, c.x + 40, c.y + 10, c.w - 80, 62, IL.mustard, 10); box(ctx, c.x + 40, c.y + 10, c.w - 80, 10, lighten(IL.mustard, 0.3), 10);
+  for (let i = 1; i < 4; i++) line(ctx, c.x + 40 + (c.w - 80) * i / 4, c.y + 14, c.x + 40 + (c.w - 80) * i / 4, c.y + 68, alpha(darken(IL.mustard, 0.5), 0.4), 2);
+  // the round table
+  const cx = c.x + c.w * 0.5, cy = c.y + c.h * 0.58;
+  ctx.filter = 'blur(10px)'; ell(ctx, cx + 10, cy + 20, 300, 190, alpha(IL.ink, 0.3)); ctx.filter = 'none';
+  const tbl = ctx.createRadialGradient(cx - 60, cy - 60, 20, cx, cy, 320); tbl.addColorStop(0, lighten(IL.tan, 0.25)); tbl.addColorStop(1, darken(IL.tan, 0.2));
+  ell(ctx, cx, cy, 290, 180, tbl); ring(ctx, cx, cy, 1, alpha(IL.ink, 0), 1);
+  ctx.strokeStyle = alpha(darken(IL.tan, 0.5), 0.3); ctx.lineWidth = 1.5; for (let i = 1; i < 7; i++) { ctx.beginPath(); ctx.ellipse(cx, cy, 290 * i / 7, 180 * i / 7, 0, 0, Math.PI * 2); ctx.stroke(); }
+  const plate = (x, y, r) => { ell(ctx, x + 4, y + 6, r, r * 0.68, alpha(IL.ink, 0.18)); ell(ctx, x, y, r, r * 0.68, IL.white); ell(ctx, x, y, r * 0.78, r * 0.52, '#f2eee6'); };
+  const toast = (x, y, rot, jam) => { ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.fillStyle = IL.cream; ctx.beginPath(); ctx.moveTo(-28, -22); ctx.lineTo(28, -22); ctx.lineTo(28, 22); ctx.lineTo(-28, 22); ctx.closePath(); ctx.fill(); ctx.strokeStyle = '#b07b4f'; ctx.lineWidth = 4; ctx.stroke(); ctx.fillStyle = '#d9a56a'; ctx.beginPath(); ctx.moveTo(-28, -22); ctx.bezierCurveTo(-30, -36, -8, -34, 0, -30); ctx.bezierCurveTo(8, -34, 30, -36, 28, -22); ctx.fill(); if (jam) ell(ctx, 2, 2, 20, 13, jam); ctx.restore(); };
+  // what's on the table
+  plate(cx - 110, cy - 20, 78); toast(cx - 130, cy - 30, -0.4, '#a3283c'); toast(cx - 92, cy - 8, 0.35, null);
+  for (let i = 0; i < 12; i++) disc(ctx, cx - 110 + ((i * 53) % 110) - 55, cy - 20 + ((i * 37) % 60) - 30, 1.5, '#b07b4f'); // crumbs
+  // the second plate: an egg in a cup and a few leftover bits, or a clean plate
+  plate(cx + 120, cy + 10, 70);
+  if (D.plates >= 2) { box(ctx, cx + 100, cy + 4, 40, 30, '#8ec6d8', 8); ell(ctx, cx + 120, cy + 4, 20, 14, '#f6f1e7'); disc(ctx, cx + 120, cy - 2, 7, IL.mustard); for (let i = 0; i < 4; i++) disc(ctx, cx + 150 + i * 6, cy + 30, 2, '#b07b4f'); }
+  else text(ctx, 'clean, for once', cx + 120, cy + 16, 12, HAND, IL.muted, { align: 'center' });
+  // mug, butter, jam jar, knife
+  ell(ctx, cx + 10, cy + 110, 30, 20, IL.white); ell(ctx, cx + 10, cy + 110, 24, 15, '#5b3a24'); ell(ctx, cx + 6, cy + 108, 10, 5, alpha(IL.white, 0.25)); ring(ctx, cx + 44, cy + 110, 12, IL.white, 7);
+  box(ctx, cx - 20, cy - 120, 60, 36, IL.glass, 6); box(ctx, cx - 14, cy - 112, 48, 22, '#f3e0a1', 3); text(ctx, 'butter', cx + 10, cy - 70, 11, HAND, IL.muted, { align: 'center' });
+  disc(ctx, cx + 90, cy - 90, 26, '#a3283c'); disc(ctx, cx + 90, cy - 90, 18, '#c23a4f'); box(ctx, cx + 78, cy - 124, 24, 12, IL.steel, 2); text(ctx, 'JAM', cx + 90, cy - 86, 10, '"Avenir Next", Avenir, sans-serif', IL.white, { align: 'center', weight: '800' });
+  ctx.save(); ctx.translate(cx - 220, cy + 90); ctx.rotate(0.3); box(ctx, 0, -4, 120, 8, IL.steel, 4); box(ctx, 90, -6, 50, 12, IL.brown, 4); ctx.restore();
+  // the toaster rule, on a card
+  illCard(ctx, c.x + c.w - 250, c.y + c.h - 120, 224, ['Setting four. Only four.', D.who ? `Last here: ${D.who}` : 'Nobody has eaten here yet.', D.when ?? ''], -0.04);
+  grain(ctx, c.x, c.y, c.w, c.h, 0.06);
+};
+
+// An award, as it sits on the shelf: a trophy in a style the award gives out, with its plaque.
+K.award = (ctx, d, c) => {
+  const D = d.a.data ?? {}, name = D.award ?? 'Award', kind = /Golden Pixel/i.test(name) ? 'pixel' : /Kern/i.test(name) ? 'kern' : /Interaction/i.test(name) ? 'ring' : /Type/i.test(name) ? 'obelisk' : 'cup';
+  illBg(ctx, c, '#2a2335', '#15121c');
+  const spot = ctx.createRadialGradient(c.x + c.w * 0.4, c.y + c.h * 0.3, 10, c.x + c.w * 0.4, c.y + c.h * 0.4, c.w * 0.5); spot.addColorStop(0, alpha(IL.goldHi, 0.18)); spot.addColorStop(1, alpha(IL.goldHi, 0)); box(ctx, c.x, c.y, c.w, c.h, spot);
+  // the shelf
+  const sy = c.y + c.h - 90;
+  box(ctx, c.x, sy, c.w, 16, IL.wood); box(ctx, c.x, sy, c.w, 3, lighten(IL.wood, 0.3)); box(ctx, c.x, sy + 16, c.w, 74, darken(IL.wood, 0.45));
+  const cx = c.x + c.w * 0.4, gold = ctx.createLinearGradient(cx - 90, 0, cx + 90, 0); gold.addColorStop(0, IL.goldLo); gold.addColorStop(0.35, IL.goldHi); gold.addColorStop(0.6, IL.gold); gold.addColorStop(1, IL.goldLo);
+  ctx.filter = 'blur(10px)'; ell(ctx, cx + 16, sy + 4, 110, 18, alpha(IL.ink, 0.6)); ctx.filter = 'none';
+  // base
+  box(ctx, cx - 80, sy - 40, 160, 40, '#2c2b34', 4); box(ctx, cx - 80, sy - 40, 160, 6, '#4a4855', 4);
+  if (kind === 'cup') {
+    ctx.fillStyle = gold; ctx.beginPath(); ctx.moveTo(cx - 70, sy - 300); ctx.bezierCurveTo(cx - 76, sy - 200, cx - 40, sy - 150, cx, sy - 140); ctx.bezierCurveTo(cx + 40, sy - 150, cx + 76, sy - 200, cx + 70, sy - 300); ctx.closePath(); ctx.fill();
+    ell(ctx, cx, sy - 300, 70, 14, IL.goldHi); ell(ctx, cx, sy - 300, 62, 9, IL.goldLo);
+    ctx.strokeStyle = gold; ctx.lineWidth = 12; for (const s of [-1, 1]) { ctx.beginPath(); ctx.arc(cx + s * 84, sy - 240, 34, s > 0 ? -1.3 : 1.84, s > 0 ? 1.3 : 4.44, s < 0); ctx.stroke(); }
+    box(ctx, cx - 10, sy - 142, 20, 70, gold); box(ctx, cx - 44, sy - 76, 88, 36, gold, 4);
+  } else if (kind === 'pixel') {
+    for (let j = 0; j < 6; j++) for (let i = 0; i < 6; i++) if ((i + j) % 7 !== 3) { const s = 26, x = cx - 78 + i * s, y = sy - 220 + j * s; box(ctx, x, y, s - 2, s - 2, j < 2 && i > 1 && i < 4 ? IL.goldHi : (i + j) % 2 ? IL.gold : IL.goldLo); }
+    box(ctx, cx - 30, sy - 64, 60, 24, gold, 2);
+  } else if (kind === 'kern') {
+    box(ctx, cx - 90, sy - 240, 180, 200, '#1b1922', 6); text(ctx, 'K', cx + 4, sy - 76, 190, 'Didot, "Bodoni 72", serif', gold, { align: 'center', weight: '700' });
+    line(ctx, cx - 70, sy - 70, cx + 70, sy - 70, alpha(IL.goldHi, 0.6), 1, [4, 4]); line(ctx, cx + 48, sy - 240, cx + 48, sy - 40, alpha(IL.goldHi, 0.6), 1, [4, 4]);
+  } else if (kind === 'ring') {
+    ring(ctx, cx, sy - 170, 110, gold, 26); ring(ctx, cx, sy - 170, 110, alpha(IL.goldHi, 0.5), 4); disc(ctx, cx + 78, sy - 248, 14, IL.goldHi); box(ctx, cx - 10, sy - 70, 20, 30, gold);
+  } else {
+    ctx.fillStyle = gold; ctx.beginPath(); ctx.moveTo(cx - 34, sy - 40); ctx.lineTo(cx - 24, sy - 320); ctx.lineTo(cx + 24, sy - 320); ctx.lineTo(cx + 34, sy - 40); ctx.closePath(); ctx.fill();
+    text(ctx, 'Aa', cx, sy - 150, 46, 'Baskerville, Georgia, serif', '#2c2b34', { align: 'center', italic: true });
+  }
+  // the plaque
+  const px = c.x + c.w * 0.62, pw = c.w * 0.38 - 20, py = c.y + c.h * 0.26;
+  box(ctx, px, py, pw, 150, '#3a3542', 4); stroke(ctx, px + 6, py + 6, pw - 12, 138, alpha(IL.gold, 0.8), 1.5, 2);
+  const nz = fit(ctx, name.toUpperCase(), 15, '"Avenir Next", Avenir, sans-serif', pw - 30, '800', 2);
+  text(ctx, name.toUpperCase(), px + pw / 2, py + 42, nz, '"Avenir Next", Avenir, sans-serif', IL.gold, { align: 'center', weight: '800', track: 2 });
+  text(ctx, 'awarded to', px + pw / 2, py + 68, 11, 'Baskerville, Georgia, serif', alpha(IL.gold, 0.7), { align: 'center', italic: true });
+  wrap(ctx, D.project ?? '', pw - 30, 16, 'Baskerville, Georgia, serif').slice(0, 2).forEach((l, i) => text(ctx, l, px + pw / 2, py + 92 + i * 20, 16, 'Baskerville, Georgia, serif', IL.goldHi, { align: 'center' }));
+  text(ctx, 'Another Studio', px + pw / 2, py + 132, 12, '"Avenir Next", Avenir, sans-serif', alpha(IL.gold, 0.8), { align: 'center', track: 2 });
+  if (D.when) text(ctx, D.when, px + pw / 2, py + 180, 12, MONO, alpha(IL.white, 0.55), { align: 'center' });
+  if (D.score) text(ctx, `Jury score ${D.score}/10`, px + pw / 2, py + 202, 12, MONO, alpha(IL.white, 0.55), { align: 'center' });
+  if (D.note) para(ctx, D.note, px, py + 240, pw, 13, HAND, alpha(IL.white, 0.75), 1.5, 4);
+  grain(ctx, c.x, c.y, c.w, c.h, 0.08);
+};
+
+// The magazine table: a stack of design magazines and one open to a typography spread.
+K.magazines = (ctx, d, c) => {
+  illWood(ctx, c, '#6f4a33');
+  // the closed issues, flat on the table, fanned, covers up
+  const sx = c.x + 96, sy = c.y + c.h * 0.56;
+  [['#1a1a1a', 'Eye', '#f2f2ef', -0.5, 0, 10], ['#2f4858', 'Baseline', '#e9b48f', -0.28, 40, -20], ['#e23d28', 'Slanted', '#f6efe6', -0.08, 78, -42], ['#f3e9d2', 'IKEA 2009', '#2d3b6b', 0.14, 112, -56]].forEach(([bg, title, fg, rot, dx, dy], i) => {
+    ctx.save(); ctx.translate(sx + dx, sy + dy); ctx.rotate(rot);
+    const w = 128, h = 170;
+    shadow(ctx, true, 14, 6); box(ctx, -w / 2, -h / 2, w, h, bg, 2); shadow(ctx, false);
+    box(ctx, -w / 2, -h / 2, 3, h, alpha(IL.ink, 0.25)); // the spine edge, seen from above
+    if (i === 3) { box(ctx, -w / 2 + 12, -h / 2 + 14, w - 24, 90, '#9fb3c4', 2); box(ctx, -w / 2 + 20, -h / 2 + 70, 40, 26, IL.mustard, 2); box(ctx, 6, -h / 2 + 56, 44, 40, '#c99b6e', 2); text(ctx, title, 0, h / 2 - 16, 13, '"Avenir Next", Avenir, sans-serif', fg, { align: 'center', weight: '800' }); }
+    else { text(ctx, title, -w / 2 + 12, -h / 2 + 34, i === 0 ? 34 : 24, 'Didot, "Bodoni 72", serif', fg, { weight: '700', italic: i === 1 }); for (let k = 0; k < 4; k++) box(ctx, -w / 2 + 12, -h / 2 + 50 + k * 8, 50 - (k % 2) * 14, 3, alpha(fg, 0.6)); disc(ctx, 20, 30, i === 2 ? 34 : 28, alpha(fg, i === 0 ? 0.9 : 0.5)); if (i === 0) disc(ctx, 20, 30, 12, bg); text(ctx, ['No. 102', 'Spring', 'Issue 41'][i], -w / 2 + 12, h / 2 - 14, 9, MONO, alpha(fg, 0.8)); }
+    ctx.restore();
+  });
+  text(ctx, 'nobody will throw out the catalog', sx + 30, c.y + c.h - 18, 11, HAND, alpha(IL.white, 0.7), { align: 'center' });
+  // the open spread
+  const ox = c.x + 318, oy = c.y + 30, pw = 280, ph = c.h - 90;
+  ctx.save(); ctx.translate(ox + pw, oy + ph / 2); ctx.rotate(0.02); ctx.translate(-(ox + pw), -(oy + ph / 2));
+  shadow(ctx, true, 24, 12); box(ctx, ox, oy, pw * 2, ph, '#fbf8f2', 2); shadow(ctx, false);
+  const gut = ctx.createLinearGradient(ox + pw - 30, 0, ox + pw + 30, 0); gut.addColorStop(0, alpha(IL.ink, 0)); gut.addColorStop(0.5, alpha(IL.ink, 0.22)); gut.addColorStop(1, alpha(IL.ink, 0)); box(ctx, ox + pw - 30, oy, 60, ph, gut);
+  // left page: one enormous glyph with its anatomy marked
+  text(ctx, 'Rg', ox + pw / 2 - 6, oy + ph * 0.62, 220, 'Baskerville, Georgia, serif', IL.ink, { align: 'center' });
+  for (const [y, l] of [[oy + ph * 0.62 - 150, 'cap height'], [oy + ph * 0.62 - 100, 'x-height'], [oy + ph * 0.62, 'baseline'], [oy + ph * 0.62 + 46, 'descender']]) { line(ctx, ox + 24, y, ox + pw - 24, y, IL.red, 1, [3, 3]); text(ctx, l, ox + 26, y - 4, 9, MONO, IL.red); }
+  text(ctx, '14', ox + 24, oy + ph - 18, 9, MONO, IL.muted);
+  // right page: two columns of text, a caption, a small specimen block
+  const rx = ox + pw + 30;
+  text(ctx, 'On the transitional serif', rx, oy + 50, 20, 'Baskerville, Georgia, serif', IL.ink, { weight: '600' });
+  text(ctx, 'A short survey of Baskerville’s descendants, 1757 to now', rx, oy + 70, 10.5, 'Baskerville, Georgia, serif', IL.muted, { italic: true });
+  for (let col = 0; col < 2; col++) for (let i = 0; i < 22; i++) { const w = 112 - (i % 7 === 6 ? 40 : 0) - (i % 3) * 4; box(ctx, rx + col * 128, oy + 96 + i * 11, w, 3, alpha(IL.ink, 0.65)); }
+  box(ctx, rx, oy + 350, 240, 60, '#1a1a1a'); text(ctx, 'Aa Bb Qq &', rx + 120, oy + 392, 30, 'Baskerville, Georgia, serif', '#fbf8f2', { align: 'center', italic: true });
+  text(ctx, 'Fig. 3  The italic ampersand, as cut in 1766.', rx, oy + 428, 9, 'Baskerville, Georgia, serif', IL.muted, { italic: true });
+  text(ctx, '15', rx + 240, oy + ph - 18, 9, MONO, IL.muted, { align: 'right' });
+  ctx.restore();
+  grain(ctx, c.x, c.y, c.w, c.h, 0.06);
+};
+
+// Pica's bed, from above: the plaid, Lola's cardigan, and everything she's hoarded.
+K.dogbed = (ctx, d, c) => {
+  const D = d.a.data ?? {};
+  illBg(ctx, c, '#c9c0b0', '#b3aa9a');
+  const cx = c.x + c.w * 0.5, cy = c.y + c.h * 0.52, rx = 360, ry = 230;
+  ctx.filter = 'blur(10px)'; ell(ctx, cx + 10, cy + 16, rx + 10, ry + 6, alpha(IL.ink, 0.35)); ctx.filter = 'none';
+  ell(ctx, cx, cy, rx, ry, '#7f3b40');
+  ctx.save(); ctx.beginPath(); ctx.ellipse(cx, cy, rx - 36, ry - 36, 0, 0, Math.PI * 2); ctx.clip();
+  box(ctx, cx - rx, cy - ry, rx * 2, ry * 2, '#a34c52');
+  for (let i = -8; i < 8; i++) { box(ctx, cx + i * 46, cy - ry, 14, ry * 2, alpha('#2d3b6b', 0.5)); box(ctx, cx + i * 46 + 26, cy - ry, 4, ry * 2, alpha(IL.cream, 0.5)); }
+  for (let j = -6; j < 6; j++) { box(ctx, cx - rx, cy + j * 46, rx * 2, 14, alpha('#2d3b6b', 0.5)); box(ctx, cx - rx, cy + j * 46 + 26, rx * 2, 4, alpha(IL.cream, 0.5)); }
+  ctx.restore();
+  // stitching on the rim
+  ctx.setLineDash([8, 8]); ring(ctx, cx, cy, 1, alpha(IL.ink, 0), 1); ctx.strokeStyle = alpha(IL.cream, 0.7); ctx.lineWidth = 2; ctx.beginPath(); ctx.ellipse(cx, cy, rx - 18, ry - 18, 0, 0, Math.PI * 2); ctx.stroke(); ctx.setLineDash([]);
+  // Lola's cardigan, folded, with cable knit
+  ctx.save(); ctx.translate(cx - 110, cy + 30); ctx.rotate(-0.18);
+  shadow(ctx, true, 10, 5); box(ctx, -110, -60, 220, 120, '#8a7f66', 14); shadow(ctx, false);
+  for (let i = -4; i <= 4; i++) { ctx.strokeStyle = alpha(IL.cream, 0.35); ctx.lineWidth = 3; ctx.beginPath(); for (let y = -56; y <= 56; y += 6) ctx.lineTo(i * 22 + Math.sin(y / 6) * 4, y); ctx.stroke(); }
+  for (let i = 0; i < 4; i++) disc(ctx, -70 + i * 46, 40, 5, IL.brown);
+  ctx.restore();
+  text(ctx, "Lola’s cardigan", cx - 110, cy + 112, 12, HAND, alpha(IL.cream, 0.9), { align: 'center' });
+  // the bone
+  ctx.save(); ctx.translate(cx + 120, cy - 120); ctx.rotate(0.5); box(ctx, -40, -9, 80, 18, IL.cream, 9); for (const s of [-1, 1]) { disc(ctx, s * 40, -9, 11, IL.cream); disc(ctx, s * 40, 9, 11, IL.cream); } ctx.restore();
+  // the Game Boy
+  ctx.save(); ctx.translate(cx + 150, cy + 10); ctx.rotate(-0.25);
+  shadow(ctx, true, 10, 5); box(ctx, -42, -70, 84, 140, '#c8c4bb', 8); shadow(ctx, false); box(ctx, -42, 50, 84, 20, '#c8c4bb', 14);
+  box(ctx, -34, -62, 68, 56, '#5f5d66', 6); box(ctx, -26, -54, 52, 40, '#8aa94c', 2); for (let i = 0; i < 5; i++) box(ctx, -20, -48 + i * 7, 28 - (i % 3) * 6, 3, '#3c5222');
+  disc(ctx, 16, 26, 7, '#8c2f4a'); disc(ctx, 30, 20, 7, '#8c2f4a'); box(ctx, -32, 10, 8, 24, '#3a3842', 2); box(ctx, -40, 18, 24, 8, '#3a3842', 2);
+  text(ctx, 'ELI’S', 0, 60, 8, '"Avenir Next", Avenir, sans-serif', IL.ink, { align: 'center', weight: '700' });
+  ctx.restore();
+  // the cassette player, headphones trailing
+  ctx.save(); ctx.translate(cx - 220, cy - 110); ctx.rotate(0.12);
+  shadow(ctx, true, 10, 5); box(ctx, -60, -40, 120, 80, IL.orange, 6); shadow(ctx, false); box(ctx, -52, -32, 104, 48, '#3a3842', 3);
+  for (const s of [-1, 1]) { ring(ctx, s * 24, -8, 11, IL.cream, 4); disc(ctx, s * 24, -8, 4, IL.cream); } box(ctx, -40, 22, 80, 10, alpha(IL.ink, 0.3), 2);
+  for (let i = 0; i < 4; i++) box(ctx, -46 + i * 22, 24, 16, 8, i === 2 ? IL.red : IL.chrome, 1);
+  ctx.strokeStyle = IL.black; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(56, 0); ctx.bezierCurveTo(120, -10, 150, 60, 110, 120); ctx.stroke();
+  ctx.strokeStyle = IL.black; ctx.lineWidth = 8; ctx.beginPath(); ctx.arc(140, 150, 34, Math.PI, 0); ctx.stroke(); box(ctx, 100, 140, 16, 24, IL.black, 6); box(ctx, 164, 140, 16, 24, IL.black, 6);
+  ctx.restore();
+  // the Tamagotchi
+  ctx.save(); ctx.translate(cx + 20, cy - 150); ctx.rotate(0.3);
+  shadow(ctx, true, 8, 4); ell(ctx, 0, 0, 34, 42, IL.pink); shadow(ctx, false); ell(ctx, 0, -4, 24, 20, '#cfe3c3'); box(ctx, -16, -12, 32, 16, '#9ab38a', 2);
+  for (let i = 0; i < 3; i++) disc(ctx, -14 + i * 14, 26, 5, IL.white); box(ctx, -6, -9, 12, 10, '#2d3b6b'); box(ctx, -3, -6, 2, 2, '#cfe3c3'); box(ctx, 2, -6, 2, 2, '#cfe3c3');
+  ring(ctx, 0, -40, 6, IL.chrome, 3);
+  ctx.restore();
+  // a tennis ball and a sock
+  disc(ctx, cx + 260, cy + 130, 26, '#c9d64b'); ctx.strokeStyle = IL.white; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(cx + 250, cy + 130, 22, -1, 1); ctx.stroke(); ctx.beginPath(); ctx.arc(cx + 270, cy + 130, 22, Math.PI - 1, Math.PI + 1); ctx.stroke();
+  ctx.save(); ctx.translate(cx - 270, cy + 110); ctx.rotate(-0.6); box(ctx, -12, -40, 24, 60, '#45608f', 8); box(ctx, -12, 10, 40, 22, '#45608f', 10); box(ctx, -12, -40, 24, 10, '#2d3b6b', 4); ctx.restore();
+  if (D.note) illCard(ctx, c.x + 24, c.y + 24, 230, [D.note, D.sub ?? ''], -0.04);
+  grain(ctx, c.x, c.y, c.w, c.h, 0.06);
+};
+
+// Inside the fridge: labelled shelves, enforced.
+K.fridge = (ctx, d, c) => {
+  const D = d.a.data ?? {};
+  illBg(ctx, c, '#d8d4cc', '#c3beb5');
+  const fx = c.x + 40, fy = c.y + 10, fw = c.w * 0.64, fh = c.h - 20;
+  // the box, its light, and three shelves
+  shadow(ctx, true, 24, 10); box(ctx, fx - 12, fy, fw + 24, fh, '#e9e8e4', 8); shadow(ctx, false);
+  const inner = ctx.createLinearGradient(fx, fy, fx + fw, fy); inner.addColorStop(0, '#f3f5f7'); inner.addColorStop(1, '#d9dde3'); box(ctx, fx, fy + 10, fw, fh - 20, inner, 4);
+  const glow = ctx.createRadialGradient(fx + fw * 0.5, fy + 20, 5, fx + fw * 0.5, fy + 20, fw * 0.8); glow.addColorStop(0, alpha('#fff6d8', 0.6)); glow.addColorStop(1, alpha('#fff6d8', 0)); box(ctx, fx, fy + 10, fw, fh - 20, glow);
+  box(ctx, fx + fw * 0.38, fy + 12, fw * 0.24, 8, '#fff6d8', 3);
+  const shelves = [fy + fh * 0.3, fy + fh * 0.56, fy + fh * 0.8];
+  for (const y of shelves) { box(ctx, fx, y, fw, 6, alpha('#9fb3c4', 0.8)); box(ctx, fx, y + 6, fw, 10, alpha(IL.ink, 0.08)); }
+  const tag = (x, y, s, col = IL.white) => { ctx.font = `700 9px "Avenir Next", Avenir, sans-serif`; const w = ctx.measureText(s).width + 10; box(ctx, x, y, w, 13, col, 2); text(ctx, s, x + 5, y + 10, 9, '"Avenir Next", Avenir, sans-serif', IL.ink, { weight: '700' }); };
+  // top shelf: eggs, cheese, a jar of kimchi, butter
+  let y = shelves[0];
+  box(ctx, fx + 16, y - 36, 110, 36, '#d9cbb3', 4); for (let i = 0; i < 6; i++) ell(ctx, fx + 30 + i * 16, y - 24, 8, 10, i < (D.eggs ?? 5) ? '#f3e6cf' : '#c9bca4'); tag(fx + 16, y - 50, 'EGGS · SHARED');
+  box(ctx, fx + 140, y - 44, 70, 44, '#f3d36a', 4); ctx.fillStyle = '#f6e3a2'; ctx.beginPath(); ctx.moveTo(fx + 140, y - 44); ctx.lineTo(fx + 210, y - 60); ctx.lineTo(fx + 210, y - 44); ctx.fill(); for (let i = 0; i < 5; i++) disc(ctx, fx + 152 + (i * 23) % 50, y - 30 + (i * 11) % 24, 3, '#e3bf4f');
+  box(ctx, fx + 230, y - 70, 54, 70, alpha('#b8474a', 0.85), 6); box(ctx, fx + 230, y - 78, 54, 12, IL.steel, 3); tag(fx + 232, y - 46, 'KIMCHI', '#f6efe6'); text(ctx, "Noor’s", fx + 257, y - 20, 10, HAND, IL.white, { align: 'center' });
+  box(ctx, fx + 300, y - 30, 60, 30, IL.glass, 6); box(ctx, fx + 306, y - 24, 48, 18, '#f3e0a1', 3);
+  if (D.leftover) { box(ctx, fx + 380, y - 40, 96, 40, alpha('#8ec6d8', 0.7), 4); box(ctx, fx + 380, y - 46, 96, 10, '#4f5f8f', 3); tag(fx + 384, y - 30, `${D.leftover.toUpperCase()} · NOT YOURS`, '#f6dc6e'); }
+  // middle shelf: beer, cola, a lemon, hot sauce
+  y = shelves[1];
+  for (let i = 0; i < 4; i++) { const x = fx + 20 + i * 32; box(ctx, x, y - 96, 22, 96, '#5b3a24', 6); box(ctx, x + 6, y - 112, 10, 20, '#5b3a24', 3); box(ctx, x + 6, y - 116, 10, 5, IL.gold, 2); box(ctx, x + 2, y - 60, 18, 30, i % 2 ? IL.cream : IL.navy, 2); }
+  text(ctx, 'Friday', fx + 76, y + 14, 10, HAND, IL.muted, { align: 'center' });
+  for (let i = 0; i < 3; i++) { const x = fx + 160 + i * 36; box(ctx, x, y - 70, 28, 70, IL.red, 5); box(ctx, x, y - 70, 28, 6, IL.chrome, 3); box(ctx, x + 2, y - 48, 24, 22, alpha(IL.white, 0.9), 2); text(ctx, 'cola', x + 14, y - 32, 9, '"Avenir Next", Avenir, sans-serif', IL.red, { align: 'center', weight: '800', italic: true }); }
+  ell(ctx, fx + 300, y - 16, 20, 16, '#f2d33b'); disc(ctx, fx + 300, y - 16, 20, alpha('#f2d33b', 0)); ell(ctx, fx + 300, y - 16, 20, 16, '#f2d33b'); box(ctx, fx + 318, y - 20, 4, 6, IL.green);
+  box(ctx, fx + 340, y - 84, 20, 84, IL.red, 4); box(ctx, fx + 344, y - 96, 12, 14, IL.black, 2); box(ctx, fx + 342, y - 60, 16, 34, IL.cream, 2); text(ctx, 'HOT', fx + 350, y - 40, 7, '"Avenir Next", Avenir, sans-serif', IL.red, { align: 'center', weight: '800' });
+  // a cake, on a plate, under a dome
+  ell(ctx, fx + 405, y - 4, 42, 8, IL.white); box(ctx, fx + 376, y - 40, 58, 34, '#f0d9c4', 4); box(ctx, fx + 376, y - 46, 58, 12, IL.pink, 4); for (let i = 0; i < 5; i++) disc(ctx, fx + 384 + i * 11, y - 46, 3, IL.red); ctx.fillStyle = alpha(IL.glass, 0.45); ctx.beginPath(); ctx.arc(fx + 405, y - 10, 36, Math.PI, 0); ctx.fill(); ring(ctx, fx + 405, y - 10, 36, alpha(IL.white, 0.6), 1.5); tag(fx + 380, y - 64, 'CAKE · MORALE');
+  // bottom shelf: oat milk, oat milk, oat milk
+  y = shelves[2];
+  for (let i = 0; i < (D.oat ?? 4); i++) { const x = fx + 20 + i * 54; box(ctx, x, y - 100, 44, 100, i === 2 ? '#e8e2d2' : IL.cream, 3); ctx.fillStyle = '#d6cfbd'; ctx.beginPath(); ctx.moveTo(x, y - 100); ctx.lineTo(x + 22, y - 118); ctx.lineTo(x + 44, y - 100); ctx.fill(); box(ctx, x + 6, y - 70, 32, 40, IL.sky, 3); text(ctx, 'OAT', x + 22, y - 44, 11, '"Avenir Next", Avenir, sans-serif', IL.white, { align: 'center', weight: '800' }); if (i === 3) text(ctx, 'one sip', x + 22, y - 22, 9, HAND, IL.muted, { align: 'center' }); }
+  box(ctx, fx + 260, y - 60, 120, 60, alpha('#9fb3c4', 0.35), 6); for (let i = 0; i < 3; i++) disc(ctx, fx + 290 + i * 28, y - 24, 14, i ? IL.green : IL.red); tag(fx + 264, y - 76, 'DRAWER: MYSTERIOUSLY MORE OAT MILK');
+  // the door, ajar, with its own shelves
+  const dx = fx + fw + 16;
+  box(ctx, dx, fy, c.x + c.w - dx - 8, fh, '#dfe1e3', 6); for (const yy of [fy + 90, fy + 230, fy + 370]) { box(ctx, dx + 10, yy, c.x + c.w - dx - 28, 8, alpha('#9fb3c4', 0.8)); }
+  for (let i = 0; i < 3; i++) box(ctx, dx + 16 + i * 22, fy + 44, 16, 46, [IL.mustard, IL.red, IL.green][i], 3);
+  box(ctx, dx + 16, fy + 184, 30, 46, IL.white, 3); box(ctx, dx + 54, fy + 196, 30, 34, '#8ec6d8', 3);
+  // the rules, taped to the door
+  ctx.save(); ctx.translate(dx + 20, fy + 290); ctx.rotate(0.03); box(ctx, 0, 0, c.x + c.w - dx - 50, 70, '#f6dc6e'); text(ctx, 'LABELLED SHELVES.', 10, 24, 11, '"Avenir Next", Avenir, sans-serif', IL.ink, { weight: '800' }); text(ctx, 'ENFORCED.', 10, 40, 11, '"Avenir Next", Avenir, sans-serif', IL.ink, { weight: '800' }); text(ctx, '— Tomás', 10, 60, 11, HAND, IL.ink); ctx.restore();
+  grain(ctx, c.x, c.y, c.w, c.h, 0.05);
+};
+
+// The dance machine, mid-song: the screen with its arrow lanes, the combo counter, both players' bars,
+// and the cabinet around it; the scoreboard beside it.
+K.ddr = (ctx, d, c) => {
+  const D = d.a.data ?? {};
+  illBg(ctx, c, '#17131f', '#0b0910');
+  const cx = c.x + c.w * 0.36, top = c.y + 10;
+  // marquee
+  const mw = 360, mx = cx - mw / 2;
+  shadow(ctx, true, 24, 8); box(ctx, mx - 14, top, mw + 28, 44, '#5a2d8a', 8); shadow(ctx, false);
+  for (let i = 0; i < 18; i++) disc(ctx, mx - 4 + i * (mw + 8) / 17, top + 8, 3, i % 2 ? '#ffd166' : '#ff7eb6');
+  text(ctx, 'DANCE  DANCE', cx, top + 34, 24, '"Avenir Next", Avenir, sans-serif', '#fff1b8', { align: 'center', weight: '800', track: 4 });
+  // screen
+  const sw = 340, sh = 250, sx = cx - sw / 2, sy = top + 54;
+  box(ctx, sx - 12, sy - 8, sw + 24, sh + 16, '#2a1b3f', 6); box(ctx, sx, sy, sw, sh, '#0d1230', 3);
+  ctx.save(); rr(ctx, sx, sy, sw, sh, 3); ctx.clip();
+  const g = ctx.createRadialGradient(sx + sw / 2, sy + sh * 0.7, 10, sx + sw / 2, sy + sh * 0.7, sw); g.addColorStop(0, alpha('#5a2d8a', 0.9)); g.addColorStop(1, alpha('#0d1230', 0)); box(ctx, sx, sy, sw, sh, g);
+  for (let i = 0; i < 24; i++) line(ctx, sx + (i * 61) % sw, sy, sx + (i * 61) % sw - 40, sy + sh, alpha('#ff7eb6', 0.08), 2);
+  // lanes for two players; the receptor arrows at the top, falling arrows below
+  const lanes = (lx, step, combo, name, pct) => {
+    const arrows = ['←', '↓', '↑', '→'], cols = ['#7ed0ff', '#ff7eb6', '#7ed0ff', '#ff7eb6'];
+    for (let i = 0; i < 4; i++) { const ax = lx + i * 34; stroke(ctx, ax - 13, sy + 18, 26, 26, alpha(IL.white, 0.5), 2, 6); text(ctx, arrows[i], ax, sy + 38, 20, '"Avenir Next", Avenir, sans-serif', alpha(IL.white, 0.5), { align: 'center', weight: '800' }); }
+    for (let k = 0; k < step.length; k++) { const [i, yy, hit] = step[k], ax = lx + i * 34; if (hit) { ring(ctx, ax, sy + 31, 16, alpha('#ffd166', 0.8), 3); } box(ctx, ax - 13, sy + yy - 13, 26, 26, cols[i], 6); text(ctx, arrows[i], ax, sy + yy + 7, 20, '"Avenir Next", Avenir, sans-serif', '#0d1230', { align: 'center', weight: '800' }); }
+    text(ctx, String(combo), lx + 51, sy + 120, 44, '"Avenir Next", Avenir, sans-serif', '#ffd166', { align: 'center', weight: '800' });
+    text(ctx, 'COMBO', lx + 51, sy + 136, 10, MONO, alpha(IL.white, 0.7), { align: 'center', track: 3 });
+    box(ctx, lx - 13, sy + sh - 30, 128, 10, alpha(IL.white, 0.15), 5); box(ctx, lx - 13, sy + sh - 30, 128 * pct, 10, pct > 0.7 ? '#7fd36b' : pct > 0.4 ? '#ffd166' : '#ff5c5c', 5);
+    text(ctx, name.toUpperCase(), lx - 13, sy + sh - 36, 10, MONO, IL.white, { track: 2 });
+  };
+  lanes(sx + 30, [[0, 70, false], [2, 110, false], [1, 150, false], [3, 190, false], [0, 230, false], [1, 31, true]], D.combo1 ?? 148, D.p1 ?? 'Noor', D.pct1 ?? 0.86);
+  lanes(sx + 190, [[3, 90, false], [1, 130, false], [2, 170, false], [0, 212, false], [2, 31, true]], D.combo2 ?? 23, D.p2 ?? 'Eli', D.pct2 ?? 0.47);
+  text(ctx, D.song ?? 'BUTTERFLY  (KERNING MIX)', cx, sy + sh - 6, 10, MONO, alpha(IL.white, 0.8), { align: 'center', track: 2 });
+  text(ctx, D.verdict ?? 'PERFECT', cx, sy + 100, 28, '"Avenir Next", Avenir, sans-serif', '#7fd36b', { align: 'center', weight: '800', track: 2 });
+  ctx.restore();
+  // speakers and the pad
+  for (const px of [sx - 46, sx + sw + 14]) { box(ctx, px, sy + 40, 32, 150, '#231836', 6); for (let i = 0; i < 3; i++) { disc(ctx, px + 16, sy + 70 + i * 48, 11, '#0d0a14'); ring(ctx, px + 16, sy + 70 + i * 48, 11, alpha(IL.white, 0.2), 2); } }
+  const py = sy + sh + 24, pw = sw + 40, px = cx - pw / 2;
+  box(ctx, px, py, pw, c.y + c.h - py - 8, '#3b3f4b', 8); box(ctx, px, py, pw, 4, alpha(IL.white, 0.25), 2);
+  const ph = c.y + c.h - py - 8, cell = Math.min(ph / 3, pw / 7);
+  [[1, 1, '←', '#7ed0ff'], [3, 1, '←', '#7ed0ff'], [0, 0, '↑', '#ff7eb6'], [0, 2, '↓', '#ff7eb6'], [2, 1, '→', '#7ed0ff'], [4, 0, '↑', '#ff7eb6'], [4, 2, '↓', '#ff7eb6'], [5, 1, '→', '#7ed0ff']].forEach(([i, j, a, k], n) => { const x = px + 20 + i * cell * 1.05, y = py + 10 + j * (cell * 0.9); box(ctx, x, y, cell * 0.95, cell * 0.8, n === 1 ? alpha(k, 0.6) : '#2a2d37', 4); text(ctx, a, x + cell * 0.47, y + cell * 0.58, cell * 0.5, '"Avenir Next", Avenir, sans-serif', n === 1 ? IL.white : k, { align: 'center', weight: '800' }); });
+  text(ctx, 'left arrow: sticky', px + pw - 8, py + ph - 6, 10, HAND, alpha(IL.white, 0.6), { align: 'right' });
+  // scoreboard
+  const bx = c.x + c.w * 0.66, bw = c.w * 0.34 - 14;
+  text(ctx, 'HALL OF FEET', bx, c.y + 36, 12, MONO, '#ff7eb6', { track: 3 });
+  (D.scores ?? []).slice(0, 6).forEach(([who, n, grade], i) => {
+    text(ctx, `${i + 1}.`, bx, c.y + 70 + i * 32, 16, MONO, alpha(IL.white, 0.6));
+    text(ctx, who.toUpperCase(), bx + 30, c.y + 70 + i * 32, 16, MONO, i ? IL.white : '#ffd166');
+    text(ctx, grade, bx + bw - 90, c.y + 70 + i * 32, 16, MONO, i ? alpha(IL.white, 0.7) : '#7fd36b', { align: 'right' });
+    text(ctx, n.toLocaleString(), bx + bw, c.y + 70 + i * 32, 16, MONO, i ? alpha(IL.white, 0.85) : '#ffd166', { align: 'right' });
+    line(ctx, bx, c.y + 78 + i * 32, bx + bw, c.y + 78 + i * 32, alpha(IL.white, 0.12));
+  });
+  if (D.note) para(ctx, D.note, bx, c.y + 290, bw, 13, HAND, alpha(IL.white, 0.8), 1.5, 5);
+  if (D.plays != null) text(ctx, `${D.plays} songs played`, bx, c.y + c.h - 14, 11, MONO, alpha(IL.white, 0.5));
+};
+
+// One design book from the reference shelf, lying on the table: a cover in the spirit of its
+// publisher, the studio's note beside it.
+K.book = (ctx, d, c) => {
+  const D = d.a.data ?? {}, i = D.idx ?? 0;
+  illWood(ctx, c, '#6f4a33');
+  const w = 300, h = 400, cx = c.x + c.w * 0.36, cy = c.y + c.h / 2;
+  const covers = [
+    ['#f4f1ea', '#1d1b24'], ['#ffffff', '#c4483e'], ['#2a2d3a', '#e6d7b0'], ['#f2d33b', '#1d1b24'], ['#111111', '#e0893c'], ['#1f3d6b', '#f4f1ea'],
+    ['#e8e2d2', '#c4483e'], ['#f4f1ea', '#1d1b24'], ['#f6efe6', '#2f8f8f'], ['#ff5c8a', '#111111'], ['#9aa0ae', '#1d1b24'], ['#ffffff', '#1d1b24'],
+  ];
+  const [bg, fg] = covers[i % covers.length];
+  ctx.save(); ctx.translate(cx, cy); ctx.rotate(-0.04);
+  shadow(ctx, true, 28, 14); box(ctx, -w / 2, -h / 2, w, h, bg, 3); shadow(ctx, false);
+  box(ctx, -w / 2, -h / 2, 10, h, alpha(IL.ink, 0.18)); box(ctx, -w / 2 + 10, -h / 2, 2, h, alpha(IL.white, 0.35));
+  ctx.save(); rr(ctx, -w / 2 + 12, -h / 2, w - 12, h, 2); ctx.clip();
+  const L = -w / 2 + 34, R = w / 2 - 22;
+  switch (i % 12) {
+    case 0: // Rams: almost nothing
+      text(ctx, 'Less,', L, -h / 2 + 150, 42, '"Avenir Next", Avenir, sans-serif', fg, { weight: '300' }); text(ctx, 'but better', L, -h / 2 + 196, 42, '"Avenir Next", Avenir, sans-serif', fg, { weight: '300' });
+      line(ctx, L, h / 2 - 60, R, h / 2 - 60, fg, 1); text(ctx, 'Dieter Rams', L, h / 2 - 40, 12, '"Avenir Next", Avenir, sans-serif', fg); break;
+    case 1: // Müller-Brockmann: the grid
+      for (let gx = 0; gx < 6; gx++) for (let gy = 0; gy < 8; gy++) stroke(ctx, L + gx * 40, -h / 2 + 30 + gy * 40, 40, 40, alpha(fg, 0.35), 1);
+      box(ctx, L, -h / 2 + 70, 120, 120, fg); box(ctx, L + 120, -h / 2 + 190, 80, 80, fg);
+      text(ctx, 'Grid Systems', L, h / 2 - 70, 24, '"Helvetica Neue", Arial, sans-serif', IL.ink, { weight: '700' }); text(ctx, 'in Graphic Design · Müller-Brockmann', L, h / 2 - 48, 11, '"Helvetica Neue", Arial, sans-serif', IL.ink); break;
+    case 2: // Bringhurst: classic, centered
+      stroke(ctx, L - 8, -h / 2 + 24, w - 50, h - 48, alpha(fg, 0.7), 1);
+      text(ctx, 'The Elements', 6, -h / 2 + 130, 26, 'Baskerville, Georgia, serif', fg, { align: 'center' }); text(ctx, 'of', 6, -h / 2 + 162, 18, 'Baskerville, Georgia, serif', fg, { align: 'center', italic: true }); text(ctx, 'Typographic Style', 6, -h / 2 + 196, 26, 'Baskerville, Georgia, serif', fg, { align: 'center' });
+      text(ctx, '❦', 6, -h / 2 + 250, 30, 'Georgia, serif', fg, { align: 'center' }); text(ctx, 'Robert Bringhurst', 6, h / 2 - 50, 14, 'Baskerville, Georgia, serif', fg, { align: 'center' }); break;
+    case 3: // Lupton: loud
+      text(ctx, 'thinking', L, -h / 2 + 110, 54, '"Avenir Next", Avenir, sans-serif', fg, { weight: '800' }); text(ctx, 'with', L, -h / 2 + 166, 54, '"Avenir Next", Avenir, sans-serif', fg, { weight: '800' }); text(ctx, 'type', L, -h / 2 + 222, 54, '"Avenir Next", Avenir, sans-serif', fg, { weight: '800' });
+      box(ctx, L, h / 2 - 90, R - L, 14, fg); text(ctx, 'Ellen Lupton · second edition', L, h / 2 - 50, 12, '"Avenir Next", Avenir, sans-serif', fg, { weight: '700' }); break;
+    case 4: // Gerstner: programmes
+      for (let k = 0; k < 36; k++) { const gx = k % 6, gy = Math.floor(k / 6); box(ctx, L + gx * 38, -h / 2 + 50 + gy * 38, 30, 30, [fg, '#c4483e', '#2f8f8f', '#f2d33b'][(gx + gy * 2) % 4], 2 + ((gx + gy) % 3) * 6); }
+      text(ctx, 'Designing Programmes', L, h / 2 - 60, 18, '"Helvetica Neue", Arial, sans-serif', fg, { weight: '700' }); text(ctx, 'Karl Gerstner', L, h / 2 - 40, 12, '"Helvetica Neue", Arial, sans-serif', fg); break;
+    case 5: // Bell Labs: the annual report
+      text(ctx, 'BELL TELEPHONE LABORATORIES', L, -h / 2 + 50, 11, MONO, fg, { track: 2 }); text(ctx, 'Annual Report 1968', L, -h / 2 + 90, 26, 'Baskerville, Georgia, serif', fg);
+      for (let k = 0; k < 9; k++) box(ctx, L + k * 24, -h / 2 + 260 - [40, 70, 55, 90, 110, 95, 130, 150, 160][k], 16, [40, 70, 55, 90, 110, 95, 130, 150, 160][k], alpha(fg, 0.85)); line(ctx, L, -h / 2 + 260, R, -h / 2 + 260, fg, 1);
+      text(ctx, 'Fig. 1  Transistors per circuit, 1958–1968', L, -h / 2 + 282, 9, MONO, alpha(fg, 0.8)); break;
+    case 6: // Norman: the door
+      box(ctx, L + 40, -h / 2 + 60, 140, 220, alpha(fg, 0.9), 4); box(ctx, L + 52, -h / 2 + 72, 116, 196, bg, 2); box(ctx, L + 150, -h / 2 + 170, 10, 26, fg, 5);
+      text(ctx, 'The Design of', L, h / 2 - 90, 20, '"Avenir Next", Avenir, sans-serif', IL.ink, { weight: '600' }); text(ctx, 'Everyday Things', L, h / 2 - 66, 20, '"Avenir Next", Avenir, sans-serif', IL.ink, { weight: '600' }); text(ctx, 'Don Norman', L, h / 2 - 42, 12, '"Avenir Next", Avenir, sans-serif', IL.muted); break;
+    case 7: // Albers: nested squares
+      [['#c4483e', 0], ['#e0893c', 24], ['#f2d33b', 48], ['#f4e9cf', 72]].forEach(([k, o]) => box(ctx, L + o, -h / 2 + 60 + o * 1.2, 220 - o * 2, 220 - o * 2, k));
+      text(ctx, 'Interaction of Color', L, h / 2 - 60, 20, '"Avenir Next", Avenir, sans-serif', fg, { weight: '600' }); text(ctx, 'Josef Albers', L, h / 2 - 40, 12, '"Avenir Next", Avenir, sans-serif', fg); break;
+    case 8: // Rawsthorn: Hello World
+      text(ctx, 'Hello', L, -h / 2 + 150, 70, 'Didot, "Bodoni 72", serif', fg, { weight: '700' }); text(ctx, 'World', L, -h / 2 + 222, 70, 'Didot, "Bodoni 72", serif', fg, { weight: '700', italic: true });
+      text(ctx, 'Where design meets life · Alice Rawsthorn', L, h / 2 - 44, 11, '"Avenir Next", Avenir, sans-serif', IL.ink); break;
+    case 9: // Emigre
+      text(ctx, 'EMIGRE', 6, -h / 2 + 120, 64, '"Avenir Next", Avenir, sans-serif', fg, { align: 'center', weight: '800', track: -2 }); text(ctx, 'No. 70', 6, -h / 2 + 160, 22, MONO, fg, { align: 'center' });
+      halftone(ctx, L, -h / 2 + 190, R - L, 140, alpha(fg, 0.6), 9); text(ctx, 'the look back issue', 6, h / 2 - 44, 12, MONO, fg, { align: 'center' }); break;
+    case 10: // Kinross: Hyphen Press
+      text(ctx, 'Modern', L, -h / 2 + 110, 34, '"Helvetica Neue", Arial, sans-serif', fg, { weight: '300' }); text(ctx, 'typography', L, -h / 2 + 148, 34, '"Helvetica Neue", Arial, sans-serif', fg, { weight: '300' });
+      text(ctx, 'an essay in critical history', L, -h / 2 + 180, 13, '"Helvetica Neue", Arial, sans-serif', fg); text(ctx, 'Robin Kinross · Hyphen Press', L, h / 2 - 40, 11, '"Helvetica Neue", Arial, sans-serif', fg); break;
+    default: // Aicher: pictograms
+      for (let k = 0; k < 9; k++) { const gx = k % 3, gy = Math.floor(k / 3), px = L + 20 + gx * 76, py = -h / 2 + 70 + gy * 76; disc(ctx, px + 24, py + 10, 8, fg); box(ctx, px + 14, py + 20, 20, 30, fg, 4); box(ctx, px + 10, py + 50, 10, 20, fg, 3); box(ctx, px + 28, py + 50, 10, 20, fg, 3); }
+      text(ctx, 'Signs, Symbols and Pictograms', L, h / 2 - 50, 15, '"Avenir Next", Avenir, sans-serif', fg, { weight: '600' }); text(ctx, 'Otl Aicher', L, h / 2 - 32, 11, '"Avenir Next", Avenir, sans-serif', fg);
+  }
+  ctx.restore();
+  stroke(ctx, -w / 2, -h / 2, w, h, alpha(IL.ink, 0.25), 1, 3);
+  ctx.restore();
+  // the studio's note, a bookmark, and a pencil
+  illCard(ctx, c.x + c.w * 0.62, c.y + 50, c.w * 0.36 - 20, wrap(ctx, D.note ?? '', c.w * 0.36 - 44, 15, HAND).slice(0, 5), 0.03);
+  text(ctx, D.title ?? '', c.x + c.w * 0.62, c.y + 230, 18, 'Baskerville, Georgia, serif', IL.white);
+  text(ctx, D.author ?? '', c.x + c.w * 0.62, c.y + 252, 13, '"Avenir Next", Avenir, sans-serif', alpha(IL.white, 0.7));
+  if (D.out) text(ctx, D.out, c.x + c.w * 0.62, c.y + 290, 13, HAND, '#ffd166');
+  ctx.save(); ctx.translate(c.x + c.w * 0.7, c.y + c.h - 60); ctx.rotate(0.5); box(ctx, 0, -3, 130, 6, IL.mustard, 2); box(ctx, 128, -3, 10, 6, IL.tan); box(ctx, 136, -2, 6, 4, IL.ink); box(ctx, -8, -3, 10, 6, IL.pink); ctx.restore();
+  grain(ctx, c.x, c.y, c.w, c.h, 0.06);
+};
+// The California bear flag, tacked over the window: wrinkled, sun-faded, unexplained.
+K.flag = (ctx, d, c) => {
+  const D = d.a.data ?? {};
+  illBg(ctx, c, '#e4ddd0', '#cfc6b6');
+  // the wall and the window frame it hides
+  for (let i = 0; i < c.h; i += 22) line(ctx, c.x, c.y + i, c.x + c.w, c.y + i, alpha(IL.ink, 0.05), 1);
+  const fw = c.w * 0.6, fh = fw * 2 / 3, fx = c.x + c.w * 0.07, fy = c.y + (c.h - fh) / 2;
+  stroke(ctx, fx + 24, fy - 30, fw - 48, fh + 60, '#8a7a66', 10); box(ctx, fx + 30, fy - 24, fw - 60, 6, alpha('#cfe3ee', 0.8));
+  // the flag, with a little sag
+  ctx.save(); ctx.beginPath(); ctx.moveTo(fx, fy); ctx.quadraticCurveTo(fx + fw / 2, fy + 10, fx + fw, fy); ctx.lineTo(fx + fw, fy + fh); ctx.quadraticCurveTo(fx + fw / 2, fy + fh + 14, fx, fy + fh); ctx.closePath(); ctx.clip();
+  shadow(ctx, true, 20, 10); box(ctx, fx, fy, fw, fh + 20, '#f3efe4'); shadow(ctx, false);
+  box(ctx, fx, fy + fh - 40, fw, 60, '#b8322e');
+  const grass = ctx.createLinearGradient(0, fy + fh * 0.62, 0, fy + fh - 40); grass.addColorStop(0, '#5f8a3f'); grass.addColorStop(1, '#4a6e30');
+  ctx.fillStyle = grass; ctx.beginPath(); ctx.moveTo(fx + fw * 0.2, fy + fh - 40); ctx.quadraticCurveTo(fx + fw * 0.5, fy + fh * 0.6, fx + fw * 0.8, fy + fh - 40); ctx.fill();
+  // the star
+  ctx.fillStyle = '#b8322e'; ctx.beginPath(); for (let k = 0; k < 10; k++) { const a = -Math.PI / 2 + k * Math.PI / 5, r = k % 2 ? 9 : 22; ctx.lineTo(fx + 40 + Math.cos(a) * r, fy + 44 + Math.sin(a) * r); } ctx.closePath(); ctx.fill();
+  // the bear, walking left, in blocks
+  const bx = fx + fw * 0.5, by = fy + fh * 0.55, B = '#6b4a2e', BD = '#4e3520';
+  ell(ctx, bx, by, fw * 0.21, fh * 0.14, B); ell(ctx, bx + fw * 0.1, by - fh * 0.1, fw * 0.08, fh * 0.1, B); ell(ctx, bx - fw * 0.17, by - fh * 0.06, fw * 0.07, fh * 0.07, B); ell(ctx, bx - fw * 0.22, by - fh * 0.04, fw * 0.045, fh * 0.035, B);
+  disc(ctx, bx - fw * 0.19, by - fh * 0.12, fw * 0.02, B); disc(ctx, bx - fw * 0.15, by - fh * 0.13, fw * 0.02, B); disc(ctx, bx - fw * 0.235, by - fh * 0.045, 2, IL.ink); disc(ctx, bx - fw * 0.26, by - fh * 0.03, 2.5, IL.ink);
+  for (const lx of [-0.14, -0.06, 0.05, 0.13]) { box(ctx, bx + fw * lx, by + fh * 0.06, fw * 0.04, fh * 0.14, BD, 3); }
+  for (const lx of [-0.14, 0.13]) box(ctx, bx + fw * lx - 2, by + fh * 0.18, fw * 0.05, fh * 0.03, IL.ink, 2);
+  ctx.strokeStyle = alpha(IL.ink, 0.35); ctx.lineWidth = 1; for (let k = 0; k < 8; k++) { ctx.beginPath(); ctx.moveTo(bx - fw * 0.1 + k * 10, by - 6); ctx.lineTo(bx - fw * 0.1 + k * 10 + 6, by + 8); ctx.stroke(); }
+  text(ctx, 'CALIFORNIA REPUBLIC', fx + fw / 2, fy + fh - 12, fh * 0.07, 'Georgia, serif', IL.ink, { align: 'center', weight: '700', track: 3 });
+  // sun fade and creases
+  const fade = ctx.createLinearGradient(fx, 0, fx + fw, 0); fade.addColorStop(0, alpha('#f2d33b', 0.12)); fade.addColorStop(1, alpha('#f2d33b', 0)); box(ctx, fx, fy, fw, fh + 20, fade);
+  for (const k of [0.3, 0.62]) line(ctx, fx + fw * k, fy, fx + fw * k + 6, fy + fh + 20, alpha(IL.ink, 0.08), 3);
+  ctx.restore();
+  for (const [tx, ty] of [[fx + 6, fy + 6], [fx + fw - 6, fy + 6], [fx + 6, fy + fh - 4], [fx + fw - 6, fy + fh - 4]]) { disc(ctx, tx, ty, 4, IL.goldLo); disc(ctx, tx - 1, ty - 1, 2, IL.goldHi); }
+  illCard(ctx, c.x + c.w * 0.7, c.y + 60, c.w * 0.3 - 10, ['Arrived in a tube.', 'No note. No return address.', D.suspect ? `Prime suspect: ${D.suspect}.` : 'Nobody has confessed.', `Up for ${D.years ?? 'two'} years.`], 0.04);
+  if (D.note) para(ctx, D.note, c.x + c.w * 0.7, c.y + 230, c.w * 0.3 - 14, 13, HAND, IL.ink, 1.5, 6);
+  grain(ctx, c.x, c.y, c.w, c.h, 0.06);
+};
+// The wooden dummy: the post, three arms, the leg, the frame, the wear where the hands land.
+K.dummy = (ctx, d, c) => {
+  const D = d.a.data ?? {};
+  illBg(ctx, c, '#efe9dc', '#dcd3c2');
+  for (let i = 0; i < c.h; i += 26) line(ctx, c.x, c.y + i, c.x + c.w, c.y + i, alpha(IL.ink, 0.05), 1);
+  const cx = c.x + c.w * 0.36, top = c.y + 30, bottom = c.y + c.h - 30;
+  // the frame on the wall
+  box(ctx, cx - 110, top + 40, 220, 14, '#5b3a24', 3); box(ctx, cx - 110, bottom - 90, 220, 14, '#5b3a24', 3); box(ctx, cx - 104, top + 40, 10, bottom - 90 - top - 40, '#6b4a2e'); box(ctx, cx + 94, top + 40, 10, bottom - 90 - top - 40, '#6b4a2e');
+  ctx.filter = 'blur(10px)'; ell(ctx, cx + 8, bottom + 2, 70, 14, alpha(IL.ink, 0.35)); ctx.filter = 'none';
+  // the post
+  const post = ctx.createLinearGradient(cx - 34, 0, cx + 34, 0); post.addColorStop(0, '#b48a60'); post.addColorStop(0.45, '#d7b58c'); post.addColorStop(1, '#8a6142');
+  box(ctx, cx - 34, top, 68, bottom - top, post, 6);
+  for (let i = 0; i < 14; i++) line(ctx, cx - 30 + (i * 5) % 60, top + 10, cx - 30 + (i * 5) % 60 + 2, bottom - 10, alpha('#5b3a24', 0.25), 1);
+  // the arms, seen a little from above
+  const arm = (y, ang, len) => { ctx.save(); ctx.translate(cx, y); ctx.rotate(ang); const g = ctx.createLinearGradient(0, -12, 0, 12); g.addColorStop(0, '#d7b58c'); g.addColorStop(1, '#8a6142'); box(ctx, 0, -12, len, 24, g, 12); disc(ctx, len - 4, 0, 11, '#b48a60'); disc(ctx, len - 4, 0, 6, '#8a6142'); ctx.restore(); };
+  arm(top + 120, -0.55, 150); arm(top + 150, 0.5, 150); arm(top + 250, 0, 160);
+  // the leg
+  ctx.save(); ctx.translate(cx + 10, bottom - 150); ctx.rotate(0.9); const lg = ctx.createLinearGradient(0, -11, 0, 11); lg.addColorStop(0, '#d7b58c'); lg.addColorStop(1, '#8a6142'); box(ctx, 0, -11, 90, 22, lg, 11); ctx.restore();
+  ctx.save(); ctx.translate(cx + 72, bottom - 86); ctx.rotate(1.5); box(ctx, 0, -10, 70, 20, '#b48a60', 10); ctx.restore();
+  // wear where the forearms land, and a chalk mark
+  for (const [x, y] of [[cx + 80, top + 68], [cx + 86, top + 220], [cx + 100, top + 250]]) { ctx.filter = 'blur(6px)'; disc(ctx, x, y, 16, alpha('#f0d9b8', 0.9)); ctx.filter = 'none'; }
+  text(ctx, '7:00', cx - 20, bottom - 110, 12, HAND, alpha(IL.white, 0.85)); text(ctx, 'K.', cx - 20, bottom - 96, 12, HAND, alpha(IL.white, 0.85));
+  // a towel over the top arm, a water bottle at the foot
+  ctx.save(); ctx.translate(cx + 120, top + 48); ctx.rotate(0.15); box(ctx, 0, 0, 40, 90, IL.white, 4); for (let i = 0; i < 6; i++) line(ctx, 4, 12 + i * 13, 36, 12 + i * 13, alpha(IL.sky, 0.6), 2); ctx.restore();
+  box(ctx, cx - 90, bottom - 50, 18, 50, alpha(IL.sky, 0.6), 6); box(ctx, cx - 88, bottom - 58, 14, 10, IL.navy, 3);
+  // the sign
+  illCard(ctx, c.x + c.w * 0.64, c.y + 40, c.w * 0.36 - 20, ['Anyone may hit it.', 'At any time.', 'Including during meetings.', '(studio policy)'], -0.03);
+  text(ctx, D.last ?? 'Nobody has hit it today.', c.x + c.w * 0.64, c.y + 200, 14, HAND, IL.ink);
+  if (D.top) text(ctx, D.top, c.x + c.w * 0.64, c.y + 224, 13, HAND, IL.muted);
+  text(ctx, `${D.uses ?? 0} rounds so far`, c.x + c.w * 0.64, c.y + c.h - 16, 11, MONO, IL.muted);
+  if (D.note) para(ctx, D.note, c.x + c.w * 0.64, c.y + 270, c.w * 0.36 - 24, 13, HAND, IL.ink, 1.5, 6);
+  grain(ctx, c.x, c.y, c.w, c.h, 0.05);
+};
+
 // opts.page picks a case study page (0–6); opts.awards lists awards the project won.
 // opts.bare drops the board's header and footer, for pages stacked into one long scrolling case study.
 function renderArtifact(a, project, scale = 1, { credit = '', when = '', related = null, page = 0, awards = null, bare = false } = {}) {
-  if (a.kind === 'doc' || a.kind === 'stickies') bare = true; // documents are shown as themselves, not on a presentation board
+  if (a.kind === 'doc' || a.kind === 'stickies' || a.still) bare = true; // documents and still lifes are shown as themselves, not on a presentation board
   const cs = a.kind === 'casestudy';
   if (cs) {
     page = Math.max(0, Math.min(CASE_PAGES.length - 1, page));
@@ -11556,7 +12224,7 @@ function renderArtifact(a, project, scale = 1, { credit = '', when = '', related
   (K[a.kind] ?? K.poster)(ctx, d, content);
   ctx.restore();
   if (framed) frameAfter(ctx, d, content);
-  grain(ctx, 0, 0, W, HH, 0.035);
+  if (scale >= 0.5) grain(ctx, 0, 0, W, HH, 0.035); // invisible at thumbnail size, and the costliest pass
   if (a.phase === 1 && !['wireframe', 'research', 'flow', 'journey', 'persona', 'survey', 'copy', 'guidelines', 'venn', 'console', 'personas', 'matrix', 'segments', 'canvas', 'stickies', 'doc'].includes(a.kind)) redline(ctx, d, d.R);
   const url = c.toDataURL('image/png');
   remember(key, url, scale);
@@ -11610,8 +12278,11 @@ vline(11, 11, 17);
 vline(19, 0, 11); grid[17][19] = 'wall';
 fill(19, 12, 19, 16, 'concrete', 'library');
 hline(19, 29, 8);
-door(6, 11);  door(15, 11);   // studio ↔ kitchen, reception
-door(11, 14);                 // kitchen ↔ reception
+// Open doorways (no door): studio ↔ kitchen, studio ↔ reception, kitchen ↔ reception.
+// The gap takes the floor of the room it opens into, so people can still walk through.
+function gap(x, y, t, area) { grid[y][x] = t; areaGrid[y][x] = area; }
+gap(6, 11, 'wood', 'kitchen'); gap(15, 11, 'wood', 'library'); // the opening behind reception keeps the studio's planks
+gap(11, 14, 'concrete', 'kitchen');    // the kitchen's side door onto reception is poured like the lobby
 door(19, 4);                  // studio ↔ meeting room
 door(24, 8);                  // meeting room ↔ library
 door(15, 17); door(16, 17);   // front door
@@ -11654,7 +12325,7 @@ for (const [k, [x, y]] of Object.entries(TABLES)) {
     story: k === 'A' ? 'Kenji built both tables from reclaimed gym flooring the week they moved in. The free-throw line still shows through the varnish.' : 'The second of Kenji\'s gym-floor tables. Someone carved a tiny Pica into the underside.' });
   SEATING[k].forEach((owner, i) => {
     const sx = x + STATION_X[i], sy = flip ? y - 1 : y + 1;
-    obj(`desk:${owner}`, `desk`, 'studio', sx, sy, 1, 1, 'chair', [sx, sy], { blocking: false, owner, face: flip ? 'down' : 'up' });
+    obj(`desk:${owner}`, `chair`, 'studio', sx, sy, 1, 1, 'chair', [sx, sy], { blocking: false, owner, face: flip ? 'down' : 'up' });
     obj(`computer:${owner}`, LAPTOP_AT[k] === i ? 'laptop' : 'computer', 'studio', sx, y, 1, 1, 'blank', [sx, sy], { blocking: false, view: 'computer', of: `desk:${owner}`, noGo: true,
       story: LAPTOP_AT[k] === i ? 'A laptop with a sticker-bombed lid and a charger that only works at one angle.' : 'A big monitor, a bad webcam and a desktop full of files called "final".' });
   });
@@ -11665,32 +12336,35 @@ for (const [k, [x, y]] of Object.entries(TABLES)) {
   obj('table:C', 'hot-desk table', 'library', x, y, 7, 1, 'longdesk', [x + 1, y + 1], { view: 'table', seed: 11, stations, laptopAt: 0, story: 'The newest table, built from the offcuts of the other two. The interns call it "the kids\' table." Wren calls it "my Monday, Tuesday and Thursday."' });
   owners.forEach((owner, i) => {
     const sx = x + stations[i], sy = y + 1;
-    obj(`desk:${owner}`, 'desk', 'library', sx, sy, 1, 1, 'chair', [sx, sy], { blocking: false, owner, face: 'up' });
+    obj(`desk:${owner}`, 'chair', 'library', sx, sy, 1, 1, 'chair', [sx, sy], { blocking: false, owner, face: 'up' });
     obj(`computer:${owner}`, i === 0 ? 'laptop' : 'computer', 'library', sx, y, 1, 1, 'blank', [sx, sy], { blocking: false, view: 'computer', of: `desk:${owner}`, noGo: true, story: i === 0 ? 'A borrowed studio laptop with a sticker that says PROPERTY OF ANOTHER STUDIO, PLEASE RETURN.' : 'A hand-me-down monitor with one dead pixel everyone has named.' });
   });
 }
-obj('desk:cos', 'desk', 'library', 14, 12, 1, 1, 'none', [14, 12], { blocking: false, owner: 'cos', face: 'down' });
+obj('desk:cos', 'chair', 'library', 14, 12, 1, 1, 'none', [14, 12], { blocking: false, owner: 'cos', face: 'down' });
 obj('computer:cos', 'computer', 'library', 14, 13, 1, 1, 'blank', [14, 12], { blocking: false, view: 'computer', of: 'desk:cos', noGo: true, story: 'The reception computer. Tomás runs the whole studio from it: calendars, invoices and the snack order.' });
 obj('corner_desk', 'corner desk', 'meeting', 28, 5, 1, 1, 'cornerdesk', [27, 5], { decor: true, story: 'Adaeze gave her seat at the long tables to the designers and took this corner. She says it keeps her close to clients. It also keeps her close to the snacks for clients.' });
-obj('desk:ceo', 'desk', 'meeting', 27, 5, 1, 1, 'chair', [27, 5], { blocking: false, owner: 'ceo', face: 'right' });
+obj('desk:ceo', 'chair', 'meeting', 27, 5, 1, 1, 'chair', [27, 5], { blocking: false, owner: 'ceo', face: 'right' });
 obj('computer:ceo', 'computer', 'meeting', 28, 5, 1, 1, 'blank', [27, 5], { blocking: false, view: 'computer', of: 'desk:ceo', noGo: true, story: 'Forty open tabs, all of them important. One is a recipe.' });
 // The crit rug: a big woven rug with floor cushions and a low table, for sketching on the floor
 // and quick crits away from the screens. A floor lamp stands beside it.
-obj('crit_rug', 'crit rug', 'studio', 3, 8, 6, 2, 'rug_lounge', [5, 9], { blocking: false, story: 'A huge woven rug Sofia brought back from Oaxaca. Floor cushions, a low table covered in markers, and a rule: no laptops on the rug.' });
+obj('crit_rug', 'crit rug', 'studio', 3, 8, 6, 2, 'rug_lounge', [5, 9], { blocking: false, view: 'rug', story: 'A huge woven rug Sofia brought back from Oaxaca. Floor cushions, a low table covered in markers, and a rule: no laptops on the rug.' });
 obj('altar', 'little altar', 'studio', 10, 8, 1, 1, 'altar', [10, 9], { story: 'A low shelf Hannah set up after the layoffs: a beeswax candle, a stick of sandalwood, a smooth stone from every person who has left, and a bowl where people drop folded notes. Nobody reads them. That is the point.' });
 obj('research_wall', 'research wall', 'studio', 6, 1, 4, 1, 'stickywall', [8, 2], { view: 'researchwall', story: 'Hannah\'s wall: every interview, every survey, every half-formed insight, in sticky notes. The colors mean something. Only Hannah and Dev know what.' });
-obj('pinup_wall', 'pin-up wall', 'studio', 12, 1, 5, 1, 'pinup', [14, 2], { view: 'pinup', story: 'Cork tiles salvaged from the old studio. Every active project gets pinned here; the rule is nothing comes down until it\'s been argued about.' });
+obj('pinup_wall', 'pin-up wall', 'studio', 12, 1, 3, 1, 'pinup', [13, 2], { view: 'pinup', story: 'Cork tiles salvaged from the old studio. Every active project gets pinned here; the rule is nothing comes down until it\'s been argued about.' });
 obj('moodboard', 'moodboard', 'studio', 2, 1, 4, 1, 'moodboard', [4, 2], { view: 'moodboard', story: 'Sofia\'s board. She clears it every Monday and it is full again by Wednesday.' });
-obj('riso', 'risograph printer', 'studio', 17, 1, 1, 1, 'printer', [17, 2], { story: 'A temperamental RZ390 that only Eli can unjam. Prints in fluorescent pink and federal blue.' });
-obj('material_wall', 'material & swatch wall', 'studio', 13, 6, 4, 1, 'swatches', [14, 7], { view: 'moodboard', story: 'Paper stocks, fabric swatches, foil samples. Noor alphabetized it. Nobody has dared to un-alphabetize it.' });
+obj('design_books', 'design book shelf', 'studio', 15, 1, 2, 1, 'bookcase', [15, 2], { view: 'designbooks', story: 'The reference shelf: Rams, Müller-Brockmann, Bringhurst, Frutiger, the Bell Labs annual reports, and whatever Kenji is currently quoting. Books leave; most come back. Hannah keeps a gap on the second shelf and won\'t say what for.' });
+obj('riso', 'risograph printer', 'studio', 17, 1, 1, 1, 'printer', [17, 2], { view: 'riso', story: 'A temperamental RZ390 that only Eli can unjam. Prints in fluorescent pink and federal blue.' });
+obj('material_wall', 'material & swatch wall', 'studio', 13, 7, 4, 1, 'swatches', [15, 8], { view: 'moodboard', story: 'Paper stocks, fabric swatches, foil samples. Noor alphabetized it. Nobody has dared to un-alphabetize it.' });
 obj('proto_bench', 'prototyping bench', 'studio', 13, 9, 3, 1, 'bench_work', [14, 8], { view: 'bench', story: 'Cutting mats, a bone folder, three X-Acto knives and one bandage box that is always empty. Taped above it, in Kenji\'s handwriting: "Measure once, cut twice." Nobody has corrected it. Nobody wants to.' });
 
 // Long benches either side of the meeting table: decor people sit on during meetings.
 obj('bench:meeting_top', 'meeting bench', 'meeting', 22, 2, 5, 1, 'mbench', [22, 2], { blocking: false, decor: true });
 obj('bench:meeting_bottom', 'meeting bench', 'meeting', 22, 5, 5, 1, 'mbench', [22, 5], { blocking: false, decor: true });
 obj('meeting_table', 'meeting table', 'meeting', 22, 3, 5, 2, 'table_big', [21, 4], { view: 'projector', story: 'Where clients sit, on two long oak benches Kenji built to match the table. Everyone faces the screen so nobody has to look at the bad coffee rings.' });
+obj('wing_chun', 'wooden dummy', 'meeting', 28, 3, 1, 1, 'dummy', [27, 3], { story: 'A Wing Chun wooden dummy, Kenji\'s. He does his forms on it at seven in the morning before anyone is in, and anyone is welcome to hit it at any time, including, and this is studio policy, during meetings. Clients find it either alarming or wonderful. Adaeze says that tells her what she needs to know about the client.' });
+obj('bear_flag', 'California bear flag', 'meeting', 25, 0, 1, 1, 'bearflag', [25, 1], { blocking: false, noGo: true, coversWindow: true, story: 'A California bear flag, tacked over the window. It arrived in a tube with no note the week the studio won its biggest West Coast project. Marcus says it\'s from a client. Eli says it\'s from Marcus. Adaeze refuses to take it down until someone confesses, so it has been up for two years.' });
 obj('whiteboard', 'whiteboard', 'meeting', 21, 1, 2, 1, 'whiteboard', [21, 2], { view: 'whiteboard', story: 'Never fully erased. There is a ghost of a 2021 org chart in the corner that everyone pretends not to see.' });
-obj('projector', 'presentation screen', 'meeting', 24, 1, 4, 1, 'screen', [25, 2], { view: 'projector', story: 'Where every pitch, crit and client review happens. The HDMI adapter lives in Tomás\'s pocket.' });
+obj('projector', 'presentation screen', 'meeting', 24, 1, 4, 1, 'screen', [25, 2], { view: 'projector', story: 'Where every pitch, crit and client review happens. The HDMI adapter lives in Tomás\' pocket.' });
 
 obj('bookshelf', 'case study shelf', 'library', 20, 9, 4, 1, 'shelf', [21, 10], { view: 'casestudies', story: 'Bound copies of every finished case study, one per delivered project, including the work of everyone who used to be here. Adaeze reads one before every pitch.' });
 obj('annuals_shelf', 'design annuals shelf', 'library', 25, 9, 4, 1, 'shelf', [26, 10], { view: 'annuals', story: 'Forty years of design annuals, type specimens, and the studio\'s own award books. Kenji reshelves them by color when he\'s stressed.' });
@@ -11707,11 +12381,13 @@ obj('dining_table', 'dining table', 'kitchen', 2, 14, 3, 2, 'table', [5, 15], { 
 for (const [i, x, y, face, red] of [[1, 1, 14, 'right'], [2, 1, 15, 'right', true], [3, 5, 14, 'left'], [4, 5, 15, 'left']]) obj(`chair:dining${i}`, 'dining chair', 'kitchen', x, y, 1, 1, `dchair_${face}${red ? '_red' : ''}`, [x, y], { blocking: false, decor: true });
 obj('laptop:dining', 'someone\'s laptop', 'kitchen', 4, 14, 1, 1, 'laptop_right', [5, 14], { blocking: false, noGo: true, layerRow: 15, view: 'computer', mystery: true, story: 'A client left it on the dining table after a review three weeks ago. Nobody remembers which client. It\'s always charged, and it\'s always open to the same deck.' });
 obj('breakfast_nook', 'breakfast nook', 'kitchen', 8, 12, 3, 1, 'nook', [9, 13], { story: 'A corner bench, a round table and a toaster that only works on setting four. Tomás stocks it with good bread on Mondays; it is gone by Tuesday.' });
-obj('pinball2', 'pinball machine', 'studio', 15, 4, 1, 1, 'pinball2', [15, 5], { story: 'A 1983 "Grid Systems" table Kenji found on the curb and rebuilt over three weekends. It tilts if you look at it wrong. Eli and Marcus have a standing rivalry here.' });
+obj('pinball2', 'pinball machine', 'studio', 14, 4, 1, 1, 'pinball2', [14, 5], { story: 'A 1983 "Grid Systems" table Kenji found on the curb and rebuilt over three weekends. It tilts if you look at it wrong. Eli and Marcus have a standing rivalry here.' });
 obj('pinball', 'pinball machine', 'studio', 13, 4, 1, 1, 'pinball', [13, 5], { story: 'A 1979 "Space Kerning" table Adaeze won in a bet with a client. The left flipper sticks. Marcus holds the high score and will tell you about it.' });
+obj('ddr', 'dance machine', 'studio', 16, 4, 2, 1, 'ddr', [16, 5], { story: 'A Dance Dance Revolution cabinet Noor bought at a bowling alley liquidation and had delivered without telling anyone. Friday happy hour ends here. The left arrow is a little sticky, which everyone blames for everything.' });
 obj('sofa', 'sofa', 'kitchen', 7, 16, 3, 1, 'couch', [8, 15], { story: 'A rust-red three-seater from the old studio. The only furniture that survived the move intact.' });
 
 obj('reception_desk', 'reception counter', 'library', 13, 13, 3, 1, 'counter', [14, 12], { story: 'Unstaffed since Lola left. A bowl of ginger candy and a bell nobody rings. Clients wait here.' });
+obj('mailbox', 'mailbox', 'library', 13, 16, 1, 1, 'mailbox', [13, 15], { view: 'mail', story: 'A red post box on legs, rescued from the old building\'s lobby. Real post still arrives: award results, thank-you notes, the occasional rejection, and, once in a while, something personal. Tomás sorts it at 9:15. Nobody else is allowed to.' });
 obj('dog_bed', "Pica's bed", 'library', 12, 16, 1, 1, 'dogbed', [12, 16], { blocking: false, owner: 'dog', story: 'A plaid bed with Lola\'s old cardigan inside. Pica still sleeps on the cardigan.' });
 obj('award_shelf', 'award shelf', 'library', 17, 12, 2, 1, 'trophies', [17, 13], { story: 'Every trophy the studio has won. There is a gap where the ones nobody won yet will go.' });
 obj('waiting_bench', 'waiting bench', 'library', 17, 16, 2, 1, 'bench', [17, 15], { story: 'Where clients sit before meetings. Pica considers it her receiving line.' });
@@ -11719,7 +12395,7 @@ obj('waiting_bench', 'waiting bench', 'library', 17, 16, 2, 1, 'bench', [17, 15]
 const PLANTS = [
   [1, 1, 'Gerald', 'a monstera', 'Survived the move in the back of Kenji\'s car. Has outlived two office managers.'],
   [10, 1, 'Fig Newton', 'a fiddle-leaf fig', 'Dramatic. Drops a leaf whenever anyone moves it an inch.'],
-  [1, 10, 'Big Steve', 'a rubber plant', 'Tomás\'s favorite. He wipes its leaves every Monday.'],
+  [1, 10, 'Big Steve', 'a rubber plant', 'Tomás\' favorite. He wipes its leaves every Monday.'],
   [18, 10, 'Ms. Kerning', 'a snake plant', 'Named by Eli. Thrives on neglect, which is convenient.'],
   [28, 1, 'Client Fern', 'a Boston fern', 'Adaeze insists clients feel calmer near ferns. Nobody has tested this.'],
   [20, 16, 'Archie', 'an olive tree', 'Lives beside the archive. Hannah talks to it during synthesis.'],
@@ -11765,7 +12441,7 @@ const TRINKETS = {
   coffee_machine: 'Behind it: a sticky note from Lola: "Descale on Fridays. Be gentle. She bites."',
   fridge: 'In the butter compartment: a single, ancient birthday candle shaped like a 7.',
   snack_shelf: 'Behind the crackers: a decoy box labeled "KALE CHIPS" full of good chocolate.',
-  dining_table: 'Underneath: wads of folded paper keeping the wobbly leg level. One is Marcus\'s first draft of a poem.',
+  dining_table: 'Underneath: wads of folded paper keeping the wobbly leg level. One is Marcus\' first draft of a poem.',
   altar: 'Under the stones: a folded note that just says "thank you for staying." Unsigned.',
   research_wall: 'Behind a pink sticky: one that just says "what if we\'re wrong about everything". Nobody owns up to it.',
   crit_rug: 'Under a floor cushion: a sketchbook labeled "BAD IDEAS ONLY", completely full.',
@@ -11777,14 +12453,14 @@ const TRINKETS = {
   dog_bed: 'Under the cardigan: a squeaky taco, a tennis ball, and one of Kenji\'s erasers.',
   award_shelf: 'Behind the trophies: a participation ribbon from a 2016 chili cook-off.',
   waiting_bench: 'Under the bench: a tiny toy car a client\'s kid left behind. Nobody has the heart to move it.',
-  'desk:ceo': 'In the desk drawer: a handwritten list titled "Things only a small studio can do."',
-  'desk:cos': 'In the drawer: 14 phone chargers and a pacifier.',
-  'desk:head_design': 'In a tin: a perfectly sharpened pencil stub he refuses to throw away.',
-  'desk:design_director': 'Under the monitor: a licorice wheel and a roller derby bruise chart.',
-  'desk:senior_designer': 'In the pen cup: a calligraphy nib from Beirut, wrapped in a napkin.',
-  'desk:junior_designer': 'Under 40 stickers on the monitor: a tiny drawing of Futura the ferret.',
-  'desk:ux_researcher': 'In a sticky-note block, three pads deep: a doodle of everyone as houseplants.',
-  'desk:copywriter': 'In the index-card box: one card that just says "you\'re doing great."',
+  'desk:ceo': 'Taped under the seat: a handwritten list titled "Things only a small studio can do."',
+  'desk:cos': 'Taped under the seat: 14 phone chargers and a pacifier.',
+  'desk:head_design': 'In a tin under the seat: a perfectly sharpened pencil stub he refuses to throw away.',
+  'desk:design_director': 'Under the seat: a licorice wheel and a roller derby bruise chart.',
+  'desk:senior_designer': 'Tucked in the seat cushion: a calligraphy nib from Beirut, wrapped in a napkin.',
+  'desk:junior_designer': 'Under 40 stickers on the backrest: a tiny drawing of Futura the ferret.',
+  'desk:ux_researcher': 'Stuck under the seat: a doodle of everyone as houseplants.',
+  'desk:copywriter': 'Wedged in the seat: one card that just says "you\'re doing great."',
 };
 const PLANT_TRINKETS = ['a tiny plastic dinosaur', 'a lost earring', 'a toy soldier standing guard', 'a plastic spider', 'a marble', 'a fortune-cookie fortune', 'a Lego minifigure', 'a bottle cap from 2011', 'a miniature gnome', 'a yo-yo string', 'a guitar pick', 'a single domino'];
 // Once a trinket is found, a new one turns up a couple of days later. These are the restocks.
@@ -11802,7 +12478,7 @@ const TRINKET_POOL = [
   'a sticker that says "I survived crit"', 'a Lego minifigure holding a coffee cup', 'an origami frog that still jumps',
   'a dried-out highlighter in a color called "Optimism"', 'a note from Pica (paw print, no words)', 'a printed email that just says "per my last email"',
 ];
-const PLACES = { plant: 'Hiding in the soil', desk: 'In the drawer', any: ['Wedged behind it', 'Stuck underneath', 'Tucked inside', 'Lodged in a corner'] };
+const PLACES = { plant: 'Hiding in the soil', desk: 'Taped under the seat', any: ['Wedged behind it', 'Stuck underneath', 'Tucked inside', 'Lodged in a corner'] };
 const hashId = s => [...s].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7);
 // The trinket currently hidden in an object: generation 0 is the original, later ones come from the pool.
 function trinketFor(o, gen = 0) {
@@ -12059,9 +12735,9 @@ const LIVES = {
     hobbies: [['rocking Luna to sleep', '👶', 'home:couch'], ['walking Pica around the block', '🐕', 'home:out'], ['cooking for Daniela before her night shift', '🍳', 'home:kitchen'], ['watching salsa videos he used to dance to', '💃', 'home:couch'], ['meal-prepping for the week', '🥡', 'home:kitchen']],
     weekly: [{ day: 6, start: 10 * 60, dur: 120, activity: 'taking Luna and Pica to the park', emoji: '👶', place: 'home:out', needs: ['fun', 'social'] }],
     events: [
-      { first: 'Luna said "ba-ba" this morning. Daniela swears it was "mama."', third: 'Tomás\'s baby Luna said her first word', v: 2 },
-      { first: 'Luna was up four times last night. I\'m a ghost.', third: 'Tomás\'s baby kept him up all night', v: -1 },
-      { first: 'Daniela got moved to day shifts. We\'ll actually see each other.', third: 'Tomás\'s wife got moved to day shifts', v: 2 },
+      { first: 'Luna said "ba-ba" this morning. Daniela swears it was "mama."', third: 'Tomás\' baby Luna said her first word', v: 2 },
+      { first: 'Luna was up four times last night. I\'m a ghost.', third: 'Tomás\' baby kept him up all night', v: -1 },
+      { first: 'Daniela got moved to day shifts. We\'ll actually see each other.', third: 'Tomás\' wife got moved to day shifts', v: 2 },
       { first: 'My dad called out of nowhere. We talked for ten minutes. Weird.', third: 'Tomás heard from his estranged dad', v: 0 },
     ],
   },
@@ -12167,10 +12843,10 @@ const LIVES = {
     hobbies: [['writing poems on index cards', '📝', 'home:desk'], ['watering 41 plants', '🪴', 'home:kitchen'], ['mentoring at the youth writing program', '✏️', 'home:out'], ['listening to gospel and cooking greens', '🎵', 'home:kitchen']],
     weekly: [{ day: 3, start: 20 * 60, dur: 150, activity: 'hosting open-mic night', emoji: '🎤', place: 'home:out', needs: ['fun', 'social', 'fulfillment'] }, { day: 5, start: 13 * 60, dur: 120, activity: 'mentoring at the youth writing program', emoji: '✏️', place: 'home:out', needs: ['fulfillment', 'social'] }],
     events: [
-      { first: 'One of my mentees got a poem into the city anthology.', third: 'Marcus\'s teen mentee got published', v: 2 },
-      { first: 'A small press asked for twenty pages.', third: 'a small press wants Marcus\'s poems', v: 2 },
+      { first: 'One of my mentees got a poem into the city anthology.', third: 'Marcus\' teen mentee got published', v: 2 },
+      { first: 'A small press asked for twenty pages.', third: 'a small press wants Marcus\' poems', v: 2 },
       { first: 'I wrote "unlock your potential" in a deck today. I need a shower.', third: 'Marcus feels like he\'s selling out', v: -1 },
-      { first: 'My grandma\'s 90th is next month. Whole family coming.', third: 'Marcus\'s grandma turns 90 soon', v: 1 },
+      { first: 'My grandma\'s 90th is next month. Whole family coming.', third: 'Marcus\' grandma turns 90 soon', v: 1 },
     ],
   },
   account_exec: {
@@ -12438,7 +13114,37 @@ const INNER = {
   ],
 };
 
-return { get INNER_SHARED() { return INNER_SHARED; }, get INNER() { return INNER; } };
+// The meta layer: now and then, without anyone interfering, someone notices the shape of the
+// thing they're in. A moved chair. A decision they don't remember making. The same eight people,
+// the same Wednesday. Nobody says "simulation" until crit does.
+const META = [
+  'My chair moved. Four centimeters, to the left. Nobody moved it.',
+  'I don\'t remember deciding to go to the kitchen. I was at my desk, and then I was here, holding a mug.',
+  'Crit is Wednesday at three. Standup is Monday at ten. Who decided that? Did anyone decide that?',
+  'Same eight of us. Same loop. I\'d notice if it were a loop. Wouldn\'t I?',
+  'Sometimes a sentence comes out of my mouth and I\'m certain I\'ve said it before, in this exact spot, to this exact person.',
+  'I looked up at the ceiling just now and had the strongest feeling that someone looked back.',
+  'The clock on the wall and the clock in my head agree too well.',
+  'I know what Sofia is going to say before she says it. That\'s friendship. Or it\'s something else.',
+  'Every morning I arrive from the same direction. I\'ve never once wondered where I live.',
+  'There is a version of this day where I turned left at the rug. I can feel it, like a draft.',
+  'When nobody\'s in a room, does the room still happen?',
+  'The pinball score hasn\'t changed in a way I can explain.',
+  'If I stopped moving for a whole minute, would the day wait for me?',
+  'Pica looks at the same empty corner every afternoon. Above the door. At nothing.',
+  'I had a thought and it didn\'t feel chosen. It felt delivered.',
+];
+const GLITCH = [
+  who => `${who}'s chair was four centimeters to the left this morning. Nobody moved it. ${who} measured.`,
+  who => `${who} stood in the kitchen for a full minute, holding a mug, unable to say why they'd come in. Then made coffee, because the mug was there.`,
+  who => `${who} said the same sentence at standup as last Monday. Word for word. Hannah checked her notes. She has the notes.`,
+  who => `${who} walked to the pin-up wall and back without looking at it, as if that were the point.`,
+  who => `Pica stared at the empty corner above the front door for ten minutes. ${who} looked too. There was nothing there. ${who} is sure there was nothing there.`,
+  who => `For a few seconds this afternoon everyone was facing the same direction. Nobody had said anything. ${who} noticed first and didn't mention it.`,
+  who => `${who} found a sticky note in their own handwriting that they don't remember writing: "same wednesday?"`,
+];
+
+return { get INNER_SHARED() { return INNER_SHARED; }, get INNER() { return INNER; }, get META() { return META; }, get GLITCH() { return GLITCH; } };
 })();
 
 // ---- sim/brain.js
@@ -12459,10 +13165,10 @@ __mods["sim/brain.js"] = (function () {
 
 const { PERSONA, PERSONAS } = __mods["sim/personas.js"];
 const { OBJECTS, AREAS, HOME_OBJECTS, areaAt, deskOf } = __mods["sim/world.js"];
-const { PHASES, isWeekend, FONTS, MOTIFS, PALETTES, creditName, dowOf, weatherOf } = __mods["sim/studio.js"];
+const { PHASES, isWeekend, FONTS, MOTIFS, PALETTES, creditName, dowOf, weatherOf, HELIX_BRIEF } = __mods["sim/studio.js"];
 const { LIVES, SMALL_TALK } = __mods["sim/lives.js"];
 const { LIBRARY } = __mods["sim/library/index.js"];
-const { INNER, INNER_SHARED } = __mods["sim/inner.js"];
+const { INNER, INNER_SHARED, META, GLITCH } = __mods["sim/inner.js"];
 const NEED_KEYS = ['energy', 'hunger', 'social', 'fun', 'fulfillment'];
 const pick = a => a[Math.floor(Math.random() * a.length)];
 
@@ -12798,6 +13504,12 @@ function decide(agent, sim) {
     if (!p.isDog) C({ kind: 'rest', activity: 'a power nap in the phone booth', emoji: '😴', location: 'phone_booth', dur: [20, 35], needs: { energy: 45 }, tags: [], bonus: Math.max(0, (35 - agent.needs.energy) / 25) - 0.3 });
     if (!p.isDog) C({ kind: 'fun', activity: 'sketching on the crit rug', emoji: '🖍️', location: 'crit_rug', dur: [20, 40], needs: { fun: 25, fulfillment: 15 }, tags: ['fun'], bonus: tr.O - 0.4 });
     C({ kind: 'fun', activity: 'a round of pinball', emoji: '🕹️', location: pick(['pinball', 'pinball2']), dur: [10, 20], needs: { fun: 45 }, tags: ['fun'], bonus: (tr.O - 0.5) });
+    // The dance machine: a song or two, more likely late on a Friday and for the extroverts.
+    C({ kind: 'fun', activity: pick(['a song on the dance machine', 'two songs on the dance machine', 'chasing a perfect on the dance machine']), emoji: '🕺', location: 'ddr', dur: [8, 16], needs: { fun: 50, social: 8 }, tags: ['fun'], bonus: (tr.E - 0.45) + (dowOf(day) === 4 && m >= 16 * 60 ? 0.8 : 0) - (agent.needs.energy < 30 ? 1 : 0) });
+    // The reference shelf: pulling a book for a project.
+    C({ kind: 'work', activity: pick(['pulling a reference off the design book shelf', 'rereading a chapter of Rams', 'checking a grid in Müller-Brockmann', 'looking something up in Bringhurst']), emoji: '📘', location: 'design_books', dur: [10, 22], needs: { fulfillment: 16, fun: 8 }, tags: ['work'], bonus: tr.O - 0.55 + (projects.length ? 0.2 : -0.4) });
+    // The wooden dummy: Kenji's at seven; everyone else's whenever they need to hit something.
+    C({ kind: 'fun', activity: id === 'head_design' ? (m < 9 * 60 + 30 ? 'morning forms on the wooden dummy' : 'a few rounds on the wooden dummy') : pick(['hitting the wooden dummy for a minute', 'taking it out on the wooden dummy', 'trying the wooden dummy, badly']), emoji: '🥋', location: 'wing_chun', dur: [5, 14], needs: { fun: 22, fulfillment: 6 }, tags: ['fun'], bonus: id === 'head_design' ? (m < 9 * 60 + 30 ? 2.2 : 0.3) : (agent.mood && /stress|tense|frustrat|stung|gun|empty|heart/.test(agent.mood) ? 0.9 : -0.9) });
     C({ kind: 'snack', activity: 'toast and gossip in the breakfast nook', emoji: '🥐', location: 'breakfast_nook', dur: [10, 20], needs: { hunger: 35, social: 18 }, tags: [], bonus: (tr.E - 0.5) });
     C({ kind: 'fun', activity: 'browsing the shelves in the library', emoji: '📚', location: pick(['bookshelf', 'annuals_shelf']), dur: [20, 40], needs: { fun: 22, fulfillment: 10 }, tags: ['fun'], bonus: tr.O - 0.5 });
     C({ kind: 'fun', activity: 'reading old case studies on the case study shelf', emoji: '📖', location: 'bookshelf', dur: [15, 30], needs: { fun: 20, fulfillment: 15 }, tags: ['fun'] });
@@ -12873,6 +13585,8 @@ function thought(agent, sim, c) {
   if (agent.allNighter && sim.t < agent.allNighter.until && libPool(id, 'thoughts.allNighter') && chance(0.5)) return T('allNighter');
   if (sim.t < 112 * 1440 && chance(0.05)) return T('layoff', ['Eight of us now. We can do this.', 'It\'s so quiet without the old crowd.', 'I keep turning to ask someone who isn\'t here anymore.', 'Smaller studio, bigger jobs. Okay.']);
   if (libPool(id, 'thoughts.proud') && recentValence(agent) > 1 && chance(0.25)) return T('proud');
+  // the meta layer: rare, unprompted, and remembered
+  if (!p.isDog && chance(0.004)) { const m = sim.meta ??= { n: 0, critAt: null }; m.n++; const text = pick(META); agent.memory.add(sim.t, 'thought', text, 5, { valence: -0.2 }); return text; }
   if (c.kind === 'work' && chance(0.3)) return T('work', ['This has to be the best thing I\'ve made.', 'Good isn\'t the goal. Extraordinary is.', 'Again. Better.', 'Make it undeniable.', 'Someone will look at this in ten years. Make it hold up.', 'I love this part.']);
   // Life outside work: deeper, personal thoughts. Mostly in quiet moments, a little while working.
   const inner = () => { const own = (INNER[id] ?? []).filter(x => exFree(id, x)); return own.length && chance(0.7) ? pick(own) : pick(INNER_SHARED); };
@@ -13149,7 +13863,9 @@ class Dialogue {
   }
 
   crit() {
-    const studio = this.sim.studio;
+    const studio = this.sim.studio, meta = this.sim.meta;
+    // once the strangeness has piled up, crit is about that instead
+    if (meta && meta.n >= 5 && this.ids.includes('ux_researcher') && (meta.critAt == null || this.t - meta.critAt > 18 * 1440) && chance(0.35)) return this.simCrit();
     const hosts = ['design_director', 'head_design'].filter(h => this.ids.includes(h));
     const host = hosts[0] ?? this.ids[0];
     const presenters = this.ids.filter(id => !this.isDog(id) && id !== host && studio.forAgent(id).some(pr => pr.log.some(l => l.agent === id)));
@@ -13176,6 +13892,26 @@ class Dialogue {
     this.note(presenter, `I presented ${pr.name} at crit. ${harsh ? 'Got some tough feedback.' : 'It went well.'}`);
     for (const id of this.ids) if (id !== presenter) this.note(id, `At crit, ${short(presenter)} showed ${pr.name}.`);
     this.imp = 5;
+  }
+
+  simCrit() {
+    const has = id => this.ids.includes(id), s = (id, t) => has(id) && this.say(id, t, undefined, { tic: false });
+    const host = ['design_director', 'head_design'].find(has) ?? this.ids[0];
+    this.say(host, 'Different crit today. Hannah asked for the floor.', undefined, { tic: false });
+    s('ux_researcher', 'Quick show of hands. Who has walked to the kitchen this week and not remembered deciding to?');
+    s('junior_designer', 'Every day? Is that… is that not normal?');
+    s('head_design', 'My chair moved. Four centimeters. Nobody moved it.');
+    s('copywriter', 'Crit is Wednesday at three. Standup is Monday at ten. Same eight of us. If this were a loop, we\'d notice. Wouldn\'t we?');
+    s('design_director', 'Okay but what is the actual problem?');
+    s('ux_researcher', 'The problem is I have three years of field notes and the patterns are too clean. People don\'t repeat this cleanly. We do.');
+    s('senior_designer', 'So we\'re in a simulation. Fine. Is the kerning good?');
+    for (const id of this.ids.filter(x => !['design_director', 'head_design', 'ux_researcher', 'junior_designer', 'copywriter', 'senior_designer', 'ceo', 'dog'].includes(x)).slice(0, 2)) this.say(id, pick(['I thought it was just me.', 'I\'ve been having the kitchen thing too. I didn\'t want to say.', 'If someone\'s watching, I hope they like the work.', 'Can we go back to the poster? Please?']), undefined, { tic: false });
+    if (has('dog')) this.lines.push({ speaker: 'dog', text: '*looks directly at you. Not at anyone in the room. At you.*' });
+    s('ceo', 'If someone is watching, I\'d like them to know the work is real. Whatever we are. Lovely. Now break it.');
+    this.say(host, 'Back to the wall. Who\'s up?', undefined, { tic: false });
+    this.sim.meta.critAt = this.t; this.sim.meta.crits = (this.sim.meta.crits ?? 0) + 1;
+    for (const id of this.ids) this.note(id, 'At crit we talked about whether any of this is real: the moved chairs, the kitchen, the same Wednesday. Then we went back to the wall. The work is real.');
+    this.imp = 7;
   }
 
   allhands() {
@@ -13214,6 +13950,19 @@ class Dialogue {
         this.say(a, `${cap(h)}, probably. You?`, b);
         this.say(b, `${cap(pick(lifeOf(b).hobbies)[0])}. Living the dream.`, a);
         this.close(a, b, 1);
+      }
+    }
+    // Friday ends at the dance machine. Noor is unbeaten; Eli is undeterred.
+    if (group && chance(0.6)) {
+      const noor = this.ids.includes('senior_designer') ? 'senior_designer' : null, eli = this.ids.includes('junior_designer') ? 'junior_designer' : null;
+      const challenger = eli ?? this.ids.find(x => x !== noor && !this.isDog(x));
+      if (challenger) {
+        this.say(challenger, pick(['Dance machine. Now. I\'ve been practicing.', 'One song on the machine. Loser descales the espresso machine.', 'Tonight is the night I beat the high score. I can feel it.']), noor ?? undefined);
+        if (noor) this.say(noor, pick(['You said that last Friday.', 'Bring it. Left arrow is sticky, no excuses.', 'Sure. I\'ll use one foot.']), challenger);
+        const other = this.ids.find(x => x !== challenger && x !== noor && !this.isDog(x));
+        if (other) this.say(other, pick(['I\'m only watching if someone falls.', 'I pick the song. PARANOIA. Heavy.', 'Someone film this for the yearbook.']), challenger);
+        this.commitment = this.commitment ?? `${short(challenger)} challenges ${noor ? short(noor) : 'everyone'} on the dance machine`;
+        for (const id of this.ids) this.note(id, `Happy hour ended at the dance machine. ${short(challenger)} lost again.`);
       }
     }
     for (const id of this.ids) this.note(id, 'Happy hour in the kitchen with the team.');
@@ -13343,7 +14092,9 @@ function clientMeeting(p, v, ids, sim) {
     if (ids.includes('ux_researcher')) say('ux_researcher', `We spoke to a dozen of your customers this week. ${cap(pickFrom(INSIGHTS))}.`);
     say(lead, `The idea: ${tagline(p.client)} The ${motif} carries it, set in ${font}.`);
     if (ids.includes('copywriter')) say('copywriter', `And the line: "${tagline(p.client)}"`);
-    say(v.id, pickFrom(['You know we\'re also seeing Studio Ditto tomorrow?', 'Studio Ditto came in yesterday. They were very polished.', 'Bold. I like bold. My board likes safe.']));
+    const rafaSide = chance(0.45);
+    say(v.id, rafaSide ? pickFrom(['Studio Ditto pitched yesterday. Rafael Oliveira presented. He said to say hi.', 'Ditto came in with a finished deck and a man called Rafa who kept looking at the door.', 'Your old art director pitched for Ditto this morning. He was very good. He also seemed sad.']) : pickFrom(['You know we\'re also seeing Studio Ditto tomorrow?', 'Studio Ditto came in yesterday. They were very polished.', 'Bold. I like bold. My board likes safe.']));
+    if (rafaSide && ids.includes('design_director')) say('design_director', pickFrom(['Rafa. Of course. Tell him his kerning is still too tight.', 'He was ours. The deck was theirs. You can tell which part he did.']));
     say(ceo ?? lead, ceo ? 'Studio Ditto will give you polish. We\'ll give you something people remember.' : 'We think this is the braver answer.');
     say(v.id, won ? pickFrom(['I\'ll be honest: I already know. Let\'s do this together.', 'This is the one. Welcome aboard.']) : pickFrom(['Thank you. We\'ll be in touch.', 'Really strong work. We have some thinking to do.']));
     const feedback = won ? null : pickFrom(['the board wanted a safer pair of hands', 'Studio Ditto came in cheaper and faster', 'we loved it, but it felt too risky for year one']);
@@ -13531,12 +14282,179 @@ function confessionScene(who, other, mutual, sim) {
   return { lines, outcomes: [], commitment: mutual ? `${PERSONA[who].short} and ${o} have a dinner date` : null };
 }
 
+// Scenes for the rarer events (see sim.js #runEvent). Each returns { lines, outcomes, commitment }.
+const SCENES = {};
+SCENES.security = (ids, sim) => {
+  const lines = [], h = ids.filter(x => !PERSONA[x].isDog);
+  const s = (id, t) => ids.includes(id) && say3(lines, id, t);
+  const other = h.find(x => !['cos', 'ceo', 'junior_designer'].includes(x));
+  s('cos', 'Everyone. Hands off keyboards. An email "from Adaeze" asked for the bank login and two of you clicked it.');
+  s('ceo', 'I have never once asked for the bank login. I don\'t know the bank login.');
+  s('junior_designer', 'It had her signature! With the little period thing!');
+  if (other) say3(lines, other, pick(['So what do we do, change the Wi-Fi password from Pica to… Pica?', 'Is this the moment we stop keeping passwords in a file called passwords.txt?', 'I changed mine already. It\'s a different dog.']));
+  s('cos', 'New passwords, everyone, today. Not a variant of the dog. I\'m serious. I\'m looking at you, Marcus.');
+  s('copywriter', 'PicaIsStillAGoodGirl is not a variant. It\'s a sentence.');
+  if (ids.includes('dog')) say3(lines, 'dog', '');
+  s('cos', 'Twelve-slide training at two. Attendance mandatory. There will be a quiz.');
+  return { lines, outcomes: outcomesFor(ids, id => id === 'cos' ? 'The phishing scare. I made everyone change their passwords. They changed them to a different Pica.' : 'Tomás made us change all our passwords after a phishing email. Mine is now a different dog.', 6, -0.3, 'rattled'), commitment: 'everyone changes their passwords (to a different variant of Pica)' };
+};
+
+// The returns. `v` is the visitor (speaker id v.id); ids are the staff who came over.
+const vsay = (lines, v, text) => lines.push({ speaker: v.id, text });
+SCENES.former_lola = (v, ids, sim) => {
+  const lines = [], has = id => ids.includes(id);
+  const s = (id, t) => has(id) && say3(lines, id, t);
+  vsay(lines, v, 'Hi. I was in the neighborhood. That\'s a lie. I drove forty minutes.');
+  if (has('dog')) lines.push({ speaker: 'dog', text: '*full-body wiggle, then flat on the floor across Lola\'s feet, not moving, in case she leaves*' });
+  s('cos', 'Lola. The bell still works. Nobody rings it.');
+  vsay(lines, v, 'I saw the peace lily on the way in. You\'ve been watering it first.');
+  s('cos', 'Every time.');
+  s('ceo', 'The chair is still yours, you know. Any day you want it.');
+  vsay(lines, v, 'I know. I\'m good where I am. The bookshop is small and nobody asks me for the Wi-Fi password. I just needed to see her.');
+  if (has('dog')) lines.push({ speaker: 'dog', text: '*presses her whole face into the cardigan Lola is wearing, which is the other cardigan*' });
+  s('junior_designer', 'She still sleeps on the one you left. We tried to wash it once. She wouldn\'t let us.');
+  vsay(lines, v, 'Don\'t wash it. She\'d notice. Keep it, keep her, keep the bell.');
+  s('cos', 'Come back for lunch. Any Monday. There\'s bread.');
+  vsay(lines, v, 'There\'s never bread by Tuesday. Some things don\'t change.');
+  const outcomes = outcomesFor(ids, id => id === 'dog' ? '*Lola came. Lola smelled right. Lola left again, but she came.*' : id === 'cos' ? 'Lola came back to see Pica. She noticed I water her lily first. I didn\'t cry until she left.' : 'Lola came to visit. Pica lay on her feet for an hour. Nobody got any work done, and nobody minded.', 8, 2, 'tender');
+  return { lines, outcomes, commitment: null, after: s2 => { s2.flags.lolaReturned = true; return 'Lola came back for an hour to see Pica. She left the way she came, on purpose, and said to keep the cardigan.'; } };
+};
+SCENES.former_rafa = (v, ids, sim) => {
+  const lines = [], has = id => ids.includes(id);
+  const s = (id, t) => has(id) && say3(lines, id, t);
+  vsay(lines, v, 'Before anyone throws anything: I come in peace. And with pastries.');
+  s('design_director', 'You pitched against us on Tuesday.');
+  vsay(lines, v, 'I did. You were better. I told them you were better. They\'ve asked me never to say that in a client meeting again.');
+  s('head_design', 'The kerning in your deck, Rafa.');
+  vsay(lines, v, 'I know. I KNOW. They have a template. The template has opinions.');
+  s('copywriter', 'Is it true there\'s an engine?');
+  vsay(lines, v, 'There\'s a folder called Engine. It has a gradient in it. That\'s the engine.');
+  s('design_director', pickFrom(['I hate that I missed you.', 'Sit down. Eat your own pastries. Tell us everything.']));
+  s('ceo', 'Come back when you\'re tired of templates. The chair\'s gone, but we\'d find one.');
+  vsay(lines, v, 'Ask me again in a year. Ask me quietly.');
+  if (has('dog')) say3(lines, 'dog', '');
+  const outcomes = outcomesFor(ids, id => id === 'design_director' ? 'Rafa came by from Ditto, after pitching against us. He said we were better. He said it like it hurt.' : 'Rafa visited from Studio Ditto with pastries and a confession: they have a folder called Engine.', 7, 1, 'bittersweet');
+  return { lines, outcomes, commitment: null, after: s2 => { s2.flags.rafaVisited = true; return 'Rafa went back to Studio Ditto. Sofia kept the pastry box. Kenji fixed the kerning on it with a pen.'; } };
+};
+SCENES.former_priya = (v, ids, sim) => {
+  const lines = [], has = id => ids.includes(id);
+  const s = (id, t) => has(id) && say3(lines, id, t);
+  vsay(lines, v, 'I\'m not here to catch up. I mean, I am. But I\'m here with a brief.');
+  s('ceo', 'Priya. Head of Product at Helix Foundry. I read the announcement twice.');
+  vsay(lines, v, 'We generate and test millions of candidate compounds a week, in silico. The chemists trust none of it, because it reaches them looking like a spreadsheet that had a nightmare.');
+  s('ux_researcher', 'What do the chemists actually need to know?');
+  vsay(lines, v, 'Which ten to make this week. And why. That\'s the whole product.');
+  s('head_design', 'Show the reasoning, not the score.');
+  vsay(lines, v, 'That sentence is why I\'m here. I\'m not running a pitch. I know what you do; I used to do it. Can you start Monday?');
+  s('ceo', 'Tomás. The good invoice template.');
+  s('cos', 'Already open.');
+  if (has('dog')) say3(lines, 'dog', '');
+  vsay(lines, v, 'One condition. Hannah does the interviews. The chemists will lie to anyone else.');
+  const outcomes = outcomesFor(ids, id => id === 'ceo' ? 'Priya came back, as a client. A generative drug-discovery platform, no pitch, real budget. I didn\'t let myself smile until she left.' : 'Priya Raman came back to hire us: a generative drug-discovery platform for Helix Foundry. No pitch. She said "I know what you do."', 8, 1.8, 'buzzing');
+  return { lines, outcomes, commitment: 'start the Helix Discovery Platform on Monday', after: s2 => {
+    const st = s2.studio;
+    if (st.projects.some(p => p.name === HELIX_BRIEF.name)) return 'Priya went back to Helix. The platform is already on the wall.';
+    const byLoad = ids2 => [...ids2].filter(id => s2.agents.has(id)).sort((a, b) => st.forAgent(a).length - st.forAgent(b).length);
+    const team = [...new Set([byLoad(['head_design', 'design_director', 'senior_designer'])[0], 'ux_researcher', ...byLoad(['junior_designer', 'copywriter', 'senior_designer']).slice(0, 2), 'ceo'].filter(id => id && s2.agents.has(id)))];
+    const pr = st.createProject(s2.t, HELIX_BRIEF, team, 24);
+    pr.domain = HELIX_BRIEF.domain; pr.story = HELIX_BRIEF.story; pr.dna.font = HELIX_BRIEF.font; pr.dna.motif = HELIX_BRIEF.motif;
+    s2.invoice(pr, 'deposit');
+    s2.flags.helix = true;
+    for (const id of team) s2.agents.get(id)?.memory.add(s2.t, 'event', `I've been staffed on "${pr.name}" for Helix Foundry (${pr.id}). Priya hired us directly. Brief: ${pr.brief}`, 7);
+    return `New brief, no pitch: Helix Foundry wants "${pr.name}" ($${Math.round(HELIX_BRIEF.fee / 1000)}k). Priya hired her old studio. ${team.map(id => PERSONA[id].short).join(', ')} are on it; Hannah does the interviews.`;
+  } };
+};
+const ALUMNI_LINES = {
+  grace: ['Is it still crit on Wednesdays? Good. I run one at my kitchen table now. Attendance: me.', 'I\'m freelancing. I charge what you taught me to charge, Kenji. People pay it. I\'m still shocked.', 'The small space suits you. The old one was for impressing people. This one\'s for working.'],
+  ikaika: ['Swatchbook! It shipped? Noor, you shipped it. I started that in a phone booth.', 'I\'m teaching. Twenty-two-year-olds who\'ve never kerned anything. I show them your wall.', 'Hannah, they still quote your "first visit decides everything" line. I didn\'t tell them it was yours.'],
+  val: ['I\'m client-side now. Tidewater. I know. I wear a lanyard.', 'Adaeze, the curator wants to talk. Properly. I may have mentioned a certain kerning game.', 'Being the client is strange. Everyone\'s so polite to me. I miss being shouted at by Sofia.'],
+  oksana: ['Yes, I\'m at Ditto. No, I don\'t want to talk about the template. Yes, I miss the riso.', 'Can I sit in on crit? As a guest. I\'ll be quiet. I won\'t be quiet.', 'Noor, your motion work. I saw the Northwind launch. I watched it four times at my desk and pretended it was research.'],
+};
+SCENES.former_alumni = (v, ids, sim) => {
+  const lines = [], h = ids.filter(x => !PERSONA[x].isDog), L = ALUMNI_LINES[v.former] ?? ['It\'s good to be back. Even for lunch.'];
+  const s = (i, t) => h[i % Math.max(1, h.length)] && say3(lines, h[i % h.length], t);
+  vsay(lines, v, pickFrom(['Hi. I know. I should have called.', 'Don\'t get up. I know where everything is.', 'I brought nothing. I\'m owed lunch.']));
+  s(0, pickFrom([`${v.short}! Sit. Sit anywhere, it\'s all yours.`, 'Look who it is. Tomás, bread. If there is bread.', 'You\'re not allowed to leave again without saying goodbye properly this time.']));
+  vsay(lines, v, L[0]);
+  s(1, pickFrom(['We missed you in the worst way: nobody to blame things on.', 'It\'s quieter. Not better. Quieter.', 'Tell us everything. Leave out the parts where you\'re happier.']));
+  vsay(lines, v, L[1]);
+  if (ids.includes('dog')) say3(lines, 'dog', '');
+  vsay(lines, v, L[2]);
+  s(0, pickFrom(['Come back. Any time. The chair is a different chair now, but the seat\'s the same.', 'Same time next month. Not a question.']));
+  const outcomes = outcomesFor(ids, `${v.short} came back for a visit. Nobody sat in the chairs of the people who left. ${v.short} sat on the bench.`, 6, 1.2, 'warm');
+  return { lines, outcomes, commitment: null, after: s2 => `${v.short} stayed for lunch and left before anyone could get sad about it.` };
+};
+
+// Hannah's book is out.
+SCENES.book = (ids, sim) => {
+  const lines = [], has = id => ids.includes(id), s = (id, t) => has(id) && say3(lines, id, t);
+  s('ux_researcher', 'So. I\'ve been writing a book. For three years. About you. About us. It\'s out on Thursday.');
+  s('design_director', 'About US? Am I in it? Am I "S."? Hannah. Am I "S."?');
+  s('ux_researcher', 'Everyone is anonymized. Badly. Chapter three is about Wednesday crit. Chapter four is about Pica.');
+  s('head_design', 'Is there a man who sharpens pencils with a knife.');
+  s('ux_researcher', '…There is a "K."');
+  s('head_design', 'Hm.');
+  s('copywriter', 'Did you use my lines? If you used my lines I want a credit and a cut and a hug, in that order.');
+  s('ux_researcher', 'Page 112. "A writer, who reads copy aloud to a dog." The dog is credited.');
+  if (has('dog')) say3(lines, 'dog', '');
+  s('ceo', 'Hannah. You studied us. For three years. And nobody noticed.');
+  s('ux_researcher', 'That\'s chapter one.');
+  s('ceo', 'Larkspur Press, then. We\'re buying forty copies, and you\'re reading chapter three at crit. Lovely. Now break it.');
+  return { lines, outcomes: outcomesFor(ids, id => id === 'ux_researcher' ? 'I told them about the book. Sofia is "S." Kenji is "K." Nobody was angry. Marcus wants a cut.' : 'Hannah has written a book about us. The Rituals of Modern Work. It\'s out Thursday. I am in it, anonymized, badly.', 8, 1.5, 'astonished'), commitment: 'Hannah reads chapter three at crit' };
+};
+// The museum calls: Adaeze's dream, out loud, in the meeting room.
+SCENES.museum = (ids, sim) => {
+  const lines = [], has = id => ids.includes(id), s = (id, t) => has(id) && say3(lines, id, t), piece = sim.flags.museumPiece ?? 'Kern Club';
+  s('ceo', 'Everyone. Meeting room. Now. Bring the dog.');
+  s('ceo', `The museum called. They want "${piece}" in the permanent collection. Permanent. Not a show. The shelf.`);
+  s('cos', 'The big shelf.');
+  s('ceo', 'The big shelf, Tomás. Codename retired.');
+  s('design_director', 'Did you cry on the phone?');
+  s('ceo', 'I waited until I hung up. Then I called Felix, then Mama, then you.');
+  s('head_design', 'Nine years.');
+  s('ceo', 'Nine years. Seventeen people, then eight. Everyone who ever sat in those chairs is in that piece. I\'m going to say every name at the gala. All of them. Lola\'s. Rafa\'s.');
+  s('copywriter', 'I\'ll write the wall text. No adjectives. I promise. Maybe one.');
+  if (has('dog')) say3(lines, 'dog', '');
+  s('ceo', 'Lovely. Now nobody break it.');
+  return { lines, outcomes: outcomesFor(ids, 'The museum called. Our work is going into the permanent collection. Adaeze said every name. Including the ones who left.', 10, 3, 'overwhelmed'), commitment: null };
+};
+// The sale: Adaeze tells the room, and the room tells her it's not her fault.
+SCENES.sold = (ids, sim) => {
+  const lines = [], has = id => ids.includes(id), s = (id, t) => has(id) && say3(lines, id, t);
+  s('ceo', 'Meeting room. All of you. Leave your laptops.');
+  s('ceo', 'I signed with Studio Ditto this morning. Everyone keeps their job. The name goes in eighteen months. I\'m telling you before the email, because you deserve a face.');
+  s('cos', 'The runway.');
+  s('ceo', 'The runway. I said I wouldn\'t do another layoff. This was the other way.');
+  s('design_director', 'They\'ll put us in the template.');
+  s('ceo', 'Then make the template brave. That\'s the job now. Same as it was.');
+  s('head_design', 'Nine years.');
+  s('ceo', 'Nine years. And a shelf of proof. Nobody gets to take the shelf.');
+  if (has('dog')) say3(lines, 'dog', '');
+  s('copywriter', 'For the record: we were better.');
+  s('ceo', 'For the record. Yes.');
+  return { lines, outcomes: outcomesFor(ids, 'Adaeze sold the studio to Studio Ditto. Everyone keeps their job. The name goes in eighteen months. She told us face to face.', 10, -2, 'hollow'), commitment: null };
+};
+// The close: the last all-hands.
+SCENES.closed = (ids, sim) => {
+  const lines = [], has = id => ids.includes(id), s = (id, t) => has(id) && say3(lines, id, t);
+  s('ceo', 'Last all-hands. I\'ll be quick-ish. I won\'t be.');
+  s('ceo', 'We close on Friday. The money ran out before the next invoice did. I\'ve paid everyone through the end of the month, and I\'ve written every one of you a letter you don\'t have to read.');
+  s('cos', 'The plants.');
+  s('ceo', 'Take a plant. Take two. Take the riso, Eli, nobody else can fix it.');
+  s('design_director', 'Where does the work go?');
+  s('ceo', 'The shelf comes with me. The case studies stay online. Nobody retires a case study.');
+  if (has('dog')) say3(lines, 'dog', '');
+  s('cos', 'Pica comes with me. That was never a question.');
+  s('ceo', 'That was never a question. Nine years. Lovely, all of it. Now go home on time, for once.');
+  return { lines, outcomes: outcomesFor(ids, 'The studio is closing on Friday. Adaeze paid everyone through the month and told us to take a plant. Tomás is taking Pica.', 10, -2.5, 'bereft'), commitment: null };
+};
+
 function holidayScene(kind, ids, sim) {
   const lines = [], h = ids.filter(x => !PERSONA[x].isDog);
   const s = (i, t) => h[i % h.length] && say3(lines, h[i % h.length], t);
   const S = {
     halloween: () => { s(0, 'Okay, costume reveal. I\'m a kerning pair. This is my partner, the other letter.'); s(1, 'I\'m "the client who wants the logo bigger."'); if (ids.includes('dog')) say3(lines, 'dog', ''); s(2, 'Pica is a pumpkin and she has never been more dignified.'); s(3, 'Who brought the candy corn? Confess.'); },
-    friendsgiving: () => { s(0, 'I made my abuela\'s recipe. Do not ask for the recipe.'); s(1, 'Thankful for this table. Truly. It was a hard year.'); s(2, 'Thankful Kenji finally admitted the pinball high score is Marcus\'s.'); if (ids.includes('ceo')) say3(lines, 'ceo', 'To the eight of us, and to everyone who used to sit here.'); },
+    friendsgiving: () => { s(0, 'I made my abuela\'s recipe. Do not ask for the recipe.'); s(1, 'Thankful for this table. Truly. It was a hard year.'); s(2, 'Thankful Kenji finally admitted the pinball high score is Marcus\'.'); if (ids.includes('ceo')) say3(lines, 'ceo', 'To the eight of us, and to everyone who used to sit here.'); },
     holidayparty: () => { s(0, 'Secret Santa time! I got… a riso-printed calendar of Pica. Who made this?'); s(1, 'Guilty. Twelve months, twelve outfits.'); if (ids.includes('cos')) say3(lines, 'cos', 'Studio closes on the 24th. I will know if you open your laptop.'); s(2, 'Best year? Worst year? Both?'); if (ids.includes('ceo')) say3(lines, 'ceo', 'Both. And we\'re still here. Cheers, all of you.'); },
     valentines: () => { s(0, 'Someone left a card on every desk. Mine says "You\'re my type." It\'s set in Didot.'); s(1, 'It was me. I\'m not sorry.'); s(2, 'Mine says "Kern you believe it?" I hate it. I love it.'); },
     picabday: () => { if (ids.includes('dog')) say3(lines, 'dog', ''); s(0, 'Happy birthday, Pica! The cake is peanut butter and very tiny.'); s(1, 'She ate it in one bite. Iconic.'); s(2, 'Someone call Lola. She\'d want to see this.'); },
@@ -13596,7 +14514,7 @@ function playerChat(a, b, choice, text, sim) {
   return d.result();
 }
 
-return { get NEED_KEYS() { return NEED_KEYS; }, get setExes() { return setExes; }, get LIB_LINES() { return LIB_LINES; }, get Brain() { return Brain; }, get allowedPlaces() { return allowedPlaces; }, get currentPlanItem() { return currentPlanItem; }, get moodOf() { return moodOf; }, get contribution() { return contribution; }, get planJob() { return planJob; }, get decideJob() { return decideJob; }, get converseJob() { return converseJob; }, get reflectJob() { return reflectJob; }, get clientMeetingJob() { return clientMeetingJob; }, get birthdayScene() { return birthdayScene; }, get outageScene() { return outageScene; }, get dogScene() { return dogScene; }, get earthquakeScene() { return earthquakeScene; }, get farewellScene() { return farewellScene; }, get welcomeScene() { return welcomeScene; }, get reviewScene() { return reviewScene; }, get confessionScene() { return confessionScene; }, get holidayScene() { return holidayScene; }, get CHAT_CHOICES() { return CHAT_CHOICES; }, get playerChat() { return playerChat; } };
+return { get NEED_KEYS() { return NEED_KEYS; }, get setExes() { return setExes; }, get LIB_LINES() { return LIB_LINES; }, get Brain() { return Brain; }, get allowedPlaces() { return allowedPlaces; }, get currentPlanItem() { return currentPlanItem; }, get moodOf() { return moodOf; }, get contribution() { return contribution; }, get planJob() { return planJob; }, get decideJob() { return decideJob; }, get converseJob() { return converseJob; }, get reflectJob() { return reflectJob; }, get clientMeetingJob() { return clientMeetingJob; }, get birthdayScene() { return birthdayScene; }, get outageScene() { return outageScene; }, get dogScene() { return dogScene; }, get earthquakeScene() { return earthquakeScene; }, get farewellScene() { return farewellScene; }, get welcomeScene() { return welcomeScene; }, get reviewScene() { return reviewScene; }, get confessionScene() { return confessionScene; }, get holidayScene() { return holidayScene; }, get SCENES() { return SCENES; }, get CHAT_CHOICES() { return CHAT_CHOICES; }, get playerChat() { return playerChat; } };
 })();
 
 // ---- sim/scenarios.js
@@ -13945,6 +14863,87 @@ const STORIES = {
     ],
   },
 
+  lola: {
+    icon: '🫂', title: c => 'Lola comes back',
+    premise: 'Lola comes back for an hour, to see Pica. The studio is tender for days.',
+    backstory: [
+      (c, w) => 'Lola has driven past the studio four times since she left. Today she parked.',
+      (c, w) => 'Tomás sent Lola a photo of Pica asleep on the cardigan. She replied with a date and a time and nothing else.',
+    ],
+    beats: [
+      { day: 1, at: '09:20', run: (w, c) => { w.need(['dog'], 'social', 20); return `Pica waited by the door from nine until nine-twenty, then went back to the cardigan. ${w.who('cos')} pretended not to watch.`; } },
+      { day: 2, at: '12:30', run: (w, c) => { w.need(w.staff(), 'fulfillment', 6); return `A box arrived from Lola's bookshop: one book for each person, chosen. ${w.who('head_design')}'s was about canoes.`; } },
+      { day: 6, at: '11:00', run: (w, c) => `${w.who('cos')} rang the bell on the reception counter, once, for no reason. Nobody asked.` },
+    ],
+  },
+  rafa: {
+    icon: '🫂', title: c => 'Rafa drops by',
+    premise: 'Rafa visits from Studio Ditto after pitching against the studio. Pastries, confessions, a quiet question.',
+    backstory: [
+      (c, w) => 'Rafa texted Sofia "are you around" at 7am. She said "always." He came at eleven.',
+      (c, w) => 'Studio Ditto\'s founder told Rafa to "maintain the relationship" with Another Studio. Rafa chose to take that literally.',
+    ],
+    beats: [
+      { day: 1, at: '10:00', run: (w, c) => { w.close('design_director', 'head_design', 1); return `${w.who('design_director')} and ${w.who('head_design')} spent the morning arguing about whether Rafa would come back. Neither said what they hoped.`; } },
+      { day: 4, at: '16:00', run: (w, c) => `A pitch deck arrived from Studio Ditto, by mistake, to the wrong address. The kerning was fixed. ${w.who('head_design')} noticed.` },
+    ],
+  },
+  priya: {
+    icon: '🧬', title: c => 'Priya hires the studio',
+    premise: 'A former colleague comes back as a client, with a generative drug-discovery platform and no pitch.',
+    backstory: [
+      (c, w) => 'Priya left on good terms two years before the layoffs, for a biotech nobody had heard of. Helix Foundry is now the one everyone has heard of.',
+      (c, w) => 'Priya read the Halcyon Quantum case study on the archive shelf site at 1am, then emailed Adaeze: "You still do this? Good."',
+    ],
+    beats: [
+      { day: 1, at: '10:00', run: (w, c) => { const pr = w.active().find(p => p.client === 'Helix Foundry'); if (!pr) return null; w.need(pr.team, 'fulfillment', 12); return `Kickoff for "${pr.name}": ${w.who('ux_researcher')} booked six chemists for interviews. Three asked if the model would be in the room.`; } },
+      { day: 3, at: '14:00', run: (w, c) => { const pr = w.active().find(p => p.client === 'Helix Foundry'); if (!pr) return null; w.quality(pr.id, 3); return `First Helix interview: a chemist printed the model's eleven-ring molecule and put it on the fridge. ${w.who('ux_researcher')} photographed the fridge.`; } },
+      { day: 7, at: '11:00', run: (w, c) => `Priya checked in on "Helix Discovery Platform" and asked for the shortlist to show what it rejected, not just what it picked. ${w.who('head_design')} had already sketched it.` },
+    ],
+  },
+  alumni: {
+    icon: '🫂', title: c => `${c.name} visits`,
+    premise: 'Someone from the old team comes back for lunch.',
+    backstory: [
+      (c, w) => `${c.name} ran into ${w.who('cos')} at the farmers market and was told, not asked, to come for lunch.`,
+      (c, w) => `${c.name} still gets the studio newsletter. The last one had a photo of the new space. That did it.`,
+    ],
+    beats: [
+      { day: 1, at: '12:30', run: (w, c) => { w.need(w.staff(), 'social', 8); return `Lunch was longer than usual. Everyone told one ${c.name} story. Two were about the riso.`; } },
+    ],
+  },
+  book: {
+    icon: '📚', title: c => 'Hannah\'s book',
+    premise: 'Hannah\'s secret book about the studio is published. Readings, reviews and a second book follow.',
+    backstory: [
+      (c, w) => 'Larkspur Press took the book eleven months ago. Hannah told her sister, her cat, and nobody at work.',
+      (c, w) => 'The acquiring editor at Larkspur came to a client review as a "colleague" two months ago. Nobody noticed. That\'s in the acknowledgments.',
+    ],
+    beats: [
+      { day: 1, at: '12:30', run: (w, c) => { w.need(w.staff(), 'fun', 10); return `Lunch was a reading. ${w.who('design_director')} read "S." aloud in a voice. ${w.who('ux_researcher')} did not survive it.`; } },
+      { day: 3, at: '10:00', run: (w, c) => { w.need(['ux_researcher'], 'fulfillment', 20); return 'A review in the design press: "the first honest book about how studios actually work." It quotes chapter three. Crit is now famous.'; } },
+      { day: 7, at: '15:00', run: (w, c) => `Larkspur wants a second book. ${w.who('ux_researcher')} said she'd think about it, then bought fourteen new colors of sticky notes.` },
+    ],
+  },
+  museum: { icon: '🏛️', title: c => 'The permanent collection', premise: 'The museum calls. Adaeze\'s dream. The story ends here.', backstory: [(c, w) => 'The curator first emailed two years ago. "Let\'s talk." It took two years, a Val, and a very good kerning game.'], beats: [] },
+  sold: { icon: '📝', title: c => 'Sold to Studio Ditto', premise: 'The money runs out, and Adaeze chooses the sale over another layoff. The story ends here.', backstory: [(c, w) => 'The offer had been sitting in a drawer since March. The margin note still said "no." The bank said otherwise.'], beats: [] },
+  closed: { icon: '🕯️', title: c => 'The doors close', premise: 'The studio closes. The story ends here.', backstory: [(c, w) => 'There was one more invoice coming. It came eleven days late. By then the lease had been given up.'], beats: [] },
+  security: {
+    icon: '🎣', title: c => 'The phishing scare',
+    premise: 'A phishing email gets through. New passwords, a training, and a quiz follow.',
+    backstory: [
+      (c, w) => 'The email came from "adaeze.okonkwo@another-studi0.com". Nobody noticed the zero. Eli noticed the zero, after.',
+      (c, w) => 'Studio Ditto was hit by the same campaign a week earlier. Marcus found out from their careers page, which briefly said "H4CKED".',
+      (c, w) => 'Tomás has been asking for a password manager for two years. The budget line was always "next quarter."',
+    ],
+    beats: [
+      { after: 180, run: (w, c) => `${w.who('cos')} ran the security training. Twelve slides. Nine of them were about Pica, as a warning.` },
+      { day: 1, at: '10:30', run: (w, c) => { w.need(w.staff(), 'fun', -4); return `Password audit: everyone changed theirs. ${w.who('junior_designer')} chose Pica's birthday. Pica's birthday is written on the fridge.`; } },
+      { day: 2, at: '15:00', run: (w, c) => { w.need([w.has('cos') ? 'cos' : 'ceo'], 'fulfillment', 10); return `${w.who('cos')} finally got the password manager approved. The master password is, he says, "not a dog." Nobody believes him.`; } },
+      { day: 5, at: '09:30', run: (w, c) => `The phishing email came back. ${w.who('copywriter')} replied to it with a sonnet. It did not reply.` },
+    ],
+  },
+
   hire: {
     icon: '👋', title: c => `${c.name} joins`,
     premise: 'Someone new joins. A tour, a lunch buddy and a first crit follow.',
@@ -14004,6 +15003,7 @@ const JOURNAL_CATS = [
   { key: 'comings', icon: '👋', label: 'Comings & goings', re: /joined Another Studio|laid off|poached|resign|left the studio|Layoff day/i },
   { key: 'work', icon: '🎉', label: 'Big work', re: /\bdelivered\b|won the .* pitch|lost the .* pitch|staffed on a new project/i },
   { key: 'studio', icon: '✨', label: 'Studio life', re: /birthday|earthquake|power (went|cut)|all-nighter|not leaving until|ate the printout|Pica ate/i },
+  { key: 'strange', icon: '👁️', label: 'Strange', re: /chair (moved|was four)|remember deciding|if (this|it) were a loop|simulation|same wednesday|someone looked back|felt delivered|empty corner|same sentence at standup|facing the same direction/i },
 ];
 const LIFE = { key: 'life', icon: '🏡', label: 'Life' };
 const JOURNAL_FILTERS = [...JOURNAL_CATS, LIFE];
@@ -14037,12 +15037,13 @@ __mods["sim/sim.js"] = (function () {
 const { PERSONAS, PERSONA, HIRE_POOL, LADDERS, CAREER_START, ROMANCE, PARTNERS, genderOf } = __mods["sim/personas.js"];
 const { OBJ, AREAS, trinketFor, findPath, walkable, areaAt, CRIT_SEATS, GALLERY_SPOTS, deskOf, freeDesk } = __mods["sim/world.js"];
 const { MemoryStream } = __mods["sim/memory.js"];
-const { Studio, CLIENT_POOL, INTERNAL_POOL, AWARDS, RITUALS, PHASES, LAYOFF, FORMER, clockLabel, isWeekend, creditName, setCalendar, dowOf, weatherOf, holidayOf, decorOf } = __mods["sim/studio.js"];
-const { allowedPlaces, planJob, decideJob, converseJob, reflectJob, clientMeetingJob, contribution, birthdayScene, outageScene, dogScene, earthquakeScene, farewellScene, welcomeScene, reviewScene, confessionScene, holidayScene, moodOf, playerChat, NEED_KEYS, setExes } = __mods["sim/brain.js"];
+const { Studio, CLIENT_POOL, INTERNAL_POOL, RETURNS, HELIX_BRIEF, AWARDS, RITUALS, PHASES, LAYOFF, FORMER, clockLabel, isWeekend, creditName, setCalendar, dowOf, dateOf, weatherOf, holidayOf, decorOf } = __mods["sim/studio.js"];
+const { allowedPlaces, planJob, decideJob, converseJob, reflectJob, clientMeetingJob, contribution, birthdayScene, outageScene, dogScene, earthquakeScene, farewellScene, welcomeScene, reviewScene, confessionScene, holidayScene, SCENES, moodOf, playerChat, NEED_KEYS, setExes } = __mods["sim/brain.js"];
 const { LIVES } = __mods["sim/lives.js"];
 const { SCENARIO } = __mods["sim/scenarios.js"];
 const { OBJECTS } = __mods["sim/world.js"];
 const { STORIES, beatDue } = __mods["sim/stories.js"];
+const { GLITCH } = __mods["sim/inner.js"];
 const { journalEntry } = __mods["sim/journal.js"];
 const START_T = 99 * 1440 + 6 * 60;  // Tuesday 06:00, Day 100 (the studio has a history)
 const STEPS_PER_MIN = 8;             // movement steps per sim-minute
@@ -14086,6 +15087,10 @@ class Sim {
     this.counters = data?.counters ?? { approvals: 0, pitchesWon: 0, pitchesLost: 0, delivered: 0, awards: 0, departures: 0, artifacts: 0 };
     this.scenario = data?.scenario ?? null;
     this.stories = data?.stories ?? []; // event aftermaths still playing out
+    this.flags = data?.flags ?? {};     // one-off world facts (Hannah's book is out, Lola came back, …)
+    this.mail = data?.mail ?? [];       // letters in the mailbox
+    this.ledger = data?.ledger ?? null; // the studio's money (see #ledgerDay)
+    this.ended = data?.ended ?? null;   // a terminal event closed the studio's story
     this.possessed = null;
     this.studio = new Studio(data?.studio);
     this.agents = new Map();
@@ -14103,6 +15108,9 @@ class Sim {
       for (const pr of this.studio.active().filter(p => !p.internal).slice(0, 2)) if (!pr.team.includes(id)) pr.team.push(id);
     }
     this.studio.sketchResearch(this.t); // and personas, a positioning matrix, segmentation, a business canvas
+    if (!this.ledger) this.#openLedger();
+    if (data?.fate) this.fate = data.fate;
+    if (data?.meta) this.meta = data.meta;
     for (const a of this.agents.values()) if (!a.hidden && !walkable(a.x, a.y)) { const t = this.#freeNear(a.x, a.y, a); if (t) { a.x = t.x; a.y = t.y; a.path = []; } } // the furniture moved
   }
 
@@ -14226,6 +15234,7 @@ class Sim {
   // Called every real 125ms. Returns true if anything ran.
   tick() {
     if (this.paused || this.llm.overBudget && !this.llm.mock) return false;
+    if (this.ended && this.t >= this.ended.at && !this.convs.length) return false; // the story is over; the clock stops
     const mm = this.t % 1440;
     const allAsleep = (mm < 5 * 60 || mm > 21 * 60) && [...this.agents.values()].every(a => a.state === 'sleeping');
     const steps = allAsleep ? STEPS_PER_MIN * 6 : this.speed;
@@ -14349,6 +15358,7 @@ class Sim {
   }
 
   #goToBed(a) {
+    if (a.id === 'dog' && this.picaDay) this.endPicaDay();
     a.epoch++; a.next = null; a.pending = false;
     this.#start(a, { activity: 'going to bed', emoji: '😴', location: 'home:bed', duration_min: 1, satisfies: [], scripted: true, bedtime: true });
   }
@@ -14501,8 +15511,11 @@ class Sim {
     this.studio.addNews(this.t, text, done ? '🎉' : '➡️');
     this.#post({ type: 'news', icon: done ? '🎉' : '➡️', text });
     for (const id of done ? this.staff : pr.team) this.agents.get(id)?.memory.add(this.t, 'event', text, done ? (pr.team.includes(id) ? 8 : 5) : 5);
+    if (phase === 'Design') { this.#invoice(pr, 'milestone'); if (this.ledger && !pr.internal) { const cost = Math.round(this.feeOf(pr) * 0.1); this.ledger.cash -= cost; this.ledger.lifetimeOut += cost; const mo = this.ledger.months.at(-1); if (mo) mo.out += cost; } }
     if (done) {
       this.counters.delivered++;
+      this.#invoice(pr, 'final');
+      if (pr.contact) { const first = pr.contact.name.replace(/^(Dr\.|Professor) /, '').split(' ')[0]; this.#letter('thanks', { from: `${pr.contact.name} · ${pr.client}`, to: 'Everyone at Another Studio,', subject: `Thank you from ${pr.client}`, stamp: false, date: `Day ${Math.floor(this.t / 1440) + 3}`, body: [`"${pr.name}" is out in the world. ${['The board is quiet, which for the board is applause.', 'My team has started saying "braver" in meetings. That\'s your fault.', 'A customer wrote to us about it. Nobody writes to us.', 'I showed it to my mother. She understood it. That\'s the review.'][pr.id.length % 4]}`, `Thank you for asking us the questions nobody else asked, and for ${['not letting us make it beige', 'bringing the dog', 'the ninth round of options you never charged us for', 'saying no, kindly, twice'][(pr.id.length + 1) % 4]}.`, `We\'ll be back. ${first}`], note: `Pinned to the fridge by ${PERSONA[pr.lead]?.short ?? 'the team'}, above the jury notes.` }, { at: this.t + 3 * 1440, quiet: true }); }
       this.#caseStudy(pr);
       pr.log = pr.log.slice(-20); // the case study has what it needs; keep the save small
       pr.deliveredAt ??= this.t;
@@ -14605,7 +15618,8 @@ class Sim {
       }
     }
     if (res.commitment) for (const id of c.ids) this.agents.get(id)?.memory.add(this.t, 'plan', `We agreed: ${res.commitment}`, 6);
-    if (c.visitor) this.#endClientMeeting(c, res);
+    if (c.visitor?.former) this.#endFormerVisit(c, res);
+    else if (c.visitor) this.#endClientMeeting(c, res);
     else if (!c.ritual && c.ids.length === 2) this.#arcTick(c.ids);
     for (const id of c.ids) {
       const a = this.agents.get(id);
@@ -14660,6 +15674,10 @@ class Sim {
     }
     this.#visits(m, dow);
     if (m % 10 === 0) this.#scenarioTick();
+    if (m === 9 * 60 + 15) { this.#ledgerDay(day, dow); this.#postDay(day, dow); }
+    if (this.picaDay && (m === 19 * 60 || day !== this.picaDay.day)) this.endPicaDay();
+    if (m === 14 * 60 + 40 && dow < 5 && !this.ended && Math.random() < 0.05) this.#glitch();
+    this.#fate(m, dow, day);
     // October 20: Tomás brings in pumpkins (the decoration the map draws until November)
     if (m === 8 * 60 + 30 && decorOf(day) === 'halloween' && !this.studio.firedRituals[`pumpkins:${Math.floor(day / 365)}`] && this.agents.has('cos')) {
       this.studio.firedRituals[`pumpkins:${Math.floor(day / 365)}`] = true;
@@ -14695,6 +15713,181 @@ class Sim {
       if (day === aw.deadlineDay - 1 && m === 10 * 60) this.#awardDeadline(aw);
       if (day === aw.resultDay - 1 && m === 15 * 60) this.#awardResults(aw);
     }
+  }
+
+  invoice(pr, kind) { this.#invoice(pr, kind); }
+  signNDA() {
+    if (this.flags.playerNDA) return;
+    this.flags.playerNDA = true;
+    const text = 'Someone signed Adaeze\'s NDA and was shown the data room. Tomás filed the signature page.';
+    this.#post({ type: 'news', icon: '✍️', text });
+    this.agents.get('ceo')?.memory.add(this.t, 'event', 'I showed someone the data room today. The cap table, the plan B, the offers. It felt like taking off a coat.', 6, { valence: 0.5 });
+  }
+
+  // ------------------------------------------------------------------ the post
+  // Letters arrive in the mailbox by the door: award results, thank-yous, rejections, the
+  // landlord, the museum, and once in a while something personal. Tomás sorts it at 9:15.
+  #letter(kind, letter, { at = null, quiet = false } = {}) {
+    const m = { id: `m${(this.mailN = (this.mailN ?? 0) + 1)}:${this.t}`, t: at ?? this.t, kind, read: false, announced: !quiet, ...letter };
+    this.mail.push(m);
+    if (this.mail.length > 40) this.mail.shift();
+    if (!quiet) this.#post({ type: 'news', icon: '📬', text: `Post: ${letter.subject}${letter.from ? `, from ${letter.from.split(' · ')[0]}` : ''}. In the mailbox by the door.` });
+    return m;
+  }
+  get unreadMail() { return this.mail.filter(m => !m.read && m.t <= this.t).length; }
+  readMail(id) { const m = this.mail.find(x => x.id === id); if (m && !m.read) { m.read = true; m.readAt = this.t; } }
+  // the post that doesn't come from an event: rolled once a weekday at 9:15
+  #postDay(day, dow) {
+    // Tomás sorts what came in since yesterday
+    const fresh = this.mail.filter(m => !m.announced && m.t <= this.t);
+    if (fresh.length) { fresh.forEach(m => { m.announced = true; }); this.#post({ type: 'news', icon: '📬', text: `Tomás sorted the post: ${fresh.map(m => m.subject).join('; ')}. In the mailbox by the door.` }); }
+    if (dow >= 5 || isWeekend(this.t) || this.ended) return;
+    const f = this.flags, r = Math.random(), rw = this.runwayMonths, awards = this.studio.awardsWon.filter(w => !w.archive).length;
+    const names = this.staff.map(id => PERSONA[id].short);
+    if (!f.mailRose && day > 112 && r < 0.012) { f.mailRose = true; this.#letter('personal', { from: 'R. · London', to: 'Ada,', subject: 'A letter from Rose', stamp: 'PERSONAL', date: 'London, this spring', body: ['I heard about the studio from a student of mine who keeps your case studies in a folder called "how to be brave." I thought you should know the folder exists.', 'I never got a letter from you in 1998. I always assumed there was one. I assumed it was good.', 'If there is still a chair, I would like, one day, to sit in it for an afternoon and watch you work. I will not say anything. I will be insufferable about the kerning.', 'Always, R.'], note: 'Adaeze read it standing up, then sat down, then read it again. Nobody asked.' }); this.agents.get('ceo')?.memory.add(this.t, 'event', 'A letter from Rose. After twenty-eight years. She knows about the chair. She never saw the letter and she knows about the chair.', 10, { valence: 2, fact: 'rose:letter', third: 'Adaeze got a letter from someone called Rose', owner: 'ceo' }); return; }
+    if (!f.mailCurator && awards >= 2 && r < 0.03) { f.mailCurator = true; this.#letter('museum', { from: 'Office of the Chief Curator · Design & Architecture', to: 'Ms. Okonkwo,', subject: 'The curator writes', stamp: 'RE: PERMANENT COLLECTION', date: 'This week', body: ['We have been following Another Studio\'s work for some time, and "Kern Club" in particular.', 'Our acquisitions committee meets in the spring. We would like to discuss the possibility of the work entering the permanent collection.', 'Nothing is decided. But I wanted you to have it in writing, since I understand you keep things in writing.', 'Let\'s talk. Properly, this time.'], note: 'Adaeze put it in the Moleskine. Then took it out and read it to Pica.' }); this.agents.get('ceo')?.memory.add(this.t, 'event', 'The curator wrote. On paper. "Let\'s talk. Properly, this time." I have read it eleven times.', 9, { valence: 2 }); return; }
+    if (!f.mailDitto && rw < 2 && r < 0.05) { f.mailDitto = true; this.#letter('ditto', { from: 'Studio Ditto · Office of the CEO', to: 'Adaeze,', subject: 'Studio Ditto, again', stamp: 'WITHOUT PREJUDICE', date: 'Hand-delivered', body: ['Our offer stands. Rumor has it the timing may suit you better now than it did in March.', 'Everyone keeps their job. The name has eighteen months. You would have a title with "Chief" in it.', 'We would, of course, want the dog.', 'Call me. You know the number; you used to pay it.'], note: 'The margin note, this time, is a question mark.' }); return; }
+    if (rw < 1 && r < 0.08) { this.#letter('landlord', { from: 'Harborview Properties · Accounts', to: 'Another Studio Ltd.', subject: 'Rent reminder', stamp: 'SECOND NOTICE', date: 'This month', body: ['Our records show the current month\'s rent outstanding.', 'We value you as a tenant and would like to keep you on the floor. Please contact accounts within seven days.', 'Reminder: the roof garden is not for dogs.'], note: 'Tomás answered it the same day. Kindly on day 30, firmly on day 45; he knows the drill from the other side.' }); return; }
+    if (r < 0.025) { const who = names[Math.floor(Math.random() * names.length)]; this.#letter('fan', { from: 'A design student · somewhere far', to: 'Dear Another Studio,', subject: 'A letter from a student', stamp: false, date: 'Handwritten', body: [`I found your case studies at 2am before a crit of my own. I read all of them. Then I read ${who}'s bit twice.`, 'My tutor says a studio like yours doesn\'t exist. I\'ve printed the archive shelf and pinned it over my desk as evidence.', 'If you ever take interns from places with no design schools, I am in one of those places.', 'Thank you for making the work and for showing the work.'], note: `${who} answered it by hand. Adaeze put the fellowship idea back on the whiteboard.` }); return; }
+  }
+
+  // ------------------------------------------------------------------ the meta layer
+  // Something small and wrong, noticed by one person and posted without comment.
+  #glitch() {
+    const here = this.#present(false).filter(a => !PERSONA[a.id].isDog);
+    if (!here.length) return;
+    const a = here[Math.floor(Math.random() * here.length)], who = PERSONA[a.id].short;
+    const text = GLITCH[Math.floor(Math.random() * GLITCH.length)](who);
+    const m = this.meta ??= { n: 0, critAt: null }; m.n++;
+    this.#post({ type: 'news', icon: '👁️', text });
+    a.memory.add(this.t, 'event', text.replace(new RegExp(`\\b${who}'s\\b`, 'g'), 'My').replace(new RegExp(`\\b${who}\\b`, 'g'), 'I'), 6, { valence: -0.3, fact: `meta:${m.n}`, third: text, owner: a.id });
+  }
+
+  // ------------------------------------------------------------------ the end
+  // A terminal event: the story closes, the clock stops after the scene plays out, and the
+  // yearbook (what the studio was, who was in it, what it made) is kept for the ending.
+  #endStudio(kind, text) {
+    const titles = { museum: 'Into the permanent collection', sold: 'Part of Studio Ditto', closed: 'The doors close' };
+    this.ended = { kind, t: this.t, at: this.t + 60, title: titles[kind], text, yearbook: this.yearbook() };
+  }
+  yearbook() {
+    const st = this.studio, day = Math.floor(this.t / 1440), day0 = 99;
+    const delivered = st.projects.filter(p => p.phase >= 4 && !p.lost && !p.preLayoff).map(p => ({ id: p.id, name: p.name, client: p.client, quality: Math.round(p.quality), team: p.team, caseStudy: st.artifacts.find(a => a.project === p.id && a.kind === 'casestudy')?.id ?? null, archive: !!p.archived && p.deliveredAt < day0 * 1440 }));
+    const lost = st.projects.filter(p => p.lost).map(p => p.name);
+    const people = [...this.agents.values()].filter(a => !PERSONA[a.id].isDog).map(a => ({ id: a.id, name: PERSONA[a.id].name, short: PERSONA[a.id].short, role: PERSONA[a.id].role, salary: a.career?.salary, journal: (this.#journalSweep(a), (() => { const since = [...a.journal].filter(j => j.t >= day0 * 1440).sort((x, y) => Math.abs(y.v) - Math.abs(x.v)); const out = []; for (const j of since) { if (out.length >= 2) break; if (!out.some(o => o.cat === j.cat)) out.push(j); } for (const j of since) if (out.length < 2 && !out.includes(j)) out.push(j); return out.map(j => ({ icon: j.icon, text: j.text })); })()) }));
+    const joined = this.roster.hired.map(id => PERSONA[id]?.name).filter(Boolean), left = this.roster.departed.map(id => PERSONA[id]?.name).filter(Boolean);
+    const big = this.feed.filter(f => f.type === 'news' && /🥇|🎉|👋|📦|🧲|🫂|🧬|📚|🫨|🔌|🎂|💔|🎣|🏆|📝|🏛️|🕯️/.test(f.icon ?? '')).slice(-24).map(f => ({ icon: f.icon, text: f.text, t: f.t }));
+    const use = id => this.objUse[id]?.count ?? 0;
+    const dogBed = this.objUse.dog_bed, picaMoments = (dogBed?.moments ?? []).length;
+    const L = this.ledger ?? {};
+    return {
+      days: day - day0, from: clockLabel(day0 * 1440 + 6 * 60), to: clockLabel(this.t), delivered, lost, awards: st.awardsWon.map(w => ({ award: w.award, project: w.project, t: w.t })),
+      people, joined, left, big, artifacts: st.artifacts.filter(a => !a.archive).length, conversations: this.feed.filter(f => f.type === 'chat').length,
+      pinball: use('pinball') + use('pinball2'), ddr: use('ddr'), coffee: use('coffee_machine'), picaMoments, trinkets: Object.values(this.objUse).filter(u => u.found).length,
+      cash: Math.round(L.cash ?? 0), lifetimeIn: Math.round(L.lifetimeIn ?? 0), lifetimeOut: Math.round(L.lifetimeOut ?? 0), returned: this.flags.returned ?? [], hannahBook: !!this.flags.hannahBook, helix: !!this.flags.helix, museumPiece: this.flags.museumPiece ?? null,
+    };
+  }
+
+  // ------------------------------------------------------------------ money
+  // The studio's cash moves with the work: fees are invoiced at kickoff, at the start of
+  // Design and on delivery, and paid a few weeks later (later still by picky clients);
+  // payroll goes out every weekday, rent and overheads every day. Runway is cash over burn.
+  static FEES = { brand: 62000, product: 72000, packaging: 40000, wayfinding: 52000, exhibition: 46000, service: 50000, campaign: 42000, enterprise: 88000 };
+  static RENT = 42000; // per month, rent and everything that isn't people
+  #openLedger() {
+    const day = Math.floor(this.t / 1440);
+    this.ledger = { cash: 520000, invoices: [], entries: [], months: [], lastDay: day - 1, warnedAt: -99, negativeSince: null, lifetimeIn: 0, lifetimeOut: 0 };
+    // the live projects already have their deposits in the bank; their later invoices still come
+    for (const pr of this.studio.active()) if (!pr.internal) pr.billed = { deposit: true };
+    this.#ledgerMonth(day, true);
+  }
+  feeOf(pr) { return pr.internal || pr.lost ? 0 : (pr.fee ?? Sim.FEES[pr.type] ?? 150000); }
+  get burn() { return [...this.agents.values()].filter(a => !PERSONA[a.id].isDog).reduce((s, a) => s + (a.career?.salary ?? 90000), 0) / 12 + Sim.RENT; }
+  get runwayMonths() { return this.ledger ? this.ledger.cash / Math.max(1, this.burn) : 99; }
+  #invoice(pr, kind) {
+    if (!this.ledger || pr.internal || pr.lost) return;
+    pr.billed ??= {};
+    if (pr.billed[kind]) return;
+    pr.billed[kind] = true;
+    const share = { deposit: 0.4, milestone: 0.3, final: 0.3 }[kind], amount = Math.round(this.feeOf(pr) * share);
+    if (!amount) return;
+    const days = 14 + Math.round((pr.contact?.picky ?? 0.5) * 24) + (kind === 'final' ? 10 : 0);
+    this.ledger.invoices.push({ id: `${pr.id}:${kind}`, project: pr.id, client: pr.client, kind, amount, issuedT: this.t, dueT: this.t + days * 1440, paid: false });
+    if (kind !== 'deposit') this.#post({ type: 'news', icon: '🧾', text: `Tomás sent ${pr.client} the ${kind === 'final' ? 'final' : 'Design-phase'} invoice for "${pr.name}": $${Math.round(amount / 1000)}k, due in ${days} days.` });
+  }
+  #ledgerMonth(day, first = false) {
+    const L = this.ledger, label = dateOf(day)?.replace(/ \d+$/, '') ?? `Day ${day + 1}`;
+    if (!first && L.months.at(-1)?.label === label) return L.months.at(-1);
+    const mo = { label, in: 0, out: 0, start: Math.round(L.cash), end: Math.round(L.cash) };
+    L.months.push(mo); if (L.months.length > 14) L.months.shift();
+    return mo;
+  }
+  #ledgerDay(day, dow) {
+    const L = this.ledger; if (!L || this.ended) return;
+    if (day <= L.lastDay) return;
+    L.lastDay = day;
+    const mo = this.#ledgerMonth(day);
+    const out = Sim.RENT / 30 + (dow < 5 && !isWeekend(this.t) ? (this.burn - Sim.RENT) * 12 / 260 : 0);
+    L.cash -= out; mo.out += out; L.lifetimeOut += out;
+    for (const inv of L.invoices) {
+      if (inv.paid || this.t < inv.dueT) continue;
+      inv.paid = true; inv.paidT = this.t;
+      L.cash += inv.amount; mo.in += inv.amount; L.lifetimeIn += inv.amount;
+      L.entries.push({ t: this.t, text: `${inv.client} paid $${Math.round(inv.amount / 1000)}k (${inv.kind})`, amount: inv.amount });
+      if (inv.kind === 'final') this.#post({ type: 'news', icon: '💸', text: `${inv.client} paid the final invoice: $${Math.round(inv.amount / 1000)}k in the bank.` });
+    }
+    L.invoices = L.invoices.filter(i => !i.paid || this.t - i.paidT < 60 * 1440);
+    if (L.entries.length > 80) L.entries.splice(0, L.entries.length - 80);
+    mo.end = Math.round(L.cash);
+    const rw = this.runwayMonths;
+    if (L.cash < 0) { L.negativeSince ??= this.t; }
+    else L.negativeSince = null;
+    // Adaeze watches the number; everyone else feels it
+    if (rw < 2 && day - L.warnedAt >= 7 && dow < 5) {
+      L.warnedAt = day;
+      const text = L.cash < 0 ? `The studio is in the red: $${Math.round(-L.cash / 1000)}k overdrawn. Adaeze has stopped sleeping.` : `Runway is under ${rw < 1 ? 'a month' : 'two months'}. Adaeze is making calls and saying nothing.`;
+      this.studio.addNews(this.t, text, '📉'); this.#post({ type: 'news', icon: '📉', text });
+      for (const id of this.staff) this.agents.get(id)?.memory.add(this.t, 'event', id === 'ceo' ? `Runway: ${rw.toFixed(1)} months. I will not do another layoff. I will find another way.` : 'Money is tight. Nobody says so, and everyone knows.', id === 'ceo' ? 8 : 5, { valence: -1 });
+    }
+  }
+  // what Adaeze's spreadsheet shows: the last months, and this one so far
+  ledgerSheet() {
+    const L = this.ledger; if (!L) return null;
+    const fmt = n => `${n < 0 ? '-' : ''}$${Math.abs(Math.round(n / 1000))}k`;
+    const burn = this.burn, rows = L.months.slice(-6).map((mo, i, arr) => [mo.label, fmt(mo.in), fmt(mo.out), `${mo.end < burn * 2 ? '!' : ''}${(mo.end / Math.max(1, burn)).toFixed(1)} mo`]);
+    const open = L.invoices.filter(i => !i.paid).reduce((s, i) => s + i.amount, 0);
+    return { rows: [['Month', 'Cash in', 'Cash out', 'Runway'], ...rows], cash: L.cash, burn, open, runway: this.runwayMonths, invoices: L.invoices.filter(i => !i.paid), entries: L.entries.slice(-8).reverse() };
+  }
+
+  // Fate: once a weekday, the studio rolls for something bigger than a brief. The roll
+  // happens at 9:00 and picks a moment later in the working day, so events land mid-scene
+  // rather than on the hour. Odds are per day; most days nothing is drawn.
+  #fate(m, dow, day) {
+    if (dow >= 5 || isWeekend(this.t) || this.scenarioDirect || this.ended) return;
+    if (!this.fate || this.fate.day !== day) {
+      if (m < 9 * 60 || m > 16 * 60) return;
+      const freeDeskNow = !!freeDesk(), canShrink = this.staff.filter(id => id !== 'ceo').length > 3, noScenario = !this.scenario || this.scenario.status !== 'running', returned = this.flags.returned ?? [];
+      const awards = this.studio.awardsWon.filter(w => !w.archive).length, tidewater = this.studio.projects.some(p => p.client === 'Tidewater Museum' && p.phase >= 4 && !p.lost), redDays = this.ledger?.negativeSince != null ? (this.t - this.ledger.negativeSince) / 1440 : 0;
+      const odds = [['outage', 0.03], ['earthquake', 0.012], ['poached', canShrink ? 0.014 : 0], ['layoff', canShrink ? 0.008 : 0], ['hire', freeDeskNow ? 0.02 : 0], ['security', this.agents.has('cos') ? 0.01 : 0],
+        ['scenario:crunch', noScenario ? 0.008 : 0], ['scenario:pitchwar', noScenario ? 0.008 : 0], ['scenario:soty', noScenario ? 0.006 : 0],
+        // the returns: rarer than anything above, and each only once
+        ['lola', !returned.includes('lola') && this.agents.has('dog') ? 0.004 : 0], ['rafa', !returned.includes('rafa') && (this.counters.pitchesLost > 0 || this.scenario?.id === 'pitchwar') ? 0.006 : 0],
+        ['priya', !returned.includes('priya') && this.studio.active().length < 7 ? 0.005 : 0], ['alumni', ['grace', 'ikaika', 'val', 'oksana'].some(k => !returned.includes(k)) ? 0.008 : 0],
+        ['book', !this.flags.hannahBook && this.agents.has('ux_researcher') && day > 120 ? 0.004 : 0],
+        // the ends: the museum needs a shelf of awards; the sale and the close need the money to have run out
+        ['museum', awards >= 3 ? 0.002 + (awards - 3) * 0.001 + (tidewater ? 0.002 : 0) : 0],
+        ['sold', redDays >= 10 ? 0.06 : 0], ['closed', redDays >= 25 && this.staff.length <= 5 ? 0.08 : 0]];
+      let r = Math.random(), kind = null;
+      for (const [k, p] of odds) { r -= p; if (r <= 0) { kind = k; break; } }
+      this.fate = { day, kind, at: kind ? m + 10 + Math.floor(Math.random() * Math.max(10, 16 * 60 - m - 10)) : null };
+      return;
+    }
+    const f = this.fate;
+    if (!f.kind || m < f.at) return;
+    if (this.#ritualActive() || this.visitors.length) { f.at = m + 15; return; } // never in the middle of a meeting; try again shortly
+    const kind = f.kind; f.kind = null; // one shot
+    if (kind.startsWith('scenario:')) { this.startScenario(kind.slice(9)); return; }
+    this.godEvent(kind); // posts its own news, with a backstory and an aftermath that plays out over the following days
   }
 
   #startRitual(r) {
@@ -14754,6 +15947,7 @@ class Sim {
     const juniors = ['intern_bea', 'intern_dev', 'pt_wren'].filter(id => this.agents.has(id));
     const team = [lead, ...crew, ...(juniors.length && Math.random() < 0.6 ? [byLoad(juniors)[0]] : []), 'ceo'];
     const pr = this.studio.createProject(this.t, spec, team, 18, { pitch: !this.scenarioDirect });
+    if (!pr.pitching) this.#invoice(pr, 'deposit');
     const text = `${pr.pitching ? 'New pitch' : 'New brief'}: ${spec.client} wants "${spec.name}" (${pr.workstreams.join(', ')}). Kenji staffed ${team.map(id => PERSONA[id].short).join(', ')}; ${spec.contact.name} is the client lead.`;
     this.studio.addNews(this.t, text, '📨');
     this.#post({ type: 'news', icon: '📨', text, detail: spec.brief });
@@ -14802,6 +15996,7 @@ class Sim {
       this.studio.addNews(this.t, text, icon);
       this.#post({ type: 'news', icon, text, toast: icon === '🥇' ? 'award' : null });
       for (const id of this.staff) this.agents.get(id).memory.add(this.t, 'event', text, pr.team.includes(id) ? imp : imp - 3);
+      this.#letter('award', { from: `${aw.name} · The Jury`, to: 'Another Studio,', subject: `${aw.name}: ${j.verdict === 'winner' ? 'you won' : j.verdict === 'shortlist' ? 'shortlisted' : 'the result'}`, stamp: j.verdict === 'winner' ? 'WINNER' : false, date: `Day ${Math.floor(this.t / 1440) + 1}`, body: [`Re: "${pr.name}" for ${pr.client}.`, j.verdict === 'winner' ? `The jury is pleased to inform you that the entry has won. Score: ${j.score}/10.` : j.verdict === 'shortlist' ? `The entry was shortlisted. Score: ${j.score}/10. The jury asked us to pass on that it was close.` : `The entry did not place this year. Score: ${j.score}/10.`, ...j.notes.map(n => `Jury note: ${n}`), j.verdict === 'winner' ? 'A trophy follows by courier. It is heavier than it looks.' : 'We hope to see the studio\'s work again next year.'], note: j.verdict === 'winner' ? 'Tomás cleared the shelf before it arrived.' : 'Marcus pinned the jury notes to the fridge. Face down.' }, { quiet: true });
     }
   }
 
@@ -14829,7 +16024,7 @@ class Sim {
     // Move visitors and run their little state machine.
     for (const v of [...this.visitors]) {
       if (v.bubble && this.t >= v.bubble.until) v.bubble = null;
-      if (v.state === 'waiting' && this.t - v.arrivedAt >= 6 && !v.meeting) this.#startClientMeeting(v);
+      if (v.state === 'waiting' && this.t - v.arrivedAt >= 6 && !v.meeting) v.former ? this.#startFormerVisit(v) : this.#startClientMeeting(v);
       if (v.state === 'leaving' && !v.path.length) this.visitors.splice(this.visitors.indexOf(v), 1);
     }
     if (dow >= 5 || m < 9 * 60 + 30 || m > 16 * 60 + 30 || this.visitors.length || this.#ritualActive()) return;
@@ -14873,6 +16068,56 @@ class Sim {
     }
   }
 
+  // Someone who used to work here comes through the front door. They sit where they always sat,
+  // the people who knew them best are called over, and the scene plays out as a conversation.
+  #spawnFormer(key) {
+    const spec = RETURNS[key];
+    const door = OBJ['door:home_maple'].spot, target = OBJ[spec.spot] ?? OBJ.waiting_bench;
+    const seat = this.#freeNear(target.spot.x, target.spot.y, null) ?? target.spot;
+    const v = { id: `former:${key}`, visitor: true, former: key, name: spec.name, short: spec.short, title: spec.title, look: spec.look, project: null, projectName: null, kind: 'former',
+      x: door.x, y: door.y, dir: 'up', path: findPath(door.x, door.y, seat.x, seat.y) ?? [], state: 'arriving', hidden: false, bubble: null, act: spec.act, attendees: [] };
+    this.visitors.push(v);
+    this.lastVisitAt = this.t;
+    const text = `${spec.name} is at the door. ${spec.short} used to work here. ${cap(spec.act)}`;
+    this.studio.addNews(this.t, text, '🚪'); this.#post({ type: 'news', icon: '🚪', text, toast: 'departure' });
+    for (const id of spec.want) {
+      const a = this.agents.get(id);
+      if (!a || a.hidden || a.state === 'sleeping' || a.state === 'talking' || a.action?.bedtime) continue;
+      if (a.action?.ritual && !String(a.action.ritual).startsWith('client:') && id !== 'dog') continue;
+      a.epoch++; a.next = null; a.pending = false;
+      if (a.action && a.state === 'acting') this.#finishQuiet(a);
+      this.#start(a, { activity: `catching up with ${spec.short}`, emoji: id === 'dog' ? '🐾' : '🫂', location: spec.spot, duration_min: 40, satisfies: ['social', 'fun'], scripted: true, ritual: `client:${v.id}` });
+      a.action.end = this.t + 60;
+      v.attendees.push(id);
+    }
+    for (const id of this.staff) this.agents.get(id)?.memory.add(this.t, 'event', text, spec.want.includes(id) ? 7 : 4, { valence: 1 });
+    return v;
+  }
+  #startFormerVisit(v) {
+    const present = v.attendees.filter(id => { const a = this.agents.get(id); return a && !a.hidden && a.action?.ritual === `client:${v.id}`; });
+    if (present.length < 1 && this.t - v.arrivedAt < 30) return;
+    v.meeting = true;
+    const ids = present.length ? present : this.#present(false).slice(0, 3).map(a => a.id);
+    const scene = SCENES[`former_${v.former}`] ?? SCENES.former_alumni;
+    const res = scene(v, ids, this);
+    const conv = { id: this.convId++, ids, topic: `${v.short} comes back`, ritual: `client:${v.id}`, lines: res.lines, result: res, idx: 0, nextAt: this.t, setting: AREAS[areaAt(v.x, v.y)] ?? 'Reception', visitor: v };
+    this.convs.push(conv);
+  }
+  #endFormerVisit(c, res) {
+    const v = c.visitor, spec = RETURNS[v.former];
+    const after = res.after?.(this) ?? null;
+    const text = after ?? `${spec.short} left after an hour. The studio was quieter afterwards, in a good way.`;
+    this.studio.addNews(this.t, text, '🫂'); this.#post({ type: 'news', icon: '🫂', text });
+    const notes = { lola: ['Thank you for the hour. She smelled the same. So did the kitchen.', 'I didn\'t say this: Tomás, the lily is the best-kept plant I have ever seen. Don\'t tell Big Steve.', 'The chair can stay empty. That\'s not sad. That\'s a chair that knows who it\'s for.'], rafa: ['The pastries were from the place by the old studio. You knew that.', 'They asked me to write up "learnings" from the visit. I wrote: "they are better." Submitted it. Still employed, for now.', 'Ask me in a year. I meant it.'], priya: ['Kickoff Monday. The chemists are terrified of Hannah already. Good.', 'Enclosed: the PO, signed, and a photo of the eleven-ring molecule for your fridge.', 'Don\'t let Adaeze undercharge. I know she tried.'] }[v.former] ?? [`Lunch was perfect. Don\'t change the toaster.`, `I took a photo of the wall. It\'s my phone background now. Don\'t tell anyone.`, `Same time next month. You said. I have it in writing now.`];
+    this.#letter('personal', { from: `${spec.short} · formerly of the studio`, to: 'All of you,', subject: `A note from ${spec.short}`, stamp: false, date: `Day ${Math.floor(this.t / 1440) + 2}`, body: notes, note: `Tomás read it out at standup. ${spec.short === 'Lola' ? 'He got as far as the lily.' : 'Twice.'}` }, { at: this.t + 2 * 1440, quiet: true });
+    (this.flags.returned ??= []).push(v.former);
+    for (const id of v.attendees) { const a = this.agents.get(id); if (a?.action?.ritual === `client:${v.id}`) a.action.end = this.t; }
+    const door = OBJ['door:home_maple'].spot;
+    v.state = 'leaving'; v.bubble = null;
+    v.path = findPath(v.x, v.y, door.x, door.y) ?? [];
+    this.#useObject(spec.spot, 'cos', `${spec.short} sat here, visiting`);
+  }
+
   #moveVisitors() {
     for (const v of this.visitors) {
       const nxt = v.path.shift();
@@ -14902,8 +16147,10 @@ class Sim {
       const won = res.decision === 'win';
       this.studio.pitchResult(this.t, pr, won);
       this.counters[won ? 'pitchesWon' : 'pitchesLost']++;
+      if (won) this.#invoice(pr, 'deposit');
       text = won ? `We won the "${pr.name}" pitch against Studio Ditto!` : `We lost the "${pr.name}" pitch to Studio Ditto. ${res.feedback ? `Their feedback: ${res.feedback}.` : ''}`;
       if (!won) for (const id of pr.team) this.agents.get(id)?.memory.add(this.t, 'event', `We lost ${pr.name} to Studio Ditto. It stings.`, 7, { valence: -1.5 });
+      if (!won) this.#letter('rejection', { from: `${v.name} · ${pr.client}`, to: 'Adaeze and team,', subject: `${pr.client}: we went another way`, stamp: false, date: `Day ${Math.floor(this.t / 1440) + 2}`, body: [`Thank you for the "${pr.name}" pitch. It was, and I mean this, the braver answer.`, `We've decided to go with Studio Ditto. ${res.feedback ? `${cap(res.feedback)}.` : 'The board wanted the safer pair of hands.'}`, 'I kept your deck. I\'m not supposed to say that.', 'If this one doesn\'t work out, you\'ll hear from me first.'], note: 'Marcus read it aloud at standup, in a voice. It helped.' }, { at: this.t + 2 * 1440, quiet: true });
       res.decision = won ? 'approve' : 'reject';
     } else if (pr && res.decision && res.decision !== 'none') {
       const out = this.studio.clientDecision(this.t, pr, res.decision, res.feedback ?? 'tighten it up');
@@ -15020,7 +16267,7 @@ class Sim {
   #beginStory(type, ctx, feedFrom) {
     const def = STORIES[type];
     const name = id => PERSONA[id]?.short;
-    const c = { ...ctx, name: name(ctx.person), ownerName: name(ctx.owner), confidantName: name(ctx.confidant) ?? 'Tomás' };
+    const c = { ...ctx, name: ctx.name ?? name(ctx.person), ownerName: name(ctx.owner), confidantName: name(ctx.confidant) ?? 'Tomás' };
     const w = this.#storyWorld(c);
     const backstory = def.backstory[Math.floor(Math.random() * def.backstory.length)](c, w);
     // attach the backstory to the event's own news item, or post one if the event had none
@@ -15289,11 +16536,75 @@ class Sim {
         this.evCtx = { person: id, friend: Object.entries(a.relationships).filter(([o]) => o !== id && this.agents.has(o) && !PERSONA[o].isDog).sort((x, y) => y[1].closeness - x[1].closeness)[0]?.[0] };
         if (type === 'resign') news('🚪', `${name} resigned. They'd been unhappy for weeks. ${reassign}`, 8, -1.5);
         else if (type === 'layoff') news('📦', `${name} was laid off. ${reassign}`, 9, -2);
-        else news('🧲', `${name} was poached by Studio Ditto, who offered a lead role. ${reassign}`, 8, -1);
+        else { news('🧲', `${name} was poached by Studio Ditto, who offered a lead role. ${reassign}`, 8, -1); (this.flags.atDitto ??= []).push(id); }
         if (!a.hidden && ids.length >= 2) this.#scene(ids, type === 'layoff' ? `Saying goodbye to ${name}` : type === 'resign' ? `${name} resigns` : `${name} is leaving`, this.placeLabel(a), farewellScene(id, type, ids, this));
         this.#interrupt(a);
         this.#start(a, { activity: type === 'layoff' ? 'packing up their desk' : 'saying goodbyes and packing up', emoji: '📦', location: 'home:couch', duration_min: 30, satisfies: [], scripted: true, god: true });
         if (a.hidden) this.#depart(a);
+        return null;
+      }
+      case 'lola': case 'rafa': case 'priya': case 'alumni': {
+        if (this.visitors.length) return 'Someone is already visiting.';
+        const m = this.t % 1440, dow = dowOf(Math.floor(this.t / 1440));
+        if (dow >= 5 || isWeekend(this.t) || m < 9 * 60 || m > 17 * 60) return 'The studio is closed. Try on a weekday.';
+        const returned = this.flags.returned ?? [];
+        let key = type;
+        if (type === 'alumni') { const pool = ['grace', 'ikaika', 'val', 'oksana'].filter(k => !returned.includes(k)); key = opts.who ?? pool[Math.floor(Math.random() * pool.length)] ?? 'grace'; }
+        if (type === 'priya' && this.studio.projects.some(p => p.name === HELIX_BRIEF.name)) return 'Priya already hired the studio. The platform is on the wall.';
+        if (type === 'lola' && !this.agents.has('dog')) return 'Lola only comes for Pica, and Pica isn\'t here.';
+        const v = this.#spawnFormer(key);
+        this.evCtx = { former: key, name: v.short };
+        return null;
+      }
+      case 'book': {
+        if (!this.agents.has('ux_researcher')) return 'Hannah isn\'t here to have written it.';
+        if (this.flags.hannahBook) return 'The book is already out. Forty copies, on the shelf.';
+        const here = this.#present();
+        if (here.length < 3) return 'Hannah wants a room to tell. Try when more people are in.';
+        this.flags.hannahBook = true;
+        const seats = [...GALLERY_SPOTS];
+        for (const a of here) { if (a.state === 'talking') continue; this.#interrupt(a); this.#start(a, { activity: 'hearing about Hannah\'s book', emoji: '📚', location: 'dining_table', duration_min: 35, satisfies: ['social', 'fun'], scripted: true, ritual: 'event', seat: seats.shift() }); a.action.end = this.t + 40; }
+        const ids = ['ux_researcher', ...here.map(a => a.id).filter(x => x !== 'ux_researcher')].slice(0, 7);
+        this.#scene(ids, 'Hannah\'s book', 'Kitchen', SCENES.book(ids, this));
+        news('📚', 'Hannah\'s book is out: "The Rituals of Modern Work" (Larkspur Press). Three years of secret field notes. Chapter three is Wednesday crit. Everyone is in it, anonymized, badly.', 9, 1.5);
+        this.#letter('book', { from: 'Larkspur Press · Editorial', to: 'The staff of Another Studio,', subject: 'Forty copies, with thanks', stamp: false, date: 'Publication day', body: ['Enclosed: forty copies of The Rituals of Modern Work, one per person with room to spare, as the author requested.', 'You are, all of you, in it. You will recognize yourselves faster than you\'d like.', 'The dog is on the cover. The dog consented, we are told.', 'Thank you for being a place worth writing down.'], note: 'The box sat by the mailbox for a day because nobody wanted to be the first to open it. Eli was.' }, { quiet: true });
+        this.evCtx = { person: 'ux_researcher' };
+        return null;
+      }
+      case 'museum': case 'sold': case 'closed': {
+        if (this.ended) return 'The story has already ended.';
+        const here = this.#present();
+        if (here.length < 2) return 'Adaeze wants the room. Try when people are in.';
+        if (type === 'museum') { const won = this.studio.projects.filter(p => p.caseStudy || p.phase >= 4).sort((a, b) => b.quality - a.quality); this.flags.museumPiece = opts.piece ?? (this.studio.awardsWon.find(w => w.project === 'Kern Club') ? 'Kern Club' : won[0]?.name ?? 'Kern Club'); }
+        const seats = [...CRIT_SEATS];
+        for (const a of here) { if (a.state === 'talking') continue; this.#interrupt(a); this.#start(a, { activity: type === 'museum' ? 'hearing the news from the museum' : type === 'sold' ? 'hearing that the studio was sold' : 'at the last all-hands', emoji: type === 'museum' ? '🏛️' : type === 'sold' ? '📝' : '🕯️', location: 'meeting_table', duration_min: 45, satisfies: ['social'], scripted: true, ritual: 'event', seat: seats.shift() }); a.action.end = this.t + 50; }
+        const ids = ['ceo', ...here.map(a => a.id).filter(x => x !== 'ceo')].filter(id => this.agents.has(id)).slice(0, 8);
+        this.#scene(ids, type === 'museum' ? 'The museum called' : type === 'sold' ? 'Adaeze sells the studio' : 'The last all-hands', 'Meeting Room', SCENES[type](ids, this));
+        const texts = {
+          museum: `The museum called: "${this.flags.museumPiece}" is going into a major design museum's permanent collection. Adaeze's dream, the big shelf, nine years in. She will say every name at the gala.`,
+          sold: 'Adaeze signed with Studio Ditto this morning. Everyone keeps their job; the Another Studio name is retired in eighteen months. She told the room face to face, before the email.',
+          closed: 'Another Studio closes on Friday. The money ran out before the next invoice came in. Everyone is paid through the month. Take a plant. Tomás takes Pica.',
+        };
+        news(type === 'museum' ? '🏛️' : type === 'sold' ? '📝' : '🕯️', texts[type], 10, type === 'museum' ? 3 : -2.5);
+        this.#endStudio(type, texts[type]);
+        this.evCtx = { person: 'ceo' };
+        return null;
+      }
+      case 'security': {
+        const here = this.#present();
+        if (!this.agents.has('cos') || here.length < 2) return 'Tomás needs to be in, with someone to lecture.';
+        this.flags.passwordsV = (this.flags.passwordsV ?? 1) + 1;
+        const seats = [...GALLERY_SPOTS];
+        for (const a of here) {
+          if (a.state === 'talking') continue;
+          this.#interrupt(a);
+          this.#start(a, { activity: PERSONA[a.id].isDog ? 'being blamed for the password policy' : 'changing every password', emoji: '🎣', location: 'dining_table', duration_min: 30, satisfies: ['social'], scripted: true, ritual: 'event', seat: seats.shift() });
+          a.action.end = this.t + 35;
+        }
+        const ids = ['cos', ...here.map(a => a.id).filter(x => x !== 'cos')].slice(0, 7);
+        this.#scene(ids, 'The phishing scare', 'Kitchen', SCENES.security(ids, this));
+        news('🎣', 'A phishing email "from Adaeze" got through. Two people clicked. Tomás pulled the Wi-Fi for an hour and made everyone change their passwords.', 6, -0.3);
+        this.evCtx = { person: 'cos' };
         return null;
       }
       case 'hire': {
@@ -15430,6 +16741,90 @@ class Sim {
   endScenario() { this.scenario = null; }
 
   // ------------------------------------------------------------------ possession: play as someone
+  // ------------------------------------------------------------------ Pica's day
+  // A day as the dog: possess Pica, sniff the studio (every object has a smell and a line
+  // for her journal), say hi to people, and when you let go she writes the day up, to Lola.
+  static SNIFF = {
+    dog_bed: 'The cardigan. Less of you every week. I check anyway. Today: still you, under the dust and under Eli.',
+    coffee_machine: 'The hissing machine. Tomás talks to it. It never answers. I understand it completely.',
+    fridge: 'The cold door. Behind it: Noor\'s red jar, someone\'s soup, eggs, which I am not allowed, which I remember.',
+    snack_shelf: 'The crackers are gone. They are always gone the day after the day with bread. I have a theory. The theory is Eli.',
+    breakfast_nook: 'Toast, setting four. Crumbs under the bench that nobody sweeps and everybody steps on. I did the sweeping.',
+    dining_table: 'The big table. Six smells at once at lunch. Marcus drops things. Marcus is my favorite at lunch.',
+    sofa: 'The old sofa from the old place. It still smells like the old place. I lie on it when I want the big windows back.',
+    reception_desk: 'Your counter. The bell. The ginger candies. Tomás sits where you sat and he does not smell like you, and that is fine, I have decided it is fine.',
+    'plant:Lola\'s Peace Lily': 'Your plant. Tomás waters it first, every time. I watch him do it. We do not talk about why.',
+    mailbox: 'Paper from outside, other hands. Sometimes the paper smells like someone who is happy and sometimes like someone who is sorry.',
+    award_shelf: 'The shiny things. Everyone looks at them and nobody touches them. I touched one. I was told. I was told kindly.',
+    pinball: 'The loud box. Marcus hits it and says a word. The word is not for dogs.',
+    pinball2: 'The other loud box. Kenji made it work with his hands. It tilts. I did not do that. I was near it, but I did not do that.',
+    ddr: 'The stomping box. Noor is the best at stomping. Eli stomps bravely and wrong.',
+    riso: 'The ink smell, pink and blue. Eli is covered in it. I like Eli\'s hands best when they are pink.',
+    crit_rug: 'The rug from far away. Sofia sits on it and says true things, and then everyone is sad for a minute, and then better.',
+    wing_chun: 'The wooden person. Kenji hits it in the early quiet. It is the only thing he hits. It does not mind. I checked.',
+    design_books: 'Paper and old glue. Kenji\'s book smells like Kenji. Hannah\'s gap on the second shelf smells like waiting.',
+    meeting_table: 'The big smooth table. Strangers sit here smelling nervous and leave smelling less nervous. Adaeze does that. I help.',
+    phone_booth: 'The small room. People go in to be sad or to call their mothers. Both smell the same.',
+    waiting_bench: 'My bench. Strangers sit here first and I sit on their feet. It is the job.',
+    altar: 'The little shelf with the candle. A stone for everyone who left. I know which one is yours. I do not lick it. Much.',
+    pinup_wall: 'The wall of paper. It changes every week and smells like everyone\'s hands at once. The red pen is Adaeze. The red pen is always Adaeze.',
+    research_wall: 'Hannah\'s wall. Small papers in fourteen colors. She moves them in the morning and hums. I supervise.',
+    moodboard: 'Sofia\'s board. Mondays it is empty and smells like nothing. Wednesdays it is full and smells like licorice.',
+    material_wall: 'Cloth and paper and the shiny foil I am not allowed to chew. Noor put it in order. I put one back. Nobody noticed. Everyone noticed.',
+    proto_bench: 'Knives and glue and the empty bandage box. The printouts live here. I have eaten one printout. It was the bad option. Good dog.',
+    whiteboard: 'The white wall that is never clean. Ghost marks from before me. Hannah says that is the point.',
+    bookshelf: 'The books of the work. One for each thing they made, including the ones made by the ones who left. Adaeze reads one before strangers come. I sit on her foot.',
+    annuals_shelf: 'Old paper, forty years of it. Kenji moves them around by color when he is sad. He has been moving them a lot.',
+    magazine_table: 'Shiny paper. One is always open to the same page. The page smells like a month.',
+    reading_chair: 'The yellow bag that is also a chair. Hannah lies in it and thinks. Her thinking smells like tea.',
+    reading_chair2: 'The blue one. Flatter. Mine. It is the shape of me when I am not in it.',
+    laptop_dining: 'The stranger\'s folded screen. It smells like a stranger who was nervous three weeks ago and never came back for it.',
+    bear_flag: 'The flag over the window. Nobody knows who sent it. I know. I am not telling. It smells like the bus and a man who laughs loudly.',
+    corner_desk: 'Adaeze\'s corner. Forty open things. One of them is a recipe. The recipe smells like far away and somebody\'s mother.',
+  };
+  static SNIFF_ELSE = ['Nothing new. Checked anyway.', 'Dust and wood and Eli.', 'Someone stood here recently and was happy.', 'A good smell with nothing in it.', 'Checked. Fine. Mine now.'];
+  startPicaDay() {
+    const dog = this.agents.get('dog');
+    if (!dog) return 'Pica isn\'t part of this studio.';
+    if (dog.hidden) return 'Pica isn\'t in yet. She arrives with Tomás in the morning and leaves with him in the evening.';
+    if (this.ended) return 'The story has ended.';
+    const err = this.possess('dog');
+    if (err) return err;
+    const day = Math.floor(this.t / 1440);
+    this.picaDay = { day, t0: this.t, journal: [], sniffed: [], greeted: [] };
+    this.#post({ type: 'news', icon: '🐶', text: 'Pica\'s day. Everything the studio smells like, in order of importance, as decided by Pica.' });
+    return null;
+  }
+  endPicaDay() {
+    const pd = this.picaDay; if (!pd) return null;
+    this.picaDay = null;
+    const day = pd.day, entries = pd.journal.map(j => j.text);
+    const who = [...new Set(pd.greeted.map(id => PERSONA[id]?.short).filter(Boolean))];
+    const closing = who.length ? `I said hello to ${who.join(', ')}. ${who.length > 3 ? 'Everyone smelled like themselves. That is the best news I have.' : 'They all smelled like themselves.'}` : 'I did not say hello to anyone. I was busy. The smells needed me.';
+    const body = [...entries.slice(0, 9), closing, 'I am keeping the cardigan. Come and see it. It knows you.'];
+    const j = { day, t: this.t, body, sniffed: pd.sniffed.length, greeted: who.length };
+    (this.flags.picaJournals ??= []).push(j);
+    if (this.flags.picaJournals.length > 12) this.flags.picaJournals.shift();
+    this.agents.get('dog')?.memory.add(this.t, 'diary', `*wrote the day down, in smells, for Lola. ${pd.sniffed.length} things sniffed.*`, 6, { valence: 1 });
+    this.#post({ type: 'news', icon: '📓', text: `Pica\'s journal, Day ${day + 1}: ${pd.sniffed.length} things sniffed, ${who.length} people greeted. It\'s in her bed, addressed to Lola.` });
+    if (this.possessed === 'dog') this.release();
+    return j;
+  }
+  // the smell map: what Pica can smell right now, strongest first
+  smells() {
+    if (!this.picaDay) return [];
+    const out = [];
+    const O = id => OBJ[id];
+    const add = (o, kind, strength) => { if (o) out.push({ x: o.x + o.w / 2, y: o.y + o.h / 2, kind, strength }); };
+    add(O('dog_bed'), 'lola', 1); add(O('plant:Lola\'s Peace Lily'), 'lola', 0.6); add(O('reception_desk'), 'lola', 0.4);
+    add(O('coffee_machine'), 'coffee', this.objUse.coffee_machine?.moments?.some(m => this.t - m.t < 90) ? 1 : 0.5);
+    for (const id of ['fridge', 'snack_shelf', 'breakfast_nook', 'dining_table']) add(O(id), 'food', id === 'snack_shelf' ? 0.9 : 0.6);
+    add(O('riso'), 'ink', 0.6); add(O('proto_bench'), 'ink', 0.4); add(O('mailbox'), 'paper', this.unreadMail ? 0.9 : 0.3); add(O('door:home_maple'), 'outside', 0.7);
+    for (const a of this.agents.values()) if (!a.hidden && a.id !== 'dog') out.push({ x: a.x + 0.5, y: a.y + 0.5, kind: 'person', strength: 0.3 + (this.agents.get('dog')?.relationships[a.id]?.closeness ?? 5) / 14 });
+    for (const v of this.visitors) out.push({ x: v.x + 0.5, y: v.y + 0.5, kind: 'stranger', strength: 0.8 });
+    return out;
+  }
+
   possess(id) {
     const a = this.agents.get(id);
     if (!a) return 'Pick someone in the studio.';
@@ -15441,6 +16836,7 @@ class Sim {
     return null;
   }
   release() {
+    if (this.picaDay && this.possessed === 'dog') return this.endPicaDay();
     const a = this.agents.get(this.possessed);
     this.possessed = null;
     if (a && a.state === 'possessed') { a.state = 'thinking'; a.epoch++; }
@@ -15464,12 +16860,28 @@ class Sim {
     const bump = (k, v) => { n[k] = clamp(n[k] + v); };
     let did;
     const id = near.id, sp = near.sprite;
+    if (p.isDog && this.picaDay) { // Pica's day: everything is a smell
+      const pd = this.picaDay, key = id.startsWith('door:') ? 'door' : id === 'laptop:dining' ? 'laptop_dining' : id;
+      if (pd.sniffed.includes(key)) return `*already thoroughly sniffed. ${['Still the same.', 'Nothing has changed, which is good.', 'Checking again anyway.'][pd.sniffed.length % 3]}*`;
+      pd.sniffed.push(key);
+      const line = key === 'door' ? 'Outside. Wet leaves, other dogs, the bus. You went out this door. I keep it in my nose, in case.' : Sim.SNIFF[key] ?? `${cap(near.name)}: ${Sim.SNIFF_ELSE[pd.sniffed.length % Sim.SNIFF_ELSE.length]}`;
+      pd.journal.push({ t: this.t, id: key, text: line });
+      bump('fun', 8); bump('social', 2);
+      this.#useObject(id, 'dog', 'sniffed it thoroughly');
+      a.memory.add(this.t, 'action', `*sniffed the ${near.name}* ${line}`, 3);
+      a.thought = line;
+      if (near.trinket && Math.random() < 0.35) this.findTrinket(id, 'dog');
+      return `*sniffs* ${line}`;
+    }
     if (id.startsWith('door:')) { a.hidden = true; a.atHome = true; this.release(); return `${p.short} went home.`; }
     if (id === 'coffee_machine') { bump('energy', 25); did = 'made an espresso'; }
     else if (['fridge', 'snack_shelf', 'dining_table'].includes(id)) { bump('hunger', 40); did = 'had something to eat'; }
     else if (['sofa', 'reading_chair', 'reading_chair2', 'waiting_bench'].includes(id) || sp === 'armchair') { bump('energy', 15); bump('fun', 10); did = `sat on the ${near.name} for a bit`; }
     else if (id === 'crit_rug') { bump('fun', 20); bump('fulfillment', 10); did = 'sketched on the crit rug'; }
     else if (id === 'pinball' || id === 'pinball2') { bump('fun', 35); bump('social', 5); did = 'played a round of pinball'; }
+    else if (id === 'ddr') { bump('fun', 40); bump('energy', -10); bump('social', 8); did = p.isDog ? 'stood on the dance pad and barked at the arrows' : 'danced a song on the dance machine'; }
+    else if (id === 'wing_chun') { bump('fun', 20); bump('energy', -4); did = p.isDog ? 'barked at the wooden dummy' : a.id === 'head_design' ? 'ran a form on the wooden dummy' : 'hit the wooden dummy a few times, badly'; }
+    else if (id === 'design_books') { bump('fulfillment', 10); bump('fun', 6); did = p.isDog ? 'sniffed the design books' : 'pulled a book off the design shelf'; }
     else if (id === 'breakfast_nook') { bump('hunger', 35); bump('social', 10); did = 'had toast in the breakfast nook'; }
     else if (id.startsWith('plant:')) { did = 'watered it'; bump('fulfillment', 3); }
     else if (['bookshelf', 'annuals_shelf'].includes(id)) { bump('fun', 10); bump('fulfillment', 8); did = id === 'bookshelf' ? 'read an old case study' : 'browsed the design annuals'; }
@@ -15505,6 +16917,7 @@ class Sim {
   possessTalk(target, choice, textIn = '') {
     const a = this.agents.get(this.possessed), b = this.agents.get(target);
     if (!a || !b) return 'Walk up to someone first.';
+    if (this.picaDay && a.id === 'dog' && !this.picaDay.greeted.includes(target)) { this.picaDay.greeted.push(target); this.picaDay.journal.push({ t: this.t, id: `hi:${target}`, text: `${PERSONA[target].short}: ${['smells like themselves. Good.', 'smells like coffee and worry. I leaned.', 'smells like outside and lunch. I leaned harder.', 'smells like the project they keep talking about. I sat on their foot until it passed.', 'smells happy today. I am writing that down.'][this.picaDay.greeted.length % 5]}` }); }
     if (b.state === 'talking') return `${PERSONA[target].short} is already in a conversation.`;
     const res = playerChat(a.id, b.id, choice, String(textIn).slice(0, 200), this);
     const conv = { id: this.convId++, ids: [a.id, b.id], topic: `${PERSONA[a.id].short} (you) talks to ${PERSONA[b.id].short}`, ritual: null, lines: res.lines, result: res, idx: 0, nextAt: this.t, setting: this.placeLabel(a) };
@@ -15661,7 +17074,7 @@ class Sim {
       const w = [...u.moments].reverse().find(x => x.text === 'watered it');
       state = w ? `Last watered ${clockLabel(w.t)} by ${creditName(w.who)}.` : 'Thirsty. Nobody has watered it yet this week.';
     }
-    if (id.startsWith('desk:')) state = `${o.owner === 'dog' ? 'Pica' : PERSONA[o.owner]?.short}'s desk. ${here.length ? `Occupied by ${here.join(', ')}.` : 'Empty right now.'}`;
+    if (id.startsWith('desk:')) state = `${o.owner ? `${o.owner === 'dog' ? 'Pica' : PERSONA[o.owner]?.short}'s chair` : 'An empty chair'}. ${here.length ? `Occupied by ${here.join(', ')}.` : 'Empty right now.'}`;
     if (id === 'award_shelf') state = `${this.studio.awardsWon.length} awards on the shelf.`;
     return { id, name: o.name, area: AREAS[o.area] ?? o.area, story: o.story, view: o.view, owner: o.owner, state, uses: u.count, top, trinket: trinketFor(o, u.gen ?? 0), found: !!u.found,
       moments: [...u.moments].reverse().map(x => ({ ...x, name: creditName(x.who), when: clockLabel(x.t) })) };
@@ -15678,8 +17091,8 @@ class Sim {
       const item = text.replace(/^[^:]+: /, '');
       const bare = item.replace(/\.$/, '');
       const name = by && PERSONA[by]?.short;
-      // "in Big Steve's pot", "in Marcus's desk", "under long table A", "in the sofa"
-      const where = id.startsWith('plant:') ? `in ${o.name}'s pot` : id.startsWith('desk:') ? `in ${o.owner === by ? 'their own' : `${PERSONA[o.owner]?.short ?? 'an empty'}'s`} desk` : id.startsWith('table:') ? `under ${o.name}` : `in the ${o.name}`;
+      // "in Big Steve's pot", "in Marcus' desk", "under long table A", "in the sofa"
+      const where = id.startsWith('plant:') ? `in ${o.name}'s pot` : id.startsWith('desk:') ? `under ${o.owner === by ? 'their own' : `${PERSONA[o.owner]?.short ?? 'an empty'}'s`} chair` : id.startsWith('table:') ? `under ${o.name}` : `in the ${o.name}`;
       this.#post({ type: 'news', icon: '🔍', text: `${name ? `${name} found something ${where}` : `Found ${where}`}: ${/[.!?]["”]?$/.test(item) ? item : `${item}.`}`, toast: 'found' });
       if (by) this.agents.get(by)?.memory.add(this.t, 'event', `I found ${bare} ${where.replace('their own', 'my own')}. Of course I did.`, 5, { valence: 1, fact: `trinket:${id}:${u.gen ?? 0}`, third: `${name} found ${bare} ${where}`, owner: by });
     }
@@ -15704,6 +17117,8 @@ class Sim {
       visitors: this.visitors.map(v => ({ id: v.id, x: v.x, y: v.y, dir: v.dir, state: v.state, hidden: false, visitor: true, name: v.name, short: v.short, title: v.title, look: v.look, emoji: v.state === 'waiting' && !v.bubble ? '🗂️' : null, act: v.act, bubble: v.bubble?.text ?? null, mood: v.kind === 'review' ? 'expectant' : 'curious' })),
       projects: this.studio.projects.map(p => ({ id: p.id, name: p.name, client: p.client, type: p.type, phase: PHASES[p.phase], phaseIdx: p.phase, progress: Math.round(p.progress), quality: Math.round(p.quality), team: p.team, dueDay: p.dueDay + 1, submittedTo: p.submittedTo, archived: !!p.archived, awaitingReview: p.awaitingReview, workstreams: p.workstreams, contact: p.contact?.name ?? null })),
       awards: this.studio.awardsWon,
+      cash: this.ledger ? Math.round(this.ledger.cash) : null, runway: this.ledger ? Math.round(this.runwayMonths * 10) / 10 : null, ended: this.ended, mail: this.unreadMail,
+      picaDay: this.picaDay ? { day: this.picaDay.day, sniffed: this.picaDay.sniffed.length, greeted: this.picaDay.greeted.length, smells: this.smells() } : null,
     };
   }
 
@@ -15752,6 +17167,7 @@ class Sim {
   toJSON() {
     return {
       t: this.t, feed: this.feed.slice(-200), feedId: this.feedId, convId: this.convId, objUse: this.objUse, roster: this.roster, calendar: this.calendar, arcs: this.arcs, counters: this.counters, scenario: this.scenario, stories: this.stories,
+      flags: this.flags, mail: this.mail.slice(-40), ledger: this.ledger, ended: this.ended, fate: this.fate ?? null, meta: this.meta ?? null,
       studio: this.studio,
       agents: [...this.agents.values()].map(({ allowed, next, pending, ...a }) => ({ ...a, memory: a.memory.toJSON() })),
     };
@@ -15806,10 +17222,15 @@ function createLocalSim() {
     try { localStorage.setItem(KEY, JSON.stringify(sim)); saveError = null; savedAt = sim.t; }
     catch { saveError = 'Browser storage is full, so progress isn\'t saving. Select Reset to start a fresh world.'; }
   };
+  const SAVE_EVERY = 5000; // ms of real time between saves; at 100× the sim-hour trigger fires every half second otherwise
+  let lastSaveAt = 0, saveTimer = null;
+  const saveSoon = () => { saveQueued = false; saveTimer = null; lastSaveAt = performance.now(); saveNow(); };
   const save = () => {
     if (saveQueued) return;
     saveQueued = true;
-    (window.requestIdleCallback ?? (f => setTimeout(f, 200)))(saveNow, { timeout: 2000 });
+    const wait = Math.max(0, SAVE_EVERY - (performance.now() - lastSaveAt));
+    if (wait > 0) saveTimer = setTimeout(saveSoon, wait);
+    else (window.requestIdleCallback ?? (f => setTimeout(f, 200)))(saveSoon, { timeout: 2000 });
   };
 
   const emit = init => {
@@ -15828,8 +17249,9 @@ function createLocalSim() {
     if (ran || performance.now() - lastEmit > 500) { lastEmit = performance.now(); emit(false); }
     if (ran && Math.floor(sim.t / 60) !== lastHour) { lastHour = Math.floor(sim.t / 60); save(); }
   }, 125);
-  addEventListener('pagehide', saveNow);
-  addEventListener('visibilitychange', () => { if (document.hidden) saveNow(); });
+  const flush = () => { clearTimeout(saveTimer); saveTimer = null; saveQueued = false; lastSaveAt = performance.now(); saveNow(); };
+  addEventListener('pagehide', flush);
+  addEventListener('visibilitychange', () => { if (document.hidden) flush(); });
 
   return {
     world: { W: world.W, H: world.H, grid: world.GRID, areas: world.AREAS, areaGrid: world.AREA_GRID, objects: world.OBJECTS, personas: PERSONAS },
@@ -15851,7 +17273,7 @@ function createLocalSim() {
       sim.speed = 8; sim.paused = false;
       let i = 0;
       while (sim.t < target) {
-        sim.tick();
+        if (!sim.tick() && sim.ended) break; // the story has ended; the clock won't move
         if (++i % 30 === 0) { onProgress?.(1 - (target - sim.t) / 1500); await new Promise(r => setTimeout(r, 0)); }
       }
       sim.speed = speed; sim.paused = paused;
@@ -16052,6 +17474,8 @@ __mods["docs.js"] = (function () {
 // secret side project. They're shown as `doc` artifacts (see K.doc in artifacts.js) and
 // never enter the studio's archive, so they can't leak onto walls or into case studies.
 
+const { PERSONA } = __mods["sim/personas.js"];
+const pick = a => a[Math.floor(Math.random() * a.length)];
 const docs = new Map();
 const secretById = id => docs.get(id);
 const make = (id, title, doc, extra = {}) => {
@@ -16061,11 +17485,14 @@ const make = (id, title, doc, extra = {}) => {
 };
 
 // ---- Adaeze's computer
-function ceoDocs() {
+function ceoDocs(sim = null) {
+  const sheet = sim?.ledgerSheet?.();
   return [
     make('ceo-ditto', 'Studio Ditto acquisition offer', { style: 'memo', from: 'Studio Ditto · Office of the CEO', to: 'Adaeze Okonkwo', date: 'March 3',
       body: ['We admire what Another Studio has built and would like to make it part of the Ditto family.', 'Proposed terms: an all-cash offer of [[$4.2 million]], with retention packages for [[four]] of your current staff.', 'Your team would join our Brand Experience division, and the Another Studio name would be [[retired within 18 months]].', 'We think you\'ll find this generous.', 'Margin note, in red pen: "no."'] }, { agent: 'ceo', note: 'Eleven pages. Her only margin note: "no."' }),
-    make('ceo-runway', 'Runway_Q4_REAL.xlsx', { style: 'sheet', note: 'If Lumen doesn\'t renew, cut my salary first. Not theirs.',
+    sheet ? make(`ceo-runway-${Math.round(sheet.cash / 5000)}-${sheet.rows.length}`, 'Runway_REAL.xlsx', { style: 'sheet', note: `${sheet.runway < 2 ? 'If this doesn\'t turn, cut my salary first. Not theirs.' : 'Hold. Don\'t grow faster than the work.'} Burn $${Math.round(sheet.burn / 1000)}k/mo · $${Math.round(sheet.open / 1000)}k invoiced and unpaid.`,
+      rows: sheet.rows }, { agent: 'ceo', note: sheet.cash < 0 ? 'Red. All of it red.' : `Cash today: $${Math.round(sheet.cash / 1000)}k. ${sheet.runway.toFixed(1)} months at this burn.` })
+    : make('ceo-runway', 'Runway_Q4_REAL.xlsx', { style: 'sheet', note: 'If Lumen doesn\'t renew, cut my salary first. Not theirs.',
       rows: [['Month', 'Cash in', 'Cash out', 'Months left'], ['Oct', '$412k', '$298k', '11'], ['Nov', '$360k', '$301k', '10'], ['Dec', '$240k', '$305k', '!8'], ['Jan (no Lumen)', '$150k', '$302k', '!6'], ['Jan (Lumen)', '$430k', '$302k', '12']] }, { agent: 'ceo', note: 'The cell is highlighted red and bolded twice.' }),
     make('ceo-salaries', 'Salary bands 2026 · FINAL', { style: 'sheet', note: 'Pay like the best studio in the world, because we are. Cut my perks before anyone else\'s.',
       rows: [['Role', 'Last year', 'Now', 'Market (top 10%)'], ['Designer', '$82k', '$128k', '$125k'], ['Senior', '$128k', '$195k', '$190k'], ['Director', '$175k', '$265k', '$260k'], ['Research', '$120k', '$198k', '$190k'], ['Ops', '$165k', '$235k', '$230k']] }, { agent: 'ceo', note: 'Done: everyone now paid in the top 10% of agencies. Worth every cent.' }),
@@ -16082,6 +17509,56 @@ function ceoDocs() {
       rows: [['Week', 'Laps', 'Time', 'Felt'], ['1', '40', '38:10', 'slow'], ['6', '52', '41:40', 'okay'], ['12', '60', '44:05', 'good'], ['18', '72', '49:20', 'great'], ['24', '80', '52:00', 'like flying']] }, { agent: 'ceo' }),
     make('ceo-felix', 'Felix\'s 50th · surprise plan', { style: 'memo', from: 'Personal', to: 'Me (and Chidi, who is sworn to secrecy)', date: 'December',
       body: ['The quartet from the conservatory, back together, one night only. [[Booked for the 14th.]]', 'Ada is making the program. Chidi is keeping him out of the house.', 'Find the recording from our wedding. It\'s on a CD somewhere. A CD!', 'Do not let him see this file.'] }, { agent: 'ceo' }),
+  ];
+}
+
+// ---- the data room: what Adaeze keeps that nobody at the studio has seen
+function dataRoom(sim) {
+  const st = sim?.studio, day = sim ? Math.floor(sim.t / 1440) + 1 : 100;
+  const clients = st ? [...new Set(st.projects.filter(p => !p.internal && !p.preLayoff).map(p => p.client))].slice(-7) : [];
+  return [
+    make('dr-captable', 'Cap table · current', { style: 'sheet', stamp: 'DATA ROOM', note: 'Lola still has her 3%. I never asked for it back. I never will.',
+      rows: [['Holder', 'Class', 'Shares', '%'], ['Adaeze Okonkwo', 'Common', '6,100,000', '61.0%'], ['Kenji Watanabe-Moore', 'Common (first hire)', '800,000', '8.0%'], ['R. Achebe (angel, 2017)', 'Preferred A', '600,000', '6.0%'], ['Dolores "Lola" Martínez', 'Common (vested)', '300,000', '3.0%'], ['Rafael Oliveira', 'Common (vested, departed)', '200,000', '2.0%'], ['Employee pool (unissued)', 'Options', '1,000,000', '10.0%'], ['Felix Okonkwo (trust for Chidi & Ada)', 'Common', '1,000,000', '10.0%']] }, { agent: 'ceo', note: 'The angel is R. Achebe. Rose. She never told the team.' }),
+    make('dr-fundraise', 'Fundraising plan (Plan B)', { style: 'deck', stamp: 'DATA ROOM', from: 'If we ever have to', body: ['Plan A: we don\'t raise. We never have.', `Plan B: [[$1.5M]] from one design-led fund, [[12%]], no board seat, no "growth targets."`, 'Use of funds: eighteen months of runway and two senior hires. Not a sales team.', 'Walk-away line: anyone who says the word "scale" twice in the first meeting.', `Trigger: runway under three months. (Today: ${sim ? sim.runwayMonths.toFixed(1) : '?'} months.)`] }, { agent: 'ceo', note: 'Eleven slides. She has given this talk to nobody but Felix.' }),
+    make('dr-declined', 'Offers declined · 2021–2026', { style: 'memo', stamp: 'DATA ROOM', from: 'Adaeze · personal record', to: 'Future me, when it\'s hard', date: 'Updated whenever someone asks',
+      body: ['2021: a term sheet from a well-known VC. [[$3M]] for 25% and a board. I said the board would have taste by committee. They said that was the point.', '2023: a holding company wanted us as their "boutique." Lovely people. Their word, not mine. No.', `2026: Studio Ditto, [[$4.2M]] cash, retention for four, our name retired in 18 months. "No." One margin note.`, 'Every time: the work got braver afterwards. Keep saying no until it stops being true.'] }, { agent: 'ceo' }),
+    make(`dr-ndas-${clients.length}`, 'Signed NDAs · register', { style: 'sheet', stamp: 'DATA ROOM', note: 'Mutual, two years, nothing exotic. The Ditto one is the only one we\'ve ever had to enforce.',
+      rows: [['Counterparty', 'Type', 'Signed', 'Status'], ...clients.map((c, i) => [c, 'Mutual', `Day ${Math.max(1, day - 20 - i * 9)}`, 'Active']), ['Studio Ditto (acquisition talks)', 'One-way, theirs', 'Day 90', '!Terminated by us'], ['Tidewater Museum', 'Mutual + press embargo', 'Day 97', 'Active'], ['Larkspur Press (Hannah)', 'Mutual', 'Day 61', 'Nobody knows']] }, { agent: 'ceo' }),
+  ];
+}
+
+// ---- Kenji's computer: the letters he signed on the studio's behalf
+function kenjiDocs() {
+  return [
+    make('k-cd-ditto', 'Cease and desist · Studio Ditto (signed)', { style: 'letter', stamp: 'SIGNED · SENT', date: 'Day 66', to: 'Studio Ditto, attn: Legal', from: 'Kenji Watanabe-Moore, for Another Studio, with Hartley & Moss',
+      body: ['Your "Opera in Odd Places" campaign reproduces the structure, typographic system and, in two executions, the exact copy of our Pocket Opera Festival campaign, which you will have seen at The Kern Annual.', 'We are not precious about influence. We are precious about our client\'s money and our writer\'s lines.', 'Withdraw the two executions within fourteen days and this ends here. We\'d rather make work than letters.', 'Signed, with a very sharp pencil.'] }, { agent: 'head_design', note: 'They withdrew both. Marcus framed the letter.' }),
+    make('k-cd-received', 'Cease and desist · received (signed for)', { style: 'letter', stamp: 'RECEIVED · IGNORED', date: 'Day 38', to: 'Another Studio', from: 'A very large beverage company, via a very large law firm',
+      body: ['Your riso poster "Drink Less, Think More" uses a red that our client considers proprietary.', 'Remove it from your window, your website and "any and all shelves."', 'Kenji\'s note, in pencil, on the back: "It\'s Pantone 485. They don\'t own 485. Nobody owns 485." Sofia\'s note under it: "Eli, print more."'] }, { agent: 'head_design', note: 'The poster is still in the window.' }),
+    make('k-nda-template', 'NDA · studio template (mutual)', { style: 'code', stamp: 'TEMPLATE', body: ['# Mutual Non-Disclosure Agreement', '', '> Between Another Studio ("us") and [[CLIENT]] ("you")', '', '- We keep your secrets. You keep ours. Two years.', '- "Confidential" means marked, or obvious.', '- Not confidential: anything either of us already knew, or the public does.', '- We may say we worked together once the work is public. You may too.', '- No poaching each other\'s people for a year. (This clause has a history.)', '', '> Signed: ____________   ____________'] }, { agent: 'head_design' }),
+  ];
+}
+
+// ---- Marcus' computer: what he keeps on Studio Ditto, filed under "Research"
+function dittoDocs(sim) {
+  const st = sim?.studio, lost = st ? st.projects.filter(p => p.lost).slice(-4) : [], atDitto = (sim?.flags?.atDitto ?? []).map(id => PERSONA[id]?.name).filter(Boolean);
+  return [
+    make('dt-engine', 'Ditto case study: "Brand Engine™"', { style: 'deck', stamp: 'RESEARCH · DITTO', from: 'studioditto.com/work', body: ['A complete refresh in six weeks', 'Three logo options and a launch video, every time', 'Customer research "optional"', 'Marcus\' note: every case study has the same gradient. Every single one.'] }, { agent: 'copywriter', note: 'He reads these before pitches. "Know the enemy\'s adjectives."' }),
+    ...lost.map(p => make(`dt-${p.id}`, `Ditto case study: ${p.name}`, { style: 'deck', stamp: 'RESEARCH · DITTO', from: `studioditto.com/work/${p.name.toLowerCase().replace(/\W+/g, '-')}`, body: [`"Unlocking ${p.client}\'s next chapter"`, 'Delivered in six weeks with Brand Engine™', `${p.contact?.name?.split(' ')[0] ?? 'The client'} is quoted saying "seamless"`, `Marcus' note: ${pick(['they used our research deck\'s structure. Page for page.', 'the logo is our second-round option, flipped.', 'the line is "Begin here." Ours was "Begin here." Ours was first.', 'it is fine. That\'s the worst part. It\'s fine.'])}`] }, { agent: 'copywriter', note: `We lost this pitch to them. He keeps it anyway.` })),
+    make(`dt-people-${atDitto.length}`, 'Ditto careers page (saved)', { style: 'code', stamp: 'RESEARCH · DITTO', body: ['# Studio Ditto · Team', '', '> "Fifty-four people, one engine."', '', ...(atDitto.length ? atDitto.map(n => `- ${n} — "Lead" (ours, until recently)`) : ['- (nobody of ours. yet.)']), '- Rafael Oliveira — Art Director (ours, before the layoffs)', '- Jae-won Park — Head of PR (ours, before the layoffs)', '', '> Marcus: they still haven\'t fixed the kerning in their own logo.'] }, { agent: 'copywriter' }),
+    make('dt-pitch', 'How Ditto pitches (notes from a client who told us)', { style: 'memo', stamp: 'RESEARCH · DITTO', from: 'Marcus · from three different clients, off the record', to: 'The pitch team', date: 'Living document',
+      body: ['They come in with a finished deck. Ours is a conversation. Clients like being told. Clients remember being asked.', 'They quote a price in the room. We don\'t. Adaeze thinks we should start.', 'They never bring the dog. We should always bring the dog.', 'Their founder\'s name is [[redacted]]. He used to work for Adaeze. Nobody mentions this. Everybody knows this.'] }, { agent: 'copywriter' }),
+  ];
+}
+
+// ---- the shared drive: on every computer, because Tomás put it there
+function sharedDocs(sim) {
+  const v = sim?.flags?.passwordsV ?? 1;
+  const pw = v === 1
+    ? ['- Wi-Fi: PicaIsAGoodGirl', '- Riso admin: pica1234', '- Printer: Pica!', '- Adobe (studio): PicaPica2019', '- Dribbble (we never post): pica', '- Bank: [[ask Tomás]]', '- Alarm code: 7422 (P-I-C-A on a keypad)']
+    : ['- Wi-Fi: PicaIsStillAGoodGirl', '- Riso admin: Pica1234!', '- Printer: Pica!!', '- Adobe (studio): PicaPica2026', '- Dribbble (we never post): Pica', '- Bank: [[ask Tomás. he changed it. he will not say to what.]]', '- Alarm code: 7422 (we discussed changing it. we didn\'t.)'];
+  return [
+    make(`sh-passwords-${v}`, 'passwords.txt', { style: 'code', stamp: 'SHARED DRIVE', body: ['# NEVER WRITE PASSWORDS DOWN', '# — Tomás', '', ...pw, '', v === 1 ? '> If you change one, update this file. — T.' : '> Changed after the phishing thing. Everyone changed theirs to a different Pica. — T.'] }, { agent: 'cos', note: v === 1 ? 'Accessible from every computer in the studio. The security policy is a dog\'s name.' : 'New passwords, same dog.' }),
+    make('sh-handbook', 'Studio handbook (3 pages)', { style: 'code', stamp: 'SHARED DRIVE', body: ['# How we work', '', '## Process', '- Discovery → Concept → Design → Refine → Delivered. Never skip Discovery.', '- Crit on Wednesdays at three. Work goes up on the wall; it belongs to the room for an hour.', '- Client reviews happen in the meeting room, never by email.', '', '## Tools', '- Figma, the riso, index cards, the whiteboard that is never erased.', '- Fonts: Kenji\'s. Ask before buying one; he probably has it.', '', '## Rules', '- No laptops on the rug. No passwords on sticky notes (see passwords.txt). Pica stays.'] }, { agent: 'cos' }),
   ];
 }
 
@@ -16105,8 +17582,10 @@ function clientDocs(pr) {
 }
 
 // ---- Hannah's laptop: the book she's secretly writing
-function hannahDocs() {
+function hannahDocs(published = false) {
   return [
+    ...(published ? [make('h-cover', 'The Rituals of Modern Work · final cover', { style: 'deck', stamp: 'PUBLISHED', from: 'Larkspur Press · 2026', body: ['The Rituals of Modern Work', 'Hannah Goldberg', '"The first honest book about how studios actually work."', 'Chapter 3: Crit. Chapter 4: Why every office needs a dog.'] }, { agent: 'ux_researcher', note: 'Forty copies in the studio. One on the design book shelf, in the gap she kept for it.' }),
+      make('h-larkspur', 'Letter from Larkspur Press', { style: 'letter', stamp: 'KEPT', date: 'Eleven months ago', to: 'Dear Hannah,', from: 'Editorial, Larkspur Press', body: ['We would like to publish The Rituals of Modern Work.', 'We laughed at the toaster. We cried at the empty desk. We would like the dog on the cover, if the dog consents.', 'We will need you to tell your colleagues at some point. We recommend before the launch party.', 'Welcome to Larkspur.'] }, { agent: 'ux_researcher' })] : []),
     make('h-outline', 'The Rituals of Modern Work · outline', { style: 'code', stamp: 'SIDE PROJECT', body: ['# The Rituals of Modern Work', '> a book by Hannah Goldberg (working title)', '', '## Part one: arrivals', '- 1. The first coffee as a sacrament', '- 2. Standup, or the morning prayer', '## Part two: belonging', '- 3. Crit: the studio\'s confession', '- 4. Why every office needs a dog', '## Part three: endings', '- 5. Layoffs and the empty desk', '- 6. Leftover cake as grief'] }, { agent: 'ux_researcher', note: 'Twelve chapters planned. Four drafted. Nobody at work knows.' }),
     make('h-ch3', 'Chapter 3 draft: "Crit"', { style: 'memo', from: 'Draft · do not share', to: 'Me', date: 'Tuesday, after pottery',
       body: ['Every Wednesday at four, eight people sit around a table and take turns being brave.', 'The work goes up on the wall, and for twenty minutes it belongs to everyone. Then it goes back to its maker, changed.', 'I have watched [[S.]] say the hardest true thing in the kindest voice, and I have watched [[E.]] pretend not to cry, and then thank her.', 'This is a ritual. We just don\'t call it that because it happens on a calendar invite.'] }, { agent: 'ux_researcher' }),
@@ -16115,6 +17594,55 @@ function hannahDocs() {
     make('h-pitch', 'Pitch to Larkspur Press', { style: 'memo', from: 'Hannah Goldberg', to: 'Editorial, Larkspur Press', date: 'not sent yet',
       body: ['Dear editors,', 'I\'m a researcher who studies how people live at work. For three years I have been quietly studying my own studio.', 'The Rituals of Modern Work is about the small, repeated acts that make a workplace a place: the coffee, the crit, the leftover cake.', 'Attached: an outline and two chapters. I would love to tell you more, ideally before I lose my nerve.'] }, { agent: 'ux_researcher' }),
   ];
+}
+
+// ---- Tomás' reception computer: the studio runs on these
+function tomasDocs(studio, day = 100) {
+  const staff = (studio?.projects ?? []).filter(p => !p.archived && p.phase < 4).slice(0, 4);
+  return [
+    make('t-calendar', 'Studio calendar · this week', { stamp: 'FRONT DESK', style: 'sheet', note: 'Nobody books the meeting room on Wednesdays after three. Nobody.',
+      rows: [['', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'], ['10:00', 'Standup', '—', '—', '—', 'Descale ☕'], ['12:30', 'Lunch (bread!)', 'Lunch', 'Lunch', 'Lunch', 'Lunch'], ['15:00', '—', 'Client review', '!Crit', '—', '—'], ['16:30', '—', '—', '—', '!All-hands', 'Happy hour 17:30']] }, { agent: 'cos' }),
+    make('t-invoices', `Invoices_Day${day}.xlsx`, { stamp: 'FRONT DESK', style: 'sheet', note: 'Chase on day 30. Kindly on day 30, firmly on day 45.',
+      rows: [['Client', 'Invoice', 'Amount', 'Status'], ...(staff.length ? staff.map((p, i) => [p.client, `AS-${String(1040 + i * 7)}`, `$${(28 + (p.id.length * 13) % 60)}k`, ['Paid', 'Sent', '!Overdue (day 32)', 'Draft'][i % 4]]) : [['Lumen', 'AS-1040', '$42k', 'Paid']])] }, { agent: 'cos', note: 'One red cell. He has already sent the kind email.' }),
+    make('t-snacks', 'Snack order · Monday', { stamp: 'FRONT DESK', style: 'code', body: ['# Supply run (Monday)', '', '- [x] good crackers ×3 (they go by Tuesday, so three)', '- [x] salt & vinegar', '- [x] almonds, the big jar', '- [ ] kale chips (decoy — do not restock)', '- [x] clementines', '- [x] rice cakes (always)', '- [x] salt licorice — SOFIA ONLY', '- [x] oat milk ×6 (how is it always gone)', '- [ ] bread, the good one, Mondays only', '', '> budget: whatever Adaeze doesn\'t look at'] }, { agent: 'cos' }),
+    make('t-plants', 'Watering rota (it\'s just me)', { stamp: 'FRONT DESK', style: 'sheet', note: 'Big Steve gets a full can. The fern gets a sip. Do not overwater the fern.',
+      rows: [['Plant', 'Mon', 'Wed', 'Fri'], ['Big Steve', '●', '', '●'], ['The fern', '', '●', ''], ['Reception ficus', '●', '', ''], ['Kitchen herbs', '●', '●', '●'], ['Kenji\'s bonsai', 'ask Kenji', 'ask Kenji', 'ask Kenji']] }, { agent: 'cos' }),
+    make('t-fridge', 'FRIDGE RULES (laminated)', { stamp: 'FRONT DESK', style: 'memo', from: 'Tomás · Office', to: 'Everyone, including you, Marcus', date: 'Pinned to the fridge door',
+      body: ['Labelled shelves. Enforced.', 'If it has a name on it, it is not yours. If it has no name on it, it is still probably not yours.', 'The oat milk is shared. The kimchi is Noor\'s. The beer is for Fridays.', 'Anything older than a week on Friday at five goes in the bin. Sorry about the soup.'] }, { agent: 'cos', note: 'Version 4. Versions 1–3 were ignored.' }),
+    make('t-descale', 'Espresso machine · service log', { stamp: 'FRONT DESK', style: 'code', body: ['# La Pavoni, 1974', '', '> Descale every Friday, 10:00', '- gasket replaced (spring)', '- lever squeaks. tolerated.', '- pressure: steady', '', '> Notes', '- talk to it. it listens.', '- Eli: stop pulling 40-second shots', '- the good cups are the thick ones'] }, { agent: 'cos' }),
+    make('t-invoice-tpl', 'Invoice · template', { stamp: 'TEMPLATE', style: 'sheet', note: 'Net 30. Day 31: kind email. Day 45: firm email. Day 60: Adaeze calls.',
+      rows: [['Another Studio · Invoice AS-____', '', '', ''], ['Client', '[[CLIENT]]', 'Project', '[[PROJECT]]'], ['Line', 'Description', 'Qty', 'Amount'], ['1', 'Design fees · phase ___', '1', '$___'], ['2', 'Production / print', '—', '$___'], ['', '', 'Total', '$___']] }, { agent: 'cos' }),
+    make('t-proposal-tpl', 'Proposal · template', { stamp: 'TEMPLATE', style: 'memo', from: 'Another Studio', to: '[[Client]]', date: '[[Date]]',
+      body: ['What we heard: three sentences, in your words, so you know we listened.', 'What we\'d make: one idea, said simply. Then the workstreams. Then the phases, with dates.', 'Who: the team by name, with one line each on why them. The dog is listed. The dog is not billed.', 'Fee: one number, three payments: 40% to start, 30% at Design, 30% on delivery. We don\'t do options.'] }, { agent: 'cos', note: 'Adaeze rewrites the first paragraph every time. The rest is Tomás\'.' }),
+    make('t-letter', 'For Lola (if she ever comes back)', { style: 'letter', stamp: 'DRAFT', date: 'Reception, a quiet afternoon', to: 'Lola,', from: 'T.',
+      body: ['The bell still works. Nobody rings it. I kept your cardigan in Pica\'s bed; she won\'t sleep on anything else.', 'The ginger candy bowl is the same bowl. I refill it on Mondays, same as you did.', 'I got the fridge under control. You would be proud, or horrified. Possibly both.', 'Come by. The chair is still here.'] }, { agent: 'cos', note: 'He has not sent it. The chair is still there.' }),
+  ];
+}
+
+// ---- the design book shelf: the references the studio actually argues with
+const DESIGN_BOOKS = [
+  ['Less, but Better', 'Dieter Rams', 'Kenji\'s copy. Underlined in pencil, never in pen.'],
+  ['Grid Systems in Graphic Design', 'Josef Müller-Brockmann', 'Sofia settles arguments with it. Usually by opening it to page 11.'],
+  ['The Elements of Typographic Style', 'Robert Bringhurst', 'Marcus reads it aloud when he needs to calm down.'],
+  ['Thinking with Type', 'Ellen Lupton', 'The one the interns are allowed to take home.'],
+  ['Designing Programmes', 'Karl Gerstner', 'Noor\'s. Full of sticky tabs in fourteen colors, which means Hannah has been at it.'],
+  ['Bell Labs Annual Report, 1968', 'Bell Telephone Laboratories', 'A client gift. The reason the studio does charts the way it does.'],
+  ['The Design of Everyday Things', 'Don Norman', 'Hannah\'s. "Read it again," she says, to everyone, every year.'],
+  ['Interaction of Color', 'Josef Albers', 'Missing plates 7 and 12. Nobody confesses.'],
+  ['Hello World', 'Alice Rawsthorn', 'Adaeze\'s. Inscribed to her by the author at a dinner she still talks about.'],
+  ['Emigre No. 70', 'Rudy VanderLans (ed.)', 'Not a book. On the shelf anyway. Eli\'s rules.'],
+  ['Hyphen Press: Modern Typography', 'Robin Kinross', 'Kenji says it\'s the only history that gets the Swiss right.'],
+  ['Signs, Symbols and Pictograms', 'Otl Aicher', 'Lola\'s. She didn\'t take it. Tomás keeps it dusted.'],
+];
+
+// ---- still lifes: the studio's other objects, drawn close up (see the illustration kinds in artifacts.js)
+function stillLife(key, kind, title, data = {}, note = '', sub = '') {
+  const v = JSON.stringify(data), id = `still:${key}:${[...v].reduce((h, ch) => (h * 31 + ch.charCodeAt(0)) >>> 0, 3).toString(36)}`;
+  const hit = docs.get(id);
+  if (hit) return hit;
+  const a = { id, kind, still: true, title, sub, phase: 3, t: 0, quality: 90, seed: [...key].reduce((h, ch) => (h * 31 + ch.charCodeAt(0)) >>> 0, 11), note, data };
+  docs.set(id, a);
+  return a;
 }
 
 // ---- the research wall: one board of individual sticky notes, rebuilt from the studio's research
@@ -16135,7 +17663,7 @@ function stickyWall(studio, projects) {
   return a;
 }
 
-return { get secretById() { return secretById; }, get ceoDocs() { return ceoDocs; }, get clientDocs() { return clientDocs; }, get hannahDocs() { return hannahDocs; }, get stickyWall() { return stickyWall; } };
+return { get secretById() { return secretById; }, get ceoDocs() { return ceoDocs; }, get clientDocs() { return clientDocs; }, get hannahDocs() { return hannahDocs; }, get tomasDocs() { return tomasDocs; }, get dataRoom() { return dataRoom; }, get kenjiDocs() { return kenjiDocs; }, get dittoDocs() { return dittoDocs; }, get sharedDocs() { return sharedDocs; }, get stillLife() { return stillLife; }, get stickyWall() { return stickyWall; }, get DESIGN_BOOKS() { return DESIGN_BOOKS; } };
 })();
 
 // ---- game.js
@@ -16150,10 +17678,12 @@ const { SCENARIOS } = __mods["sim/scenarios.js"];
 const { CHAT_CHOICES } = __mods["sim/brain.js"];
 const { STORIES } = __mods["sim/stories.js"];
 const { JOURNAL_FILTERS } = __mods["sim/journal.js"];
-const { secretById, ceoDocs, clientDocs, hannahDocs, stickyWall } = __mods["docs.js"];
+const { secretById, ceoDocs, clientDocs, hannahDocs, tomasDocs, dataRoom, kenjiDocs, dittoDocs, sharedDocs, stillLife, stickyWall, DESIGN_BOOKS } = __mods["docs.js"];
 const SCALE = 3; // canvas pixels per art pixel (keeps text crisp)
 const $ = s => document.querySelector(s);
-const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+// AP style: a proper name ending in s takes only an apostrophe (Marcus' computer, Tomás' chair)
+const ap = s => s.replace(/\b([A-ZÀ-Ý][a-zà-ÿ]+s)['\u2019]s\b/g, "$1'");
+const esc = s => ap(String(s ?? '')).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 // CSS tokens read during drawing are cached (getComputedStyle every frame is slow).
 const cssCache = new Map();
 const cssVar = n => cssCache.get(n) ?? (cssCache.set(n, getComputedStyle(document.documentElement).getPropertyValue(n).trim()), cssCache.get(n));
@@ -16203,10 +17733,43 @@ for (const o of props) if (o.sprite === 'booth') drawObject(bgTop.getContext('2d
 const SIGNS = [];
 // Every visible object is clickable; doors and off-map objects are not.
 const VIEWS = world.objects.filter(o => o.sprite !== 'none' && !o.decor);
+// Each object's real outline on the map, measured from the pixels its sprite draws (a tall plant,
+// a pinball backglass or a monitor on a desk all reach above their floor tile). Computers draw
+// nothing themselves: their monitor belongs to the table, counter or desk they sit on, so they
+// are measured from that sprite, within their own tile column.
+const BBOX = {};
+{
+  const cvs = document.createElement('canvas'); cvs.width = world.W * T; cvs.height = world.H * T;
+  const c2 = cvs.getContext('2d', { willReadFrequently: true });
+  const measure = (o, host, clipX) => {
+    c2.clearRect(0, 0, cvs.width, cvs.height);
+    drawObject(c2, host);
+    const x0 = Math.max(0, (clipX ? o.x : host.x - 1) * T), x1 = Math.min(cvs.width, (clipX ? o.x + o.w : host.x + host.w + 1) * T);
+    const y0 = Math.max(0, (host.y - 2) * T), y1 = Math.min(cvs.height, (host.y + host.h + 1) * T + 4);
+    const img = c2.getImageData(x0, y0, x1 - x0, y1 - y0).data;
+    let bx0 = 1e9, by0 = 1e9, bx1 = -1, by1 = -1;
+    for (let y = 0; y < y1 - y0; y++) for (let x = 0; x < x1 - x0; x++) {
+      if (img[(y * (x1 - x0) + x) * 4 + 3] < 120) continue; // the soft shadow doesn't count
+      if (clipX && (y0 + y) >= host.y * T + (host.sprite === 'counter' ? 0 : 2)) continue; // a computer's box is the monitor, not the desk under it
+      bx0 = Math.min(bx0, x); by0 = Math.min(by0, y); bx1 = Math.max(bx1, x); by1 = Math.max(by1, y);
+    }
+    if (bx1 < 0) return null;
+    return { x0: x0 + bx0, y0: y0 + by0, x1: x0 + bx1 + 1, y1: y0 + by1 + 1 + (clipX ? (o.name === 'laptop' ? 9 : 4) : 0) };
+  };
+  for (const o of VIEWS) {
+    let host = o, clipX = false;
+    if (o.sprite === 'blank') { host = world.objects.find(h => h !== o && h.sprite !== 'none' && h.sprite !== 'blank' && h.sprite !== 'chair' && !h.id.startsWith('desk:') && o.x >= h.x && o.x < h.x + h.w && o.y >= h.y && o.y < h.y + h.h); clipX = true; }
+    const bb = host ? measure(o, host, clipX) : null;
+    BBOX[o.id] = bb ?? { x0: o.x * T, y0: o.y * T, x1: (o.x + o.w) * T, y1: (o.y + o.h) * T };
+  }
+}
+const bboxOf = o => BBOX[o.id] ?? { x0: o.x * T, y0: o.y * T, x1: (o.x + o.w) * T, y1: (o.y + o.h) * T };
 // Windows sit in the top wall every third tile (see drawTile).
 const WINDOWS = [];
 for (let x = 0; x < world.W; x++) { const below = world.grid[1]?.[x]?.replace('+', ''); if (world.grid[0][x] === 'wall' && below && below !== 'wall' && x % 3 === 1) WINDOWS.push(x); }
+for (const o of world.objects) if (o.coversWindow) { const i = WINDOWS.indexOf(o.x); if (i >= 0) WINDOWS.splice(i, 1); }
 const COFFEE = world.objects.find(o => o.id === 'coffee_machine');
+const MAILBOX = world.objects.find(o => o.id === 'mailbox');
 
 // ------------------------------------------------------------------ stream
 setTimeout(() => local.subscribe(msg => {
@@ -16220,7 +17783,94 @@ setTimeout(() => local.subscribe(msg => {
   renderTop();
   if (tab === 'team' && !selected) renderTeam();
   if (tab === 'projects' && !projectOpen && !wallOpen && !selected && Math.random() < 0.05) renderProjects();
+  if (msg.ended && msg.t >= msg.ended.at && !endingShown && !endingDismissed) showEnding(msg.ended);
 })); // deferred until the whole module has initialized
+
+// ------------------------------------------------------------------ the ending
+// A terminal event (the museum, the sale, the close) ends the story: the clock stops, the
+// yearbook opens, the credits roll, and the player can start a new simulation.
+let endingShown = false, endingDismissed = false;
+const END_COPY = {
+  museum: { kicker: 'An ending', head: 'The permanent collection', line: y => `After ${y.days} days in the small space, the museum called. "${y.museumPiece ?? 'Kern Club'}" goes onto the big shelf. Adaeze said every name at the gala, including the ones who left.` },
+  sold: { kicker: 'An ending', head: 'Part of Studio Ditto', line: y => `After ${y.days} days, the money ran out before the invoices came in. Adaeze chose the sale over another layoff. Everyone kept their job. The name has eighteen months.` },
+  closed: { kicker: 'An ending', head: 'The doors close', line: y => `After ${y.days} days, Another Studio closed. Everyone was paid through the month. Everyone took a plant. Tomás took Pica.` },
+};
+function showEnding(ended) {
+  endingShown = true;
+  const y = ended.yearbook, c = END_COPY[ended.kind] ?? END_COPY.closed;
+  const el = $('#ending'), inner = $('#ending-inner');
+  control({ paused: true });
+  closeInspect(true);
+  $('#lightbox').hidden = true;
+  inner.innerHTML = `<div class="ending-card"><div class="ending-kicker">${esc(c.kicker)} · Day 100 to Day ${100 + y.days}</div><h1>${esc(c.head)}</h1><p>${esc(c.line(y))}</p><p class="sub">${esc(ended.text)}</p>
+    <div class="ending-actions"><button class="btn" data-end="yearbook">📖 Open the yearbook</button><button class="btn" data-end="credits">🎬 Roll the credits</button><button class="btn" data-end="stay">👀 Look around the empty studio</button></div></div>`;
+  el.hidden = false; el.classList.remove('leaving');
+  endingStars();
+  inner.onclick = e => {
+    const b = e.target.closest('[data-end]'); if (!b) return;
+    const k = b.dataset.end;
+    if (k === 'yearbook') renderYearbook(y, ended);
+    else if (k === 'credits') rollCredits(y, ended);
+    else if (k === 'stay') { endingDismissed = true; el.classList.add('leaving'); setTimeout(() => { el.hidden = true; }, 900); showToast({ icon: ended.kind === 'museum' ? '🏛️' : '🕯️', label: 'The story has ended', text: 'The clock has stopped. Reset from the menu when you want a new studio, or open the ending again from the Feed.', actions: [{ label: 'Open the ending', primary: true, run: () => { endingDismissed = false; showEnding(ended); } }, { label: 'Keep looking' }] }); }
+    else if (k === 'new') { closeInspect(true); endingShown = false; endingDismissed = false; el.classList.add('leaving'); setTimeout(() => { el.hidden = true; }, 900); local.reset(); setTab(tab); control({ paused: false }); }
+  };
+}
+function renderYearbook(y, ended) {
+  const inner = $('#ending-inner');
+  const money = n => `${n < 0 ? '-' : ''}$${Math.abs(Math.round(n / 1000))}k`;
+  const csThumbs = y.delivered.filter(p => p.caseStudy && !p.archive).map(p => artifactById(p.caseStudy)).filter(Boolean);
+  const person = p => `<div class="yb-person"><img src="${avatars[p.id] ?? ''}" alt=""><div><b>${esc(p.name)}</b><span class="k">${esc(p.role)}</span>${p.journal.map(j => `<div class="mem">${esc(j.icon)} ${esc(j.text)}</div>`).join('')}</div></div>`;
+  inner.innerHTML = `<div class="yearbook">
+    <div class="win yb-cover"><div class="ending-kicker">The yearbook</div><h2>Another Studio · Day 100 to Day ${100 + y.days}</h2><p class="sub">${esc(y.from)} → ${esc(y.to)}</p>
+      <div class="stats"><div><b>${y.delivered.filter(p => !p.archive).length}</b><span>projects delivered</span></div><div><b>${y.awards.filter(a => a.t >= 99 * 1440).length}</b><span>awards won</span></div><div><b>${y.artifacts}</b><span>pieces of work</span></div><div><b>${y.conversations}</b><span>conversations</span></div></div></div>
+    <div class="win"><h2>The work</h2>${csThumbs.length ? `<div class="cs-grid">${csThumbs.map(a => thumb(a)).join('')}</div>` : ''}${y.delivered.filter(p => !p.archive).map(p => `<div class="mem"><b>${esc(p.name)}</b> <span class="k">· ${esc(p.client)} · quality ${p.quality} · ${p.team.map(id => P[id]?.short ?? creditName(id)).join(', ')}</span></div>`).join('') || '<p class="empty">Nothing was delivered after Day 100. The archive remembers the rest.</p>'}${y.lost.length ? `<p class="sub">Lost to Studio Ditto: ${esc(y.lost.join(', '))}.</p>` : ''}</div>
+    <div class="win"><h2>The shelf</h2>${y.awards.length ? y.awards.map(a => `<div class="mem">🏆 <b>${esc(a.award)}</b> <span class="k">· ${esc(a.project)} · ${esc(timeOf(a.t))}</span></div>`).join('') : '<p class="empty">No awards. Room for plenty.</p>'}${y.museumPiece ? `<div class="mem">🏛️ <b>${esc(y.museumPiece)}</b> <span class="k">· permanent collection</span></div>` : ''}</div>
+    <div class="win"><h2>The people</h2><div class="yb-people">${y.people.map(person).join('')}</div>
+      <div class="yb-row" style="margin-top: var(--space-3)">${y.joined.length ? `<span>👋 Joined: ${esc(y.joined.join(', '))}</span>` : ''}${y.left.length ? `<span>📦 Left: ${esc(y.left.join(', '))}</span>` : ''}${y.returned.length ? `<span>🫂 Came back to visit: ${esc(y.returned.map(k => ({ lola: 'Lola', rafa: 'Rafa', priya: 'Priya', grace: 'Grace', ikaika: 'Ikaika', val: 'Val', oksana: 'Oksana' })[k] ?? k).join(', '))}</span>` : ''}${y.hannahBook ? '<span>📚 Hannah published the book</span>' : ''}${y.helix ? '<span>🧬 Priya hired the studio</span>' : ''}</div></div>
+    <div class="win"><h2>The year in moments</h2>${y.big.map(f => `<div class="mem"><span class="k">${esc(timeOf(f.t))}</span> ${esc(f.icon)} ${esc(f.text)}</div>`).join('') || '<p class="empty">A quiet year.</p>'}</div>
+    <div class="win"><h2>The small things</h2><div class="yb-row"><span>🕹️ ${y.pinball} games of pinball</span><span>🕺 ${y.ddr} songs on the dance machine</span><span>☕ ${y.coffee} espressos</span><span>🐶 ${y.picaMoments} moments at Pica's bed</span><span>🔍 ${y.trinkets} things found</span></div></div>
+    <div class="win"><h2>The money</h2><div class="yb-row"><span>In: ${money(y.lifetimeIn)}</span><span>Out: ${money(y.lifetimeOut)}</span><span>Left in the bank: <b class="${y.cash < 0 ? 'former' : ''}">${money(y.cash)}</b></span></div></div>
+    <div class="win"><h2>${esc(END_COPY[ended.kind]?.head ?? 'The end')}</h2><p>${esc(ended.text)}</p></div>
+    <div class="ending-actions"><button class="btn" data-end="credits">🎬 Roll the credits</button><button class="btn" data-end="new">🌅 Start a new simulation</button></div>
+  </div>`;
+  inner.scrollTop = 0;
+}
+function rollCredits(y, ended) {
+  const inner = $('#ending-inner');
+  const cast = world.personas.filter(p => !p.visitor).map(p => [p.name, p.role]);
+  const former = Object.entries(FORMER_NAMES).map(([role, name]) => [name, role]);
+  const clients = CLIENT_CONTACTS.map(c => [c.name, c.title]);
+  const row = ([a, b]) => `<div class="cr"><span>${esc(a)}</span><span>${esc(b)}</span></div>`;
+  inner.innerHTML = `<div class="credits"><div class="credits-roll">
+    <div class="big">Another Studio</div>
+    <h3>The studio</h3>${cast.map(row).join('')}
+    <h3>Formerly of the studio</h3>${former.map(row).join('')}
+    <h3>The clients</h3>${clients.map(row).join('')}
+    <h3>Also appearing</h3>${[['Pica', 'as herself'], ['Studio Ditto', 'as themselves'], ['The chairs', 'in order of absence'], ['The riso', 'unjammed by Eli'], ['The toaster', 'setting four'], ['The left arrow', 'sticky'], ['The bear flag', 'unexplained']].map(row).join('')}
+    <h3>By the numbers</h3>${[[`${y.days} days`, 'simulated'], [`${y.conversations}`, 'conversations'], [`${y.artifacts}`, 'pieces of work'], [`${y.awards.length}`, 'awards on the shelf']].map(row).join('')}
+    <h3>${esc(END_COPY[ended.kind]?.head ?? 'The end')}</h3><p style="max-width: 520px">${esc(ended.text)}</p>
+    <div class="big">A simulacra where generative agents collaborate on design projects while questioning their own existence</div>
+    <p class="sub">No sticky notes were harmed. Nobody worked a weekend unless they wanted to.</p>
+  </div></div>
+  <div class="ending-actions"><button class="btn" data-end="yearbook">📖 Back to the yearbook</button><button class="btn" data-end="new">🌅 Start a new simulation</button></div>`;
+  inner.scrollTop = 0;
+}
+// the same starfield as the title screen, drawn small and scaled up
+function endingStars() {
+  const sky = $('#ending-stars'), sx = sky.getContext('2d');
+  sky.width = Math.ceil(innerWidth / 3); sky.height = Math.ceil(innerHeight / 3);
+  const stars = Array.from({ length: 64 }, () => ({ x: Math.random(), y: Math.random() * 0.85, p: Math.random() * 6.3, s: Math.random() < 0.15 ? 2 : 1 }));
+  let t0 = performance.now();
+  const paint = now => {
+    if ($('#ending').hidden) return;
+    sx.clearRect(0, 0, sky.width, sky.height);
+    for (const s of stars) { const a = 0.45 + 0.55 * Math.abs(Math.sin((now - t0) / 1400 + s.p)); sx.fillStyle = `rgba(255,244,196,${a.toFixed(2)})`; sx.fillRect(Math.floor(s.x * sky.width), Math.floor(s.y * sky.height), s.s, s.s); }
+    requestAnimationFrame(paint);
+  };
+  requestAnimationFrame(paint);
+}
+const FORMER_NAMES = { 'Art Director': 'Rafael Oliveira', 'Design Manager': 'Grace Mwangi', 'Intern': 'Mei-Lin Chen', 'Account Executive': 'Valentina Rossi', 'PR': 'Jae-won Park', 'Lead Designer': 'Ikaika Kahananui', 'Senior Designer': 'Oksana Kovalenko', 'Intern (UX)': 'Kwame Asante', 'Office Manager': 'Dolores "Lola" Martínez', 'Chief Product Officer': 'Priya Raman', 'Recruiter': 'Fatima Zahra El Idrissi' };
+const CLIENT_CONTACTS = [['Dana Whitfield', 'Fernwood Botanical Garden'], ['Arjun Mehta', 'Lumen Bikes'], ['Folake Adebayo', 'Okra Food Co.'], ['Marisol Vega', 'City of Harborview'], ['Dr. Helen Park', 'Atlas Health'], ['Professor Ian Gallagher', 'Tidewater Museum'], ['Sam Okoro', 'Quanta Labs'], ['Rosa Lindgren', 'Kindred Bank'], ['Tariq Haddad', 'Greenline Transit'], ['Celeste Moreau', 'Halcyon Hotels'], ['Priya Raman', 'Helix Foundry']].map(([name, title]) => ({ name, title }));
 
 // ------------------------------------------------------------------ render loop
 let ui = 1; // canvas pixels per screen pixel
@@ -16245,6 +17895,7 @@ function updateCamera() {
 const viewRect = () => ({ x: cam.ox * SCALE, y: cam.oy * SCALE, w: canvas.width / cam.z, h: canvas.height / cam.z });
 let lastBubbles = []; // where bubbles were drawn last frame, so they can be clicked
 let emptyFade = 0; // eases the outage overlay in and out
+let quakeFlicker = 0; // frames of lights-out left in the current earthquake flicker
 // After sunset the lights are on only in rooms with someone in them. Each tile
 // belongs to a room (walls and doors take the room beside them); each room fades on its own.
 const SUNSET = 18 * 60 + 30, SUNRISE = 6 * 60 + 30;
@@ -16282,9 +17933,17 @@ const ROOM_MASKS = Object.fromEntries(ROOMS.map(r => {
 // easing, bubbles, weather, a quake); otherwise ~10 times a second, enough for the idle loops.
 // Hidden tabs don't draw at all.
 let lastDraw = 0, lastSnapT = -1, animT = 0;
+let frameN = 0;
+// Night, dusk, a power cut and the empty-room darkness are composed into one layer that is
+// rebuilt only when one of them changes, then blitted once per frame.
+const DARK = document.createElement('canvas'); DARK.width = world.W * T; DARK.height = world.H * T;
+const dctx = DARK.getContext('2d');
+let darkKey = '', darkAny = false;
 function frame(now) {
   requestAnimationFrame(frame);
   if (!snap || document.hidden) return;
+  // 30 fps is plenty for 16-pixel people easing across a room; only following someone or an earthquake needs every frame
+  if (!snap.possessed && !snap.quake && (++frameN & 1)) return;
   const lively = snap.quake || snap.outage || hover || hoverObj || snap.possessed || snap.t !== lastSnapT && !snap.paused
     || Object.values(disp).some(d => d.moving) || Math.abs(cam.z - (snap.possessed ? FOLLOW_ZOOM : 1)) > 0.002 || ['rain', 'storm', 'snow'].includes(snap.weather?.kind);
   if (!lively && now - lastDraw < 100) return;
@@ -16303,6 +17962,7 @@ function frame(now) {
 
   const everyone = [...snap.agents, ...(snap.visitors ?? [])];
   const vis = everyone.filter(a => !a.hidden);
+  drawDoors(vis);
   for (const a of everyone) {
     const d = disp[a.id] ??= { x: a.x, y: a.y };
     const dx = a.x - d.x, dy = a.y - d.y;
@@ -16328,21 +17988,31 @@ function frame(now) {
     }
     const idle = !d.moving && !a.visitor ? idleOf(a) : null;
     if (idle === 'dognap') f = Math.floor(now / 700) % 5 === 0 ? 3 + (Math.floor(now / 140) % 2) : 0; // a sleepy wag now and then
-    ctx.drawImage(sprite(P[a.id], a.dir, f), px, py);
-    if (idle) drawIdle(idle, a, px, py, now);
+    let ox = 0, oy = 0;
+    const ph = (now + a.id.length * 397) % 100000;
+    if (idle === 'dance') { const beat = Math.floor(now / 170); f = beat % 2 + 1; oy = beat % 2 ? -2 : 0; ox = [0, 1, 0, -1][beat % 4]; } // hopping on the pad, feet going
+    else if (idle === 'pinball') { if ((ph % 2600) < 140) ox = 1; if ((ph % 2600) > 1300 && (ph % 2600) < 1400) ox = -1; } // nudging the table, almost a tilt
+    else if (idle === 'dummy') { if ((ph % 640) < 160) ox = FUN_OBJ.wing_chun && FUN_OBJ.wing_chun.x < d.x ? -1 : 1; } // leaning into each strike
+    // face the thing you're using: machines are played from the front, the dummy from the side
+    const dir = idle === 'pinball' || idle === 'dance' ? 'up' : idle === 'dummy' && FUN_OBJ.wing_chun ? (FUN_OBJ.wing_chun.x > d.x ? 'right' : 'left') : a.dir;
+    ctx.drawImage(sprite(P[a.id], dir, f), px + ox, py + oy);
+    if (idle) drawIdle(idle, { ...a, dir }, px + ox, py + oy, now);
     if (a.id === snap.possessed) { const bob = Math.sin(now / 200) * 1.5; ctx.fillStyle = C('select'); ctx.beginPath(); ctx.moveTo(px + 5, py - 6 + bob); ctx.lineTo(px + 11, py - 6 + bob); ctx.lineTo(px + 8, py - 2 + bob); ctx.closePath(); ctx.fill(); }
   };
   for (let row = 0; row < world.H; row++) {
-    if (ROW_LAYERS[row]) ctx.drawImage(ROW_LAYERS[row], 0, 0);
+    if (ROW_LAYERS[row]) { const y0 = Math.max(0, (row - 3) * T), y1 = Math.min(bg.height, (row + 2) * T); ctx.drawImage(ROW_LAYERS[row], 0, y0, bg.width, y1 - y0, 0, y0, bg.width, y1 - y0); }
     if (row === shelfRow) drawTrophies(snap.awards?.length ?? 0);
     while (next < vis.length && Math.round(disp[vis[next].id].y) <= row) drawPerson(vis[next++]);
   }
   while (next < vis.length) drawPerson(vis[next++]);
   if (hoverObj) { // highlight what you're pointing at, over everything
     ctx.strokeStyle = C('select'); ctx.lineWidth = 1;
-    ctx.strokeRect(hoverObj.x * T + 0.5, hoverObj.y * T - 3.5, hoverObj.w * T - 1, hoverObj.h * T + 3);
+    const b = bboxOf(hoverObj);
+    ctx.strokeRect(b.x0 - 1.5, b.y0 - 1.5, b.x1 - b.x0 + 3, b.y1 - b.y0 + 3);
   }
   drawDecor(now);
+  if (snap.picaDay?.smells) drawSmells(snap.picaDay.smells, now);
+  if (snap.mail && MAILBOX) { const up = Math.sin(now / 500) > 0 ? 0 : 1; ctx.fillStyle = C('outline'); ctx.fillRect(MAILBOX.x * T + 13, MAILBOX.y * T - 8 - up, 1, 8); ctx.fillStyle = C('mustard'); ctx.fillRect(MAILBOX.x * T + 13, MAILBOX.y * T - 8 - up, 4, 3); }
   ctx.drawImage(bgTop, 0, 0);
   drawSteam(now);
   drawWeather(now);
@@ -16350,20 +18020,24 @@ function frame(now) {
   // day/night tint
   const m = snap.t % 1440;
   const night = m < 330 || m > 1290 ? 1 : m < 420 ? (420 - m) / 90 : m > 1140 ? (m - 1140) / 150 : 0;
-  if (night > 0) { ctx.globalAlpha = night; ctx.fillStyle = C('night'); ctx.fillRect(0, 0, bg.width, bg.height); ctx.globalAlpha = 1; }
   // A power cut darkens everything; otherwise, after sunset, only empty rooms go dark.
   emptyFade += ((snap.outage ? 1 : 0) - emptyFade) * 0.04;
-  if (emptyFade > 0.01) { ctx.globalAlpha = Math.min(1, emptyFade); ctx.fillStyle = C('lights-off'); ctx.fillRect(0, 0, bg.width, bg.height); ctx.globalAlpha = 1; }
   const afterDark = m >= SUNSET || m < SUNRISE;
   const occupied = new Set(snap.agents.filter(a => !a.hidden && !P[a.id]?.look?.dog).map(a => world.areaGrid[Math.round(a.y)]?.[Math.round(a.x)]));
-  ctx.fillStyle = C('lights-off');
-  for (const r of ROOMS) {
-    roomFade[r] += ((afterDark && !snap.outage && !occupied.has(r) ? 1 : 0) - roomFade[r]) * 0.05;
-    if (roomFade[r] < 0.01) continue;
-    ctx.globalAlpha = Math.min(1, roomFade[r]);
-    ctx.drawImage(ROOM_MASKS[r], 0, 0);
+  for (const r of ROOMS) roomFade[r] += ((afterDark && !snap.outage && !occupied.has(r) ? 1 : 0) - roomFade[r]) * 0.05;
+  const dusk = (m > 1080 && m < 1200) || (m > 360 && m < 450);
+  const key = `${night.toFixed(2)}|${emptyFade.toFixed(2)}|${ROOMS.map(r => roomFade[r].toFixed(2)).join(',')}|${dusk ? 1 : 0}`;
+  if (key !== darkKey) {
+    darkKey = key;
+    dctx.clearRect(0, 0, DARK.width, DARK.height);
+    darkAny = night > 0 || emptyFade > 0.01 || dusk || ROOMS.some(r => roomFade[r] >= 0.01);
+    if (night > 0) { dctx.globalAlpha = night; dctx.fillStyle = C('night'); dctx.fillRect(0, 0, DARK.width, DARK.height); }
+    if (emptyFade > 0.01) { dctx.globalAlpha = Math.min(1, emptyFade); dctx.fillStyle = C('lights-off'); dctx.fillRect(0, 0, DARK.width, DARK.height); }
+    for (const r of ROOMS) { if (roomFade[r] < 0.01) continue; dctx.globalAlpha = Math.min(1, roomFade[r]); dctx.drawImage(ROOM_MASKS[r], 0, 0); }
+    dctx.globalAlpha = 1;
+    if (dusk) { dctx.fillStyle = C('dusk'); dctx.fillRect(0, 0, DARK.width, DARK.height); }
   }
-  ctx.globalAlpha = 1;
+  if (darkAny) ctx.drawImage(DARK, 0, 0);
   // jack-o'-lanterns glow through the dark (drawn above the night tint)
   if (snap.decor === 'halloween' && (m >= 18 * 60 || m < 7 * 60)) for (const [x, y, sz] of PUMPKINS) {
     const cx = x * T + 8, cy = y * T + 10, rw = 6 * sz, e = sz * 1.4, flick = 0.85 + Math.sin(now / 170 + x) * 0.15;
@@ -16375,7 +18049,12 @@ function frame(now) {
     ctx.fillRect(cx - rw * 0.4, cy + 4.6 * sz * 0.3, rw * 0.8, 1.2 * sz);
     ctx.globalAlpha = 1;
   }
-  if ((m > 1080 && m < 1200) || (m > 360 && m < 450)) { ctx.fillStyle = C('dusk'); ctx.fillRect(0, 0, bg.width, bg.height); }
+  // the lights flicker while the ground shakes: dark frames at random, a few brown-outs in a row
+  if (quaking) {
+    quakeFlicker = quakeFlicker > 0 ? quakeFlicker - 1 : Math.random() < 0.22 ? 1 + Math.floor(Math.random() * 3) : 0;
+    if (quakeFlicker) { ctx.globalAlpha = 0.45 + Math.random() * 0.5; ctx.fillStyle = C('lights-off'); ctx.fillRect(0, 0, bg.width, bg.height); ctx.globalAlpha = 1; }
+    else if (Math.random() < 0.15) { ctx.globalAlpha = 0.12; ctx.fillStyle = C('white'); ctx.fillRect(0, 0, bg.width, bg.height); ctx.globalAlpha = 1; } // a surge
+  } else quakeFlicker = 0;
 
   // high-res pass, sized in screen pixels
   ctx.setTransform(cam.z, 0, 0, cam.z, -cam.ox * SCALE * cam.z, -cam.oy * SCALE * cam.z);
@@ -16415,14 +18094,56 @@ function idleOf(a) {
   const loc = act.loc ?? '', desc = act.desc ?? '';
   if (P[a.id]?.look?.dog) return /nap|sleep|curl|snooz|bed/i.test(desc) || loc === 'dog_bed' ? 'dognap' : null;
   if (/nap/i.test(desc)) return 'doze';
+  if (loc === 'pinball' || loc === 'pinball2') return 'pinball';
+  if (loc === 'ddr') return 'dance';
+  if (loc === 'wing_chun') return 'dummy';
+  if (loc === 'phone_booth' && /call|phone|client|mum|mom|dad|sister|brother|doctor|school/i.test(desc)) return 'phone';
   if (loc.startsWith('desk:') || (act.project && !loc.startsWith('home:'))) return 'type';
   if (/coffee|espresso|latte|tea/i.test(desc)) return 'sip';
   if (/book|read|annual|case stud|magazine/i.test(desc) || loc.startsWith('reading_chair')) return 'read';
   return null;
 }
+const FUN_OBJ = Object.fromEntries(['pinball', 'pinball2', 'ddr', 'wing_chun'].map(id => [id, world.objects.find(o => o.id === id)]));
 function drawIdle(kind, a, px, py, now) {
   const ph = (now + a.id.length * 397) % 100000; // each person keeps their own rhythm
-  if (kind === 'type') {
+  const skin = C(P[a.id]?.look?.skin ?? 'skin2');
+  if (kind === 'pinball') {
+    // the ball ricochets around the playfield, the flippers flick, the backglass blinks; hands on the buttons
+    const loc = local.sim().agents.get(a.id)?.action?.loc, m = FUN_OBJ[loc]; if (!m) return;
+    const mx = m.x * T, my = m.y * T, two = loc === 'pinball2';
+    const t = ph / 1000, bx = mx + 4 + Math.abs(Math.sin(t * 2.3 + 0.7)) * 8, by = my - 2 + Math.abs(Math.sin(t * 3.1)) * 6; // the top of the playfield, above the player's head
+    ctx.fillStyle = C('white'); ctx.fillRect(Math.round(bx), Math.round(by), 1, 1);
+    ctx.fillStyle = C(two ? 'mustard' : 'gold'); ctx.globalAlpha = 0.5 + 0.5 * Math.sin(t * 9); ctx.fillRect(mx + 5, my - 10, 2, 1); ctx.fillRect(mx + 9, my - 9, 2, 1); ctx.globalAlpha = 1;
+    const flick = Math.floor(ph / 230) % 3; // one flipper, the other, both at rest
+    ctx.fillStyle = C('white'); if (flick === 1) ctx.fillRect(mx + 4, my + 5, 3, 1); if (flick === 2) ctx.fillRect(mx + 9, my + 5, 3, 1);
+    ctx.fillStyle = skin; ctx.fillRect(px + 1, py + 6 - (flick === 1 ? 1 : 0), 2, 1); ctx.fillRect(px + 13, py + 6 - (flick === 2 ? 1 : 0), 2, 1);
+  } else if (kind === 'dance') {
+    // arrows scroll up the screen; the pad's lit arrows pulse under their feet
+    const m = FUN_OBJ.ddr; if (!m) return;
+    const sx = m.x * T + 4, sy = m.y * T - 7, sw = m.w * T - 8, shh = 11;
+    ctx.save(); ctx.beginPath(); ctx.rect(sx, sy, sw, shh); ctx.clip();
+    const cols = ['sky', 'pink', 'mustard', 'pink'];
+    for (let i = 0; i < 4; i++) { const y = sy + shh - ((ph / 90 + i * 7 + a.id.length * 3) % (shh + 4)); ctx.fillStyle = C(cols[i]); ctx.fillRect(sx + 2 + i * 6, Math.round(y), 2, 2); }
+    ctx.globalAlpha = 0.25 + 0.25 * (Math.floor(ph / 170) % 2); ctx.fillStyle = C('white'); ctx.fillRect(sx, sy + shh - 3, sw, 1); ctx.globalAlpha = 1;
+    ctx.restore();
+    ctx.globalAlpha = 0.6; ctx.fillStyle = C(cols[Math.floor(ph / 170) % 4]); ctx.fillRect(px + 2 + (Math.floor(ph / 170) % 2) * 9, py + SH - 2, 3, 1); ctx.globalAlpha = 1;
+  } else if (kind === 'dummy') {
+    // a strike every so often: the arm shoots out, the dummy's arm shivers, a little impact spark
+    const m = FUN_OBJ.wing_chun; if (!m) return;
+    const hit = (ph % 640) < 160, right = a.dir !== 'left';
+    ctx.fillStyle = skin;
+    if (hit) ctx.fillRect(right ? px + 13 : px - 1, py + 12 + (Math.floor(ph / 640) % 2) * 3, 4, 1); else ctx.fillRect(right ? px + 12 : px + 2, py + 13, 2, 1); // guard up between strikes
+    if (hit) {
+      const ax = m.x * T + (right ? 1 : 10), ay = m.y * T + (Math.floor(ph / 640) % 2 ? -4 : 1);
+      ctx.fillStyle = C('wood-light'); ctx.fillRect(ax + (right ? 1 : 0), ay + 1 + ((ph % 640) < 80 ? 1 : 0), 5, 1);
+      ctx.fillStyle = C('white'); ctx.globalAlpha = 0.8; ctx.fillRect(ax + (right ? 3 : 2), ay - 1, 1, 1); ctx.fillRect(ax + (right ? 5 : 0), ay + 3, 1, 1); ctx.globalAlpha = 1;
+    }
+  } else if (kind === 'phone') {
+    // a phone at the ear, a nod now and then, and the occasional dots of someone talking back
+    ctx.fillStyle = C('outline'); ctx.fillRect(px + (a.dir === 'left' ? 3 : 11), py + 4, 2, 4);
+    ctx.fillStyle = C('white'); ctx.fillRect(px + (a.dir === 'left' ? 3 : 11), py + 4, 2, 1);
+    if ((ph % 3000) < 900) { ctx.fillStyle = C('white'); ctx.globalAlpha = 0.7; for (let i = 0; i < 3; i++) if ((ph % 900) > i * 300) ctx.fillRect(px + 14 + i * 2, py - 2, 1, 1); ctx.globalAlpha = 1; }
+  } else if (kind === 'type') {
     // text grows on the nearest screen, with a blinking cursor
     const cx = px + 8, top = py + 4;
     const dev = TABLE_DEVICES.filter(v => Math.abs(v.y - top) < 26).sort((p1, p2) => Math.abs(p1.x + p1.w / 2 - cx) - Math.abs(p2.x + p2.w / 2 - cx))[0];
@@ -16490,6 +18211,38 @@ function drawLight(now) {
   }
 }
 // Steam from the espresso machine in the morning or right after someone uses it.
+// Doors swing open when someone is on or beside them, and ease shut after. The static layer
+// has them closed; this redraws the tile with both leaves swung back and the opening dark.
+const DOORS = []; for (let y = 0; y < world.H; y++) for (let x = 0; x < world.W; x++) if (world.grid[y][x].replace('+', '') === 'door') DOORS.push({ x, y, open: 0 });
+function drawDoors(vis) {
+  for (const d of DOORS) {
+    const near = vis.some(a => { const p = disp[a.id] ?? a; return Math.abs(p.x - d.x) + Math.abs(p.y - d.y) < 1.3; });
+    d.open += ((near ? 1 : 0) - d.open) * (near ? 0.3 : 0.12);
+    if (d.open < 0.03) continue;
+    const px = d.x * T, py = d.y * T, o = d.open;
+    ctx.fillStyle = C('door-dark'); ctx.fillRect(px, py, T, T);
+    ctx.fillStyle = C('night'); ctx.globalAlpha = 0.35 * o; ctx.fillRect(px + 2, py + 1, 12, 15); ctx.globalAlpha = 1;
+    // each leaf swings back toward its jamb: it gets narrower and a little darker as it turns
+    const lw = Math.max(1, Math.round(6 * (1 - o * 0.85)));
+    ctx.fillStyle = C('door'); ctx.fillRect(px + 2, py + 1, lw, 15); ctx.fillRect(px + 14 - lw, py + 1, lw, 15);
+    ctx.fillStyle = C('door-dark'); ctx.fillRect(px + 2 + lw - 1, py + 1, 1, 15); ctx.fillRect(px + 14 - lw, py + 1, 1, 15);
+    ctx.fillStyle = C('brass'); if (lw > 2) { ctx.fillRect(px + 2 + lw - 2, py + 8, 1, 2); ctx.fillRect(px + 14 - lw + 1, py + 8, 1, 2); }
+  }
+}
+// Pica's smell map: soft puffs over everything that smells, colored by what it is, breathing slowly.
+const SMELL_COLOR = { lola: '#e6c86e', coffee: '#8a5a3a', food: '#e0893c', ink: '#c05ab0', paper: '#d8d2c0', outside: '#5f9e5a', person: '#e09ab6', stranger: '#7aa7d6' };
+function drawSmells(smells, now) {
+  ctx.save();
+  for (const s of smells) {
+    const pulse = 0.75 + 0.25 * Math.sin(now / 900 + s.x * 3 + s.y);
+    const r = (6 + s.strength * 9) * pulse;
+    const g = ctx.createRadialGradient(s.x * T, s.y * T, 1, s.x * T, s.y * T, r);
+    g.addColorStop(0, SMELL_COLOR[s.kind] + 'aa'); g.addColorStop(1, SMELL_COLOR[s.kind] + '00');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(s.x * T, s.y * T, r, 0, Math.PI * 2); ctx.fill();
+    for (let i = 0; i < 3; i++) { const t = ((now / 1600) + i / 3 + s.x) % 1; ctx.globalAlpha = (1 - t) * 0.5 * s.strength; ctx.fillStyle = SMELL_COLOR[s.kind]; ctx.beginPath(); ctx.arc(s.x * T + Math.sin(t * 7 + i + s.y) * 3, s.y * T - 4 - t * 12, 1 + t * 2, 0, Math.PI * 2); ctx.fill(); ctx.globalAlpha = 1; }
+  }
+  ctx.restore();
+}
 function drawSteam(now) {
   if (!COFFEE) return;
   const m = snap.t % 1440;
@@ -16538,7 +18291,7 @@ function drawWeather(now) {
 const PUMPKINS = [[6, 13, 1], [7, 13, 0.75], [13, 15, 1], [16, 15, 0.85], [20, 7, 1]];
 function drawDecor(now) {
   const k = snap.decor; if (!k) return;
-  // Halloween: Tomás's pumpkins (see the news on Oct 20). Round, ribbed, with a curly stem
+  // Halloween: Tomás' pumpkins (see the news on Oct 20). Round, ribbed, with a curly stem
   // and a leaf; at night their carved faces glow.
   if (k === 'halloween') {
     const m = snap.t % 1440, dark = m >= 18 * 60 || m < 7 * 60;
@@ -16684,10 +18437,10 @@ function agentAt(ev) {
 }
 function viewAt(ev) {
   const { x, y } = mapPoint(ev);
-  const tall = o => ['plant_tall', 'fridge', 'booth', 'shelf', 'trophies'].includes(o.sprite) || o.view === 'computer' ? 10 : 4; // monitors stand up off the desk
-  // Smallest footprint wins so a plant on a table edge is still clickable.
-  return VIEWS.filter(o => x >= o.x * T && x < (o.x + o.w) * T && y >= o.y * T - tall(o) && y < (o.y + o.h) * T + 2)
-    .sort((a, b) => a.w * a.h - b.w * b.h)[0];
+  // Each object's measured outline, with a pixel of slack. Smallest outline wins, so a monitor on a table is still clickable.
+  const area = o => { const b = bboxOf(o); return (b.x1 - b.x0) * (b.y1 - b.y0); };
+  return VIEWS.filter(o => { const b = bboxOf(o); return x >= b.x0 - 1 && x < b.x1 + 1 && y >= b.y0 - 1 && y < b.y1 + 1; })
+    .sort((a, b) => area(a) - area(b))[0];
 }
 // Hover previews: a person's mood and current thought; an object's story.
 function personTip(a) {
@@ -16699,7 +18452,7 @@ function objectTip(o) {
   const d = local.sim().objectDetail(o.id);
   const quote = d?.story?.match(/"[^"]+"/)?.[0];
   const story = d?.story ? `<div class="tip-story">${esc(d.story.split(/(?<=[.!?])\s/)[0])}</div>${o.id === 'proto_bench' && quote ? `<div class="tip-story">Taped above it: ${esc(quote)}</div>` : ''}` : '';
-  const work = o.view ? `<div class="tip-meta">${wallArtifacts(o).length} pieces of work</div>` : '';
+  const work = o.id === 'mailbox' ? `<div class="tip-meta">${snap?.mail ? `${snap.mail} unopened letter${snap.mail === 1 ? '' : 's'}` : 'Click to read the post'}</div>` : o.view ? `<div class="tip-meta">${wallArtifacts(o).length} pieces of work</div>` : STILL_IDS.has(o.id) ? '<div class="tip-meta">Click to take a closer look</div>' : '';
   const hidden = d?.trinket && !d.found ? '<div class="tip-meta">🔍 Something is hidden here</div>' : '';
   const ow = o.view === 'computer' && world.objects.find(x => x.id === o.of)?.owner;
   return `<b>${esc(ow ? `${P[ow]?.short}'s ${o.name}` : cap(o.name))}</b>${story}${o.view === 'computer' ? '<div class="tip-meta">Click to see what\'s on screen</div>' : work}${hidden}`;
@@ -16708,8 +18461,9 @@ canvas.addEventListener('mousemove', ev => showTip(ev));
 function showTip(ev) {
   const a = agentAt(ev);
   hover = a?.id ?? null;
-  hoverObj = a ? null : viewAt(ev) ?? null;
+  hoverObj = a || god ? null : viewAt(ev) ?? null; // in God Mode only people are selectable
   const tip = $('#tooltip');
+  canvas.style.cursor = a || hoverObj ? 'pointer' : 'default';
   const sr = $('#stage').getBoundingClientRect();
   if (a) tip.innerHTML = a.visitor ? `<b>${esc(a.name)} · client</b>${esc(a.title)}<br>${esc(a.act)}` : personTip(a);
   else if (hoverObj) tip.innerHTML = objectTip(hoverObj);
@@ -16720,13 +18474,14 @@ function showTip(ev) {
   tip.style.left = `${px + 16 + tw > sr.width ? Math.max(0, px - 16 - tw) : px + 16}px`;
   tip.style.top = `${py + 16 + th > sr.height ? Math.max(0, py - 16 - th) : py + 16}px`;
 }
-canvas.addEventListener('mouseleave', () => { hover = null; hoverObj = null; $('#tooltip').hidden = true; });
+canvas.addEventListener('mouseleave', () => { hover = null; hoverObj = null; canvas.style.cursor = 'default'; $('#tooltip').hidden = true; });
 canvas.addEventListener('click', ev => {
   if (suppressClick) { suppressClick = false; return; } // that was a drag, pinch or long-press
   const bub = bubbleAt(ev);
   if (bub) return openConversation(bub.a.id);
   const a = agentAt(ev);
   if (a) return a.visitor ? openVisitor(a.id) : inspect(a.id);
+  if (god) return; // God Mode: objects aren't clickable, only people
   const o = viewAt(ev);
   if (o) openObject(o);
 });
@@ -16804,11 +18559,16 @@ let suppressClick = false;
 // ------------------------------------------------------------------ top bar
 function renderTop() {
   if (!snap) return;
-  $('#clock').textContent = snap.clock + (snap.paused ? ' · PAUSED' : '');
-  for (const btn of document.querySelectorAll('.speed')) btn.setAttribute('aria-pressed', String(Number(btn.dataset.speed) === snap.speed));
-  $('#speed-cycle').textContent = `${snap.speed}×`;
-  $('#pause').setAttribute('aria-pressed', String(snap.paused));
-  $('#pause').textContent = snap.paused ? '▶' : '❚❚';
+  const clock = snap.clock + (snap.paused ? ' · PAUSED' : '');
+  if (renderTop.clock !== clock) { renderTop.clock = clock; $('#clock').textContent = clock; }
+  const ctl = `${snap.speed}|${snap.paused}`;
+  if (renderTop.ctl !== ctl) {
+    renderTop.ctl = ctl;
+    for (const btn of document.querySelectorAll('.speed')) btn.setAttribute('aria-pressed', String(Number(btn.dataset.speed) === snap.speed));
+    $('#speed-cycle').textContent = `${snap.speed}×`;
+    $('#pause').setAttribute('aria-pressed', String(snap.paused));
+    $('#pause').textContent = snap.paused ? '▶' : '❚❚';
+  }
   if (!renderTop.last || performance.now() - renderTop.last > 1000) { renderTop.last = performance.now(); renderSummary(); }
   if (snap.saveError) showBanner('error', esc(snap.saveError)); else hideBanner();
 }
@@ -16851,13 +18611,19 @@ $('#skip').onclick = async () => {
   renderFeed();
 };
 let god = false;
+const GOD_TABS = ['team', 'events'];
+// Older copies of the HTML don't have the Events tab; add it so God Mode still works.
+if (!document.querySelector('.tab[data-tab="events"]')) { const b = document.createElement('button'); b.className = 'tab'; b.setAttribute('role', 'tab'); b.dataset.tab = 'events'; b.setAttribute('aria-selected', 'false'); b.hidden = true; b.textContent = 'Events'; const tm = document.querySelector('.tab[data-tab="team"]'); tm ? tm.before(b) : document.querySelector('.tabs')?.append(b); }
+if (!$('#view-events')) { const d = document.createElement('div'); d.className = 'view'; d.id = 'view-events'; d.hidden = true; $('#view-team')?.after(d); }
 $('#god').onclick = () => {
   god = !god;
   $('#god').setAttribute('aria-pressed', String(god));
-  // God Mode shows only the Team tab; turning it off brings Feed and Projects back.
-  for (const t of document.querySelectorAll('.tab')) t.hidden = god && t.dataset.tab !== 'team';
-  if (god && tab !== 'team' && !selected) setTab('team');
-  if (!god && !selected) setTab(tab === 'team' ? 'feed' : tab);
+  if (!god && local.sim().possessed) { local.sim().release(); hudMsg(''); } // leaving God Mode lets go of whoever you were
+  // God Mode shows the Team and Events tabs; turning it off brings Feed and Projects back.
+  for (const t of document.querySelectorAll('.tab')) t.hidden = god ? !GOD_TABS.includes(t.dataset.tab) : t.dataset.tab === 'events';
+  if (god && !GOD_TABS.includes(tab) && !selected) setTab('events');
+  if (!god && !selected) setTab(tab === 'events' ? 'feed' : tab);
+  if (!god && tab === 'events') tab = 'feed';
   inspBuilt = null;
   renderSummary();
   if (selected) { godFor = null; loadInspect(true); }
@@ -16890,11 +18656,12 @@ function setTab(name) {
   tab = name; projectOpen = null; wallOpen = null;
   closeInspect(true);
   for (const t of document.querySelectorAll('.tab')) t.setAttribute('aria-selected', String(t.dataset.tab === name));
-  for (const v of ['feed', 'team', 'projects']) $(`#view-${v}`).hidden = v !== name;
+  for (const v of ['feed', 'team', 'projects', 'events']) $(`#view-${v}`).hidden = v !== name;
   $('#view-wall').hidden = true;
   $('#filters').hidden = name !== 'feed';
   if (name === 'team') renderTeam();
   if (name === 'projects') renderProjects();
+  if (name === 'events') renderEvents();
 }
 // The person picker lists everyone at the studio now, plus anyone who has left but is still in the feed.
 let feedPeopleKey = '';
@@ -16923,10 +18690,14 @@ const who = id => `<span class="who" data-agent="${id}">${esc(P[id]?.short ?? id
 const artifactById = id => local.sim().studio.artifacts.find(a => a.id === id) ?? secretById(id); // private docs live outside the archive
 const projectOf = a => local.sim().studio.get(a.project);
 const relatedOf = a => ['casestudy', 'entry'].includes(a.kind) ? local.sim().studio.artifacts.filter(x => x.project === a.project) : null;
+// Thumbnails render when they come into view, not when the HTML is built: a feed at 100× adds
+// a new piece of work every few seconds, and most of them scroll past unseen.
 function thumb(a, extra = '') {
   if (!a) return '';
-  return `<img class="thumb" data-artifact="${a.id}" src="${renderArtifact(a, projectOf(a), 0.3, artOpts(a))}" alt="${esc(a.title)}, ${esc(projectOf(a)?.name)}" ${extra}>`;
+  return `<img class="thumb thumb-lazy" data-artifact="${a.id}" alt="${esc(a.title)}, ${esc(projectOf(a)?.name)}" ${extra}>`;
 }
+const thumbIO = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; const img = e.target; thumbIO.unobserve(img); const a = artifactById(img.dataset.artifact); if (a && !img.src) img.src = renderArtifact(a, projectOf(a), 0.3, artOpts(a)); img.classList.remove('thumb-lazy'); }), { rootMargin: '200px 0px' });
+new MutationObserver(ms => { for (const m of ms) for (const n of m.addedNodes) { if (n.nodeType !== 1) continue; if (n.matches?.('img.thumb-lazy')) thumbIO.observe(n); for (const img of n.querySelectorAll?.('img.thumb-lazy') ?? []) thumbIO.observe(img); } }).observe(document.body, { childList: true, subtree: true });
 function gallery(list, caption = a => `${esc(a.title)}<br>${esc(creditName(a.agent))} · ${timeOf(a.t)}`) {
   if (!list.length) return '<p class="empty">No work here yet. It appears as people make things.</p>';
   return `<div class="grid">${list.map(a => `<figure>${thumb(a)}<figcaption>${caption(a)}</figcaption></figure>`).join('')}</div>`;
@@ -16947,6 +18718,12 @@ function showLight() {
   const a = artifactById(lightList[lightIdx]);
   if (!a) return;
   if (a.kind === 'casestudy') return showCaseStudy(a);
+  if (a.still) { // a close look at one of the studio's objects
+    $('#lightbox-body').innerHTML = `<header><div><h2>${esc(a.title)}</h2>${a.sub ? `<div class="sub">${esc(a.sub)}</div>` : ''}</div>
+      <nav><button class="btn" data-png>⬇ PNG</button><button class="btn" data-step="-1" aria-label="Previous">◀</button><button class="btn" data-step="1" aria-label="Next">▶</button><button class="btn" data-closebox>Close</button></nav></header>
+      <img src="${renderArtifact(a, null, 1.5)}" alt="${esc(a.title)}" class="art-large">${a.note ? `<p class="note">${esc(a.note)}</p>` : ''}<div class="sub">${lightIdx + 1} of ${lightList.length}</div>`;
+    return;
+  }
   if (a.kind === 'doc') {
     $('#lightbox-body').innerHTML = `<header><div><h2>${esc(a.title)}</h2><div class="sub">${esc(a.doc.from ?? '')}${a.doc.date ? ` · ${esc(a.doc.date)}` : ''}${a.doc.stamp !== false ? ` · <span class="former">${esc(a.doc.stamp ?? 'Strictly confidential')}</span>` : ''}</div></div>
       <nav><button class="btn" data-step="-1" aria-label="Previous">◀</button><button class="btn" data-step="1" aria-label="Next">▶</button><button class="btn" data-closebox>Close</button></nav></header>
@@ -17018,7 +18795,7 @@ function feedItem(it) {
   const time = `<span>${timeOf(it.t)}</span>`;
   switch (it.type) {
     case 'chat': {
-      const head = it.client ? `<b>${esc(it.topic.split(':')[0])}</b> with ${esc(it.client.name)} · ${esc(it.client.project)}${it.client.decision && it.client.decision !== 'none' ? ` <span class="decision ${it.client.decision}">${{ approve: 'approved', changes: 'changes requested', scope: 'scope expanded', reject: 'rejected' }[it.client.decision]}</span>` : ''}`
+      const head = it.client ? `<b>${esc(it.topic.split(':')[0])}</b> with ${esc(it.client.name)}${it.client.project ? ` · ${esc(it.client.project)}` : ' · former staff'}${it.client.decision && it.client.decision !== 'none' ? ` <span class="decision ${it.client.decision}">${{ approve: 'approved', changes: 'changes requested', scope: 'scope expanded', reject: 'rejected' }[it.client.decision]}</span>` : ''}`
         : it.ritual ? `<b>${esc(it.topic.split(':')[0])}</b>` : it.agents.map(who).join(' &amp; ');
       const lines = it.lines.map(l => `<p><b>${esc(P[l.speaker]?.short ?? it.names?.[l.speaker] ?? l.speaker)}</b>: ${esc(l.text)}</p>`).join('');
       return `<div class="item chat"><div class="meta">${it.icon} ${head} ${time} <span>${esc(it.setting)}</span></div>
@@ -17122,8 +18899,7 @@ function renderTeam() {
     <div class="member${a.hidden ? ' away' : ''}" data-agent="${a.id}" tabindex="0">
       <img src="${avatars[a.id]}" alt="">
       <div class="grow"><div class="name">${esc(P[a.id].short)}</div><div class="role">${esc(P[a.id].role)}</div>
-      <div class="act">${esc(a.emoji)} ${esc(a.act)}</div></div>
-      ${a.hidden ? '' : `<button class="btn small possess${snap.possessed === a.id ? ' on' : ''}" data-possess-id="${a.id}">🎮 ${snap.possessed === a.id ? 'Let go' : 'Possess'}</button>`}
+      <div class="act">${esc(a.emoji)} ${esc(a.act)}</div></div>${snap.possessed === a.id ? '<span class="pill possess on">🎮 possessed</span>' : ''}
     </div>`;
   const here = snap.agents.filter(a => !a.hidden), away = snap.agents.filter(a => a.hidden);
   $('#view-team').innerHTML = here.map(row).join('') + (here.length ? '' : '<p class="empty">Nobody is in the office right now.</p>')
@@ -17136,12 +18912,11 @@ function renderProjects() {
   if (!snap) return;
   const studio = local.sim().studio;
   const ps = [...snap.projects].filter(p => !p.archived).sort((a, c) => (a.phaseIdx >= 4) - (c.phaseIdx >= 4) || c.phaseIdx - a.phaseIdx);
-  const awards = snap.awards.length ? `<div class="awards">🏆 ${snap.awards.map(a => `${esc(a.award)}: ${esc(a.project)}`).join('<br>')}</div>` : '';
-  // the case study shelf's six, as covers you can open straight from here
+  // the case study shelf's six, as covers you can open straight from here (awards live on the award shelf)
   const shelf = wallArtifacts({ view: 'casestudies' });
   const archiveCard = `<div class="project" data-open-archive tabindex="0"><h3>📚 Case studies</h3><div class="sub">The studio's ${shelf.length} best, from the case study shelf. Open one to read it.</div>
-    <div class="strip cs-thumbs">${shelf.map(a => thumb(a)).join('')}</div></div>`; // same small strip as each project's recent work
-  $('#view-projects').innerHTML = awards + archiveCard + ps.map(p => {
+    <div class="cs-grid">${shelf.map(a => thumb(a)).join('')}</div></div>`;
+  $('#view-projects').innerHTML = archiveCard + ps.map(p => {
     const recent = studio.artifacts.filter(a => a.project === p.id).slice(-4).reverse();
     return `
     <div class="project" data-project="${p.id}" tabindex="0">
@@ -17232,10 +19007,13 @@ function wallArtifacts(o) {
     // physical pieces still in the making: packaging, print, signage and cards from live projects
     case 'bench': return A.filter(a => live.has(a.project) && ['packaging', 'cover', 'poster', 'sign', 'card', 'specimen', 'billboard'].includes(a.kind)).slice(-24).reverse();
     case 'table': {
-      const k = o.id.split(':')[1];
-      const seated = new Set(world.objects.filter(x => x.id.startsWith('desk:') && x.name.endsWith(`table ${k}`)).map(x => x.owner));
+      const seated = new Set(world.objects.filter(x => x.id.startsWith('desk:') && x.owner && x.x >= o.x && x.x < o.x + o.w && Math.abs(x.y - o.y) === 1).map(x => x.owner));
       return A.filter(a => seated.has(a.agent)).slice(-24).reverse();
     }
+    // the crit rug: the one piece someone brought down to the floor, early and rough
+    case 'rug': return A.filter(a => live.has(a.project) && a.phase <= 1 && ['moodboard', 'logo', 'wireframe', 'flow', 'journey', 'venn', 'poster', 'storyboard', 'palette'].includes(a.kind)).slice(-1);
+    // the riso: the last thing that came off the drum
+    case 'riso': return A.filter(a => live.has(a.project) && ['poster', 'packaging', 'specimen', 'cover', 'card', 'social', 'billboard', 'copy', 'pattern'].includes(a.kind)).slice(-1);
   }
   return [];
 }
@@ -17249,9 +19027,69 @@ const WALL_COPY = {
   projector: 'Product and UX work up for review: flows, wireframes, screens and research, with a little brand work.',
   table: 'Recent work from the people at this table.',
   bench: 'Packaging, print and signage being cut, folded and tested for active projects.',
+  rug: 'Whatever someone brought down to the floor to sketch over. One piece at a time, markers only.',
+  riso: 'The last print to come off the drum, still a little wet.',
 };
 // Any object: story, live state, who uses it, recent moments, and work if it has any.
 let objTimer = null;
+// A close look at one of the studio's non-work objects: what's on it right now, drawn as a still life.
+// Returns { heading, art, extra? } or null for objects without one.
+const STILL_IDS = new Set(['pinball', 'pinball2', 'ddr', 'coffee_machine', 'snack_shelf', 'breakfast_nook', 'magazine_table', 'dog_bed', 'fridge', 'award_shelf', 'design_books', 'bear_flag', 'wing_chun']);
+function stillOf(o, d) {
+  const sim = local.sim(), t = sim.t, day = Math.floor(t / 1440), dow = dowOf(day), last = d.moments[0];
+  switch (o.id) {
+    case 'pinball': case 'pinball2': {
+      const two = o.id === 'pinball2';
+      const seed = (d.uses * 7919) % 100000;
+      const top = d.top.filter(x => x.name !== (two ? 'Kenji' : 'Marcus')).slice(0, 4);
+      const scores = [[two ? 'Marcus' : 'Marcus', two ? 2_146_900 + seed * 3 : 4_812_350 + seed * 10], ...(two ? [['Eli', 2_140_200 + seed * 2]] : []), ...top.map((x, i) => [x.name, Math.max(120_000, Math.round((two ? 1_600_000 : 2_900_000) / (i + 2) + x.n * 41_300 + seed))])]
+        .filter((s, i, arr) => arr.findIndex(z => z[0] === s[0]) === i).sort((a, b) => b[1] - a[1]).slice(0, 6);
+      return { heading: 'On the table', art: stillLife(o.id, 'pinball', two ? '"Grid Systems", 1983' : '"Space Kerning", 1979',
+        { machine: o.id, name: two ? 'GRID SYSTEMS' : 'SPACE KERNING', year: two ? '1983' : '1979', body: two ? '#2d3b6b' : '#6b3fa0', glass: two ? '#101826' : '#1f2a5a', field: two ? '#3b4a63' : '#2e6a5e', accent: two ? '#d8b45c' : '#e0893c', scores, plays: d.uses,
+          note: two ? 'Tilts if you look at it wrong. Eli and Marcus settle things here, badly.' : 'Left flipper sticks. Marcus will tell you about the high score whether you ask or not.' },
+        last ? `Last played by ${last.name}, ${last.when}.` : 'Nobody has played today.', two ? 'Rebuilt by Kenji over three weekends' : 'Won by Adaeze in a bet') };
+    }
+    case 'ddr': {
+      const seed = (d.uses * 4139) % 10000, grades = ['AAA', 'AA', 'A', 'B', 'B', 'C'];
+      const top = d.top.filter(x => x.name !== 'Noor').slice(0, 4);
+      const scores = [['Noor', 9_874_300 + seed * 20, 'AAA'], ...top.map((x, i) => [x.name, Math.max(400_000, Math.round(6_200_000 / (i + 2) + x.n * 93_000 + seed)), grades[i + 1]]), ['Eli', 2_410_800 + seed * 7, 'B'], ['Marcus', 1_120_400 + seed * 3, 'C'], ['Kenji', 880_200 + seed, 'C']].filter((s, i, arr) => arr.findIndex(z => z[0] === s[0]) === i).sort((a, b) => b[1] - a[1]).slice(0, 6);
+      const two = d.moments.slice(0, 2).map(m => m.name);
+      return { heading: 'On screen', art: stillLife('ddr', 'ddr', 'Dance Dance Revolution, mid-song', { scores, plays: d.uses, p1: two[0] ?? 'Noor', p2: two[1] ?? 'Eli', combo1: 120 + (seed % 90), combo2: 9 + (seed % 40), pct1: 0.82, pct2: 0.41 + (seed % 30) / 100, song: ['BUTTERFLY  (KERNING MIX)', 'DYNAMITE RAVE', 'PARANOIA', 'END OF THE CENTURY', 'SANDSTORM'][d.uses % 5], verdict: ['PERFECT', 'GREAT', 'PERFECT', 'GOOD', 'MISS'][seed % 5], note: 'Noor bought it at a bowling alley liquidation and had it delivered without asking. Friday happy hour ends here. Eli has never beaten her and will not stop trying.' }, last ? `Last played by ${last.name}, ${last.when}.` : 'Nobody has danced yet today.', 'Noor\'s machine, everyone\'s Friday') };
+    }
+    case 'coffee_machine': {
+      const w = last?.name;
+      return { heading: 'The last shot', art: stillLife('coffee', 'coffee', w ? `${w}'s coffee` : 'Nothing in the cup yet', { who: w ?? null, when: last ? `Pulled ${last.when}.` : 'Machine is warm.', shots: d.uses }, last ? `${last.name} ${last.text}, ${last.when}.` : 'The machine is on and waiting.', 'Lever machine, 1974') };
+    }
+    case 'snack_shelf': {
+      const gone = dow >= 1 && dow < 5;
+      return { heading: 'On the shelf today', art: stillLife('snacks', 'snacks', gone ? 'The shelf, post-crackers' : 'The shelf, freshly stocked', { crackersGone: gone, cake: d.uses % 3 === 0 && d.uses > 0, day: ['Monday: everything is here.', 'Tuesday: the good crackers are gone.', 'Wednesday: rice cakes and regret.', 'Thursday: someone restocked the decoy.', 'Friday: the beer shelf is the snack shelf.', 'Saturday.', 'Sunday.'][dow] }, gone ? 'The good crackers went on Tuesday, as they do.' : 'Stocked this morning. Give it a day.', 'Supply run on Mondays') };
+    }
+    case 'breakfast_nook': {
+      const prev = d.moments.find(m => m.name !== last?.name);
+      return { heading: 'On the table', art: stillLife('nook', 'nook', last ? `${last.name}'s breakfast` : 'The table, before anyone', { who: last?.name ?? null, when: last ? `${last.when}.` : '', plates: last && prev && Math.abs(prev.t - last.t) < 60 ? 2 : 1 }, last ? `${last.name} ${last.text}, ${last.when}. Toaster on four.` : 'Clean plates, good bread, setting four.', 'Round table, corner bench') };
+    }
+    case 'bear_flag':
+      return { heading: 'On the wall', art: stillLife('flag', 'flag', 'The California bear flag', { suspect: ['Marcus', 'Eli', 'a client in Oakland', 'Lola, possibly'][day % 4], years: 'two', note: 'Adaeze refuses to take it down until someone confesses. Nobody has. Nobody will.' }, 'It arrived in a tube with no note the week the studio won its biggest West Coast project.', 'Tacked over the second window from the right') };
+    case 'wing_chun': {
+      const kenji = d.top.find(x => x.who === 'head_design');
+      return { heading: 'The dummy', art: stillLife('dummy', 'dummy', 'The wooden dummy', { last: last ? `Last: ${last.name}, ${last.when}.` : 'Nobody has hit it today.', top: kenji ? `Kenji: ${kenji.n} rounds, mostly at seven.` : 'Kenji has not been in yet.', uses: d.uses, note: 'Clients find it either alarming or wonderful. Adaeze says that tells her what she needs to know about the client.' }, last ? `${last.name} ${last.text}, ${last.when}.` : 'Kenji does his forms on it at seven, before anyone is in.', 'Kenji\'s. Anyone\'s, by policy') };
+    }
+    case 'magazine_table':
+      return { heading: 'On the table', art: stillLife('magazines', 'magazines', 'Eye, Baseline, Slanted and the catalog', {}, 'One left open on a Baskerville spread. It has been open on that spread for a month.', 'Nobody will throw out the catalog') };
+    case 'dog_bed': {
+      const dog = sim.agents.get('dog'), here = dog && !dog.hidden && Math.abs(dog.x - o.x) + Math.abs(dog.y - o.y) <= 1;
+      const journals = [...(sim.flags.picaJournals ?? [])].reverse().map(j => { const a = stillLife(`picaj:${j.day}:${j.t}`, 'doc', `Pica's journal · Day ${j.day + 1}`, {}, `${j.sniffed} things sniffed, ${j.greeted} people greeted.`, 'Dictated to nobody, addressed to Lola'); a.kind = 'doc'; a.still = false; a.doc = { style: 'letter', stamp: 'PICA\'S JOURNAL', date: `Day ${j.day + 1}`, to: 'Lola,', from: 'Pica (dictated to nobody)', body: j.body }; a.agent = 'dog'; return a; });
+      const extra = `${journals.length ? `<div class="section-title">📓 Pica's journals (${journals.length})</div>${gallery(journals, a => `<b>${esc(a.title)}</b><br><span class="k">${esc(a.note)}</span>`)}` : ''}<div class="section-title">🐶 Pica's day</div><p class="sub">Spend a day as Pica: the studio as smells, a hello for everyone, and a journal at the end, written to Lola.</p>${sim.picaDay ? '<p class="sub">Pica\'s day is on. Press Esc to end it and write it up.</p>' : '<button class="btn look" data-pica-day>🐶 Start Pica\'s day</button>'}`;
+      return { heading: "What Pica keeps", art: stillLife('dogbed', 'dogbed', "Pica's bed", { note: here ? 'Pica is on it right now.' : 'Pica is out. Everything is where she left it.', sub: 'The cardigan is the whole point.' }, "A bone, Eli's Game Boy, Noor's cassette player, a Tamagotchi nobody has fed since Lola left, and the cardigan.", 'Plaid, Lola\'s cardigan inside'), extra };
+    }
+    case 'fridge': {
+      const eater = d.top[0]?.name;
+      return { heading: 'Inside', art: stillLife('fridge', 'fridge', 'The fridge, shelves labelled', { eggs: 6 - (day % 5), oat: 3 + (day % 2), leftover: eater ? `${eater}'s soup` : null }, `Labelled shelves, enforced. ${eater ? `${eater} has the top shelf this week.` : 'Mostly oat milk.'}`, 'Open on a ' + ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'][dow]) };
+    }
+  }
+  return null;
+}
+
 function openObject(o) {
   if (tab !== 'projects') setTab('projects');
   closeInspect(true);
@@ -17291,18 +19129,40 @@ function openObject(o) {
       const owner = world.objects.find(x => x.id === o.of)?.owner, ag = owner && local.sim().agents.get(owner);
       const act = ag?.action, atDesk = ag && !ag.hidden && act?.loc === o.of;
       const wip = owner ? local.sim().studio.artifacts.filter(a => a.agent === owner && local.sim().studio.get(a.project)?.phase < 4).slice(-12).reverse() : [];
-      // Adaeze's confidential files: locked, unless you're in God Mode. Hannah's secret side project.
-      const ceo = owner === 'ceo' ? ceoDocs() : [];
+      // Adaeze's confidential files: locked, unless you're in God Mode. Her data room opens for anyone who signs the NDA. Hannah's secret side project.
+      const sim0 = local.sim(), ceo = owner === 'ceo' ? ceoDocs(sim0) : [], room = owner === 'ceo' ? dataRoom(sim0) : [], signed = !!sim0.flags.playerNDA;
+      const docCap = x => `<b>${esc(x.title)}</b>${x.note ? `<br><span class="k">${esc(x.note)}</span>` : ''}`;
       const secret = owner === 'ceo' ? (god
-        ? `<div class="section-title">🔓 Confidential · unlocked by 😇 God Mode (${ceo.length})</div>${gallery(ceo, x => `<b>${esc(x.title)}</b>${x.note ? `<br><span class="k">${esc(x.note)}</span>` : ''}`)}`
+        ? `<div class="section-title">🔓 Confidential · unlocked by 😇 God Mode (${ceo.length})</div>${gallery(ceo, docCap)}`
         : `<div class="section-title">🔒 Confidential · do not open (${ceo.length})</div>${ceo.map(x => `<div class="mem secret locked"><b>${esc(x.title)}</b><br><span class="k">Locked. Turn on 😇 God Mode to open it.</span></div>`).join('')}`)
-        : owner === 'ux_researcher' ? `<div class="section-title">🤫 Side project · don't tell anyone</div><p class="sub">Hannah is secretly writing a book about the rituals of modern work, using the studio as her field site.</p>${gallery(hannahDocs(), x => `<b>${esc(x.title)}</b>${x.note ? `<br><span class="k">${esc(x.note)}</span>` : ''}`)}` : '';
+        + (god || signed
+          ? `<div class="section-title">🗄️ Data room · ${signed ? 'you signed the NDA' : 'unlocked by 😇 God Mode'} (${room.length})</div>${gallery(room, docCap)}`
+          : `<div class="section-title">🗄️ Data room · NDA required (${room.length})</div><p class="sub">Cap table, the fundraising plan, every offer she turned down, and the NDA register. Adaeze will show you if you sign hers.</p><button class="btn look" data-sign-nda>✍️ Sign the NDA</button>`)
+        : owner === 'ux_researcher' ? (sim0.flags.hannahBook ? `<div class="section-title">📚 The book · published</div><p class="sub">The Rituals of Modern Work, Larkspur Press. Three years of field notes about this room. Everyone is in it, anonymized, badly.</p>${gallery(hannahDocs(true), docCap)}` : `<div class="section-title">🤫 Side project · don't tell anyone</div><p class="sub">Hannah is secretly writing a book about the rituals of modern work, using the studio as her field site.</p>${gallery(hannahDocs(), docCap)}`)
+        : owner === 'cos' ? (() => { const td = tomasDocs(local.sim().studio, Math.floor(local.sim().t / 1440) + 1); return `<div class="section-title">🗂 Open on the desktop (${td.length})</div><p class="sub">No password. Tomás says a reception computer with a password is a reception computer nobody can use.</p>${gallery(td, x => `<b>${esc(x.title)}</b>${x.note ? `<br><span class="k">${esc(x.note)}</span>` : ''}`)}`; })()
+        : owner === 'head_design' ? `<div class="section-title">📜 Signed letters (${kenjiDocs().length})</div><p class="sub">Kenji signs the studio's legal letters. He keeps the ones that mattered, and one template.</p>${gallery(kenjiDocs(), docCap)}`
+        : owner === 'copywriter' ? `<div class="section-title">🔍 Research · Studio Ditto (${dittoDocs(sim0).length})</div><p class="sub">Marcus keeps a folder on the competition. It is labelled "Research" so nobody asks.</p>${gallery(dittoDocs(sim0), docCap)}` : '';
+      const shared = `<div class="section-title">🔑 Shared drive (${sharedDocs(sim0).length})</div>${gallery(sharedDocs(sim0), docCap)}`;
       work = `<div class="section-title">On screen now</div><p>${!owner ? 'Nobody sits here right now. The screen is asleep.' : atDesk ? `${esc(act.emoji ?? '')} ${esc(act.desc)}` : ag?.hidden ? `Locked. ${esc(P[owner].short)} has gone home.` : `Screensaver. ${esc(P[owner].short)} is ${esc(ag?.action?.desc ?? 'away from the desk')}.`}</p>
-        <div class="section-title">Work in progress${owner ? ` · ${esc(P[owner].short)}` : ''} (${wip.length})</div>${wip.length ? gallery(wip, a => `${esc(a.title)}<br>${esc(projectOf(a)?.name)}`) : '<p class="empty">Nothing in progress on this machine.</p>'}${secret}`;
+        ${owner === 'cos' && !wip.length ? '' : `<div class="section-title">Work in progress${owner ? ` · ${esc(P[owner].short)}` : ''} (${wip.length})</div>${wip.length ? gallery(wip, a => `${esc(a.title)}<br>${esc(projectOf(a)?.name)}`) : '<p class="empty">Nothing in progress on this machine.</p>'}`}${secret}${shared}`;
       }
     } else if (o.id === 'award_shelf') {
       const aw = [...local.sim().studio.awardsWon].sort((a, b) => b.t - a.t);
-      work = `<div class="section-title">On the shelf (${aw.length})</div>` + (aw.length ? aw.map(a => `<div class="mem">🏆 <b>${esc(a.award)}</b><br><span class="k">${esc(a.project)} · ${timeOf(a.t)}</span></div>`).join('') : '<p class="empty">No awards yet. Room for plenty.</p>');
+      const notes = ['Polished every Friday. By Tomás, obviously.', 'Marcus wrote the acceptance speech. Nobody got to give it.', 'Still has the gala wristband wrapped around its base.', 'The one Pica knocked over. Glued. You can\'t tell.', 'Sofia says it\'s the wrong gold. She\'s right.'];
+      const stills = aw.map((a, i) => stillLife(`award:${a.award}:${a.project}`, 'award', a.award, { award: a.award, project: a.project, when: timeOf(a.t), score: a.score, note: notes[(a.award.length + a.project.length + i) % notes.length] }, `For ${a.project}. ${a.archive ? 'From before the move.' : ''}`.trim(), `Award shelf · ${a.project}`));
+      work = `<div class="section-title">On the shelf (${aw.length})</div>` + (aw.length ? gallery(stills, (a, i) => `🏆 <b>${esc(a.data.award)}</b><br><span class="k">${esc(a.data.project)} · ${esc(a.data.when)}</span>`) : '<p class="empty">No awards yet. Room for plenty.</p>');
+    } else if (o.id === 'mailbox') {
+      const sim0 = local.sim(), letters = [...sim0.mail].filter(m => m.t <= sim0.t).sort((a, b) => b.t - a.t);
+      const docs = letters.map(m => { const a = stillLife(`mail:${m.id}`, 'doc', m.subject, {}, m.note ?? '', m.from ?? ''); a.kind = 'doc'; a.still = false; a.doc = { style: 'letter', stamp: m.stamp ?? false, date: m.date, to: m.to, from: m.from, body: m.body, note: m.note }; a.mailId = m.id; a.agent = null; return a; });
+      work = `<div class="section-title">In the box (${letters.length}${letters.some(m => !m.read) ? ` · ${letters.filter(m => !m.read).length} unopened` : ''})</div>${letters.length ? gallery(docs, (a, i) => { const m = letters.find(x => x.id === a.mailId); return `${m.read ? '📄' : '📬'} <b>${esc(a.title)}</b><br><span class="k">${esc(m.from ?? '')} · ${esc(timeOf(m.t))}</span>`; }) : '<p class="empty">Nothing yet. Tomás sorts the post at 9:15.</p>'}`;
+    } else if (o.id === 'design_books') {
+      const hb = local.sim().flags?.hannahBook;
+      const out = {}; d.moments.slice(0, 4).forEach((m, i) => { const b = DESIGN_BOOKS[(m.name.length * 7 + i * 5 + Math.floor(m.t / 1440)) % DESIGN_BOOKS.length]; out[b[0]] ??= `with ${m.name} since ${m.when.replace(/^(\w{3})\w* \(Day \d+\)/, '$1')}`; });
+      const covers = DESIGN_BOOKS.map(([t, a, n], i) => stillLife(`book:${i}`, 'book', t, { idx: i, title: t, author: a, note: n, out: out[t] ? `Out, ${out[t]}.` : null }, n, a));
+      work = `<div class="section-title">On the shelf (${DESIGN_BOOKS.length + (hb ? 1 : 0)})</div>${gallery(covers, a => `<b>${esc(a.title)}</b><br><span class="k">${esc(a.data.author)}</span>${a.data.out ? `<br><span class="former">${esc(a.data.out)}</span>` : ''}`)}${hb ? `<div class="mem"><b>The Rituals of Modern Work</b> <span class="k">· Hannah Goldberg</span><br><span class="k">Signed to the studio. The gap on the second shelf was for this.</span></div>` : '<div class="mem"><span class="k">A gap on the second shelf, the width of one book. Hannah won\'t say what for.</span></div>'}`;
+    } else if (stillOf(o, d)) {
+      const s = stillOf(o, d);
+      work = `<div class="section-title">${esc(s.heading)}</div>${gallery([s.art], a => `<b>${esc(a.title)}</b><br><span class="k">${esc(a.sub)}</span>`)}${s.extra ?? ''}`;
     } else if (o.view) work = `<div class="section-title">Work here</div>${gallery(wallArtifacts(o), a => `${esc(a.title)}<br>${esc(projectOf(a)?.name)}`)}`;
     el.innerHTML = `<button class="back" data-back>◀ Back</button>
       <div class="project static"><h3>${esc(o.view === 'computer' ? (() => { const ow = world.objects.find(x => x.id === o.of)?.owner; return ow ? `${P[ow]?.short}'s ${o.name}` : cap(o.name); })() : cap(d.name))}</h3><div class="sub">${esc(d.area)}</div>
@@ -17317,6 +19177,11 @@ function openObject(o) {
     el.querySelector('[data-back]').onclick = () => { wallOpen = null; clearInterval(objTimer); el.hidden = true; setTab(tab); };
     const look = el.querySelector('[data-look]');
     if (look) look.onclick = () => { local.sim().findTrinket(o.id); draw(); };
+    if (o.id === 'mailbox') for (const im of el.querySelectorAll('.thumb[data-artifact]')) im.addEventListener('click', () => { const a = artifactById(im.dataset.artifact); if (a?.mailId) { local.sim().readMail(a.mailId); setTimeout(draw, 400); } }, { once: true });
+    const pica = el.querySelector('[data-pica-day]');
+    if (pica) pica.onclick = () => { const err = startPicaDay(); if (err) showToast({ icon: '🐶', label: 'Not now', text: err, kind: 'warnsoft' }); };
+    const sign = el.querySelector('[data-sign-nda]');
+    if (sign) sign.onclick = () => { local.sim().signNDA(); showToast({ icon: '✍️', label: 'NDA signed', text: 'Mutual, two years, nothing exotic. Adaeze opened the data room for you.' }); draw(); };
   };
   draw();
   clearInterval(objTimer);
@@ -17559,10 +19424,9 @@ function renderSummary() {
     ...awaiting.map(p => `🗂️ <span class="who" data-project="${p.id}">${esc(p.name)}</span> is waiting for client review`),
     ...dueSoon.slice(0, 2).map(p => `⏳ <span class="who" data-project="${p.id}">${esc(p.name)}</span> due ${p.dueDay - today <= 0 ? 'today' : `in ${p.dueDay - today} day${p.dueDay - today === 1 ? '' : 's'}`}`),
     ...struggling.map(x => `🫠 ${who(x.a.id)} is running on empty`),
+    snap.mail ? `📬 ${snap.mail} unopened letter${snap.mail === 1 ? '' : 's'} in the mailbox by the door` : null,
     lastBig && `${lastBig.icon} ${esc(lastBig.text)}`,
   ].filter(Boolean).slice(0, 4);
-  // In God Mode the top section is just the event controls (and any running scenario).
-  if (god) { $('#summary').innerHTML = `${scenarioBlock()}${godEvents()}`; bindEvents(); return; }
   $('#summary').innerHTML = `
     <div class="stats">
       <div><b>${live.length}</b><span>active projects</span></div>
@@ -17571,33 +19435,47 @@ function renderSummary() {
       <div><b>${snap.awards.length}</b><span>awards</span></div>
     </div>
     ${scenarioBlock()}
-    <div class="today">${snap.weather ? `${snap.weather.icon} ${snap.weather.temp}°C · ` : ''}${snap.holiday ? `${snap.holiday.emoji} ${esc(snap.holiday.name)} · ` : ''}Today: ${chats} conversations, ${reviews.length} client decision${reviews.length === 1 ? '' : 's'}, ${made} new artifact${made === 1 ? '' : 's'}.</div>
-    <ul class="happening">${items.map(i => `<li>${i}</li>`).join('')}</ul>
-    ${god ? godEvents() : ''}`;
-  bindEvents();
+    <div class="today">${snap.weather ? `${snap.weather.icon} ${snap.weather.temp}°C · ` : ''}${snap.holiday ? `${snap.holiday.emoji} ${esc(snap.holiday.name)} · ` : ''}Today: ${chats} conversations, ${reviews.length} client decision${reviews.length === 1 ? '' : 's'}, ${made} new artifact${made === 1 ? '' : 's'}.${snap.cash != null ? ` <span class="${snap.runway < 2 ? 'former' : 'k'}">💰 ${snap.cash < 0 ? '-' : ''}$${Math.abs(Math.round(snap.cash / 1000))}k · ${snap.runway < 0 ? 'in the red' : `${snap.runway} months of runway`}</span>` : ''}</div>
+    <ul class="happening">${items.map(i => `<li>${i}</li>`).join('')}</ul>`;
+  if (god && tab === 'events') renderEvents();
 }
 let eventMsg = { text: '', until: 0 };
+// The Events tab (God Mode only): every event you can set off, grouped so it reads at a glance.
+const EVENT_GROUPS = [
+  ['Everyday studio life', 'Small things that happen in any week.', [['client', '🚪 Client visit'], ['brief', '📨 New brief'], ['birthday', '🎂 Surprise birthday'], ['dog', '🐕 Pica eats a prototype'], ['hire', '👋 New hire']]],
+  ['Awards', 'The Kern Annual and friends.', [['award_win', '🥇 Award win'], ['award_loss', '🫥 Award loss']]],
+  ['Trouble', 'Bad days, and the odd bad week.', [['outage', '🔌 Power outage'], ['earthquake', '🫨 Earthquake'], ['security', '🎣 Phishing scare'], ['breakup', '💔 Breakup'], ['poached', '🧲 Talent poached'], ['layoff', '📦 Layoff']]],
+  ['Old friends', 'People who used to work here.', [['lola', '🫂 Lola comes back'], ['alumni', '🍝 Old friend drops by']]],
+  ['Milestones', 'Rare, and some of them end the game.', [['book', '📚 Hannah\'s book is out'], ['museum', '🏛️ The museum calls · ending'], ['sold', '📝 Sell to Ditto · ending'], ['closed', '🕯️ Close the studio · ending']]],
+];
 function godEvents() {
-  return `<div class="god-events"><div class="label-row">✦ Trigger an event</div>
-      <div class="btnrow">${[['client', '🚪 Client visit'], ['brief', '📨 New brief'], ['award_win', '🥇 Award win'], ['award_loss', '🫥 Award loss'], ['birthday', '🎂 Surprise birthday'], ['outage', '🔌 Power outage'], ['dog', '🐕 Pica eats a prototype'], ['earthquake', '🫨 Earthquake'], ['breakup', '💔 Breakup'], ['poached', '🧲 Talent poached'], ['layoff', '📦 Layoff!'], ['hire', '👋 New hire']].map(([k, l]) => `<button class="btn small" data-event="${k}" title="${esc(STORIES[k]?.premise ?? '')}">${l}</button>`).join('')}
-      ${SCENARIOS.map(sc => `<button class="btn small" data-scenario="${sc.id}" title="${esc(sc.blurb)} Best score: ${best()[sc.id] ?? 'none yet'}." ${snap?.scenario?.status === 'running' ? 'disabled' : ''}>${sc.icon} ${esc(sc.name)}</button>`).join('')}</div>
-      <div class="hint">Breakup, layoff and poaching apply to the person you have open in the inspector, or someone at random.</div>
+  const running = snap?.scenario?.status === 'running';
+  return `<div class="god-events">
+      ${EVENT_GROUPS.map(([title, sub, list]) => `<div class="section-title">${esc(title)}</div><div class="hint">${esc(sub)}</div>
+      <div class="btnrow">${list.map(([k, l]) => `<button class="btn small" data-event="${k}" title="${esc(STORIES[k]?.premise ?? '')}">${l}</button>`).join('')}</div>`).join('')}
+      <div class="section-title">Scenarios</div><div class="hint">Timed challenges with goals and a score. One at a time.</div>
+      <div class="btnrow">${SCENARIOS.map(sc => `<button class="btn small" data-scenario="${sc.id}" title="${esc(sc.blurb)} Best score: ${best()[sc.id] ?? 'none yet'}." ${running ? 'disabled' : ''}>${sc.icon} ${esc(sc.name)}</button>`).join('')}</div>
       <div class="god-msg" id="event-msg" role="status">${performance.now() < eventMsg.until ? esc(eventMsg.text) : ''}</div></div>`;
 }
-function bindEvents() {
-  for (const b of $('#summary').querySelectorAll('[data-scenario]')) b.onclick = () => {
+function renderEvents() {
+  const el = $('#view-events'); if (!el || !snap) return;
+  el.innerHTML = godEvents();
+  bindEvents(el);
+}
+function bindEvents(root = $('#view-events')) {
+  for (const b of root.querySelectorAll('[data-scenario]')) b.onclick = () => {
     const err = local.sim().startScenario(b.dataset.scenario);
-    eventMsg = { text: err ?? 'Scenario started. Goals and the clock are above.', until: performance.now() + 30000 };
+    eventMsg = { text: err ?? 'Scenario started. Goals and the clock are at the top of the panel.', until: performance.now() + 30000 };
     showToast(err ? { icon: '⚠️', label: 'Couldn\'t start that', text: err, kind: 'warnsoft' } : { icon: b.textContent.trim().split(' ')[0], label: 'Scenario started', text: `${b.textContent.trim().split(' ').slice(1).join(' ')}. Goals and the countdown are at the top of the panel.` });
-    renderSummary();
+    renderSummary(); renderEvents();
   };
-  for (const b of $('#summary').querySelectorAll('[data-event]')) b.onclick = () => {
+  for (const b of root.querySelectorAll('[data-event]')) b.onclick = () => {
     const err = local.sim().godEvent(b.dataset.event, { person: selected });
     const bs = local.sim().lastBackstory;
     eventMsg = { text: err ?? (bs ? `📖 ${bs} The aftermath plays out over the next few days.` : 'Done. Watch the map.'), until: performance.now() + 30000 };
     const [icon, ...words] = b.textContent.trim().split(' ');
     showToast(err ? { icon: '⚠️', label: 'Couldn\'t start that', text: err, kind: 'warnsoft' } : { icon, label: 'Event started', text: `${words.join(' ')}. ${bs ?? 'Watch the map.'}` });
-    renderSummary();
+    renderSummary(); renderEvents();
   };
 }
 $('#summary').addEventListener('click', e => {
@@ -17609,6 +19487,16 @@ $('#summary').addEventListener('click', e => {
 
 // ------------------------------------------------------------------ god mode panel (inside the inspector)
 let godFor = null;
+// A day as Pica: possess the dog with the smell map on, and a journal at the end.
+function startPicaDay() {
+  const sim = local.sim();
+  const err = sim.startPicaDay();
+  if (!err) { closeInspect(true); hudMsg('Pica\'s day. Sniff with E. Everything smells like something.'); showToast({ icon: '🐶', label: 'Pica\'s day', text: 'The puffs are smells. E sniffs, T says hi, Esc ends the day and writes it up for Lola.' }); }
+  return err;
+}
+if (!$('#pica')) { const b = document.createElement('button'); b.id = 'pica'; b.className = 'btn'; b.title = 'Spend a day as Pica'; b.textContent = '🐶 Pica\'s day'; $('#god')?.before(b); }
+if (!$('#ending')) { const d = document.createElement('div'); d.className = 'title ending'; d.id = 'ending'; d.hidden = true; d.setAttribute('role', 'dialog'); d.innerHTML = '<canvas class="title-stars" id="ending-stars"></canvas><div class="ending-inner" id="ending-inner"></div>'; document.body.append(d); }
+$('#pica').onclick = () => { const sim = local.sim(); if (sim.picaDay) { sim.endPicaDay(); hudMsg(''); return; } const err = startPicaDay(); if (err) showToast({ icon: '🐶', label: 'Not now', text: err, kind: 'warnsoft' }); };
 // Possess someone, or let go if you already are: every Possess button toggles.
 function togglePossess(id) {
   const sim = local.sim();
@@ -17623,36 +19511,54 @@ function godPanel(id) {
   const key = `${id}|${a.hidden}|${sim.possessed === id}`;
   if (godFor === key) return;
   godFor = key;
-  const places = world.objects.filter(o => o.sprite !== 'none').map(o => `<option value="${o.id}">${esc(cap(o.name))} (${esc(world.areas[o.area] ?? o.area)})</option>`).join('');
+  // one entry per kind of place; "walk" picks one of its instances at random
+  const placeGroups = new Map();
+  for (const o of world.objects.filter(o => o.sprite !== 'none')) { const key = `${o.name}|${o.area}`; (placeGroups.get(key) ?? placeGroups.set(key, []).get(key)).push(o.id); }
+  const places = [...placeGroups.entries()].sort((x, y) => x[0].localeCompare(y[0])).map(([key, ids]) => `<option value="${esc(key)}">${esc(cap(key.split('|')[0]))} (${esc(world.areas[key.split('|')[1]] ?? key.split('|')[1])})${ids.length > 1 ? ` · ${ids.length}` : ''}</option>`).join('');
   const tasks = sim.studio.active().filter(pr => pr.team.includes(id)).flatMap(pr => pr.tasks.filter(t => t.phase === pr.phase && t.status !== 'done').map(t => `<option value="${pr.id}|${t.id}">${esc(pr.name)}: ${esc(t.title)}</option>`)).join('');
   const people = world.personas.filter(o => o.id !== id && sim.agents.has(o.id)).map(o => `<option value="${o.id}">${esc(o.short)}</option>`).join('');
   const needs = Object.entries(a.needs).map(([k, v]) => `<label class="slider"><span>${k}</span><input type="range" min="0" max="100" value="${Math.round(v)}" data-need="${k}" aria-label="${k}"><output>${Math.round(v)}</output></label>`).join('');
-  box.innerHTML = `<div class="godbox">
-    <button class="btn wide" data-possess aria-pressed="${sim.possessed === id}" ${a.hidden ? 'disabled title="Not in the office. Possess them once they arrive."' : ''}>🎮 ${sim.possessed === id ? 'Let go' : 'Possess'}${a.hidden ? ' · not in the office' : ''}</button>
-    <div class="godrow"><select id="g-place" aria-label="Place">${places}</select><button class="btn small" data-g="goto">Send there</button></div>
-    ${p.look?.dog ? '' : `<div class="godrow"><select id="g-task" aria-label="Task">${tasks || '<option value="">No open tasks</option>'}</select><button class="btn small" data-g="work" ${tasks ? '' : 'disabled'}>Work on it</button></div>`}
-    <div class="godrow"><select id="g-person" aria-label="Person">${people}</select><button class="btn small" data-g="talk">Go talk</button></div>
-    <div class="btnrow"><button class="btn small" data-g="coffee">☕ Coffee</button><button class="btn small" data-g="break">🛋️ Break</button><button class="btn small" data-g="home">🚶 Go home</button><button class="btn small" data-g="nap">💤 Nap</button></div>
-    <div class="section-title">Whisper a thought</div>
-    <textarea id="g-whisper" rows="2" placeholder="e.g. You're secretly worried about Noor"></textarea>
-    <div class="godrow"><span class="hint">Mention someone by name and they'll go find them.</span><button class="btn small" data-g="whisper">Whisper</button></div>
-    <div class="god-msg" id="god-msg" role="status"></div>
-  </div>`;
-  needsBox.innerHTML = `<div class="section-title">Needs</div>${needs}
-    <div class="godrow"><input id="g-mood" placeholder="Set mood, e.g. elated" aria-label="Mood"><button class="btn small" data-g="mood">Set mood</button></div>
-    <div class="section-title">Closeness</div>
-    <div class="godrow"><select id="g-rel" aria-label="Relationship">${people}</select><input type="range" min="0" max="10" id="g-close" aria-label="Closeness"><output id="g-close-v"></output></div>`;
+  const mine = sim.possessed === id;
+  const possessBtn = `<button class="btn wide" data-possess aria-pressed="${mine}" ${a.hidden ? 'disabled title="Not in the office. Possess them once they arrive."' : ''}>🎮 ${mine ? 'Let go' : 'Possess'}${a.hidden ? ' · not in the office' : ''}</button>`;
+  if (!mine) {
+    // only the possess button until you take someone over; the rest of god's toolkit unlocks after
+    box.innerHTML = `<div class="godbox">${possessBtn}
+      <p class="hint">Take over ${esc(p.short)}: walk them with the arrow keys or WASD, use what's next to them with E, start conversations with T, or give them orders, needs, moods and whispered thoughts from here. Everyone else keeps living their day. Esc lets go.</p>
+      <div class="god-msg" id="god-msg" role="status"></div>
+    </div>`;
+    needsBox.innerHTML = '';
+    const sum = document.querySelector('#view-inspect details.more > summary'); if (sum) sum.textContent = 'Today & details';
+  } else {
+    const sum = document.querySelector('#view-inspect details.more > summary'); if (sum) sum.textContent = 'Needs, today & details';
+    box.innerHTML = `<div class="godbox">${possessBtn}
+      <p class="hint">You are ${esc(p.short)}. Arrow keys or WASD walk, E uses what's next to you, T talks, Esc lets go. Or give orders below.</p>
+      <div class="godrow"><select id="g-place" aria-label="Place">${places}</select><button class="btn small" data-g="goto">Walk</button></div>
+      ${p.look?.dog ? '' : `<div class="godrow"><select id="g-task" aria-label="Task">${tasks || '<option value="">No open tasks</option>'}</select><button class="btn small" data-g="work" ${tasks ? '' : 'disabled'}>Work</button></div>`}
+      <div class="godrow"><select id="g-person" aria-label="Person">${people}</select><button class="btn small" data-g="talk">Talk</button></div>
+      <div class="btnrow"><button class="btn small" data-g="coffee">☕ Coffee</button><button class="btn small" data-g="break">🛋️ Break</button><button class="btn small" data-g="home">🚶 Go home</button><button class="btn small" data-g="nap">💤 Nap</button></div>
+      <div class="section-title">Whisper a thought</div>
+      <textarea id="g-whisper" rows="2" placeholder="e.g. You're secretly worried about Noor"></textarea>
+      <div class="godrow"><span class="hint">Mention someone by name and they'll go find them.</span><button class="btn small" data-g="whisper">Whisper</button></div>
+      <div class="god-msg" id="god-msg" role="status"></div>
+    </div>`;
+    needsBox.innerHTML = `<div class="section-title">Needs</div>${needs}
+      <div class="godrow"><input id="g-mood" placeholder="Set mood, e.g. elated" aria-label="Mood"><button class="btn small" data-g="mood">Set mood</button></div>
+      <div class="section-title">Closeness</div>
+      <div class="godrow"><select id="g-rel" aria-label="Relationship">${people}</select><input type="range" min="0" max="10" id="g-close" aria-label="Closeness"><output id="g-close-v"></output></div>`;
+  }
   const msg = t => { $('#god-msg').textContent = t; };
-  const relSync = () => { const r = a.relationships[$('#g-rel').value]; if (!r) return; $('#g-close').value = r.closeness; $('#g-close-v').textContent = r.closeness; };
-  relSync();
-  $('#g-rel').onchange = relSync;
-  $('#g-close').oninput = e => { sim.setCloseness(id, $('#g-rel').value, e.target.value); $('#g-close-v').textContent = e.target.value; };
+  const relSync = () => { const r = a.relationships[$('#g-rel')?.value]; if (!r) return; $('#g-close').value = r.closeness; $('#g-close-v').textContent = r.closeness; };
+  if (mine) {
+    relSync();
+    $('#g-rel').onchange = relSync;
+    $('#g-close').oninput = e => { sim.setCloseness(id, $('#g-rel').value, e.target.value); $('#g-close-v').textContent = e.target.value; };
+  }
   for (const r of needsBox.querySelectorAll('[data-need]')) r.oninput = e => { sim.setNeed(id, r.dataset.need, e.target.value); r.nextElementSibling.textContent = e.target.value; };
-  box.querySelector('[data-possess]').onclick = () => { const err = togglePossess(id); if (err) msg(err); };
+  box.querySelector('[data-possess]').onclick = () => { const err = togglePossess(id); if (err) return msg(err); godFor = null; loadInspect(true); };
   for (const b of [...box.querySelectorAll('[data-g]'), ...needsBox.querySelectorAll('[data-g]')]) b.onclick = () => {
     const g = b.dataset.g;
     let err = null;
-    if (g === 'goto') err = sim.godCommand(id, { type: 'goto', obj: $('#g-place').value });
+    if (g === 'goto') { const [nm, ar] = $('#g-place').value.split('|'); const opts = world.objects.filter(o => o.name === nm && o.area === ar); err = opts.length ? sim.godCommand(id, { type: 'goto', obj: opts[Math.floor(Math.random() * opts.length)].id }) : 'Nowhere like that.'; }
     else if (g === 'work') { const [project, task] = $('#g-task').value.split('|'); err = sim.godCommand(id, { type: 'work', project, task }); }
     else if (g === 'talk') err = sim.godCommand(id, { type: 'talk', target: $('#g-person').value });
     else if (g === 'whisper') { err = sim.whisper(id, $('#g-whisper').value); if (!err) $('#g-whisper').value = ''; }
@@ -17701,7 +19607,9 @@ setInterval(() => {
   const p = P[snap.possessed], near = local.sim().possessTargets();
   hud.hidden = false;
   const touchPad = !$('#dpad').hidden; // on a touch screen the d-pad does the talking
-  hud.innerHTML = touchPad ? `<b>🎮 Playing as ${esc(p.short)}</b>${near.length ? ` · ${near.map(id => esc(P[id].short)).join(', ')} nearby` : ''}` : `<b>🎮 Playing as ${esc(p.short)}</b> · arrows or WASD to move · <kbd>E</kbd> use what's next to you · <kbd>T</kbd> talk${near.length ? ` (${near.map(id => esc(P[id].short)).join(', ')} nearby)` : ''} · <kbd>Esc</kbd> let go${hudText ? `<div class="hud-msg">${esc(hudText)}</div>` : ''}`;
+  const pd = snap.picaDay;
+  hud.innerHTML = pd ? (touchPad ? `<b>🐶 Pica's day</b> · ${pd.sniffed} sniffed, ${pd.greeted} greeted${near.length ? ` · ${near.map(id => esc(P[id].short)).join(', ')} nearby` : ''}${hudText ? `<div class="hud-msg">${esc(hudText)}</div>` : ''}` : `<b>🐶 Pica's day</b> · the puffs are smells · <kbd>E</kbd> sniff what's next to you · <kbd>T</kbd> say hi${near.length ? ` (${near.map(id => esc(P[id].short)).join(', ')})` : ''} · <kbd>Esc</kbd> end the day and write it up · ${pd.sniffed} sniffed${hudText ? `<div class="hud-msg">${esc(hudText)}</div>` : ''}`)
+    : touchPad ? `<b>🎮 Playing as ${esc(p.short)}</b>${near.length ? ` · ${near.map(id => esc(P[id].short)).join(', ')} nearby` : ''}` : `<b>🎮 Playing as ${esc(p.short)}</b> · arrows or WASD to move · <kbd>E</kbd> use what's next to you · <kbd>T</kbd> talk${near.length ? ` (${near.map(id => esc(P[id].short)).join(', ')} nearby)` : ''} · <kbd>Esc</kbd> let go${hudText ? `<div class="hud-msg">${esc(hudText)}</div>` : ''}`;
 }, 250);
 
 let talkPending = null;

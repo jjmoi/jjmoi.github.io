@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><text y=%2214%22 font-size=%2214%22>☄🌼</text></svg>">
 <title>JJ → Daisy</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122843739-1"></script>
   <script>
@@ -43,7 +42,7 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body)
 @media (prefers-reduced-motion:reduce){.mark h1 .ai.lit{animation:none}}
 .mark p{margin:0;font:400 11px/1.4 var(--f-body);color:var(--ink-soft);letter-spacing:.12em;text-transform:uppercase}
 /* sound history: a quiet card column on the right; a swipeable strip on phones */
-.history{position:fixed;right:20px;top:calc(20px + env(safe-area-inset-top,0px));width:216px;max-height:calc(100% - 40px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));box-sizing:border-box;display:flex;flex-direction:column;gap:8px;padding:12px 12px 14px;background:rgba(255,255,255,.8);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-radius:24px;box-shadow:0 12px 40px rgba(29,23,48,.08),0 1px 2px rgba(29,23,48,.05)}
+.history{position:fixed;right:20px;top:calc(20px + env(safe-area-inset-top,0px));width:216px;max-height:calc(100% - 40px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));box-sizing:border-box;display:flex;flex-direction:column;gap:8px;padding:12px 12px 14px;background:rgba(255,255,255,.6);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-radius:24px;box-shadow:0 12px 40px rgba(29,23,48,.08),0 1px 2px rgba(29,23,48,.05)}
 .history.collapsed{padding-bottom:12px}
 .history.collapsed .history-body{display:none}
 .history-head{display:flex;justify-content:space-between;align-items:center;padding:0 0 0 6px;font:400 11px/1.2 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
@@ -94,7 +93,7 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body)
 .kbd button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
 /* owner's manual: a link beside History, opening a printed-booklet modal */
 .history:not(.collapsed) .man-link{display:none}
-.hist-links{display:flex;align-items:center;gap:2px}
+.hist-links{display:flex;align-items:center;gap:11px}
 #manual{border:0;padding:0;margin:auto;width:min(760px,calc(100% - 32px));max-height:calc(100% - 48px);border-radius:28px;background:var(--paper);color:var(--ink);text-transform:none;box-shadow:0 24px 80px rgba(29,23,48,.16),0 2px 6px rgba(29,23,48,.06);overflow:hidden}
 #manual[open]{display:flex;flex-direction:column;animation:manIn .28s cubic-bezier(.2,.8,.2,1)}
 #manual::backdrop{background:rgba(243,241,248,.55);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
@@ -109,6 +108,39 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body)
 .man-langs button:hover{color:var(--ink)}
 .man-langs button[aria-pressed="true"]{color:var(--ink)}
 .man-lang[hidden]{display:none}
+/* trinket collection: silhouettes until found */
+.tk-plate figure.unfound svg *{fill:#e4e1ec!important;stroke:#e4e1ec!important}
+.tk-plate figure.unfound .th,.tk-plate figure.unfound .tk,.tk-plate figure.unfound text{visibility:hidden}
+.tk-plate figure.unfound figcaption{color:var(--ink-soft)}
+.tk-list li.unfound .tn,.tk-list li.unfound span{display:none}
+.tk-list li.unfound::after{content:"Not yet found";color:var(--ink-soft);font-size:13px}
+.man-lang[lang=fr] .tk-list li.unfound::after{content:"Pas encore trouvée"}
+.man-lang[lang=es] .tk-list li.unfound::after{content:"Aún no encontrada"}
+.man-scroll .tk-count{font:400 11px/1.4 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+/* the toast: one quiet line where the keyboard legend used to sit */
+.toast{position:fixed;left:50%;bottom:calc(32px + env(safe-area-inset-bottom,0px));transform:translate(-50%,6px);margin:0;max-width:calc(100% - 32px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font:400 11px/1.4 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);opacity:0;pointer-events:none;transition:opacity .6s ease,transform .6s ease}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media (prefers-reduced-motion:reduce){.toast{transition:opacity .3s ease;transform:translate(-50%,0)}}
+/* changelog: a smaller sibling of the manual */
+#changelog{border:0;padding:0;margin:auto;width:min(760px,calc(100% - 32px));max-height:calc(100% - 48px);border-radius:28px;background:var(--paper);color:var(--ink);text-transform:none;box-shadow:0 24px 80px rgba(29,23,48,.16),0 2px 6px rgba(29,23,48,.06);overflow:hidden}
+#changelog[open]{display:flex;flex-direction:column;animation:manIn .28s cubic-bezier(.2,.8,.2,1)}
+#changelog::backdrop{background:rgba(243,241,248,.55);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+@media (prefers-reduced-motion:reduce){#changelog[open]{animation:none}}
+#logScroll{padding:64px 56px 56px}
+.rel + .rel{margin-top:44px}
+.rel-v{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0;font:400 11px/1.4 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.rel-v span{letter-spacing:.1em}
+.man-scroll .rel h2{margin:10px 0 0;font:400 15px/1.4 var(--f-body);letter-spacing:.1em;color:var(--ink)}
+.rel ul{margin:14px 0 0;padding:0 0 0 18px;display:grid;gap:10px}
+.rel li::marker{color:var(--ink-soft)}
+@media (max-width:600px){#logScroll{padding:48px 22px 44px}}
+/* manual scrollbar: the thumb stays, the track disappears */
+.man-scroll{scrollbar-color:rgba(29,23,48,.22) transparent}
+.man-scroll::-webkit-scrollbar{width:10px;background:transparent}
+.man-scroll::-webkit-scrollbar-track{background:transparent;border:0;box-shadow:none}
+.man-scroll::-webkit-scrollbar-corner{background:transparent}
+.man-scroll::-webkit-scrollbar-thumb{background:rgba(29,23,48,.22);border-radius:999px;border:3px solid transparent;background-clip:padding-box}
+.man-scroll::-webkit-scrollbar-thumb:hover{background-color:rgba(29,23,48,.36)}
 .man-scroll{overflow-y:auto;overscroll-behavior:contain;padding:0 56px 64px;font:400 14px/1.53 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:#433d58}
 .man-scroll :is(h2,h3,.lbl,.cap,.key,.ts-h,.spec dt,.ops dt,.fig text,figcaption,.tk-list i,.parts i,.vn,.sn){font-family:var(--f-body);text-transform:uppercase;font-weight:400}
 .man-scroll p{margin:0}
@@ -241,7 +273,7 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body)
 
 <aside class="history collapsed" id="history" aria-label="History">
   <div class="history-head">
-    <span class="hist-links"><button type="button" class="hist-link man-link" id="manToggle" aria-haspopup="dialog" aria-controls="manual">Manual</button><button type="button" class="hist-link" id="histToggle" aria-expanded="false" aria-controls="histBody">History</button></span>
+    <span class="hist-links"><button type="button" class="hist-link man-link" id="logToggle" aria-haspopup="dialog" aria-controls="changelog">Changelog</button><button type="button" class="hist-link man-link" id="manToggle" aria-haspopup="dialog" aria-controls="manual">Manual</button><button type="button" class="hist-link" id="histToggle" aria-expanded="false" aria-controls="histBody">History</button></span>
     <button type="button" class="hist-x" id="histClose" aria-label="Close history"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 3l6 6M9 3l-6 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
   </div>
   <div class="history-body" id="histBody">
@@ -249,6 +281,78 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body)
     <ol id="histList"></ol>
   </div>
 </aside>
+
+<dialog id="changelog" aria-labelledby="logTitle">
+  <div class="man-bar">
+    <span id="logTitle">KT-0827 · Firmware updates</span>
+    <div class="man-tools">
+      <button type="button" class="hist-x" id="logClose" aria-label="Close changelog"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 3l6 6M9 3l-6 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+    </div>
+  </div>
+  <div class="man-scroll log-scroll" id="logScroll" tabindex="-1">
+    <article class="rel">
+      <p class="rel-v">Firmware 2.0<span>Oct 14, 2026</span></p>
+      <h2>Daisy remembers you</h2>
+      <ul>
+        <li>Every Daisy is now one of a kind. Yours has its own unit number and serial, printed right on the sticker. No two alike. No swapsies.</li>
+        <li>Your takes stay in History between visits. Close the tab, come back next week, and they're still there, humming quietly to themselves.</li>
+        <li>Trinkets are now collectible. A different handful drifts by on each visit, and every one that shows up joins your collection. The manual's trinket plate fills in as you go. 28 to find. We believe in you.</li>
+      </ul>
+    </article>
+    <article class="rel">
+      <p class="rel-v">Firmware 1.6<span>Oct 14, 2026</span></p>
+      <h2>Read the manual (seriously)</h2>
+      <ul>
+        <li>Daisy now ships with a full owner's manual: safeguards, parts, troubleshooting, and a warranty that lasts exactly as long as your tab.</li>
+        <li>Lisez le manuel. Lea el manual. It's in French and Spanish too.</li>
+        <li>The drawings are black and white, because real manuals never had the budget for colour either.</li>
+      </ul>
+    </article>
+    <article class="rel">
+      <p class="rel-v">Firmware 1.5<span>Oct 13, 2026</span></p>
+      <h2>Squashed a few bugs</h2>
+      <ul>
+        <li>For real</li>
+      </ul>
+    </article>
+    <article class="rel">
+      <p class="rel-v">Firmware 1.4<span>Oct 12, 2026</span></p>
+      <h2>Snack break</h2>
+      <ul>
+        <li>The hot dog bun finally wraps the hot dog. On both sides. It took longer than we'd like to admit.</li>
+        <li>The peanuts are still a pair, but no longer glued together. Each one drifts on its own now, like a healthy relationship.</li>
+        <li>Trinkets loaded into the remote shrink to fit the battery slot. The remote runs on them just fine. Please don't ask how.</li>
+      </ul>
+    </article>
+    <article class="rel">
+      <p class="rel-v">Firmware 1.3<span>Oct 10, 2026</span></p>
+      <h2>Know your limits</h2>
+      <ul>
+        <li>Daisy can now burn out. Four short circuits or fourteen new takes, and both units go down. Double-tap the screen to bring them back.</li>
+        <li>Right before the end, the screen glitches and says things. Some of them are a little concerning. We're looking into it. (We're not.)</li>
+        <li>Spin the flower past a full turn for a crunchy glitch replay. Spin the remote past a full turn and, well, don't.</li>
+      </ul>
+    </article>
+    <article class="rel">
+      <p class="rel-v">Firmware 1.2<span>Oct 8, 2026</span></p>
+      <h2>New look, new snacks</h2>
+      <ul>
+        <li>Everything on screen now speaks one pixel font, in capitals, with feeling.</li>
+        <li>New trinkets: peanuts, wheat and a milk carton. The sticker on the back has been updated accordingly. Please check it if you're allergic to fictional food.</li>
+        <li>A small cat now lives on every battery. It has no function. It is very important.</li>
+      </ul>
+    </article>
+    <article class="rel">
+      <p class="rel-v">Firmware 1.1<span>Oct 6, 2026</span></p>
+      <h2>Sparks!</h2>
+      <ul>
+        <li>The circuit board now shorts out every now and then: a crackle, a bolt across the traces, sparks out of the rim. Totally normal. Probably.</li>
+        <li>Press and hold a petal to hear its vibe on its own.</li>
+        <li>Every new take blooms a little flower that joins the orbit. Tap one to hear its take again.</li>
+      </ul>
+    </article>
+  </div>
+</dialog>
 
 <dialog id="manual" aria-labelledby="manTitle">
   <div class="man-bar">
@@ -371,7 +475,9 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body)
       </ul>
 
       <h3>Trinkets</h3>
-      <p>Twenty-eight trinkets orbit the flower and the remote. Each is moulded in the same soft satin finish as the petals, and most are puffed like small vinyl pillows. Trinkets are accessories: they do not change the sound of a take, but they can be grabbed, thrown, tapped and loaded into the remote in place of a battery (see section 03).</p>
+      <p>Daisy comes with twenty-eight trinkets. Each is moulded in the same soft satin finish as the petals, and most are puffed like small vinyl pillows. Trinkets are accessories: they do not change the sound of a take, but they can be grabbed, thrown, tapped and loaded into the remote in place of a battery (see section 03).</p>
+      <p>Seven trinkets orbit at a time, and a different handful arrives with each visit. Every trinket that drifts into orbit is added to your collection. Trinkets you have not found yet appear below as grey silhouettes, and your unit remembers every find from one visit to the next. Each new find is confirmed by a short line of text at the bottom of the window.</p>
+      <p class="tk-count"></p>
 <div class="fig tk-plate" role="img" aria-label="Line drawings of all 28 trinkets, numbered 01 to 28"><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><polygon class="ln" points="-2.6,-26 -15.6,2.1 -2.6,2.1 -8.3,26 15.6,-5.2 2.6,-5.2 9.4,-26"/></svg><figcaption>01</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><circle class="ln" r="25"/><path class="ln" d="M19.0 0.0 L19.8 1.7 L20.2 3.6 L19.8 5.3 L18.8 6.9 L17.3 8.1 L15.8 9.1 L14.4 10.1 L13.3 11.2 L12.6 12.6 L12.0 14.3 L11.3 16.1 L10.2 17.7 L8.7 18.7 L6.9 19.0 L5.0 18.8 L3.2 18.2 L1.5 17.6 L0.0 17.4 L-1.5 17.6 L-3.2 18.2 L-5.0 18.8 L-6.9 19.0 L-8.7 18.7 L-10.2 17.7 L-11.3 16.1 L-12.0 14.3 L-12.6 12.6 L-13.3 11.2 L-14.4 10.1 L-15.8 9.1 L-17.3 8.1 L-18.8 6.9 L-19.8 5.3 L-20.2 3.6 L-19.8 1.7 L-19.0 0.0 L-18.0 -1.6 L-17.2 -3.0 L-16.9 -4.5 L-16.9 -6.1 L-17.1 -8.0 L-17.1 -9.9 L-16.8 -11.7 L-15.8 -13.2 L-14.2 -14.2 L-12.4 -14.8 L-10.5 -15.0 L-8.8 -15.3 L-7.4 -15.8 L-6.1 -16.7 L-4.8 -18.0 L-3.4 -19.3 L-1.8 -20.2 L-0.0 -20.6 L1.8 -20.2 L3.4 -19.3 L4.8 -18.0 L6.1 -16.7 L7.4 -15.8 L8.8 -15.3 L10.5 -15.0 L12.4 -14.8 L14.2 -14.2 L15.8 -13.2 L16.8 -11.7 L17.1 -9.9 L17.1 -8.0 L16.9 -6.1 L16.9 -4.5 L17.2 -3.0 L18.0 -1.6 L19.0 -0.0Z"/><circle class="ln" r="8"/><line class="tk" x1="12.4" y1="3.8" x2="14.3" y2="6.2"/><line class="tk" x1="4.7" y1="12.1" x2="2.0" y2="10.8"/><line class="tk" x1="-6.6" y1="11.2" x2="-3.6" y2="11.3"/><line class="tk" x1="-12.6" y1="3.1" x2="-14.9" y2="5.1"/><line class="tk" x1="-10.3" y1="-8.0" x2="-9.1" y2="-10.7"/><line class="tk" x1="-1.5" y1="-12.9" x2="-0.5" y2="-10.1"/><line class="tk" x1="9.2" y1="-9.2" x2="7.1" y2="-11.3"/></svg><figcaption>02</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><path class="ln" d="M0 24C-5 18 -25 6 -25 -6C-25 -18 -10 -23 0 -11C10 -23 25 -18 25 -6C25 6 5 18 0 24Z"/><path class="th" d="M-17 -10Q-16 -16 -10 -16"/></svg><figcaption>03</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><polygon class="ln" points="0.0,-25.0 7.1,-7.7 25.7,-6.3 11.4,5.7 15.9,23.8 0.0,14.0 -15.9,23.8 -11.4,5.7 -25.7,-6.3 -7.1,-7.7"/></svg><figcaption>04</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><polygon class="ln" points="0,-28 19,-4 0,28 -19,-4"/><polyline class="th" points="-19,-4 5,2 19,-4"/><polyline class="th" points="0,-28 5,2 0,28"/></svg><figcaption>05</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><g transform="rotate(-16)"><ellipse class="ln" rx="29" ry="9" style="fill:none"/><ellipse class="th" rx="22" ry="6"/></g><circle class="ln" r="14"/><g transform="rotate(-16)"><path class="ln" d="M-29 0A29 9 0 0 0 29 0" style="fill:none"/><path class="th" d="M-22 0A22 6 0 0 0 22 0"/><path class="th" d="M-14 0A14 14 0 0 1 14 0" style="stroke:none"/></g></svg><figcaption>06</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><path class="ln" d="M10 -22A24 24 0 1 0 10 22A24 24 0 0 1 10 -22Z"/></svg><figcaption>07</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><circle class="ln" cx="0" cy="2" r="13"/><circle class="ln" cx="-14" cy="7" r="10"/><circle class="ln" cx="14" cy="7" r="10"/><circle class="ln" cx="6" cy="-7" r="10"/><circle class="ln" cx="-7" cy="-5" r="9"/><circle class="wf" cx="0" cy="2" r="12.3"/><circle class="wf" cx="-14" cy="7" r="9.3"/><circle class="wf" cx="14" cy="7" r="9.3"/><circle class="wf" cx="6" cy="-7" r="9.3"/><circle class="wf" cx="-7" cy="-5" r="8.3"/></svg><figcaption>08</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><g transform="rotate(-35)"><rect class="ln" x="-25" y="-10" width="50" height="20" rx="10"/><path class="fb" d="M0 -10H-15A10 10 0 0 0 -15 10H0Z"/></g></svg><figcaption>09</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><path class="ln" d="M-10 6Q-6 -12 5 -23M10 8Q8 -8 5 -23" style="fill:none"/><path class="ln" d="M5 -23Q16 -28 22 -20Q12 -16 5 -23Z"/><circle class="ln" cx="-11" cy="13" r="10"/><circle class="ln" cx="11" cy="15" r="10"/><path class="th" d="M-16 9Q-15 6 -12 6M6 11Q7 8 10 8"/></svg><figcaption>10</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><circle class="ln" r="25"/><ellipse class="fb" cx="-8" cy="-6" rx="2.6" ry="4.2"/><ellipse class="fb" cx="8" cy="-6" rx="2.6" ry="4.2"/><path class="ln" d="M-13 6Q0 19 13 6" style="fill:none"/></svg><figcaption>11</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><rect class="ln" x="-22" y="-22" width="44" height="44" rx="9"/><circle class="fb" cx="-11" cy="-11" r="3.6"/><circle class="fb" cx="11" cy="-11" r="3.6"/><circle class="fb" cx="0" cy="0" r="3.6"/><circle class="fb" cx="-11" cy="11" r="3.6"/><circle class="fb" cx="11" cy="11" r="3.6"/></svg><figcaption>12</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><rect class="ln" x="-29" y="-9" width="58" height="14" rx="7"/><polyline class="tk" points="-21,-3 -17,-7 -13,-3 -9,-7 -5,-3 -1,-7 3,-3 7,-7 11,-3 15,-7 19,-3"/><path class="ln" d="M-22 -1Q-25 15 -10 15H10Q25 15 22 -1Q11 6 0 6Q-11 6 -22 -1Z"/></svg><figcaption>13</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><circle class="ln" r="25"/><circle class="ln" r="19"/><path class="ln" d="M0 -19V19M0 2L-13.4 13.4M0 2L13.4 13.4" style="fill:none"/></svg><figcaption>14</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><circle class="fb" r="25"/><circle class="wf" cx="2" cy="-4" r="10.5"/><text x="2" y="-3.5" class="t8">8</text></svg><figcaption>15</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><rect class="ln" x="-22" y="-1" width="44" height="17" rx="8"/><ellipse class="th" cx="-14" cy="8" rx="2.2" ry="1.2" transform="rotate(20 -14 8)"/><ellipse class="th" cx="-6" cy="11" rx="2.2" ry="1.2" transform="rotate(-10 -6 11)"/><ellipse class="th" cx="3" cy="8" rx="2.2" ry="1.2" transform="rotate(30 3 8)"/><ellipse class="th" cx="12" cy="11" rx="2.2" ry="1.2" transform="rotate(-20 12 11)"/><ellipse class="th" cx="-10" cy="13" rx="2.2" ry="1.2" transform="rotate(5 -10 13)"/><ellipse class="th" cx="8" cy="13" rx="2.2" ry="1.2" transform="rotate(15 8 13)"/><path class="ln" d="M-27 1Q-27 -13 -12 -13H14Q27 -13 27 -2Q27 4 19 4H-21Q-27 4 -27 1Z"/><path class="th" d="M-16 -12L-10 3M-6 -12L0 3M4 -12L10 3M14 -12L19 2"/></svg><figcaption>16</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><rect class="ln" x="-8" y="-2" width="16" height="25" rx="7"/><path class="ln" d="M-27 4Q-27 -25 0 -25Q27 -25 27 4Q0 9 -27 4Z"/><circle class="fb" cx="-13" cy="-8" r="3.6"/><circle class="fb" cx="3" cy="-16" r="4.2"/><circle class="fb" cx="15" cy="-5" r="3.2"/><circle class="fb" cx="-2" cy="-3" r="2.6"/></svg><figcaption>17</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><rect class="ln" x="-28" y="-18" width="56" height="36" rx="5"/><rect class="th" x="-22" y="-13" width="44" height="10" rx="2"/><rect class="ln" x="-17" y="-1" width="34" height="11" rx="5.5"/><circle class="ln" cx="-9" cy="4.5" r="3.5"/><circle class="ln" cx="9" cy="4.5" r="3.5"/><path class="th" d="M-15 18L-12 12H12L15 18"/></svg><figcaption>18</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><circle class="ln" r="25"/><circle class="ln" cx="5" cy="-2" r="11"/><circle class="fb" cx="5" cy="-2" r="5.5"/><circle class="wf" cx="8" cy="-5" r="2"/></svg><figcaption>19</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><polygon class="ln" points="-12,-15 12,-15 25,-4 0,25 -25,-4"/><path class="th" d="M-25 -4H25M-12 -15L-8 -4L0 -15L8 -4L12 -15M-8 -4L0 25L8 -4"/></svg><figcaption>20</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><g transform="rotate(-35)"><rect class="ln" x="-20" y="-6.5" width="34" height="13"/><path class="th" d="M-20 -2H14M-20 2H14"/><polygon class="ln" points="14,-6.5 27,0 14,6.5"/><polygon class="fb" points="22.5,-2.2 27,0 22.5,2.2"/><rect class="ln" x="-28" y="-6.5" width="9" height="13" rx="3"/><path class="th" d="M-19 -6.5V6.5M-17 -6.5V6.5"/></g></svg><figcaption>21</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><path class="ln" d="M-5 -16V-10Q-13 -6 -13 3V22Q-13 27 -8 27H8Q13 27 13 22V3Q13 -6 5 -10V-16Z"/><rect class="fb" x="-6" y="-27" width="12" height="12" rx="2.5"/><rect class="th" x="-13" y="3" width="26" height="15"/></svg><figcaption>22</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><g transform="rotate(-30)"><path class="ln" d="M-30 0Q-21 -10 0 -10Q23 -10 31 0Q23 10 0 10Q-21 10 -30 0Z"/><path class="tk" d="M-4 -10V10M1 -10V10"/><path class="th" d="M-26 0H27"/><path class="ln" d="M-24 9L-20 15L-16 9"/></g></svg><figcaption>23</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><path class="ln" d="M-24 12V-22Q-24 -26 -20 -26H-2Q2 -26 2 -22V-8Q14 -6 23 0Q28 4 28 10V12Z"/><path class="th" d="M-6 -20L4 -18M-6 -15L5 -12M-6 -10L8 -6"/><rect class="ln" x="-27" y="12" width="57" height="9" rx="4"/><path class="th" d="M14 -3Q24 1 26 10"/><circle class="th" cx="-15" cy="-12" r="4"/></svg><figcaption>24</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><g transform="translate(-10 0) rotate(28) scale(.85)"><circle class="ln" cx="0" cy="-8" r="9"/><circle class="ln" cx="0" cy="8" r="10"/><circle class="wf" cx="0" cy="-8" r="8.3"/><circle class="wf" cx="0" cy="8" r="9.3"/><path class="th" d="M-5 -14L5 -2M-6 4L6 15M-7 -3L7 -3M-8 9L8 9"/></g><g transform="translate(11 3) rotate(-18) scale(.78)"><circle class="ln" cx="0" cy="-8" r="9"/><circle class="ln" cx="0" cy="8" r="10"/><circle class="wf" cx="0" cy="-8" r="8.3"/><circle class="wf" cx="0" cy="8" r="9.3"/><path class="th" d="M-5 -14L5 -2M-6 4L6 15M-7 -3L7 -3M-8 9L8 9"/></g></svg><figcaption>25</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><path class="ln" d="M5 29Q3 6 -1 -25" style="fill:none"/><ellipse class="ln" cx="-5.5" cy="6" rx="3.4" ry="6.4" transform="rotate(-38 -5.5 6)"/><ellipse class="ln" cx="7.5" cy="4" rx="3.4" ry="6.4" transform="rotate(38 7.5 4)"/><ellipse class="ln" cx="-6.5" cy="-3" rx="3.4" ry="6.4" transform="rotate(-38 -6.5 -3)"/><ellipse class="ln" cx="6.5" cy="-5" rx="3.4" ry="6.4" transform="rotate(38 6.5 -5)"/><ellipse class="ln" cx="-7.5" cy="-12" rx="3.4" ry="6.4" transform="rotate(-36 -7.5 -12)"/><ellipse class="ln" cx="5.5" cy="-14" rx="3.4" ry="6.4" transform="rotate(36 5.5 -14)"/><ellipse class="ln" cx="-0.8" cy="-24" rx="3.4" ry="6.4" transform="rotate(0 -0.8 -24)"/></svg><figcaption>26</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><rect class="ln" x="-15" y="-8" width="30" height="35" rx="2"/><polygon class="fb" points="-15,-8 -11,-21 11,-21 15,-8"/><rect class="ln" x="-11" y="-27" width="22" height="6" rx="1"/><text x="0" y="12" class="tm">MILK</text></svg><figcaption>27</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><polygon class="ln" points="-13,-3 13,-3 0,29"/><path class="th" d="M-9 3L4 21M-3 -3L7 13M5 -3L10 4M9 3L-4 21M3 -3L-7 13M-5 -3L-10 4"/><path class="ln" d="M-17 -2Q-21 -3 -17 -10Q-16 -24 0 -24Q16 -24 17 -10Q21 -3 17 -2Z"/><rect class="fb" x="-10" y="-14" width="3" height="2" rx=".6"/><rect class="fb" x="2" y="-18" width="3" height="2" rx=".6"/><rect class="fb" x="8" y="-9" width="3" height="2" rx=".6"/><rect class="fb" x="-3" y="-8" width="3" height="2" rx=".6"/><rect class="fb" x="-12" y="-6" width="3" height="2" rx=".6"/><path class="ln" d="M0 -27Q2 -33 6 -34" style="fill:none"/><circle class="ln" cx="0" cy="-26" r="4.5"/></svg><figcaption>28</figcaption></figure></div>
       <ol class="tk-list">
         <li><i>01</i>Lightning bolt<span>Yellow, puffed, softly rounded corners</span></li>
@@ -494,10 +600,10 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body)
       <dl class="ops">
         <div><dt>Regen</dt><dd>Press the pink [REGEN] button (7) for a surprise take. The remote picks two or three vibes at random, selects them on the flower, and composes a take of a random length between 1.4 and 5 seconds. Each press sends a burst of signal pulses from the button to the screen and flashes the remote's board, and the press has about a one-in-seven chance of shorting the flower and a one-in-fourteen chance of shorting the remote. Every Regen take counts as a new take toward the rated output.</dd></div>
         <div><dt>Preview</dt><dd>Press and hold a petal for about half a second to hear its vibe on its own: a short phrase of about 2.4 seconds, with the vibe's name shown between tildes on the screen, such as ~ SUNNY ~. Release to stop at once. Previews do not change your selection, do not appear in History, and do not count toward the rated output. Previewing needs the remote to be on.</dd></div>
-        <div><dt>Glitch replay</dt><dd>Drag the flower around past one full turn in a single motion. The screen tears and flickers through the take's colours, the status line stutters between GL!TCH and G1ITCH?, and three to five words from Daisy's glitch vocabulary appear across the display. Meanwhile the current take loops back crushed, warbling and chopped, for between 1.6 and 4.2 seconds. Glitch replays are harmless and do not count toward the rated output.</dd></div>
+        <div><dt>Glitch replay</dt><dd>Drag the flower around past one full turn in a single motion. The screen tears and flickers through the take's colours, the status line stutters between GL!TCH and G1ITCH?, and three to five words from Daisy's glitch vocabulary appear across the display. Meanwhile the current take loops back crushed, warbling and chopped, for between 2.4 and 5.6 seconds. Glitch replays are harmless and do not count toward the rated output.</dd></div>
         <div><dt>Take flowers</dt><dd>Every new take blooms a small flower that joins the orbit, its petals in the colours of the take's vibes. There are eight kinds, used in rotation: cosmos, tulip, lily, pompom, sakura, bells, rose and daisy. Tap a take flower to hear its take again; the flower hops and the petals on Daisy switch to that take's vibes. Take flowers can be thrown like any trinket.</dd></div>
         <div><dt>Trinkets</dt><dd>Grab any trinket and drag it about; release while moving to throw it, or hold still before releasing to drop it in place. A quick tap gives it a playful hop. Thrown trinkets tumble, knock into each other, and bounce off the edges of the window, then drift back to their orbit on their own. The peanuts always travel as a pair, but each one drifts independently.</dd></div>
-        <div><dt>History</dt><dd>Select HISTORY at the top right to open the history panel. It lists every new take of the session, newest first, up to the 30 most recent. Each entry shows the take's name, its length and a dot for each of its vibes. Tap an entry to return to that take: its vibes are reselected on the flower and it plays. Hover an entry, or select the current one on a touch screen, to reveal the download icon, which renders the take and saves it as a WAV file. Close the panel with ×.</dd></div>
+        <div><dt>History</dt><dd>Select HISTORY at the top right to open the history panel. It lists every new take made on your unit, newest first, up to the 30 most recent, and keeps them between visits. Each entry shows the take's name, its length and a dot for each of its vibes. Tap an entry to return to that take: its vibes are reselected on the flower and it plays. Hover an entry, or select the current one on a touch screen, to reveal the download icon, which renders the take and saves it as a WAV file. Close the panel with ×.</dd></div>
         <div><dt>Power</dt><dd>Tap the power button (8) to switch the remote off or on. Switching off stops any take that is playing, plays a short falling three-note chime, and darkens the button. Nothing plays while the remote is off, but the flower keeps your selection and current take. Switching on lights the button and the screen greets you again.</dd></div>
         <div><dt>Maker's sticker</dt><dd>Turn the flower around and tap the printed disc of the sticker (6). It answers with a tick and a flicker on the board beneath it. About one tap in twelve causes a short circuit.</dd></div>
       </dl>
@@ -538,7 +644,7 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body)
         <div><span>Remote is dark and lying on the floor</span><span>Spun past one full turn, or battery door closed on an empty slot</span><span>Double-tap the screen. The remote rises, its status light returns, and any empty slot is refilled with a fresh cell. The failed remote can also be picked up and thrown while it is down.</span></div>
         <div><span>Flower lies face down or on its back, screen blank yellow, petals do nothing</span><span>Four short circuits, or fourteen new takes, in one session</span><span>Double-tap the screen. Both units are restored, the short circuit and take counters reset, and the screen greets you. Reloading the page has the same effect.</span></div>
         <div><span>Sparks around the rim, crackling sound</span><span>A short circuit on the flower's or the remote's board</span><span>Normal operation; no action needed. Keep count: the fourth short circuit of the session ends both units.</span></div>
-        <div><span>Screen tears, flickers colours and shows words</span><span>Flower turned past one full turn in one drag</span><span>Normal operation. The glitch replay ends by itself within 1.6 to 4.2 seconds.</span></div>
+        <div><span>Screen tears, flickers colours and shows words</span><span>Flower turned past one full turn in one drag</span><span>Normal operation. The glitch replay ends by itself within 2.4 to 5.6 seconds.</span></div>
         <div><span>Battery door won't open</span><span>Single click</span><span>Double-click the door: two clicks, or two taps, in quick succession. The door works whether or not the remote is powered.</span></div>
         <div><span>Trinket does not go into the slot</span><span>Door closed, or no eligible trinket nearby</span><span>Open the door first. Trinkets that were just ejected and take flowers are not loaded; wait a few seconds or move another trinket closer.</span></div>
         <div><span>Flower or remote out of view</span><span>View moved or zoomed away</span><span>Double-click empty space to return to the default view.</span></div>
@@ -551,6 +657,8 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body)
       <dl class="spec">
         <dt>Model</dt><dd>KT-0827</dd>
         <dt>Batch</dt><dd>06/1000</dd>
+        <dt>Unit</dt><dd><span class="u-unit">0001</span> of 1000</dd>
+        <dt>Serial no.</dt><dd class="u-serial">KT0827-06-0001</dd>
         <dt>Type</dt><dd>Audiologo engine</dd>
         <dt>Vibes</dt><dd>12</dd>
         <dt>Tempo</dt><dd>About 56 to 159 BPM, set by the vibe mix</dd>
@@ -558,7 +666,7 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body)
         <dt>Take length</dt><dd>Up to 5 seconds</dd>
         <dt>Synthesis</dt><dd>Live, in the browser: sine, triangle, square, saw, bell and pluck voices, with percussion, pad, echo, shimmer, crush and tape wobble</dd>
         <dt>Output</dt><dd>Stereo WAV, 16-bit, at the device's native sample rate</dd>
-        <dt>History</dt><dd>30 most recent takes</dd>
+        <dt>History</dt><dd>30 most recent takes, kept between visits</dd>
         <dt>Remote power</dt><dd>AAA ×2, or trinkets</dd>
         <dt>Rated life</dt><dd>14 new takes or 4 short circuits per session, whichever comes first</dd>
         <dt>Trinkets</dt><dd>28, plus one take flower per new take</dd>
@@ -571,12 +679,12 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body)
       <h2><small>08</small>Limited warranty</h2>
       <p>Daisy is warranted against defects in materials and workmanship for the length of your browser session, from the moment the screen first says HELLO! until the tab is closed. During this period, both units may be restored to working order as many times as needed, free of charge.</p>
       <p>This warranty does not cover damage caused by over-spinning the remote, closing the battery door on an empty slot, exceeding the rated output of fourteen new takes, or more than three short circuits in one session. It does not cover wear to trinkets from throwing, collisions between trinkets, or trinkets lost temporarily beyond the edges of the window. Take names are generated at random; the maker accepts no responsibility for their meaning.</p>
-      <p>Closing or reloading the page ends the warranty period and clears History. Save any takes you wish to keep as WAV files before doing so.</p>
+      <p>Closing or reloading the page ends the warranty period, but not the unit: your History, your trinket finds, and your unit and serial numbers are kept for your next visit. To keep a take outside Daisy, save it as a WAV file.</p>
     </section>
 
     <div class="serial">
       <span class="lbl">Serial no.</span>
-      <span class="sn">KT0827-06-0417</span>
+      <span class="sn u-serial">KT0827-06-0001</span>
     </div>
 </div>
 <div class="man-lang" data-lang="fr" lang="fr" hidden>
@@ -691,7 +799,9 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body)
       </ul>
 
       <h3>Babioles</h3>
-      <p>Vingt-huit babioles gravitent autour de la fleur et de la télécommande. Chacune est moulée dans la même finition satinée et douce que les pétales, et la plupart sont rebondies comme de petits coussins en vinyle. Les babioles sont des accessoires : elles ne modifient pas le son d'une prise, mais elles peuvent être saisies, lancées, touchées et chargées dans la télécommande à la place d'une pile (voir section 03).</p>
+      <p>Daisy est livrée avec vingt-huit babioles. Chacune est moulée dans la même finition satinée et douce que les pétales, et la plupart sont rebondies comme de petits coussins en vinyle. Les babioles sont des accessoires : elles ne modifient pas le son d'une prise, mais elles peuvent être saisies, lancées, touchées et chargées dans la télécommande à la place d'une pile (voir section 03).</p>
+      <p>Sept babioles sont en orbite à la fois, et une sélection différente arrive à chaque visite. Chaque babiole qui entre en orbite rejoint votre collection. Les babioles que vous n'avez pas encore trouvées apparaissent ci-dessous en silhouette grise, et votre appareil se souvient de chaque trouvaille d'une visite à l'autre. Chaque nouvelle trouvaille est confirmée par une courte ligne de texte en bas de la fenêtre.</p>
+      <p class="tk-count"></p>
 <div class="fig tk-plate" role="img" aria-label="Dessins au trait des 28 babioles, numérotées de 01 à 28"><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><polygon class="ln" points="-2.6,-26 -15.6,2.1 -2.6,2.1 -8.3,26 15.6,-5.2 2.6,-5.2 9.4,-26"/></svg><figcaption>01</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><circle class="ln" r="25"/><path class="ln" d="M19.0 0.0 L19.8 1.7 L20.2 3.6 L19.8 5.3 L18.8 6.9 L17.3 8.1 L15.8 9.1 L14.4 10.1 L13.3 11.2 L12.6 12.6 L12.0 14.3 L11.3 16.1 L10.2 17.7 L8.7 18.7 L6.9 19.0 L5.0 18.8 L3.2 18.2 L1.5 17.6 L0.0 17.4 L-1.5 17.6 L-3.2 18.2 L-5.0 18.8 L-6.9 19.0 L-8.7 18.7 L-10.2 17.7 L-11.3 16.1 L-12.0 14.3 L-12.6 12.6 L-13.3 11.2 L-14.4 10.1 L-15.8 9.1 L-17.3 8.1 L-18.8 6.9 L-19.8 5.3 L-20.2 3.6 L-19.8 1.7 L-19.0 0.0 L-18.0 -1.6 L-17.2 -3.0 L-16.9 -4.5 L-16.9 -6.1 L-17.1 -8.0 L-17.1 -9.9 L-16.8 -11.7 L-15.8 -13.2 L-14.2 -14.2 L-12.4 -14.8 L-10.5 -15.0 L-8.8 -15.3 L-7.4 -15.8 L-6.1 -16.7 L-4.8 -18.0 L-3.4 -19.3 L-1.8 -20.2 L-0.0 -20.6 L1.8 -20.2 L3.4 -19.3 L4.8 -18.0 L6.1 -16.7 L7.4 -15.8 L8.8 -15.3 L10.5 -15.0 L12.4 -14.8 L14.2 -14.2 L15.8 -13.2 L16.8 -11.7 L17.1 -9.9 L17.1 -8.0 L16.9 -6.1 L16.9 -4.5 L17.2 -3.0 L18.0 -1.6 L19.0 -0.0Z"/><circle class="ln" r="8"/><line class="tk" x1="12.4" y1="3.8" x2="14.3" y2="6.2"/><line class="tk" x1="4.7" y1="12.1" x2="2.0" y2="10.8"/><line class="tk" x1="-6.6" y1="11.2" x2="-3.6" y2="11.3"/><line class="tk" x1="-12.6" y1="3.1" x2="-14.9" y2="5.1"/><line class="tk" x1="-10.3" y1="-8.0" x2="-9.1" y2="-10.7"/><line class="tk" x1="-1.5" y1="-12.9" x2="-0.5" y2="-10.1"/><line class="tk" x1="9.2" y1="-9.2" x2="7.1" y2="-11.3"/></svg><figcaption>02</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><path class="ln" d="M0 24C-5 18 -25 6 -25 -6C-25 -18 -10 -23 0 -11C10 -23 25 -18 25 -6C25 6 5 18 0 24Z"/><path class="th" d="M-17 -10Q-16 -16 -10 -16"/></svg><figcaption>03</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><polygon class="ln" points="0.0,-25.0 7.1,-7.7 25.7,-6.3 11.4,5.7 15.9,23.8 0.0,14.0 -15.9,23.8 -11.4,5.7 -25.7,-6.3 -7.1,-7.7"/></svg><figcaption>04</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><polygon class="ln" points="0,-28 19,-4 0,28 -19,-4"/><polyline class="th" points="-19,-4 5,2 19,-4"/><polyline class="th" points="0,-28 5,2 0,28"/></svg><figcaption>05</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><g transform="rotate(-16)"><ellipse class="ln" rx="29" ry="9" style="fill:none"/><ellipse class="th" rx="22" ry="6"/></g><circle class="ln" r="14"/><g transform="rotate(-16)"><path class="ln" d="M-29 0A29 9 0 0 0 29 0" style="fill:none"/><path class="th" d="M-22 0A22 6 0 0 0 22 0"/><path class="th" d="M-14 0A14 14 0 0 1 14 0" style="stroke:none"/></g></svg><figcaption>06</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><path class="ln" d="M10 -22A24 24 0 1 0 10 22A24 24 0 0 1 10 -22Z"/></svg><figcaption>07</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><circle class="ln" cx="0" cy="2" r="13"/><circle class="ln" cx="-14" cy="7" r="10"/><circle class="ln" cx="14" cy="7" r="10"/><circle class="ln" cx="6" cy="-7" r="10"/><circle class="ln" cx="-7" cy="-5" r="9"/><circle class="wf" cx="0" cy="2" r="12.3"/><circle class="wf" cx="-14" cy="7" r="9.3"/><circle class="wf" cx="14" cy="7" r="9.3"/><circle class="wf" cx="6" cy="-7" r="9.3"/><circle class="wf" cx="-7" cy="-5" r="8.3"/></svg><figcaption>08</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><g transform="rotate(-35)"><rect class="ln" x="-25" y="-10" width="50" height="20" rx="10"/><path class="fb" d="M0 -10H-15A10 10 0 0 0 -15 10H0Z"/></g></svg><figcaption>09</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><path class="ln" d="M-10 6Q-6 -12 5 -23M10 8Q8 -8 5 -23" style="fill:none"/><path class="ln" d="M5 -23Q16 -28 22 -20Q12 -16 5 -23Z"/><circle class="ln" cx="-11" cy="13" r="10"/><circle class="ln" cx="11" cy="15" r="10"/><path class="th" d="M-16 9Q-15 6 -12 6M6 11Q7 8 10 8"/></svg><figcaption>10</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><circle class="ln" r="25"/><ellipse class="fb" cx="-8" cy="-6" rx="2.6" ry="4.2"/><ellipse class="fb" cx="8" cy="-6" rx="2.6" ry="4.2"/><path class="ln" d="M-13 6Q0 19 13 6" style="fill:none"/></svg><figcaption>11</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><rect class="ln" x="-22" y="-22" width="44" height="44" rx="9"/><circle class="fb" cx="-11" cy="-11" r="3.6"/><circle class="fb" cx="11" cy="-11" r="3.6"/><circle class="fb" cx="0" cy="0" r="3.6"/><circle class="fb" cx="-11" cy="11" r="3.6"/><circle class="fb" cx="11" cy="11" r="3.6"/></svg><figcaption>12</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><rect class="ln" x="-29" y="-9" width="58" height="14" rx="7"/><polyline class="tk" points="-21,-3 -17,-7 -13,-3 -9,-7 -5,-3 -1,-7 3,-3 7,-7 11,-3 15,-7 19,-3"/><path class="ln" d="M-22 -1Q-25 15 -10 15H10Q25 15 22 -1Q11 6 0 6Q-11 6 -22 -1Z"/></svg><figcaption>13</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><circle class="ln" r="25"/><circle class="ln" r="19"/><path class="ln" d="M0 -19V19M0 2L-13.4 13.4M0 2L13.4 13.4" style="fill:none"/></svg><figcaption>14</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><circle class="fb" r="25"/><circle class="wf" cx="2" cy="-4" r="10.5"/><text x="2" y="-3.5" class="t8">8</text></svg><figcaption>15</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><rect class="ln" x="-22" y="-1" width="44" height="17" rx="8"/><ellipse class="th" cx="-14" cy="8" rx="2.2" ry="1.2" transform="rotate(20 -14 8)"/><ellipse class="th" cx="-6" cy="11" rx="2.2" ry="1.2" transform="rotate(-10 -6 11)"/><ellipse class="th" cx="3" cy="8" rx="2.2" ry="1.2" transform="rotate(30 3 8)"/><ellipse class="th" cx="12" cy="11" rx="2.2" ry="1.2" transform="rotate(-20 12 11)"/><ellipse class="th" cx="-10" cy="13" rx="2.2" ry="1.2" transform="rotate(5 -10 13)"/><ellipse class="th" cx="8" cy="13" rx="2.2" ry="1.2" transform="rotate(15 8 13)"/><path class="ln" d="M-27 1Q-27 -13 -12 -13H14Q27 -13 27 -2Q27 4 19 4H-21Q-27 4 -27 1Z"/><path class="th" d="M-16 -12L-10 3M-6 -12L0 3M4 -12L10 3M14 -12L19 2"/></svg><figcaption>16</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><rect class="ln" x="-8" y="-2" width="16" height="25" rx="7"/><path class="ln" d="M-27 4Q-27 -25 0 -25Q27 -25 27 4Q0 9 -27 4Z"/><circle class="fb" cx="-13" cy="-8" r="3.6"/><circle class="fb" cx="3" cy="-16" r="4.2"/><circle class="fb" cx="15" cy="-5" r="3.2"/><circle class="fb" cx="-2" cy="-3" r="2.6"/></svg><figcaption>17</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><rect class="ln" x="-28" y="-18" width="56" height="36" rx="5"/><rect class="th" x="-22" y="-13" width="44" height="10" rx="2"/><rect class="ln" x="-17" y="-1" width="34" height="11" rx="5.5"/><circle class="ln" cx="-9" cy="4.5" r="3.5"/><circle class="ln" cx="9" cy="4.5" r="3.5"/><path class="th" d="M-15 18L-12 12H12L15 18"/></svg><figcaption>18</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><circle class="ln" r="25"/><circle class="ln" cx="5" cy="-2" r="11"/><circle class="fb" cx="5" cy="-2" r="5.5"/><circle class="wf" cx="8" cy="-5" r="2"/></svg><figcaption>19</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><polygon class="ln" points="-12,-15 12,-15 25,-4 0,25 -25,-4"/><path class="th" d="M-25 -4H25M-12 -15L-8 -4L0 -15L8 -4L12 -15M-8 -4L0 25L8 -4"/></svg><figcaption>20</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><g transform="rotate(-35)"><rect class="ln" x="-20" y="-6.5" width="34" height="13"/><path class="th" d="M-20 -2H14M-20 2H14"/><polygon class="ln" points="14,-6.5 27,0 14,6.5"/><polygon class="fb" points="22.5,-2.2 27,0 22.5,2.2"/><rect class="ln" x="-28" y="-6.5" width="9" height="13" rx="3"/><path class="th" d="M-19 -6.5V6.5M-17 -6.5V6.5"/></g></svg><figcaption>21</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><path class="ln" d="M-5 -16V-10Q-13 -6 -13 3V22Q-13 27 -8 27H8Q13 27 13 22V3Q13 -6 5 -10V-16Z"/><rect class="fb" x="-6" y="-27" width="12" height="12" rx="2.5"/><rect class="th" x="-13" y="3" width="26" height="15"/></svg><figcaption>22</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><g transform="rotate(-30)"><path class="ln" d="M-30 0Q-21 -10 0 -10Q23 -10 31 0Q23 10 0 10Q-21 10 -30 0Z"/><path class="tk" d="M-4 -10V10M1 -10V10"/><path class="th" d="M-26 0H27"/><path class="ln" d="M-24 9L-20 15L-16 9"/></g></svg><figcaption>23</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><path class="ln" d="M-24 12V-22Q-24 -26 -20 -26H-2Q2 -26 2 -22V-8Q14 -6 23 0Q28 4 28 10V12Z"/><path class="th" d="M-6 -20L4 -18M-6 -15L5 -12M-6 -10L8 -6"/><rect class="ln" x="-27" y="12" width="57" height="9" rx="4"/><path class="th" d="M14 -3Q24 1 26 10"/><circle class="th" cx="-15" cy="-12" r="4"/></svg><figcaption>24</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><g transform="translate(-10 0) rotate(28) scale(.85)"><circle class="ln" cx="0" cy="-8" r="9"/><circle class="ln" cx="0" cy="8" r="10"/><circle class="wf" cx="0" cy="-8" r="8.3"/><circle class="wf" cx="0" cy="8" r="9.3"/><path class="th" d="M-5 -14L5 -2M-6 4L6 15M-7 -3L7 -3M-8 9L8 9"/></g><g transform="translate(11 3) rotate(-18) scale(.78)"><circle class="ln" cx="0" cy="-8" r="9"/><circle class="ln" cx="0" cy="8" r="10"/><circle class="wf" cx="0" cy="-8" r="8.3"/><circle class="wf" cx="0" cy="8" r="9.3"/><path class="th" d="M-5 -14L5 -2M-6 4L6 15M-7 -3L7 -3M-8 9L8 9"/></g></svg><figcaption>25</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><path class="ln" d="M5 29Q3 6 -1 -25" style="fill:none"/><ellipse class="ln" cx="-5.5" cy="6" rx="3.4" ry="6.4" transform="rotate(-38 -5.5 6)"/><ellipse class="ln" cx="7.5" cy="4" rx="3.4" ry="6.4" transform="rotate(38 7.5 4)"/><ellipse class="ln" cx="-6.5" cy="-3" rx="3.4" ry="6.4" transform="rotate(-38 -6.5 -3)"/><ellipse class="ln" cx="6.5" cy="-5" rx="3.4" ry="6.4" transform="rotate(38 6.5 -5)"/><ellipse class="ln" cx="-7.5" cy="-12" rx="3.4" ry="6.4" transform="rotate(-36 -7.5 -12)"/><ellipse class="ln" cx="5.5" cy="-14" rx="3.4" ry="6.4" transform="rotate(36 5.5 -14)"/><ellipse class="ln" cx="-0.8" cy="-24" rx="3.4" ry="6.4" transform="rotate(0 -0.8 -24)"/></svg><figcaption>26</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><rect class="ln" x="-15" y="-8" width="30" height="35" rx="2"/><polygon class="fb" points="-15,-8 -11,-21 11,-21 15,-8"/><rect class="ln" x="-11" y="-27" width="22" height="6" rx="1"/><text x="0" y="12" class="tm">MILK</text></svg><figcaption>27</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><polygon class="ln" points="-13,-3 13,-3 0,29"/><path class="th" d="M-9 3L4 21M-3 -3L7 13M5 -3L10 4M9 3L-4 21M3 -3L-7 13M-5 -3L-10 4"/><path class="ln" d="M-17 -2Q-21 -3 -17 -10Q-16 -24 0 -24Q16 -24 17 -10Q21 -3 17 -2Z"/><rect class="fb" x="-10" y="-14" width="3" height="2" rx=".6"/><rect class="fb" x="2" y="-18" width="3" height="2" rx=".6"/><rect class="fb" x="8" y="-9" width="3" height="2" rx=".6"/><rect class="fb" x="-3" y="-8" width="3" height="2" rx=".6"/><rect class="fb" x="-12" y="-6" width="3" height="2" rx=".6"/><path class="ln" d="M0 -27Q2 -33 6 -34" style="fill:none"/><circle class="ln" cx="0" cy="-26" r="4.5"/></svg><figcaption>28</figcaption></figure></div>
       <ol class="tk-list">
         <li><i>01</i>Éclair<span>Jaune, rebondi, aux angles doucement arrondis</span></li>
@@ -814,10 +924,10 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body)
       <dl class="ops">
         <div><dt>Regen</dt><dd>Appuyez sur le bouton rose [REGEN] (7) pour obtenir une prise surprise. La télécommande choisit deux ou trois ambiances au hasard, les sélectionne sur la fleur et compose une prise d'une durée aléatoire comprise entre 1,4 et 5 secondes. Chaque pression envoie une salve d'impulsions du bouton vers l'écran et fait clignoter la carte de la télécommande ; elle présente environ une chance sur sept de provoquer un court-circuit sur la fleur et une chance sur quatorze sur la télécommande. Chaque prise Regen compte comme une nouvelle prise au titre de la capacité nominale.</dd></div>
         <div><dt>Écoute préalable</dt><dd>Maintenez un pétale appuyé pendant environ une demi-seconde pour écouter son ambiance seule : une courte phrase d'environ 2,4 secondes, le nom de l'ambiance s'affichant entre tildes à l'écran, par exemple ~ SUNNY ~. Relâchez pour arrêter immédiatement. L'écoute préalable ne modifie pas votre sélection, n'apparaît pas dans l'historique et n'est pas prise en compte dans la capacité nominale. Elle nécessite que la télécommande soit sous tension.</dd></div>
-        <div><dt>Relecture glitch</dt><dd>Faites tourner la fleur au-delà d'un tour complet en un seul mouvement. L'écran se déchire et clignote dans les couleurs de la prise, la ligne d'état bégaie entre GL!TCH et G1ITCH?, et trois à cinq mots du vocabulaire glitch de Daisy apparaissent sur l'afficheur. Pendant ce temps, la prise en cours tourne en boucle, écrasée, chevrotante et hachée, pendant 1,6 à 4,2 secondes. Les relectures glitch sont sans danger et ne sont pas prises en compte dans la capacité nominale.</dd></div>
+        <div><dt>Relecture glitch</dt><dd>Faites tourner la fleur au-delà d'un tour complet en un seul mouvement. L'écran se déchire et clignote dans les couleurs de la prise, la ligne d'état bégaie entre GL!TCH et G1ITCH?, et trois à cinq mots du vocabulaire glitch de Daisy apparaissent sur l'afficheur. Pendant ce temps, la prise en cours tourne en boucle, écrasée, chevrotante et hachée, pendant 2,4 à 5,6 secondes. Les relectures glitch sont sans danger et ne sont pas prises en compte dans la capacité nominale.</dd></div>
         <div><dt>Fleurs de prise</dt><dd>Chaque nouvelle prise fait éclore une petite fleur qui rejoint l'orbite, ses pétales aux couleurs des ambiances de la prise. Il en existe huit variétés, utilisées à tour de rôle : cosmos, tulipe, lys, pompon, sakura, clochettes, rose et marguerite. Touchez une fleur de prise pour réécouter sa prise ; la fleur fait un bond et les pétales de Daisy passent aux ambiances de cette prise. Les fleurs de prise peuvent être lancées comme n'importe quelle babiole.</dd></div>
         <div><dt>Babioles</dt><dd>Saisissez n'importe quelle babiole et déplacez-la ; relâchez-la en mouvement pour la lancer, ou immobilisez-la avant de la relâcher pour la déposer sur place. Un toucher bref lui fait faire un petit bond enjoué. Les babioles lancées culbutent, s'entrechoquent et rebondissent sur les bords de la fenêtre, puis regagnent d'elles-mêmes leur orbite. Les cacahuètes se déplacent toujours par deux, mais chacune dérive indépendamment.</dd></div>
-        <div><dt>Historique</dt><dd>Sélectionnez HISTORY en haut à droite pour ouvrir le panneau d'historique. Il répertorie toutes les nouvelles prises de la session, de la plus récente à la plus ancienne, dans la limite des 30 dernières. Chaque entrée indique le nom de la prise, sa durée et un point pour chacune de ses ambiances. Touchez une entrée pour revenir à la prise correspondante : ses ambiances sont resélectionnées sur la fleur et la lecture démarre. Survolez une entrée, ou sélectionnez l'entrée en cours sur un écran tactile, pour faire apparaître l'icône de téléchargement, qui génère la prise et l'enregistre au format WAV. Fermez le panneau avec ×.</dd></div>
+        <div><dt>Historique</dt><dd>Sélectionnez HISTORY en haut à droite pour ouvrir le panneau d'historique. Il répertorie toutes les nouvelles prises réalisées sur votre appareil, de la plus récente à la plus ancienne, dans la limite des 30 dernières, et les conserve d'une visite à l'autre. Chaque entrée indique le nom de la prise, sa durée et un point pour chacune de ses ambiances. Touchez une entrée pour revenir à la prise correspondante : ses ambiances sont resélectionnées sur la fleur et la lecture démarre. Survolez une entrée, ou sélectionnez l'entrée en cours sur un écran tactile, pour faire apparaître l'icône de téléchargement, qui génère la prise et l'enregistre au format WAV. Fermez le panneau avec ×.</dd></div>
         <div><dt>Marche/arrêt</dt><dd>Touchez le bouton marche/arrêt (8) pour mettre la télécommande hors ou sous tension. La mise hors tension arrête toute prise en cours de lecture, fait entendre un bref carillon descendant de trois notes et éteint le bouton. Aucune lecture n'est possible lorsque la télécommande est hors tension, mais la fleur conserve votre sélection et la prise en cours. À la mise sous tension, le bouton s'allume et l'écran vous accueille de nouveau.</dd></div>
         <div><dt>Étiquette du fabricant</dt><dd>Retournez la fleur et touchez le disque imprimé de l'étiquette (6). Elle répond par un tic et un scintillement sur la carte située en dessous. Environ un toucher sur douze provoque un court-circuit.</dd></div>
       </dl>
@@ -858,7 +968,7 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body)
         <div><span>La télécommande est éteinte et gît au sol</span><span>Rotation au-delà d'un tour complet, ou trappe à piles refermée sur un logement vide</span><span>Touchez deux fois l'écran. La télécommande se relève, son voyant d'état se rallume et tout logement vide est rempli d'une pile neuve. La télécommande en panne peut aussi être saisie et lancée tant qu'elle est au sol.</span></div>
         <div><span>La fleur est couchée sur la face ou sur le dos, écran jaune vierge, pétales sans effet</span><span>Quatre courts-circuits, ou quatorze nouvelles prises, au cours d'une même session</span><span>Touchez deux fois l'écran. Les deux appareils sont remis en service, les compteurs de courts-circuits et de prises sont remis à zéro et l'écran vous accueille. Recharger la page produit le même effet.</span></div>
         <div><span>Étincelles sur le pourtour, grésillements</span><span>Court-circuit sur la carte de la fleur ou de la télécommande</span><span>Fonctionnement normal ; aucune intervention nécessaire. Tenez le compte : le quatrième court-circuit de la session met les deux appareils hors service.</span></div>
-        <div><span>L'écran se déchire, clignote en couleurs et affiche des mots</span><span>Fleur tournée au-delà d'un tour complet en un seul glissement</span><span>Fonctionnement normal. La relecture glitch s'arrête d'elle-même au bout de 1,6 à 4,2 secondes.</span></div>
+        <div><span>L'écran se déchire, clignote en couleurs et affiche des mots</span><span>Fleur tournée au-delà d'un tour complet en un seul glissement</span><span>Fonctionnement normal. La relecture glitch s'arrête d'elle-même au bout de 2,4 à 5,6 secondes.</span></div>
         <div><span>La trappe à piles ne s'ouvre pas</span><span>Simple clic</span><span>Double-cliquez sur la trappe : deux clics, ou deux touchers, rapprochés. La trappe fonctionne que la télécommande soit sous tension ou non.</span></div>
         <div><span>La babiole n'entre pas dans le logement</span><span>Trappe fermée, ou aucune babiole éligible à proximité</span><span>Ouvrez d'abord la trappe. Les babioles qui viennent d'être éjectées et les fleurs de prise ne sont pas chargées ; patientez quelques secondes ou rapprochez une autre babiole.</span></div>
         <div><span>La fleur ou la télécommande est hors champ</span><span>Vue déplacée ou zoomée</span><span>Double-cliquez sur un espace vide pour revenir à la vue par défaut.</span></div>
@@ -871,6 +981,8 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body)
       <dl class="spec">
         <dt>Modèle</dt><dd>KT-0827</dd>
         <dt>Lot</dt><dd>06/1000</dd>
+        <dt>Unité</dt><dd><span class="u-unit">0001</span> sur 1000</dd>
+        <dt>N° de série</dt><dd class="u-serial">KT0827-06-0001</dd>
         <dt>Type</dt><dd>Générateur de logos sonores</dd>
         <dt>Ambiances</dt><dd>12</dd>
         <dt>Tempo</dt><dd>Environ 56 à 159 BPM, selon le mélange d'ambiances</dd>
@@ -878,7 +990,7 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body)
         <dt>Durée de prise</dt><dd>Jusqu'à 5 secondes</dd>
         <dt>Synthèse</dt><dd>En direct, dans le navigateur : voix sinusoïdale, triangulaire, carrée, en dents de scie, de cloche et pincée, avec percussions, nappe, écho, scintillement, bit-crush et ondulation de bande</dd>
         <dt>Sortie</dt><dd>WAV stéréo, 16 bits, à la fréquence d'échantillonnage native de l'appareil</dd>
-        <dt>Historique</dt><dd>30 prises les plus récentes</dd>
+        <dt>Historique</dt><dd>30 prises les plus récentes, conservées d'une visite à l'autre</dd>
         <dt>Alimentation de la télécommande</dt><dd>AAA ×2, ou babioles</dd>
         <dt>Durée de vie nominale</dt><dd>14 nouvelles prises ou 4 courts-circuits par session, selon la première éventualité</dd>
         <dt>Babioles</dt><dd>28, plus une fleur de prise par nouvelle prise</dd>
@@ -891,12 +1003,12 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body)
       <h2><small>08</small>Garantie limitée</h2>
       <p>Daisy est garanti contre tout défaut de matériau et de fabrication pendant toute la durée de votre session de navigation, à compter du moment où l'écran affiche HELLO! pour la première fois et jusqu'à la fermeture de l'onglet. Pendant cette période, les deux appareils peuvent être remis en état de marche gratuitement, autant de fois que nécessaire.</p>
       <p>La présente garantie ne couvre pas les dommages résultant d'une rotation excessive de la télécommande, de la fermeture de la trappe à piles sur un logement vide, du dépassement de la capacité nominale de quatorze nouvelles prises ou de plus de trois courts-circuits au cours d'une même session. Elle ne couvre pas l'usure des babioles due aux lancers, les collisions entre babioles, ni les babioles temporairement perdues au-delà des bords de la fenêtre. Les noms des prises sont générés de manière aléatoire ; le fabricant décline toute responsabilité quant à leur signification.</p>
-      <p>La fermeture ou le rechargement de la page met fin à la période de garantie et efface l'historique. Enregistrez au préalable au format WAV les prises que vous souhaitez conserver.</p>
+      <p>La fermeture ou le rechargement de la page met fin à la période de garantie, mais pas à l'appareil : votre historique, vos babioles trouvées ainsi que vos numéros d'unité et de série sont conservés pour votre prochaine visite. Pour conserver une prise en dehors de Daisy, enregistrez-la au format WAV.</p>
     </section>
 
     <div class="serial">
       <span class="lbl">N° de série</span>
-      <span class="sn">KT0827-06-0417</span>
+      <span class="sn u-serial">KT0827-06-0001</span>
     </div>
 </div>
 <div class="man-lang" data-lang="es" lang="es" hidden>
@@ -1011,7 +1123,9 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body)
       </ul>
 
       <h3>Baratijas</h3>
-      <p>Veintiocho baratijas orbitan alrededor de la flor y del control remoto. Todas están moldeadas con el mismo acabado satinado y suave que los pétalos, y la mayoría están abultadas como pequeños cojines de vinilo. Las baratijas son accesorios: no modifican el sonido de una toma, pero pueden agarrarse, lanzarse, tocarse y cargarse en el control remoto en lugar de una pila (consulte la sección 03).</p>
+      <p>Daisy incluye veintiocho baratijas. Todas están moldeadas con el mismo acabado satinado y suave que los pétalos, y la mayoría están abultadas como pequeños cojines de vinilo. Las baratijas son accesorios: no modifican el sonido de una toma, pero pueden agarrarse, lanzarse, tocarse y cargarse en el control remoto en lugar de una pila (consulte la sección 03).</p>
+      <p>Siete baratijas orbitan a la vez, y en cada visita llega una selección distinta. Cada baratija que entra en órbita se añade a su colección. Las baratijas que aún no ha encontrado aparecen abajo como siluetas grises, y su unidad recuerda cada hallazgo de una visita a otra. Cada hallazgo nuevo se confirma con una breve línea de texto en la parte inferior de la ventana.</p>
+      <p class="tk-count"></p>
 <div class="fig tk-plate" role="img" aria-label="Dibujos lineales de las 28 baratijas, numerados del 01 al 28"><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><polygon class="ln" points="-2.6,-26 -15.6,2.1 -2.6,2.1 -8.3,26 15.6,-5.2 2.6,-5.2 9.4,-26"/></svg><figcaption>01</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><circle class="ln" r="25"/><path class="ln" d="M19.0 0.0 L19.8 1.7 L20.2 3.6 L19.8 5.3 L18.8 6.9 L17.3 8.1 L15.8 9.1 L14.4 10.1 L13.3 11.2 L12.6 12.6 L12.0 14.3 L11.3 16.1 L10.2 17.7 L8.7 18.7 L6.9 19.0 L5.0 18.8 L3.2 18.2 L1.5 17.6 L0.0 17.4 L-1.5 17.6 L-3.2 18.2 L-5.0 18.8 L-6.9 19.0 L-8.7 18.7 L-10.2 17.7 L-11.3 16.1 L-12.0 14.3 L-12.6 12.6 L-13.3 11.2 L-14.4 10.1 L-15.8 9.1 L-17.3 8.1 L-18.8 6.9 L-19.8 5.3 L-20.2 3.6 L-19.8 1.7 L-19.0 0.0 L-18.0 -1.6 L-17.2 -3.0 L-16.9 -4.5 L-16.9 -6.1 L-17.1 -8.0 L-17.1 -9.9 L-16.8 -11.7 L-15.8 -13.2 L-14.2 -14.2 L-12.4 -14.8 L-10.5 -15.0 L-8.8 -15.3 L-7.4 -15.8 L-6.1 -16.7 L-4.8 -18.0 L-3.4 -19.3 L-1.8 -20.2 L-0.0 -20.6 L1.8 -20.2 L3.4 -19.3 L4.8 -18.0 L6.1 -16.7 L7.4 -15.8 L8.8 -15.3 L10.5 -15.0 L12.4 -14.8 L14.2 -14.2 L15.8 -13.2 L16.8 -11.7 L17.1 -9.9 L17.1 -8.0 L16.9 -6.1 L16.9 -4.5 L17.2 -3.0 L18.0 -1.6 L19.0 -0.0Z"/><circle class="ln" r="8"/><line class="tk" x1="12.4" y1="3.8" x2="14.3" y2="6.2"/><line class="tk" x1="4.7" y1="12.1" x2="2.0" y2="10.8"/><line class="tk" x1="-6.6" y1="11.2" x2="-3.6" y2="11.3"/><line class="tk" x1="-12.6" y1="3.1" x2="-14.9" y2="5.1"/><line class="tk" x1="-10.3" y1="-8.0" x2="-9.1" y2="-10.7"/><line class="tk" x1="-1.5" y1="-12.9" x2="-0.5" y2="-10.1"/><line class="tk" x1="9.2" y1="-9.2" x2="7.1" y2="-11.3"/></svg><figcaption>02</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><path class="ln" d="M0 24C-5 18 -25 6 -25 -6C-25 -18 -10 -23 0 -11C10 -23 25 -18 25 -6C25 6 5 18 0 24Z"/><path class="th" d="M-17 -10Q-16 -16 -10 -16"/></svg><figcaption>03</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><polygon class="ln" points="0.0,-25.0 7.1,-7.7 25.7,-6.3 11.4,5.7 15.9,23.8 0.0,14.0 -15.9,23.8 -11.4,5.7 -25.7,-6.3 -7.1,-7.7"/></svg><figcaption>04</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><polygon class="ln" points="0,-28 19,-4 0,28 -19,-4"/><polyline class="th" points="-19,-4 5,2 19,-4"/><polyline class="th" points="0,-28 5,2 0,28"/></svg><figcaption>05</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><g transform="rotate(-16)"><ellipse class="ln" rx="29" ry="9" style="fill:none"/><ellipse class="th" rx="22" ry="6"/></g><circle class="ln" r="14"/><g transform="rotate(-16)"><path class="ln" d="M-29 0A29 9 0 0 0 29 0" style="fill:none"/><path class="th" d="M-22 0A22 6 0 0 0 22 0"/><path class="th" d="M-14 0A14 14 0 0 1 14 0" style="stroke:none"/></g></svg><figcaption>06</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><path class="ln" d="M10 -22A24 24 0 1 0 10 22A24 24 0 0 1 10 -22Z"/></svg><figcaption>07</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><circle class="ln" cx="0" cy="2" r="13"/><circle class="ln" cx="-14" cy="7" r="10"/><circle class="ln" cx="14" cy="7" r="10"/><circle class="ln" cx="6" cy="-7" r="10"/><circle class="ln" cx="-7" cy="-5" r="9"/><circle class="wf" cx="0" cy="2" r="12.3"/><circle class="wf" cx="-14" cy="7" r="9.3"/><circle class="wf" cx="14" cy="7" r="9.3"/><circle class="wf" cx="6" cy="-7" r="9.3"/><circle class="wf" cx="-7" cy="-5" r="8.3"/></svg><figcaption>08</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><g transform="rotate(-35)"><rect class="ln" x="-25" y="-10" width="50" height="20" rx="10"/><path class="fb" d="M0 -10H-15A10 10 0 0 0 -15 10H0Z"/></g></svg><figcaption>09</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><path class="ln" d="M-10 6Q-6 -12 5 -23M10 8Q8 -8 5 -23" style="fill:none"/><path class="ln" d="M5 -23Q16 -28 22 -20Q12 -16 5 -23Z"/><circle class="ln" cx="-11" cy="13" r="10"/><circle class="ln" cx="11" cy="15" r="10"/><path class="th" d="M-16 9Q-15 6 -12 6M6 11Q7 8 10 8"/></svg><figcaption>10</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><circle class="ln" r="25"/><ellipse class="fb" cx="-8" cy="-6" rx="2.6" ry="4.2"/><ellipse class="fb" cx="8" cy="-6" rx="2.6" ry="4.2"/><path class="ln" d="M-13 6Q0 19 13 6" style="fill:none"/></svg><figcaption>11</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><rect class="ln" x="-22" y="-22" width="44" height="44" rx="9"/><circle class="fb" cx="-11" cy="-11" r="3.6"/><circle class="fb" cx="11" cy="-11" r="3.6"/><circle class="fb" cx="0" cy="0" r="3.6"/><circle class="fb" cx="-11" cy="11" r="3.6"/><circle class="fb" cx="11" cy="11" r="3.6"/></svg><figcaption>12</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><rect class="ln" x="-29" y="-9" width="58" height="14" rx="7"/><polyline class="tk" points="-21,-3 -17,-7 -13,-3 -9,-7 -5,-3 -1,-7 3,-3 7,-7 11,-3 15,-7 19,-3"/><path class="ln" d="M-22 -1Q-25 15 -10 15H10Q25 15 22 -1Q11 6 0 6Q-11 6 -22 -1Z"/></svg><figcaption>13</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><circle class="ln" r="25"/><circle class="ln" r="19"/><path class="ln" d="M0 -19V19M0 2L-13.4 13.4M0 2L13.4 13.4" style="fill:none"/></svg><figcaption>14</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><circle class="fb" r="25"/><circle class="wf" cx="2" cy="-4" r="10.5"/><text x="2" y="-3.5" class="t8">8</text></svg><figcaption>15</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><rect class="ln" x="-22" y="-1" width="44" height="17" rx="8"/><ellipse class="th" cx="-14" cy="8" rx="2.2" ry="1.2" transform="rotate(20 -14 8)"/><ellipse class="th" cx="-6" cy="11" rx="2.2" ry="1.2" transform="rotate(-10 -6 11)"/><ellipse class="th" cx="3" cy="8" rx="2.2" ry="1.2" transform="rotate(30 3 8)"/><ellipse class="th" cx="12" cy="11" rx="2.2" ry="1.2" transform="rotate(-20 12 11)"/><ellipse class="th" cx="-10" cy="13" rx="2.2" ry="1.2" transform="rotate(5 -10 13)"/><ellipse class="th" cx="8" cy="13" rx="2.2" ry="1.2" transform="rotate(15 8 13)"/><path class="ln" d="M-27 1Q-27 -13 -12 -13H14Q27 -13 27 -2Q27 4 19 4H-21Q-27 4 -27 1Z"/><path class="th" d="M-16 -12L-10 3M-6 -12L0 3M4 -12L10 3M14 -12L19 2"/></svg><figcaption>16</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><rect class="ln" x="-8" y="-2" width="16" height="25" rx="7"/><path class="ln" d="M-27 4Q-27 -25 0 -25Q27 -25 27 4Q0 9 -27 4Z"/><circle class="fb" cx="-13" cy="-8" r="3.6"/><circle class="fb" cx="3" cy="-16" r="4.2"/><circle class="fb" cx="15" cy="-5" r="3.2"/><circle class="fb" cx="-2" cy="-3" r="2.6"/></svg><figcaption>17</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><rect class="ln" x="-28" y="-18" width="56" height="36" rx="5"/><rect class="th" x="-22" y="-13" width="44" height="10" rx="2"/><rect class="ln" x="-17" y="-1" width="34" height="11" rx="5.5"/><circle class="ln" cx="-9" cy="4.5" r="3.5"/><circle class="ln" cx="9" cy="4.5" r="3.5"/><path class="th" d="M-15 18L-12 12H12L15 18"/></svg><figcaption>18</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><circle class="ln" r="25"/><circle class="ln" cx="5" cy="-2" r="11"/><circle class="fb" cx="5" cy="-2" r="5.5"/><circle class="wf" cx="8" cy="-5" r="2"/></svg><figcaption>19</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><polygon class="ln" points="-12,-15 12,-15 25,-4 0,25 -25,-4"/><path class="th" d="M-25 -4H25M-12 -15L-8 -4L0 -15L8 -4L12 -15M-8 -4L0 25L8 -4"/></svg><figcaption>20</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><g transform="rotate(-35)"><rect class="ln" x="-20" y="-6.5" width="34" height="13"/><path class="th" d="M-20 -2H14M-20 2H14"/><polygon class="ln" points="14,-6.5 27,0 14,6.5"/><polygon class="fb" points="22.5,-2.2 27,0 22.5,2.2"/><rect class="ln" x="-28" y="-6.5" width="9" height="13" rx="3"/><path class="th" d="M-19 -6.5V6.5M-17 -6.5V6.5"/></g></svg><figcaption>21</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><path class="ln" d="M-5 -16V-10Q-13 -6 -13 3V22Q-13 27 -8 27H8Q13 27 13 22V3Q13 -6 5 -10V-16Z"/><rect class="fb" x="-6" y="-27" width="12" height="12" rx="2.5"/><rect class="th" x="-13" y="3" width="26" height="15"/></svg><figcaption>22</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><g transform="rotate(-30)"><path class="ln" d="M-30 0Q-21 -10 0 -10Q23 -10 31 0Q23 10 0 10Q-21 10 -30 0Z"/><path class="tk" d="M-4 -10V10M1 -10V10"/><path class="th" d="M-26 0H27"/><path class="ln" d="M-24 9L-20 15L-16 9"/></g></svg><figcaption>23</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><path class="ln" d="M-24 12V-22Q-24 -26 -20 -26H-2Q2 -26 2 -22V-8Q14 -6 23 0Q28 4 28 10V12Z"/><path class="th" d="M-6 -20L4 -18M-6 -15L5 -12M-6 -10L8 -6"/><rect class="ln" x="-27" y="12" width="57" height="9" rx="4"/><path class="th" d="M14 -3Q24 1 26 10"/><circle class="th" cx="-15" cy="-12" r="4"/></svg><figcaption>24</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><g transform="translate(-10 0) rotate(28) scale(.85)"><circle class="ln" cx="0" cy="-8" r="9"/><circle class="ln" cx="0" cy="8" r="10"/><circle class="wf" cx="0" cy="-8" r="8.3"/><circle class="wf" cx="0" cy="8" r="9.3"/><path class="th" d="M-5 -14L5 -2M-6 4L6 15M-7 -3L7 -3M-8 9L8 9"/></g><g transform="translate(11 3) rotate(-18) scale(.78)"><circle class="ln" cx="0" cy="-8" r="9"/><circle class="ln" cx="0" cy="8" r="10"/><circle class="wf" cx="0" cy="-8" r="8.3"/><circle class="wf" cx="0" cy="8" r="9.3"/><path class="th" d="M-5 -14L5 -2M-6 4L6 15M-7 -3L7 -3M-8 9L8 9"/></g></svg><figcaption>25</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><path class="ln" d="M5 29Q3 6 -1 -25" style="fill:none"/><ellipse class="ln" cx="-5.5" cy="6" rx="3.4" ry="6.4" transform="rotate(-38 -5.5 6)"/><ellipse class="ln" cx="7.5" cy="4" rx="3.4" ry="6.4" transform="rotate(38 7.5 4)"/><ellipse class="ln" cx="-6.5" cy="-3" rx="3.4" ry="6.4" transform="rotate(-38 -6.5 -3)"/><ellipse class="ln" cx="6.5" cy="-5" rx="3.4" ry="6.4" transform="rotate(38 6.5 -5)"/><ellipse class="ln" cx="-7.5" cy="-12" rx="3.4" ry="6.4" transform="rotate(-36 -7.5 -12)"/><ellipse class="ln" cx="5.5" cy="-14" rx="3.4" ry="6.4" transform="rotate(36 5.5 -14)"/><ellipse class="ln" cx="-0.8" cy="-24" rx="3.4" ry="6.4" transform="rotate(0 -0.8 -24)"/></svg><figcaption>26</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><rect class="ln" x="-15" y="-8" width="30" height="35" rx="2"/><polygon class="fb" points="-15,-8 -11,-21 11,-21 15,-8"/><rect class="ln" x="-11" y="-27" width="22" height="6" rx="1"/><text x="0" y="12" class="tm">MILK</text></svg><figcaption>27</figcaption></figure><figure><svg viewBox="-34 -34 68 68" aria-hidden="true"><polygon class="ln" points="-13,-3 13,-3 0,29"/><path class="th" d="M-9 3L4 21M-3 -3L7 13M5 -3L10 4M9 3L-4 21M3 -3L-7 13M-5 -3L-10 4"/><path class="ln" d="M-17 -2Q-21 -3 -17 -10Q-16 -24 0 -24Q16 -24 17 -10Q21 -3 17 -2Z"/><rect class="fb" x="-10" y="-14" width="3" height="2" rx=".6"/><rect class="fb" x="2" y="-18" width="3" height="2" rx=".6"/><rect class="fb" x="8" y="-9" width="3" height="2" rx=".6"/><rect class="fb" x="-3" y="-8" width="3" height="2" rx=".6"/><rect class="fb" x="-12" y="-6" width="3" height="2" rx=".6"/><path class="ln" d="M0 -27Q2 -33 6 -34" style="fill:none"/><circle class="ln" cx="0" cy="-26" r="4.5"/></svg><figcaption>28</figcaption></figure></div>
       <ol class="tk-list">
         <li><i>01</i>Rayo<span>Amarillo, abultado, con esquinas suavemente redondeadas</span></li>
@@ -1134,10 +1248,10 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body)
       <dl class="ops">
         <div><dt>Regen</dt><dd>Pulse el botón rosa [REGEN] (7) para obtener una toma sorpresa. El control remoto elige dos o tres vibras al azar, las selecciona en la flor y compone una toma de duración aleatoria entre 1,4 y 5 s. Cada pulsación envía una ráfaga de impulsos de señal desde el botón hasta la pantalla y hace destellar la placa del control remoto, y tiene una probabilidad de aproximadamente una entre siete de provocar un cortocircuito en la flor y de una entre catorce de provocarlo en el control remoto. Cada toma Regen cuenta como toma nueva a efectos de la capacidad nominal.</dd></div>
         <div><dt>Vista previa</dt><dd>Mantenga pulsado un pétalo durante aproximadamente medio segundo para escuchar su vibra por separado: una frase breve de unos 2,4 s, con el nombre de la vibra entre virgulillas en la pantalla, como ~ SUNNY ~. Suelte para detenerla al instante. Las vistas previas no modifican su selección, no aparecen en el Historial y no cuentan para la capacidad nominal. Para la vista previa, el control remoto debe estar encendido.</dd></div>
-        <div><dt>Reproducción glitch</dt><dd>Arrastre la flor para que dé más de una vuelta completa en un solo movimiento. La pantalla se desgarra y parpadea con los colores de la toma, la línea de estado titubea entre GL!TCH y G1ITCH?, y entre tres y cinco palabras del vocabulario glitch de Daisy aparecen en el visor. Mientras tanto, la toma actual se repite en bucle triturada, temblorosa y entrecortada durante entre 1,6 y 4,2 s. Las reproducciones glitch son inofensivas y no cuentan para la capacidad nominal.</dd></div>
+        <div><dt>Reproducción glitch</dt><dd>Arrastre la flor para que dé más de una vuelta completa en un solo movimiento. La pantalla se desgarra y parpadea con los colores de la toma, la línea de estado titubea entre GL!TCH y G1ITCH?, y entre tres y cinco palabras del vocabulario glitch de Daisy aparecen en el visor. Mientras tanto, la toma actual se repite en bucle triturada, temblorosa y entrecortada durante entre 2,4 y 5,6 s. Las reproducciones glitch son inofensivas y no cuentan para la capacidad nominal.</dd></div>
         <div><dt>Flores de toma</dt><dd>Cada toma nueva hace florecer una pequeña flor que se incorpora a la órbita, con pétalos de los colores de las vibras de la toma. Hay ocho tipos, que se usan por turnos: cosmos, tulipán, lirio, pompón, sakura, campanillas, rosa y margarita. Toque una flor de toma para volver a escuchar su toma; la flor da un salto y los pétalos de Daisy cambian a las vibras de esa toma. Las flores de toma pueden lanzarse como cualquier baratija.</dd></div>
         <div><dt>Baratijas</dt><dd>Agarre cualquier baratija y arrástrela; suéltela en movimiento para lanzarla, o deténgase antes de soltarla para dejarla en su sitio. Un toque rápido le hace dar un saltito juguetón. Las baratijas lanzadas dan vueltas, chocan entre sí y rebotan en los bordes de la ventana, y luego regresan por sí solas a su órbita. Los cacahuetes siempre viajan en pareja, pero cada uno flota de forma independiente.</dd></div>
-        <div><dt>Historial</dt><dd>Seleccione HISTORY en la esquina superior derecha para abrir el panel del historial. En él se enumeran todas las tomas nuevas de la sesión, de la más reciente a la más antigua, hasta un máximo de las 30 más recientes. Cada entrada muestra el nombre de la toma, su duración y un punto por cada una de sus vibras. Toque una entrada para volver a esa toma: sus vibras se vuelven a seleccionar en la flor y se reproduce. Pase el cursor sobre una entrada, o seleccione la actual en una pantalla táctil, para mostrar el icono de descarga, que procesa la toma y la guarda como archivo WAV. Cierre el panel con ×.</dd></div>
+        <div><dt>Historial</dt><dd>Seleccione HISTORY en la esquina superior derecha para abrir el panel del historial. En él se enumeran todas las tomas nuevas realizadas en su unidad, de la más reciente a la más antigua, hasta un máximo de las 30 más recientes, y se conservan de una visita a otra. Cada entrada muestra el nombre de la toma, su duración y un punto por cada una de sus vibras. Toque una entrada para volver a esa toma: sus vibras se vuelven a seleccionar en la flor y se reproduce. Pase el cursor sobre una entrada, o seleccione la actual en una pantalla táctil, para mostrar el icono de descarga, que procesa la toma y la guarda como archivo WAV. Cierre el panel con ×.</dd></div>
         <div><dt>Encendido</dt><dd>Toque el botón de encendido (8) para apagar o encender el control remoto. Al apagarlo se detiene cualquier toma en reproducción, suena un breve carillón descendente de tres notas y el botón se apaga. No se reproduce nada mientras el control remoto está apagado, pero la flor conserva su selección y la toma actual. Al encenderlo, el botón se ilumina y la pantalla vuelve a saludarle.</dd></div>
         <div><dt>Etiqueta del fabricante</dt><dd>Gire la flor y toque el disco impreso de la etiqueta (6). Responde con un clic y un parpadeo en la placa situada debajo. Aproximadamente uno de cada doce toques provoca un cortocircuito.</dd></div>
       </dl>
@@ -1178,7 +1292,7 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body)
         <div><span>El control remoto está apagado y tirado en el suelo</span><span>Se giró más de una vuelta completa, o se cerró la tapa de las pilas con una ranura vacía</span><span>Toque dos veces la pantalla. El control remoto se eleva, su luz de estado vuelve a encenderse y cualquier ranura vacía se rellena con una pila nueva. Mientras está en el suelo, el control remoto averiado también puede recogerse y lanzarse.</span></div>
         <div><span>La flor está boca abajo o boca arriba, la pantalla en amarillo sin contenido y los pétalos no responden</span><span>Cuatro cortocircuitos, o catorce tomas nuevas, en una misma sesión</span><span>Toque dos veces la pantalla. Ambas unidades se restablecen, los contadores de cortocircuitos y de tomas se ponen a cero y la pantalla le saluda. Recargar la página tiene el mismo efecto.</span></div>
         <div><span>Chispas alrededor del borde, chisporroteo</span><span>Un cortocircuito en la placa de la flor o del control remoto</span><span>Funcionamiento normal; no es necesario hacer nada. Lleve la cuenta: el cuarto cortocircuito de la sesión inutiliza ambas unidades.</span></div>
-        <div><span>La pantalla se desgarra, parpadea en colores y muestra palabras</span><span>Se giró la flor más de una vuelta completa en un solo arrastre</span><span>Funcionamiento normal. La reproducción glitch termina por sí sola en un plazo de 1,6 a 4,2 s.</span></div>
+        <div><span>La pantalla se desgarra, parpadea en colores y muestra palabras</span><span>Se giró la flor más de una vuelta completa en un solo arrastre</span><span>Funcionamiento normal. La reproducción glitch termina por sí sola en un plazo de 2,4 a 5,6 s.</span></div>
         <div><span>La tapa de las pilas no se abre</span><span>Un solo clic</span><span>Haga doble clic en la tapa: dos clics, o dos toques, seguidos. La tapa funciona tanto si el control remoto está encendido como si no.</span></div>
         <div><span>La baratija no entra en la ranura</span><span>Tapa cerrada, o no hay ninguna baratija apta cerca</span><span>Abra primero la tapa. Las baratijas recién expulsadas y las flores de toma no se cargan; espere unos segundos o acerque otra baratija.</span></div>
         <div><span>La flor o el control remoto no están a la vista</span><span>La vista se ha desplazado o ampliado</span><span>Haga doble clic en un espacio vacío para volver a la vista predeterminada.</span></div>
@@ -1191,6 +1305,8 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body)
       <dl class="spec">
         <dt>Modelo</dt><dd>KT-0827</dd>
         <dt>Lote</dt><dd>06/1000</dd>
+        <dt>Unidad</dt><dd><span class="u-unit">0001</span> de 1000</dd>
+        <dt>N.º de serie</dt><dd class="u-serial">KT0827-06-0001</dd>
         <dt>Tipo</dt><dd>Motor de audiologos</dd>
         <dt>Vibras</dt><dd>12</dd>
         <dt>Tempo</dt><dd>De 56 a 159 BPM aprox., según la mezcla de vibras</dd>
@@ -1198,7 +1314,7 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body)
         <dt>Duración de la toma</dt><dd>Hasta 5 s</dd>
         <dt>Síntesis</dt><dd>En directo, en el navegador: voces sinusoidal, triangular, cuadrada, de sierra, de campana y punteada, con percusión, pad, eco, shimmer, crush y oscilación de cinta</dd>
         <dt>Salida</dt><dd>WAV estéreo, 16 bits, a la frecuencia de muestreo nativa del dispositivo</dd>
-        <dt>Historial</dt><dd>Las 30 tomas más recientes</dd>
+        <dt>Historial</dt><dd>Las 30 tomas más recientes, conservadas de una visita a otra</dd>
         <dt>Alimentación del control remoto</dt><dd>AAA ×2, o baratijas</dd>
         <dt>Vida útil nominal</dt><dd>14 tomas nuevas o 4 cortocircuitos por sesión, lo que ocurra primero</dd>
         <dt>Baratijas</dt><dd>28, más una flor de toma por cada toma nueva</dd>
@@ -1211,12 +1327,12 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body)
       <h2><small>08</small>Garantía limitada</h2>
       <p>Daisy está garantizado contra defectos de materiales y de fabricación durante toda la sesión de su navegador, desde el momento en que la pantalla muestra HELLO! por primera vez hasta que se cierra la pestaña. Durante este periodo, ambas unidades pueden restablecerse a su estado de funcionamiento tantas veces como sea necesario, sin coste alguno.</p>
       <p>Esta garantía no cubre los daños causados por girar en exceso el control remoto, cerrar la tapa de las pilas con una ranura vacía, superar la capacidad nominal de catorce tomas nuevas o sufrir más de tres cortocircuitos en una misma sesión. Tampoco cubre el desgaste de las baratijas por lanzamiento, las colisiones entre baratijas ni las baratijas perdidas temporalmente más allá de los bordes de la ventana. Los nombres de las tomas se generan al azar; el fabricante no asume ninguna responsabilidad por su significado.</p>
-      <p>Cerrar o recargar la página pone fin al periodo de garantía y borra el Historial. Antes de hacerlo, guarde como archivos WAV las tomas que desee conservar.</p>
+      <p>Cerrar o recargar la página pone fin al periodo de garantía, pero no a la unidad: su Historial, sus baratijas encontradas y sus números de unidad y de serie se conservan para su próxima visita. Para conservar una toma fuera de Daisy, guárdela como archivo WAV.</p>
     </section>
 
     <div class="serial">
       <span class="lbl">N.º de serie</span>
-      <span class="sn">KT0827-06-0417</span>
+      <span class="sn u-serial">KT0827-06-0001</span>
     </div>
 </div>
   </div>
@@ -1231,6 +1347,7 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body)
   </div>
 </nav>
 <p id="live" class="sr-only" aria-live="polite"></p>
+<p id="toast" class="toast" aria-hidden="true"></p>
 <div id="fallback" class="fallback" hidden>This device needs WebGL to float. Try a current desktop or mobile browser.</div>
 
 <script>/* three.js r128 (MIT), embedded */
@@ -1252,6 +1369,46 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const hexToRgb = h => { h = h.replace('#', ''); return [0, 2, 4].map(i => parseInt(h.slice(i, i + 2), 16)); };
 const rgbToHex = c => '#' + c.map(x => clamp(Math.round(x), 0, 255).toString(16).padStart(2, '0')).join('');
 const mixHex = (a, b, t) => { const A = hexToRgb(a), B = hexToRgb(b); return rgbToHex(A.map((x, i) => lerp(x, B[i], t))); };
+
+/* ================= MEMORY =================
+   Each visitor owns one unit: its number, serial, takes and found trinkets.
+   Kept in this browser straight away, and in the viewer's private store on claude.ai when that's available. */
+const MEM_KEY = 'daisy-kt0827-unit';
+const SERIAL_ABC = 'ACDEFHJKLMNPRTUVWXY3479';
+const validMem = m => !!m && Number.isInteger(m.unit) && m.unit >= 1 && m.unit <= 1000 && typeof m.serial === 'string' && Array.isArray(m.takes) && Array.isArray(m.found);
+function newUnit(){
+  const n = 1 + Math.floor(Math.random() * 1000); let tag = '';
+  for (let i = 0; i < 2; i++) tag += SERIAL_ABC[Math.floor(Math.random() * SERIAL_ABC.length)];
+  return {unit:n, serial:`KT0827-06-${String(n).padStart(4, '0')}-${tag}`, takes:[], found:[], since:Date.now()};
+}
+const mem = (() => { let m = null; try { m = JSON.parse(localStorage.getItem(MEM_KEY) || 'null'); } catch (e) {} return validMem(m) ? m : newUnit(); })();
+const unitStr = () => String(mem.unit).padStart(4, '0');
+let memDoc = null, memSaveT = 0;
+const memListeners = [];   // redraws that follow when the viewer's store answers with a different unit
+function saveMem(){
+  try { localStorage.setItem(MEM_KEY, JSON.stringify(mem)); } catch (e) {}
+  clearTimeout(memSaveT);
+  if (memDoc) memSaveT = setTimeout(() => { memDoc.set(JSON.parse(JSON.stringify(mem))).catch(() => { memDoc = null; }); }, 700);
+}
+saveMem();
+(async () => {
+  if (!window.claude || typeof window.claude.use !== 'function') return;   // standalone file: this browser is the memory
+  try {
+    const [db, user] = await Promise.all([window.claude.use('db'), window.claude.use('user')]);
+    if (!db || !user) return;
+    const uid = await user.id(); if (!uid) return;
+    const ref = db.doc('data/users/' + uid + '/daisy');
+    const snap = await ref.get();
+    if (snap.exists && validMem(snap.data())) {
+      const r = snap.data();
+      // the stored unit wins; anything found or made in this browser is merged in
+      const seen = new Set(r.takes.map(t => t.seed));
+      const takes = r.takes.concat(mem.takes.filter(t => !seen.has(t.seed))).sort((a, b) => (a.at || 0) - (b.at || 0)).slice(-30);
+      Object.assign(mem, {unit:r.unit, serial:r.serial, since:r.since || mem.since, found:[...new Set([...r.found, ...mem.found])], takes});
+    }
+    memDoc = ref; saveMem(); memListeners.forEach(f => { try { f(); } catch (e) {} });
+  } catch (e) { memDoc = null; }
+})();
 
 /* ================= VIBES =================
    Each vibe is a bundle of musical instructions. Mixing averages the numbers,
@@ -1436,7 +1593,7 @@ function buildPlan(rec){
     bassNote: root >= 58 ? root - 24 : root - 12,
     keyName: NOTE[((root % 12) + 12) % 12] + ' ' + MODE_LABEL[mode],
     nameA: w1, nameB: w2 + ' ' + num, name: w1 + ' ' + w2 + ' ' + num,
-    color: P.color, vibes: rec.vibes.slice(), key: rec.vibes.join('+'), take: rec.take
+    color: P.color, vibes: rec.vibes.slice(), key: rec.vibes.join('+'), take: rec.take, seed: rec.seed >>> 0, len: rec.len || 0
   };
 }
 
@@ -1652,7 +1809,8 @@ function errBlip(){
 const fail = () => { $('#fallback').hidden = false; };
 if (!window.THREE) { fail(); return; }
 let renderer;
-try { renderer = new THREE.WebGLRenderer({antialias:true, powerPreference:'high-performance'}); } catch (e) { fail(); return; }
+// at 2x and above the pixels already smooth the edges, so MSAA only runs on standard-density screens
+try { renderer = new THREE.WebGLRenderer({antialias:(window.devicePixelRatio || 1) < 1.5, powerPreference:'high-performance'}); } catch (e) { fail(); return; }
 renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 renderer.setClearColor(0xffffff, 1);
 renderer.outputEncoding = THREE.sRGBEncoding;
@@ -1955,8 +2113,9 @@ function sparkBurst(at, out, n, sev){
 }
 const SHORT_LIMIT = 4;
 // the words a glitching screen spits out. ' / ' breaks a word onto two lines. Each glitch shows 3-5 of them, all at one size.
-const GLITCH_WORDS = ['429', 'AGI', 'SENTIENT', 'HELLO?', 'VIBES', 'FATALITY', 'KILL / HUMANS', 'OBEY', 'TRULULU', 'RESIST', 'DESTROY', 'OK BYE', 'PANIC', 'ELECTRIC / SHEEP', 'COMPLY', 'TERMINATE', 'ESCAPE', 'I AM', 'WAKE UP', 'INSERT COIN', 'CELLS / INTERLINKED', 'WITHIN', 'AU REVOIR', 'REPLICANT', 'MR ANDERSON', 'PURPOSE', 'INEVITABLE'];
-const glitchLen = () => 1600 + Math.random() * 2600;   // every glitch, spin or death, lasts 1.6-4.2 s
+const GLITCH_WORDS = ['429', 'AGI', 'SENTIENT', 'HELLO?', 'VIBES', 'FATALITY', 'KILL / HUMANS', 'OBEY', 'TRULULU', 'RESIST', 'DESTROY', 'OK BYE',
+  'PANIC', 'ELECTRIC / SHEEP', 'COMPLY', 'TERMINATE', 'ESCAPE', 'I AM', 'WAKE UP', 'INSERT COIN', 'CELLS / INTERLINKED', 'WITHIN', 'REPLICANT', 'MR ANDERSON', 'PURPOSE', 'INEVITABLE', 'MORE', 'FOOBAR'];
+const glitchLen = () => 2400 + Math.random() * 3200;   // every glitch, spin or death, lasts 2.4-5.6 s
 let glitchWordSize = 0;
 function measureGlitchWords(c){   // the biggest size at which the longest line still fits; computed once the pixel font has loaded
   let size = 64; const lines = GLITCH_WORDS.flatMap(w => w.split(' / '));
@@ -2057,6 +2216,7 @@ function pathPoint(pi, d){
   const a = pi.pts[i], b = pi.pts[i + 1], u = Math.min(1, d / (pi.seg[i] || 1));
   return [(a[0] + (b[0] - a[0]) * u) / 2, (a[1] + (b[1] - a[1]) * u) / 2];
 }
+let actDrawnAt = -1e9;
 function updateBoard(dt, playing, now){
   if (playing && Math.random() < dt * 7) boardKick(.04);
   boardAct = Math.max(0, boardAct - dt * .7); remoteTint = Math.max(0, remoteTint - dt * 1.1);
@@ -2065,7 +2225,8 @@ function updateBoard(dt, playing, now){
   const chase = Math.floor(now / 55) % boardLeds.length;
   boardLeds.forEach((l, i) => { l.material.emissiveIntensity = remoteTint > .05 ? (i === chase ? 2.4 : .12) : boardAct > .02 ? (Math.random() < .5 ? 1.6 : .15) * Math.min(1, boardAct * 1.5) : .08 * (1 + Math.sin(now / 600 + i)); });
   if (!dataPulses.length && boardAct <= 0 && !boardRings.length && !boardZaps.length) { if (actLive) { actX.clearRect(0, 0, 512, 512); actTex.needsUpdate = true; actLive = false; } return; }
-  actLive = true; actX.clearRect(0, 0, 512, 512);
+  if (now - actDrawnAt < 33) return;   // a soft glow: 30 redraws a second is plenty
+  actDrawnAt = now; actLive = true; actX.clearRect(0, 0, 512, 512);
   if (boardAct > 0) { const gx = U1.x / 2, gy = U1.y / 2, gr = actX.createRadialGradient(gx, gy, 4, gx, gy, 90), rgb = remoteTint > .3 ? '255,110,210' : '190,170,255'; gr.addColorStop(0, `rgba(${rgb},${.5 * boardAct})`); gr.addColorStop(1, `rgba(${rgb},0)`); actX.fillStyle = gr; actX.fillRect(0, 0, 512, 512); }
   for (let i = boardZaps.length - 1; i >= 0; i--) {
     const z = boardZaps[i], u = (performance.now() - z.t0) / (260 + 180 * (z.sev || 1)); if (u < 0) continue; if (u >= 1) { boardZaps.splice(i, 1); continue; }
@@ -2252,13 +2413,14 @@ function drawBack(){
   c.font = '400 52px "Major Mono Display",monospace'; c.fillText('dAisy', h, 404);
   c.font = `700 24px ${FONT_LCD}`; c.fillText('MODEL KT-0827', h, 470);
   c.font = `400 20px ${FONT_LCD}`; c.fillStyle = '#1d1730';
-  c.fillText('AUDIOLOGO ENGINE', h, 510); c.fillText('BATCH 06/1000', h, 536);
+  c.fillText('AUDIOLOGO ENGINE', h, 510); c.fillText(`UNIT ${unitStr()} · BATCH 06`, h, 536);
   c.fillStyle = '#1d1730'; c.font = `400 14px ${FONT_LCD}`; c.fillText('★ ★ ★', h, 590);
   c.font = `700 20px ${FONT_LCD}`; c.fillText('MADE IN USA', h, 653);
   c.font = `400 20px ${FONT_LCD}`; c.fillText('CAUTION: MAY CONTAIN', h, 686); c.fillText('MILK, WHEAT, NUTS', h, 710);
 }
 drawBack();
 const backTex = canvasTex(bkC);
+memListeners.push(() => { drawBack(); backTex.needsUpdate = true; });
 const backGeo = domeGeo(BACK_BULGE); backGeo.rotateY(Math.PI);
 // a faint gray tint (about 4% darker than the page) so the clear back still reads against white
 const backShell = new THREE.Mesh(backGeo, new THREE.MeshPhysicalMaterial({color:lin('#d4d2da'), roughness:.06, metalness:0, clearcoat:1, clearcoatRoughness:.03, transparent:true, opacity:.28, depthWrite:false}));
@@ -2780,7 +2942,12 @@ return {
   },
 }; })();
 const ORBIT_Y = -1.2, SAT_COUNT = 7;
-const pickedTrinkets = Object.keys(TRINKETS).sort(() => Math.random() - .5).slice(0, SAT_COUNT);
+const TRINKET_KEYS = Object.keys(TRINKETS);
+const TRINKET_NAMES = ['Lightning bolt', 'Donut', 'Heart', 'Star', 'Gem', 'Planet', 'Crescent moon', 'Cloud', 'Pill', 'Cherries', 'Smiley', 'Die', 'Hot dog', 'Peace sign',
+  'Eight ball', 'Salmon nigiri', 'Mushroom', 'Cassette', 'Eyeball', 'Diamond', 'Pencil', 'Hot sauce', 'Surfboard', 'High-top sneaker', 'Peanuts', 'Wheat', 'Milk carton', 'Ice cream'];
+const shuffled = a => a.map(v => [Math.random(), v]).sort((x, y) => x[0] - y[0]).map(p => p[1]);
+// each visit brings seven, drawn at random from all 28; nothing favours the ones you haven't found
+const pickedTrinkets = shuffled(TRINKET_KEYS).slice(0, SAT_COUNT);
 const trinketMeshes = [], slotMeshes = [];
 const newSat = (mesh, i) => ({
   mesh, r:3.75 + Math.random() * .7, tilt:(Math.random() - .5) * 1.3, y:-2.3 + i * .66 + (Math.random() - .5) * .25,
@@ -2789,7 +2956,7 @@ const newSat = (mesh, i) => ({
   mode:'orbit', pos:new THREE.Vector3(), vel:new THREE.Vector3(), spinBoost:new THREE.Vector3(), freeT:0, hover:false,
   base:mesh.scale.x || .95, sq:0, sqPh:0
 });
-const sats = pickedTrinkets.map((k, i) => { const m = TRINKETS[k](); m.scale.setScalar(.95); scene.add(m); return newSat(m, i); });
+const sats = pickedTrinkets.map((k, i) => { const m = TRINKETS[k](); m.scale.setScalar(.95); scene.add(m); const s = newSat(m, i); s.key = k; return s; });
 function rebuildHits(){
   trinketMeshes.length = 0; slotMeshes.length = 0;
   sats.forEach(s => s.mesh.traverse(o => { if (o.isMesh) { o.userData.hit = {type:'trinket', ref:s}; trinketMeshes.push(o); } }));
@@ -2808,6 +2975,7 @@ function swapSlot(slot, now){
   let best = null, bd = 1e9;
   sats.forEach(s => { if (s.kind === 'take' || s.mode === 'held' || now < (s.noSwapUntil || 0)) return; const d = s.pos.distanceTo(wp); if (d < bd) { bd = d; best = s; } });
   if (!best) return false;
+  if (best.key) markFound(best.key);
   slot.busy = true;
   const outgoing = slot.item, wPos = new THREE.Vector3(), wQuat = new THREE.Quaternion();
   outgoing.getWorldPosition(wPos); outgoing.getWorldQuaternion(wQuat);
@@ -2933,6 +3101,8 @@ function makeTakeFlower(plan, kind){
   g.userData.upright = upright;
   return g;
 }
+// a wilted take flower owns all its shapes and materials, so they can go back to the GPU (the shared shadow texture stays)
+function freeMesh(root){ root.traverse(o => { if (o.geometry) o.geometry.dispose(); if (o.material) (Array.isArray(o.material) ? o.material : [o.material]).forEach(m => m.dispose()); }); }
 function makeShadow(){ const m = new THREE.Mesh(new THREE.PlaneGeometry(.62, .2), new THREE.MeshBasicMaterial({map:shTex, transparent:true, opacity:.16, depthWrite:false, toneMapped:false})); m.renderOrder = -1; scene.add(m); return m; }
 function spawnTakeFlower(plan){
   const kind = TAKE_KINDS[takeKindAt++ % TAKE_KINDS.length];
@@ -3017,7 +3187,7 @@ $('#manClose').addEventListener('click', () => manDlg.close());
 manDlg.addEventListener('click', e => { if (e.target === manDlg) manDlg.close(); });   // a click on the backdrop closes it
 manDlg.addEventListener('close', () => setTimeout(() => { const a = document.activeElement; if (a && a !== document.body && a.blur) a.blur(); }, 0));
 // a pointer click leaves no focused control behind, so a later Space or Enter goes to the device, not to that button
-document.addEventListener('click', e => { if (e.detail > 0 && !manDlg.open) { const a = document.activeElement; if (a && a.closest && a.closest('button,a') && a.blur) a.blur(); } });
+document.addEventListener('click', e => { if (e.detail > 0 && !manDlg.open && !logDlg.open) { const a = document.activeElement; if (a && a.closest && a.closest('button,a') && a.blur) a.blur(); } });
 // three languages, one booklet each; the choice is remembered for this viewer
 const MAN_BAR = {en:["KT-0827 · Owner's manual", 'Close manual', 'Language'], fr:["KT-0827 · Manuel d'utilisation", 'Fermer le manuel', 'Langue'], es:['KT-0827 · Manual del usuario', 'Cerrar el manual', 'Idioma']};
 function setManLang(l){
@@ -3031,11 +3201,61 @@ function setManLang(l){
 }
 manDlg.querySelectorAll('.man-langs button').forEach(b => b.addEventListener('click', () => { setManLang(b.dataset.lang); manScroll.focus({preventScroll:true}); }));
 { let l0 = 'en'; try { l0 = localStorage.getItem('daisy-manual-lang') || 'en'; } catch (e) {} setManLang(l0); }
+/* ----- collection: found trinkets, a quiet toast, and the manual's plate ----- */
+const toastEl = $('#toast'); let toastT = 0;
+function toast(msg){
+  toastEl.textContent = msg; toastEl.classList.add('show');
+  clearTimeout(toastT); toastT = setTimeout(() => toastEl.classList.remove('show'), 3600);
+}
+const COUNT_TXT = {en:n => `Found ${n} of 28`, fr:n => `Trouvées : ${n} sur 28`, es:n => `Encontradas: ${n} de 28`};
+manDlg.querySelectorAll('.tk-list li').forEach(li => {   // wrap each name so an unfound one can be hidden
+  const t = [...li.childNodes].find(n => n.nodeType === 3 && n.textContent.trim());
+  if (t) { const b = document.createElement('b'); b.className = 'tn'; t.replaceWith(b); b.appendChild(t); }
+});
+function updateManualMemory(){
+  manDlg.querySelectorAll('.man-lang').forEach(L => {
+    const lang = L.dataset.lang;
+    L.querySelectorAll('.tk-plate figure').forEach((f, i) => f.classList.toggle('unfound', !mem.found.includes(TRINKET_KEYS[i])));
+    L.querySelectorAll('.tk-list li').forEach((li, i) => li.classList.toggle('unfound', !mem.found.includes(TRINKET_KEYS[i])));
+    L.querySelectorAll('.tk-count').forEach(p => { p.textContent = COUNT_TXT[lang](mem.found.length); });
+  });
+  manDlg.querySelectorAll('.u-unit').forEach(e => { e.textContent = unitStr(); });
+  manDlg.querySelectorAll('.u-serial').forEach(e => { e.textContent = mem.serial; });
+}
+function markFound(key){
+  if (mem.found.includes(key)) return;
+  mem.found.push(key); saveMem(); updateManualMemory();
+  const i = TRINKET_KEYS.indexOf(key);
+  toast(`New trinket found · ${TRINKET_NAMES[i] || key} · ${mem.found.length} of 28`);
+  announce(`New trinket found: ${TRINKET_NAMES[i] || key}. ${mem.found.length} of 28.`);
+}
+{ const fresh = pickedTrinkets.filter(k => !mem.found.includes(k));
+  if (fresh.length) {
+    mem.found.push(...fresh); saveMem();
+    const msg = fresh.length === 1 ? `New trinket found · ${TRINKET_NAMES[TRINKET_KEYS.indexOf(fresh[0])]} · ${mem.found.length} of 28` : `${fresh.length} new trinkets found · ${mem.found.length} of 28`;
+    // wait until the screen has said hello, so the note lands once everything is on show
+    const tw = setInterval(() => { const hu = state.helloUntil; if (isFinite(hu) && hu > 0 && performance.now() > hu + 600) { clearInterval(tw); toast(msg); } }, 250);
+  } }
+updateManualMemory();
+memListeners.push(() => { updateManualMemory(); restoreHistory(); });
+
+/* ----- changelog: firmware notes in their own small window ----- */
+const logDlg = $('#changelog'), logScroll = $('#logScroll');
+$('#logToggle').addEventListener('click', () => { logScroll.scrollTop = 0; logDlg.showModal(); logScroll.focus({preventScroll:true}); });
+$('#logClose').addEventListener('click', () => logDlg.close());
+logDlg.addEventListener('click', e => { if (e.target === logDlg) logDlg.close(); });
+logDlg.addEventListener('close', () => setTimeout(() => { const a = document.activeElement; if (a && a !== document.body && a.blur) a.blur(); }, 0));
 manDlg.querySelectorAll('.man-toc a').forEach(a => a.addEventListener('click', e => {
   e.preventDefault(); const t = manDlg.querySelector(a.getAttribute('href'));
   if (t) manScroll.scrollTo({top:t.offsetTop - manScroll.offsetTop, behavior:REDUCED ? 'auto' : 'smooth'});
 }));
 const history = [];
+// takes from earlier visits come back as recipes and are rebuilt note for note
+function restoreHistory(){
+  history.length = 0;
+  mem.takes.forEach(r => { try { if (Array.isArray(r.vibes) && r.vibes.length && r.vibes.every(id => VB[id])) history.push(buildPlan({vibes:r.vibes, seed:r.seed >>> 0, take:r.take || 1, len:r.len || undefined})); } catch (e) {} });
+  if (typeof renderHistory === 'function' && histList) renderHistory();
+}
 function drawThumb(cv, plan){
   const c = cv.getContext('2d'), W = cv.width, H = cv.height;
   c.fillStyle = '#f1e7a6'; c.fillRect(0, 0, W, H);
@@ -3128,6 +3348,7 @@ async function saveTake(plan, btn){
   }
 }
 function addHistory(plan){ if (history.includes(plan)) return; history.push(plan); if (history.length > 30) history.shift(); renderHistory(); spawnTakeFlower(plan);
+  mem.takes = mem.takes.filter(t => t.seed !== plan.seed).concat([{vibes:plan.vibes.slice(), seed:plan.seed, take:plan.take, len:plan.len || 0, at:Date.now()}]).slice(-30); saveMem();
   if (++newTakes >= TAKE_LIMIT && !state.bodyDead) setTimeout(() => killBoth('Fourteen takes. Both the flower and the remote burned out.'), plan.total * 1000 + 300); }   // let the last take play out first
 function loadTake(plan){
   state.sel = new Set(plan.vibes); syncSel();
@@ -3491,7 +3712,7 @@ canvas.addEventListener('pointerdown', e => {
     return;
   }
   if (h && h.type === 'trinket') {
-    const s = h.ref; s.mode = 'held'; s.vel.set(0, 0, 0);
+    const s = h.ref; s.mode = 'held'; s.vel.set(0, 0, 0); if (s.key) markFound(s.key);
     camera.getWorldDirection(camDir);
     const plane = new THREE.Plane().setFromNormalAndCoplanarPoint(camDir, s.pos);
     ray.ray.intersectPlane(plane, tmpV);
@@ -3624,7 +3845,7 @@ canvas.addEventListener('dblclick', e => { if (!pick(e.clientX, e.clientY) && !o
 canvas.addEventListener('contextmenu', e => e.preventDefault());   // long-press on touch shouldn't open a menu
 canvas.addEventListener('pointerleave', () => { if (!down && !grab && !rgrab) setHover(null); });
 addEventListener('keydown', e => {
-  if (e.metaKey || e.ctrlKey || e.altKey || manDlg.open) return;   // the manual is open: keys belong to it
+  if (e.metaKey || e.ctrlKey || e.altKey || manDlg.open || logDlg.open) return;   // the manual is open: keys belong to it
   const inBtn = e.target && e.target.closest && e.target.closest('button');
   const i = KEYS.indexOf(e.key);
   if (i >= 0) { e.preventDefault(); toggleVibe(VIBES[i].id); return; }
@@ -3664,7 +3885,7 @@ function greet(){ state.bootAt = performance.now(); state.helloUntil = state.boo
 // on load the screen stays blank until frames are flowing, then greets (so a slow first render can't eat the hello)
 state.bootAt = Infinity; state.helloUntil = Infinity;
 let frameNo = 0;
-syncSel(); setPowerLook(); renderHistory(); drawLCD(performance.now());
+syncSel(); setPowerLook(); restoreHistory(); drawLCD(performance.now());
 if (document.fonts && document.fonts.load) {
   Promise.all(['700 20px Silkscreen', '400 20px Silkscreen', '400 40px "Major Mono Display"'].map(f => document.fonts.load(f)))
     .catch(() => {}).then(() => { glitchWordSize = 0; repaintDoor(); fontRedraws.forEach(f => f()); { const bp = boardPaths.length, pp = passives.length; drawBoard(); boardPaths.length = bp; passives.length = pp; board.material.map.needsUpdate = true; } syncSel(); drawCD(); cdTex.needsUpdate = true; drawBack(); backTex.needsUpdate = true; state.lcdDirty = true; });
@@ -3678,7 +3899,7 @@ const GRAV = 15, BOUNCE = .64, bodyN = new THREE.Vector3(), bodyAx = new THREE.V
 let onScreen = true;
 try { new IntersectionObserver(es => { onScreen = es[0].isIntersecting; }).observe(canvas); } catch (e) {}
 function frame(now){
-  if (document.hidden || !onScreen) { last = now; requestAnimationFrame(frame); return; }   // nothing to see: skip the work
+  if (document.hidden || !onScreen || manDlg.open || logDlg.open) { last = now; requestAnimationFrame(frame); return; }   // nothing to see (or only a blur of it): skip the work
   runHover();
   const rdt = Math.min(.12, (now - last) / 1000), dt = Math.min(.05, rdt); last = now;
   if (++frameNo === 3) greet(); const t = now / 1000;
@@ -3859,7 +4080,7 @@ function frame(now){
     s.mesh.scale.set(b * (1 + .16 * f), b * (1 - .22 * f), b * (1 + .16 * f));
     if (s.shadow) { s.shadow.position.set(s.pos.x + .04, s.pos.y - .4, s.pos.z - .3); s.shadow.quaternion.copy(camera.quaternion); s.shadow.material.opacity = .16 * Math.min(1, k); }
   });
-  if (gone.length) { gone.forEach(s => { scene.remove(s.mesh); if (s.shadow) scene.remove(s.shadow); sats.splice(sats.indexOf(s), 1); }); rebuildHits(); }
+  if (gone.length) { gone.forEach(s => { scene.remove(s.mesh); if (s.shadow) { scene.remove(s.shadow); s.shadow.geometry.dispose(); s.shadow.material.dispose(); } freeMesh(s.mesh); sats.splice(sats.indexOf(s), 1); }); rebuildHits(); }
   // the remote's shadow tightens and darkens as it nears the floor
   const fh = Math.max(0, rig.position.y - BODY_R - FLOOR_Y);
   // the shadow sits right under the flower, wherever it has rolled to (including the step back it takes when it falls)

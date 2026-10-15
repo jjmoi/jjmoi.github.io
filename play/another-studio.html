@@ -31,6 +31,7 @@
     <div class="controls more" id="more">
       <button id="skip" class="btn" title="Fast-forward to 11:30 tomorrow">⏭ Next day</button>
       <button id="sound" class="btn" aria-pressed="false" title="Lo-fi music and sound effects">🔇 Sound</button>
+      <button id="pica" class="btn" title="Spend a day as Pica: sniff the studio, say hi, and she writes it up for Lola">🐶 Pica's day</button>
       <button id="god" class="btn god" aria-pressed="false" title="Command people, whisper thoughts, change needs, trigger events">😇 God Mode</button>
       <button id="reset" class="btn" title="Wipe the saved world and start over on Day 100">🧨 Reset</button>
     </div>
@@ -65,6 +66,7 @@
       <nav class="tabs" role="tablist">
         <button class="tab" role="tab" data-tab="feed" aria-selected="true">Feed</button>
         <button class="tab" role="tab" data-tab="projects" aria-selected="false">Projects</button>
+        <button class="tab" role="tab" data-tab="events" aria-selected="false" hidden>Events</button>
         <button class="tab" role="tab" data-tab="team" aria-selected="false">Team</button>
       </nav>
       <div class="filters" id="filters">
@@ -79,6 +81,7 @@
       </div>
       <div class="view" id="view-feed"></div>
       <div class="view" id="view-team" hidden></div>
+      <div class="view" id="view-events" hidden></div>
       <div class="view" id="view-projects" hidden></div>
       <div class="view" id="view-wall" hidden></div>
       <div class="view" id="view-inspect" hidden></div>
@@ -102,6 +105,11 @@
       </div>
       <p class="title-copy">A simulacra where generative agents collaborate on design projects while questioning their own existence through autonomous interactions and natural language</p>
     </div>
+  </div>
+  <!-- The ending: a terminal event closes the story. The yearbook, then the credits, then a new simulation. -->
+  <div class="title ending" id="ending" hidden role="dialog" aria-modal="true" aria-label="The end">
+    <canvas class="title-stars" id="ending-stars"></canvas>
+    <div class="ending-inner" id="ending-inner"></div>
   </div>
   <div class="lightbox" id="modal" hidden role="dialog" aria-modal="true"><div class="win modal-body" id="modal-body"></div></div>
   <div class="skipping" id="skipping" hidden role="status"><div class="win">Skipping to tomorrow…</div></div>
