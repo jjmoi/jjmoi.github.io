@@ -433,6 +433,53 @@ function drawObject(ctx, o) {
       f('brass', 8, -7, 1, 1); f('brass', 8, -1, 1, 1);
       break;
     }
+    case 'board': { // Eli's skateboard, stood on its tail against the east wall
+      shadow(5, 13, 7, 2);
+      f('outline', 7, 0, 3, 14); f('mustard', 8, 1, 1, 12); f('red', 8, 6, 1, 2);
+      f('outline', 6, 2, 5, 1); f('white', 6, 1, 1, 1); f('white', 10, 1, 1, 1);
+      f('outline', 6, 11, 5, 1); f('white', 6, 10, 1, 1); f('white', 10, 10, 1, 1);
+      break;
+    }
+    case 'skatesign': { // Tomás' sandwich board
+      f('outline', 3, 2, 10, 12); f('mustard', 4, 3, 8, 9); f(S('mustard', 1.2), 4, 3, 8, 1);
+      f('red', 5, 5, 6, 1); f('outline', 5, 7, 5, 1); f('outline', 5, 9, 4, 1); f('red', 10, 9, 1, 1);
+      f('outline', 4, 12, 1, 3); f('outline', 11, 12, 1, 3);
+      break;
+    }
+    case 'turntable': { // a turntable on a milk crate of records
+      shadow(1, 12, 15, 4);
+      f('outline', 1, 4, 14, 11); f('red', 2, 5, 12, 9); f(S('red', 0.75), 2, 8, 12, 1); f(S('red', 0.75), 2, 11, 12, 1);
+      for (let i = 0; i < 6; i++) f(['navy', 'mustard', 'teal', 'pink', 'black', 'orange'][i], 3 + i * 2, 6, 1, 5); // record spines
+      f('outline', 1, -4, 14, 9); f('metal', 2, -3, 12, 7); f('black', 3, -2, 8, 5); f(S('black', 1.6), 6, 0, 2, 1); f('metal', 12, -2, 1, 4); f('outline', 11, -2, 2, 1);
+      break;
+    }
+    case 'polaroid': { // a Polaroid camera sitting in the shelf's lower cubby
+      f('outline', 5, 5, 9, 7); f('white', 6, 6, 7, 5); f('black', 6, 9, 7, 2);
+      f('outline', 8, 6, 4, 4); f('navy', 9, 7, 2, 2); f(S('navy', 1.8), 9, 7, 1, 1);
+      f('red', 12, 6, 1, 1); f('sky', 6, 6, 2, 1);
+      for (let i = 0; i < 3; i++) f('red', 6 + i * 2, 9, 1, 1); f('mustard', 7, 9, 1, 1); f('green', 9, 9, 1, 1); f('sky', 11, 9, 1, 1); // the rainbow stripe
+      break;
+    }
+    case 'orflag': { // the Oregon flag: navy field, a gold crest ringed with stars, "STATE OF OREGON" above, 1859 below
+      f('outline', 1, 1, 14, 12); f('navy', 2, 2, 12, 10);
+      f('gold', 4, 3, 8, 1); f('gold', 6, 5, 4, 4); f('navy', 7, 6, 2, 2); f('gold', 5, 10, 6, 1);
+      f('gold', 4, 6, 1, 1); f('gold', 11, 6, 1, 1); f('gold', 5, 8, 1, 1); f('gold', 10, 8, 1, 1);
+      f('outline', 2, 1, 1, 1); f('outline', 13, 1, 1, 1); f('brass', 2, 2, 1, 1); f('brass', 13, 2, 1, 1);
+      break;
+    }
+    case 'poster_mot': { // a motivational poster: black frame, a dawn over a mountain, one big word
+      f('outline', 2, 3, 12, 12); f('black', 3, 4, 10, 10);
+      f('navy', 4, 5, 8, 3); f('plum', 4, 7, 8, 1); f('orange', 4, 8, 8, 1); f('mustard', 7, 7, 2, 1);
+      f(S('navy', 0.6), 5, 8, 2, 1); f(S('navy', 0.6), 9, 8, 2, 1); f('white', 5, 11, 6, 1);
+      break;
+    }
+    case 'poster_law': { // a labor-law poster: white sheet, red header, columns of fine print, a pin in each corner
+      f('outline', 2, 3, 12, 12); f('white', 3, 4, 10, 10);
+      f('red', 3, 4, 10, 2); f('white', 5, 5, 6, 1) ; f('red', 4, 5, 1, 1);
+      for (let j = 7; j < 13; j += 2) { f(S('white', 0.7), 4, j, 3, 1); f(S('white', 0.7), 8, j, 4, 1); }
+      f('brass', 3, 4, 1, 1); f('brass', 12, 4, 1, 1); f('brass', 3, 13, 1, 1); f('brass', 12, 13, 1, 1);
+      break;
+    }
     case 'bearflag': { // a California bear flag tacked over the window: white field, red stripe, a brown bear, a red star
       f('outline', 1, 1, 14, 12); f('white', 2, 2, 12, 10); f('red', 2, 10, 12, 2);
       f('red', 3, 3, 1, 1); f('wood-dark', 6, 5, 5, 3); f('wood-dark', 5, 6, 1, 2); f('wood-dark', 10, 4, 2, 2); f('wood-dark', 7, 8, 1, 1); f('wood-dark', 9, 8, 1, 1);
@@ -517,7 +564,7 @@ function drawObject(ctx, o) {
       break;
     case 'dchair_right': case 'dchair_left': case 'dchair_right_red': case 'dchair_left_red': { // dining chair seen side-on, facing the table
       // three light-oak chairs and one odd red one
-      const r = o.sprite.startsWith('dchair_right'), odd = o.sprite.endsWith('_red'), wood = odd ? 'red' : 'desk-edge', top = odd ? S('red', 1.2) : S('desk-top', 1.1);
+      const r = o.sprite.startsWith('dchair_right'), odd = o.sprite.endsWith('_red'), wood = odd ? 'rgb(221,72,66)' : 'rgb(214,174,135)', top = odd ? 'rgb(240,98,88)' : 'rgb(234,203,166)'; // light oak; a clear, saturated red
       shadow(4, 12, 9, 3);
       f('outline', 4, 7, 9, 6); f(wood, 5, 8, 7, 4); f(top, 5, 8, 7, 1);
       f('outline', r ? 3 : 11, 0, 3, 13); f(top, r ? 4 : 12, 1, 1, 11);
@@ -582,8 +629,8 @@ function drawObject(ctx, o) {
     case 'booth':
       // the back: padded interior, acoustic panels, a bench and a little lamp
       shadow(1, 30, 31, 3);
-      f('outline', 0, -14, 32, 46); f('navy', 1, -13, 30, 44);
-      for (let i = 0; i < 5; i++) f(S('navy', 1.25), 3 + i * 6, -9, 3, 18);
+      f('outline', 0, -14, 32, 46); f('mustard', 1, -13, 30, 44);
+      for (let i = 0; i < 5; i++) f(S('mustard', 0.85), 3 + i * 6, -9, 3, 18); // acoustic panels, a shade darker
       f('gold', 13, -12, 6, 2); f('lamp', 12, -10, 8, 3);
       f('outline', 3, 15, 26, 8); f('couch', 4, 16, 24, 6); f(S('couch', 1.2), 4, 16, 24, 1);
       break;
@@ -592,7 +639,7 @@ function drawObject(ctx, o) {
       ctx.save(); ctx.globalAlpha = 0.32; f('window', 2, -12, 28, 33); ctx.restore();
       f('window-light', 3, -11, 2, 26); f('window-light', 7, -11, 1, 18);
       f('outline', 0, -14, 32, 2); f('outline', 0, -14, 2, 46); f('outline', 30, -14, 2, 46); f('outline', 15, -12, 1, 33);
-      f('outline', 0, 21, 32, 11); f('navy', 2, 22, 28, 9); f(S('navy', 1.2), 2, 22, 28, 1);
+      f('outline', 0, 21, 32, 11); f('mustard', 2, 22, 28, 9); f(S('mustard', 1.15), 2, 22, 28, 1);
       f('metal', 25, 6, 2, 7);
       break;
     case 'dogbed':
@@ -629,7 +676,7 @@ __mods["sim/personas.js"] = (function () {
 
 const PERSONAS = [
   {
-    id: 'ceo', name: 'Adaeze Okonkwo', short: 'Adaeze', role: 'Founder, CEO & Account Lead', age: 49, pronouns: 'she/her',
+    id: 'ceo', name: 'Adaeze Okonkwo', short: 'Adaeze', role: 'Founder & CEO', age: 49, pronouns: 'she/her',
     home: 'home_harbor', wake: 6 * 60, sleep: 22 * 60 + 30,
     background: 'Born in Enugu, raised in South London. Studied at the RCA, spent 11 years at a famous London consultancy, made partner, then left to found Another Studio nine years ago with her savings and two clients.',
     personality: 'Visionary, warm but exacting, tells long stories, hates mediocrity more than failure.',
@@ -644,7 +691,7 @@ const PERSONAS = [
     relationships: { cos: 'Her right hand; she trusts him with everything except taste.', head_design: 'Her first hire. Old friend; they argue like siblings.' },
   },
   {
-    id: 'cos', name: 'Tomás Herrera', short: 'Tomás', role: 'Chief of Staff & Office Manager', age: 36, pronouns: 'he/him',
+    id: 'cos', name: 'Tomás Herrera', short: 'Tomás', role: 'Chief of Staff', age: 36, pronouns: 'he/him',
     home: 'home_maple', wake: 5 * 60 + 45, sleep: 22 * 60,
     background: 'Grew up in El Paso. Army logistics officer for six years, then two years at a big consulting firm. Joined to "make the trains run without killing the magic."',
     personality: 'Organized, earnest, dry humor, quietly anxious about being liked.',
@@ -659,7 +706,7 @@ const PERSONAS = [
     relationships: { ceo: 'Protective of her time.', dog: 'Took Pica home when Lola left. Pretends it was a logistics decision.' },
   },
   {
-    id: 'head_design', name: 'Kenji Watanabe-Moore', short: 'Kenji', role: 'Head of Design & Design Manager', age: 45, pronouns: 'he/him',
+    id: 'head_design', name: 'Kenji Watanabe-Moore', short: 'Kenji', role: 'Head of Design', age: 45, pronouns: 'he/him',
     home: 'home_maple', wake: 6 * 60 + 30, sleep: 23 * 60,
     background: 'Half Japanese, half Oregonian. Grew up between Osaka and Portland. Type designer turned brand designer. Adaeze\'s first hire.',
     personality: 'Quiet, precise, dry wit, deeply principled about craft.',
@@ -674,7 +721,7 @@ const PERSONAS = [
     relationships: { ceo: 'Old friend; they argue like siblings.', senior_designer: 'Sees himself in Noor.', junior_designer: 'Wants to mentor Eli but struggles to show warmth.' },
   },
   {
-    id: 'design_director', name: 'Sofia Lindqvist', short: 'Sofia', role: 'Design & Art Director', age: 39, pronouns: 'she/her',
+    id: 'design_director', name: 'Sofia Lindqvist', short: 'Sofia', role: 'Art Director', age: 39, pronouns: 'she/her',
     home: 'home_harbor', wake: 6 * 60 + 45, sleep: 23 * 60,
     background: 'From Gothenburg. Product design at a famous innovation firm, then led design systems at a fintech. Joined two years ago to run the interactive practice.',
     personality: 'Blunt, systems thinker, loyal, laughs loudly, hates vague feedback.',
@@ -689,7 +736,7 @@ const PERSONAS = [
     relationships: { junior_designer: 'Thinks Eli has raw talent.' },
   },
   {
-    id: 'senior_designer', name: 'Noor Haddad', short: 'Noor', role: 'Senior Designer & Motion Lead', age: 31, pronouns: 'she/her',
+    id: 'senior_designer', name: 'Noor Haddad', short: 'Noor', role: 'Senior Designer', age: 31, pronouns: 'she/her',
     home: 'home_maple', wake: 7 * 60, sleep: 23 * 60 + 30,
     background: 'Lebanese-Canadian from Montreal by way of Beirut. Brand and motion specialist, bilingual type nerd.',
     personality: 'Perfectionist, sharp, ambitious, quietly funny, guarded.',
@@ -704,7 +751,7 @@ const PERSONAS = [
     relationships: { head_design: 'Wants Kenji\'s respect more than anyone\'s.', junior_designer: 'Mentors Eli, impatiently.' },
   },
   {
-    id: 'junior_designer', name: 'Eli Brooks', short: 'Eli', role: 'Designer & Production', age: 25, pronouns: 'they/them',
+    id: 'junior_designer', name: 'Eli Brooks', short: 'Eli', role: 'Design Engineer', age: 25, pronouns: 'they/them',
     home: 'home_maple', wake: 8 * 60, sleep: 25 * 60,
     background: 'From a small town in rural Ohio. Taught themself design from YouTube and library books, first in their family to go to college. One year at the studio.',
     personality: 'Energetic, funny, self-deprecating, works too late, big-hearted.',
@@ -719,7 +766,7 @@ const PERSONAS = [
     relationships: { senior_designer: 'In awe of Noor, a bit scared of her.' },
   },
   {
-    id: 'ux_researcher', name: 'Hannah Goldberg', short: 'Hannah', role: 'UX Research & Strategy', age: 38, pronouns: 'she/her',
+    id: 'ux_researcher', name: 'Hannah Goldberg', short: 'Hannah', role: 'UX Researcher', age: 38, pronouns: 'she/her',
     home: 'home_harbor', wake: 7 * 60, sleep: 23 * 60,
     background: 'Jewish New Yorker. PhD in anthropology, studied rituals of everyday life, then moved into UX research. Hard of hearing; wears hearing aids and prefers written notes in noisy rooms.',
     personality: 'Curious, wry, patient, asks "why" five times, allergic to assumptions.',
@@ -734,7 +781,7 @@ const PERSONAS = [
     relationships: { copywriter: 'Trades book recommendations with Marcus.' },
   },
   {
-    id: 'copywriter', name: 'Marcus Bell', short: 'Marcus', role: 'Copywriter & PR', age: 33, pronouns: 'he/him',
+    id: 'copywriter', name: 'Marcus Bell', short: 'Marcus', role: 'Copywriter', age: 33, pronouns: 'he/him',
     home: 'home_maple', wake: 7 * 60 + 30, sleep: 24 * 60,
     background: 'From Atlanta. Spoken-word poet and battle rapper turned brand writer. Writes naming, voice and taglines.',
     personality: 'Witty, reflective, warm, loves wordplay, protective of his words.',
@@ -749,7 +796,7 @@ const PERSONAS = [
     relationships: { ux_researcher: 'Hannah is his favorite reader.', junior_designer: 'Eli makes him laugh on the hard days.' },
   },
   {
-    id: 'intern_bea', name: 'Bea Lindqvist-Oduya', short: 'Bea', role: 'Design Intern', age: 21, pronouns: 'she/her',
+    id: 'intern_bea', name: 'Bea Lindqvist-Oduya', short: 'Bea', role: 'Intern', age: 21, pronouns: 'she/her',
     home: 'home_maple', wake: 7 * 60, sleep: 24 * 60, intern: true,
     background: 'Final-year design student on a summer-into-autumn internship. Swedish-Ghanaian, grew up in Gothenburg. Applied with a zine about bus stops.',
     personality: 'Bright, over-prepared, writes everything down, terrified of wasting anyone\'s time.',
@@ -764,7 +811,7 @@ const PERSONAS = [
     relationships: { design_director: 'Sofia is her hero. She hasn\'t told her.' }, drive: 'Wants to earn a seat at the table, not be given one.',
   },
   {
-    id: 'intern_dev', name: 'Dev Ramaswamy', short: 'Dev', role: 'UX Intern', age: 23, pronouns: 'he/him',
+    id: 'intern_dev', name: 'Dev Ramaswamy', short: 'Dev', role: 'Intern', age: 23, pronouns: 'he/him',
     home: 'home_harbor', wake: 7 * 60 + 15, sleep: 24 * 60 + 30, intern: true,
     background: 'Cognitive-science grad doing a career switch into UX. Built a habit-tracker app that 40,000 people use and nobody at his university noticed.',
     personality: 'Curious, a little chaotic, funny in group chats, quiet in meetings.',
@@ -794,7 +841,7 @@ const PERSONAS = [
     relationships: {}, drive: 'Wants to prove three focused days beat five scattered ones.',
   },
   {
-    id: 'dog', name: 'Pica', short: 'Pica', role: 'Studio Dog (Cavalier King Charles)', age: 4, pronouns: 'she/her',
+    id: 'dog', name: 'Pica', short: 'Pica', role: 'Dog (Cavalier King Charles)', age: 4, pronouns: 'she/her',
     home: 'home_maple', wake: 6 * 60, sleep: 21 * 60, isDog: true, owner: 'cos',
     background: 'A Blenheim Cavalier King Charles spaniel named after the typographic unit. Silky ears, enormous eyes. Lola left her with the studio when she was laid off; she lives with Tomás now and comes to work with him every day.',
     personality: 'Gentle, affectionate, food-motivated, a lap dog who thinks every lap is hers.',
@@ -847,7 +894,7 @@ const PERSONA = Object.fromEntries(PERSONAS.map(p => [p.id, p]));
 // hire arrives with a past, a personality and a life outside work.
 const HIRE_POOL = [
   {
-    id: 'hire_lucia', name: 'Lucía Ferreyra', short: 'Lucía', role: 'Product Designer', age: 29, pronouns: 'she/her',
+    id: 'hire_lucia', name: 'Lucía Ferreyra', short: 'Lucía', role: 'Senior Designer', age: 29, pronouns: 'she/her',
     home: 'home_harbor', wake: 7 * 60, sleep: 23 * 60 + 30,
     background: 'Argentine, from Rosario, by way of Barcelona. Five years designing a music-streaming app used by millions. Wanted to make fewer things, better.',
     personality: 'Sunny, sharp, decisive, sings under her breath, asks for feedback constantly.',
@@ -922,7 +969,7 @@ const HIRE_POOL = [
     relationships: {}, drive: 'Wants every project to stand for something real.',
   },
   {
-    id: 'hire_ari', name: 'Ari Navarro', short: 'Ari', role: 'Illustrator & Designer', age: 26, pronouns: 'they/them',
+    id: 'hire_ari', name: 'Ari Navarro', short: 'Ari', role: 'Illustrator', age: 26, pronouns: 'they/them',
     home: 'home_maple', wake: 8 * 60 + 30, sleep: 25 * 60,
     background: 'Filipino-American, from San Diego. Self-published comics, then illustrated picture books. Their linework is instantly recognizable.',
     personality: 'Dreamy, witty, a little chaotic, deeply kind.',
@@ -947,15 +994,19 @@ const LADDERS = {
   production: ['Producer', 'Senior Producer', 'Head of Production'],
   strategy: ['Brand Strategist', 'Senior Strategist', 'Strategy Director'],
   intern: ['Intern', 'Junior Designer'],
+  engineering: ['Design Engineer', 'Senior Design Engineer', 'Lead Design Engineer', 'Staff Design Engineer'],
+  art: ['Art Director', 'Senior Art Director', 'Creative Director'],
+  motion: ['Motion Designer', 'Senior Motion Designer', 'Motion Lead'],
+  illustration: ['Illustrator', 'Senior Illustrator', 'Lead Illustrator'],
   leadership: null, // leaders get raises, not promotions
 };
 const CAREER_START = {
   // pay at the top 10% of design agencies (big-city, senior-heavy studios)
   ceo: ['leadership', 0, 420000], cos: ['leadership', 0, 235000], head_design: ['leadership', 0, 310000],
-  design_director: ['design', 4, 265000], senior_designer: ['design', 2, 195000], junior_designer: ['design', 1, 128000],
-  ux_researcher: ['research', 1, 198000], copywriter: ['writing', 1, 175000],
-  hire_lucia: ['design', 2, 190000], hire_rohan: ['design', 2, 185000], hire_sione: ['design', 0, 108000],
-  hire_mira: ['production', 1, 180000], hire_zainab: ['strategy', 0, 168000], hire_ari: ['design', 1, 140000],
+  design_director: ['art', 0, 265000], senior_designer: ['design', 2, 195000], junior_designer: ['engineering', 0, 128000],
+  ux_researcher: ['research', 0, 198000], copywriter: ['writing', 0, 175000],
+  hire_lucia: ['design', 2, 190000], hire_rohan: ['motion', 0, 185000], hire_sione: ['design', 0, 108000],
+  hire_mira: ['production', 0, 180000], hire_zainab: ['strategy', 0, 168000], hire_ari: ['illustration', 0, 140000],
   // hourly staff: [ladder, level, yearly equivalent, paid hours per year]
   intern_bea: ['intern', 0, 22 * 2080, 2080], intern_dev: ['intern', 0, 22 * 2080, 2080], pt_wren: ['design', 0, 55 * 1248, 1248],
 };
@@ -1022,7 +1073,7 @@ const CLIENT_POOL = [
   { client: 'City of Harborview', name: 'Harborview Wayfinding', type: 'wayfinding', brief: 'A coastal city\'s new waterfront district needs signage, maps, and a typeface that tourists and locals both trust.', contact: { name: 'Marisol Vega', title: 'Planning Commissioner', temper: 'careful, process-bound, secretly delighted by good design', picky: 0.65, look: { skin: 'skin3', hair: 'hair-brown', style: 'long', shirt: 'navy', pants: 'ink' } } },
   { client: 'Atlas Health', name: 'Atlas Patient Portal', type: 'product', brief: 'A hospital network\'s patient portal is so confusing people call instead. Redesign the core flows.', contact: { name: 'Dr. Helen Park', title: 'Chief Digital Officer', temper: 'precise, risk-averse, patient-obsessed', picky: 0.7, look: { skin: 'skin2', hair: 'hair-black', style: 'bob', shirt: 'white', pants: 'ink' } } },
   { client: 'Tidewater Museum', name: 'Tidewater "Deep Time" Exhibit', type: 'exhibition', brief: 'An exhibition identity for a show about 4 billion years of ocean life.', contact: { name: 'Professor Ian Gallagher', title: 'Chief Curator', temper: 'erudite, digressive, wants scientific accuracy', picky: 0.55, look: { skin: 'skin1', hair: 'hair-grey', style: 'bald', shirt: 'khaki', pants: 'ink' } } },
-  { client: 'Quanta Labs', name: 'Quanta Brand', type: 'brand', brief: 'An AI research startup wants a brand that feels human and trustworthy, not sci-fi chrome.', contact: { name: 'Sam Okoro', title: 'Head of Brand', temper: 'thoughtful, allergic to clichés', picky: 0.5, look: { skin: 'skin5', hair: 'hair-black', style: 'curly', shirt: 'sky', pants: 'black' } } },
+  { client: 'Quantify Labs', name: 'Quantify Brand', type: 'brand', brief: 'An AI research startup wants a brand that feels human and trustworthy, not sci-fi chrome.', contact: { name: 'Sam Okoro', title: 'Head of Brand', temper: 'thoughtful, allergic to clichés', picky: 0.5, look: { skin: 'skin5', hair: 'hair-black', style: 'curly', shirt: 'sky', pants: 'black' } } },
   { client: 'Kindred Bank', name: 'Kindred Onboarding', type: 'product', brief: 'A credit union for artists needs an onboarding flow that doesn\'t feel like a bank.', contact: { name: 'Rosa Lindgren', title: 'VP Member Experience', temper: 'kind, consensus-seeking', picky: 0.4, look: { skin: 'skin1', hair: 'hair-blonde', style: 'long', shirt: 'plum', pants: 'ink' } } },
   { client: 'Greenline Transit', name: 'Greenline Trip Planner', type: 'product', brief: 'A regional transit agency wants a trip planner app that works for riders who don\'t speak English.', contact: { name: 'Tariq Haddad', title: 'Director of Rider Experience', temper: 'practical, budget-conscious', picky: 0.55, look: { skin: 'skin3', hair: 'hair-black', style: 'short', shirt: 'teal', pants: 'khaki' } } },
   { client: 'Halcyon Hotels', name: 'Halcyon Guest Experience', type: 'service', brief: 'A boutique hotel group wants a guest experience from booking email to room key card.', contact: { name: 'Celeste Moreau', title: 'Brand Director', temper: 'glamorous, exacting about details', picky: 0.75, look: { skin: 'skin2', hair: 'hair-brown', style: 'bun', shirt: 'red', pants: 'black' } } },
@@ -1642,7 +1693,7 @@ return { get PHASES() { return PHASES; }, get CULTURE() { return CULTURE; }, get
 
 // ---- sim/library/ceo.js
 __mods["sim/library/ceo.js"] = (function () {
-// Adaeze Okonkwo, Founder, CEO & Account Lead. Hand-written lines for the procedural brain (sim/brain.js).
+// Adaeze Okonkwo, Founder & CEO. Hand-written lines for the procedural brain (sim/brain.js).
 const __default = {
   hi: [
     "Darling, come here. I need your eyes.",
@@ -2146,7 +2197,7 @@ return { default: __default };
 
 // ---- sim/library/cos.js
 __mods["sim/library/cos.js"] = (function () {
-// Tomás Herrera, Chief of Staff & Office Manager. Hand-written lines for the procedural brain (sim/brain.js).
+// Tomás Herrera, Chief of Staff. Hand-written lines for the procedural brain (sim/brain.js).
 const __default = {
   hi: [
     "Hey, got ninety seconds? I timed it.",
@@ -2637,7 +2688,7 @@ return { default: __default };
 
 // ---- sim/library/head_design.js
 __mods["sim/library/head_design.js"] = (function () {
-// Kenji Watanabe-Moore, Head of Design & Design Manager. Hand-written lines for the procedural brain (sim/brain.js).
+// Kenji Watanabe-Moore, Head of Design. Hand-written lines for the procedural brain (sim/brain.js).
 const __default = {
   hi: [
     "Got a minute? Bring the printout.",
@@ -3128,7 +3179,7 @@ return { default: __default };
 
 // ---- sim/library/design_director.js
 __mods["sim/library/design_director.js"] = (function () {
-// Sofia Lindqvist, Design & Art Director. Hand-written lines for the procedural brain (sim/brain.js).
+// Sofia Lindqvist, Art Director. Hand-written lines for the procedural brain (sim/brain.js).
 const __default = {
   hi: [
     "Hej. Got five minutes and a thick skin?",
@@ -3619,7 +3670,7 @@ return { default: __default };
 
 // ---- sim/library/senior_designer.js
 __mods["sim/library/senior_designer.js"] = (function () {
-// Noor Haddad, Senior Designer & Motion Lead. Hand-written lines for the procedural brain (sim/brain.js).
+// Noor Haddad, Senior Designer. Hand-written lines for the procedural brain (sim/brain.js).
 const __default = {
   hi: [
     "Hey. Got a second to look at something?",
@@ -4110,7 +4161,7 @@ return { default: __default };
 
 // ---- sim/library/junior_designer.js
 __mods["sim/library/junior_designer.js"] = (function () {
-// Eli Brooks, Designer & Production. Hand-written lines for the procedural brain (sim/brain.js).
+// Eli Brooks, Design Engineer. Hand-written lines for the procedural brain (sim/brain.js).
 const __default = {
   hi: [
     "Heyyy, you got a sec? Promise it's quick.",
@@ -4601,7 +4652,7 @@ return { default: __default };
 
 // ---- sim/library/ux_researcher.js
 __mods["sim/library/ux_researcher.js"] = (function () {
-// Hannah Goldberg, UX Research & Strategy. Hand-written lines for the procedural brain (sim/brain.js).
+// Hannah Goldberg, UX Researcher. Hand-written lines for the procedural brain (sim/brain.js).
 const __default = {
   hi: [
     "Got five minutes and an opinion?",
@@ -5092,7 +5143,7 @@ return { default: __default };
 
 // ---- sim/library/copywriter.js
 __mods["sim/library/copywriter.js"] = (function () {
-// Marcus Bell, Copywriter & PR. Hand-written lines for the procedural brain (sim/brain.js).
+// Marcus Bell, Copywriter. Hand-written lines for the procedural brain (sim/brain.js).
 const __default = {
   hi: [
     "Hey, can I borrow your ears for one line?",
@@ -11996,6 +12047,8 @@ K.fridge = (ctx, d, c) => {
   box(ctx, dx, fy, c.x + c.w - dx - 8, fh, '#dfe1e3', 6); for (const yy of [fy + 90, fy + 230, fy + 370]) { box(ctx, dx + 10, yy, c.x + c.w - dx - 28, 8, alpha('#9fb3c4', 0.8)); }
   for (let i = 0; i < 3; i++) box(ctx, dx + 16 + i * 22, fy + 44, 16, 46, [IL.mustard, IL.red, IL.green][i], 3);
   box(ctx, dx + 16, fy + 184, 30, 46, IL.white, 3); box(ctx, dx + 54, fy + 196, 30, 34, '#8ec6d8', 3);
+  // the fridge war: a passive-aggressive note, taped over everything
+  if (D.warNote) { ctx.save(); ctx.translate(fx + fw * 0.12, fy + fh * 0.36); ctx.rotate(-0.06); shadow(ctx, true, 12, 4); box(ctx, 0, 0, fw * 0.76, 120, IL.white, 2); shadow(ctx, false); box(ctx, fw * 0.3, -8, 50, 16, alpha('#e8e2c8', 0.85)); para(ctx, D.warNote, 14, 30, fw * 0.76 - 28, 15, HAND, IL.ink, 1.4, 6); ctx.restore(); }
   // the rules, taped to the door
   ctx.save(); ctx.translate(dx + 20, fy + 290); ctx.rotate(0.03); box(ctx, 0, 0, c.x + c.w - dx - 50, 70, '#f6dc6e'); text(ctx, 'LABELLED SHELVES.', 10, 24, 11, '"Avenir Next", Avenir, sans-serif', IL.ink, { weight: '800' }); text(ctx, 'ENFORCED.', 10, 40, 11, '"Avenir Next", Avenir, sans-serif', IL.ink, { weight: '800' }); text(ctx, '— Tomás', 10, 60, 11, HAND, IL.ink); ctx.restore();
   grain(ctx, c.x, c.y, c.w, c.h, 0.05);
@@ -12153,6 +12206,224 @@ K.flag = (ctx, d, c) => {
   for (const [tx, ty] of [[fx + 6, fy + 6], [fx + fw - 6, fy + 6], [fx + 6, fy + fh - 4], [fx + fw - 6, fy + fh - 4]]) { disc(ctx, tx, ty, 4, IL.goldLo); disc(ctx, tx - 1, ty - 1, 2, IL.goldHi); }
   illCard(ctx, c.x + c.w * 0.7, c.y + 60, c.w * 0.3 - 10, ['Arrived in a tube.', 'No note. No return address.', D.suspect ? `Prime suspect: ${D.suspect}.` : 'Nobody has confessed.', `Up for ${D.years ?? 'two'} years.`], 0.04);
   if (D.note) para(ctx, D.note, c.x + c.w * 0.7, c.y + 230, c.w * 0.3 - 14, 13, HAND, IL.ink, 1.5, 6);
+  grain(ctx, c.x, c.y, c.w, c.h, 0.06);
+};
+// A Polaroid from the wall of us: the people, in pixels, in the room they were in, with a caption in Sharpie.
+K.polaroid = (ctx, d, c) => {
+  const D = d.a.data ?? {};
+  illBg(ctx, c, '#c9b9a0', '#b4a386'); // cork
+  for (let i = 0; i < 60; i++) disc(ctx, c.x + (i * 137) % c.w, c.y + (i * 89) % c.h, 1.5, alpha(IL.woodLo, 0.25));
+  const pw = Math.min(c.w * 0.5, (c.h - 40) / 1.2), ph = pw * 1.2, px = c.x + (c.w - pw) / 2 + (D.tilt ?? 0) * 20, py = c.y + (c.h - ph) / 2;
+  ctx.save(); ctx.translate(px + pw / 2, py + ph / 2); ctx.rotate(D.tilt ?? -0.03); ctx.translate(-(px + pw / 2), -(py + ph / 2));
+  shadow(ctx, true, 18, 6); box(ctx, px, py, pw, ph, '#f7f5ef', 2); shadow(ctx, false);
+  const m = pw * 0.06, iw = pw - m * 2, ih = iw;
+  const bg = { studio: ['#c9a27a', '#b48a60'], kitchen: ['#e7e1d4', '#d5cdbd'], meeting: ['#efe3cf', '#e0d0b4'], library: ['#c8c3ba', '#b3ada3'] }[D.area] ?? ['#d6cfc2', '#c3baa9'];
+  const g = ctx.createLinearGradient(0, py + m, 0, py + m + ih); g.addColorStop(0, bg[0]); g.addColorStop(1, bg[1]); box(ctx, px + m, py + m, iw, ih, g);
+  box(ctx, px + m, py + m, iw, ih * 0.35, alpha('#ffffff', 0.18)); // wall
+  // the people, scaled up, pixel-crisp
+  const spr = __mods['sprites.js'].sprite, people = D.people ?? [];
+  const scale = Math.max(3, Math.floor(Math.min(iw / (people.length * 18 + 4), ih / 30))), sw = 16 * scale, gap = (iw - people.length * sw) / (people.length + 1);
+  ctx.imageSmoothingEnabled = false;
+  people.forEach((p0, i) => { try { const img = spr({ id: p0.id, look: p0.look }, p0.look?.dog ? 'right' : 'down', p0.look?.dog ? 3 : 0); const x = px + m + gap + i * (sw + gap), y = py + m + ih - 24 * scale - ih * 0.05 + (i % 2) * scale; ell(ctx, x + sw / 2, y + 23 * scale, sw * 0.42, scale * 1.6, alpha(IL.ink, 0.25)); ctx.drawImage(img, x, y, sw, 24 * scale); } catch {} });
+  ctx.imageSmoothingEnabled = true;
+  // flash and that Polaroid wash
+  const fl = ctx.createRadialGradient(px + m + iw * 0.5, py + m + ih * 0.35, 4, px + m + iw * 0.5, py + m + ih * 0.35, iw * 0.7); fl.addColorStop(0, alpha('#fffbe8', 0.28)); fl.addColorStop(1, alpha('#fffbe8', 0)); box(ctx, px + m, py + m, iw, ih, fl);
+  box(ctx, px + m, py + m, iw, ih, alpha('#2a6f8a', 0.06));
+  const vg = ctx.createRadialGradient(px + m + iw / 2, py + m + ih / 2, iw * 0.3, px + m + iw / 2, py + m + ih / 2, iw * 0.75); vg.addColorStop(0, alpha(IL.ink, 0)); vg.addColorStop(1, alpha(IL.ink, 0.3)); box(ctx, px + m, py + m, iw, ih, vg);
+  // the caption, in marker
+  text(ctx, D.caption ?? '', px + pw / 2, py + m + ih + (ph - ih - m) * 0.55, Math.max(14, pw * 0.055), HAND, IL.ink, { align: 'center' });
+  if (D.date) text(ctx, D.date, px + pw - m, py + ph - m * 0.6, Math.max(10, pw * 0.032), HAND, IL.muted, { align: 'right' });
+  ctx.restore();
+  disc(ctx, px + pw / 2, py + 6, 6, IL.red); disc(ctx, px + pw / 2 - 2, py + 4, 2, alpha(IL.white, 0.7)); // the pin
+  if (D.by) text(ctx, `taken by ${D.by}`, c.x + c.w - 16, c.y + c.h - 16, 13, HAND, IL.ink, { align: 'right' });
+  grain(ctx, c.x, c.y, c.w, c.h, 0.07);
+};
+// A plant's closer look: the pot, the leaves (greener when happy, browner when not), and three gauges.
+K.plantcard = (ctx, d, c) => {
+  const D = d.a.data ?? {}, h = (D.health ?? 80) / 100;
+  illBg(ctx, c, '#efe9dc', '#ded5c3');
+  const sunny = (D.sun ?? 50) / 100; const sun = ctx.createRadialGradient(c.x + c.w * 0.1, c.y, 10, c.x + c.w * 0.1, c.y, c.w * 0.7); sun.addColorStop(0, alpha('#ffe7a0', 0.55 * sunny)); sun.addColorStop(1, alpha('#ffe7a0', 0)); box(ctx, c.x, c.y, c.w, c.h, sun);
+  const cx = c.x + c.w * 0.32, base = c.y + c.h * 0.86, pw = c.w * 0.16;
+  // pot
+  shadow(ctx, true, 18, 8); ctx.fillStyle = '#b5653d'; ctx.beginPath(); ctx.moveTo(cx - pw / 2, base - pw * 0.9); ctx.lineTo(cx + pw / 2, base - pw * 0.9); ctx.lineTo(cx + pw * 0.38, base); ctx.lineTo(cx - pw * 0.38, base); ctx.closePath(); ctx.fill(); shadow(ctx, false);
+  box(ctx, cx - pw * 0.55, base - pw * 0.98, pw * 1.1, pw * 0.16, '#c97749', 3);
+  ell(ctx, cx, base - pw * 0.9, pw * 0.48, pw * 0.08, D.water > 40 ? '#3b2a1f' : '#7a6249'); // soil, darker when wet
+  // leaves: colour from health, droop from water
+  const mix = (a, b, t) => { const p = x => [1, 3, 5].map(i => parseInt(x.slice(i, i + 2), 16)); const A = p(a), B = p(b); return `rgb(${A.map((v, i) => Math.round(v + (B[i] - v) * t)).join(',')})`; };
+  const leaf = D.dead ? '#7a6a52' : mix('#a88a3c', '#4f8a52', h), leafHi = D.dead ? '#8e7d62' : mix('#c4a65a', '#7fb46e', h);
+  const droop = D.dead ? 1 : Math.max(0, (40 - (D.water ?? 60)) / 40), n = D.tall ? 9 : 7, top = base - pw * 0.9;
+  ctx.save(); ctx.beginPath(); ctx.rect(c.x, c.y, c.w * 0.56, c.h); ctx.clip(); // keep the leaves clear of the gauges
+  for (let i = 0; i < n; i++) {
+    const a = -Math.PI / 2 + (i - (n - 1) / 2) * (0.3 + droop * 0.1), len = pw * (D.tall ? 1.6 : 1.15) * (0.75 + (i % 3) * 0.12);
+    const ex = cx + Math.cos(a) * len, ey = top + Math.sin(a) * len * (1 - droop * 0.45) + droop * len * 0.2;
+    line(ctx, cx, top, ex, ey, mix('#3a5a33', '#4f6f3a', h), 3);
+    ctx.save(); ctx.translate(ex, ey); ctx.rotate(a + Math.PI / 2 + droop * 0.6 * (i < n / 2 ? -1 : 1)); ell(ctx, 0, 0, pw * 0.22, pw * 0.42, leaf); ell(ctx, -pw * 0.05, -pw * 0.08, pw * 0.08, pw * 0.22, leafHi); ctx.restore();
+  }
+  ctx.restore();
+  if (D.dead) text(ctx, 'R.I.P.', cx, base - pw * 0.4, pw * 0.22, HAND, IL.white, { align: 'center' });
+  // the name tag, its stake pushed into the soil inside the pot's rim
+  { const sx = cx + pw * 0.18, soil = top + pw * 0.02, stake = pw * 0.42, cw = pw * 0.62, ch = pw * 0.22, label = `${D.name}${D.gen > 1 ? ` ${['', '', 'II', 'III', 'IV', 'V'][D.gen] ?? D.gen}` : ''}`;
+    ctx.save(); ctx.translate(sx, soil); ctx.rotate(0.08);
+    box(ctx, -1.5, -stake, 3, stake, '#cdbd9e'); // the stake, ending at the soil line
+    shadow(ctx, true, 6, 2); box(ctx, -cw / 2, -stake - ch, cw, ch, IL.white, 2); shadow(ctx, false);
+    text(ctx, label, 0, -stake - ch * 0.32, Math.max(11, Math.min(pw * 0.1, cw / Math.max(6, label.length) * 1.7)), HAND, IL.ink, { align: 'center' });
+    ctx.restore();
+    ell(ctx, sx, soil, 3, 1.2, '#2a1d14'); } // where it goes in
+  // gauges
+  const gx = c.x + c.w * 0.6, gw = c.w * 0.32, rows = [['Water', D.water, '#3f7fbf', null], ['Sun', D.sun, '#e0b03c', D.wantSun], ['Food', D.food, '#5c9a4f', null], ['Health', D.health, '#c4483e', null]];
+  text(ctx, cap(D.kind ?? 'a plant'), gx, c.y + c.h * 0.16, Math.max(16, c.w * 0.026), 'Georgia, serif', IL.ink, { italic: true });
+  text(ctx, D.dead ? 'gone, but not forgotten' : D.status ?? '', gx, c.y + c.h * 0.16 + 24, 14, HAND, IL.muted);
+  rows.forEach(([lb, v, col, want], i) => {
+    const y = c.y + c.h * 0.32 + i * c.h * 0.14;
+    text(ctx, lb, gx, y, 14, '"Avenir Next", Avenir, sans-serif', IL.ink, { weight: '600' });
+    box(ctx, gx, y + 8, gw, 12, alpha(IL.ink, 0.1), 6); box(ctx, gx, y + 8, gw * Math.max(0.02, (v ?? 0) / 100), 12, col, 6);
+    if (want != null) { box(ctx, gx + gw * want / 100 - 1, y + 4, 2, 20, IL.ink); text(ctx, 'likes', gx + gw * want / 100, y + 34, 11, HAND, IL.muted, { align: 'center' }); }
+    text(ctx, String(v ?? 0), gx + gw + 8, y + 19, 13, '"Avenir Next", Avenir, sans-serif', IL.muted);
+  });
+  grain(ctx, c.x, c.y, c.w, c.h, 0.05);
+};
+// The skate lane: the counter edge they slide, the board, and Tomás' sandwich board with the tally of falls.
+K.skate = (ctx, d, c) => {
+  const D = d.a.data ?? {};
+  illBg(ctx, c, '#d9d4cb', '#c4beb3'); // concrete
+  for (let i = 0; i < 80; i++) disc(ctx, c.x + (i * 173) % c.w, c.y + (i * 97) % c.h, 1, alpha(IL.ink, 0.12));
+  // the reception counter's front edge, waxed and scuffed from boardslides
+  const ex = c.x + c.w * 0.06, ey = c.y + c.h * 0.3, ew = c.w * 0.58;
+  shadow(ctx, true, 16, 6); box(ctx, ex, ey, ew, 22, '#c99b6e', 3); shadow(ctx, false);
+  box(ctx, ex, ey + 22, ew, 8, '#a87b52', 2);
+  for (let k = 0; k < 7; k++) line(ctx, ex + 30 + k * ew * 0.11, ey + 21 + (k % 3), ex + 30 + k * ew * 0.11 + 40, ey + 23 - (k % 2), alpha(IL.ink, 0.35), 2);
+  text(ctx, 'wax here →', ex + 10, ey - 10, 13, HAND, IL.muted);
+  // the board, mid-roll, with motion lines
+  const bx = c.x + c.w * 0.12, by = c.y + c.h * 0.8;
+  ctx.save(); ctx.translate(bx, by); ctx.rotate(-0.08);
+  box(ctx, 0, 0, 150, 16, '#23222b', 8); box(ctx, 4, 2, 142, 6, '#d9b24a', 4);
+  for (const wx of [20, 118]) { disc(ctx, wx, 22, 9, '#f4f3ee'); disc(ctx, wx, 22, 4, '#9aa0ae'); }
+  ctx.restore();
+  for (let k = 0; k < 3; k++) line(ctx, bx - 70 + k * 6, by + 6 + k * 8, bx - 14, by + 6 + k * 8, alpha(IL.ink, 0.35), 2);
+  // the sandwich board
+  const sx = c.x + c.w * 0.7, sy = c.y + c.h * 0.22, sw = c.w * 0.24, sh = c.h * 0.5;
+  shadow(ctx, true, 18, 6); box(ctx, sx, sy, sw, sh, '#e3b83f', 4); shadow(ctx, false);
+  box(ctx, sx + 8, sy + 8, sw - 16, sh - 16, '#f0c94e', 2);
+  para(ctx, 'NO SKATING DURING CLIENT HOURS.', sx + 16, sy + 34, sw - 32, Math.max(14, sw * 0.085), '"Avenir Next", Avenir, sans-serif', '#b8322e', 1.25, 4);
+  para(ctx, 'THIS MEANS YOU, ELI.', sx + 16, sy + sh * 0.58, sw - 32, Math.max(13, sw * 0.07), HAND, IL.ink, 1.3, 3);
+  // the tally
+  const n = D.falls ?? 0, tx = sx + 16, ty = sy + sh * 0.82;
+  for (let i = 0; i < Math.min(n, 25); i++) { const g = Math.floor(i / 5), k = i % 5; if (k < 4) line(ctx, tx + g * 34 + k * 6, ty, tx + g * 34 + k * 6, ty + 22, IL.ink, 2); else line(ctx, tx + g * 34 - 3, ty + 18, tx + g * 34 + 24, ty + 4, IL.ink, 2); }
+  if (!n) text(ctx, 'falls: 0 (so far)', tx, ty + 16, 13, HAND, IL.muted);
+  line(ctx, sx + 10, sy + sh, sx - 4, sy + sh + 30, IL.ink, 3); line(ctx, sx + sw - 10, sy + sh, sx + sw + 4, sy + sh + 30, IL.ink, 3);
+  if (D.note) para(ctx, D.note, c.x + 24, c.y + 30, c.w * 0.3, 13, HAND, IL.ink, 1.5, 6);
+  grain(ctx, c.x, c.y, c.w, c.h, 0.07);
+};
+// The record player and its crate: what's on, whose pick, and the sleeves.
+K.records = (ctx, d, c) => {
+  const D = d.a.data ?? {};
+  illBg(ctx, c, '#e8e2d6', '#d4ccbd');
+  const cx = c.x + c.w * 0.32, cy = c.y + c.h * 0.48, R = Math.min(c.w * 0.18, c.h * 0.3);
+  // the deck
+  shadow(ctx, true, 22, 8); box(ctx, cx - R * 1.35, cy - R * 1.15, R * 2.9, R * 2.3, '#b9bcc4', 8); shadow(ctx, false);
+  box(ctx, cx - R * 1.3, cy - R * 1.1, R * 2.8, R * 2.2, '#cfd2d9', 6);
+  disc(ctx, cx, cy, R * 1.02, '#2a2a30'); disc(ctx, cx, cy, R, '#151418');
+  for (let k = 0.45; k < 1; k += 0.07) ring(ctx, cx, cy, R * k, alpha('#ffffff', 0.05), 1);
+  disc(ctx, cx, cy, R * 0.33, D.labelColor ?? IL.red); disc(ctx, cx, cy, 3, '#ddd');
+  text(ctx, D.label ?? 'side A', cx, cy + R * 0.2, R * 0.09, 'Georgia, serif', IL.white, { align: 'center' });
+  ctx.save(); ctx.translate(cx + R * 1.1, cy - R * 0.8); ctx.rotate(D.playing ? 0.55 : 0.15); box(ctx, -4, 0, 8, R * 1.25, '#8f939c', 3); box(ctx, -7, R * 1.2, 14, 16, '#3a3a40', 2); ctx.restore();
+  disc(ctx, cx + R * 1.1, cy - R * 0.8, 10, '#8f939c');
+  illCard(ctx, c.x + c.w * 0.64, c.y + 40, c.w * 0.32, [D.playing ? `Now playing: ${D.playing}` : 'Nothing on. Yet.', D.by ? `${D.by}'s pick` : 'Whoever gets here first', D.since ?? 'Arguments: ongoing'], 0.03);
+  if (D.note) para(ctx, D.note, c.x + c.w * 0.64, c.y + 200, c.w * 0.32, 13, HAND, IL.ink, 1.5, 8);
+  if (D.playing) for (let i = 0; i < 5; i++) text(ctx, ['♪', '♫', '♪', '♬', '♫'][i], cx + R * (0.4 + i * 0.25), cy - R * (1.25 + (i % 2) * 0.25), 22 - i * 2, 'Georgia, serif', alpha(IL.ink, 0.55 - i * 0.08));
+  grain(ctx, c.x, c.y, c.w, c.h, 0.06);
+};
+// The Oregon flag, both sides: the crest on navy, and the beaver on the back.
+K.orflag = (ctx, d, c) => {
+  const D = d.a.data ?? {}, NAVY = '#1f3a73', GOLD = '#e2b63a', GOLD2 = '#b58a1e';
+  illBg(ctx, c, '#e4ddd0', '#cfc6b6');
+  for (let i = 0; i < c.h; i += 22) line(ctx, c.x, c.y + i, c.x + c.w, c.y + i, alpha(IL.ink, 0.05), 1);
+  const fw = c.w * 0.3, fh = fw * 0.6, gap = c.w * 0.04, fx0 = c.x + c.w * 0.05, fy = c.y + (c.h - fh) / 2 - 10;
+  const flag = (fx, back) => {
+    ctx.save(); ctx.beginPath(); ctx.moveTo(fx, fy); ctx.quadraticCurveTo(fx + fw / 2, fy + 8, fx + fw, fy); ctx.lineTo(fx + fw, fy + fh); ctx.quadraticCurveTo(fx + fw / 2, fy + fh + 12, fx, fy + fh); ctx.closePath(); ctx.clip();
+    shadow(ctx, true, 18, 8); box(ctx, fx, fy, fw, fh + 16, NAVY); shadow(ctx, false);
+    const cx = fx + fw / 2, cy = fy + fh * 0.52;
+    if (!back) {
+      text(ctx, 'STATE OF OREGON', cx, fy + fh * 0.18, fh * 0.1, 'Georgia, serif', GOLD, { align: 'center', weight: '700', track: 2 });
+      // the shield, the sun, the mountains, the wagon, the sea; 33 stars around it
+      ctx.fillStyle = GOLD; ctx.beginPath(); ctx.moveTo(cx - fw * 0.11, cy - fh * 0.18); ctx.lineTo(cx + fw * 0.11, cy - fh * 0.18); ctx.lineTo(cx + fw * 0.11, cy + fh * 0.06); ctx.quadraticCurveTo(cx, cy + fh * 0.26, cx - fw * 0.11, cy + fh * 0.06); ctx.closePath(); ctx.fill();
+      ctx.fillStyle = NAVY; ctx.beginPath(); ctx.moveTo(cx - fw * 0.09, cy - fh * 0.16); ctx.lineTo(cx + fw * 0.09, cy - fh * 0.16); ctx.lineTo(cx + fw * 0.09, cy + fh * 0.05); ctx.quadraticCurveTo(cx, cy + fh * 0.22, cx - fw * 0.09, cy + fh * 0.05); ctx.closePath(); ctx.fill();
+      disc(ctx, cx + fw * 0.04, cy - fh * 0.08, fh * 0.05, GOLD);
+      ctx.fillStyle = GOLD; ctx.beginPath(); ctx.moveTo(cx - fw * 0.09, cy); ctx.lineTo(cx - fw * 0.04, cy - fh * 0.07); ctx.lineTo(cx, cy - fh * 0.01); ctx.lineTo(cx + fw * 0.04, cy - fh * 0.06); ctx.lineTo(cx + fw * 0.09, cy); ctx.closePath(); ctx.fill();
+      box(ctx, cx - fw * 0.09, cy + fh * 0.03, fw * 0.18, fh * 0.03, GOLD2); for (let k = 0; k < 4; k++) box(ctx, cx - fw * 0.08 + k * fw * 0.045, cy + fh * 0.08, fw * 0.03, 2, GOLD);
+      ell(ctx, cx + fw * 0.17, cy - fh * 0.2, fw * 0.03, fh * 0.03, GOLD); ell(ctx, cx - fw * 0.17, cy - fh * 0.2, fw * 0.03, fh * 0.03, GOLD); // the eagle, more or less
+      for (let k = 0; k < 33; k++) { const a = -Math.PI / 2 + k * Math.PI * 2 / 33; disc(ctx, cx + Math.cos(a) * fw * 0.2, cy + Math.sin(a) * fh * 0.36, 1.6, GOLD); }
+      text(ctx, '1859', cx, fy + fh * 0.9, fh * 0.1, 'Georgia, serif', GOLD, { align: 'center', weight: '700', track: 3 });
+    } else {
+      // the beaver on the back, on its log
+      const bx = cx, by = cy + fh * 0.05;
+      box(ctx, bx - fw * 0.22, by + fh * 0.12, fw * 0.44, fh * 0.06, GOLD2, 3);
+      ell(ctx, bx, by, fw * 0.14, fh * 0.14, GOLD); ell(ctx, bx + fw * 0.13, by - fh * 0.06, fw * 0.06, fh * 0.07, GOLD); ell(ctx, bx - fw * 0.2, by + fh * 0.04, fw * 0.08, fh * 0.045, GOLD2);
+      disc(ctx, bx + fw * 0.17, by - fh * 0.11, 2, GOLD2); disc(ctx, bx + fw * 0.155, by - fh * 0.08, 1.5, NAVY);
+      for (let k = 0; k < 5; k++) line(ctx, bx - fw * 0.24 + k * 4, by + fh * 0.02, bx - fw * 0.17 + k * 4, by + fh * 0.07, alpha(NAVY, 0.6), 1);
+      text(ctx, 'THE BEAVER STATE', cx, fy + fh * 0.9, fh * 0.08, 'Georgia, serif', GOLD, { align: 'center', weight: '700', track: 2 });
+    }
+    for (const k of [0.3, 0.66]) line(ctx, fx + fw * k, fy, fx + fw * k + 5, fy + fh + 16, alpha(IL.ink, 0.1), 3);
+    ctx.restore();
+    for (const [tx, ty] of [[fx + 6, fy + 6], [fx + fw - 6, fy + 6], [fx + 6, fy + fh - 4], [fx + fw - 6, fy + fh - 4]]) { disc(ctx, tx, ty, 4, IL.goldLo); disc(ctx, tx - 1, ty - 1, 2, IL.goldHi); }
+  };
+  flag(fx0, false); flag(fx0 + fw + gap, true);
+  text(ctx, 'front', fx0 + fw / 2, fy + fh + 44, 13, HAND, IL.muted, { align: 'center' }); text(ctx, 'back (yes, really)', fx0 + fw + gap + fw / 2, fy + fh + 44, 13, HAND, IL.muted, { align: 'center' });
+  illCard(ctx, c.x + c.w * 0.73, c.y + 50, c.w * 0.24, ['Up for balance.', 'Two designs, one flag.', 'Hannah\'s. Obviously.'], 0.04);
+  if (D.note) para(ctx, D.note, c.x + c.w * 0.73, c.y + 190, c.w * 0.24, 13, HAND, IL.ink, 1.5, 7);
+  grain(ctx, c.x, c.y, c.w, c.h, 0.06);
+};
+// A motivational poster: black frame, a mountain at dawn, one big serif word, one sentence under it.
+K.poster = (ctx, d, c) => {
+  const D = d.a.data ?? {};
+  illBg(ctx, c, '#e4ddd0', '#cfc6b6');
+  for (let i = 0; i < c.h; i += 22) line(ctx, c.x, c.y + i, c.x + c.w, c.y + i, alpha(IL.ink, 0.05), 1);
+  const pw = Math.min(c.w * 0.4, (c.h - 60) / 1.3), ph = pw * 1.3, px = c.x + c.w * 0.3 - pw / 2, py = c.y + (c.h - ph) / 2;
+  shadow(ctx, true, 24, 12); box(ctx, px - 14, py - 14, pw + 28, ph + 28, '#15141a', 2); shadow(ctx, false);
+  box(ctx, px - 6, py - 6, pw + 12, ph + 12, '#2a2831');
+  box(ctx, px, py, pw, ph, '#0d0c12');
+  // the picture: a dawn sky over a ridge
+  const sky = ctx.createLinearGradient(0, py, 0, py + ph * 0.6); sky.addColorStop(0, '#1b1a3f'); sky.addColorStop(0.55, '#5a2d5c'); sky.addColorStop(1, '#e58a3c');
+  box(ctx, px + 12, py + 12, pw - 24, ph * 0.6, sky);
+  disc(ctx, px + pw * 0.62, py + ph * 0.5, pw * 0.07, '#ffd27a');
+  ctx.fillStyle = '#14122a'; ctx.beginPath(); ctx.moveTo(px + 12, py + ph * 0.62); ctx.lineTo(px + pw * 0.3, py + ph * 0.36); ctx.lineTo(px + pw * 0.45, py + ph * 0.5); ctx.lineTo(px + pw * 0.62, py + ph * 0.3); ctx.lineTo(px + pw * 0.8, py + ph * 0.5); ctx.lineTo(px + pw - 12, py + ph * 0.42); ctx.lineTo(px + pw - 12, py + ph * 0.62); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = '#0d0c12'; ctx.beginPath(); ctx.moveTo(px + 12, py + ph * 0.62); ctx.lineTo(px + pw * 0.2, py + ph * 0.52); ctx.lineTo(px + pw * 0.5, py + ph * 0.6); ctx.lineTo(px + pw * 0.75, py + ph * 0.54); ctx.lineTo(px + pw - 12, py + ph * 0.62); ctx.closePath(); ctx.fill();
+  for (let k = 0; k < 14; k++) disc(ctx, px + 20 + (k * 53) % (pw - 40), py + 18 + (k * 29) % (ph * 0.22), 1, alpha(IL.white, 0.7));
+  text(ctx, D.word ?? 'DEADLINES', px + pw / 2, py + ph * 0.8, pw * 0.11, 'Georgia, serif', IL.white, { align: 'center', track: 6 });
+  text(ctx, D.line ?? 'Nothing focuses the mind like a Tuesday.', px + pw / 2, py + ph * 0.9, pw * 0.04, 'Georgia, serif', alpha(IL.white, 0.75), { align: 'center', italic: true });
+  box(ctx, px + pw * 0.3, py + ph * 0.84, pw * 0.4, 1, alpha(IL.white, 0.3));
+  illCard(ctx, c.x + c.w * 0.62, c.y + 50, c.w * 0.34, ['Bought as a joke.', 'Month one.', 'Not a joke by month four.'], -0.03);
+  if (D.note) para(ctx, D.note, c.x + c.w * 0.62, c.y + 180, c.w * 0.34, 13, HAND, IL.ink, 1.5, 8);
+  grain(ctx, c.x, c.y, c.w, c.h, 0.06);
+};
+// The labor law poster: red header, four boxed sections of fine print, a pencil note.
+K.lawposter = (ctx, d, c) => {
+  const D = d.a.data ?? {};
+  illBg(ctx, c, '#e4ddd0', '#cfc6b6');
+  for (let i = 0; i < c.h; i += 22) line(ctx, c.x, c.y + i, c.x + c.w, c.y + i, alpha(IL.ink, 0.05), 1);
+  const pw = Math.min(c.w * 0.5, (c.h - 40) / 1.25), ph = pw * 1.25, px = c.x + c.w * 0.31 - pw / 2, py = c.y + (c.h - ph) / 2;
+  ctx.save(); ctx.translate(px + pw / 2, py + ph / 2); ctx.rotate(-0.01); ctx.translate(-(px + pw / 2), -(py + ph / 2));
+  shadow(ctx, true, 16, 6); box(ctx, px, py, pw, ph, '#f7f4ec'); shadow(ctx, false);
+  box(ctx, px, py, pw, ph * 0.13, '#b8322e');
+  text(ctx, 'EMPLOYEE RIGHTS', px + 16, py + ph * 0.07, ph * 0.05, 'Helvetica, Arial, sans-serif', IL.white, { weight: '700', track: 2 });
+  text(ctx, 'WHAT EVERY WORKER NEEDS TO KNOW · POST IN A CONSPICUOUS PLACE', px + 16, py + ph * 0.11, ph * 0.015, 'Helvetica, Arial, sans-serif', alpha(IL.white, 0.9), { weight: '700', track: 0.5 });
+  const secs = [['MINIMUM WAGE', 'Every hour counts, including the ones nobody asked you to work.'], ['MEAL & REST BREAKS', '30 minutes unpaid for meals. 10 minutes paid for every 4 hours worked. Yes, including crit.'], ['PAID SICK LEAVE', 'Accrues from day one. Using it is not a personality flaw.'], ['REPORTING & RETALIATION', 'Report anything. Retaliation is illegal. The hotline is real and someone answers.']];
+  const gx = px + 16, gw = (pw - 48) / 2, gy = py + ph * 0.17, gh = (ph * 0.78 - 16) / 2;
+  secs.forEach(([h, body], i) => {
+    const x = gx + (i % 2) * (gw + 16), y = gy + Math.floor(i / 2) * (gh + 16);
+    stroke(ctx, x, y, gw, gh, alpha(IL.ink, 0.5), 1);
+    box(ctx, x, y, gw, ph * 0.035, '#b8322e'); text(ctx, h, x + 8, y + ph * 0.025, ph * 0.019, 'Helvetica, Arial, sans-serif', IL.white, { weight: '700', track: 0.5 });
+    para(ctx, body, x + 8, y + ph * 0.07, gw - 16, ph * 0.022, 'Helvetica, Arial, sans-serif', IL.ink, 1.4, 4);
+    for (let k = 0; k < 9; k++) { const ly = y + ph * 0.16 + k * ph * 0.028; if (ly > y + gh - 8) break; line(ctx, x + 8, ly, x + 8 + (gw - 16) * (0.6 + ((k * 7 + i * 3) % 5) * 0.08), ly, alpha(IL.ink, 0.3), 1); }
+  });
+  text(ctx, 'Form LL-12 · Rev. this year · Required by law', px + pw / 2, py + ph - 8, ph * 0.018, 'Helvetica, Arial, sans-serif', IL.muted, { align: 'center' });
+  // the pencil note on the breaks section
+  ctx.save(); ctx.translate(gx + gw + 16 + gw * 0.5, gy + gh * 0.55); ctx.rotate(-0.08);
+  text(ctx, '10 min per 4 hrs — Eli??', 0, 0, 14, HAND, '#4a4a55', { align: 'center' }); ctx.restore();
+  ctx.restore();
+  for (const [tx, ty] of [[px + 8, py + 8], [px + pw - 8, py + 8], [px + 8, py + ph - 8], [px + pw - 8, py + ph - 8]]) { disc(ctx, tx, ty, 4, IL.goldLo); disc(ctx, tx - 1, ty - 1, 2, IL.goldHi); }
+  illCard(ctx, c.x + c.w * 0.64, c.y + 50, c.w * 0.32, ['Required by law.', 'Next to the fridge.', 'Annotated, in pencil.'], 0.03);
+  if (D.note) para(ctx, D.note, c.x + c.w * 0.64, c.y + 180, c.w * 0.32, 13, HAND, IL.ink, 1.5, 8);
   grain(ctx, c.x, c.y, c.w, c.h, 0.06);
 };
 // The wooden dummy: the post, three arms, the leg, the frame, the wear where the hands land.
@@ -12362,6 +12633,9 @@ obj('bench:meeting_top', 'meeting bench', 'meeting', 22, 2, 5, 1, 'mbench', [22,
 obj('bench:meeting_bottom', 'meeting bench', 'meeting', 22, 5, 5, 1, 'mbench', [22, 5], { blocking: false, decor: true });
 obj('meeting_table', 'meeting table', 'meeting', 22, 3, 5, 2, 'table_big', [21, 4], { view: 'projector', story: 'Where clients sit, on two long oak benches Kenji built to match the table. Everyone faces the screen so nobody has to look at the bad coffee rings.' });
 obj('wing_chun', 'wooden dummy', 'meeting', 28, 3, 1, 1, 'dummy', [27, 3], { story: 'A Wing Chun wooden dummy, Kenji\'s. He does his forms on it at seven in the morning before anyone is in, and anyone is welcome to hit it at any time, including, and this is studio policy, during meetings. Clients find it either alarming or wonderful. Adaeze says that tells her what she needs to know about the client.' });
+obj('or_flag', 'Oregon flag', 'meeting', 26, 0, 1, 1, 'orflag', [26, 1], { blocking: false, noGo: true, story: 'The Oregon flag, next to the bear. Hannah put it up the week after the bear flag appeared, "for balance". It is the only state flag with a different design on the back, a beaver, which Hannah will tell you about whether or not you ask.' });
+obj('poster_mot', 'motivational poster', 'library', 14, 11, 1, 1, 'poster_mot', [14, 12], { blocking: false, noGo: true, story: 'A motivational poster behind reception: a mountain at dawn and the word DEADLINES. Tomás bought it as a joke. It stopped being a joke around the third all-nighter.' });
+obj('poster_law', 'labor law poster', 'kitchen', 5, 11, 1, 1, 'poster_law', [5, 12], { blocking: false, noGo: true, story: 'The state-mandated labor law poster, by law in a place where everyone eats. Someone has annotated the section on rest breaks in pencil. The handwriting is Eli\'s. The breaks are not.' });
 obj('bear_flag', 'California bear flag', 'meeting', 25, 0, 1, 1, 'bearflag', [25, 1], { blocking: false, noGo: true, coversWindow: true, story: 'A California bear flag, tacked over the window. It arrived in a tube with no note the week the studio won its biggest West Coast project. Marcus says it\'s from a client. Eli says it\'s from Marcus. Adaeze refuses to take it down until someone confesses, so it has been up for two years.' });
 obj('whiteboard', 'whiteboard', 'meeting', 21, 1, 2, 1, 'whiteboard', [21, 2], { view: 'whiteboard', story: 'Never fully erased. There is a ghost of a 2021 org chart in the corner that everyone pretends not to see.' });
 obj('projector', 'presentation screen', 'meeting', 24, 1, 4, 1, 'screen', [25, 2], { view: 'projector', story: 'Where every pitch, crit and client review happens. The HDMI adapter lives in Tomás\' pocket.' });
@@ -12371,7 +12645,9 @@ obj('annuals_shelf', 'design annuals shelf', 'library', 25, 9, 4, 1, 'shelf', [2
 obj('reading_chair', 'mustard beanbag', 'library', 21, 14, 1, 1, 'beanbag', [21, 15], { story: 'A huge mustard beanbag that replaced the velvet reading chair. Hannah claimed it in the first hour and does synthesis in it, horizontally.' });
 obj('reading_chair2', 'teal beanbag', 'library', 24, 14, 1, 1, 'beanbag_teal', [24, 15], { story: 'Its teal twin. Slightly flatter. Pica prefers this one and leaves it dog-shaped.' });
 obj('magazine_table', 'magazine table', 'library', 22, 14, 2, 1, 'magazines', [22, 15], { story: 'A low table stacked with Eye, Baseline, Slanted and one very old IKEA catalog that nobody will throw out.' });
-obj('phone_booth', 'phone booth', 'library', 27, 14, 2, 2, 'booth', [28, 15], { blocking: false, story: 'Soundproof-ish, with a padded bench. Used for client calls, family calls, power naps and occasionally crying.' });
+obj('skate_ramp', 'skateboard', 'library', 28, 13, 1, 1, 'board', [26, 13], { story: 'Eli\'s skateboard, stood on its tail against the east wall. He skates the lane the length of reception, and boardslides the front of the reception counter, which Tomás says is "the one place clients stand." Rohan has a board here too. Nobody else is allowed, by Tomás, and nobody else wants to.' });
+obj('skate_sign', 'Tomás\' sign', 'library', 28, 11, 1, 1, 'skatesign', [27, 11], { blocking: false, noGo: true, story: 'A yellow sandwich board in Tomás\' handwriting: NO SKATING DURING CLIENT HOURS. THIS MEANS YOU, ELI. There is a tally of falls on the back. It keeps going up.' });
+obj('phone_booth', 'phone booth', 'library', 27, 15, 2, 2, 'booth', [28, 16], { blocking: false, story: 'Soundproof-ish, with a padded bench. Used for client calls, family calls, power naps and occasionally crying.' });
 
 obj('coffee_machine', 'espresso machine', 'kitchen', 1, 12, 1, 1, 'coffee', [1, 13], { story: 'An Italian lever machine older than Eli. Tomás descales it every Friday and talks to it gently.' });
 obj('fridge', 'fridge', 'kitchen', 2, 12, 1, 1, 'fridge', [2, 13], { story: 'Labelled shelves, enforced by Tomás. The bottom drawer is always mysteriously full of oat milk.' });
@@ -12384,6 +12660,8 @@ obj('breakfast_nook', 'breakfast nook', 'kitchen', 8, 12, 3, 1, 'nook', [9, 13],
 obj('pinball2', 'pinball machine', 'studio', 14, 4, 1, 1, 'pinball2', [14, 5], { story: 'A 1983 "Grid Systems" table Kenji found on the curb and rebuilt over three weekends. It tilts if you look at it wrong. Eli and Marcus have a standing rivalry here.' });
 obj('pinball', 'pinball machine', 'studio', 13, 4, 1, 1, 'pinball', [13, 5], { story: 'A 1979 "Space Kerning" table Adaeze won in a bet with a client. The left flipper sticks. Marcus holds the high score and will tell you about it.' });
 obj('ddr', 'dance machine', 'studio', 16, 4, 2, 1, 'ddr', [16, 5], { story: 'A Dance Dance Revolution cabinet Noor bought at a bowling alley liquidation and had delivered without telling anyone. Friday happy hour ends here. The left arrow is a little sticky, which everyone blames for everything.' });
+obj('record_player', 'record player', 'kitchen', 7, 12, 1, 1, 'turntable', [7, 13], { story: 'A Technics turntable on a milk crate of records, next to the breakfast nook. Whoever gets to it first picks the music for the room, which is the single biggest source of conflict at Another Studio.' });
+obj('polaroid', 'Polaroid camera', 'library', 18, 12, 1, 1, 'polaroid', [18, 13], { blocking: false, noGo: false, story: 'An old Polaroid SX-70 on the award shelf. Anyone can take a picture of anyone. The pictures go on the wall of us, and nobody is allowed to take one down.' });
 obj('sofa', 'sofa', 'kitchen', 7, 16, 3, 1, 'couch', [8, 15], { story: 'A rust-red three-seater from the old studio. The only furniture that survived the move intact.' });
 
 obj('reception_desk', 'reception counter', 'library', 13, 13, 3, 1, 'counter', [14, 12], { story: 'Unstaffed since Lola left. A bowl of ginger candy and a bell nobody rings. Clients wait here.' });
@@ -12406,7 +12684,7 @@ const PLANTS = [
   [24, 16, 'Old Faithful', 'a jade plant', 'Older than the studio. Adaeze\'s grandmother\'s cutting.'],
   [19, 12, 'Spike', 'a cactus', 'Do not hug Spike.'],
 ];
-for (const [x, y, name, kind, story] of PLANTS) obj(`plant:${name}`, name, areaGrid[y][x], x, y, 1, 1, (x + y) % 2 ? 'plant' : 'plant_tall', [x, y], { story: `${cap(kind)}. ${story}` });
+for (const [x, y, name, kind, story] of PLANTS) obj(`plant:${name}`, name, areaGrid[y][x], x, y, 1, 1, (x + y) % 2 ? 'plant' : 'plant_tall', [x, y], { kind, story: `${cap(kind)}. ${story}` });
 function cap(s) { return s[0].toUpperCase() + s.slice(1); }
 
 obj('door:home_maple', 'front door', 'home_maple', 15, 17, 1, 1, 'none', [15, 17], { blocking: false });
@@ -13280,6 +13558,7 @@ function recentValence(agent, n = 30) {
   return ms.reduce((s, m) => s + valenceOf(m) * (m.importance / 5), 0) / Math.max(4, ms.length / 3);
 }
 function moodOf(agent) {
+  if (!agent || !LIVES[agent.id]) return 'fine';
   const p = PERSONA[agent.id], tr = LIVES[agent.id].traits, n = agent.needs;
   const v = recentValence(agent);
   if (p.isDog) return n.hunger < 40 ? 'snack-focused' : n.energy < 40 ? 'sleepy' : v > 0.3 ? 'wiggly' : 'alert';
@@ -13491,7 +13770,7 @@ function decide(agent, sim) {
   }
   // Role work.
   const rw = pick(ROLE_WORK[id] ?? [['catching up on email', '📧']]);
-  C({ kind: 'work', activity: rw[0], emoji: rw[1], location: id === 'ceo' && chance(0.3) ? 'annuals_shelf' : id === 'cos' && /espresso/.test(rw[0]) ? 'coffee_machine' : (deskOf(id) ?? 'dining_table'), dur: [30, 75], needs: { fulfillment: 18 }, tags: ['work'], bonus: projects.length ? -0.4 : 0.4 });
+  C({ kind: 'work', activity: rw[0], emoji: rw[1], anywhere: /water/.test(rw[0]), location: id === 'ceo' && chance(0.3) ? 'annuals_shelf' : id === 'cos' && /espresso/.test(rw[0]) ? 'coffee_machine' : /water/.test(rw[0]) ? pick(OBJECTS.filter(o => o.id.startsWith('plant:') && o.area !== 'outside')).id : (deskOf(id) ?? 'dining_table'), dur: [30, 75], needs: { fulfillment: 18 }, tags: ['work'], bonus: projects.length ? -0.4 : 0.4 });
 
   // Food & coffee.
   if ((atStudio || workHours) && !wfh) {
@@ -13510,6 +13789,10 @@ function decide(agent, sim) {
     C({ kind: 'work', activity: pick(['pulling a reference off the design book shelf', 'rereading a chapter of Rams', 'checking a grid in Müller-Brockmann', 'looking something up in Bringhurst']), emoji: '📘', location: 'design_books', dur: [10, 22], needs: { fulfillment: 16, fun: 8 }, tags: ['work'], bonus: tr.O - 0.55 + (projects.length ? 0.2 : -0.4) });
     // The wooden dummy: Kenji's at seven; everyone else's whenever they need to hit something.
     C({ kind: 'fun', activity: id === 'head_design' ? (m < 9 * 60 + 30 ? 'morning forms on the wooden dummy' : 'a few rounds on the wooden dummy') : pick(['hitting the wooden dummy for a minute', 'taking it out on the wooden dummy', 'trying the wooden dummy, badly']), emoji: '🥋', location: 'wing_chun', dur: [5, 14], needs: { fun: 22, fulfillment: 6 }, tags: ['fun'], bonus: id === 'head_design' ? (m < 9 * 60 + 30 ? 2.2 : 0.3) : (agent.mood && /stress|tense|frustrat|stung|gun|empty|heart/.test(agent.mood) ? 0.9 : -0.9) });
+    if (id === 'junior_designer' || id === 'hire_rohan') C({ kind: 'fun', activity: pick(['skating the lane', 'trying a kickflip in reception', 'one more run down the lane', 'landing the boardslide, finally']), emoji: '🛹', location: 'skate_ramp', dur: [10, 20], needs: { fun: 45 }, tags: ['fun'], bonus: 0.3 + (agent.needs.energy < 30 ? -1 : 0) });
+    { const sad = Object.entries(sim.flags.plants ?? {}).filter(([, pl]) => !pl.dead && (pl.water < 30 || pl.health < 40)); if (sad.length && !p.isDog) { const [pid, pl] = pick(sad); const nm = pid.slice(6); C({ kind: 'care', activity: pl.water < 30 ? `watering ${nm}` : `fussing over ${nm}`, emoji: '🪴', location: pid, anywhere: true, dur: [5, 10], needs: { fulfillment: 25 }, tags: [], bonus: (id === 'cos' ? 1.5 : 0.3) + (pl.water < 15 ? 1 : 0) + (pl.health < 30 ? 1 : 0) + ((tr.A ?? 0.5) - 0.5) }); } }
+    C({ kind: 'fun', activity: pick(['putting a record on', 'flipping through the records', 'changing the music']), emoji: '🎵', location: 'record_player', dur: [6, 12], needs: { fun: 18 }, tags: ['fun'], bonus: (tr.O - 0.5) * 0.6 + (sim.music ? -0.4 : 0.2) });
+    C({ kind: 'fun', activity: pick(['taking a Polaroid', 'snapping a Polaroid of whoever is around', 'adding to the wall of us']), emoji: '📸', location: 'polaroid', dur: [5, 10], needs: { social: 12, fun: 12 }, tags: ['fun'], bonus: (tr.E - 0.55) * 0.6 });
     C({ kind: 'snack', activity: 'toast and gossip in the breakfast nook', emoji: '🥐', location: 'breakfast_nook', dur: [10, 20], needs: { hunger: 35, social: 18 }, tags: [], bonus: (tr.E - 0.5) });
     C({ kind: 'fun', activity: 'browsing the shelves in the library', emoji: '📚', location: pick(['bookshelf', 'annuals_shelf']), dur: [20, 40], needs: { fun: 22, fulfillment: 10 }, tags: ['fun'], bonus: tr.O - 0.5 });
     C({ kind: 'fun', activity: 'reading old case studies on the case study shelf', emoji: '📖', location: 'bookshelf', dur: [15, 30], needs: { fun: 20, fulfillment: 15 }, tags: ['fun'] });
@@ -13568,7 +13851,7 @@ function decide(agent, sim) {
   const dur = Math.round(c.dur[0] + Math.random() * (c.dur[1] - c.dur[0]));
   return {
     thought: thought(agent, sim, c),
-    activity: c.activity, emoji: c.emoji, location: c.location, duration_min: dur,
+    activity: c.activity, emoji: c.emoji, location: c.location, duration_min: dur, anywhere: c.anywhere ?? false,
     project_id: c.project?.id ?? null,
     contribution: c.project && chance(0.8) ? contribution(id, c.project, c.task) : null,
     talk_to: c.talk_to ?? null, talk_about: c.talk_about ?? null,
@@ -13625,6 +13908,7 @@ function dogDecide(agent, sim, item) {
     }
   }
   if (!atStudio && item.kind !== 'social_out') return o('sniffing every corner', '👃', pick(['reading_chair2', 'dog_bed']), 30, ['fun']);
+  if (Math.random() < 0.08) return o('skating the lane (yes, really)', '🛹', 'skate_ramp', 12, ['fun'], { thought: dt('fun', 'Board. Wheels. Wind in ears. Best.') });
   const job = pick(['supervising the designers', 'zoomies down the hallway', 'guarding the meeting room', 'sniffing the material wall']);
   return o(job, pick(['👀', '💨', '🛡️', '👃']), pick(['pinup_wall', 'moodboard', 'meeting_table', 'material_wall', 'dog_bed', 'waiting_bench']), 25, ['fun'], job.startsWith('zoomies') ? {} : { thought: dt('work', ['Snack?', 'Who is that. Must sniff.', 'Warm spot. Mine.', 'Ball? BALL.']) });
 }
@@ -13975,7 +14259,7 @@ class Dialogue {
       const notes = this.notes[id];
       const memory = notes.length ? notes.join(' ') : `I chatted with ${others.map(short).join(', ')}.`;
       const changes = others.map(o => ({ other_id: o, delta: this.delta[id][o] ?? 0, note: this.delta[id][`${o}:note`] ?? '' })).filter(c => c.delta || c.note);
-      return { agent_id: id, memory, importance: Math.round(this.imp), closeness_changes: changes, mood: moodOf(this.A(id)), learned: this.learned[id] };
+      return { agent_id: id, memory, importance: Math.round(this.imp), closeness_changes: changes, mood: this.A(id) ? moodOf(this.A(id)) : null, learned: this.learned[id] }; // someone may have left mid-conversation
     });
     return { lines: this.lines.slice(0, 16), outcomes, commitment: this.commitment };
   }
@@ -14297,6 +14581,67 @@ SCENES.security = (ids, sim) => {
   if (ids.includes('dog')) say3(lines, 'dog', '');
   s('cos', 'Twelve-slide training at two. Attendance mandatory. There will be a quiz.');
   return { lines, outcomes: outcomesFor(ids, id => id === 'cos' ? 'The phishing scare. I made everyone change their passwords. They changed them to a different Pica.' : 'Tomás made us change all our passwords after a phishing email. Mine is now a different dog.', 6, -0.3, 'rattled'), commitment: 'everyone changes their passwords (to a different variant of Pica)' };
+};
+
+// The fridge war: a labelled lunch is gone. victim first, then whoever gathered.
+SCENES.fridge = (ids, victim, food, sim) => {
+  const lines = [], h = ids.filter(x => !PERSONA[x].isDog), V = PERSONA[victim].short;
+  const s = (id, t) => ids.includes(id) && say3(lines, id, t);
+  say3(lines, victim, pick([`Who ate my ${food}? It had my NAME on it. In Sharpie. Twice.`, `My ${food} is gone. The label is still there. Just the label.`, `I want everyone to know I'm not angry about the ${food}. I'm documenting.`]));
+  s('cos', 'Nobody leaves the kitchen. I\'m writing a note.');
+  const other = h.filter(x => x !== victim && x !== 'cos');
+  if (other[0]) say3(lines, other[0], pick(['It wasn\'t me. I bring my own sadness salad.', 'Was it labelled with a date, though? Because legally…', 'I saw a shape near the fridge at noon. A low shape.']));
+  if (other[1]) say3(lines, other[1], pick(['This is the most exciting thing that\'s happened all week.', 'I have a theory and I need a whiteboard.', 'Check the bin. The guilty always leave the lid.']));
+  if (ids.includes('dog')) say3(lines, 'dog', '');
+  s('cos', `The note is up. "To whoever ate ${V}'s ${food}: we know. We don't know. But we will."`);
+  return { lines, outcomes: outcomesFor(ids, id => id === victim ? `Someone ate my labelled ${food}. Tomás put up a note. I am choosing to be calm.` : `Somebody ate ${V}'s labelled ${food}. There's a passive-aggressive note on the fridge now.`, 5, id => (id === victim ? -1 : 0.3), 'suspicious') };
+};
+SCENES.fridgeReveal = (ids, victim, culprit, food) => {
+  const lines = [], V = PERSONA[victim].short, C = PERSONA[culprit].short;
+  if (PERSONA[culprit].isDog) {
+    if (ids.includes('cos')) say3(lines, 'cos', `Case closed. Exhibit A: a Tupperware lid under Pica's bed. Exhibit B: Pica.`);
+    say3(lines, 'dog', '');
+    say3(lines, victim, `…I can't even be mad. Look at her. She's proud of herself.`);
+  } else {
+    say3(lines, ids.find(x => x !== culprit && x !== victim) ?? victim, `The bin had the container. The container had a fork. The fork was ${C}'s fork.`);
+    say3(lines, culprit, pick([`I thought it was the communal one! Nothing in this fridge is communal, I know that now.`, `I was going to replace it. I was going to replace it today. It's not even 3.`, `In my defense, it smelled incredible.`]));
+    say3(lines, victim, pick([`I want a new ${food}. And an apology in writing.`, `We're fine. We're not fine. We'll be fine by Friday.`]));
+  }
+  return { lines, outcomes: outcomesFor(ids, id => id === culprit ? `I got caught eating ${V}'s ${food}.` : `The fridge mystery is solved: it was ${C}.`, 5, id => id === culprit ? -1 : 0.4, 'vindicated') };
+};
+// Friday dance-off and karaoke at the dance machine.
+SCENES.danceoff = (ids, a, b, winner, song, sim) => {
+  const lines = [], A = PERSONA[a].short, B = PERSONA[b].short, W = PERSONA[winner].short;
+  const host = ids.find(x => x !== a && x !== b && !PERSONA[x].isDog) ?? a;
+  say3(lines, host, `Friday dance-off! ${A} versus ${B}. Song: ${song}. Loser sings the karaoke round.`);
+  say3(lines, a, pick(['I\'ve been practicing. Don\'t ask where.', 'Left arrow is sticky. I\'m saying it now, for the record.', 'Somebody hold my drink.']));
+  say3(lines, b, pick(['I was born for this machine.', 'Say goodbye to your combo.', 'I\'m going to do the spin.']));
+  if (ids.includes('dog')) say3(lines, 'dog', '');
+  say3(lines, host, `And… ${W} takes it! ${winner === a ? B : A}, the mic is yours.`);
+  const loser = winner === a ? b : a;
+  say3(lines, loser, pick(['(singing) Is this the real life? Is this just fantasy…', '(singing) Total eclipse of the… does anyone know the words?', '(singing) I will survive! Hey, hey!', '(singing) Don\'t stop believin\'… okay everyone join in, please.']));
+  const crowd = ids.find(x => ![a, b, host, 'dog'].includes(x));
+  if (crowd) say3(lines, crowd, pick(['Encore! Encore!', 'This is going in the group chat.', 'I\'m next. I\'m doing Whitney. Nobody stop me.']));
+  return { lines, outcomes: outcomesFor(ids, id => id === winner ? `I won the Friday dance-off. ${song}. Undefeated (for now).` : id === loser ? `Lost the dance-off to ${W} and had to sing karaoke. I've never felt more alive.` : `Friday dance-off: ${W} beat ${winner === a ? B : A}. The karaoke round was something.`, 4, id => (id === loser ? 0.4 : 1), 'buoyant') };
+};
+// The leak: something unshown turns up in Studio Ditto's work.
+SCENES.leakHunt = (ids, what, client) => {
+  const lines = [], s = (id, t) => ids.includes(id) && say3(lines, id, t);
+  s('ceo', `Studio Ditto launched work for one of their clients this morning. It has ${what}. Ours. Unshown. How?`);
+  s('cos', 'I\'m pulling the shared-drive logs and the visitor book. Nobody panic. Everybody panic a little.');
+  s('ux_researcher', `${client} was in last week and stood by the screens a long time. I'm just saying what I saw.`);
+  s('head_design', 'Let\'s not accuse a client before we know. Logs first.');
+  if (ids.includes('dog')) say3(lines, 'dog', '');
+  return { lines, outcomes: outcomesFor(ids, `Something we hadn't shown anyone turned up in Studio Ditto's work. Tomás is going through the logs.`, 7, -1, 'rattled') };
+};
+SCENES.spy = (ids, spy) => {
+  const lines = [], S = PERSONA[spy].short, s = (id, t) => ids.includes(id) && say3(lines, id, t);
+  s('cos', `The logs are clear. Every leaked file was downloaded from one account at 11 p.m. ${S}'s.`);
+  say3(lines, spy, pick([`Ditto offered me double. I told myself it was only references.`, `I was going to stop. After one more.`, `It started as coffee with an old classmate. It didn't stay coffee.`]));
+  s('ceo', `We trusted you with everything in this room. Pack your desk. Tomás will walk you out.`);
+  s('head_design', 'I sat next to you every day.');
+  if (ids.includes('dog')) say3(lines, 'dog', '');
+  return { lines, outcomes: outcomesFor(ids, id => id === spy ? 'They found out I was passing work to Ditto. It\'s over.' : `${S} was spying for Studio Ditto. I can't believe it. I keep going over every conversation.`, 9, id => id === spy ? -2 : -1.5, 'shaken') };
 };
 
 // The returns. `v` is the visitor (speaker id v.id); ids are the staff who came over.
@@ -15043,6 +15388,7 @@ const { LIVES } = __mods["sim/lives.js"];
 const { SCENARIO } = __mods["sim/scenarios.js"];
 const { OBJECTS } = __mods["sim/world.js"];
 const { STORIES, beatDue } = __mods["sim/stories.js"];
+const pick = arr => arr[Math.floor(Math.random() * arr.length)];
 const { GLITCH } = __mods["sim/inner.js"];
 const { journalEntry } = __mods["sim/journal.js"];
 const START_T = 99 * 1440 + 6 * 60;  // Tuesday 06:00, Day 100 (the studio has a history)
@@ -15140,6 +15486,12 @@ class Sim {
       for (const [k, v] of Object.entries(p.relationships || {})) a.memory.add(0, 'seed', `About ${PERSONA[k].short}: ${v}`, 6);
     }
     if (!saved) a.memory.sinceReflection = 0;
+    // saves from before the title rename: anyone not yet promoted moves onto their new ladder
+    if (a.career && !a.career.role && CAREER_START[p.id] && a.career.ladder !== CAREER_START[p.id][0]) {
+      const [ladder, level] = CAREER_START[p.id];
+      Object.assign(a.career, { ladder, level, title: LADDERS[ladder]?.[level] ?? p.role });
+    }
+    if (a.career && !a.career.role && LADDERS[a.career.ladder]) a.career.title = LADDERS[a.career.ladder][a.career.level] ?? a.career.title;
     if (!a.career) {
       const [ladder, level, salary, hours] = CAREER_START[p.id] ?? ['leadership', 0, 100000];
       a.career = { ladder, level, salary, hours: hours ?? null, title: LADDERS[ladder]?.[level] ?? p.role, happiness: [], unhappyDays: 0, reviews: [], lastReview: this.t - 20 * 1440, lastPromo: this.t - 60 * 1440 };
@@ -15384,7 +15736,7 @@ class Sim {
     const p = PERSONA[a.id];
     a.next = null;
     let loc = d.location;
-    if (!a.allowed.has(loc) && !(d.scripted && loc.startsWith('home:')) && !(d.god && OBJ[loc])) {
+    if (!a.allowed.has(loc) && !(d.scripted && loc.startsWith('home:')) && !((d.god || d.anywhere) && OBJ[loc])) {
       const m = this.t % 1440;
       loc = !isWeekend(this.t) && m > 540 && m < 1080 && !p.isDog && deskOf(a.id) ? deskOf(a.id) : 'home:couch';
     }
@@ -15395,7 +15747,7 @@ class Sim {
       project: p.isDog ? null : proj, contribution: p.isDog ? null : d.contribution,
       satisfies: (d.satisfies || []).filter(k => NEED_KEYS.includes(k)),
       seek: d.talk_to && this.agents.has(d.talk_to) && d.talk_to !== a.id ? d.talk_to : null,
-      topic: d.talk_about, mock: d._mock, bedtime: d.bedtime, ritual: d.ritual, seat: d.seat,
+      topic: d.talk_about, mock: d._mock, bedtime: d.bedtime, ritual: d.ritual, seat: d.seat, useOn: d.useOn ?? null, useMode: d.useMode ?? null,
     };
     a.actedMin = 0;
     if (d.mood) a.mood = d.mood;
@@ -15407,7 +15759,7 @@ class Sim {
     if (OBJ[loc]) this.#useObject(loc, a.id, d.activity);
     // now and then, someone stumbles on what's hidden there
     if (OBJ[loc]?.trinket && !d.scripted && !this.objUse[loc]?.found && Math.random() < 0.012) this.findTrinket(loc, a.id);
-    if (/water/i.test(d.activity) && !loc.startsWith('home:')) for (const o of OBJECTS) if (o.id.startsWith('plant:')) this.#useObject(o.id, a.id, 'watered it');
+    if (/water/i.test(d.activity) && !loc.startsWith('home:')) { if (/every plant/i.test(d.activity)) { for (const o of OBJECTS) if (o.id.startsWith('plant:')) { this.#useObject(o.id, a.id, 'watered it'); this.tendPlant(o.id, 'water', a.id); } } else if (loc.startsWith('plant:')) { this.#useObject(loc, a.id, 'watered it'); this.tendPlant(loc, 'water', a.id); } }
 
     // Where to go.
     let target;
@@ -15427,7 +15779,18 @@ class Sim {
       const door = OBJ[`door:${p.home}`].spot;
       a.x = door.x; a.y = door.y; a.hidden = false; a.atHome = false;
     }
-    const path = findPath(a.x, a.y, target.x, target.y);
+    let path = findPath(a.x, a.y, target.x, target.y);
+    // skaters sometimes boardslide the reception counter on the way to the lane
+    if (loc === 'skate_ramp' && Sim.SKATERS.includes(a.id) && Math.random() < 0.4 && OBJ['reception_desk']) {
+      const tb = OBJ['reception_desk'], start = { x: tb.x - 1, y: tb.y }, toStart = findPath(a.x, a.y, start.x, start.y);
+      if (toStart) {
+        const rail = Array.from({ length: tb.w }, (_, i) => ({ x: tb.x + i, y: tb.y }));
+        const end = rail[rail.length - 1], land = walkable(end.x, end.y + 1) ? { x: end.x, y: end.y + 1 } : { x: end.x - 1, y: end.y + 1 }, drop = findPath(land.x, land.y, target.x, target.y) ?? [];
+        path = [...toStart, ...rail, land, ...drop];
+        a.grindRail = true; a.railStyle = 'grind';
+        this.#post({ type: 'news', icon: '🛹', text: `${PERSONA[a.id].short} boardslid the reception counter on the way to the lane. Past the ginger candy.${this.agents.has('cos') ? ' Tomás saw.' : ''}` });
+      }
+    }
     if (path && path.length) { a.path = path; a.state = 'walking'; }
     else this.#arrive(a);
   }
@@ -15464,6 +15827,17 @@ class Sim {
     a.state = 'acting';
     act.end = act.ritual ? act.end : this.t + act.dur;
     if (OBJ[act.loc]?.face) a.dir = OBJ[act.loc].face; // sit facing the desk
+    if (act.loc === 'record_player' && !act.useOn && !PERSONA[a.id].isDog) this.playRecord(a.id);
+    if (act.loc === 'skate_ramp' && !act.useOn && Sim.SKATERS.includes(a.id)) this.#skate(a);
+    if (act.loc === 'polaroid' && !act.useOn && !PERSONA[a.id].isDog) this.snapPhoto(a.id);
+    if (act.loc?.startsWith('plant:') && /fussing/.test(act.desc ?? '')) { const need = this.plantMost(act.loc); this.tendPlant(act.loc, need, a.id); act.desc = need === 'water' ? `watering ${OBJ[act.loc].name}` : need === 'sun' ? `moving ${OBJ[act.loc].name} into the sun` : `feeding ${OBJ[act.loc].name}`; }
+    if (act.useOn && OBJ[act.useOn]) { // sent here by god: use the thing on arrival
+      const o = OBJ[act.useOn]; act.useOn = null;
+      if (o.x + o.w / 2 - 0.5 !== a.x) a.dir = o.x + o.w / 2 - 0.5 > a.x ? 'right' : 'left';
+      if (Math.abs(o.y - a.y) >= Math.abs(o.x + o.w / 2 - 0.5 - a.x)) a.dir = o.y > a.y ? 'down' : 'up';
+      const did = this.#useNear(a, o, false, act.useMode);
+      if (did) act.desc = did; // the activity reads as what they did
+    }
     if (act.seek) {
       const o = this.agents.get(act.seek);
       if (dist(a, o) <= 3 && this.#available(o)) {
@@ -15477,6 +15851,286 @@ class Sim {
     if (!p.isDog) this.#perceiveOne(a);
   }
 
+  // ------------------------------------------------------------------ the skate lane
+  static SKATERS = ['junior_designer', 'hire_rohan', 'dog'];
+  #skate(a) {
+    a.grindRail = false;
+    this.#useObject('skate_ramp', a.id, 'took a few runs');
+    const clients = this.visitors.length > 0;
+    if (Math.random() < (clients ? 0.35 : 0.22)) this.#later(4 + Math.floor(Math.random() * 8), 'skateFall', { id: a.id, clients });
+  }
+  #skateFall(id, clients) {
+    const a = this.agents.get(id); if (!a || a.hidden) return;
+    const name = PERSONA[id].short;
+    a.needs.energy = clamp(a.needs.energy - 25); a.needs.fun = clamp(a.needs.fun + 5);
+    a.mood = 'bruised but proud';
+    this.flags.skateFalls = (this.flags.skateFalls ?? 0) + 1;
+    this.flags.standupStory = { id, t: this.t, clients, n: this.flags.skateFalls };
+    const how = pick(['caught the counter edge and slid the length of reception on their back', 'landed the kickflip, then the floor', 'bailed into the magazine table', 'missed the board completely and stuck the landing anyway, sort of']);
+    a.memory.add(this.t, 'event', `I fell off the board. I ${how.replace(/their/g, 'my')}. Totally fine. Mostly fine.`, 6, { valence: -0.3 });
+    a.thought = 'Ow. Worth it.';
+    this.#post({ type: 'news', icon: '🛹', text: `${name} ${how}.${clients ? ' In front of a client.' : ''} Tomás updated the tally on the back of his sign: ${this.flags.skateFalls}.` });
+    this.agents.get('cos')?.memory.add(this.t, 'observation', `${name} fell off the board again${clients ? ', in front of a client' : ''}. I'm adding it to the sign.`, 4, { valence: -0.3 });
+  }
+  #standupStory() {
+    const st = this.flags.standupStory; if (!st) return;
+    this.flags.standupStory = null;
+    const id = st.id; if (!this.agents.has(id) || this.agents.get(id).hidden) return;
+    const name = PERSONA[id].short;
+    const lines = [
+      { speaker: id, text: pick(['Before we start, I\'d like to talk about the skateboard.', 'Quick one. Some of you saw. Some of you heard. I\'m fine.', 'So. The board. I have a statement.']) },
+      ...(this.agents.has('cos') ? [{ speaker: 'cos', text: st.clients ? 'In front of a client. A CLIENT. The sign says client hours.' : `That's ${st.n}. I'm keeping count on the back of the sign.` }] : []),
+      { speaker: id, text: pick(['It was a learning experience. What I learned is the counter edge is sharp.', 'In my defense, I was very close to landing it.', 'I\'ve decided it builds character. Mine.']) },
+      ...(this.agents.has('ceo') ? [{ speaker: 'ceo', text: pick(['Lovely. Now break it… no. Don\'t break anything.', 'Wear a helmet or wear a costume. Your choice.', 'Projects, everyone. Skate stories after.']) }] : []),
+    ];
+    const ids = [...new Set(lines.map(l => l.speaker))].filter(x => this.agents.has(x));
+    if (ids.length >= 2) this.#scene(ids, `Standup: ${name} and the skateboard`, 'Meeting Room', { lines, outcomes: ids.map(x => ({ agent_id: x, memory: x === id ? 'I told the skate story at standup. People laughed. Tomás did not.' : `${name} told everyone about falling off the board at standup.`, importance: 3, closeness_changes: [], learned: [] })) });
+  }
+
+  // ------------------------------------------------------------------ the plants: water, sun and food
+  // Each plant has its own habits: ferns and peace lilies drink fast, cacti and jade barely drink; snake plants,
+  // pothos and ferns are happy in shade, figs and birds of paradise want a window.
+  static plantTraits(kind = '') {
+    const thirsty = /fern|peace lily|calathea/.test(kind), camel = /cactus|jade|snake|succulent|zz/.test(kind);
+    const shade = /snake|pothos|fern|peace lily|philodendron|zz/.test(kind), sunny = /fig|bird of paradise|olive|cactus|jade/.test(kind);
+    return { drink: thirsty ? 1.15 : camel ? 0.25 : 0.62, wantSun: sunny ? 65 : shade ? 25 : 45, eat: 0.07 }; // per half hour: a fern needs water every other day, a cactus every week or so
+  }
+  // light where the plant sits: the window rows get the most, the inner rooms the least
+  static plantLight(o) { return o.y <= 2 ? 1 : o.area === 'meeting' ? 0.8 : o.y <= 10 ? 0.6 : 0.42; }
+  #plants() {
+    const P0 = this.flags.plants ??= {};
+    for (const o of OBJECTS) if (o.id.startsWith('plant:') && !P0[o.id]) P0[o.id] = { water: 70 + Math.random() * 25, sun: 70, food: 60 + Math.random() * 30, health: 85, dead: false, by: {} };
+    return P0;
+  }
+  plantMost(id) { const p = this.#plants()[id]; if (!p) return 'water'; const tr = Sim.plantTraits(OBJ[id]?.kind); const sunGap = Math.max(0, tr.wantSun - p.sun); return p.water <= Math.min(p.food, 100 - sunGap) ? 'water' : sunGap > 100 - p.food ? 'sun' : 'food'; }
+  tendPlant(id, what, who) {
+    const p = this.#plants()[id]; if (!p) return;
+    if (p.dead) return;
+    if (what === 'water') p.water = Math.min(100, p.water + 70);
+    else if (what === 'sun') { p.sun = Math.min(100, p.sun + 45); p.movedUntil = this.t + 6 * 60; } // out by the window for the afternoon
+    else if (what === 'food') p.food = Math.min(100, p.food + 60);
+    p.by[who] = (p.by[who] ?? 0) + 1; p.last = { who, what, t: this.t };
+  }
+  #plantTick(m, dow) {
+    const P0 = this.#plants(), day = m >= 7 * 60 && m <= 19 * 60;
+    // Tomás' morning round on weekdays: anything below half gets water; Mondays, everything gets fed
+    if (m === 9 * 60 + 30 && dow < 5 && !isWeekend(this.t)) {
+      const tom = this.agents.get('cos'), dry = Object.entries(P0).filter(([, p]) => !p.dead && p.water < 55).sort((x, y) => x[1].water - y[1].water);
+      if (tom && !tom.hidden && tom.state !== 'talking' && tom.state !== 'sleeping' && !tom.action?.ritual && dry.length) {
+        this.#interrupt(tom);
+        this.#start(tom, { activity: 'watering every plant', emoji: '🪴', location: dry[0][0], duration_min: 10 + dry.length * 2, satisfies: ['fulfillment'], scripted: true, anywhere: true, thought: 'Gerald first. Then Lola\'s lily. Then everyone else.' });
+        if (dow === 0) for (const id of Object.keys(P0)) this.tendPlant(id, 'food', 'cos');
+      }
+    }
+    for (const o of OBJECTS) {
+      if (!o.id.startsWith('plant:')) continue;
+      const p = P0[o.id], tr = Sim.plantTraits(o.kind);
+      if (p.dead) {
+        // Tomás replaces a dead plant after two days, same name, one Roman numeral higher
+        if (this.t - p.diedAt > 2 * 1440 && this.agents.has('cos')) {
+          p.gen = (p.gen ?? 1) + 1; Object.assign(p, { water: 90, sun: 70, food: 90, health: 80, dead: false });
+          this.#post({ type: 'news', icon: '🪴', text: `Tomás came back from the garden center with ${o.name} ${['', '', 'II', 'III', 'IV', 'V', 'VI'][p.gen] ?? p.gen}. Same spot. Nobody mention it.` });
+        }
+        continue;
+      }
+      p.water = Math.max(0, p.water - tr.drink); // per half hour
+      p.food = Math.max(0, p.food - tr.eat);
+      if (day) { const light = (p.movedUntil > this.t ? 1 : Sim.plantLight(o)) * (this.today && /rain|storm|snow|cloud/.test(this.today.kind) ? 0.6 : 1); p.sun = Math.max(0, Math.min(100, p.sun + (light * 100 - p.sun) * 0.08)); }
+      else p.sun = Math.max(0, p.sun - 0.4);
+      const sunOk = 100 - Math.max(0, tr.wantSun - p.sun) * 1.4;
+      const target = Math.min(100, (Math.min(p.water * 1.6, 100) * 0.5 + sunOk * 0.3 + Math.min(p.food * 1.4, 100) * 0.2));
+      const was = p.health;
+      p.health = Math.max(0, Math.min(100, p.health + (target - p.health) * 0.06));
+      if (was >= 30 && p.health < 30) this.#post({ type: 'news', icon: '🥀', text: `${o.name} is wilting. ${p.water < 20 ? 'Bone dry.' : p.sun < tr.wantSun - 20 ? 'It needs a window.' : 'It needs feeding.'}` });
+      if (p.water <= 0 && p.health < 8) {
+        p.dead = true; p.diedAt = this.t;
+        this.#post({ type: 'news', icon: '🪦', text: `${o.name} has died. ${o.name === 'Gerald' ? 'Gerald survived the move, two office managers and a layoff. He did not survive this week.' : o.name === "Lola's Peace Lily" ? 'Tomás is taking it very hard.' : 'There will be a small service by the bin.'}` });
+        for (const a of this.agents.values()) if (!PERSONA[a.id].isDog) a.memory.add(this.t, 'event', `${o.name} died. We should have watered it.`, o.name === "Lola's Peace Lily" ? 7 : 4, { valence: -0.8 });
+      }
+    }
+  }
+  plantState(id) { const p = this.#plants()[id]; if (!p) return null; const tr = Sim.plantTraits(OBJ[id]?.kind); return { ...p, wantSun: tr.wantSun, most: this.plantMost(id), status: p.dead ? 'dead' : p.health >= 75 ? 'thriving' : p.health >= 50 ? 'fine' : p.health >= 30 ? 'droopy' : 'wilting' }; }
+  get plantsBrief() { const P0 = this.#plants(); return Object.fromEntries(Object.entries(P0).map(([id, p]) => [id, p.dead ? 'dead' : p.water < 25 ? 'thirsty' : p.sun < Sim.plantTraits(OBJ[id]?.kind).wantSun - 25 ? 'dark' : p.food < 20 ? 'hungry' : p.health < 30 ? 'wilting' : null])); }
+
+  // ------------------------------------------------------------------ the record player
+  static GENRES = {
+    jazz: { label: 'jazz', icon: '🎷', mood: 'mellow' },
+    techno: { label: 'techno', icon: '🎛️', mood: 'locked in' },
+    folk: { label: 'sad folk', icon: '🪕', mood: 'wistful' },
+    bossa: { label: 'bossa nova', icon: '🌴', mood: 'easy' },
+    hiphop: { label: '90s hip-hop', icon: '📼', mood: 'bouncy' },
+    ambient: { label: 'ambient', icon: '🌫️', mood: 'calm' },
+    classical: { label: 'classical', icon: '🎻', mood: 'focused' },
+  };
+  static TASTE = { ceo: 'jazz', cos: 'bossa', head_design: 'ambient', design_director: 'techno', senior_designer: 'techno', junior_designer: 'hiphop', ux_researcher: 'folk', copywriter: 'jazz', intern_bea: 'hiphop', intern_dev: 'ambient', pt_wren: 'folk', hire_lucia: 'bossa', hire_rohan: 'techno', hire_sione: 'hiphop', hire_mira: 'classical', hire_zainab: 'jazz', hire_ari: 'folk' };
+  #musicAt(a) { const mu = this.music; return mu && this.t < mu.until && areaAt(a.x, a.y) === mu.room ? mu : null; }
+  playRecord(id, genre = null) {
+    const dow = dowOf(Math.floor(this.t / 1440));
+    const g = genre ?? (dow === 0 && Math.random() < 0.5 ? 'folk' : Math.random() < 0.65 ? (Sim.TASTE[id] ?? 'jazz') : pick(Object.keys(Sim.GENRES))); // Mondays: sad folk
+    this.music = { genre: g, by: id, room: OBJ.record_player.area, until: this.t + 120 + Math.floor(Math.random() * 90), since: this.t };
+    this.#useObject('record_player', id, `put on ${Sim.GENRES[g].label}`);
+    this.agents.get(id)?.memory.add(this.t, 'action', `I put on some ${Sim.GENRES[g].label}.`, 2);
+    return Sim.GENRES[g].label;
+  }
+  #musicTick(m, dow) {
+    const mu = this.music; if (!mu) return;
+    if (this.t >= mu.until || this.outageUntil > this.t) { this.music = null; return; }
+    const G = Sim.GENRES[mu.genre];
+    const near = [...this.agents.values()].filter(a => !a.hidden && a.state !== 'sleeping' && !PERSONA[a.id].isDog && areaAt(a.x, a.y) === mu.room);
+    for (const a of near) {
+      const n = a.needs, likes = Sim.TASTE[a.id] === mu.genre;
+      if (mu.genre === 'jazz') { n.fun = clamp(n.fun + 1); if (/anxious|tense|stress|rattled|frustrat/.test(a.mood ?? '')) a.mood = 'mellow'; } // jazz lowers stress
+      else if (mu.genre === 'techno') { n.energy = clamp(n.energy - 0.5); }
+      else if (mu.genre === 'folk') { n.social = clamp(n.social + 1); n.fun = clamp(n.fun - 0.5); }
+      else n.fun = clamp(n.fun + 0.5);
+      if (likes) { n.fun = clamp(n.fun + 1); if (Math.random() < 0.2) a.mood = G.mood; }
+    }
+    // every half hour, someone who hates it might go and change it
+    if (m % 30 !== 0 || this.t - mu.since < 20) return;
+    const grump = near.find(a => a.id !== mu.by && Sim.TASTE[a.id] && Sim.TASTE[a.id] !== mu.genre && a.state !== 'talking' && Math.random() < 0.25);
+    const dj = this.agents.get(mu.by);
+    if (!grump) return;
+    const was = G.label, now = Sim.GENRES[Sim.TASTE[grump.id]].label, A = PERSONA[grump.id].short, B = PERSONA[mu.by].short;
+    const lines = [
+      { speaker: grump.id, text: pick([`Can we please turn off the ${was}?`, `Who put on ${was}? Was it you, ${B}?`, `I can't think with ${was} on. I've tried.`]) },
+      ...(dj && !dj.hidden && dj.state !== 'talking' ? [{ speaker: mu.by, text: pick([`${cap(was)} is good for you. Like vegetables.`, `It's a classic! Give it one more track.`, `My pick, my hour. Those are the rules.`]) }] : []),
+      { speaker: grump.id, text: pick([`I'm putting on ${now}. Democracy.`, `${cap(now)}. Final offer.`, `Fine. One track. Then ${now}.`]) },
+    ];
+    const ids = lines.some(l => l.speaker === mu.by) ? [grump.id, mu.by] : [grump.id];
+    if (ids.length === 2) this.#scene(ids, `The music: ${was} or ${now}`, this.placeLabel(grump), { lines, outcomes: ids.map(id => ({ agent_id: id, memory: id === grump.id ? `I changed the music from ${was} to ${now}. ${B} was not thrilled.` : `${A} took my ${was} off for ${now}.`, importance: 3, closeness_changes: [{ other_id: ids.find(x => x !== id), delta: 0, note: '' }], learned: [] })) });
+    this.playRecord(grump.id, Sim.TASTE[grump.id]);
+    this.#post({ type: 'news', icon: '🎵', text: `${A} took off ${B}'s ${was} and put on ${now}.` });
+  }
+  get musicState() { const mu = this.music; return mu && this.t < mu.until ? { genre: mu.genre, label: Sim.GENRES[mu.genre].label, icon: Sim.GENRES[mu.genre].icon, by: mu.by, room: mu.room } : null; }
+
+  // ------------------------------------------------------------------ the Polaroid camera and the wall of us
+  // a few from before the game starts, so the wall is never empty
+  #seedPhotos() {
+    if (this.flags.photosSeeded) return;
+    this.flags.photosSeeded = true;
+    const has = ids => ids.filter(id => PERSONA[id] && !PERSONA[id].departed);
+    const old = [
+      { by: 'cos', people: has(['ceo', 'head_design', 'design_director', 'cos']), caption: 'move-in day. no chairs yet.', place: 'The Studio', area: 'studio', when: 'two springs ago' },
+      { by: 'junior_designer', people: has(['dog']), caption: 'Pica, day one. already the boss.', place: 'Reception & Library', area: 'library', when: 'last summer' },
+      { by: 'ceo', people: has(['senior_designer', 'junior_designer', 'copywriter']), caption: 'Kern Annual night. we lost. we danced anyway.', place: 'The Studio', area: 'studio', when: 'last fall' },
+      { by: 'copywriter', people: has(['ux_researcher', 'design_director']), caption: 'crit, as usual (Sofia mid-"but what is the problem")', place: 'The Studio', area: 'studio', when: 'last winter' },
+      { by: 'design_director', people: has(['cos', 'dog']), caption: 'Tomás and Pica guarding the snacks', place: 'Kitchen', area: 'kitchen', when: 'this spring' },
+      { by: 'ux_researcher', people: has(['intern_bea', 'intern_dev', 'pt_wren']), caption: 'the new kids. first Friday.', place: 'Reception & Library', area: 'library', when: 'this summer' },
+    ].filter(ph => ph.people.length);
+    const day0 = Math.floor(this.t / 1440);
+    this.flags.photos = [...old.map((ph, i) => ({ id: `ph0:${i}`, t: 0, day: day0 - 400 + i * 70, ...ph })), ...(this.flags.photos ?? [])];
+  }
+  snapPhoto(by, { subjects = null, caption = null, place = null } = {}) {
+    const a = this.agents.get(by) ?? this.actor(by); if (!a) return null;
+    const pool = subjects ?? [...this.agents.values()].filter(o => o.id !== by && !o.hidden && o.state !== 'sleeping' && Math.abs(o.x - a.x) + Math.abs(o.y - a.y) <= 8).map(o => o.id);
+    let people = subjects ?? [...pool].sort(() => Math.random() - 0.5).slice(0, 1 + Math.floor(Math.random() * 3));
+    if (!subjects && (!people.length || Math.random() < 0.25)) people = [by, ...people].slice(0, 4); // a selfie, sometimes
+    if (!people.length) return null;
+    const names = people.map(id => PERSONA[id]?.short ?? id);
+    const day = Math.floor(this.t / 1440);
+    const cap0 = caption ?? pick([
+      names.length === 1 ? `${names[0]}, mid-thought` : `${names.slice(0, -1).join(', ')} & ${names.at(-1)}`,
+      `${names[0]} pretending not to notice`, `blurry. still counts.`, `day ${day + 1}. everyone tired. everyone here.`, `${names.join(' + ')} (Pica photobomb pending)`, `the good light at 4pm`,
+    ]);
+    const photo = { id: `ph${(this.photoN = (this.photoN ?? 0) + 1)}:${this.t}`, t: this.t, day, by, people, place: place ?? this.placeLabel(a), area: areaAt(a.x, a.y), caption: cap0 };
+    (this.flags.photos ??= []).push(photo);
+    if (this.flags.photos.length > 80) this.flags.photos.shift();
+    this.#useObject('polaroid', by, `snapped ${names.join(', ')}`);
+    for (const id of people) this.agents.get(id)?.memory.add(this.t, 'event', `${PERSONA[by]?.short ?? 'Someone'} took a Polaroid of ${id === by ? 'us' : 'me'}. It's on the wall of us now.`, 3, { valence: 0.5 });
+    this.#post({ type: 'news', icon: '📸', text: `${PERSONA[by]?.short ?? 'Someone'} took a Polaroid${people.includes(by) && people.length === 1 ? ' selfie' : ` of ${names.filter(n => n !== PERSONA[by]?.short).join(', ') || 'themselves'}`}. It's on the wall of us.` });
+    return { ...photo, names: names.join(', ') };
+  }
+
+  // ------------------------------------------------------------------ timed follow-ups
+  #later(mins, kind, data) { (this.flags.timers ??= []).push({ at: this.t + mins, kind, data }); }
+  #timers() {
+    const due = (this.flags.timers ?? []).filter(x => this.t >= x.at);
+    if (!due.length) return;
+    this.flags.timers = this.flags.timers.filter(x => this.t < x.at);
+    for (const x of due) this.#timer(x.kind, x.data);
+  }
+  #timer(kind, data) {
+    const post = (icon, text, imp = 5, val = 0) => { this.studio.addNews(this.t, text, icon); this.#post({ type: 'news', icon, text }); for (const id of this.staff) this.agents.get(id)?.memory.add(this.t, 'event', text, imp, { valence: val }); };
+    if (kind === 'danceoffStart') { this.godEvent('danceoff'); return; }
+    if (kind === 'skateFall') { this.#skateFall(data.id, data.clients); return; }
+    if (kind === 'standupStory') { this.#standupStory(); return; }
+    if (kind === 'leakStart') { this.godEvent('leak', data); return; }
+    if (kind === 'fridgeReveal') {
+      const f = this.flags.fridge; if (!f || f.done) return;
+      f.done = true;
+      const ids = [f.victim, f.culprit, 'cos'].filter((x, i, arr) => arr.indexOf(x) === i && this.agents.has(x) && !this.agents.get(x).hidden);
+      if (ids.length >= 2) this.#scene(ids, 'The fridge war: solved', 'Kitchen', SCENES.fridgeReveal(ids, f.victim, f.culprit, f.food));
+      if (f.culprit === 'dog') post('🐶', `The fridge war is over. It was Pica. A Tupperware lid was found under her bed. ${PERSONA[f.victim].short} has forgiven her completely.`, 5, 1);
+      else {
+        post('🥡', `The fridge war is over. It was ${PERSONA[f.culprit].short}. A fork was involved. ${PERSONA[f.victim].short} has been promised a replacement ${f.food}.`, 5, 0.2);
+        const v = this.agents.get(f.victim), c = this.agents.get(f.culprit);
+        if (v?.relationships[f.culprit]) v.relationships[f.culprit].closeness = Math.max(0, v.relationships[f.culprit].closeness - 1);
+        c?.memory.add(this.t, 'event', `Everyone knows I ate ${PERSONA[f.victim].short}'s ${f.food}. I'm buying two.`, 6, { valence: -1 });
+      }
+    } else if (kind === 'spyReveal') {
+      const L = this.flags.leak; if (!L || L.done) return;
+      L.done = true;
+      if (!this.agents.has(L.spy)) { post('🕵️', 'The logs went cold. Whoever leaked the work is already gone.', 6, -0.5); return; }
+      const ids = ['cos', 'ceo', L.spy, 'head_design'].filter((x, i, arr) => arr.indexOf(x) === i && this.agents.has(x) && !this.agents.get(x).hidden);
+      if (ids.length >= 2) this.#scene(ids, 'The spy', 'Meeting Room', SCENES.spy(ids, L.spy));
+      post('🕵️', `It wasn't ${L.client}. The logs led to ${PERSONA[L.spy].short}, who has been passing work to Studio Ditto for months. Adaeze called ${L.client} to apologize.`, 9, -1.5);
+      const pr = this.studio.get(L.project); if (pr) { pr.trust = (pr.trust ?? 0) + 1; pr.quality = Math.min(100, pr.quality + 3); }
+      (this.flags.atDitto ??= []).push(L.spy);
+      this.godEvent('fired', { person: L.spy });
+    } else if (kind === 'riteResult') {
+      const r = this.flags.rites?.[data.id]; if (!r || r.done || !this.agents.has(data.id)) return;
+      const name = PERSONA[data.id].short, ok = Math.random() < 0.4 + (r.tries ?? 0) * 0.15;
+      r.tries = (r.tries ?? 0) + 1;
+      if (ok) {
+        r.done = true; r.at = this.t; (this.flags.stickers ??= {})[data.id] = pick(['star', 'pica', 'heart', 'bolt']);
+        post('🎖️', r.challenge === 'pinball' ? `${name} beat Marcus' pinball high score on attempt ${r.tries} and earned a desk sticker. Marcus is "fine".` : `${name} unjammed the riso on attempt ${r.tries} and earned a desk sticker. Eli cried a little.`, 6, 1);
+        this.agents.get(data.id)?.memory.add(this.t, 'event', 'I got my desk sticker. I belong here now.', 8, { valence: 2 });
+        if (this.agents.has('copywriter') && r.challenge === 'pinball') this.agents.get('copywriter').memory.add(this.t, 'event', `${name} beat my pinball high score. I am processing.`, 6, { valence: -0.5 });
+      } else this.#post({ type: 'news', icon: r.challenge === 'pinball' ? '🕹️' : '🖨️', text: r.challenge === 'pinball' ? `${name} tried to beat Marcus' pinball score. Tilted on the last ball. Tomorrow, maybe.` : `${name} tried to unjam the riso. The riso won. Tomorrow, maybe.` });
+    } else if (kind === 'soloResult') {
+      const a = this.agents.get(data.id); if (!a) return;
+      const pr = this.studio.get(data.project), good = Math.random() < 0.55, name = PERSONA[data.id].short;
+      if (pr) pr.quality = Math.max(0, Math.min(100, pr.quality + (good ? 4 : -3)));
+      const text = good ? `${name} spent the ${data.dayName} alone in the studio${pr ? ` on ${pr.name}` : ''}. It's the best work they've done in weeks.` : `${name} spent the ${data.dayName} alone in the studio${pr ? ` on ${pr.name}` : ''}. On Monday they deleted most of it.`;
+      this.#post({ type: 'news', icon: good ? '🌤️' : '🌧️', text });
+      a.memory.add(this.t, 'event', good ? 'A whole day alone in the studio. Quiet, and it worked.' : 'I worked all weekend and it was worse than nothing. I should have stayed home.', 6, { valence: good ? 1 : -1 });
+      this.flags.solo = null;
+    }
+  }
+  // Interns and new hires earn a desk sticker by beating Marcus' pinball score or unjamming the riso.
+  #attemptRite(id) {
+    const a = this.agents.get(id), r = this.flags.rites?.[id];
+    if (!a || !r || r.done) return 'No rite to attempt.';
+    if (a.hidden || a.state === 'sleeping' || a.state === 'talking') return `${PERSONA[id].short} isn't free right now.`;
+    this.#interrupt(a);
+    this.#start(a, { activity: r.challenge === 'pinball' ? 'the rite of passage: beating Marcus\' pinball score' : 'the rite of passage: unjamming the riso', emoji: '🎖️', location: r.challenge === 'pinball' ? 'pinball' : 'riso', duration_min: 25, satisfies: ['fun', 'fulfillment'], scripted: true, god: true, thought: r.challenge === 'pinball' ? 'Four million. Marcus has four million. How.' : 'Everyone says only Eli can do it. Watch me.' });
+    this.#later(25, 'riteResult', { id });
+    return null;
+  }
+  #rites(m, dow) {
+    // everyone who doesn't have a sticker yet starts with a rite; interns from day one, hires when they join
+    const R = this.flags.rites ??= {};
+    for (const id of this.staff) if (!R[id] && (id.startsWith('intern_') || id.startsWith('hire_') || id === 'pt_wren') && !(this.flags.stickers ?? {})[id]) R[id] = { challenge: Math.random() < 0.6 ? 'pinball' : 'riso', done: false, tries: 0 };
+    if (dow >= 5 || m !== 15 * 60 + 40) return;
+    const pending = Object.entries(R).filter(([id, r]) => !r.done && this.agents.has(id) && !this.agents.get(id).hidden);
+    if (pending.length && Math.random() < 0.5) this.#attemptRite(pick(pending)[0]);
+  }
+  // Weekends: now and then one person comes in alone.
+  #weekendSolo(force = false) {
+    const day = Math.floor(this.t / 1440);
+    if (this.flags.solo?.day === day) return 'Someone is already in today.';
+    const cands = this.staff.filter(id => deskOf(id) && this.agents.get(id) && !this.agents.get(id).leaving && this.agents.get(id).state !== 'sleeping');
+    if (!cands.length) return 'Nobody to come in.';
+    const id = pick(cands), a = this.agents.get(id), pr = this.studio.forAgent(id)[0];
+    this.#interrupt(a);
+    this.#start(a, { activity: pr ? `alone in the studio · ${pr.name}` : 'alone in the studio, catching up', emoji: '🔦', location: deskOf(id), duration_min: 240, satisfies: ['fulfillment'], scripted: true, god: true, project_id: pr?.id, thought: pick(['It\'s so quiet I can hear the fridge think.', 'No crit, no Slack, no dance machine. Just me and the grid.', 'I can hear my own typing echo. I hate it. I love it.', 'Pica isn\'t here. Everything smells like Friday.']) });
+    const dayName = dowOf(day) === 5 ? 'Saturday' : 'Sunday';
+    this.flags.solo = { id, day, project: pr?.id ?? null };
+    this.#post({ type: 'news', icon: '🔦', text: `${PERSONA[id].short} came into the studio alone on ${dayName}. The lights are off everywhere but their desk.` });
+    this.#later(240, 'soloResult', { id, project: pr?.id ?? null, dayName });
+    return null;
+  }
+
   #available(o) {
     return !o.hidden && ['acting', 'thinking'].includes(o.state) && !o.action?.ritual && !o.action?.bedtime;
   }
@@ -15486,7 +16140,7 @@ class Sim {
     const p = PERSONA[a.id];
     a.lastAction = act.desc;
     if (act.project && a.actedMin > 0 && !(this.outageUntil > this.t)) {
-      const res = this.studio.work(this.t, a.id, p, act.project, a.actedMin, a.needs.fulfillment, act.contribution);
+      const res = this.studio.work(this.t, a.id, p, act.project, Math.round(a.actedMin * (this.#musicAt(a)?.genre === 'techno' ? 1.25 : 1)), a.needs.fulfillment, act.contribution); // techno: a quarter more done
       if (res) {
         a.needs.fulfillment = clamp(a.needs.fulfillment + 10);
         if (act.contribution) {
@@ -15593,7 +16247,7 @@ class Sim {
         const dur = 2 + Math.ceil(l.text.length / 45);
         const sp = this.actor(l.speaker);
         if (sp) sp.bubble = { text: l.text, until: this.t + dur };
-        for (const id of [...c.ids, ...(c.visitor ? [c.visitor.id] : [])]) if (id !== l.speaker && this.actor(id)) this.actor(id).bubble = null;
+        for (const id of [...c.ids, ...(c.visitor ? [c.visitor.id] : []), ...(c.guest ? [c.guest.id] : [])]) if (id !== l.speaker && this.actor(id)) this.actor(id).bubble = null;
         c.nextAt = this.t + dur;
         continue;
       }
@@ -15603,6 +16257,7 @@ class Sim {
 
   #endConversation(c) {
     this.convs.splice(this.convs.indexOf(c), 1);
+    if (c.guest) { const g = this.actor(c.guest.id); if (g) { g.bubble = null; if (g.state === 'possessed') g.act = 'wandering around the studio'; } }
     const res = c.result || {};
     for (const o of res.outcomes || []) {
       const a = this.agents.get(o.agent_id);
@@ -15635,7 +16290,7 @@ class Sim {
       type: 'chat', icon: c.visitor ? '🤝' : c.ritual ? '🗣️' : '💬', agents: c.ids, ritual: c.visitor ? null : c.ritual, setting: c.setting, topic: c.topic,
       lines: c.lines ?? [], commitment: res.commitment ?? null, mock: c.mock,
       client: c.visitor ? { id: c.visitor.id, name: c.visitor.name, title: c.visitor.title, project: c.visitor.projectName, decision: res.decision } : null,
-      names: c.visitor ? { [c.visitor.id]: c.visitor.short } : null,
+      names: c.visitor ? { [c.visitor.id]: c.visitor.short } : c.guest ? { [c.guest.id]: c.guest.short } : null,
     });
   }
 
@@ -15674,10 +16329,15 @@ class Sim {
     }
     this.#visits(m, dow);
     if (m % 10 === 0) this.#scenarioTick();
+    if (m % 10 === 0) this.#musicTick(m, dow);
+    if (m % 30 === 0) this.#plantTick(m, dow);
     if (m === 9 * 60 + 15) { this.#ledgerDay(day, dow); this.#postDay(day, dow); }
     if (this.picaDay && (m === 19 * 60 || day !== this.picaDay.day)) this.endPicaDay();
     if (m === 14 * 60 + 40 && dow < 5 && !this.ended && Math.random() < 0.05) this.#glitch();
     this.#fate(m, dow, day);
+    this.#timers();
+    this.#rites(m, dow);
+    if (isWeekend(this.t) && m === 10 * 60 + 20 && !this.ended && this.flags.solo?.day !== day && Math.random() < 0.18) this.#weekendSolo();
     // October 20: Tomás brings in pumpkins (the decoration the map draws until November)
     if (m === 8 * 60 + 30 && decorOf(day) === 'halloween' && !this.studio.firedRituals[`pumpkins:${Math.floor(day / 365)}`] && this.agents.has('cos')) {
       this.studio.firedRituals[`pumpkins:${Math.floor(day / 365)}`] = true;
@@ -15868,7 +16528,7 @@ class Sim {
       if (m < 9 * 60 || m > 16 * 60) return;
       const freeDeskNow = !!freeDesk(), canShrink = this.staff.filter(id => id !== 'ceo').length > 3, noScenario = !this.scenario || this.scenario.status !== 'running', returned = this.flags.returned ?? [];
       const awards = this.studio.awardsWon.filter(w => !w.archive).length, tidewater = this.studio.projects.some(p => p.client === 'Tidewater Museum' && p.phase >= 4 && !p.lost), redDays = this.ledger?.negativeSince != null ? (this.t - this.ledger.negativeSince) / 1440 : 0;
-      const odds = [['outage', 0.03], ['earthquake', 0.012], ['poached', canShrink ? 0.014 : 0], ['layoff', canShrink ? 0.008 : 0], ['hire', freeDeskNow ? 0.02 : 0], ['security', this.agents.has('cos') ? 0.01 : 0],
+      const odds = [['outage', 0.03], ['earthquake', 0.012], ['poached', canShrink ? 0.014 : 0], ['layoff', canShrink ? 0.008 : 0], ['resign', canShrink ? 0.006 : 0], ['fridge', 0.012], ['leak', canShrink && !this.flags.leak ? 0.003 : 0], ['hire', freeDeskNow ? 0.02 : 0], ['security', this.agents.has('cos') ? 0.01 : 0],
         ['scenario:crunch', noScenario ? 0.008 : 0], ['scenario:pitchwar', noScenario ? 0.008 : 0], ['scenario:soty', noScenario ? 0.006 : 0],
         // the returns: rarer than anything above, and each only once
         ['lola', !returned.includes('lola') && this.agents.has('dog') ? 0.004 : 0], ['rafa', !returned.includes('rafa') && (this.counters.pitchesLost > 0 || this.scenario?.id === 'pitchwar') ? 0.006 : 0],
@@ -15914,6 +16574,8 @@ class Sim {
       a.memory.add(this.t, 'event', `I went to the ${r.name}.`, 2);
     }
     this.#post({ type: 'news', icon: '📅', text: `${r.name} is starting.` });
+    if (r.id === 'happyhour' && Math.random() < 0.45) this.#later(25, 'danceoffStart', {});
+    if (r.id === 'standup' && this.flags.standupStory) this.#later(6, 'standupStory', {});
   }
 
   #finishQuiet(a) {
@@ -16123,6 +16785,7 @@ class Sim {
       const nxt = v.path.shift();
       if (nxt) { v.dir = nxt.x > v.x ? 'right' : nxt.x < v.x ? 'left' : nxt.y > v.y ? 'down' : 'up'; v.x = nxt.x; v.y = nxt.y; }
       else if (v.state === 'arriving') { v.state = 'waiting'; v.arrivedAt = this.t; v.dir = 'down'; }
+      else if (v.state === 'possessed') this.#guestArrive(v);
     }
   }
 
@@ -16184,7 +16847,36 @@ class Sim {
     if (a.action && a.state === 'acting' && !a.action.ritual && !a.action.bedtime) this.#finishQuiet(a);
   }
 
+  // Orders for a possessed guest: a stroll, a coffee, a look at the work, a peek at a screen, or the door.
+  #visitorCommand(v, cmd) {
+    const goTo = (objId, act) => { const o = OBJ[objId]; if (!o) return 'Nothing like that here.'; const t = this.#freeNear(o.spot.x, o.spot.y, v); v.path = findPath(v.x, v.y, t.x, t.y) ?? []; v.act = act; v.useOn = objId; return null; };
+    switch (cmd.type) {
+      case 'look': return goTo(pick(['pinup_wall', 'moodboard', 'award_shelf', 'material_wall']), 'having a look at the work on the walls');
+      case 'coffee': return goTo('coffee_machine', 'helping themselves to a coffee');
+      case 'sit': return goTo(pick(['waiting_bench', 'sofa', 'reading_chair']), 'sitting down for a minute');
+      case 'goto': return OBJ[cmd.obj] ? goTo(cmd.obj, `heading over to the ${OBJ[cmd.obj].name}`) : 'Pick a place first.';
+      case 'snoop': case 'steal': { const screens = Object.keys(OBJ).filter(k => k.startsWith('computer:') && OBJ[OBJ[k].of]?.owner); const err = goTo(pick(screens), 'drifting, casually, toward someone\'s screen'); v.steal = true; return err; }
+      case 'work': { // a guest's idea of work: notes on the walls nobody asked for
+        const pr = this.studio.get(cmd.project); if (!pr) return 'Pick a project first.';
+        const err = goTo(pick(['pinup_wall', 'moodboard', 'meeting_table', 'whiteboard']), `forming opinions about ${pr.name}`); v.notesOn = pr.id; return err;
+      }
+      case 'talk': case 'rumor': {
+        const people = [...this.agents.values()].filter(o => !o.hidden && o.state !== 'sleeping' && o.state !== 'talking' && !PERSONA[o.id].isDog);
+        const o = cmd.target ? this.agents.get(cmd.target) : pick(people);
+        if (!o || o.hidden) return 'Nobody like that around.';
+        const t = this.#freeNear(o.x, o.y, v); v.path = findPath(v.x, v.y, t.x, t.y) ?? []; v.useOn = null;
+        v.talkTo = { id: o.id, choice: cmd.type === 'rumor' ? 'rumor' : (cmd.choice ?? 'small'), text: cmd.text ?? '' };
+        v.act = cmd.type === 'rumor' ? `looking for someone to tell something to` : `going over to ${PERSONA[o.id].short}`;
+        if (!v.path.length) this.#guestArrive(v);
+        return null;
+      }
+      case 'leave': { const door = OBJ['door:home_maple'].spot; v.path = findPath(v.x, v.y, door.x, door.y) ?? []; v.act = 'heading out'; v.wasLeaving = true; v.useOn = 'door:home_maple'; return null; }
+      default: return 'Guests can\'t do that.';
+    }
+  }
   godCommand(id, cmd) {
+    const v = this.visitor(id);
+    if (v) return this.#visitorCommand(v, cmd);
     const a = this.agents.get(id), p = PERSONA[id];
     if (!a || a.state === 'talking') return 'They are mid-conversation. Try again in a moment.';
     this.#interrupt(a);
@@ -16193,15 +16885,91 @@ class Sim {
       case 'goto': {
         const o = OBJ[cmd.obj];
         if (!o) return 'Pick a place first.';
-        go(p.isDog ? `sniffing around the ${o.name}` : `spending time at the ${o.name}`, '✨', o.id, 30, { satisfies: ['fun'], thought: `Something pulled me over to the ${o.name}.` });
+        go(p.isDog ? `trotting over to the ${o.name}` : `using the ${o.name}`, '✨', o.id, 30, { satisfies: ['fun'], useOn: o.id, useMode: p.isDog ? (o.id === 'skate_ramp' ? 'use' : 'pee') : null, thought: p.isDog ? `The ${o.name}. Mine.` : `Something pulled me over to the ${o.name}.` });
         break;
       }
       case 'work': {
         const pr = this.studio.get(cmd.project);
-        if (!pr || p.isDog) return 'Pick a project first.';
+        if (!pr) return 'Pick a project first.';
+        if (p.isDog) { // Pica works too: she supervises from wherever the work is
+          const spots = ['dining_table', 'crit_rug', 'reading_chair', 'reading_chair2', 'proto_bench', 'whiteboard', 'meeting_table', ...pr.team.map(deskOf).filter(Boolean)];
+          const task = pr.tasks.find(t => t.id === cmd.task) ?? pr.tasks.find(t => t.phase === pr.phase && t.status !== 'done') ?? pr.tasks[0];
+          go(`${task ? task.title : 'supervising'} · ${pr.name}`, '🐾', pick(spots), 60, { satisfies: ['fulfillment', 'fun'], thought: `${pr.name}. Needs more dog.` });
+          for (const m of pr.team) this.agents.get(m)?.memory.add(this.t, 'observation', `Pica sat on the ${pr.name} work for an hour. It is better now, somehow.`, 3, { valence: 0.5 });
+          break;
+        }
         const task = pr.tasks.find(t => t.id === cmd.task) ?? this.studio.taskFor(id, pr);
-        go(`${task.title} · ${pr.name}`, '✏️', deskOf(id) ?? 'dining_table', 75, { project_id: pr.id, contribution: contribution(id, pr, task), satisfies: ['fulfillment'], thought: `Right. ${task.title}. Now.` });
+        // work happens all over the studio: their desk, the dining table, a beanbag, next to a plant…
+        const spots = [deskOf(id), deskOf(id), 'dining_table', 'breakfast_nook', 'corner_desk', 'reading_chair', 'reading_chair2', 'projector', 'proto_bench', 'whiteboard', ...Object.keys(OBJ).filter(k => k.startsWith('plant:') && OBJ[k].area !== 'outside')].filter(k => k && OBJ[k]);
+        go(`${task.title} · ${pr.name}`, '✏️', pick(spots), 75, { project_id: pr.id, contribution: contribution(id, pr, task), satisfies: ['fulfillment'], thought: `Right. ${task.title}. Now.` });
         a.action.godTask = task.id;
+        break;
+      }
+      case 'eat': {
+        if (p.isDog) { // anywhere in the kitchen, the crit rug or a beanbag
+          const spot = pick(['fridge', 'dining_table', 'snack_shelf', 'breakfast_nook', 'crit_rug', 'reading_chair', 'reading_chair2']);
+          go(pick(['eating something she found', 'a snack, finally', 'begging, then eating']), '🦴', spot, 15, { satisfies: ['hunger'], thought: 'Food. FOOD.' });
+          break;
+        }
+        const spot = pick(['fridge', 'dining_table', 'dining_table', 'breakfast_nook', 'snack_shelf', deskOf(id)].filter(k => k && OBJ[k]));
+        go(spot === deskOf(id) ? 'lunch at the desk' : spot === 'snack_shelf' ? 'a snack from the shelf' : spot === 'fridge' ? 'something from the fridge' : 'a late lunch', '🥪', spot, 25, { satisfies: ['hunger'], useOn: spot === 'fridge' || spot === 'snack_shelf' ? spot : null, thought: 'Food first.' });
+        break;
+      }
+      case 'sniff': { // Pica: the nearest thing worth sniffing, or any thing at all
+        const things = Object.values(OBJ).filter(o => o.sprite !== 'none' && !o.id.startsWith('door:') && !o.id.startsWith('table:') && !o.id.startsWith('desk:'));
+        const near = things.map(o => [o, Math.abs(o.spot.x - a.x) + Math.abs(o.spot.y - a.y)]).filter(([, dd]) => dd > 0 && dd <= 6).sort((x, y) => x[1] - y[1]).slice(0, 4);
+        const o = near.length ? pick(near)[0] : pick(things);
+        const line = Sim.SNIFF[o.id] ?? `${cap(o.name)}: ${pick(Sim.SNIFF_ELSE)}`;
+        go(`sniffing the ${o.name}`, '👃', o.id, 8, { satisfies: ['fun'], thought: line });
+        a.memory.add(this.t, 'action', `*sniffed the ${o.name}* ${line}`, 3);
+        this.#useObject(o.id, 'dog', 'sniffed it thoroughly');
+        break;
+      }
+      case 'hi': { // Pica: go say hello to someone who's around
+        const people = [...this.agents.values()].filter(o => o.id !== id && !o.hidden && o.state !== 'sleeping' && o.state !== 'talking');
+        if (!people.length) return 'Nobody to say hi to right now.';
+        const o = pick(people);
+        go(`going to say hi to ${PERSONA[o.id].short}`, '🐕', deskOf(o.id) ?? 'dining_table', 10, { talk_to: o.id, talk_about: 'hello', satisfies: ['social'], thought: `${PERSONA[o.id].short}! ${PERSONA[o.id].short}! ${PERSONA[o.id].short}!` });
+        break;
+      }
+      case 'takeover': { // Pica becomes CEO. Adaeze takes it well.
+        if (this.flags.dogCEO) return 'Pica is already CEO.';
+        this.flags.dogCEO = true;
+        this.flags.roles = { dog: 'Dawg (CEO)' };
+        this.#post({ type: 'news', icon: '👑', text: 'Pica has taken over the studio. There was no vote. Her first act as CEO was to fire Adaeze.' });
+        if (this.agents.has('ceo')) this.godEvent('fired', { person: 'ceo' });
+        this.studio.addNews(this.t, 'Pica is now CEO of Another Studio.', '👑');
+        for (const o of this.agents.values()) if (o.id !== 'dog') o.memory.add(this.t, 'event', 'Pica is CEO now. The all-hands is shorter. The snacks are worse. Morale is, inexplicably, up.', 8, { valence: 1 });
+        a.memory.add(this.t, 'event', 'I am CEO. I was always CEO. Now there is a sign.', 9, { valence: 2 });
+        a.thought = 'CEO. Finally.';
+        go('surveying the studio from the corner desk', '👑', 'corner_desk', 45, { satisfies: ['fulfillment', 'fun'], thought: 'CEO. Finally.' });
+        break;
+      }
+      case 'quit': {
+        if (p.isDog) { // Pica quits, for the afternoon
+          this.#post({ type: 'news', icon: '🚪', text: 'Pica quit. She took her bone and walked out. She was back within the hour and nobody mentioned it.' });
+          a.memory.add(this.t, 'event', 'I quit today. It did not take. Nobody even noticed I was gone.', 6, { valence: -0.5 });
+          go('quitting, briefly', '🚪', 'waiting_bench', 40, { satisfies: ['fun'], thought: 'I quit. Who is going to walk me now.' }); // she sits by the door and thinks about it
+          break;
+        }
+        return this.godEvent('resign', { person: id });
+      }
+      case 'water': {
+        const plants = Object.keys(OBJ).filter(k => k.startsWith('plant:') && OBJ[k].area !== 'outside');
+        if (!plants.length) return 'No plants to water.';
+        go(p.isDog ? 'sniffing the plants' : 'watering the plants', '🪴', pick(plants), 20, { satisfies: ['fulfillment'], anywhere: true, thought: 'The plants looked thirsty.' });
+        break;
+      }
+      case 'play': {
+        if (p.isDog) { // anything, or anyone
+          const people = [...this.agents.values()].filter(o => o.id !== id && !o.hidden && o.state !== 'sleeping' && o.state !== 'talking');
+          if (people.length && Math.random() < 0.5) { const o = pick(people); go(`playing with ${PERSONA[o.id].short}`, '🎾', deskOf(o.id) ?? 'dining_table', 15, { talk_to: o.id, talk_about: 'play', satisfies: ['fun', 'social'], thought: 'Ball? BALL.' }); break; }
+          const toy = pick(Object.values(OBJ).filter(o => o.sprite !== 'none' && !o.id.startsWith('door:') && !o.id.startsWith('table:') && !o.id.startsWith('desk:'))).id;
+          go(`playing with the ${OBJ[toy].name}`, '🎾', toy, 15, { satisfies: ['fun'], useOn: toy, useMode: 'play', thought: 'Mine now.' });
+          break;
+        }
+        const toy = pick(['pinball', 'pinball2', 'ddr', 'wing_chun', 'riso', 'dog_bed'].filter(k => OBJ[k]));
+        go(`playing with the ${OBJ[toy].name}`, '🎲', toy, 25, { satisfies: ['fun'], useOn: toy, thought: 'Five minutes. Maybe ten.' });
         break;
       }
       case 'talk': {
@@ -16211,12 +16979,13 @@ class Sim {
         go(`going to talk to ${PERSONA[o.id].short}`, '💬', deskOf(id) ?? 'dining_table', 20, { talk_to: o.id, talk_about: cmd.topic || 'checkin', satisfies: ['social'] });
         break;
       }
-      case 'break': go('taking a proper break on the sofa', '🛋️', 'sofa', 30, { satisfies: ['energy', 'fun'], thought: 'I needed this more than I knew.' }); break;
+      case 'break': { const spot = pick(['sofa', 'sofa', 'reading_chair', 'reading_chair2']); go(spot === 'sofa' ? 'taking a proper break on the sofa' : 'sinking into a beanbag for a bit', '🛋️', spot, 30, { satisfies: ['energy', 'fun'], thought: 'I needed this more than I knew.' }); break; }
       case 'coffee': go('making a coffee', '☕', 'coffee_machine', 12, { satisfies: ['energy', 'social'] }); break;
       case 'home': go('heading home early', '🚶', 'home:couch', 120, { satisfies: ['energy', 'fun'], thought: 'Going home. The work will be there tomorrow.' }); break;
       case 'nap':
         // at the studio, a power nap in the phone booth; at home, a proper one in bed
-        if (!a.hidden && !p.isDog) go('a power nap in the phone booth', '😴', 'phone_booth', 30, { satisfies: ['energy'], thought: 'Twenty minutes. Just twenty.' });
+        if (!a.hidden && p.isDog) { const spot = pick(['dog_bed', 'dog_bed', 'reading_chair', 'reading_chair2']); go(spot === 'dog_bed' ? 'curled up in her bed' : 'napping on a beanbag', '💤', spot, 40, { satisfies: ['energy'], thought: 'Sleep. Then snacks.' }); }
+        else if (!a.hidden) { const spot = pick(['phone_booth', 'phone_booth', 'reading_chair', 'reading_chair2']); go(spot === 'phone_booth' ? 'a power nap in the phone booth' : 'a nap on a beanbag', '😴', spot, 30, { satisfies: ['energy'], thought: 'Twenty minutes. Just twenty.' }); }
         else { a.napUntil = this.t + 120; this.#goToBed(a); }
         break;
       default: return 'Unknown command.';
@@ -16226,6 +16995,15 @@ class Sim {
   }
 
   whisper(id, raw) {
+    const g = this.visitor(id);
+    if (g) {
+      const text = String(raw ?? '').trim().slice(0, 240); if (!text) return 'Write a thought first.';
+      const first = text.replace(/\byou are\b/gi, 'I am').replace(/\byou're\b/gi, "I'm").replace(/\byour\b/gi, 'my').replace(/\byou\b/gi, 'I');
+      g.thought = first; g.act = `thinking: ${first.slice(0, 60)}`;
+      const target = PERSONAS.find(o => this.agents.has(o.id) && new RegExp(`\\b${o.short.replace(/[^\w]/g, '.?')}\\b`, 'i').test(text));
+      if (target && g.state === 'possessed') this.#visitorCommand(g, { type: 'talk', target: target.id, choice: 'confess', text: first });
+      return null;
+    }
     const a = this.agents.get(id);
     const text = String(raw ?? '').trim().slice(0, 240);
     if (!a || !text) return 'Write a thought first.';
@@ -16240,8 +17018,8 @@ class Sim {
     return null;
   }
 
-  setNeed(id, k, v) { const a = this.agents.get(id); if (a && NEED_KEYS.includes(k)) a.needs[k] = clamp(Number(v)); }
-  setMood(id, mood) { const a = this.agents.get(id); if (a && mood) a.mood = String(mood).slice(0, 30); }
+  setNeed(id, k, v) { const a = this.actor(id); if (a?.needs && NEED_KEYS.includes(k)) a.needs[k] = clamp(Number(v)); }
+  setMood(id, mood) { const a = this.actor(id); if (a && mood) a.mood = String(mood).slice(0, 30); }
   setCloseness(id, other, v) {
     const a = this.agents.get(id), b = this.agents.get(other);
     if (!a || !b) return;
@@ -16521,10 +17299,10 @@ class Sim {
         this.evCtx = { person: id, confidant };
         return null;
       }
-      case 'poached': case 'layoff': case 'resign': {
-        const pool = this.staff.filter(id => id !== 'ceo' && !this.agents.get(id).leaving);
-        if (type === 'resign' && !this.agents.has(opts.person)) return 'Pick someone to resign.';
-        if (pool.length <= 2) return 'The studio can\'t shrink any further. Hire someone first.';
+      case 'poached': case 'layoff': case 'resign': case 'fired': {
+        const pool = this.staff.filter(id => (type === 'fired' || id !== 'ceo') && !this.agents.get(id).leaving);
+        if (type === 'resign' && opts.person && !this.agents.has(opts.person)) return 'Pick someone to resign.';
+        if (pool.length <= 2 && type !== 'fired') return 'The studio can\'t shrink any further. Hire someone first.';
         const id = pool.includes(opts.person) ? opts.person : pool[Math.floor(Math.random() * pool.length)];
         const a = this.agents.get(id), name = PERSONA[id].short;
         a.leaving = type;
@@ -16534,12 +17312,13 @@ class Sim {
         const ids = [id, ...here].slice(0, 6);
         const reassign = this.#handOver(id);
         this.evCtx = { person: id, friend: Object.entries(a.relationships).filter(([o]) => o !== id && this.agents.has(o) && !PERSONA[o].isDog).sort((x, y) => y[1].closeness - x[1].closeness)[0]?.[0] };
-        if (type === 'resign') news('🚪', `${name} resigned. They'd been unhappy for weeks. ${reassign}`, 8, -1.5);
+        if (type === 'fired') news('🐾', id === 'ceo' ? `Adaeze was fired by Pica. She founded the studio. Pica did not care. ${reassign}` : `${name} was fired. ${reassign}`, 10, -2);
+        else if (type === 'resign') news('🚪', `${name} resigned. They'd been unhappy for weeks. ${reassign}`, 8, -1.5);
         else if (type === 'layoff') news('📦', `${name} was laid off. ${reassign}`, 9, -2);
         else { news('🧲', `${name} was poached by Studio Ditto, who offered a lead role. ${reassign}`, 8, -1); (this.flags.atDitto ??= []).push(id); }
-        if (!a.hidden && ids.length >= 2) this.#scene(ids, type === 'layoff' ? `Saying goodbye to ${name}` : type === 'resign' ? `${name} resigns` : `${name} is leaving`, this.placeLabel(a), farewellScene(id, type, ids, this));
+        if (!a.hidden && ids.length >= 2) this.#scene(ids, type === 'layoff' || type === 'fired' ? `Saying goodbye to ${name}` : type === 'resign' ? `${name} resigns` : `${name} is leaving`, this.placeLabel(a), farewellScene(id, type === 'fired' ? 'layoff' : type, ids, this));
         this.#interrupt(a);
-        this.#start(a, { activity: type === 'layoff' ? 'packing up their desk' : 'saying goodbyes and packing up', emoji: '📦', location: 'home:couch', duration_min: 30, satisfies: [], scripted: true, god: true });
+        this.#start(a, { activity: type === 'layoff' || type === 'fired' ? 'packing up their desk' : 'saying goodbyes and packing up', emoji: '📦', location: 'home:couch', duration_min: 30, satisfies: [], scripted: true, god: true });
         if (a.hidden) this.#depart(a);
         return null;
       }
@@ -16589,6 +17368,68 @@ class Sim {
         this.#endStudio(type, texts[type]);
         this.evCtx = { person: 'ceo' };
         return null;
+      }
+      case 'fridge': {
+        const here = this.#present(false);
+        if (here.length < 3) return 'Not enough people in to start a fridge war.';
+        if (this.flags.fridge && !this.flags.fridge.done) return 'A fridge war is already underway.';
+        const victim = pick(here).id, food = pick(['leftover pad thai', 'birthday cake slice', 'yoghurt (a good one)', 'egg sandwich', 'homemade lasagna', 'oat milk latte', 'sushi from the good place']);
+        const culprit = this.agents.has('dog') && Math.random() < 0.3 ? 'dog' : pick(here.filter(a => a.id !== victim)).id;
+        this.flags.fridge = { victim, culprit, food, done: false };
+        const ids = [victim, ...here.map(a => a.id).filter(x => x !== victim)].slice(0, 5);
+        if (this.agents.has('dog') && !ids.includes('dog') && !this.agents.get('dog').hidden) ids.push('dog');
+        for (const id of ids) { const a = this.agents.get(id); if (!a || a.state === 'talking') continue; this.#interrupt(a); this.#start(a, { activity: id === victim ? 'staring into the fridge' : 'investigating the fridge', emoji: '🥡', location: 'fridge', duration_min: 20, satisfies: ['social'], scripted: true, ritual: 'event' }); a.action.end = this.t + 25; }
+        this.#scene(ids.filter(id => this.agents.has(id)), 'The fridge war', 'Kitchen', SCENES.fridge(ids.filter(id => this.agents.has(id)), victim, food, this));
+        news('🥡', `Someone ate ${PERSONA[victim].short}'s labelled ${food}. A passive-aggressive note is up on the fridge. The studio is investigating.`, 5, -0.2);
+        // the note is taped to the fridge door (see the fridge's closer look)
+        this.#later(120, 'fridgeReveal', {});
+        this.evCtx = { person: victim };
+        return null;
+      }
+      case 'danceoff': {
+        const here = this.#present(false).filter(a => a.state !== 'talking');
+        if (here.length < 3) return 'Not enough people in for a dance-off.';
+        const fav = here.find(a => a.id === 'senior_designer');
+        const a = fav && Math.random() < 0.6 ? fav : pick(here), b = pick(here.filter(x => x !== a));
+        const winner = a.id === 'senior_designer' ? (Math.random() < 0.75 ? a : b) : (Math.random() < 0.5 ? a : b);
+        const song = pick(['BUTTERFLY (KERNING MIX)', 'DYNAMITE RAVE', 'PARANOIA', 'SANDSTORM', 'END OF THE CENTURY']);
+        const ids = [a.id, b.id, ...here.map(x => x.id).filter(x => x !== a.id && x !== b.id)].slice(0, 7);
+        if (this.agents.has('dog') && !this.agents.get('dog').hidden) ids.push('dog');
+        for (const id of ids) { const ag = this.agents.get(id); if (!ag || ag.state === 'talking') continue; this.#interrupt(ag); this.#start(ag, { activity: id === a.id || id === b.id ? 'in the Friday dance-off' : 'cheering at the dance machine', emoji: id === a.id || id === b.id ? '🕺' : '🎤', location: 'ddr', duration_min: 30, satisfies: ['fun', 'social'], scripted: true, ritual: 'event' }); ag.action.end = this.t + 35; }
+        this.#scene(ids, 'Dance-off & karaoke', 'The Studio', SCENES.danceoff(ids, a.id, b.id, winner.id, song, this));
+        this.#useObject('ddr', winner.id, `won the dance-off on ${song}`);
+        if (Math.random() < 0.7) { const by = pick(ids.filter(x => x !== a.id && x !== b.id && x !== 'dog')) ?? a.id; this.snapPhoto(by, { subjects: [winner.id, winner === a ? b.id : a.id], caption: `dance-off: ${PERSONA[winner.id].short} wins (${song})`, place: 'The Studio' }); }
+        news('🕺', `Friday dance-off: ${PERSONA[winner.id].short} beat ${PERSONA[winner === a ? b.id : a.id].short} on ${song}. The loser sang the karaoke round. Nobody will forget it.`, 4, 1);
+        this.evCtx = { person: winner.id };
+        return null;
+      }
+      case 'leak': {
+        if (this.flags.leak && !this.flags.leak.done) return 'The studio is already chasing a leak.';
+        // the spy is always a designer
+        const designers = this.staff.filter(id => ['design_director', 'senior_designer', 'junior_designer', 'intern_bea', 'pt_wren', 'hire_lucia', 'hire_rohan', 'hire_sione', 'hire_ari'].includes(id) && this.agents.get(id) && !this.agents.get(id).leaving);
+        if (!designers.length) return 'There are no designers left to suspect.';
+        const pr = this.studio.active().filter(p => !p.internal && p.contact)[0];
+        const what = opts.what ?? pick(['the second logo direction, the good one', 'a grid nobody had shown the client yet', 'an entire moodboard', 'the color palette, swatch for swatch', 'a type pairing Noor drew by hand']);
+        const client = opts.client ?? pr?.contact?.name ?? 'a client';
+        this.flags.leak = { what, client, project: pr?.id ?? null, spy: pick(designers), done: false };
+        const here = this.#present().map(a => a.id);
+        const ids = ['ceo', 'cos', 'ux_researcher', 'head_design', ...here].filter((x, i, arr) => arr.indexOf(x) === i && this.agents.has(x) && !this.agents.get(x).hidden).slice(0, 6);
+        if (ids.length >= 2) this.#scene(ids, 'The leak', 'Meeting Room', SCENES.leakHunt(ids, what, client));
+        news('🕵️', `Studio Ditto launched work with ${what}. Ours, unshown. ${pr ? `${pr.client} is asking how. The relationship has cooled.` : ''} Tomás is going through the logs.`, 8, -1.5);
+        if (pr) { pr.quality = Math.max(0, pr.quality - 6); pr.trust = (pr.trust ?? 0) - 1; }
+        this.#later(60 * 26, 'spyReveal', {});
+        this.evCtx = { person: 'cos' };
+        return null;
+      }
+      case 'rite': {
+        const pending = Object.entries(this.flags.rites ?? {}).filter(([id, r]) => !r.done && this.agents.has(id));
+        if (!pending.length) return 'Everyone already has their desk sticker. Hire someone first.';
+        const [id] = opts.person && this.flags.rites?.[opts.person] && !this.flags.rites[opts.person].done ? [opts.person] : pick(pending);
+        return this.#attemptRite(id) ?? null;
+      }
+      case 'weekend': {
+        if (!isWeekend(this.t)) return 'Only on a Saturday or a Sunday.';
+        return this.#weekendSolo(true);
       }
       case 'security': {
         const here = this.#present();
@@ -16825,7 +17666,17 @@ class Sim {
     return out;
   }
 
+  visitor(id) { return this.visitors.find(v => v.id === id) ?? null; }
   possess(id) {
+    const v = this.visitor(id);
+    if (v) { // a guest: they walk, look around and leave; the meeting waits for them
+      if (v.meeting) return `${v.short} is in the middle of the meeting.`;
+      if (this.possessed) this.release();
+      v.wasLeaving = v.state === 'leaving'; v.path = []; v.state = 'possessed'; v.act = 'wandering around the studio';
+      v.needs ??= { energy: 70, hunger: 55, social: 60, fun: 50, fulfillment: 60 }; v.mood ??= 'curious';
+      this.possessed = id;
+      return null;
+    }
     const a = this.agents.get(id);
     if (!a) return 'Pick someone in the studio.';
     if (a.hidden) return `${PERSONA[id].short} isn't in the office. Possess them once they arrive.`;
@@ -16837,25 +17688,109 @@ class Sim {
   }
   release() {
     if (this.picaDay && this.possessed === 'dog') return this.endPicaDay();
+    const v = this.visitor(this.possessed);
+    if (v) { // back to waiting for the meeting, or out the door if they were already leaving
+      const door = OBJ['door:home_maple'].spot, seat = CRIT_SEATS[this.visitorN % 2 ? 1 : 0];
+      if (v.wasLeaving) { v.state = 'leaving'; v.path = findPath(v.x, v.y, door.x, door.y) ?? []; }
+      else { v.state = 'arriving'; v.path = findPath(v.x, v.y, seat.x, seat.y) ?? []; v.act = v.former ? v.act : `back to the meeting about ${v.projectName ?? 'the project'}`; }
+      this.possessed = null;
+      return;
+    }
     const a = this.agents.get(this.possessed);
     this.possessed = null;
     if (a && a.state === 'possessed') { a.state = 'thinking'; a.epoch++; }
   }
   possessMove(dx, dy) {
-    const a = this.agents.get(this.possessed);
+    const a = this.agents.get(this.possessed) ?? this.visitor(this.possessed);
     if (!a || a.state === 'talking') return;
     a.dir = dx > 0 ? 'right' : dx < 0 ? 'left' : dy > 0 ? 'down' : 'up';
     if (walkable(a.x + dx, a.y + dy)) { a.x += dx; a.y += dy; }
   }
   // Use whatever is next to you.
   possessUse() {
-    const a = this.agents.get(this.possessed);
+    const a = this.agents.get(this.possessed) ?? this.visitor(this.possessed);
     if (!a) return null;
     const near = Object.values(OBJ).filter(o => o.sprite !== 'none' || o.id.startsWith('door:')).map(o => {
       let best = 99; for (let y = o.y; y < o.y + o.h; y++) for (let x = o.x; x < o.x + o.w; x++) best = Math.min(best, Math.abs(x - a.x) + Math.abs(y - a.y));
       return [o, Math.min(best, Math.abs(o.spot.x - a.x) + Math.abs(o.spot.y - a.y))];
     }).filter(([, dd]) => dd <= 1).sort((x, y) => x[1] - y[1])[0]?.[0];
     if (!near) return 'Nothing to use here. Walk up to an object.';
+    if (a.visitor) return this.#visitorUse(a, near);
+    return this.#useNear(a, near, true);
+  }
+  // A possessed guest got where they were going: use the thing, leave notes, or start talking.
+  #guestArrive(v) {
+    if (v.talkTo) { const t = v.talkTo; v.talkTo = null; this.#guestTalk(v, t.id, t.choice, t.text); return; }
+    if (!v.useOn) return;
+    const o = OBJ[v.useOn]; v.useOn = null;
+    if (o) this.#visitorUse(v, o);
+  }
+  // A guest talks to someone. Short, scripted, and it ends up in the feed like any chat.
+  #guestTalk(v, target, choice, text = '') {
+    const b = this.agents.get(target);
+    if (!b || b.hidden) return `${PERSONA[target]?.short ?? 'They'} isn't here.`;
+    if (b.state === 'talking') return `${PERSONA[target].short} is already in a conversation.`;
+    const me = v.short, them = PERSONA[target].short, pr = this.studio.get(v.project);
+    const subject = pick([...this.agents.values()].filter(o => o.id !== target && !PERSONA[o.id].isDog).map(o => PERSONA[o.id].short)) ?? 'someone';
+    const L = {
+      work: [[v.id, `So what are you working on, really?`], [target, pr && pr.team.includes(target) ? `Your ${pr.name}, actually. It's getting good. I'm not allowed to show you yet.` : `Three things at once. Ask me again Friday.`]],
+      news: [[v.id, `Can I tell you something? We just closed our round.`], [target, `Oh! Congratulations. Does that mean a bigger budget?`], [v.id, `It means a bigger board.`]],
+      gossip: [[v.id, `I heard Studio Ditto lost two people last month.`], [target, `I didn't hear that from you.`]],
+      idea: [[v.id, `What if the whole thing was just one word, really big?`], [target, `…We'll take that to crit.`]],
+      compliment: [[v.id, `The work on that wall is better than anything we've had before.`], [target, `That's really kind. I'll tell the team.`]],
+      small: [[v.id, `Great space. Is that a dance machine?`], [target, `It is. Friday is chaos.`]],
+      ask: [[v.id, `How are you, honestly? You all look busy.`], [target, `Honestly? Busy. But the good kind, mostly.`]],
+      confess: [[v.id, text || `Between us, I don't think my boss gets it.`], [target, `I hear you. That stays here.`]],
+      rumor: [[v.id, `Don't say I told you, but I heard ${subject} is talking to Studio Ditto.`], [target, `${subject}? No. …Really?`], [v.id, `I didn't say anything.`]],
+    }[choice] ?? [[v.id, 'Hi.'], [target, 'Hi!']];
+    const lines = L.map(([speaker, t]) => ({ speaker, text: t }));
+    const conv = { id: this.convId++, ids: [target], guest: { id: v.id, short: v.short }, topic: `${me} (a guest) talks to ${them}`, ritual: null, lines, result: {}, idx: 0, nextAt: this.t, setting: this.placeLabel(b) };
+    if (b.x !== v.x) v.dir = b.x > v.x ? 'right' : 'left';
+    b.prevState = b.state; b.state = 'talking'; b.chatCooldown = this.t + 30;
+    this.convs.push(conv);
+    if (choice === 'rumor') {
+      const fact = `rumor:${subject}:${this.t}`;
+      b.memory.add(this.t, 'conversation', `A client told me ${subject} might be talking to Studio Ditto. I don't believe it. I keep thinking about it.`, 6, { fact, third: `a client said ${subject} might be talking to Studio Ditto`, valence: -0.5 });
+      this.#post({ type: 'news', icon: '🗣️', text: `${v.name} told ${them} a rumor about ${subject}. It will be all over the studio by lunch.` });
+    }
+    v.act = `talking to ${them}`;
+    v.needs && (v.needs.social = clamp(v.needs.social + 15));
+    return null;
+  }
+  // A guest using something: they look, they don't touch much.
+  #visitorUse(v, near) {
+    const id = near.id;
+    if (v.steal && id.startsWith('computer:')) {
+      v.steal = false;
+      const owner = OBJ[near.of]?.owner, name = PERSONA[owner]?.short ?? 'someone';
+      const what = pick(['a grid nobody has shown the client yet', 'the second logo direction, the good one', 'a type pairing', 'a whole moodboard, in one photo', 'the color palette for another client']);
+      this.#useObject(id, v.id, `photographed ${what}`);
+      this.agents.get(owner)?.memory.add(this.t, 'observation', `I'm almost sure a client took a photo of my screen. ${cap(what)}. I can't prove it.`, 6, { valence: -1 });
+      this.#post({ type: 'news', icon: '📸', text: `${v.name} stole an idea off ${name}'s screen: ${what}. Nobody saw. ${name} has a feeling.` });
+      if (!this.flags.leak && Math.random() < 0.5) this.#later(7 * 1440, 'leakStart', { what, client: v.name });
+      v.act = 'looking innocent';
+      return `${v.short} stole an idea from ${name}'s screen.`;
+    }
+    if (v.notesOn) {
+      const pr = this.studio.get(v.notesOn); v.notesOn = null;
+      if (pr) {
+        const note = pick(['Can the logo be bigger?', 'What if it felt more… premium?', 'My nephew does design, and he said', 'Love it. Can we see ten more?', 'Could it pop a bit more?']);
+        for (const m of pr.team) this.agents.get(m)?.memory.add(this.t, 'event', `A client left notes on ${pr.name} on the wall: "${note}"`, 5, { valence: -0.5 });
+        this.#useObject(id, v.id, `left notes on ${pr.name}`);
+        this.#post({ type: 'news', icon: '📝', text: `${v.name} left sticky notes on the ${pr.name} work: "${note}"` });
+        v.act = `giving notes on ${pr.name}`;
+        if (v.needs) v.needs.fulfillment = clamp(v.needs.fulfillment + 15);
+        return `${v.short} left notes on ${pr.name}.`;
+      }
+    }
+    if (id.startsWith('door:')) { this.release(); v.state = 'leaving'; v.path = []; this.visitors.splice(this.visitors.indexOf(v), 1); this.#post({ type: 'news', icon: '🚪', text: `${v.name} let themselves out.` }); return `${v.short} left.`; }
+    const did = id === 'coffee_machine' ? 'made themselves a coffee without asking' : id === 'pinup_wall' || id === 'moodboard' ? `had a long look at the ${near.name}` : id === 'award_shelf' ? 'counted the awards on the shelf' : id.startsWith('computer:') ? `glanced at ${PERSONA[OBJ[near.of]?.owner]?.short ?? 'someone'}'s screen` : id === 'snack_shelf' ? 'took a biscuit from the snack shelf' : `inspected the ${near.name}`;
+    this.#useObject(id, v.id, did);
+    v.act = did;
+    return `${v.short} ${did}.`;
+  }
+  // Use an object: needs, a memory, a line for the feed. From the E key while possessed, or on arrival after "Use".
+  #useNear(a, near, possessed = false, mode = null) {
     const p = PERSONA[a.id], n = a.needs;
     const bump = (k, v) => { n[k] = clamp(n[k] + v); };
     let did;
@@ -16873,17 +17808,25 @@ class Sim {
       if (near.trinket && Math.random() < 0.35) this.findTrinket(id, 'dog');
       return `*sniffs* ${line}`;
     }
-    if (id.startsWith('door:')) { a.hidden = true; a.atHome = true; this.release(); return `${p.short} went home.`; }
-    if (id === 'coffee_machine') { bump('energy', 25); did = 'made an espresso'; }
+    if (id.startsWith('door:')) { if (!possessed) return null; a.hidden = true; a.atHome = true; this.release(); return `${p.short} went home.`; }
+    if (p.isDog && mode === 'play') { bump('fun', 30); did = `played with the ${near.name}`; }
+    else if (p.isDog && mode !== 'use') { // anything Pica is sent to use, she pees on
+      bump('fun', 15); did = `peed on the ${near.name}`;
+      this.#post({ type: 'news', icon: '💦', text: `Pica peed on the ${near.name}. ${['Tomás is getting the paper towels.', 'Nobody saw. Everybody knows.', 'The ' + near.name + ' will never be the same.', 'Eli laughed for a full minute.'][Math.floor(Math.random() * 4)]}` });
+    }
+    else if (id === 'coffee_machine') { bump('energy', 25); did = 'made an espresso'; }
     else if (['fridge', 'snack_shelf', 'dining_table'].includes(id)) { bump('hunger', 40); did = 'had something to eat'; }
     else if (['sofa', 'reading_chair', 'reading_chair2', 'waiting_bench'].includes(id) || sp === 'armchair') { bump('energy', 15); bump('fun', 10); did = `sat on the ${near.name} for a bit`; }
     else if (id === 'crit_rug') { bump('fun', 20); bump('fulfillment', 10); did = 'sketched on the crit rug'; }
+    else if (id === 'skate_ramp') { if (Sim.SKATERS.includes(a.id)) { bump('fun', 30); this.#skate(a); did = p.isDog ? 'rode the skateboard down the lane, ears flapping' : 'took a run down the lane'; } else { bump('fun', 3); did = 'stood on the skateboard for one second and stepped off'; } }
+    else if (id === 'record_player') { bump('fun', 12); const g = this.playRecord(a.id); did = `put on some ${g}`; }
+    else if (id === 'polaroid') { bump('social', 8); bump('fun', 8); const ph = this.snapPhoto(a.id); did = ph ? `took a Polaroid of ${ph.names}` : 'took a Polaroid of the empty room'; }
     else if (id === 'pinball' || id === 'pinball2') { bump('fun', 35); bump('social', 5); did = 'played a round of pinball'; }
     else if (id === 'ddr') { bump('fun', 40); bump('energy', -10); bump('social', 8); did = p.isDog ? 'stood on the dance pad and barked at the arrows' : 'danced a song on the dance machine'; }
     else if (id === 'wing_chun') { bump('fun', 20); bump('energy', -4); did = p.isDog ? 'barked at the wooden dummy' : a.id === 'head_design' ? 'ran a form on the wooden dummy' : 'hit the wooden dummy a few times, badly'; }
     else if (id === 'design_books') { bump('fulfillment', 10); bump('fun', 6); did = p.isDog ? 'sniffed the design books' : 'pulled a book off the design shelf'; }
     else if (id === 'breakfast_nook') { bump('hunger', 35); bump('social', 10); did = 'had toast in the breakfast nook'; }
-    else if (id.startsWith('plant:')) { did = 'watered it'; bump('fulfillment', 3); }
+    else if (id.startsWith('plant:')) { const need = this.plantMost(id); this.tendPlant(id, need, a.id); did = need === 'water' ? 'watered it' : need === 'sun' ? 'moved it into the sun' : 'gave it plant food'; bump('fulfillment', 3); }
     else if (['bookshelf', 'annuals_shelf'].includes(id)) { bump('fun', 10); bump('fulfillment', 8); did = id === 'bookshelf' ? 'read an old case study' : 'browsed the design annuals'; }
     else if (id === 'phone_booth') { if (a.needs.energy < 40) { bump('energy', 30); did = 'took a power nap in the phone booth'; } else { bump('social', 20); did = 'called family from the phone booth'; } }
     else if (id.startsWith('desk:') || id.startsWith('table:') || ['proto_bench', 'pinup_wall', 'moodboard', 'material_wall', 'riso', 'whiteboard', 'meeting_table'].includes(id)) {
@@ -16908,13 +17851,15 @@ class Sim {
     if (near.trinket && Math.random() < 0.2) this.findTrinket(id, a.id);
     a.memory.add(this.t, 'action', `I ${did}.`, 2);
     a.thought = `I ${did}.`;
-    return `${p.short} ${did}.`;
+    return possessed ? `${p.short} ${did}.` : did;
   }
   possessTargets() {
-    const a = this.agents.get(this.possessed); if (!a) return [];
+    const a = this.agents.get(this.possessed) ?? this.visitor(this.possessed); if (!a) return [];
     return [...this.agents.values()].filter(o => o !== a && !o.hidden && Math.abs(o.x - a.x) + Math.abs(o.y - a.y) <= 2 && o.state !== 'talking' && o.state !== 'sleeping').map(o => o.id);
   }
   possessTalk(target, choice, textIn = '') {
+    const v = this.visitor(this.possessed);
+    if (v) return this.#guestTalk(v, target, choice, String(textIn).slice(0, 200));
     const a = this.agents.get(this.possessed), b = this.agents.get(target);
     if (!a || !b) return 'Walk up to someone first.';
     if (this.picaDay && a.id === 'dog' && !this.picaDay.greeted.includes(target)) { this.picaDay.greeted.push(target); this.picaDay.journal.push({ t: this.t, id: `hi:${target}`, text: `${PERSONA[target].short}: ${['smells like themselves. Good.', 'smells like coffee and worry. I leaned.', 'smells like outside and lunch. I leaned harder.', 'smells like the project they keep talking about. I sat on their foot until it passed.', 'smells happy today. I am writing that down.'][this.picaDay.greeted.length % 5]}` }); }
@@ -17105,6 +18050,7 @@ class Sim {
 
   // ------------------------------------------------------------------ views
   snapshot() {
+    if (!this.flags.photosSeeded) this.#seedPhotos();
     return {
       t: this.t, clock: clockLabel(this.t), speed: this.speed, paused: this.paused, outage: this.outageUntil > this.t, quake: this.quakeUntil > this.t, possessed: this.possessed, scenario: this.scenarioState(), stories: this.storyState(), weather: this.today, decor: decorOf(Math.floor(this.t / 1440)), holiday: holidayOf(Math.floor(this.t / 1440)),
       llm: { mock: this.llm.mock, model: this.llm.model, ...this.llm.stats, budget: this.llm.budgetUsd, pending: this.llm.pending, overBudget: this.llm.overBudget, lastError: this.llm.lastError },
@@ -17112,12 +18058,12 @@ class Sim {
         id: a.id, x: a.x, y: a.y, dir: a.dir, state: a.state, hidden: a.hidden,
         emoji: a.state === 'sleeping' ? '💤' : a.state === 'talking' ? '💬' : (a.state === 'thinking' || (a.state === 'home' && !a.action)) ? '💭' : a.action?.emoji,
         act: a.state === 'sleeping' ? 'sleeping' : a.state === 'talking' ? 'in a conversation' : a.action?.desc ?? 'thinking',
-        bubble: a.bubble?.text ?? null, mood: a.mood,
+        bubble: a.bubble?.text ?? null, mood: a.mood, rail: a.grindRail ? 'grind' : null,
       })),
-      visitors: this.visitors.map(v => ({ id: v.id, x: v.x, y: v.y, dir: v.dir, state: v.state, hidden: false, visitor: true, name: v.name, short: v.short, title: v.title, look: v.look, emoji: v.state === 'waiting' && !v.bubble ? '🗂️' : null, act: v.act, bubble: v.bubble?.text ?? null, mood: v.kind === 'review' ? 'expectant' : 'curious' })),
+      visitors: this.visitors.map(v => ({ id: v.id, x: v.x, y: v.y, dir: v.dir, state: v.state, hidden: false, visitor: true, name: v.name, short: v.short, title: v.title, look: v.look, emoji: v.state === 'waiting' && !v.bubble ? '🗂️' : null, act: v.act, bubble: v.bubble?.text ?? null, mood: v.mood ?? (v.kind === 'review' ? 'expectant' : 'curious') })),
       projects: this.studio.projects.map(p => ({ id: p.id, name: p.name, client: p.client, type: p.type, phase: PHASES[p.phase], phaseIdx: p.phase, progress: Math.round(p.progress), quality: Math.round(p.quality), team: p.team, dueDay: p.dueDay + 1, submittedTo: p.submittedTo, archived: !!p.archived, awaitingReview: p.awaitingReview, workstreams: p.workstreams, contact: p.contact?.name ?? null })),
       awards: this.studio.awardsWon,
-      cash: this.ledger ? Math.round(this.ledger.cash) : null, runway: this.ledger ? Math.round(this.runwayMonths * 10) / 10 : null, ended: this.ended, mail: this.unreadMail,
+      cash: this.ledger ? Math.round(this.ledger.cash) : null, runway: this.ledger ? Math.round(this.runwayMonths * 10) / 10 : null, ended: this.ended, mail: this.unreadMail, roles: this.flags.roles ?? null, solo: this.flags.solo && this.flags.solo.day === Math.floor(this.t / 1440) ? this.flags.solo.id : null, stickers: this.flags.stickers ?? null, music: this.musicState, photos: (this.flags.photos ?? []).length, plants: this.plantsBrief,
       picaDay: this.picaDay ? { day: this.picaDay.day, sniffed: this.picaDay.sniffed.length, greeted: this.picaDay.greeted.length, smells: this.smells() } : null,
     };
   }
@@ -17193,7 +18139,8 @@ const SAVE_KEY = KEY;
 try { indexedDB.deleteDatabase('another-studio-timemachine'); } catch { /* not available */ }
 
 function load() {
-  try { return JSON.parse(localStorage.getItem(KEY)); } catch { return null; }
+  // older saves still say "Quanta": the client is Quantify now, everywhere (projects, feed, memories, artifacts)
+  try { const raw = localStorage.getItem(KEY); return raw ? JSON.parse(raw.replace(/\bQuanta(?!fy)\b/g, 'Quantify')) : null; } catch { return null; }
 }
 
 function createLocalSim() {
@@ -17304,10 +18251,10 @@ let ac = null, master = null, musicGain = null, sfxGain = null, timer = null, ne
 let crackleSrc = null;
 const audio = { on: false };
 
-const BPM = 76, STEP = 60 / BPM / 2; // eighth notes
+const BPM = 76, BASE_STEP = 60 / BPM / 2, STEP = BASE_STEP; // eighth notes
 // Cmaj7 – Am7 – Fmaj7 – G6, in MIDI notes
 const CHORDS = [[48, 55, 59, 64], [45, 52, 55, 60], [41, 48, 52, 57], [43, 50, 55, 59]];
-const mtof = n => 440 * 2 ** ((n - 69) / 12);
+const MTOF = n => 440 * 2 ** ((n - 69) / 12), mtof = MTOF;
 
 function ensure() {
   if (ac) return;
@@ -17332,7 +18279,16 @@ function noise(t, dur, gain, freq, dest = sfxGain, q = 1) {
   const g = ac.createGain(); g.gain.setValueAtTime(gain, t); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
   src.connect(f); f.connect(g); g.connect(dest); src.start(t);
 }
+// The loop follows the game clock: paused is silence, 10× and 100× play faster and higher, like a tape on fast-forward.
+let rate = 1, pitch = 1, halted = false;
+function setTempo(speed = 1, paused = false) {
+  rate = speed >= 100 ? 4 : speed >= 10 ? 2 : 1; pitch = speed >= 100 ? 1.5 : speed >= 10 ? 1.26 : 1;
+  const was = halted; halted = !!paused;
+  if (ac && was && !halted) nextNote = ac.currentTime + 0.05;
+}
 function schedule() {
+  if (halted) { nextNote = Math.max(nextNote, ac.currentTime); return; }
+  const STEP = BASE_STEP / rate, mtof = n => MTOF(n) * pitch;
   while (nextNote < ac.currentTime + 0.3) {
     const bar = Math.floor(step / 8) % CHORDS.length, beat = step % 8, ch = CHORDS[bar], t = nextNote;
     const swing = beat % 2 ? STEP * 0.12 : 0;
@@ -17409,7 +18365,7 @@ function prelude() {
 // A menu blip, like moving the cursor in a command window.
 function blip(hi = false) { if (!audio.on || !ac || document.hidden) return; tone(hi ? 1320 : 990, ac.currentTime, 0.05, 'square', 0.04, sfxGain); }
 
-return { get audio() { return audio; }, get setSound() { return setSound; }, get sfx() { return sfx; }, get prelude() { return prelude; }, get blip() { return blip; }, get resumeSound() { return resumeSound; } };
+return { get audio() { return audio; }, get setSound() { return setSound; }, get sfx() { return sfx; }, get prelude() { return prelude; }, get blip() { return blip; }, get resumeSound() { return resumeSound; }, get setTempo() { return setTempo; } };
 })();
 
 // ---- export.js
@@ -17672,7 +18628,7 @@ const { C, S, T, SH, sprite, avatarURL, drawTile, drawObject } = __mods["sprites
 const { renderArtifact, CASE_PAGES } = __mods["artifacts.js"];
 const { creditName, PHASES: PHASE_NAMES, AWARDS, dowOf, dateOf } = __mods["sim/studio.js"];
 const { createLocalSim, SAVE_KEY } = __mods["local.js"];
-const { setSound, sfx, audio, prelude, blip, resumeSound } = __mods["audio.js"];
+const { setSound, sfx, audio, prelude, blip, resumeSound, setTempo } = __mods["audio.js"];
 const { downloadDataURL, buildPDF, toJPEG } = __mods["export.js"];
 const { SCENARIOS } = __mods["sim/scenarios.js"];
 const { CHAT_CHOICES } = __mods["sim/brain.js"];
@@ -17775,8 +18731,10 @@ const MAILBOX = world.objects.find(o => o.id === 'mailbox');
 setTimeout(() => local.subscribe(msg => {
   if (msg.init) { feed = []; feedKey = null; }
   playSfx(snap, msg);
+  setTempo(msg.speed, msg.paused && document.getElementById('title')?.hidden !== false); // the title screen keeps its song even though the clock is paused
   snap = msg;
   for (const p of world.personas) P[p.id] ??= p;
+  if (msg.roles) for (const [id, role] of Object.entries(msg.roles)) if (P[id]) P[id].role = role;
   for (const v of msg.visitors ?? []) P[v.id] ??= { id: v.id, name: v.name, short: v.short, role: v.title, look: v.look, visitor: true };
   if (msg.feed?.length) { feed.push(...msg.feed); if (feed.length > 400) feed = feed.slice(-400); renderFeed(); if (!msg.init) for (const it of msg.feed) if (it.toast) toast(it); }
   else if (msg.init) renderFeed();
@@ -17827,6 +18785,7 @@ function renderYearbook(y, ended) {
     <div class="win"><h2>The shelf</h2>${y.awards.length ? y.awards.map(a => `<div class="mem">🏆 <b>${esc(a.award)}</b> <span class="k">· ${esc(a.project)} · ${esc(timeOf(a.t))}</span></div>`).join('') : '<p class="empty">No awards. Room for plenty.</p>'}${y.museumPiece ? `<div class="mem">🏛️ <b>${esc(y.museumPiece)}</b> <span class="k">· permanent collection</span></div>` : ''}</div>
     <div class="win"><h2>The people</h2><div class="yb-people">${y.people.map(person).join('')}</div>
       <div class="yb-row" style="margin-top: var(--space-3)">${y.joined.length ? `<span>👋 Joined: ${esc(y.joined.join(', '))}</span>` : ''}${y.left.length ? `<span>📦 Left: ${esc(y.left.join(', '))}</span>` : ''}${y.returned.length ? `<span>🫂 Came back to visit: ${esc(y.returned.map(k => ({ lola: 'Lola', rafa: 'Rafa', priya: 'Priya', grace: 'Grace', ikaika: 'Ikaika', val: 'Val', oksana: 'Oksana' })[k] ?? k).join(', '))}</span>` : ''}${y.hannahBook ? '<span>📚 Hannah published the book</span>' : ''}${y.helix ? '<span>🧬 Priya hired the studio</span>' : ''}</div></div>
+    ${(() => { const sim = local.sim(), photos = sim.flags.photos ?? []; if (!photos.length) return ''; const pick12 = photos.length <= 12 ? photos : Array.from({ length: 12 }, (_, i) => photos[Math.floor(i * (photos.length - 1) / 11)]); const pics = pick12.map((ph, i) => stillLife(`photo:${ph.id}`, 'polaroid', ph.caption, { people: ph.people.map(id => ({ id, look: P[id]?.look ?? world.personas.find(x => x.id === id)?.look })).filter(x => x.look), area: ph.area, caption: ph.caption, date: ph.when ?? `day ${ph.day + 1}`, by: P[ph.by]?.short ?? 'someone', tilt: ((i * 37) % 9 - 4) / 100 }, `${ph.place}, ${ph.when ?? `day ${ph.day + 1}`}`, '')); return `<div class="win"><h2>The wall of us</h2><p class="sub">${photos.length} Polaroid${photos.length === 1 ? '' : 's'}, taken by the people who were there.</p><div class="cs-grid">${pics.map(a => thumb(a)).join('')}</div></div>`; })()}
     <div class="win"><h2>The year in moments</h2>${y.big.map(f => `<div class="mem"><span class="k">${esc(timeOf(f.t))}</span> ${esc(f.icon)} ${esc(f.text)}</div>`).join('') || '<p class="empty">A quiet year.</p>'}</div>
     <div class="win"><h2>The small things</h2><div class="yb-row"><span>🕹️ ${y.pinball} games of pinball</span><span>🕺 ${y.ddr} songs on the dance machine</span><span>☕ ${y.coffee} espressos</span><span>🐶 ${y.picaMoments} moments at Pica's bed</span><span>🔍 ${y.trinkets} things found</span></div></div>
     <div class="win"><h2>The money</h2><div class="yb-row"><span>In: ${money(y.lifetimeIn)}</span><span>Out: ${money(y.lifetimeOut)}</span><span>Left in the bank: <b class="${y.cash < 0 ? 'former' : ''}">${money(y.cash)}</b></span></div></div>
@@ -17870,7 +18829,7 @@ function endingStars() {
   requestAnimationFrame(paint);
 }
 const FORMER_NAMES = { 'Art Director': 'Rafael Oliveira', 'Design Manager': 'Grace Mwangi', 'Intern': 'Mei-Lin Chen', 'Account Executive': 'Valentina Rossi', 'PR': 'Jae-won Park', 'Lead Designer': 'Ikaika Kahananui', 'Senior Designer': 'Oksana Kovalenko', 'Intern (UX)': 'Kwame Asante', 'Office Manager': 'Dolores "Lola" Martínez', 'Chief Product Officer': 'Priya Raman', 'Recruiter': 'Fatima Zahra El Idrissi' };
-const CLIENT_CONTACTS = [['Dana Whitfield', 'Fernwood Botanical Garden'], ['Arjun Mehta', 'Lumen Bikes'], ['Folake Adebayo', 'Okra Food Co.'], ['Marisol Vega', 'City of Harborview'], ['Dr. Helen Park', 'Atlas Health'], ['Professor Ian Gallagher', 'Tidewater Museum'], ['Sam Okoro', 'Quanta Labs'], ['Rosa Lindgren', 'Kindred Bank'], ['Tariq Haddad', 'Greenline Transit'], ['Celeste Moreau', 'Halcyon Hotels'], ['Priya Raman', 'Helix Foundry']].map(([name, title]) => ({ name, title }));
+const CLIENT_CONTACTS = [['Dana Whitfield', 'Fernwood Botanical Garden'], ['Arjun Mehta', 'Lumen Bikes'], ['Folake Adebayo', 'Okra Food Co.'], ['Marisol Vega', 'City of Harborview'], ['Dr. Helen Park', 'Atlas Health'], ['Professor Ian Gallagher', 'Tidewater Museum'], ['Sam Okoro', 'Quantify Labs'], ['Rosa Lindgren', 'Kindred Bank'], ['Tariq Haddad', 'Greenline Transit'], ['Celeste Moreau', 'Halcyon Hotels'], ['Priya Raman', 'Helix Foundry']].map(([name, title]) => ({ name, title }));
 
 // ------------------------------------------------------------------ render loop
 let ui = 1; // canvas pixels per screen pixel
@@ -17883,9 +18842,9 @@ const viewSize = z => ({ w: canvas.width / (SCALE * z), h: canvas.height / (SCAL
 // The camera shows the whole studio, and zooms in to follow whoever you're possessing.
 function updateCamera() {
   const id = snap?.possessed;
-  const d = id && disp[id], a = id && snap.agents.find(x => x.id === id);
+  const d = id && disp[id], a = id && (snap.agents.find(x => x.id === id) ?? snap.visitors?.find(x => x.id === id));
   const on = d && a && !a.hidden;
-  const tz = on ? FOLLOW_ZOOM : 1, tx = on ? d.x * T + 8 : MAP_W / 2, ty = on ? d.y * T : MAP_H / 2;
+  const tz = on ? FOLLOW_ZOOM : 1, tx = on ? d.x * T + 8 + (d.ox ?? 0) : MAP_W / 2, ty = on ? d.y * T + (d.oy ?? 0) : MAP_H / 2;
   cam.z += (tz - cam.z) * 0.06; cam.cx += (tx - cam.cx) * 0.08; cam.cy += (ty - cam.cy) * 0.08;
   if (Math.abs(tz - cam.z) < 0.002) cam.z = tz;
   const v = viewSize(cam.z);
@@ -17922,6 +18881,69 @@ for (let y = world.H - 1; y >= 0; y--) for (let x = 0; x < world.W; x++) {
   TILE_ROOM[y][x] = roomAt(x, y) ?? roomAt(x, y + 1) ?? (isColumn(x, y + 1) ? TILE_ROOM[y + 1][x] : null) ?? nearestRoom(x, y);
 }
 const roomFade = Object.fromEntries(ROOMS.map(r => [r, 0]));
+const STICKER_AT = {}, PLANT_AT = {};
+const RECORD = world.objects.find(o => o.id === 'record_player');
+const RAMP = world.objects.find(o => o.id === 'skate_ramp');
+const skateTilt = {}, skateMode = {}, skateRow = {}; // skateRow: extra draw rows while passing in front of furniture
+// Where a skater is at time t (0..1) of a round, relative to where they stand at the end of the lane.
+// Floor: out along the lane and back, with ollies. Grind: down to reception, ollie onto the counter,
+// boardslide its front edge (board across the edge, middle on the lip), drop off the end, roll back.
+function skatePose(mode, t, d) {
+  const here = Math.round(d.x * T) + 8, floorY = Math.round(d.y * T) + T - 2; // feet line on the floor
+  const foot = here, far = foot - 9 * T;
+  const at = (x, h, dir, board = 'floor', tilt = 0) => ({ ox: Math.round(x - here), oy: -Math.round(h), dir, board, tilt });
+  // an ollie over u 0..1: crouch, snap the tail (nose up), float with the board stuck to the feet, level out, land and absorb
+  const ollie = (u, H, dir) => {
+    const up = dir === 'right' ? -1 : 1; // canvas rotation that lifts the nose for this facing
+    if (u < 0.12) return { h: -1, tilt: 0 };
+    if (u > 0.9) return { h: -1, tilt: 0 };
+    const v = (u - 0.12) / 0.78, h = Math.sin(v * Math.PI) * H;
+    const tilt = v < 0.3 ? up * 0.5 * (1 - v / 0.3) : v > 0.8 ? -up * 0.12 * ((v - 0.8) / 0.2) : 0; // pop, then nose dips to catch the landing
+    return { h, tilt };
+  };
+  const roll = (x, t0, t1, tt, H, dir) => { const u = (tt - t0) / (t1 - t0); if (u <= 0 || u >= 1) return at(x, 0, dir); const o = ollie(u, H, dir); return at(x, o.h, dir, 'floor', o.tilt); };
+  const flat = mode === 'floor' || !DESK;
+  if (flat) {
+    if (t < 0.32) return roll(foot + (far - foot) * (t / 0.32), 0.12, 0.24, t, 9, 'left'); // an ollie on the way out
+    if (t < 0.7) return roll(far + (foot - far) * ((t - 0.32) / 0.38), 0.44, 0.58, t, 10, 'right'); // and one on the way back
+    const u = ((t - 0.7) / 0.3 * 2) % 1; // two on the spot
+    return roll(foot, 0, 1, u, 8, 'right');
+  }
+  // grind: all the way down the lane to reception, ollie onto the counter's right end, boardslide it leftwards, drop off,
+  // then roll back to the lane past the front of the counter
+  const right = (DESK.x + DESK.w) * T, xa = right + 14, x1 = right - 5, x0 = DESK.x * T + 5, xd = DESK.x * T - 6, H = DESK_LIP;
+  const front = x => Math.max(0, Math.min(1, (right + 24 - x) / 24)) * 12; // how far in front of the counter the way back runs
+  if (t < 0.3) return at(foot + (xa - foot) * (t / 0.3), 0, 'left');
+  if (t < 0.38) { const u = (t - 0.3) / 0.08; return at(xa + (x1 - xa) * u, H * Math.min(1, u * 1.15) + Math.sin(u * Math.PI) * 5, 'left', u > 0.7 ? 'grind' : 'floor', u < 0.35 ? 0.5 * (1 - u / 0.35) : 0); } // the ollie up, nose first
+  if (t < 0.62) return at(x1 + (x0 - x1) * ((t - 0.38) / 0.24), H, 'left', 'grind');
+  if (t < 0.7) { const u = (t - 0.62) / 0.08; return at(x0 + (xd - x0) * u, H * (1 - u * u), 'left', u < 0.3 ? 'grind' : 'floor'); } // off the end, down to the floor
+  const u = (t - 0.7) / 0.3, x = xd + (foot - xd) * u;
+  const dy = front(x) * Math.min(1, u * 6);
+  return { ...at(x, -dy, 'right'), row: dy > 4 ? 1 : 0 }; // drawn a row later, so the counter stays behind them
+}
+// The board under the feet: flat on the floor, tipped on an ollie, across the lip on a boardslide.
+function drawBoard(a, px, py, ph, board, tilt) {
+  const k = Math.floor(ph / 90) % 2, fx = px + 8, fy = py + SH - 2;
+  if (board === 'grind') {
+    // seen from the front, a board across the edge is foreshortened to a short upright plank, its middle on the lip
+    // the deck runs under both feet and its tail hangs off the front of the lip; the nose is hidden behind the rider
+    ctx.fillStyle = C('outline'); ctx.fillRect(fx - 3, fy - 1, 6, 2); ctx.fillStyle = C('mustard'); ctx.fillRect(fx - 2, fy - 1, 4, 1); // under the feet, across the lip
+    ctx.fillStyle = C('outline'); ctx.fillRect(fx - 1, fy + 1, 3, 3); ctx.fillStyle = C('mustard'); ctx.fillRect(fx, fy + 1, 1, 2); // the tail, hanging over the edge
+    ctx.fillStyle = C('white'); ctx.fillRect(fx - 2, fy + 3, 1, 1); ctx.fillRect(fx + 2, fy + 3, 1, 1); // back wheels
+    for (let i = 0; i < 4; i++) { const t = ((ph / 110) + i / 4) % 1; ctx.globalAlpha = 1 - t; ctx.fillStyle = C(i % 2 ? 'mustard' : 'white'); ctx.fillRect(fx - 3 - t * 10, fy - 1 + (i % 3) - t * 2, 1, 1); }
+    ctx.globalAlpha = 1;
+    return;
+  }
+  ctx.save(); ctx.translate(fx, fy); if (tilt) ctx.rotate(tilt);
+  const half = tilt ? 5 : 7;
+  ctx.fillStyle = C('outline'); ctx.fillRect(-half, -1, half * 2, 2); ctx.fillStyle = C('mustard'); ctx.fillRect(-half + 1, -1, half * 2 - 2, 1);
+  ctx.fillStyle = C('white'); ctx.fillRect(-half + 2 + k, 1, 1, 1); ctx.fillRect(half - 4 + k, 1, 1, 1);
+  ctx.restore();
+}
+const DESK = world.objects.find(o => o.id === 'reception_desk'); // the counter they boardslide
+const DESK_LIP = DESK ? 10 : 0; // feet on the counter top, above the floor line
+const roomLit = Object.fromEntries(ROOMS.map(r => [r, 0])); // rooms with people in them glow against the night
+const LIT_ROOM_TINT = 0.4; // how much of the blue night tint a lit room keeps
 // each room's "lights off" shape, painted once
 const ROOM_MASKS = Object.fromEntries(ROOMS.map(r => {
   const m = document.createElement('canvas'); m.width = world.W * T; m.height = world.H * T;
@@ -17971,7 +18993,8 @@ function frame(now) {
     else { d.x += dx * k; d.y += dy * k; }
     d.moving = Math.abs(dx) + Math.abs(dy) > 0.05;
   }
-  vis.sort((a, c) => disp[a.id].y - disp[c.id].y);
+  const drawY = a => disp[a.id].y + (skateRow[a.id] ?? 0);
+  vis.sort((a, c) => drawY(a) - drawY(c));
 
   drawLight(now);
   // furniture and people, back to front, one map row at a time
@@ -17982,27 +19005,44 @@ function frame(now) {
     let f = d.moving ? (Math.floor(now / 150) % 2) + 1 : 0;
     if (!d.moving && P[a.id]?.look?.dog && vis.some(o => o !== a && !P[o.id]?.look?.dog && Math.abs(disp[o.id].x - d.x) + Math.abs(disp[o.id].y - d.y) < 2.5)) f = (Math.floor(now / 160) % 2) + 3;
     const px = Math.round(d.x * T), py = Math.round(d.y * T) - (SH - T) - 2;
-    if (a.id === selected || a.id === hover) {
-      ctx.fillStyle = C('select');
-      ctx.fillRect(px + 3, py + SH - 1, 10, 1); ctx.fillRect(px + 2, py + SH - 2, 1, 1); ctx.fillRect(px + 13, py + SH - 2, 1, 1);
-    }
-    const idle = !d.moving && !a.visitor ? idleOf(a) : null;
+    const idle0 = !a.visitor ? idleOf(a) : null, idle = idle0 === 'grind' ? 'grind' : !d.moving ? idle0 : null; // grinding happens mid-walk
     if (idle === 'dognap') f = Math.floor(now / 700) % 5 === 0 ? 3 + (Math.floor(now / 140) % 2) : 0; // a sleepy wag now and then
-    let ox = 0, oy = 0;
+    let ox = 0, oy = 0, skateDir = null;
+    skateRow[a.id] = 0;
     const ph = (now + a.id.length * 397) % 100000;
     if (idle === 'dance') { const beat = Math.floor(now / 170); f = beat % 2 + 1; oy = beat % 2 ? -2 : 0; ox = [0, 1, 0, -1][beat % 4]; } // hopping on the pad, feet going
     else if (idle === 'pinball') { if ((ph % 2600) < 140) ox = 1; if ((ph % 2600) > 1300 && (ph % 2600) < 1400) ox = -1; } // nudging the table, almost a tilt
     else if (idle === 'dummy') { if ((ph % 640) < 160) ox = FUN_OBJ.wing_chun && FUN_OBJ.wing_chun.x < d.x ? -1 : 1; } // leaning into each strike
+    else if (idle === 'nod') { if ((ph % 2600) < 220) oy = 1; } // a nod now and then
+    else if (idle === 'grind') { oy = -DESK_LIP; skateDir = 'right'; skateMode[a.id] = 'grind'; } // the board across the counter's front edge
+    else if (idle === 'skate') { // each round: out down the lane, then back along the floor or boardsliding the reception counter
+      const P = 5200, round = Math.floor((now + a.id.length * 397) / P), t = ((now + a.id.length * 397) % P) / P;
+      const mode = (round + a.id.length + (round >> 2)) % 2 ? 'grind' : 'floor';
+      const pose = skatePose(mode, t, d);
+      ox = pose.ox; oy = pose.oy; skateTilt[a.id] = pose.tilt ?? 0; skateRow[a.id] = pose.row ?? 0; skateDir = pose.dir; skateMode[a.id] = pose.board;
+    }
+    else if (idle === 'lounge') { oy = (ph % 2400) < 1200 ? 1 : 0; } // slow breathing
+    else if (idle === 'breathe' || idle === 'eat' || idle === 'drink' || idle === 'browse' || idle === 'candle' || idle === 'box') { if ((ph % 3200) < 260) oy = 1; } // shifting their weight
+    else if (idle === 'sniff') { oy = (ph % 500) < 250 ? 1 : 0; ox = (ph % 1600) < 800 ? 0 : 1; } // nose to the ground
+    else if (idle === 'chew') { oy = (ph % 360) < 180 ? 1 : 0; } // chomp
     // face the thing you're using: machines are played from the front, the dummy from the side
-    const dir = idle === 'pinball' || idle === 'dance' ? 'up' : idle === 'dummy' && FUN_OBJ.wing_chun ? (FUN_OBJ.wing_chun.x > d.x ? 'right' : 'left') : a.dir;
+    const dir = skateDir ?? (idle === 'pinball' || idle === 'dance' ? 'up' : idle === 'dummy' && FUN_OBJ.wing_chun ? (FUN_OBJ.wing_chun.x > d.x ? 'right' : 'left') : a.dir);
+    d.ox = ox; d.oy = oy; // the emoji, bubble, selection bracket and possess marker ride along
+    if (a.id === selected || a.id === hover) {
+      const sx = px + ox, sy = py + oy;
+      ctx.fillStyle = C('select');
+      ctx.fillRect(sx + 3, sy + SH - 1, 10, 1); ctx.fillRect(sx + 2, sy + SH - 2, 1, 1); ctx.fillRect(sx + 13, sy + SH - 2, 1, 1);
+    }
     ctx.drawImage(sprite(P[a.id], dir, f), px + ox, py + oy);
-    if (idle) drawIdle(idle, { ...a, dir }, px + ox, py + oy, now);
-    if (a.id === snap.possessed) { const bob = Math.sin(now / 200) * 1.5; ctx.fillStyle = C('select'); ctx.beginPath(); ctx.moveTo(px + 5, py - 6 + bob); ctx.lineTo(px + 11, py - 6 + bob); ctx.lineTo(px + 8, py - 2 + bob); ctx.closePath(); ctx.fill(); }
+    // with their back to us, whatever they're holding shows above the head instead of on their back
+    const lift = dir === 'up' && HANDHELD.has(idle) ? -20 : 0;
+    if (idle) drawIdle(idle, { ...a, dir }, px + ox, py + oy + lift, now);
+    if (a.id === snap.possessed) { const bob = Math.sin(now / 200) * 1.5; ctx.fillStyle = C('select'); ctx.beginPath(); ctx.moveTo(px + ox + 5, py + oy - 6 + bob); ctx.lineTo(px + ox + 11, py + oy - 6 + bob); ctx.lineTo(px + ox + 8, py + oy - 2 + bob); ctx.closePath(); ctx.fill(); }
   };
   for (let row = 0; row < world.H; row++) {
     if (ROW_LAYERS[row]) { const y0 = Math.max(0, (row - 3) * T), y1 = Math.min(bg.height, (row + 2) * T); ctx.drawImage(ROW_LAYERS[row], 0, y0, bg.width, y1 - y0, 0, y0, bg.width, y1 - y0); }
     if (row === shelfRow) drawTrophies(snap.awards?.length ?? 0);
-    while (next < vis.length && Math.round(disp[vis[next].id].y) <= row) drawPerson(vis[next++]);
+    while (next < vis.length && Math.round(drawY(vis[next])) <= row) drawPerson(vis[next++]);
   }
   while (next < vis.length) drawPerson(vis[next++]);
   if (hoverObj) { // highlight what you're pointing at, over everything
@@ -18011,6 +19051,30 @@ function frame(now) {
     ctx.strokeRect(b.x0 - 1.5, b.y0 - 1.5, b.x1 - b.x0 + 3, b.y1 - b.y0 + 3);
   }
   drawDecor(now);
+  // plants: brown leaves when wilting
+  if (snap.plants) for (const [id, need] of Object.entries(snap.plants)) {
+    if (!need) continue;
+    const o = PLANT_AT[id] ??= world.objects.find(x => x.id === id); if (!o) continue;
+    const px = o.x * T, py = o.y * T, tall = (o.x + o.y) % 2 === 0;
+    if (need === 'wilting' || need === 'dead') { ctx.globalAlpha = need === 'dead' ? 0.6 : 0.35; ctx.fillStyle = need === 'dead' ? '#6b5137' : '#8a6a2e'; ctx.beginPath(); ctx.ellipse(px + 8, py + (tall ? -2 : 5), 7, tall ? 9 : 6, 0, 0, 7); ctx.fill(); ctx.globalAlpha = 1; }
+  }
+  // the record player: the platter turns and notes drift up while something is on
+  if (snap.music && RECORD) {
+    const rx = RECORD.x * T, ry = RECORD.y * T, k = Math.floor(now / 160) % 4;
+    ctx.fillStyle = C('white'); ctx.fillRect(rx + 4 + [0, 3, 3, 0][k], ry - 2 + [0, 0, 2, 2][k], 1, 1);
+    for (let i = 0; i < 3; i++) {
+      const t = ((now / 2200) + i / 3) % 1, nx = rx + 6 + i * 3 + Math.sin(t * 6 + i) * 2, ny = ry - 6 - t * 16;
+      ctx.globalAlpha = 1 - t; ctx.fillStyle = C(['mustard', 'pink', 'sky'][i]);
+      ctx.fillRect(nx, ny, 1, 4); ctx.fillRect(nx - 2, ny + 3, 2, 2); ctx.fillRect(nx + 1, ny, 2, 1);
+    }
+    ctx.globalAlpha = 1;
+  }
+  // desk stickers: earned by the rite of passage
+  if (snap.stickers) for (const [id, kind] of Object.entries(snap.stickers)) {
+    const c = STICKER_AT[id] ??= world.objects.find(o => o.id === `computer:${id}`) ?? null; if (!c) continue;
+    const sx = c.x * T + 11, sy = c.y * T + 2, col = { star: 'mustard', pica: 'pink', heart: 'red', bolt: 'teal' }[kind] ?? 'mustard';
+    ctx.fillStyle = C('outline'); ctx.fillRect(sx - 1, sy - 1, 5, 5); ctx.fillStyle = C(col); ctx.fillRect(sx, sy, 3, 3); ctx.fillStyle = C('white'); ctx.fillRect(sx + 1, sy, 1, 1);
+  }
   if (snap.picaDay?.smells) drawSmells(snap.picaDay.smells, now);
   if (snap.mail && MAILBOX) { const up = Math.sin(now / 500) > 0 ? 0 : 1; ctx.fillStyle = C('outline'); ctx.fillRect(MAILBOX.x * T + 13, MAILBOX.y * T - 8 - up, 1, 8); ctx.fillStyle = C('mustard'); ctx.fillRect(MAILBOX.x * T + 13, MAILBOX.y * T - 8 - up, 4, 3); }
   ctx.drawImage(bgTop, 0, 0);
@@ -18024,14 +19088,17 @@ function frame(now) {
   emptyFade += ((snap.outage ? 1 : 0) - emptyFade) * 0.04;
   const afterDark = m >= SUNSET || m < SUNRISE;
   const occupied = new Set(snap.agents.filter(a => !a.hidden && !P[a.id]?.look?.dog).map(a => world.areaGrid[Math.round(a.y)]?.[Math.round(a.x)]));
-  for (const r of ROOMS) roomFade[r] += ((afterDark && !snap.outage && !occupied.has(r) ? 1 : 0) - roomFade[r]) * 0.05;
+  for (const r of ROOMS) roomFade[r] += (((afterDark || snap.solo) && !snap.outage && !occupied.has(r) ? 1 : 0) - roomFade[r]) * 0.05; // a lone weekend visitor only switches on their own room
+  for (const r of ROOMS) roomLit[r] += ((afterDark && !snap.outage && occupied.has(r) ? 1 : 0) - roomLit[r]) * 0.05;
   const dusk = (m > 1080 && m < 1200) || (m > 360 && m < 450);
-  const key = `${night.toFixed(2)}|${emptyFade.toFixed(2)}|${ROOMS.map(r => roomFade[r].toFixed(2)).join(',')}|${dusk ? 1 : 0}`;
+  const key = `${night.toFixed(2)}|${emptyFade.toFixed(2)}|${ROOMS.map(r => roomFade[r].toFixed(2)).join(',')}|${ROOMS.map(r => roomLit[r].toFixed(2)).join(',')}|${dusk ? 1 : 0}`;
   if (key !== darkKey) {
     darkKey = key;
     dctx.clearRect(0, 0, DARK.width, DARK.height);
     darkAny = night > 0 || emptyFade > 0.01 || dusk || ROOMS.some(r => roomFade[r] >= 0.01);
     if (night > 0) { dctx.globalAlpha = night; dctx.fillStyle = C('night'); dctx.fillRect(0, 0, DARK.width, DARK.height); }
+    // the lights are on where people are: thin the night tint over those rooms
+    if (night > 0) { dctx.globalCompositeOperation = 'destination-out'; for (const r of ROOMS) { if (roomLit[r] < 0.01) continue; dctx.globalAlpha = (1 - LIT_ROOM_TINT) * Math.min(1, roomLit[r]); dctx.drawImage(ROOM_MASKS[r], 0, 0); } dctx.globalCompositeOperation = 'source-over'; }
     if (emptyFade > 0.01) { dctx.globalAlpha = Math.min(1, emptyFade); dctx.fillStyle = C('lights-off'); dctx.fillRect(0, 0, DARK.width, DARK.height); }
     for (const r of ROOMS) { if (roomFade[r] < 0.01) continue; dctx.globalAlpha = Math.min(1, roomFade[r]); dctx.drawImage(ROOM_MASKS[r], 0, 0); }
     dctx.globalAlpha = 1;
@@ -18071,7 +19138,7 @@ function frame(now) {
     if (a.bubble || !a.emoji) continue;
     const d = disp[a.id];
     const bob = Math.sin(now / 300 + d.x) * SCALE;
-    ctx.fillText(a.emoji, (d.x * T + 8) * SCALE, (d.y * T - 13) * SCALE + bob);
+    ctx.fillText(a.emoji, (d.x * T + 8 + (d.ox ?? 0)) * SCALE, (d.y * T - 13 + (d.oy ?? 0)) * SCALE + bob);
   }
   ctx.textBaseline = 'alphabetic';
   const bubbles = placeBubbles(vis.filter(a => a.bubble).map(a => measureBubble(a, disp[a.id])));
@@ -18090,19 +19157,43 @@ const TABLE_DEVICES = world.objects.filter(o => o.sprite === 'longdesk').flatMap
 }));
 function idleOf(a) {
   const act = local.sim().agents.get(a.id)?.action;
-  if (!act || a.state === 'talking' || a.state === 'sleeping') return null;
+  if (act && a.state === 'walking' && act.loc === 'skate_ramp' && SKATERS.has(a.id) && DESK && Math.round(a.y) === DESK.y && a.x >= DESK.x && a.x < DESK.x + DESK.w) return 'grind'; // riding the rail
+  if (!act || a.state === 'talking' || a.state === 'sleeping' || a.state === 'walking') return null; // never mid-walk: between tiles the easing pauses for a frame
   const loc = act.loc ?? '', desc = act.desc ?? '';
-  if (P[a.id]?.look?.dog) return /nap|sleep|curl|snooz|bed/i.test(desc) || loc === 'dog_bed' ? 'dognap' : null;
+  if (loc === 'skate_ramp' && SKATERS.has(a.id)) return RAMP && Math.abs(a.x - RAMP.spot.x) + Math.abs(a.y - RAMP.spot.y) <= 1 ? 'skate' : null; // Pica skates too
+  if (P[a.id]?.look?.dog) {
+    if (/nap|sleep|curl|snooz|bed/i.test(desc) || loc === 'dog_bed') return 'dognap';
+    if (/chew|printout|prototype/i.test(desc) || loc === 'proto_bench') return 'chew';
+    if (/sniff|poking|smell|bowl|eat|snack|treat/i.test(desc)) return 'sniff';
+    return 'breathe';
+  }
   if (/nap/i.test(desc)) return 'doze';
   if (loc === 'pinball' || loc === 'pinball2') return 'pinball';
   if (loc === 'ddr') return 'dance';
   if (loc === 'wing_chun') return 'dummy';
-  if (loc === 'phone_booth' && /call|phone|client|mum|mom|dad|sister|brother|doctor|school/i.test(desc)) return 'phone';
-  if (loc.startsWith('desk:') || (act.project && !loc.startsWith('home:'))) return 'type';
-  if (/coffee|espresso|latte|tea/i.test(desc)) return 'sip';
+  if (loc === 'polaroid' || /polaroid/i.test(desc)) return 'snap';
+  if (loc === 'skate_ramp' && SKATERS.has(a.id)) return RAMP && Math.abs(a.x - (RAMP.spot.x)) + Math.abs(a.y - RAMP.spot.y) <= 1 ? 'skate' : null; // only once they're at the lane
+  if (loc === 'record_player') return 'browse';
+  if (/water/i.test(desc) || (loc.startsWith('plant:') && !act.project)) return 'water';
+  if (loc === 'whiteboard') return 'board';
+  if (loc === 'pinup_wall' || loc === 'moodboard' || loc === 'material_wall') return 'pin';
+  if (loc === 'riso' || /riso|print files|production files/i.test(desc)) return 'riso';
+  if (loc === 'proto_bench' || /packaging|mockup|prototype|dieline/i.test(desc)) return 'proto';
+  if (/candle|power cut/i.test(desc)) return 'candle';
+  if (/packing|box of|carrying/i.test(desc)) return 'box';
+  if (/sketch|drawing|doodl|comic|storyboard|red pen|big idea|illustrat|lettering|logo explor/i.test(desc) || loc === 'crit_rug') return 'sketch';
+  if (loc === 'sofa' || /lying|zoning/i.test(desc)) return 'lounge';
+  if (/drink|wine|beer|cheers|celebrat/i.test(desc)) return 'drink';
+  if (/lunch|dinner|toast|snack|sandwich|cake|pasta|leftover|breakfast|cookie|pizza|party|birthday/i.test(desc) || loc === 'dining_table' && /eat|lunch|snack/i.test(desc) || loc === 'breakfast_nook' || loc === 'snack_shelf') return 'eat';
+  if (/call|phone|pitching|journalist|recruiting|participants/i.test(desc) || loc === 'phone_booth' && !/nap/i.test(desc)) return 'phone';
+  if (loc === 'bookshelf' || loc === 'annuals_shelf' || loc === 'design_books' || /browsing|reference|rereading|chapter|looking something up|type library|specimens/i.test(desc)) return 'browse';
+  if (/coffee|espresso|latte|tea\b|descaling/i.test(desc) || loc === 'coffee_machine') return 'sip';
+  if (loc === 'meeting_table' || /meeting|crit|all-hands|1:1|stand-?up|client/i.test(desc)) return 'nod';
   if (/book|read|annual|case stud|magazine/i.test(desc) || loc.startsWith('reading_chair')) return 'read';
-  return null;
+  if (loc.startsWith('desk:') || (act.project && !loc.startsWith('home:'))) return 'type';
+  return 'breathe';
 }
+const HANDHELD = new Set(['sketch', 'eat', 'drink', 'proto', 'box', 'candle', 'riso', 'read', 'sip']);
 const FUN_OBJ = Object.fromEntries(['pinball', 'pinball2', 'ddr', 'wing_chun'].map(id => [id, world.objects.find(o => o.id === id)]));
 function drawIdle(kind, a, px, py, now) {
   const ph = (now + a.id.length * 397) % 100000; // each person keeps their own rhythm
@@ -18138,6 +19229,97 @@ function drawIdle(kind, a, px, py, now) {
       ctx.fillStyle = C('wood-light'); ctx.fillRect(ax + (right ? 1 : 0), ay + 1 + ((ph % 640) < 80 ? 1 : 0), 5, 1);
       ctx.fillStyle = C('white'); ctx.globalAlpha = 0.8; ctx.fillRect(ax + (right ? 3 : 2), ay - 1, 1, 1); ctx.fillRect(ax + (right ? 5 : 0), ay + 3, 1, 1); ctx.globalAlpha = 1;
     }
+  } else if (kind === 'grind') {
+    drawBoard(a, px, py, ph, skateMode[a.id] ?? 'floor', 0);
+  } else if (kind === 'skate') {
+    drawBoard(a, px, py, ph, skateMode[a.id] ?? 'floor', skateTilt[a.id] ?? 0);
+  } else if (kind === 'snap') {
+    // the camera up to the face; every few seconds, a flash
+    const up = a.dir === 'up', cx = px + (up ? 4 : 4), cy = py + (up ? -2 : 6);
+    ctx.fillStyle = C('outline'); ctx.fillRect(cx - 1, cy - 1, 9, 6); ctx.fillStyle = C('white'); ctx.fillRect(cx, cy, 7, 4); ctx.fillStyle = C('black'); ctx.fillRect(cx, cy + 3, 7, 1); ctx.fillStyle = C('navy'); ctx.fillRect(cx + 2, cy + 1, 3, 2);
+    if ((ph % 2600) < 160) { ctx.globalAlpha = 0.7; ctx.fillStyle = C('white'); ctx.beginPath(); ctx.arc(cx + 3.5, cy + 1, 7, 0, 7); ctx.fill(); ctx.globalAlpha = 1; }
+    if ((ph % 2600) > 400 && (ph % 2600) < 1600) { const out = Math.min(5, Math.floor(((ph % 2600) - 400) / 160)); ctx.fillStyle = C('outline'); ctx.fillRect(cx, cy + 4, 7, out + 1); ctx.fillStyle = C('white'); ctx.fillRect(cx + 1, cy + 4, 5, out); }
+  } else if (kind === 'water') {
+    // a watering can tips every couple of seconds and drops fall toward the pot
+    const left = a.dir === 'left', hx = left ? px - 2 : px + 12, tip = (ph % 2200) < 900;
+    ctx.fillStyle = C('outline'); ctx.fillRect(hx, py + 11 - (tip ? 1 : 0), 5, 4); ctx.fillRect(left ? hx - 2 : hx + 5, py + (tip ? 12 : 10), 2, 1);
+    ctx.fillStyle = C('teal'); ctx.fillRect(hx + 1, py + 12 - (tip ? 1 : 0), 3, 2);
+    if (tip) { // the drops land in the pot, wherever the pot is
+      const plant = world.objects.find(o => o.id === local.sim().agents.get(a.id)?.action?.loc);
+      const dx = plant ? plant.x * T + 6 : (left ? hx - 3 : hx + 6), dy0 = plant ? plant.y * T + 4 : py + 13;
+      ctx.fillStyle = C('sky'); for (let i = 0; i < 3; i++) { const dy = ((ph / 110) + i * 2.3) % 7; ctx.fillRect(dx + (i % 3), dy0 + dy, 1, 2); }
+    }
+  } else if (kind === 'board') {
+    // arm up with a marker; strokes appear on the board behind, then get wiped
+    const up = (ph % 900) < 450;
+    ctx.fillStyle = skin; ctx.fillRect(px + 13, py + (up ? 3 : 6), 2, 1); ctx.fillRect(px + 14, py + (up ? 1 : 4), 1, 3);
+    ctx.fillStyle = C('red'); ctx.fillRect(px + 14, py + (up ? 0 : 3), 1, 1);
+    const n = Math.floor(ph / 450) % 8;
+    ctx.fillStyle = C('outline'); ctx.globalAlpha = 0.5; for (let i = 0; i < n; i++) ctx.fillRect(px + 10 + (i % 4) * 2, py - 6 + Math.floor(i / 4) * 3, 1 + (i % 2), 1); ctx.globalAlpha = 1;
+  } else if (kind === 'pin') {
+    // holding a card up to the wall, then pressing a pin in
+    const hold = (ph % 2600) < 1300, press = (ph % 2600) > 2200;
+    ctx.fillStyle = skin; ctx.fillRect(px + 13, py + 5 - (press ? 1 : 0), 2, 1); ctx.fillRect(px + 1, py + 11, 1, 1);
+    if (hold) { ctx.fillStyle = C('outline'); ctx.fillRect(px + 12, py - 2, 5, 5); ctx.fillStyle = C(['white', 'mustard', 'sky', 'pink'][Math.floor(ph / 2600) % 4]); ctx.fillRect(px + 13, py - 1, 3, 3); }
+    else if (press) { ctx.fillStyle = C('red'); ctx.fillRect(px + 14, py + 2, 1, 1); }
+  } else if (kind === 'riso') {
+    // feeding sheets: a page lifts, goes in, and a fresh print slides out the other side
+    const t = ph % 1600;
+    const rx = px + 10 + (t < 800 ? Math.floor(t / 160) : 0), ry = py + 9 - (t < 800 ? Math.floor(t / 200) : 0);
+    ctx.fillStyle = C('outline'); ctx.fillRect(rx - 1, ry - 1, 7, 7); ctx.fillStyle = C('white'); ctx.fillRect(rx, ry, 5, 5);
+    ctx.fillStyle = C(['pink', 'teal', 'mustard'][Math.floor(ph / 1600) % 3]); ctx.globalAlpha = 0.8; ctx.fillRect(px + 11 + (t < 800 ? Math.floor(t / 160) : 0), py + 11 - (t < 800 ? Math.floor(t / 200) : 0), 3, 1); ctx.globalAlpha = 1;
+    ctx.fillStyle = skin; ctx.fillRect(px + 13, py + 12, 2, 1);
+  } else if (kind === 'proto') {
+    // a knife and a bone folder: measure, cut, fold
+    const t = ph % 1800, cut = t < 600, fold = t > 1200;
+    ctx.fillStyle = C('outline'); ctx.fillRect(px + 2, py + 14, 12, 6); ctx.fillStyle = C('white'); ctx.fillRect(px + 3, py + 15, 10, 4);
+    if (cut) { ctx.fillStyle = C('metal'); ctx.fillRect(px + 5 + Math.floor(t / 100), py + 13, 1, 3); ctx.fillStyle = C('outline'); ctx.globalAlpha = 0.5; ctx.fillRect(px + 5, py + 16, Math.floor(t / 100), 1); ctx.globalAlpha = 1; }
+    else if (fold) { ctx.fillStyle = C('white'); ctx.fillRect(px + 8, py + 13 + ((t - 1200) < 300 ? 0 : 1), 5, 2); }
+    ctx.fillStyle = skin; ctx.fillRect(px + 4, py + 14 - (cut ? 1 : 0), 2, 1); ctx.fillRect(px + 10, py + 14 - (fold ? 1 : 0), 2, 1);
+  } else if (kind === 'candle') {
+    // a candle held at the chest, its flame flickering
+    ctx.fillStyle = C('white'); ctx.fillRect(px + 11, py + 11, 2, 4);
+    const fl = Math.floor(ph / 120) % 3;
+    ctx.fillStyle = C(fl === 1 ? 'mustard' : 'orange'); ctx.fillRect(px + 11 + (fl === 2 ? 1 : 0), py + 8 + (fl === 1 ? 1 : 0), 1 + (fl === 1 ? 1 : 0), 2 + (fl === 1 ? 1 : 0));
+    ctx.fillStyle = C('white'); ctx.fillRect(px + 11, py + 10, 1, 1);
+    ctx.fillStyle = skin; ctx.fillRect(px + 10, py + 14, 1, 1); ctx.fillRect(px + 13, py + 14, 1, 1);
+  } else if (kind === 'box') {
+    // a cardboard box carried at the chest; it shifts in their arms
+    const sh = (ph % 1400) < 700 ? 0 : 1;
+    ctx.fillStyle = C('outline'); ctx.fillRect(px + 3, py + 10 + sh, 10, 7);
+    ctx.fillStyle = C('desk-top'); ctx.fillRect(px + 4, py + 11 + sh, 8, 5); ctx.fillStyle = C('desk-edge'); ctx.fillRect(px + 7, py + 11 + sh, 1, 5); ctx.fillRect(px + 4, py + 13 + sh, 8, 1);
+    ctx.fillStyle = skin; ctx.fillRect(px + 3, py + 16 + sh, 2, 1); ctx.fillRect(px + 11, py + 16 + sh, 2, 1);
+  } else if (kind === 'sketch') {
+    // a pad and a pencil; marks gather on the page, then a fresh sheet
+    const step = Math.floor(ph / 260) % 12;
+    ctx.fillStyle = C('outline'); ctx.fillRect(px + 3, py + 14, 9, 7); ctx.fillStyle = C('white'); ctx.fillRect(px + 4, py + 15, 7, 5);
+    ctx.fillStyle = C('outline'); ctx.globalAlpha = 0.6;
+    for (let i = 0; i < Math.min(step, 8); i++) ctx.fillRect(px + 5 + (i * 3) % 6, py + 16 + Math.floor(i / 2), 1 + (i % 2), 1);
+    ctx.globalAlpha = 1;
+    const wob = Math.floor(ph / 130) % 2;
+    ctx.fillStyle = C('mustard'); ctx.fillRect(px + 8 + wob + (step % 3), py + 12, 1, 3); ctx.fillStyle = C('outline'); ctx.fillRect(px + 8 + wob + (step % 3), py + 11, 1, 1);
+    ctx.fillStyle = skin; ctx.fillRect(px + 9 + wob + (step % 3), py + 13, 2, 1);
+  } else if (kind === 'eat') {
+    // a plate, and a fork that goes up to the mouth and back
+    const t = ph % 1500, lift = t < 500 ? Math.floor(t / 100) : t < 900 ? 5 : Math.max(0, 5 - Math.floor((t - 900) / 100));
+    ctx.fillStyle = C('outline'); ctx.fillRect(px + 3, py + 17, 10, 4); ctx.fillStyle = C('white'); ctx.fillRect(px + 4, py + 18, 8, 2); ctx.fillStyle = C(['red', 'green', 'mustard', 'orange'][a.id.length % 4]); ctx.fillRect(px + 6, py + 18, 4, 1);
+    ctx.fillStyle = C('metal'); ctx.fillRect(px + 11, py + 15 - lift, 1, 4); ctx.fillStyle = skin; ctx.fillRect(px + 10, py + 17 - lift, 2, 1);
+  } else if (kind === 'drink') {
+    // a glass raised every few seconds
+    const lift = (ph % 3400) < 800 ? 4 : 0;
+    ctx.fillStyle = C('outline'); ctx.fillRect(px + 10, py + 11 - lift, 4, 5); ctx.fillStyle = C('red'); ctx.fillRect(px + 11, py + 13 - lift, 2, 2); ctx.fillStyle = C('white'); ctx.globalAlpha = 0.5; ctx.fillRect(px + 11, py + 12 - lift, 2, 1); ctx.globalAlpha = 1;
+    ctx.fillStyle = skin; ctx.fillRect(px + 10, py + 16 - lift, 1, 1); ctx.fillRect(px + 13, py + 16 - lift, 1, 1);
+  } else if (kind === 'browse') {
+    // reaching up to the shelf; a spine slides out, gets looked at, goes back
+    const t = ph % 3000, out = t < 1200 ? Math.floor(t / 300) : t < 2200 ? 4 : Math.max(0, 4 - Math.floor((t - 2200) / 200));
+    ctx.fillStyle = skin; ctx.fillRect(px + 13, py + 2 + Math.max(0, 4 - out), 2, 1);
+    ctx.fillStyle = C(['navy', 'red', 'mustard', 'teal', 'plum'][Math.floor(ph / 3000) % 5]); ctx.fillRect(px + 12, py - 1 + out, 2, 5);
+    ctx.fillStyle = C('white'); ctx.fillRect(px + 14, py - 1 + out, 1, 5);
+  } else if (kind === 'chew') {
+    // Pica with a scrap of paper, working on it
+    const bite = (ph % 360) < 180;
+    ctx.fillStyle = C('white'); ctx.fillRect(px + (a.dir === 'left' ? 2 : 10), py + SH - 7 + (bite ? 1 : 0), 4, 3);
+    if ((ph % 2000) < 300) { ctx.fillStyle = C('white'); ctx.globalAlpha = 0.7; ctx.fillRect(px + 7, py + SH - 9 - ((ph % 300) / 100), 1, 1); ctx.globalAlpha = 1; }
   } else if (kind === 'phone') {
     // a phone at the ear, a nod now and then, and the occasional dots of someone talking back
     ctx.fillStyle = C('outline'); ctx.fillRect(px + (a.dir === 'left' ? 3 : 11), py + 4, 2, 4);
@@ -18452,7 +19634,7 @@ function objectTip(o) {
   const d = local.sim().objectDetail(o.id);
   const quote = d?.story?.match(/"[^"]+"/)?.[0];
   const story = d?.story ? `<div class="tip-story">${esc(d.story.split(/(?<=[.!?])\s/)[0])}</div>${o.id === 'proto_bench' && quote ? `<div class="tip-story">Taped above it: ${esc(quote)}</div>` : ''}` : '';
-  const work = o.id === 'mailbox' ? `<div class="tip-meta">${snap?.mail ? `${snap.mail} unopened letter${snap.mail === 1 ? '' : 's'}` : 'Click to read the post'}</div>` : o.view ? `<div class="tip-meta">${wallArtifacts(o).length} pieces of work</div>` : STILL_IDS.has(o.id) ? '<div class="tip-meta">Click to take a closer look</div>' : '';
+  const work = o.id.startsWith('plant:') ? '<div class="tip-meta">Click to see what it needs</div>' : o.id === 'mailbox' ? `<div class="tip-meta">${snap?.mail ? `${snap.mail} unopened letter${snap.mail === 1 ? '' : 's'}` : 'Click to read the post'}</div>` : o.view ? `<div class="tip-meta">${wallArtifacts(o).length} pieces of work</div>` : STILL_IDS.has(o.id) ? '<div class="tip-meta">Click to take a closer look</div>' : '';
   const hidden = d?.trinket && !d.found ? '<div class="tip-meta">🔍 Something is hidden here</div>' : '';
   const ow = o.view === 'computer' && world.objects.find(x => x.id === o.of)?.owner;
   return `<b>${esc(ow ? `${P[ow]?.short}'s ${o.name}` : cap(o.name))}</b>${story}${o.view === 'computer' ? '<div class="tip-meta">Click to see what\'s on screen</div>' : work}${hidden}`;
@@ -18526,17 +19708,23 @@ $('#speed-cycle').onclick = () => { const order = [1, 10, 100]; control({ speed:
 let suppressClick = false;
 {
   let press = null, tipTimer = null;
+  const TOUCH_ONLY = matchMedia('(hover: none) and (pointer: coarse)');
   canvas.addEventListener('pointerdown', ev => {
-    if (ev.pointerType === 'mouse') return;
+    if (ev.pointerType === 'mouse' || !TOUCH_ONLY.matches) return; // no long press on desktops and laptops
     clearTimeout(press?.lp);
-    press = { x: ev.clientX, y: ev.clientY, fired: false };
+    press = { x: ev.clientX, y: ev.clientY, fired: false, ev };
     press.lp = setTimeout(() => { press.fired = true; showTip(ev); clearTimeout(tipTimer); }, 480);
   });
   canvas.addEventListener('pointermove', ev => { if (press && Math.hypot(ev.clientX - press.x, ev.clientY - press.y) > 10) clearTimeout(press.lp); });
   const end = () => {
     if (!press) return;
     clearTimeout(press.lp);
-    if (press.fired) { suppressClick = true; tipTimer = setTimeout(() => { $('#tooltip').hidden = true; }, 2500); }
+    if (press.fired) {
+      suppressClick = true; tipTimer = setTimeout(() => { $('#tooltip').hidden = true; }, 2500);
+      // a long press on a person opens them, the same as a tap
+      const a = agentAt(press.ev);
+      if (a) { $('#tooltip').hidden = true; if (a.visitor) openVisitor(a.id); else inspect(a.id); }
+    }
     press = null;
   };
   canvas.addEventListener('pointerup', end); canvas.addEventListener('pointercancel', end);
@@ -18598,6 +19786,7 @@ function playSfx(prev, msg) {
   if (!audio.on || !prev || msg.init) return;
   const typing = msg.agents.filter(a => !a.hidden && /·/.test(a.act ?? '')).length;
   if (typing && Math.random() < 0.025 * typing) sfx.clack();
+  if (msg.solo && Math.random() < 0.08) { sfx.clack(); setTimeout(() => sfx.clack(), 180); } // alone on a weekend: every keystroke echoes
   const dog = msg.agents.find(a => a.id === 'dog'), was = prev.agents.find(a => a.id === 'dog');
   if (dog?.bubble && dog.bubble !== was?.bubble) sfx.bark();
   if (msg.quake && !prev.quake) sfx.rumble();
@@ -18611,17 +19800,17 @@ $('#skip').onclick = async () => {
   renderFeed();
 };
 let god = false;
-const GOD_TABS = ['team', 'events'];
+const GOD_TABS = ['events', 'team'];
 // Older copies of the HTML don't have the Events tab; add it so God Mode still works.
 if (!document.querySelector('.tab[data-tab="events"]')) { const b = document.createElement('button'); b.className = 'tab'; b.setAttribute('role', 'tab'); b.dataset.tab = 'events'; b.setAttribute('aria-selected', 'false'); b.hidden = true; b.textContent = 'Events'; const tm = document.querySelector('.tab[data-tab="team"]'); tm ? tm.before(b) : document.querySelector('.tabs')?.append(b); }
 if (!$('#view-events')) { const d = document.createElement('div'); d.className = 'view'; d.id = 'view-events'; d.hidden = true; $('#view-team')?.after(d); }
 $('#god').onclick = () => {
   god = !god;
   $('#god').setAttribute('aria-pressed', String(god));
-  if (!god && local.sim().possessed) { local.sim().release(); hudMsg(''); } // leaving God Mode lets go of whoever you were
+  if (!god && local.sim().possessed) { local.sim().release(); hudMsg(''); letGo(); } // leaving God Mode lets go of whoever you were
   // God Mode shows the Team and Events tabs; turning it off brings Feed and Projects back.
   for (const t of document.querySelectorAll('.tab')) t.hidden = god ? !GOD_TABS.includes(t.dataset.tab) : t.dataset.tab === 'events';
-  if (god && !GOD_TABS.includes(tab) && !selected) setTab('events');
+  if (god && !selected) setTab('events'); // God Mode always opens on Events
   if (!god && !selected) setTab(tab === 'events' ? 'feed' : tab);
   if (!god && tab === 'events') tab = 'feed';
   inspBuilt = null;
@@ -18641,9 +19830,9 @@ addEventListener('keydown', e => {
   if (snap?.possessed && !e.target.closest('input, textarea, select')) {
     const dir = { ArrowUp: [0, -1], ArrowDown: [0, 1], ArrowLeft: [-1, 0], ArrowRight: [1, 0], w: [0, -1], s: [0, 1], a: [-1, 0], d: [1, 0] }[e.key];
     if (dir) { e.preventDefault(); local.sim().possessMove(...dir); return; }
-    if (e.key === 'e' || e.key === 'E') { hudMsg(local.sim().possessUse() ?? ''); return; }
+    if (e.key === 'u' || e.key === 'U' || e.key === 'e' || e.key === 'E') { hudMsg(local.sim().possessUse() ?? ''); return; }
     if (e.key === 't' || e.key === 'T') { openTalk(); return; }
-    if (e.key === 'Escape') { local.sim().release(); hudMsg(''); return; }
+    if (e.key === 'Escape') { local.sim().release(); hudMsg(''); letGo(); return; }
   }
   if (e.target.closest('button') && e.key === ' ') return;
   if (e.key === ' ') { e.preventDefault(); control({ paused: !snap?.paused }); }
@@ -19034,9 +20223,16 @@ const WALL_COPY = {
 let objTimer = null;
 // A close look at one of the studio's non-work objects: what's on it right now, drawn as a still life.
 // Returns { heading, art, extra? } or null for objects without one.
-const STILL_IDS = new Set(['pinball', 'pinball2', 'ddr', 'coffee_machine', 'snack_shelf', 'breakfast_nook', 'magazine_table', 'dog_bed', 'fridge', 'award_shelf', 'design_books', 'bear_flag', 'wing_chun']);
+const STILL_IDS = new Set(['skate_ramp', 'skate_sign', 'record_player', 'polaroid', 'pinball', 'pinball2', 'ddr', 'coffee_machine', 'snack_shelf', 'breakfast_nook', 'magazine_table', 'dog_bed', 'fridge', 'award_shelf', 'design_books', 'bear_flag', 'or_flag', 'poster_mot', 'poster_law', 'wing_chun']);
 function stillOf(o, d) {
   const sim = local.sim(), t = sim.t, day = Math.floor(t / 1440), dow = dowOf(day), last = d.moments[0];
+  if (o.id.startsWith('plant:')) {
+    const pl = sim.plantState(o.id); if (!pl) return null;
+    const r = v => Math.round(v / 5) * 5, carer = Object.entries(pl.by ?? {}).sort((x, y) => y[1] - x[1])[0];
+    const bar = (icon, label, v, want = null) => `<div class="task"><div>${icon} ${label}<div class="owner">${want != null ? `likes about ${want}` : ''}</div></div><span class="sub">${Math.round(v)} / 100</span></div><div class="bar"><div class="${v < 30 ? 'mid' : ''}" style="width:${Math.round(v)}%"></div></div>`;
+    return { heading: pl.dead ? 'In memoriam' : 'How it\'s doing', art: stillLife(`plant:${o.id}:${r(pl.water)}:${r(pl.sun)}:${r(pl.food)}:${pl.dead ? 1 : 0}`, 'plantcard', o.name, { name: o.name, kind: o.kind, water: Math.round(pl.water), sun: Math.round(pl.sun), food: Math.round(pl.food), health: Math.round(pl.health), wantSun: pl.wantSun, dead: pl.dead, status: pl.status, tall: (o.x + o.y) % 2 === 0, gen: pl.gen ?? 1 }, pl.dead ? 'Gone. Tomás will be back from the garden center in a couple of days.' : `${cap(o.kind)}, ${pl.status}. ${pl.most === 'water' ? 'Needs water most.' : pl.most === 'sun' ? 'Could use a window.' : 'Could use feeding.'}`, cap(o.kind)),
+      extra: `<div class="section-title">Needs</div>${bar('💧', 'Water', pl.water)}${bar('☀️', 'Sun', pl.sun, pl.wantSun)}${bar('🌱', 'Food', pl.food)}${bar('💚', 'Health', pl.health)}<p class="sub">${carer ? `Looked after most by ${esc(P[carer[0]]?.short ?? carer[0])}.` : 'Nobody has looked after it yet.'}${pl.last ? ` Last: ${esc(P[pl.last.who]?.short ?? 'someone')} ${pl.last.what === 'water' ? 'watered it' : pl.last.what === 'sun' ? 'moved it into the sun' : 'fed it'}, ${esc(timeOf(pl.last.t))}.` : ''}</p>` };
+  }
   switch (o.id) {
     case 'pinball': case 'pinball2': {
       const two = o.id === 'pinball2';
@@ -19068,6 +20264,12 @@ function stillOf(o, d) {
       const prev = d.moments.find(m => m.name !== last?.name);
       return { heading: 'On the table', art: stillLife('nook', 'nook', last ? `${last.name}'s breakfast` : 'The table, before anyone', { who: last?.name ?? null, when: last ? `${last.when}.` : '', plates: last && prev && Math.abs(prev.t - last.t) < 60 ? 2 : 1 }, last ? `${last.name} ${last.text}, ${last.when}. Toaster on four.` : 'Clean plates, good bread, setting four.', 'Round table, corner bench') };
     }
+    case 'or_flag':
+      return { heading: 'On the wall, both sides', art: stillLife('orflag', 'orflag', 'The Oregon flag', { note: 'Front: the state seal, 33 stars, 1859. Back: a beaver. Hannah has flipped it to show people more times than anyone has asked.' }, 'Hannah put it up the week after the bear flag appeared, "for balance". The only state flag with a different design on the back.', 'Next to the bear, for balance') };
+    case 'poster_mot':
+      return { heading: 'Behind reception', art: stillLife('poster_mot', 'poster', 'DEADLINES', { word: 'DEADLINES', line: 'Nothing focuses the mind like a Tuesday.', note: 'Tomás bought it as a joke in the first month. Around the third all-nighter it stopped being a joke, and around the tenth it became load-bearing.' }, 'A mountain at dawn, a serif, and a sentence that is technically true.', 'The joke that stayed') };
+    case 'poster_law':
+      return { heading: 'On the kitchen wall', art: stillLife('poster_law', 'lawposter', 'Know your rights', { note: 'Required by law wherever people eat. Someone has annotated the rest-break section in pencil: "10 min per 4 hrs — Eli??" The handwriting is Eli\'s.' }, 'Minimum wage, meal and rest breaks, paid sick leave, the whistleblower line. Posted, as required, next to the fridge.', 'By order of the state') };
     case 'bear_flag':
       return { heading: 'On the wall', art: stillLife('flag', 'flag', 'The California bear flag', { suspect: ['Marcus', 'Eli', 'a client in Oakland', 'Lola, possibly'][day % 4], years: 'two', note: 'Adaeze refuses to take it down until someone confesses. Nobody has. Nobody will.' }, 'It arrived in a tube with no note the week the studio won its biggest West Coast project.', 'Tacked over the second window from the right') };
     case 'wing_chun': {
@@ -19076,6 +20278,23 @@ function stillOf(o, d) {
     }
     case 'magazine_table':
       return { heading: 'On the table', art: stillLife('magazines', 'magazines', 'Eye, Baseline, Slanted and the catalog', {}, 'One left open on a Baskerville spread. It has been open on that spread for a month.', 'Nobody will throw out the catalog') };
+    case 'skate_ramp': case 'skate_sign': {
+      const falls = sim.flags.skateFalls ?? 0, lastFall = sim.flags.standupStory;
+      return { heading: o.id === 'skate_sign' ? 'Tomás\' sign' : 'The skateboard', art: stillLife(`skate:${falls}`, 'skate', o.id === 'skate_sign' ? 'NO SKATING DURING CLIENT HOURS' : 'Eli\'s board', { falls, note: `Lives against the east wall of reception. Eli and Rohan only (and Pica). Falls so far: ${falls}.` }, falls ? `${falls} fall${falls === 1 ? '' : 's'} on the tally.${lastFall ? ` The latest: ${P[lastFall.id]?.short}, saved for Monday's standup.` : ''}` : 'Nobody has fallen yet. Tomás is waiting.', 'Eli and Rohan only') };
+    }
+    case 'record_player': {
+      const mu = snap.music, G = { jazz: '#1f3a73', techno: '#23222b', folk: '#8a6142', bossa: '#2f8f8f', hiphop: '#e0893c', ambient: '#9aa0ae', classical: '#c4483e' };
+      const fav = Object.entries({ ceo: 'jazz', cos: 'bossa nova', head_design: 'ambient', design_director: 'techno', senior_designer: 'techno', junior_designer: '90s hip-hop', ux_researcher: 'sad folk', copywriter: 'jazz' }).filter(([id]) => sim.agents.has(id)).map(([id, g]) => `${P[id].short}: ${g}`).join(' · ');
+      return { heading: mu ? `${mu.icon} Now playing` : 'The crate', art: stillLife(`records:${mu?.genre ?? 'off'}:${mu?.by ?? ''}`, 'records', mu ? `${cap(mu.label)}, on the record player` : 'The record player', { playing: mu?.label ?? null, by: mu ? P[mu.by]?.short : null, label: mu?.label ?? 'side A', labelColor: mu ? G[mu.genre] : null, note: 'Jazz calms the room. Techno gets things done. Sad folk is for Mondays. Whoever picks the music, someone else will change it.' }, mu ? `${P[mu.by]?.short}'s pick, playing to the ${world.areas[mu.room] ?? 'room'}.` : 'Nothing on right now. Put a record on and the whole room hears it.', 'Whoever gets here first'),
+        extra: `<div class="section-title">Who likes what</div><p class="sub">${esc(fav)}</p>` };
+    }
+    case 'polaroid': {
+      const photos = [...(sim.flags.photos ?? [])].reverse();
+      const pics = photos.map((ph, i) => stillLife(`photo:${ph.id}`, 'polaroid', ph.caption, { people: ph.people.map(id => ({ id, look: P[id]?.look ?? world.personas.find(x => x.id === id)?.look })).filter(x => x.look), area: ph.area, caption: ph.caption, date: ph.when ?? `day ${ph.day + 1}`, by: P[ph.by]?.short ?? 'someone', tilt: ((i * 37) % 9 - 4) / 100 }, `${ph.place}, ${ph.when ?? `day ${ph.day + 1}`}. Taken by ${P[ph.by]?.short ?? 'someone'}.`, ph.people.map(id => P[id]?.short ?? id).join(', ')));
+      const latest = pics[0];
+      return { heading: 'The wall of us', art: latest ?? stillLife('photo:none', 'polaroid', 'The wall of us', { people: [], caption: 'nothing yet. take one!', area: 'library' }, 'Nobody has taken a picture yet.', 'An SX-70 and a wall'),
+        extra: `<div class="section-title">📸 The wall of us (${photos.length})</div>${photos.length ? gallery(pics, a => `<b>${esc(a.title)}</b><br><span class="k">${esc(a.note)}</span>`) : '<p class="empty">No Polaroids yet. Someone will take one; they always do.</p>'}` };
+    }
     case 'dog_bed': {
       const dog = sim.agents.get('dog'), here = dog && !dog.hidden && Math.abs(dog.x - o.x) + Math.abs(dog.y - o.y) <= 1;
       const journals = [...(sim.flags.picaJournals ?? [])].reverse().map(j => { const a = stillLife(`picaj:${j.day}:${j.t}`, 'doc', `Pica's journal · Day ${j.day + 1}`, {}, `${j.sniffed} things sniffed, ${j.greeted} people greeted.`, 'Dictated to nobody, addressed to Lola'); a.kind = 'doc'; a.still = false; a.doc = { style: 'letter', stamp: 'PICA\'S JOURNAL', date: `Day ${j.day + 1}`, to: 'Lola,', from: 'Pica (dictated to nobody)', body: j.body }; a.agent = 'dog'; return a; });
@@ -19084,7 +20303,8 @@ function stillOf(o, d) {
     }
     case 'fridge': {
       const eater = d.top[0]?.name;
-      return { heading: 'Inside', art: stillLife('fridge', 'fridge', 'The fridge, shelves labelled', { eggs: 6 - (day % 5), oat: 3 + (day % 2), leftover: eater ? `${eater}'s soup` : null }, `Labelled shelves, enforced. ${eater ? `${eater} has the top shelf this week.` : 'Mostly oat milk.'}`, 'Open on a ' + ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'][dow]) };
+      const war = sim.flags.fridge && !sim.flags.fridge.done ? `To whoever ate ${P[sim.flags.fridge.victim]?.short}'s ${sim.flags.fridge.food}: we know. We don't know. But we will. Replace it by Friday and we'll say no more. — Management` : null;
+      return { heading: 'Inside', art: stillLife('fridge', 'fridge', 'The fridge, shelves labelled', { eggs: 6 - (day % 5), oat: 3 + (day % 2), leftover: eater ? `${eater}'s soup` : null, warNote: war }, `Labelled shelves, enforced. ${eater ? `${eater} has the top shelf this week.` : 'Mostly oat milk.'}`, 'Open on a ' + ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'][dow]) };
     }
   }
   return null;
@@ -19201,8 +20421,55 @@ function openVisitor(id) {
   el.innerHTML = `<button class="back" data-back>◀ Back</button>
     <div class="who-head"><img src="${avatarURL(P[id])}" alt=""><div><h2>${esc(v.name)}</h2><div class="sub">${esc(v.title)}</div></div></div>
     <div class="now"><div>📍 Meeting Room · ${esc(v.act)}</div>${p?.contact ? `<div>Temperament: ${esc(p.contact.temper)}</div>` : ''}</div>
-    ${p ? `<div class="project" data-project="${p.id}"><h3>${esc(p.name)}</h3><div class="sub">${PHASE_NAMES[p.phase]} · quality ${Math.round(p.quality)} · ${p.reviews.length} review${p.reviews.length === 1 ? '' : 's'} so far</div></div>` : ''}`;
+    ${p ? `<div class="project" data-project="${p.id}"><h3>${esc(p.name)}</h3><div class="sub">${PHASE_NAMES[p.phase]} · quality ${Math.round(p.quality)} · ${p.reviews.length} review${p.reviews.length === 1 ? '' : 's'} so far</div></div>` : ''}
+    ${god ? visitorGodBox(id) : ''}`;
   el.querySelector('[data-back]').onclick = () => { wallOpen = null; el.hidden = true; setTab(tab); };
+  if (god) bindVisitorGod(id, el);
+}
+// God Mode for a guest: possess them, then quick actions, tasks, a whisper, needs and a mood.
+function visitorGodBox(id) {
+  const sim = local.sim(), v = sim.visitor(id), mine = sim.possessed === id;
+  if (!v) return '';
+  const short = esc(v.short);
+  const quick = [['look', '🖼️ Look at the work'], ['coffee', '☕ Coffee'], ['sit', '🪑 Sit down'], ['steal', '👀 Steal an idea'], ['rumor', '🗣️ Spread a rumor'], ['leave', '🚪 Leave']];
+  const places = usePlaces(id).sort((x, y) => x.localeCompare(y, undefined, { sensitivity: 'base' })).map(k => `<option value="${esc(k)}">${esc(cap(k))}</option>`).join('');
+  const projects = sim.studio.active().sort((a, b) => (b.id === v.project) - (a.id === v.project)).map(pr => `<option value="${pr.id}">${esc(pr.name)}</option>`).join('');
+  const people = world.personas.filter(o => sim.agents.has(o.id) && !sim.agents.get(o.id).hidden && !o.look?.dog).map(o => `<option value="${o.id}">${esc(o.short)}</option>`).join('');
+  const needs = Object.entries(v.needs ?? {}).map(([k, n]) => `<label class="slider"><span>${k}</span><input type="range" min="0" max="100" value="${Math.round(n)}" data-need="${k}" aria-label="${k}"><output>${Math.round(n)}</output></label>`).join('');
+  return `<div class="godbox">
+    <button class="btn wide" data-possess aria-pressed="${mine}" ${v.meeting ? 'disabled title="In the middle of the meeting."' : ''}>🎮 ${mine ? 'Let go' : 'Possess'}${v.meeting ? ' · in the meeting' : ''}</button>
+    <p class="hint">${mine ? `You are ${short}. Arrow keys or WASD walk, U uses what's next to you, T talks, Esc lets go. Or pick a task below.` : `Take over ${short} for a bit: walk them around, let them poke at things, talk to the team, or send them home. The meeting waits until you let go.`}</p>
+    ${mine ? `<div class="section-title">Quick actions</div><div class="btnrow">${quick.map(([k, l]) => `<button class="btn small" data-g="${k}">${l}</button>`).join('')}</div>
+    <div class="section-title">Tasks</div>
+    <div class="godrow"><select id="v-place" aria-label="Place">${places}</select><button class="btn small" data-g="goto">Use</button></div>
+    <div class="godrow"><select id="v-task" aria-label="Project">${projects || '<option value="">No projects</option>'}</select><button class="btn small" data-g="work" ${projects ? '' : 'disabled'}>Work</button></div>
+    <div class="godrow"><select id="v-person" aria-label="Person">${people || '<option value="">Nobody around</option>'}</select><button class="btn small" data-g="talk" ${people ? '' : 'disabled'}>Talk</button></div>
+    <div class="section-title">Whisper a thought</div>
+    <textarea id="v-whisper" rows="2" placeholder="e.g. You think the logo is too small"></textarea>
+    <div class="godrow"><span class="hint">Mention someone by name and they'll go tell them.</span><button class="btn small" data-g="whisper">Whisper</button></div>
+    <div class="section-title">Needs</div>${needs}
+    <div class="godrow"><input id="v-mood" placeholder="Set mood, now ${esc(v.mood ?? 'curious')}" aria-label="Mood"><button class="btn small" data-g="mood">Set mood</button></div>` : ''}
+    <div class="god-msg" id="god-msg" role="status"></div>
+  </div>`;
+}
+function bindVisitorGod(id, el) {
+  const sim = local.sim();
+  const msg = t => { const m = el.querySelector('#god-msg'); if (m) m.textContent = t; };
+  const pz = el.querySelector('[data-possess]');
+  if (pz) pz.onclick = () => { if (sim.possessed === id) { sim.release(); hudMsg(''); letGo(); return; } const err = sim.possess(id); if (err) return msg(err); hudMsg(''); openVisitor(id); };
+  for (const r of el.querySelectorAll('[data-need]')) r.oninput = e => { sim.setNeed(id, r.dataset.need, e.target.value); r.nextElementSibling.textContent = e.target.value; };
+  for (const b of el.querySelectorAll('[data-g]')) b.onclick = () => {
+    const g = b.dataset.g, val = sel => el.querySelector(sel)?.value ?? '';
+    let err = null;
+    if (g === 'goto') { const k = val('#v-place'), opts = world.objects.filter(o => useKind(o) === k); err = opts.length ? sim.godCommand(id, { type: 'goto', obj: opts[Math.floor(Math.random() * opts.length)].id }) : 'Nothing like that here.'; }
+    else if (g === 'work') err = sim.godCommand(id, { type: 'work', project: val('#v-task') });
+    else if (g === 'talk') err = sim.godCommand(id, { type: 'talk', target: val('#v-person'), choice: 'small' });
+    else if (g === 'whisper') { err = sim.whisper(id, val('#v-whisper')); if (!err) el.querySelector('#v-whisper').value = ''; }
+    else if (g === 'mood') { const m = val('#v-mood').trim(); if (m) { sim.setMood(id, m); el.querySelector('#v-mood').value = ''; el.querySelector('#v-mood').placeholder = `Set mood, now ${m}`; } else err = 'Type a mood first.'; }
+    else err = sim.godCommand(id, { type: g });
+    msg(err ?? (g === 'whisper' ? `${sim.visitor(id)?.short ?? 'They'} can't stop thinking about it.` : 'Done.'));
+    if (g === 'leave') setTimeout(() => { if (!sim.visitor(id)) letGo(); }, 50);
+  };
 }
 
 function openWall(o) {
@@ -19220,11 +20487,15 @@ function openWall(o) {
 }
 
 // ------------------------------------------------------------------ inspector
+let inspectFrom = null; // where the Back button returns to
 function inspect(id) {
   if (selected !== id) { godFor = null; inspBuilt = null; }
+  if (!selected) inspectFrom = { tab, wall: !$('#view-wall').hidden ? wallOpen : null };
   selected = id;
   if (isPhone() && document.body.dataset.sheet === 'peek') setSheet('half');
-  for (const v of ['feed', 'team', 'projects', 'wall']) $(`#view-${v}`).hidden = true;
+  for (const v of ['feed', 'team', 'projects', 'events', 'wall']) $(`#view-${v}`).hidden = true;
+  // a person's page belongs under Team: light that tab while it's open (in God Mode, where Team is the people tab)
+  if (god) for (const t of document.querySelectorAll('.tab')) t.setAttribute('aria-selected', String(t.dataset.tab === 'team'));
   $('#filters').hidden = true;
   $('#view-inspect').hidden = false;
   loadInspect();
@@ -19235,7 +20506,13 @@ function closeInspect(silent) {
   selected = null;
   clearInterval(inspectTimer);
   $('#view-inspect').hidden = true;
-  if (!silent) setTab(god ? 'team' : tab);
+  const from = inspectFrom; inspectFrom = null;
+  if (silent) return;
+  let back = from?.tab ?? tab;
+  if (god && !GOD_TABS.includes(back)) back = 'team';
+  if (!god && back === 'events') back = 'feed';
+  setTab(back);
+  if (!god && from?.wall) { const o = world.objects.find(x => x.id === from.wall); if (o) openObject(o); } // back to the object page you came from
 }
 // Renders the inspector skeleton once per person/subtab; refreshes only the
 // live parts so long lists never jump while you scroll.
@@ -19435,16 +20712,15 @@ function renderSummary() {
       <div><b>${snap.awards.length}</b><span>awards</span></div>
     </div>
     ${scenarioBlock()}
-    <div class="today">${snap.weather ? `${snap.weather.icon} ${snap.weather.temp}°C · ` : ''}${snap.holiday ? `${snap.holiday.emoji} ${esc(snap.holiday.name)} · ` : ''}Today: ${chats} conversations, ${reviews.length} client decision${reviews.length === 1 ? '' : 's'}, ${made} new artifact${made === 1 ? '' : 's'}.${snap.cash != null ? ` <span class="${snap.runway < 2 ? 'former' : 'k'}">💰 ${snap.cash < 0 ? '-' : ''}$${Math.abs(Math.round(snap.cash / 1000))}k · ${snap.runway < 0 ? 'in the red' : `${snap.runway} months of runway`}</span>` : ''}</div>
+    <div class="today">${snap.music ? `${snap.music.icon} ${esc(cap(snap.music.label))} on the record player (${esc(P[snap.music.by]?.short ?? 'someone')}'s pick) · ` : ''}${snap.weather ? `${snap.weather.icon} ${snap.weather.temp}°C · ` : ''}${snap.holiday ? `${snap.holiday.emoji} ${esc(snap.holiday.name)} · ` : ''}Today: ${chats} conversations, ${reviews.length} client decision${reviews.length === 1 ? '' : 's'}, ${made} new artifact${made === 1 ? '' : 's'}.${snap.cash != null ? ` <span class="${snap.runway < 2 ? 'former' : 'k'}">💰 ${snap.cash < 0 ? '-' : ''}$${Math.abs(Math.round(snap.cash / 1000))}k · ${snap.runway < 0 ? 'in the red' : `${snap.runway} months of runway`}</span>` : ''}</div>
     <ul class="happening">${items.map(i => `<li>${i}</li>`).join('')}</ul>`;
   if (god && tab === 'events') renderEvents();
 }
 let eventMsg = { text: '', until: 0 };
 // The Events tab (God Mode only): every event you can set off, grouped so it reads at a glance.
 const EVENT_GROUPS = [
-  ['Everyday studio life', 'Small things that happen in any week.', [['client', '🚪 Client visit'], ['brief', '📨 New brief'], ['birthday', '🎂 Surprise birthday'], ['dog', '🐕 Pica eats a prototype'], ['hire', '👋 New hire']]],
-  ['Awards', 'The Kern Annual and friends.', [['award_win', '🥇 Award win'], ['award_loss', '🫥 Award loss']]],
-  ['Trouble', 'Bad days, and the odd bad week.', [['outage', '🔌 Power outage'], ['earthquake', '🫨 Earthquake'], ['security', '🎣 Phishing scare'], ['breakup', '💔 Breakup'], ['poached', '🧲 Talent poached'], ['layoff', '📦 Layoff']]],
+  ['Everyday studio life', 'Small things that happen in any week.', [['client', '🚪 Client visit'], ['brief', '📨 New brief'], ['birthday', '🎂 Surprise birthday'], ['dog', '🐕 Pica eats a prototype'], ['hire', '👋 New hire'], ['fridge', '🥡 Fridge war'], ['danceoff', '🎤 Karaoke & dance-off'], ['rite', '🎖️ Rite of passage'], ['weekend', '🔦 Weekend alone']]],
+  ['Trouble', 'Bad days, and the odd bad week.', [['outage', '🔌 Power outage'], ['earthquake', '🫨 Earthquake'], ['security', '🎣 Phishing scare'], ['breakup', '💔 Breakup'], ['poached', '🧲 Talent poached'], ['layoff', '📦 Layoff'], ['leak', '🕵️ The leak']]],
   ['Old friends', 'People who used to work here.', [['lola', '🫂 Lola comes back'], ['alumni', '🍝 Old friend drops by']]],
   ['Milestones', 'Rare, and some of them end the game.', [['book', '📚 Hannah\'s book is out'], ['museum', '🏛️ The museum calls · ending'], ['sold', '📝 Sell to Ditto · ending'], ['closed', '🕯️ Close the studio · ending']]],
 ];
@@ -19487,20 +20763,35 @@ $('#summary').addEventListener('click', e => {
 
 // ------------------------------------------------------------------ god mode panel (inside the inspector)
 let godFor = null;
+// What a thing counts as in the Use list: null for things you can't be sent to (tables, chairs, doors, invisible seats).
+// Reached through Work, Eat, Coffee, Break, Nap or Play instead, or just not worth an order.
+const USE_SKIP = new Set(['breakfast_nook', 'bookshelf', 'corner_desk', 'annuals_shelf', 'reading_chair', 'reading_chair2', 'projector', 'proto_bench', 'whiteboard', 'award_shelf', 'coffee_machine', 'fridge', 'moodboard', 'material_wall', 'pinup_wall', 'phone_booth', 'bear_flag', 'or_flag', 'sofa', 'snack_shelf', 'research_wall', 'poster_mot', 'poster_law', 'skate_sign']);
+// Each person's Use list: Eli gets only his skateboard; other skaters get the skateboard too; nobody else gets the reception counter.
+const ELI_USE = new Set(['skateboard']);
+const SKATERS = new Set(['junior_designer', 'hire_rohan', 'dog']);
+function usePlaces(id) {
+  return [...new Set(world.objects.map(useKind).filter(Boolean))].filter(k =>
+    id === 'junior_designer' ? ELI_USE.has(k) : k === 'reception counter' ? false : k === 'skateboard' ? SKATERS.has(id) : true);
+}
+function useKind(o) {
+  if (o.sprite === 'none' || USE_SKIP.has(o.id) || o.id.startsWith('plant:') || o.id.startsWith('computer:') || o.id.startsWith('door:') || o.id.startsWith('table:') || o.id.startsWith('desk:') || /\b(table|chair|bench|computer|laptop|flag)\b/i.test(o.name)) return null;
+  return o.name;
+}
 // A day as Pica: possess the dog with the smell map on, and a journal at the end.
 function startPicaDay() {
   const sim = local.sim();
   const err = sim.startPicaDay();
-  if (!err) { closeInspect(true); hudMsg('Pica\'s day. Sniff with E. Everything smells like something.'); showToast({ icon: '🐶', label: 'Pica\'s day', text: 'The puffs are smells. E sniffs, T says hi, Esc ends the day and writes it up for Lola.' }); }
+  if (!err) { closeInspect(true); hudMsg('Pica\'s day. Sniff with U. Everything smells like something.'); showToast({ icon: '🐶', label: 'Pica\'s day', text: 'The puffs are smells. U sniffs, T says hi, Esc ends the day and writes it up for Lola.' }); }
   return err;
 }
-if (!$('#pica')) { const b = document.createElement('button'); b.id = 'pica'; b.className = 'btn'; b.title = 'Spend a day as Pica'; b.textContent = '🐶 Pica\'s day'; $('#god')?.before(b); }
 if (!$('#ending')) { const d = document.createElement('div'); d.className = 'title ending'; d.id = 'ending'; d.hidden = true; d.setAttribute('role', 'dialog'); d.innerHTML = '<canvas class="title-stars" id="ending-stars"></canvas><div class="ending-inner" id="ending-inner"></div>'; document.body.append(d); }
-$('#pica').onclick = () => { const sim = local.sim(); if (sim.picaDay) { sim.endPicaDay(); hudMsg(''); return; } const err = startPicaDay(); if (err) showToast({ icon: '🐶', label: 'Not now', text: err, kind: 'warnsoft' }); };
+$('#pica')?.remove(); // Pica's day lives on the dog bed now; sniffing and saying hi are her quick actions
+// After letting go, back to the feed to watch what they do next.
+function letGo() { closeInspect(true); wallOpen = null; $('#view-wall').hidden = true; setTab(god ? 'events' : 'feed'); }
 // Possess someone, or let go if you already are: every Possess button toggles.
 function togglePossess(id) {
   const sim = local.sim();
-  if (sim.possessed === id) { sim.release(); hudMsg(''); return null; }
+  if (sim.possessed === id) { sim.release(); hudMsg(''); letGo(); return null; }
   const err = sim.possess(id); hudMsg(err ?? ''); return err;
 }
 function godPanel(id) {
@@ -19511,11 +20802,15 @@ function godPanel(id) {
   const key = `${id}|${a.hidden}|${sim.possessed === id}`;
   if (godFor === key) return;
   godFor = key;
-  // one entry per kind of place; "walk" picks one of its instances at random
-  const placeGroups = new Map();
-  for (const o of world.objects.filter(o => o.sprite !== 'none')) { const key = `${o.name}|${o.area}`; (placeGroups.get(key) ?? placeGroups.set(key, []).get(key)).push(o.id); }
-  const places = [...placeGroups.entries()].sort((x, y) => x[0].localeCompare(y[0])).map(([key, ids]) => `<option value="${esc(key)}">${esc(cap(key.split('|')[0]))} (${esc(world.areas[key.split('|')[1]] ?? key.split('|')[1])})${ids.length > 1 ? ` · ${ids.length}` : ''}</option>`).join('');
-  const tasks = sim.studio.active().filter(pr => pr.team.includes(id)).flatMap(pr => pr.tasks.filter(t => t.phase === pr.phase && t.status !== 'done').map(t => `<option value="${pr.id}|${t.id}">${esc(pr.name)}: ${esc(t.title)}</option>`)).join('');
+  // one entry per kind of thing (every computer is "computer", every plant is "plants"); "Use" picks an instance at random
+  const places = usePlaces(id).sort((x, y) => x.localeCompare(y, undefined, { sensitivity: 'base' })).map(k => `<option value="${esc(k)}">${esc(cap(k))}</option>`).join('');
+  // one entry per project; "Work" picks one of its open tasks at random
+  const dog = !!p.look?.dog;
+  const tasks = sim.studio.active().filter(pr => (dog || pr.team.includes(id)) && pr.tasks.some(t => t.phase === pr.phase && t.status !== 'done')).map(pr => `<option value="${pr.id}">${esc(pr.name)}</option>`).join('');
+  const quick = dog
+    ? [['sniff', '👃 Sniff'], ['hi', '🐕 Say hi'], ['eat', '🦴 Eat'], ['play', '🎾 Play'], ['nap', '💤 Nap'], ['takeover', '👑 Takeover'], ['quit', '🚪 Quit']]
+    : [['coffee', '☕ Coffee'], ['eat', '🥪 Eat'], ['water', '🪴 Water plants'], ['play', '🎲 Play'], ['break', '🛋️ Break'], ['nap', '💤 Nap'], ['home', '🚶 Go home'], ['quit', '🚪 Quit']];
+  const quickRow = `<div class="btnrow">${quick.map(([k, l]) => `<button class="btn small" data-g="${k}" ${k === 'takeover' && sim.flags.dogCEO ? 'disabled title="Pica is already CEO."' : ''}>${l}</button>`).join('')}</div>`;
   const people = world.personas.filter(o => o.id !== id && sim.agents.has(o.id)).map(o => `<option value="${o.id}">${esc(o.short)}</option>`).join('');
   const needs = Object.entries(a.needs).map(([k, v]) => `<label class="slider"><span>${k}</span><input type="range" min="0" max="100" value="${Math.round(v)}" data-need="${k}" aria-label="${k}"><output>${Math.round(v)}</output></label>`).join('');
   const mine = sim.possessed === id;
@@ -19523,7 +20818,7 @@ function godPanel(id) {
   if (!mine) {
     // only the possess button until you take someone over; the rest of god's toolkit unlocks after
     box.innerHTML = `<div class="godbox">${possessBtn}
-      <p class="hint">Take over ${esc(p.short)}: walk them with the arrow keys or WASD, use what's next to them with E, start conversations with T, or give them orders, needs, moods and whispered thoughts from here. Everyone else keeps living their day. Esc lets go.</p>
+      <p class="hint">Take over ${esc(p.short)}: walk them with the arrow keys or WASD, use what's next to them with U, start conversations with T, or give them orders, needs, moods and whispered thoughts from here. Everyone else keeps living their day. Esc lets go.</p>
       <div class="god-msg" id="god-msg" role="status"></div>
     </div>`;
     needsBox.innerHTML = '';
@@ -19531,11 +20826,13 @@ function godPanel(id) {
   } else {
     const sum = document.querySelector('#view-inspect details.more > summary'); if (sum) sum.textContent = 'Needs, today & details';
     box.innerHTML = `<div class="godbox">${possessBtn}
-      <p class="hint">You are ${esc(p.short)}. Arrow keys or WASD walk, E uses what's next to you, T talks, Esc lets go. Or give orders below.</p>
-      <div class="godrow"><select id="g-place" aria-label="Place">${places}</select><button class="btn small" data-g="goto">Walk</button></div>
-      ${p.look?.dog ? '' : `<div class="godrow"><select id="g-task" aria-label="Task">${tasks || '<option value="">No open tasks</option>'}</select><button class="btn small" data-g="work" ${tasks ? '' : 'disabled'}>Work</button></div>`}
+      <p class="hint">You are ${esc(p.short)}. Arrow keys or WASD walk, U uses what's next to you, T talks, Esc lets go. Or pick a task below: Use walks them over and uses the thing when they get there.</p>
+      <div class="section-title">Quick actions</div>
+      ${quickRow}
+      <div class="section-title">Tasks</div>
+      <div class="godrow"><select id="g-place" aria-label="Place">${places}</select><button class="btn small" data-g="goto">Use</button></div>
+      <div class="godrow"><select id="g-task" aria-label="Task">${tasks || '<option value="">No open tasks</option>'}</select><button class="btn small" data-g="work" ${tasks ? '' : 'disabled'}>Work</button></div>
       <div class="godrow"><select id="g-person" aria-label="Person">${people}</select><button class="btn small" data-g="talk">Talk</button></div>
-      <div class="btnrow"><button class="btn small" data-g="coffee">☕ Coffee</button><button class="btn small" data-g="break">🛋️ Break</button><button class="btn small" data-g="home">🚶 Go home</button><button class="btn small" data-g="nap">💤 Nap</button></div>
       <div class="section-title">Whisper a thought</div>
       <textarea id="g-whisper" rows="2" placeholder="e.g. You're secretly worried about Noor"></textarea>
       <div class="godrow"><span class="hint">Mention someone by name and they'll go find them.</span><button class="btn small" data-g="whisper">Whisper</button></div>
@@ -19558,12 +20855,14 @@ function godPanel(id) {
   for (const b of [...box.querySelectorAll('[data-g]'), ...needsBox.querySelectorAll('[data-g]')]) b.onclick = () => {
     const g = b.dataset.g;
     let err = null;
-    if (g === 'goto') { const [nm, ar] = $('#g-place').value.split('|'); const opts = world.objects.filter(o => o.name === nm && o.area === ar); err = opts.length ? sim.godCommand(id, { type: 'goto', obj: opts[Math.floor(Math.random() * opts.length)].id }) : 'Nowhere like that.'; }
-    else if (g === 'work') { const [project, task] = $('#g-task').value.split('|'); err = sim.godCommand(id, { type: 'work', project, task }); }
+    if (g === 'goto') { const k = $('#g-place').value, opts = world.objects.filter(o => useKind(o) === k); err = opts.length ? sim.godCommand(id, { type: 'goto', obj: opts[Math.floor(Math.random() * opts.length)].id }) : 'Nothing like that here.'; }
+    else if (g === 'work') { const project = $('#g-task').value, pr = sim.studio.get(project), open = pr ? pr.tasks.filter(t => t.phase === pr.phase && t.status !== 'done') : []; err = sim.godCommand(id, { type: 'work', project, task: open.length ? open[Math.floor(Math.random() * open.length)].id : undefined }); }
     else if (g === 'talk') err = sim.godCommand(id, { type: 'talk', target: $('#g-person').value });
     else if (g === 'whisper') { err = sim.whisper(id, $('#g-whisper').value); if (!err) $('#g-whisper').value = ''; }
     else if (g === 'mood') { sim.setMood(id, $('#g-mood').value); err = $('#g-mood').value ? null : 'Type a mood first.'; }
     else err = sim.godCommand(id, { type: g });
+    if (g === 'quit' && !err && !p.look?.dog) { showToast({ icon: '🚪', label: `${p.short} quit`, text: 'They\'re packing up. The feed has the rest.' }); if (sim.possessed === id) { sim.release(); hudMsg(''); } letGo(); return; }
+    if (g === 'takeover' && !err) { showToast({ icon: '👑', label: 'A coup', text: 'Pica is Dawg (CEO) now. Her first act: firing Adaeze.' }); godFor = null; }
     msg(err ?? (g === 'whisper' ? `${p.short} can't stop thinking about it.` : 'Done.'));
     loadInspect();
   };
@@ -19608,8 +20907,8 @@ setInterval(() => {
   hud.hidden = false;
   const touchPad = !$('#dpad').hidden; // on a touch screen the d-pad does the talking
   const pd = snap.picaDay;
-  hud.innerHTML = pd ? (touchPad ? `<b>🐶 Pica's day</b> · ${pd.sniffed} sniffed, ${pd.greeted} greeted${near.length ? ` · ${near.map(id => esc(P[id].short)).join(', ')} nearby` : ''}${hudText ? `<div class="hud-msg">${esc(hudText)}</div>` : ''}` : `<b>🐶 Pica's day</b> · the puffs are smells · <kbd>E</kbd> sniff what's next to you · <kbd>T</kbd> say hi${near.length ? ` (${near.map(id => esc(P[id].short)).join(', ')})` : ''} · <kbd>Esc</kbd> end the day and write it up · ${pd.sniffed} sniffed${hudText ? `<div class="hud-msg">${esc(hudText)}</div>` : ''}`)
-    : touchPad ? `<b>🎮 Playing as ${esc(p.short)}</b>${near.length ? ` · ${near.map(id => esc(P[id].short)).join(', ')} nearby` : ''}` : `<b>🎮 Playing as ${esc(p.short)}</b> · arrows or WASD to move · <kbd>E</kbd> use what's next to you · <kbd>T</kbd> talk${near.length ? ` (${near.map(id => esc(P[id].short)).join(', ')} nearby)` : ''} · <kbd>Esc</kbd> let go${hudText ? `<div class="hud-msg">${esc(hudText)}</div>` : ''}`;
+  hud.innerHTML = pd ? (touchPad ? `<b>🐶 Pica's day</b> · ${pd.sniffed} sniffed, ${pd.greeted} greeted${near.length ? ` · ${near.map(id => esc(P[id].short)).join(', ')} nearby` : ''}${hudText ? `<div class="hud-msg">${esc(hudText)}</div>` : ''}` : `<b>🐶 Pica's day</b> · the puffs are smells · <kbd>U</kbd> sniff what's next to you · <kbd>T</kbd> say hi${near.length ? ` (${near.map(id => esc(P[id].short)).join(', ')})` : ''} · <kbd>Esc</kbd> end the day and write it up · ${pd.sniffed} sniffed${hudText ? `<div class="hud-msg">${esc(hudText)}</div>` : ''}`)
+    : touchPad ? `<b>🎮 Playing as ${esc(p.short)}</b>${near.length ? ` · ${near.map(id => esc(P[id].short)).join(', ')} nearby` : ''}` : `<b>🎮 Playing as ${esc(p.short)}</b> · arrows or WASD to move · <kbd>U</kbd> use what's next to you · <kbd>T</kbd> talk${near.length ? ` (${near.map(id => esc(P[id].short)).join(', ')} nearby)` : ''} · <kbd>Esc</kbd> let go${hudText ? `<div class="hud-msg">${esc(hudText)}</div>` : ''}`;
 }, 250);
 
 let talkPending = null;

@@ -425,6 +425,16 @@ details.task summary::-webkit-details-marker { display: none; }
   border: 1px solid var(--ui-win-border); border-radius: var(--radius-1); padding: var(--space-1) var(--space-2);
 }
 .godbox textarea { width: 100%; resize: vertical; }
+/* one width for every row's action button (Use, Work, Talk, Whisper), label centered */
+.godrow > .btn { flex: none; width: 7.5em; text-align: center; justify-content: center; white-space: nowrap; }
+/* our own chevron, inset from the right edge by the same gap the text has on the left */
+.godrow select {
+  appearance: none; -webkit-appearance: none; -moz-appearance: none;
+  padding-right: calc(var(--space-2) * 2 + 10px);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23f4f3fb' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right var(--space-2) center; background-size: 10px 6px;
+}
+.godrow select option { background: var(--ui-win-bottom); color: var(--ui-text); }
 .god-head { display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-3); }
 .god-head .back { margin: 0; }
 .god-title { flex: 1; font-family: var(--font-ui); font-size: var(--text-sm); color: var(--ui-accent); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
