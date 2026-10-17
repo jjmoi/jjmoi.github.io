@@ -18884,11 +18884,11 @@ const roomFade = Object.fromEntries(ROOMS.map(r => [r, 0]));
 const STICKER_AT = {}, PLANT_AT = {};
 const RECORD = world.objects.find(o => o.id === 'record_player');
 const RAMP = world.objects.find(o => o.id === 'skate_ramp');
-const skateTilt = {}, skateMode = {}, skateRow = {}; // skateRow: extra draw rows while passing in front of furniture
+const skateTilt = {}, skateMode = {}, skateRow = {}, skateOff = {}, skateTrickNow = {}; // skateRow: extra draw rows while passing in front of furniture
 // Where a skater is at time t (0..1) of a round, relative to where they stand at the end of the lane.
 // Floor: out along the lane and back, with ollies. Grind: down to reception, ollie onto the counter,
 // boardslide its front edge (board across the edge, middle on the lip), drop off the end, roll back.
-function skatePose(mode, t, d) {
+function skatePose(mode, t, d, id = '', round = 0) {
   const here = Math.round(d.x * T) + 8, floorY = Math.round(d.y * T) + T - 2; // feet line on the floor
   const foot = here, far = foot - 9 * T;
   const at = (x, h, dir, board = 'floor', tilt = 0) => ({ ox: Math.round(x - here), oy: -Math.round(h), dir, board, tilt });
@@ -18904,10 +18904,35 @@ function skatePose(mode, t, d) {
   const roll = (x, t0, t1, tt, H, dir) => { const u = (tt - t0) / (t1 - t0); if (u <= 0 || u >= 1) return at(x, 0, dir); const o = ollie(u, H, dir); return at(x, o.h, dir, 'floor', o.tilt); };
   const flat = mode === 'floor' || !DESK;
   if (flat) {
-    if (t < 0.32) return roll(foot + (far - foot) * (t / 0.32), 0.12, 0.24, t, 9, 'left'); // an ollie on the way out
-    if (t < 0.7) return roll(far + (foot - far) * ((t - 0.32) / 0.38), 0.44, 0.58, t, 10, 'right'); // and one on the way back
+    // each floor round has one trick on the way back. Pica lands everything and gets the hard ones (360s, a full-lane manual)
+    // and bigger air; Eli only tries shove-its and kickflips and bails three times in four; Rohan lands most of his.
+    const { trick, bails } = skateTrick(id, round), air = id === 'dog' ? 1.4 : 1;
+    if (t < 0.32) return roll(foot + (far - foot) * (t / 0.32), 0.12, 0.24, t, 9 * air, 'left'); // an ollie on the way out
+    const back = tt => far + (foot - far) * ((tt - 0.32) / 0.38);
+    if (trick === 'manual' && t < 0.7) { // on the back wheels, nose up, most of the way back
+      const u = (t - 0.36) / 0.3;
+      if (u <= 0 || u >= 1) return at(back(t), 0, 'right');
+      const lean = Math.min(1, u * 6, (1 - u) * 6);
+      return at(back(t), 0, 'right', 'floor', -0.3 * lean + Math.sin(u * 40) * 0.03 * lean);
+    }
+    const T0 = 0.44, T1 = 0.58, BAIL = T0 + (T1 - T0) * 0.8; // the trick, and the moment a bail goes wrong
+    if (bails && t >= BAIL) { // landed on the board's edge: it shoots off down the lane, they go down, get up, walk to it
+      const xb = back(BAIL);
+      if (t < 0.66) { const u = Math.min(1, (t - BAIL) / 0.07); return { ...at(xb, 0, 'right'), lie: true, bx: Math.round((foot - xb) * (1 - (1 - u) * (1 - u))), board: 'floor' }; }
+      if (t < 0.8) { const x = xb + (foot - xb) * ((t - 0.66) / 0.14); return { ...at(x, 0, 'right'), walk: true, bx: Math.round(foot - x) }; }
+      return at(foot, 0, 'right');
+    }
+    if (t < 0.7) {
+      const u = (t - T0) / (T1 - T0);
+      if (u <= 0 || u >= 1 || trick === 'manual') return at(back(t), 0, 'right');
+      const o = ollie(u, (trick === 'ollie' ? 10 : 12) * air, 'right'), v = Math.max(0, Math.min(1, (u - 0.12) / 0.78));
+      if (trick === 'ollie') return at(back(t), o.h, 'right', 'floor', o.tilt);
+      const flipping = v > 0.15 && v < 0.85, p = (v - 0.15) / 0.7;
+      const dir = trick === '360' && flipping ? ['right', 'down', 'left', 'up', 'right'][Math.min(4, Math.floor(p * 5))] : 'right';
+      return { ...at(back(t), o.h, dir, 'floor', flipping ? 0 : o.tilt), trick: flipping && trick !== '360' ? { kind: trick, p } : null };
+    }
     const u = ((t - 0.7) / 0.3 * 2) % 1; // two on the spot
-    return roll(foot, 0, 1, u, 8, 'right');
+    return roll(foot, 0, 1, u, 8 * air, 'right');
   }
   // grind: all the way down the lane to reception, ollie onto the counter's right end, boardslide it leftwards, drop off,
   // then roll back to the lane past the front of the counter
@@ -18921,9 +18946,37 @@ function skatePose(mode, t, d) {
   const dy = front(x) * Math.min(1, u * 6);
   return { ...at(x, -dy, 'right'), row: dy > 4 ? 1 : 0 }; // drawn a row later, so the counter stays behind them
 }
-// The board under the feet: flat on the floor, tipped on an ollie, across the lip on a boardslide.
+// Which trick a skater goes for this round, and whether it goes wrong. Same answer every frame of the round.
+function skateTrick(id, round) {
+  const roll = n => { let h = Math.imul(n ^ 0x9e3779b9, 2654435761) >>> 0; h ^= h >>> 15; h = Math.imul(h, 2246822519) >>> 0; h ^= h >>> 13; return h % 100; };
+  const seed = round * 131 + id.length * 17 + (id.charCodeAt(0) || 0);
+  if (id === 'dog') return { trick: ['360', 'manual', 'kickflip', 'shuvit'][roll(seed) % 4], bails: false };
+  if (id === 'junior_designer') return { trick: roll(seed + 1) % 2 ? 'kickflip' : 'shuvit', bails: roll(seed + 2) < 75 };
+  const trick = ['ollie', 'shuvit', 'kickflip'][roll(seed) % 3];
+  return { trick, bails: trick !== 'ollie' && roll(seed + 2) < 25 };
+}
+// The board under the feet: flat on the floor, tipped on an ollie, spinning or flipping on a trick, across the lip on a boardslide.
 function drawBoard(a, px, py, ph, board, tilt) {
-  const k = Math.floor(ph / 90) % 2, fx = px + 8, fy = py + SH - 2;
+  const off = skateOff[a.id], tr = skateTrickNow[a.id];
+  const k = Math.floor(ph / 90) % 2, fx = px + 8 + (off?.bx ?? 0), fy = py + SH - 2 + (off?.by ?? 0);
+  if (tr && board === 'floor') {
+    const lift = Math.round(Math.sin(tr.p * Math.PI) * 2); // the board drops a little under the feet while it turns
+    if (tr.kind === 'shuvit') { // spinning flat: from the side it shrinks end-on and grows back
+      const half = Math.max(1, Math.round(7 * Math.abs(Math.cos(tr.p * Math.PI))));
+      ctx.fillStyle = C('outline'); ctx.fillRect(fx - half, fy - 1 + lift, half * 2, 2); ctx.fillStyle = C('mustard'); if (half > 1) ctx.fillRect(fx - half + 1, fy - 1 + lift, half * 2 - 2, 1);
+      if (half > 3) { ctx.fillStyle = C('white'); ctx.fillRect(fx - half + 2, fy + 1 + lift, 1, 1); ctx.fillRect(fx + half - 3, fy + 1 + lift, 1, 1); }
+      return;
+    }
+    if (tr.kind === 'kickflip') { // rolling over its long axis: deck, edge, underside with the wheels up, edge, deck
+      const c = Math.cos(tr.p * 2 * Math.PI);
+      if (Math.abs(c) < 0.4) { ctx.fillStyle = C('outline'); ctx.fillRect(fx - 7, fy + lift, 14, 1); return; }
+      ctx.fillStyle = C('outline'); ctx.fillRect(fx - 7, fy - 1 + lift, 14, 2); ctx.fillStyle = C('mustard'); ctx.fillRect(fx - 6, fy - 1 + lift, 12, 1);
+      ctx.fillStyle = C('white');
+      if (c < 0) { ctx.fillRect(fx - 5, fy - 2 + lift, 1, 1); ctx.fillRect(fx + 4, fy - 2 + lift, 1, 1); ctx.fillStyle = C('red'); ctx.fillRect(fx - 1, fy - 1 + lift, 2, 1); } // underside: wheels on top, the graphic showing
+      else { ctx.fillRect(fx - 5, fy + 1 + lift, 1, 1); ctx.fillRect(fx + 4, fy + 1 + lift, 1, 1); }
+      return;
+    }
+  }
   if (board === 'grind') {
     // seen from the front, a board across the edge is foreshortened to a short upright plank, its middle on the lip
     // the deck runs under both feet and its tail hangs off the front of the lip; the nose is hidden behind the rider
@@ -19008,7 +19061,8 @@ function frame(now) {
     const idle0 = !a.visitor ? idleOf(a) : null, idle = idle0 === 'grind' ? 'grind' : !d.moving ? idle0 : null; // grinding happens mid-walk
     if (idle === 'dognap') f = Math.floor(now / 700) % 5 === 0 ? 3 + (Math.floor(now / 140) % 2) : 0; // a sleepy wag now and then
     let ox = 0, oy = 0, skateDir = null;
-    skateRow[a.id] = 0;
+    skateRow[a.id] = 0; skateOff[a.id] = null; skateTrickNow[a.id] = null;
+    let lie = false;
     const ph = (now + a.id.length * 397) % 100000;
     if (idle === 'dance') { const beat = Math.floor(now / 170); f = beat % 2 + 1; oy = beat % 2 ? -2 : 0; ox = [0, 1, 0, -1][beat % 4]; } // hopping on the pad, feet going
     else if (idle === 'pinball') { if ((ph % 2600) < 140) ox = 1; if ((ph % 2600) > 1300 && (ph % 2600) < 1400) ox = -1; } // nudging the table, almost a tilt
@@ -19018,8 +19072,10 @@ function frame(now) {
     else if (idle === 'skate') { // each round: out down the lane, then back along the floor or boardsliding the reception counter
       const P = 5200, round = Math.floor((now + a.id.length * 397) / P), t = ((now + a.id.length * 397) % P) / P;
       const mode = (round + a.id.length + (round >> 2)) % 2 ? 'grind' : 'floor';
-      const pose = skatePose(mode, t, d);
-      ox = pose.ox; oy = pose.oy; skateTilt[a.id] = pose.tilt ?? 0; skateRow[a.id] = pose.row ?? 0; skateDir = pose.dir; skateMode[a.id] = pose.board;
+      const pose = skatePose(mode, t, d, a.id, round);
+      ox = pose.ox; oy = pose.oy; skateTilt[a.id] = pose.tilt ?? 0; skateRow[a.id] = pose.row ?? 0;
+      skateOff[a.id] = pose.bx ? { bx: pose.bx, by: 0 } : null; skateTrickNow[a.id] = pose.trick ?? null; lie = !!pose.lie;
+      if (pose.walk) f = (Math.floor(now / 150) % 2) + 1; skateDir = pose.dir; skateMode[a.id] = pose.board;
     }
     else if (idle === 'lounge') { oy = (ph % 2400) < 1200 ? 1 : 0; } // slow breathing
     else if (idle === 'breathe' || idle === 'eat' || idle === 'drink' || idle === 'browse' || idle === 'candle' || idle === 'box') { if ((ph % 3200) < 260) oy = 1; } // shifting their weight
@@ -19027,13 +19083,15 @@ function frame(now) {
     else if (idle === 'chew') { oy = (ph % 360) < 180 ? 1 : 0; } // chomp
     // face the thing you're using: machines are played from the front, the dummy from the side
     const dir = skateDir ?? (idle === 'pinball' || idle === 'dance' ? 'up' : idle === 'dummy' && FUN_OBJ.wing_chun ? (FUN_OBJ.wing_chun.x > d.x ? 'right' : 'left') : a.dir);
-    d.ox = ox; d.oy = oy; // the emoji, bubble, selection bracket and possess marker ride along
+    d.ox = lie ? ox - 6 : ox; d.oy = lie ? oy + 10 : oy; // the emoji, bubble, selection bracket and possess marker ride along (down to the floor in a bail)
     if (a.id === selected || a.id === hover) {
       const sx = px + ox, sy = py + oy;
       ctx.fillStyle = C('select');
       ctx.fillRect(sx + 3, sy + SH - 1, 10, 1); ctx.fillRect(sx + 2, sy + SH - 2, 1, 1); ctx.fillRect(sx + 13, sy + SH - 2, 1, 1);
     }
-    ctx.drawImage(sprite(P[a.id], dir, f), px + ox, py + oy);
+    if (lie) { // bailed: flat on the floor, head toward the far end of the lane
+      ctx.save(); ctx.translate(px + ox + 8, py + oy + SH - 6); ctx.rotate(-Math.PI / 2); ctx.drawImage(sprite(P[a.id], 'right', 0), -8, -SH + 2); ctx.restore();
+    } else ctx.drawImage(sprite(P[a.id], dir, f), px + ox, py + oy);
     // with their back to us, whatever they're holding shows above the head instead of on their back
     const lift = dir === 'up' && HANDHELD.has(idle) ? -20 : 0;
     if (idle) drawIdle(idle, { ...a, dir }, px + ox, py + oy + lift, now);
@@ -21130,8 +21188,8 @@ $('#summary').addEventListener('click', e => { if (e.target.closest('[data-endsc
   let stage = 'splash', timers = [];
   const snapNow = local.sim().snapshot();
   const items = [
-    ...(hadSave ? [{ act: 'continue', label: 'Continue', meta: snapNow.clock.replace(/^(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)(?:, )?/, '') }] : []),
-    { act: hadSave ? 'new' : 'continue', label: hadSave ? 'New Simulation' : 'Start', meta: hadSave ? 'Start on Day 100' : `${snapNow.clock}` },
+    ...(hadSave ? [{ act: 'continue', label: 'Continue', meta: snapNow.clock.replace(/^(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)(?:, )?/, '').replace(/\s*\d{1,2}:\d{2}\s*$/, '') }] : []),
+    { act: hadSave ? 'new' : 'continue', label: hadSave ? 'New Simulation' : 'Start Simulation', meta: hadSave ? 'Start over on Day 100' : snapNow.clock.replace(/\s*\d{1,2}:\d{2}\s*$/, '') },
   ];
   let sel = 0;
   const drawMenu = () => {
