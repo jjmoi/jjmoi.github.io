@@ -9,7 +9,6 @@
 		gtag('js', new Date());
 		gtag('config', 'UA-122843739-1');
 	</script>
-	<meta name="robots" content="noindex">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><text y=%2214%22 font-size=%2214%22>🧸</text></svg>">
@@ -68,7 +67,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- PLAY -->
+	<!-- PLAY DESKTOP -->
 	<div class="container parasection first all-device desktop" id="listing-desktop">
 		<div class="row">
 			<div class="col-4">
@@ -362,7 +361,7 @@
 			</div>
 		</a>
 	</div>
-	<!-- FOOTER DESKTOP+RWD -->
+	<!-- FOOTER ALL-DEVICES -->
 	<div class="container parasection all-device" id="footer-all-devices">
 		<div class="row">
 			<div class="col-1-sm">
@@ -374,10 +373,29 @@
 			<div class="col-1-sm">
 				<a href="https://www.instagram.com/goodnightjj" target="_blank">IG</a>
 			</div>
-			<div class="col-7-sm right">
+			<div class="col-5-sm right">
+				<p id="time"></p>
+			</div>
+			<div class="col-2-sm right">
 				<p><span id="copyrights">©</span> 2046</p>
 			</div>
 		</div>
 	</div>
+	<!-- TIME -->
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			function updateTime() {
+				document.getElementById("time").textContent =
+					new Date().toLocaleTimeString("en-US", {
+						timeZone: "America/Los_Angeles",
+						hour: "numeric",
+						minute: "2-digit",
+						hour12: false
+					});
+			}
+			updateTime();
+			setInterval(updateTime, 1000);
+		});
+	</script>
 </body>
 </html>

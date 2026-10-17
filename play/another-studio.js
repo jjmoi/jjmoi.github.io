@@ -2006,6 +2006,16 @@ const __default = {
     { id: "adaeze-felix-concert-tickets", first: "Felix got us seats for his concert. Front row. I'll be the one crying into her programme.", third: "Adaeze has front-row seats for Felix's concert", v: 1 },
     { id: "adaeze-portrait-request", first: "A design magazine wants to photograph me 'in the studio.' I'm going to make them shoot the team instead.", third: "Adaeze has a design magazine wanting to photograph her in the studio", v: 0 },
     { id: "adaeze-old-friend-dinner", first: "Had dinner with a friend from my consultancy days. She's still there. I left at the right time.", third: "Adaeze had dinner with an old friend from her consultancy days", v: 1 },
+    { id: "ceo-felix-new-cello-bow", first: "Felix bought a new bow for the cello. It cost more than my first car. He's sleeping with it.", third: "Adaeze's husband Felix splurged on a cello bow", v: 1 },
+    { id: "ceo-ada-portfolio", first: "Ada asked me to look at her portfolio. Then she asked me not to 'designer' it. I'm trying.", third: "Adaeze's daughter Ada asked for portfolio help", v: 1 },
+    { id: "ceo-swim-cramp", first: "I got a cramp in the deep end this morning and had to cling to the lane rope like a toddler.", third: "Adaeze got a cramp during her morning swim", v: -1 },
+    { id: "ceo-egusi-attempt", first: "I made Mama's egusi from the recipe. Felix had thirds. Chidi said it was 'almost hers.' Almost!", third: "Adaeze cooked her mother's egusi recipe", v: 2 },
+    { id: "ceo-chidi-passed", first: "Chidi passed his driving test on the second try. He drove me to the shops. I held the door handle the whole way.", third: "Adaeze's son Chidi passed his driving test", v: 2 },
+    { id: "ceo-garden-tomatoes", first: "Our tomato plants finally gave us one tomato. One. We split it four ways at dinner.", third: "Adaeze's family harvested a single tomato", v: 1 },
+    { id: "ceo-old-sketchbook", first: "Found a sketchbook from art school in the attic. I was so sure of myself at twenty-two. I miss her a little.", third: "Adaeze found her old art-school sketchbook", v: 0 },
+    { id: "ceo-insomnia-drawing", first: "Couldn't sleep, so I drew Felix asleep at two in the morning. Best drawing I've done all year.", third: "Adaeze drew her husband asleep at 2am", v: 1 },
+    { id: "ceo-mother-video", first: "Mama learned to use video calls. She spent the whole call showing me her ceiling.", third: "Adaeze's mother figured out video calls", v: 1 },
+    { id: "ceo-ada-concert-ticket", first: "Ada bought Felix a concert ticket with her own money. To see someone else play cello. He was thrilled and jealous.", third: "Adaeze's daughter bought Felix a concert ticket", v: 2 },
   ],
   reactGood: [
     "Oh, that's marvelous. Truly.",
@@ -2510,6 +2520,16 @@ const __default = {
     { id: "tomas-wedding-anniversary", first: "Daniela and I hit five years. We celebrated with takeout and a nap. Romance.", third: "Tomás and Daniela had their fifth anniversary", v: 1 },
     { id: "tomas-zine-draft", first: "Finished the first full draft of the studio operating manual. It has illustrations. Kind of.", third: "Tomás finished a draft of the studio operating manual", v: 1 },
     { id: "tomas-dad-call-two", first: "Called my dad back. We talked about baseball for twenty minutes. Neither of us mentioned anything real.", third: "Tomás called his dad back", v: 0 },
+    { id: "cos-luna-first-steps", first: "Luna took three steps toward Pica this morning. Not toward me. Toward the dog.", third: "Tomás' daughter Luna took her first steps", v: 2 },
+    { id: "cos-salsa-shoes", first: "Found my old salsa shoes in the closet. Still fit. Daniela made me dance in the kitchen.", third: "Tomás danced salsa in the kitchen with Daniela", v: 1 },
+    { id: "cos-mom-tamales", first: "My mom sent a freezer bag of tamales back with Daniela's cousin. We're rationing them like gold.", third: "Tomás' mom sent homemade tamales", v: 2 },
+    { id: "cos-luna-daycare-cry", first: "Luna cried at daycare drop-off and I cried in the car. Two of us crying. Very professional.", third: "Tomás had a teary daycare drop-off", v: -1 },
+    { id: "cos-night-class-a", first: "Got an A on my small-business class assignment. Cash flow forecasting. I'm framing it.", third: "Tomás got an A in his business class", v: 2 },
+    { id: "cos-pica-bath", first: "Gave Pica a bath. She sulked for an hour and then rolled in the garden. Full reset.", third: "Pica rolled in the garden right after Tomás bathed her", v: 0 },
+    { id: "cos-daniela-birthday", first: "Daniela's birthday is Saturday. I've planned it in a spreadsheet. She can never know.", third: "Tomás is planning Daniela's birthday in a spreadsheet", v: 1 },
+    { id: "cos-dad-photo", first: "My dad sent a photo of me at Luna's age. We look exactly alike. Same angry eyebrows.", third: "Tomás' dad sent him a baby photo", v: 1 },
+    { id: "cos-no-sleep-week", first: "Luna's teething. I've had nine hours of sleep total since Sunday. I'm seeing the tracker in my dreams.", third: "Tomás is running on almost no sleep", v: -1.5 },
+    { id: "cos-army-buddy-visit", first: "One of my old Army buddies is in town this weekend. Haven't seen him in eight years.", third: "an old Army friend is visiting Tomás", v: 2 },
   ],
   reactGood: [
     "That's amazing. Seriously.",
@@ -3001,6 +3021,16 @@ const __default = {
     { id: "kenji-hana-chisel", first: "Hana asked for her own chisel. I bought her a small one. Safety glasses too.", third: "Kenji bought Hana her first chisel", v: 2 },
     { id: "kenji-eli-thanks", first: "Eli left a sticker on my monitor that says \"thanks boss.\" I'm keeping it.", third: "Kenji is quietly keeping a sticker Eli gave him", v: 1 },
     { id: "kenji-insomnia", first: "Can't sleep. Lying awake rearranging the staffing plan like wood type in a case.", third: "Kenji hasn't been sleeping well", v: 0 },
+    { id: "head_design-canoe-paddle", first: "Carved the first paddle for the canoe. Ash. Hana sanded the grip and signed it with a tiny H.", third: "Kenji and his daughter carved a canoe paddle", v: 2 },
+    { id: "head_design-hana-sleepover", first: "Hana had her first sleepover at a friend's. The house was very quiet. I sharpened everything I own.", third: "Kenji's daughter had her first sleepover away", v: 0 },
+    { id: "head_design-ramen-owner", first: "The ramen owner gave me a free bowl for fixing his kerning. Best payment I've had in years.", third: "Kenji got free ramen for fixing a menu", v: 1 },
+    { id: "head_design-piano-recital-made-it", first: "Made it to Hana's piano recital this time. Front row. She played one wrong note and glared at it.", third: "Kenji made it to his daughter's recital", v: 2 },
+    { id: "head_design-mother-calligraphy", first: "My mother showed me her calligraphy from when she was young. Now I know where it comes from.", third: "Kenji discovered his mother's old calligraphy", v: 2 },
+    { id: "head_design-lake-fog", first: "Went out on the lake at dawn. Fog so thick I couldn't see the bow. Very quiet. Very good.", third: "Kenji paddled the lake in the fog at dawn", v: 1 },
+    { id: "head_design-chisel-lost", first: "Lost my favorite chisel. Fifteen years. I've checked everywhere twice.", third: "Kenji lost his favorite chisel", v: -1 },
+    { id: "head_design-chisel-found", first: "Hana had my chisel. She's been carving a tiny fish with it. I am not even angry.", third: "Kenji's daughter borrowed his chisel to carve a fish", v: 2 },
+    { id: "head_design-ex-coffee", first: "Had coffee with Hana's mother. Talked about Hana for an hour. Easy. That's new.", third: "Kenji had an easy coffee with his ex", v: 1 },
+    { id: "head_design-sleep-better", first: "Slept eight hours last night. First time in months. Felt like a different person.", third: "Kenji finally got a full night's sleep", v: 1 },
   ],
   reactGood: [
     "Good. That's earned.",
@@ -3492,6 +3522,16 @@ const __default = {
     { id: "sofia-swedish-forgetting", first: "Forgot a Swedish word on the phone with my sister. Just forgot it. Scary.", third: "Sofia is losing her Swedish a little", v: -1 },
     { id: "sofia-cooking-class", first: "Mara taught me to make gravlax. It was edible. Barely.", third: "Sofia learned to make gravlax from Mara", v: 1 },
     { id: "sofia-noor-coffee", first: "Noor and I had coffee and didn't argue about motion once. Suspicious.", third: "Sofia and Noor had a peaceful coffee", v: 0 },
+    { id: "design_director-derby-win", first: "We won the bout by two points. Last jam. I may have screamed in a referee's face. Happily.", third: "Sofia's derby team won a close bout", v: 2 },
+    { id: "design_director-mara-new-dish", first: "Mara put my grandmother's cardamom buns on her menu. With my name on them. I'm not crying, you're crying.", third: "Sofia's girlfriend Mara put her family recipe on the menu", v: 2 },
+    { id: "design_director-knee-physio", first: "Physio says my knee is fine if I stop doing the thing I love. So, not fine.", third: "Sofia's physio is worried about her knee", v: -1 },
+    { id: "design_director-sister-baby-born", first: "My sister had the baby. A girl. Eight pounds. I'm an aunt. I bought her a tiny derby helmet.", third: "Sofia's sister in Sweden had a baby girl", v: 2 },
+    { id: "design_director-swedish-lessons", first: "Started Swedish lessons on my phone. The app thinks I'm a beginner. Rude, but fair.", third: "Sofia is relearning Swedish", v: 0 },
+    { id: "design_director-lease-saved", first: "Mara's landlord renewed the lease. Two more years. We celebrated with leftovers at midnight.", third: "Mara's restaurant kept its lease", v: 2 },
+    { id: "design_director-derby-rookie", first: "I'm coaching a derby rookie who's terrified of falling. I told her falling is the whole sport.", third: "Sofia is coaching a nervous roller derby rookie", v: 1 },
+    { id: "design_director-flat-plants-dead", first: "Went away for a week and every plant in our flat died. Mara says it's a sign. Of what, she won't say.", third: "Sofia's houseplants all died while she was away", v: -0.5 },
+    { id: "design_director-ikea-fight", first: "Mara and I built a wardrobe together. We're still together. The wardrobe is crooked.", third: "Sofia and Mara survived building a wardrobe", v: 1 },
+    { id: "design_director-sauna-night", first: "Found a real wood-fired sauna across town. First time I've felt Swedish in months.", third: "Sofia found a proper sauna in town", v: 2 },
   ],
   reactGood: [
     "Ja! That's huge!",
@@ -3983,6 +4023,16 @@ const __default = {
     { id: "noor-flights-price", first: "Flights to Beirut for the wedding doubled overnight. Half our families can't come.", third: "Noor's wedding flights got really expensive", v: -2 },
     { id: "noor-crashed-file", first: "My file corrupted. Three days of keyframes, gone. I backed up. Just not that one.", third: "Noor lost three days of animation to a corrupt file", v: -1 },
     { id: "noor-baba-hospital", first: "Baba had a fall in Montreal. He's okay. I'm not, a little.", third: "Noor's dad had a fall back in Montreal", v: -1 },
+    { id: "senior_designer-karim-surprise", first: "Karim flew in for one night just to take me to dinner. One night. I'm still smiling.", third: "Noor's fiance flew in for a surprise dinner", v: 2 },
+    { id: "senior_designer-v7-attempt", first: "Fell off the V7 eleven times. Eleven. My hands look like a map of my failures.", third: "Noor keeps falling off a V7 boulder problem", v: -0.5 },
+    { id: "senior_designer-teta-recipe", first: "Teta sent me her maamoul recipe in a voice note. Half of it is just her laughing.", third: "Noor's grandmother sent her a recipe by voice note", v: 2 },
+    { id: "senior_designer-wedding-invite-design", first: "Designed our wedding invitations in Arabic and English. Took forty versions. Karim liked the first one.", third: "Noor designed her own wedding invitations", v: 1 },
+    { id: "senior_designer-dad-recovering", first: "Dad's walking without the cane now. He sent me a video of himself doing it. Showing off.", third: "Noor's dad is recovering from his fall", v: 2 },
+    { id: "senior_designer-mint-dynasty", first: "My mint plant has babies now. I'm giving them out like a proud grandmother.", third: "Noor's mint plant is thriving", v: 1 },
+    { id: "senior_designer-ramadan-iftar", first: "Hosted iftar for friends in my tiny flat. Fourteen people. Three chairs. Perfect night.", third: "Noor hosted an iftar dinner at home", v: 2 },
+    { id: "senior_designer-time-zone-tired", first: "Karim's calls are at midnight my time. I'm in love and I'm exhausted.", third: "Noor's long-distance calls are wearing her out", v: -1 },
+    { id: "senior_designer-climbing-gym-friend", first: "Made a friend at the climbing gym. She's seventy-one and climbs better than me.", third: "Noor made a 71-year-old climbing friend", v: 1 },
+    { id: "senior_designer-venue-deposit", first: "Paid the deposit on the Beirut venue. It's real now. Very real. Very expensive.", third: "Noor paid the deposit on her wedding venue", v: 1 },
   ],
   reactGood: [
     "Okay, that's actually wonderful.",
@@ -4474,6 +4524,16 @@ const __default = {
     { id: "eli-bass-amp-died", first: "My amp died mid-song at the gig. I finished on vibes alone.", third: "Eli's bass amp died during a gig", v: -1 },
     { id: "eli-mom-car-trouble", first: "Mom's car broke down on the highway again. I sent her what I had.", third: "Eli's mom's car broke down again", v: -1 },
     { id: "eli-ditto-ignored", first: "Studio Ditto posted a job I'm qualified for. Didn't apply. I like it here too much.", third: "Eli decided not to apply to Studio Ditto", v: 0 },
+    { id: "junior_designer-band-new-song", first: "We wrote a new song at practice. It's about Futura. It slaps. The drummer cried a little.", third: "Eli's band wrote a song about their ferret", v: 2 },
+    { id: "junior_designer-mom-car-fund-75", first: "Mom's car fund is at seventy-five percent. I made the chart bigger.", third: "Eli is three-quarters of the way to buying their mom a car", v: 2 },
+    { id: "junior_designer-futura-escape", first: "Futura got out of her cage and I found her asleep in my bass case. Like a tiny hairy roadie.", third: "Eli's ferret escaped into their bass case", v: 1 },
+    { id: "junior_designer-skate-bruise", first: "I have a bruise shaped like Ohio from the counter. Tomás saw. He did not laugh. That was worse.", third: "Eli has a giant bruise from skating", v: -0.5 },
+    { id: "junior_designer-zine-sold-ten", first: "The zine shop sold ten copies. Ten strangers own my signage zine. I'm famous to ten people.", third: "Eli's zine sold ten copies at the shop", v: 2 },
+    { id: "junior_designer-roommate-new", first: "New roommate moved in. She owns a label maker. I think we'll be best friends.", third: "Eli's new roommate owns a label maker", v: 1 },
+    { id: "junior_designer-gig-tiny-crowd", first: "Played to six people last night. Two were the bartender. We played like it was a stadium.", third: "Eli's band played to a tiny crowd", v: 0 },
+    { id: "junior_designer-kickflip-landed", first: "Landed a kickflip in the car park after work. Nobody saw. I'm telling everyone.", third: "Eli finally landed a kickflip", v: 2 },
+    { id: "junior_designer-mom-call-proud", first: "Mom called just to say she put my zine on the fridge next to my kindergarten drawings.", third: "Eli's mom put their zine on the fridge", v: 2 },
+    { id: "junior_designer-late-night-tutorial", first: "Watched a tutorial till 3am and learned something that'll save me hours. Worth it. Probably.", third: "Eli stayed up till 3am learning a new trick", v: 0 },
   ],
   reactGood: [
     "WAIT. That's amazing!",
@@ -4965,6 +5025,16 @@ const __default = {
     { id: "hannah-ear-infection", first: "Ear infection. I can't wear my aids for a week. Please write everything down.", third: "Hannah has an ear infection and can't wear her hearing aids", v: -2 },
     { id: "hannah-sister-fight", first: "My sister and I fought about our mother at Shabbat. We hugged at the door. Mostly fine.", third: "Hannah had a fight with her sister at Shabbat dinner", v: 0 },
     { id: "hannah-pottery-sale", first: "Someone at the pottery studio bought one of my bowls. Twelve dollars. I'm a professional.", third: "Hannah sold her first pottery bowl", v: 1 },
+    { id: "ux_researcher-pottery-teapot", first: "I threw a teapot. The spout pours sideways. I'm keeping it because it's honest.", third: "Hannah made a lopsided teapot in pottery class", v: 1 },
+    { id: "ux_researcher-bauhaus-window", first: "Bauhaus learned to open the kitchen window. I now live with a cat burglar.", third: "Hannah's cat learned to open windows", v: 0 },
+    { id: "ux_researcher-second-date", first: "There was a second date. He asked follow-up questions. I almost proposed on the spot.", third: "Hannah went on a promising second date", v: 2 },
+    { id: "ux_researcher-book-chapter-two", first: "Finished chapter two of the book. It's about listening. I wrote it in silence, which felt right.", third: "Hannah finished another chapter of her book", v: 2 },
+    { id: "ux_researcher-sister-made-up", first: "My sister and I made up over challah. Nobody apologized. Everybody passed the butter.", third: "Hannah made up with her sister", v: 2 },
+    { id: "ux_researcher-hearing-concert", first: "Went to a concert with the new hearing aids. I heard the cellist breathe. I cried in row K.", third: "Hannah heard live music clearly with her new hearing aids", v: 2 },
+    { id: "ux_researcher-kiln-explosion", first: "Someone's bowl exploded in the kiln and took my vase with it. Pottery is a lesson in letting go.", third: "Hannah's vase was lost in a kiln accident", v: -1 },
+    { id: "ux_researcher-advisor-coffee", first: "Had coffee with my old advisor. She asked when I'm coming back to academia. Never, I said. Kindly.", third: "Hannah turned down her old advisor's invitation back to academia", v: 0 },
+    { id: "ux_researcher-marcus-poem-gift", first: "Marcus wrote me a poem about the mug I made him. I'm putting it in a frame next to my degrees.", third: "Marcus wrote Hannah a poem", v: 2 },
+    { id: "ux_researcher-rainy-sunday", first: "Spent all Sunday reading with Bauhaus on my legs and the rain on the windows. Perfect day.", third: "Hannah had a perfect rainy Sunday", v: 1 },
   ],
   reactGood: [
     "Oh, that's wonderful news.",
@@ -5456,6 +5526,16 @@ const __default = {
     { id: "marcus-radio-interview", first: "Local radio wants me to read a poem on air. Live. I'm acting calm.", third: "Marcus is reading a poem on local radio", v: 2 },
     { id: "marcus-index-cards-lost", first: "Left a stack of index cards on the bus. Two months of lines. Gone.", third: "Marcus lost two months of index cards on the bus", v: -1 },
     { id: "marcus-pinball-record", first: "Beat my own Space Kerning record. Sticky flipper and all.", third: "Marcus beat his own pinball high score", v: 0 },
+    { id: "copywriter-plant-42", first: "Bought plant number forty-two. A fern. Her name is Maya, after Angelou. She's thriving out of spite.", third: "Marcus bought his 42nd plant", v: 1 },
+    { id: "copywriter-mentee-poem-published", first: "One of my teens got a poem published. Fifteen years old. I read it on the bus and missed my stop.", third: "one of Marcus' teen mentees got published", v: 2 },
+    { id: "copywriter-grandma-poem-reading", first: "Grandma read one of her secret poems at church. The whole room went quiet. Then the whole room said amen.", third: "Marcus' grandma read her poetry at church", v: 2 },
+    { id: "copywriter-open-mic-bomb", first: "Bombed at open mic. Forgot my third verse. Stood there for nine seconds. Longest nine seconds of my life.", third: "Marcus forgot his lines at open mic", v: -1 },
+    { id: "copywriter-chapbook-sold-out", first: "First print run of the chapbook sold out. Fifty copies. I signed every one like it was a lease.", third: "Marcus' chapbook sold out its first print run", v: 2 },
+    { id: "copywriter-special-someone-dinner", first: "Second dinner with the person from open mic. We talked till they stacked the chairs.", third: "Marcus had a long dinner with someone special", v: 2 },
+    { id: "copywriter-atlanta-cousins", first: "My cousins in Atlanta started a group chat called 'Marcus Famous.' I'm not famous. I'm on local radio once.", third: "Marcus' cousins are teasing him about his radio spot", v: 1 },
+    { id: "copywriter-battle-rap-rematch", first: "My old battle rap rival challenged me to a poetry slam. Friendly. Mostly. I'm practicing in the shower.", third: "Marcus is preparing for a slam against his old rival", v: 1 },
+    { id: "copywriter-index-cards-found", first: "Bus company found my lost index cards. Two months of lines. I hugged the lost-property guy.", third: "Marcus got his lost index cards back", v: 2 },
+    { id: "copywriter-mentee-back", first: "The kid who left the program came back. Just showed up Tuesday with a notebook. Didn't say anything. Didn't need to.", third: "a teen returned to Marcus' writing program", v: 2 },
   ],
   reactGood: [
     "Oh, that's beautiful news.",
@@ -6090,6 +6170,16 @@ const __default = {
     { id: "lucia-dad-proud-call", first: "My dad called just to say he read about the studio. He sounded proud.", third: "Lucía's dad called to say he's proud of her", v: 2 },
     { id: "lucia-visa-paperwork", first: "The visa office wants another form. A form about the form.", third: "Lucía is stuck in visa paperwork", v: 0 },
     { id: "lucia-cooked-for-neighbors", first: "I made empanadas for my whole floor. Now the neighbors know my name.", third: "Lucía cooked empanadas for her neighbors", v: 1 },
+    { id: "hire_lucia-abuela-recipe", first: "Abuela taught me her alfajores over video. Half the call was her telling me I was doing it wrong.", third: "Lucía learned her grandmother's alfajores recipe", v: 1 },
+    { id: "hire_lucia-football-final", first: "Our five-a-side team made the final. I'm captain. I'm unbearable. Everyone says so.", third: "Lucía's five-a-side team made the final", v: 2 },
+    { id: "hire_lucia-mate-new-gourd", first: "Bought a new mate gourd at a market here. It's ugly. I love it. We are bonding.", third: "Lucía bought a new mate gourd", v: 1 },
+    { id: "hire_lucia-visa-approved", first: "My visa paperwork finally went through. I read the email nine times to be sure.", third: "Lucía's visa paperwork was approved", v: 2 },
+    { id: "hire_lucia-homesick-asado", first: "Found an Argentine butcher across town. Bought too much meat. Invited everyone in my building.", third: "Lucía threw an asado for her neighbors", v: 2 },
+    { id: "hire_lucia-plant-flowered", first: "The plant I'm keeping alive flowered. I didn't know it could do that. I'm a gardener now.", third: "Lucía's plant flowered", v: 1 },
+    { id: "hire_lucia-barcelona-friend-left", first: "My friend from Barcelona went home. The flat is very quiet. I'm talking to the plant.", third: "Lucía is lonely after her friend's visit ended", v: -1 },
+    { id: "hire_lucia-dad-match", first: "Watched Boca play with my dad over video. We screamed at the same time across two continents.", third: "Lucía watched a Boca match with her dad over video", v: 1 },
+    { id: "hire_lucia-karaoke-regular", first: "The karaoke bar knows my name now. And my song. They start it when I walk in.", third: "Lucía has become a regular at the karaoke bar", v: 1 },
+    { id: "hire_lucia-ankle-healed", first: "Ankle's fully healed. Scored in my first game back. Bad goal. Counts.", third: "Lucía scored in her first game back from injury", v: 2 },
   ],
   reactGood: [
     "¡Qué bueno! That's huge.",
@@ -6571,6 +6661,16 @@ const __default = {
     { id: "rohan-cooking-class", first: "I signed up for a weekend cooking class. For breakfasts, obviously.", third: "Rohan signed up for a cooking class", v: 0 },
     { id: "rohan-tax-bill", first: "Freelance tax bill arrived. It's an animation of my savings disappearing.", third: "Rohan got a big freelance tax bill", v: -1 },
     { id: "rohan-new-storyboard", first: "Started storyboarding a new short. It's about the cat. Of course it's about the cat.", third: "Rohan started a new short film", v: 0 },
+    { id: "hire_rohan-short-first-frame", first: "Finished the first ten seconds of the new short. Took three weeks. Only ninety-four minutes to go.", third: "Rohan finished the opening of his new short film", v: 1 },
+    { id: "hire_rohan-tabla-first-rhythm", first: "Played my first full tabla rhythm without stopping. My teacher nodded once. I'll live on that nod for weeks.", third: "Rohan's tabla teacher approved of his playing", v: 2 },
+    { id: "hire_rohan-nikhil-cooking", first: "Nikhil tried my cooking-class curry. He said it was 'brave.' I'm choosing to take that as praise.", third: "Rohan cooked for his partner Nikhil", v: 0 },
+    { id: "hire_rohan-cat-birthday", first: "The old cat turned seventeen. We gave her a sardine on a tiny plate. She ate it and ignored us.", third: "Rohan's old cat turned seventeen", v: 2 },
+    { id: "hire_rohan-sister-wedding-plans", first: "Got my outfit for my sister's wedding. Mum approved over video. That never happens.", third: "Rohan's mum approved his wedding outfit", v: 1 },
+    { id: "hire_rohan-render-farm", first: "Rendered my whole short overnight on Nikhil's gaming PC. He came home to a very hot room.", third: "Rohan borrowed his partner's PC for a big render", v: 1 },
+    { id: "hire_rohan-tax-paid", first: "Paid the freelance tax bill. My bank account is a desert. A very compliant desert.", third: "Rohan paid his big freelance tax bill", v: -1 },
+    { id: "hire_rohan-loop-commission", first: "Someone who saw my loop asked me to animate their wedding invite. Real money. For a loop!", third: "Rohan got a commission from his viral loop", v: 2 },
+    { id: "hire_rohan-burnt-again", first: "Burnt the weekend breakfast again. Nikhil now does the eggs and I do 'presentation.'", third: "Rohan burnt breakfast again", v: 0 },
+    { id: "hire_rohan-festival-screening", first: "My short screens at a small festival next month. Nikhil already bought popcorn. Bulk popcorn.", third: "Rohan's short is screening at a festival", v: 2 },
   ],
   reactGood: [
     "Oh, that's lovely.",
@@ -7052,6 +7152,16 @@ const __default = {
     { id: "sione-phone-cracked", first: "Dropped my phone at choir. Screen's a spiderweb. Still works. Kind of.", third: "Sione cracked his phone screen", v: -1 },
     { id: "sione-new-church-hall", first: "The church is building a new hall. They asked me to design the sign.", third: "Sione is designing the sign for his church's new hall", v: 1 },
     { id: "sione-aunty-visiting", first: "My aunty's flying in next week. She'll bring a suitcase of food. Literally.", third: "Sione's aunty is visiting with a suitcase of food", v: 0 },
+    { id: "hire_sione-grandfather-home", first: "Grandad's out of hospital and back home in Tonga. He called to complain about the hospital food. Best call ever.", third: "Sione's grandfather got out of hospital", v: 2 },
+    { id: "hire_sione-choir-solo-done", first: "Sang the solo at church. My voice cracked once. Aunty said it was 'the Holy Spirit.'", third: "Sione sang his church solo", v: 2 },
+    { id: "hire_sione-rugby-new-season", first: "Touch rugby season starts Saturday. My hamstring says no. My heart says absolutely.", third: "Sione's touch rugby season is starting", v: 1 },
+    { id: "hire_sione-tapa-typeface-five", first: "Finished five letters of the tapa-cloth typeface. Kenji looked at them for a full minute without talking.", third: "Sione is making progress on his tapa-cloth typeface", v: 2 },
+    { id: "hire_sione-mum-call-caught", first: "Finally caught Mum on the phone. Two hours. She told me about every person in the village.", third: "Sione finally had a long call with his mum", v: 2 },
+    { id: "hire_sione-cousin-new-flat", first: "Helped my cousin move. Carried a couch up four flights. My back is writing me a letter.", third: "Sione helped his cousin move house", v: 0 },
+    { id: "hire_sione-sister-university", first: "My little sister got into university. First in our family. I had to step outside the bus.", third: "Sione's sister got into university", v: 2 },
+    { id: "hire_sione-phone-fixed", first: "Got my phone screen fixed. I can read messages again instead of guessing them.", third: "Sione finally fixed his cracked phone", v: 1 },
+    { id: "hire_sione-church-hall-sign", first: "The church hall sign is up. My name's on a little plaque. Aunty took forty photos.", third: "Sione's church hall sign went up", v: 2 },
+    { id: "hire_sione-money-tight-again", first: "Sent money home this month and now it's rice and eggs till payday. Worth it. Still rice and eggs.", third: "Sione is tight on money after sending some home", v: -1 },
   ],
   reactGood: [
     "Choice! That's so good.",
@@ -7533,6 +7643,16 @@ const __default = {
     { id: "mira-flood-basement", first: "Basement flooded. My old agency notebooks are soaked. Maybe that's a sign.", third: "Mira's basement flooded", v: -1 },
     { id: "mira-no-overtime-month", first: "First month in ten years with zero overtime. I keep checking the hours. It's true.", third: "Mira went a whole month without overtime", v: 2 },
     { id: "mira-ex-helped-move", first: "My ex helped me move the wardrobe. We laughed the whole time. Divorce done right.", third: "Mira's ex-husband helped her move furniture", v: 1 },
+    { id: "hire_mira-marek-giant-loaf", first: "Marek produced a loaf so big it didn't fit the bread bin. We ate it with a saw. Basically.", third: "Mira's sourdough starter made a giant loaf", v: 1 },
+    { id: "hire_mira-youngest-play-night", first: "My youngest was a tree in the school play. Very convincing tree. I cried. Trees make me cry now.", third: "Mira's daughter performed in the school play", v: 2 },
+    { id: "hire_mira-eldest-apology", first: "My eldest left a note on my pillow saying sorry. I've kept it in my wallet.", third: "Mira's eldest daughter apologized after their fight", v: 2 },
+    { id: "hire_mira-krakow-trip", first: "Booked a trip to Krakow for Christmas with the girls. First time they'll see where I grew up.", third: "Mira is taking her daughters to Krakow", v: 2 },
+    { id: "hire_mira-basement-dry", first: "The basement is finally dry. We found my wedding album down there. Undamaged. Hmm.", third: "Mira's basement finally dried out", v: 0 },
+    { id: "hire_mira-walk-twenty-k", first: "Walked twenty kilometers on Sunday with a podcast about medieval bread. Both of my favorite things.", third: "Mira did a twenty-kilometer Sunday walk", v: 1 },
+    { id: "hire_mira-tax-letter-solved", first: "Solved the tax letter. It was their mistake. I made them say it on the phone. Twice.", third: "Mira won her argument with the tax office", v: 2 },
+    { id: "hire_mira-choir-joined", first: "Joined the Polish choir. I sing alto. Badly. Loudly. Joyfully.", third: "Mira joined a Polish choir", v: 2 },
+    { id: "hire_mira-ex-birthday-card", first: "My ex sent a birthday card signed from him and his new girlfriend. Weirdly, it was nice.", third: "Mira's ex sent her a birthday card", v: 0 },
+    { id: "hire_mira-daughters-baked", first: "The girls baked me a cake from scratch. It collapsed. We ate it with spoons. Best cake of my life.", third: "Mira's daughters baked her a collapsed cake", v: 2 },
   ],
   reactGood: [
     "Wonderful. Write it down so you remember.",
@@ -8014,6 +8134,16 @@ const __default = {
     { id: "zainab-old-colleague-ditto", first: "An old colleague just joined Studio Ditto as head of strategy. Mixed feelings, mostly envy.", third: "Zainab's old colleague joined Studio Ditto", v: 0 },
     { id: "zainab-migraine", first: "Migraine all weekend. Couldn't look at a screen. Or a magazine. Torture.", third: "Zainab had a migraine all weekend", v: -1 },
     { id: "zainab-dad-letter", first: "Found an old letter from my dad in a magazine I bought years ago. I'd forgotten I kept it there.", third: "Zainab found an old letter from her dad", v: 1 },
+    { id: "hire_zainab-supper-club-proposal", first: "Someone proposed at my supper club. Between the jollof and dessert. She said yes. I cried into the plantain.", third: "someone got engaged at Zainab's supper club", v: 2 },
+    { id: "hire_zainab-magazines-saved", first: "Saved most of the magazines from the leak. Ironed them between towels. Very ancient. Very me.", third: "Zainab rescued her magazine collection from water damage", v: 1 },
+    { id: "hire_zainab-mum-recovered", first: "Mum's back on her feet in Lagos. She's already bossing the whole street again.", third: "Zainab's mum recovered from her fall", v: 2 },
+    { id: "hire_zainab-column-first", first: "My first column comes out Sunday. About grids. My old editor said it's 'unexpectedly emotional.'", third: "Zainab's first magazine column comes out this week", v: 2 },
+    { id: "hire_zainab-cousin-wedding-aso-ebi", first: "Picked the fabric for my cousin's wedding. Forty aunties have opinions. I have a headache.", third: "Zainab is navigating aunty opinions about wedding fabric", v: 0 },
+    { id: "hire_zainab-niece-video", first: "My new niece grabbed my finger on a video call. Through a screen. Somehow it still counted.", third: "Zainab met her new niece over video", v: 2 },
+    { id: "hire_zainab-new-phone-photos", first: "Lost all my phone photos when it got stolen. Found most of them in a backup I forgot I made. Past me, thank you.", third: "Zainab recovered her photos after her phone was stolen", v: 1 },
+    { id: "hire_zainab-book-chapter-three", first: "Chapter three of the book is done. It's the one about Dad. I had to take a walk after.", third: "Zainab finished a hard chapter of her book", v: 1 },
+    { id: "hire_zainab-supper-club-disaster-two", first: "The oven died mid-supper club. Served everything as 'room-temperature tasting menu.' They loved it.", third: "Zainab's oven died during supper club", v: 0 },
+    { id: "hire_zainab-migraine-free-month", first: "A whole month without a migraine. I'm celebrating quietly. Very quietly. Just in case.", third: "Zainab went a month without migraines", v: 2 },
   ],
   reactGood: [
     "Oh, that's brilliant news!",
@@ -8495,6 +8625,16 @@ const __default = {
     { id: "ari-zine-trade-hero", first: "Traded a zine with an artist I've idolized since high school. They knew my work.", third: "Ari traded zines with an artist they admire", v: 2 },
     { id: "ari-sketchbook-lost", first: "Left my sketchbook on the bus. Two months of drawings. Someone, please be kind.", third: "Ari lost their sketchbook on the bus", v: -1 },
     { id: "ari-sketchbook-returned", first: "A stranger mailed my sketchbook back with a note: \"your cats saved my week.\"", third: "Ari's lost sketchbook was mailed back by a stranger", v: 2 },
+    { id: "hire_ari-gecko-found-again", first: "Found the gecko in the shoe again. Same shoe. I think she's made it her house.", third: "Ari's gecko has moved into a roommate's shoe for good", v: 1 },
+    { id: "hire_ari-manila-countdown", first: "Twenty-three days until Manila. I made a countdown calendar. Each day is a tiny drawing of my partner.", third: "Ari is counting down to their Manila trip", v: 2 },
+    { id: "hire_ari-grandma-better", first: "My grandmother's out of the hospital. She asked about the graphic novel first thing. Before lunch.", third: "Ari's grandmother left the hospital", v: 2 },
+    { id: "hire_ari-wrist-brace", first: "Got a wrist brace for drawing. I look like a tiny boxer. A very tired tiny boxer.", third: "Ari started wearing a wrist brace", v: -0.5 },
+    { id: "hire_ari-payment-arrived", first: "The overdue freelance payment finally came. I bought groceries and one very nice pen.", third: "Ari finally got paid for an overdue job", v: 2 },
+    { id: "hire_ari-new-roommate-found", first: "Found a new roommate. She does stop-motion. Our flat is now ninety percent clay.", third: "Ari found a new roommate", v: 1 },
+    { id: "hire_ari-lumpia-party", first: "Made lumpia for the whole zine collective. Rolled two hundred. My fingers are permanently curled.", third: "Ari made two hundred lumpia for friends", v: 2 },
+    { id: "hire_ari-comic-page-done", first: "Finished the hardest page of the graphic novel. It's the one where my grandmother leaves the island. I needed a nap after.", third: "Ari finished a hard page of their graphic novel", v: 1 },
+    { id: "hire_ari-overalls-patched", first: "Patched my paint overalls with a fabric that has tiny cats on it. They're better than ever.", third: "Ari patched their favorite overalls", v: 1 },
+    { id: "hire_ari-library-again", first: "The library asked me back to read to kids again. One kid drew me. I'm keeping it forever.", third: "Ari was invited back to read at the library", v: 2 },
   ],
   reactGood: [
     "WHAT. That's amazing!",
@@ -13207,21 +13347,21 @@ const LIVES = {
     voice: { hi: ['Hi! Sorry, is now okay?', 'Quick question, I wrote it down.', 'Hej!'], tics: ['Can I take notes on that?', 'Sorry, one more question.', 'Oh, that\'s so smart.'], yes: ['Yes! On it.', 'I\'d love to.'], no: ['Oh, okay. I\'ll try again.', 'Totally, I\'ll fix it.'], bye: ['Thank you so much!', 'Hej då!'] },
     hobbies: [['Saturday café shift', '☕', 'home:out'], ['call with Nana in Accra', '📞', 'home:couch'], ['making her bus-stop zine', '✂️', 'home:desk']],
     weekly: [{ day: 5, start: 8 * 60, dur: 360, activity: 'Saturday café shift', emoji: '☕', place: 'home:out', needs: ['social'] }, { day: 6, start: 17 * 60, dur: 60, activity: 'call with Nana in Accra', emoji: '📞', place: 'home:couch', needs: ['social', 'fulfillment'] }],
-    events: [{ first: 'Sofia said "nice" about my grid. Just "nice." I\'ve thought about it all day.', third: 'Sofia complimented Bea\'s grid', v: 2 }, { first: 'My student loan statement came. I put it in a drawer.', third: 'Bea is worried about her student loans', v: -1.5 }, { first: 'A bus company emailed about my zine!', third: 'a bus company noticed Bea\'s zine', v: 2 }],
+    events: [{ first: 'Sofia said "nice" about my grid. Just "nice." I\'ve thought about it all day.', third: 'Sofia complimented Bea\'s grid', v: 2 }, { first: 'My student loan statement came. I put it in a drawer.', third: 'Bea is worried about her student loans', v: -1.5 }, { first: 'A bus company emailed about my zine!', third: 'a bus company noticed Bea\'s zine', v: 2 }, { first: "Got a postcard from Nana in Accra. She wrote 'proud' and underlined it three times.", third: "Bea's grandmother sent her a proud postcard", v: 2 }, { first: "A customer at the café left me a drawing of my latte art. It was better than my latte art.", third: "a café customer drew Bea's latte art", v: 1 }, { first: "All three of my flatmates had exams this week. We lived on toast and panic.", third: "Bea's flat survived exam week on toast", v: 0 }, { first: "Ranked twelve more bus stops for the zine. The one by the hospital has a tiny garden. It's number one now.", third: "Bea found a new favorite bus stop for her zine", v: 1 }, { first: "My café shift ran late and I missed the last bus. Walked home. Rated every bus stop on the way out of spite.", third: "Bea had to walk home after a late café shift", v: -0.5 }, { first: "Mum flew in from Gothenburg for the weekend. She reorganized my kitchen. I can't find anything. I love her.", third: "Bea's mum visited from Gothenburg", v: 2 }, { first: "Sold twenty copies of the bus stop zine at a fair. Someone asked me to sign one. I spelled my own name wrong.", third: "Bea sold copies of her bus stop zine", v: 2 }, { first: "My student loan interest went up again. I did the maths and then I had to lie on the floor.", third: "Bea's student loan interest went up", v: -1.5 }, { first: "Designed a fake Swedish stamp for fun. Dala horse in the bus stop grid. I'm sending it to the postal service. Why not.", third: "Bea designed a stamp for the Swedish postal service, unasked", v: 1 }, { first: "Nana sang me a Ga lullaby on our Sunday call. I fell asleep with the phone on my face.", third: "Bea's grandmother sang to her on their Sunday call", v: 2 }, { first: "One of my flatmates is moving out and the new one plays the trombone. At night.", third: "Bea's new flatmate plays trombone at night", v: -0.5 }, { first: "Got a free pastry at work because the owner said I 'look like I need it.' Accurate.", third: "Bea's café boss gave her a free pastry", v: 1 }, { first: "Went swimming in the lake for the first time since Sweden. Freezing. Perfect. Like home.", third: "Bea went for a cold lake swim", v: 2 }, { first: "My sticky note wall at home fell down in the night. I thought it was a burglar. It was knowledge.", third: "Bea's sticky note wall collapsed in the night", v: 0 }, { first: "Cooked jollof for my flatmates and got Mum on video to supervise. She said 'more pepper' eleven times.", third: "Bea cooked jollof with her mum supervising over video", v: 1 }],
   },
   intern_dev: {
     traits: { O: 0.9, C: 0.55, E: 0.5, A: 0.8, N: 0.55 },
     voice: { hi: ['Yo, got a sec?', 'Hey, weird question.', 'Hiii.'], tics: ['That\'s a whole research question.', 'Can I draw that?', 'Okay, but why though?'], yes: ['Love it.', 'Say less.'], no: ['Hmm, not sure the data says that.', 'Fair. Back to it.'], bye: ['Later!', 'Peace.'] },
     hobbies: [['Sunday cricket', '🏏', 'home:out'], ['cooking dinner for his family', '🍛', 'home:kitchen'], ['drawing research comics', '✏️', 'home:desk']],
     weekly: [{ day: 6, start: 10 * 60, dur: 240, activity: 'Sunday cricket', emoji: '🏏', place: 'home:out', needs: ['fun', 'social'] }, { day: 2, start: 19 * 60, dur: 90, activity: 'cooking dinner for his family', emoji: '🍛', place: 'home:kitchen', needs: ['social', 'fulfillment'] }],
-    events: [{ first: 'Mum asked what a "UX" is. I said "I make things less annoying." She seemed satisfied.', third: 'Dev explained UX to his mum', v: 1 }, { first: 'My habit app crossed 40,000 users. Nobody at work knows.', third: 'Dev\'s side app crossed 40,000 users', v: 2 }, { first: 'Got rejected from a full-time role somewhere else. Stings.', third: 'Dev got rejected from a job elsewhere', v: -1.5 }],
+    events: [{ first: 'Mum asked what a "UX" is. I said "I make things less annoying." She seemed satisfied.', third: 'Dev explained UX to his mum', v: 1 }, { first: 'My habit app crossed 40,000 users. Nobody at work knows.', third: 'Dev\'s side app crossed 40,000 users', v: 2 }, { first: 'Got rejected from a full-time role somewhere else. Stings.', third: 'Dev got rejected from a job elsewhere', v: -1.5 }, { first: "Our cricket team won by one run. I didn't bat. I fielded heroically. Once.", third: "Dev's cricket team won by one run", v: 2 }, { first: "Cooked dad's favorite rasam on Wednesday and he asked for seconds without saying anything. That's love in our house.", third: "Dev's dad loved his rasam", v: 2 }, { first: "A user emailed to say my habit app helped them stop smoking. I read it at the dinner table and went quiet.", third: "a user thanked Dev for his habit app", v: 2 }, { first: "Mum told the aunties I 'make apps for feelings.' I'm choosing to accept that job title.", third: "Dev's mum told the aunties about his job", v: 1 }, { first: "Drew a comic of my whole family arguing about where to put the TV. Dad laughed so hard he coughed.", third: "Dev drew a comic of his family", v: 1 }, { first: "Paid off one more chunk of my parents' loan. Small chunk. Still a chunk. I made a little graph.", third: "Dev paid back part of his parents' loan", v: 2 }, { first: "Got hit in the shin with a cricket ball. Walked it off. Did not walk it off. Limped it off.", third: "Dev took a cricket ball to the shin", v: -0.5 }, { first: "My cousin got into medical school and the family dinner was entirely about that. Fair. Still.", third: "Dev's cousin got into medical school", v: -0.5 }, { first: "Dad asked me to explain what a 'research participant' is. Then he volunteered to be one. For my app.", third: "Dev's dad volunteered for his user research", v: 2 }, { first: "App hit 45,000 users. Still nobody at university has noticed. I've made peace with it. Mostly.", third: "Dev's habit app hit 45,000 users", v: 1 }, { first: "Lost my notebook with all the participant comics. Found it in the cricket kit bag. Covered in grass. Fine.", third: "Dev briefly lost his comic notebook", v: 0 }, { first: "My little sister asked me to help with her science fair. We built a 'which snack makes you happiest' survey. Very rigorous.", third: "Dev helped his sister with a science fair project", v: 1 }, { first: "Mum and I watched an old Tamil film together on Sunday. She mouthed every line. I didn't know she knew it by heart.", third: "Dev watched an old film with his mum", v: 2 }, { first: "Got rejected from a conference volunteer spot. It's volunteering. They still said no.", third: "Dev was turned down as a conference volunteer", v: -1 }, { first: "Dad said 'so this design thing is going well, then.' Not a question. That's the nicest thing he's ever said about my job.", third: "Dev's dad approved of his design career", v: 2 }],
   },
   pt_wren: {
     traits: { O: 0.65, C: 0.92, E: 0.5, A: 0.75, N: 0.3 },
     voice: { hi: ['Morning. What\'s burning?', 'Hey, two minutes?', 'Hi, I\'m in till four.'], tics: ['Let\'s do it once, properly.', 'Taste it before you serve it.', 'I\'m out at four for pickup.'], yes: ['Done by lunch.', 'Easy.'], no: ['Not today, I\'m off tomorrow.', 'That\'s a Thursday job.'], bye: ['See you Thursday.', 'Off to get Mateo.'] },
     hobbies: [['Sunday morning baking', '🥖', 'home:kitchen'], ['park with Mateo', '🛝', 'home:out'], ['night-school portfolio work', '💻', 'home:desk']],
     weekly: [{ day: 6, start: 7 * 60, dur: 180, activity: 'Sunday morning baking', emoji: '🥖', place: 'home:kitchen', needs: ['fun', 'fulfillment'] }, { day: 2, start: 15 * 60, dur: 180, activity: 'park with Mateo', emoji: '🛝', place: 'home:out', needs: ['social', 'fun'] }],
-    events: [{ first: 'Mateo drew our logo on the fridge. It was better than mine.', third: 'Wren\'s son drew a logo on the fridge', v: 2 }, { first: 'Daycare raised its fees again. Did the maths twice.', third: 'Wren\'s daycare fees went up', v: -1.5 }, { first: 'Someone asked if I was "just part-time." I said I\'m fully here, three days a week.', third: 'someone called Wren "just part-time"', v: -1 }],
+    events: [{ first: 'Mateo drew our logo on the fridge. It was better than mine.', third: 'Wren\'s son drew a logo on the fridge', v: 2 }, { first: 'Daycare raised its fees again. Did the maths twice.', third: 'Wren\'s daycare fees went up', v: -1.5 }, { first: 'Someone asked if I was "just part-time." I said I\'m fully here, three days a week.', third: 'someone called Wren "just part-time"', v: -1 }, { first: "Mateo lost his first tooth in a croissant. He wants it back so he can 'put it in the bread.'", third: "Wren's son lost his first tooth", v: 2 }, { first: "Sunday bake: cardamom knots. Mateo did the knotting. They look like pretzels in distress. Tasted perfect.", third: "Wren and her son baked cardamom knots", v: 1 }, { first: "My sister can't do Thursdays next month. Back to the childcare puzzle. I'm good at puzzles. I'm tired of this one.", third: "Wren's Thursday childcare fell through", v: -1.5 }, { first: "Mateo asked what I do at work. I said 'I make things look nice and work well.' He said 'like bread.' Exactly like bread.", third: "Wren's son compared design to bread", v: 2 }, { first: "An old chef I worked under saw my portfolio online and sent one word: 'clean.' From him, that's a parade.", third: "Wren's old head chef praised her design work", v: 2 }, { first: "Burnt a whole tray on Sunday. First time in years. Mateo said 'it's okay, mama, it's dark bread.'", third: "Wren burnt a tray of bread", v: 0 }, { first: "Mateo started at a new kindergarten. He walked in without looking back. I sat in the car for ten minutes.", third: "Wren's son started kindergarten", v: 1 }, { first: "A café down my street asked if I'd sell them bread on weekends. Just a few loaves. Bakery dream, tiny version.", third: "a café asked to sell Wren's bread", v: 2 }, { first: "Mateo had a fever all weekend. We watched the same dinosaur film six times. I know every roar.", third: "Wren's son was sick all weekend", v: -1 }, { first: "Finished my night-school portfolio review. The instructor kept one of my pieces to show next year's class.", third: "Wren's night-school instructor kept her work as an example", v: 2 }, { first: "Did the maths on the bakery dream again. Still doesn't add up. Did it again anyway.", third: "Wren ran the numbers on her bakery dream again", v: -0.5 }, { first: "Mateo's dad showed up to the park for once. Mateo was so happy he forgot to be shy. I'm trying to just be glad.", third: "Wren's son saw his dad at the park", v: 0 }, { first: "Took Mateo to the farmers market. He bought one carrot with his own money and carried it like a trophy.", third: "Wren's son bought a carrot at the market", v: 1 }, { first: "My sister and I baked our grandmother's pan de sal together. Same recipe, three generations. Kitchen smelled like being eight.", third: "Wren baked her grandmother's pan de sal with her sister", v: 2 }, { first: "Someone at the park asked if I was the 'bread lady from Instagram.' I don't have an Instagram. Apparently someone else does it for me.", third: "Wren is apparently known as the bread lady at the park", v: 1 }],
   },
   hire_sione: {
     traits: { O: 0.7, C: 0.8, E: 0.8, A: 0.95, N: 0.45 },
@@ -13823,7 +13963,8 @@ function decide(agent, sim) {
     const target = scored[0].o;
     const shared = projects.find(pr => pr.team.includes(target.id));
     const myNews = agent.memory.recent(15).find(mm => mm.owner === id && mm.fact && !knows(target, mm.fact));
-    const about = myNews ? 'life' : shared && chance(0.6) ? `work:${shared.id}` : pick(['checkin', 'idea', 'gossip']);
+    // personal first: news if there is any, otherwise their weekend, family and hobbies come up as often as work
+    const about = myNews ? 'life' : shared && chance(0.45) ? `work:${shared.id}` : pick(['life', 'life', 'checkin', 'idea', 'gossip']);
     C({ kind: 'social', activity: `going to talk to ${short(target.id)}`, emoji: '💬', location: deskOf(id) ?? 'dining_table', talk_to: target.id, talk_about: about, dur: [15, 25], needs: { social: 45, fun: 10 }, tags: ['social'], bonus: (tr.E - 0.5) * 1.6 + (myNews ? 1 : 0) });
   }
 
@@ -14001,6 +14142,29 @@ class Dialogue {
     this.note(a, `I told ${short(b)} my news: ${lower(first(m.text))}.`);
     this.imp = Math.max(this.imp, 4 + Math.abs(v));
   }
+  // Life outside the studio, without needing fresh news: what they did at the weekend, what they're
+  // doing tonight, the hobby they can't shut up about. The other person answers with their own.
+  beatHome(a, b) {
+    const hob = id => LIVES[id]?.hobbies?.length ? pick(LIVES[id].hobbies)[0] : null;
+    const ha = hob(a); if (!ha) return false;
+    const dow = dowOf(Math.floor(this.t / 1440)), late = (this.t % 1440) > 15 * 60;
+    const ask = dow === 0 ? pick(['How was your weekend?', 'Good weekend?', 'Did you do anything fun this weekend?'])
+      : dow >= 3 && dow <= 4 ? pick(['Any plans this weekend?', 'What are you up to this weekend?', 'Big weekend plans?'])
+      : late ? pick(['What are you doing tonight?', 'Got plans after work?', 'Doing anything tonight?']) : pick(['How\'s life outside this place?', 'How are things at home?', 'What have you been up to lately?']);
+    this.say(b, ask, a);
+    this.say(a, dow === 0 ? pick([`Mostly ${ha}. It was perfect.`, `I spent most of it ${ha}.`, `Honestly? ${cap(ha)}. Best part of my week.`])
+      : dow >= 3 && dow <= 4 ? pick([`${cap(ha)}, if I get my way.`, `${cap(ha)} is the plan. Don't tell anyone how excited I am.`, `Some ${ha}, then absolutely nothing.`])
+      : pick([`Mostly ${ha}, honestly.`, `${cap(ha)}. It's keeping me sane.`, `Same as always: ${ha}.`]), b);
+    const hb = hob(b);
+    if (hb && chance(0.7)) {
+      this.say(b, pick([`Ha. For me it's been ${hb}.`, `Mine's mostly been ${hb}.`, `Jealous. All I've had time for is ${hb}.`]), a);
+      this.say(a, pick(['We should compare notes sometime.', 'Okay, that sounds great actually.', 'I want a full report on that.', 'Ha, of course you have.']), b);
+    } else this.say(b, pick(['That sounds really nice.', 'I love that for you.', 'You deserve that.']), a);
+    this.close(a, b, chance(0.6) ? 1 : 0, `${short(b)} asked about my life outside work`);
+    this.note(a, `${short(b)} and I talked about life outside work: ${ha}.`); this.note(b, `${short(a)} told me about ${ha}.`);
+    this.imp = Math.max(this.imp, 3);
+    return true;
+  }
   beatGossip(a, b) {
     const m = this.A(a).memory.items.filter(x => x.fact && x.owner !== b && x.owner !== a && !knows(this.A(b), x.fact)).pop();
     if (!m) return false;
@@ -14105,9 +14269,10 @@ class Dialogue {
     const close = Math.min(this.A(a).relationships[b].closeness, this.A(b).relationships[a].closeness);
     const beats = [];
     if (topic.startsWith('work:')) beats.push(['project', 9]);
-    if (topic === 'life' && myNews) beats.push(['life', 9]);
+    if (topic === 'life') beats.push(myNews ? ['life', 9] : ['home', 9]);
     if (shared) beats.push(['project', 3]);
-    if (myNews) beats.push(['life', 3 * (this.T(a).E + 0.3)]);
+    if (myNews) beats.push(['life', 3.9 * (this.T(a).E + 0.3)]);
+    beats.push(['home', 2.2]); // their weekend, their family, their hobby: always something to say
     beats.push(['gossip', 3 * this.T(a).E * (1.2 - this.T(a).A * 0.5)], ['idea', this.T(a).O * (topic === 'idea' ? 3 : 1)], ['need', 1.5], ['news', 1], ['small', 1]);
     if (close >= 7) beats.push(['deep', 1.5]);
     if (shared && [a, b].sort().join() === 'design_director,senior_designer') beats.push(['clash', 1.5]);
@@ -14123,6 +14288,7 @@ class Dialogue {
         life: () => myNews ? (this.beatLife(a, b, myNews), true) : false,
         gossip: () => this.beatGossip(a, b), idea: () => (this.beatIdea(a, b), true), need: () => this.beatNeed(a, b),
         news: () => this.beatNews(a, b), small: () => (this.beatSmall(a, b), true), deep: () => (this.beatDeep(a, b), true), clash: () => (this.beatClash(a, b), true),
+        home: () => this.beatHome(a, b),
       }[choice]?.();
       if (!ok) this.beatSmall(a, b);
     }
@@ -14400,7 +14566,14 @@ function clientMeeting(p, v, ids, sim) {
     if (ids.includes('copywriter')) say('copywriter', `The line we're proposing is "${tagline(p.client)}"`);
     const score = p.quality / 100 - c.picky * 0.85 + p.revisionRound * 0.18 + (Math.random() - 0.5) * 0.35;
     const r = Math.random();
-    decision = r < 0.06 && p.workstreams.length < 5 ? 'scope' : score > 0.42 ? 'approve' : score < 0.12 && r < 0.55 ? 'reject' : 'changes';
+    // First reviews are where clients say no: about one in four, more for picky clients. A client who has
+    // already asked for changes twice may also lose patience and reject outright.
+    const rejectFirst = Math.max(0.1, Math.min(0.45, 0.24 + (c.picky - 0.55) * 0.8 - (p.quality - 72) / 200));
+    const r2 = Math.random();
+    decision = r < 0.06 && p.workstreams.length < 5 ? 'scope'
+      : p.revisionRound === 0 && r2 < rejectFirst ? 'reject'
+      : p.revisionRound >= 2 && r2 < 0.08 ? 'reject'
+      : score > 0.42 ? 'approve' : score < 0.12 && r < 0.55 ? 'reject' : 'changes';
     const lane = pickFrom(lanes.length ? lanes : ['Identity']);
     feedback = pickFrom(FEEDBACK[lane] ?? FEEDBACK.Identity);
     if (decision === 'approve') {
@@ -18286,18 +18459,89 @@ function setTempo(speed = 1, paused = false) {
   const was = halted; halted = !!paused;
   if (ac && was && !halted) nextNote = ac.currentTime + 0.05;
 }
+// The records. With nothing on the turntable the studio's own lo-fi loop plays; put a record on and the
+// room switches to that genre at the next bar, with a needle drop. Every song is eighth-note steps,
+// 8 to a bar, written as a function of (step in bar, chord, time, step length, swing, note→Hz).
+const pluck = (f, t, dur, g, type = 'triangle') => tone(f, t, dur, type, g);
+const kick = (t, g = 0.25) => tone(110, t, 0.18, 'sine', g, musicGain, 0.4);
+const snare = (t, g = 0.08) => noise(t, 0.12, g, 1800, musicGain, 0.8);
+const hat = (t, g = 0.03, d = 0.03) => noise(t, d, g, 8000, musicGain, 2);
+const rim = t => noise(t, 0.025, 0.06, 2600, musicGain, 6);
+const SONGS = {
+  // the studio's own loop (nothing on the turntable): Cmaj7 – Am7 – Fmaj7 – G6
+  lofi: { bpm: 76, swing: 0.12, chords: CHORDS, play(b, ch, t, S, sw, m) {
+    if (b === 0) for (const n of ch) tone(m(n), t, S * 7.5, 'triangle', 0.05);
+    if (b === 0 || b === 4) tone(m(ch[0] - 12), t, S * 3, 'triangle', 0.12);
+    if (b !== 3 && b !== 7) tone(m(ch[(b * 3) % 4] + 12), t + sw, S * 0.9, 'square', 0.022);
+    if (b === 0 || b === 5) kick(t);
+    if (b === 2 || b === 6) snare(t);
+    if (b % 2) hat(t + sw);
+  } },
+  // swung ii–V–I: walking bass, brushed ride, piano comping on the "and"s
+  jazz: { bpm: 104, swing: 0.3, chords: [[50, 53, 57, 60, 64], [43, 53, 57, 59, 64], [48, 52, 55, 59, 62], [45, 49, 55, 58, 61]], play(b, ch, t, S, sw, m) {
+    if (b % 2 === 0) { const walk = [ch[0] - 12, ch[2] - 12, ch[1] - 12, ch[0] - 11][b / 2]; pluck(m(walk), t, S * 1.8, 0.13); }
+    if (b === 3 || b === 6) for (const n of ch.slice(1)) tone(m(n), t + sw, S * 1.2, 'sine', 0.035);
+    if (b % 2 === 0 || b === 5) hat(t + (b % 2 ? sw : 0), 0.025, 0.12);
+    if (b === 2 || b === 6) noise(t, 0.2, 0.025, 3000, musicGain, 0.5); // brush
+  } },
+  // four on the floor in A minor: offbeat hats, a rolling saw bass, a stab each bar
+  techno: { bpm: 126, swing: 0, chords: [[57, 60, 64], [57, 60, 64], [55, 58, 62], [53, 57, 60]], play(b, ch, t, S, sw, m) {
+    if (b % 2 === 0) kick(t, 0.3);
+    if (b % 2) { hat(t, 0.04, 0.05); tone(m(ch[0] - 24), t, S * 0.8, 'sawtooth', 0.05); }
+    if (b === 4) snare(t, 0.05);
+    if (b === 0 || b === 3) for (const n of ch) tone(m(n), t, S * 0.6, 'square', 0.018);
+  } },
+  // Am – F – C – G, fingerpicked slowly, no drums
+  folk: { bpm: 72, swing: 0.05, chords: [[45, 52, 57, 60], [41, 48, 53, 57], [48, 52, 55, 60], [43, 50, 55, 59]], play(b, ch, t, S, sw, m) {
+    const pat = [0, 2, 1, 3, 2, 1, 3, 2];
+    pluck(m(b === 0 || b === 4 ? ch[0] - 12 : ch[pat[b]]), t + (b % 2 ? sw : 0), S * 3, b === 0 ? 0.11 : 0.06);
+    if (b === 0) tone(m(ch[3] + 12), t + S * 0.5, S * 6, 'sine', 0.02);
+  } },
+  // Cmaj7 – Dm7 – G7 – Cmaj7: bossa rim pattern, root–fifth bass, soft comping
+  bossa: { bpm: 132, swing: 0, chords: [[48, 52, 55, 59], [50, 53, 57, 60], [43, 53, 55, 59], [48, 52, 55, 59]], play(b, ch, t, S, sw, m) {
+    if (b === 0 || b === 3) pluck(m(ch[0] - 12), t, S * 2.5, 0.12);
+    if (b === 4 || b === 7) pluck(m(ch[0] - 5), t, S * 1.5, 0.1);
+    if ([0, 3, 6].includes(b)) rim(t);
+    if ([1, 3, 4, 6].includes(b)) for (const n of ch.slice(1)) tone(m(n), t, S * 0.8, 'sine', 0.03);
+    hat(t, 0.015, 0.03);
+  } },
+  // boom-bap: lazy swung hats, a dusty Rhodes-ish loop in F minor
+  hiphop: { bpm: 90, swing: 0.2, chords: [[53, 56, 60, 63], [51, 55, 58, 62], [49, 53, 56, 60], [48, 52, 55, 58]], play(b, ch, t, S, sw, m) {
+    if (b === 0 || b === 3 || b === 5) kick(t, 0.32);
+    if (b === 2 || b === 6) snare(t, 0.1);
+    hat(t + (b % 2 ? sw : 0), b % 2 ? 0.02 : 0.035);
+    if (b === 0 || b === 5) for (const n of ch) tone(m(n), t, S * 2.6, 'sine', 0.04);
+    if (b === 0) tone(m(ch[0] - 24), t, S * 2.8, 'triangle', 0.16);
+    if (b === 4) tone(m(ch[2] - 24), t, S * 1.6, 'triangle', 0.12);
+  } },
+  // slow pads that overlap, a bell now and then, no beat at all
+  ambient: { bpm: 56, swing: 0, chords: [[50, 57, 62, 64], [47, 54, 59, 62], [43, 50, 55, 59], [45, 52, 57, 61]], play(b, ch, t, S, sw, m) {
+    if (b === 0) for (const n of ch) tone(m(n), t, S * 12, 'sine', 0.045);
+    if (b === 0) tone(m(ch[0] - 12), t, S * 10, 'triangle', 0.06);
+    if (b === 5) tone(m(ch[(Math.floor(t * 7) % 3) + 1] + 12), t, S * 6, 'sine', 0.03);
+  } },
+  // Alberti bass under a little melody, C – F – G7 – C, very Mozart-in-a-lift
+  classical: { bpm: 100, swing: 0, chords: [[48, 55, 52, 55], [48, 57, 53, 57], [47, 55, 53, 55], [48, 55, 52, 55]], play(b, ch, t, S, sw, m, bar) {
+    tone(m(ch[b % 4]), t, S * 0.9, 'triangle', 0.06); // Alberti: low, high, middle, high
+    const tune = [[76, 0, 79, 0, 77, 76, 74, 0], [77, 0, 81, 0, 79, 77, 76, 0], [74, 76, 77, 79, 77, 74, 71, 0], [72, 0, 76, 0, 72, 0, 0, 0]][bar];
+    if (tune[b]) tone(m(tune[b]), t, S * 1.6, 'square', 0.02);
+  } },
+};
+let song = 'lofi', wantSong = 'lofi';
+// The record on the turntable (a genre key, or null for nothing on). Switches at the next bar line.
+function setRecord(genre) { wantSong = genre && SONGS[genre] ? genre : 'lofi'; }
+function needleDrop(t) { noise(t, 0.05, 0.12, 900, musicGain, 1.2); noise(t + 0.09, 0.03, 0.06, 1400, musicGain, 2); }
 function schedule() {
   if (halted) { nextNote = Math.max(nextNote, ac.currentTime); return; }
-  const STEP = BASE_STEP / rate, mtof = n => MTOF(n) * pitch;
+  const mtof = n => MTOF(n) * pitch;
   while (nextNote < ac.currentTime + 0.3) {
-    const bar = Math.floor(step / 8) % CHORDS.length, beat = step % 8, ch = CHORDS[bar], t = nextNote;
-    const swing = beat % 2 ? STEP * 0.12 : 0;
-    if (beat === 0) for (const n of ch) tone(mtof(n), t, STEP * 7.5, 'triangle', 0.05);           // pad
-    if (beat === 0 || beat === 4) tone(mtof(ch[0] - 12), t, STEP * 3, 'triangle', 0.12);          // bass
-    if (beat !== 3 && beat !== 7) tone(mtof(ch[(beat * 3) % 4] + 12), t + swing, STEP * 0.9, 'square', 0.022); // arp
-    if (beat === 0 || beat === 5) { tone(110, t, 0.18, 'sine', 0.25, musicGain, 0.4); }            // kick
-    if (beat === 2 || beat === 6) noise(t, 0.12, 0.08, 1800, musicGain, 0.8);                      // snare
-    if (beat % 2) noise(t + swing, 0.03, 0.03, 8000, musicGain, 2);                                 // hat
+    if (step % 8 === 0 && wantSong !== song) { // a new record: lift the needle, drop it, start from the top
+      song = wantSong; step = 0; needleDrop(nextNote); nextNote += 0.25 / rate;
+    }
+    const S0 = SONGS[song], STEP = 60 / S0.bpm / 2 / rate;
+    const bar = Math.floor(step / 8) % S0.chords.length, beat = step % 8, t = nextNote;
+    const swing = beat % 2 ? STEP * S0.swing : 0;
+    S0.play(beat, S0.chords[bar], t, STEP, swing, mtof, bar);
     nextNote += STEP; step++;
   }
 }
@@ -18365,7 +18609,7 @@ function prelude() {
 // A menu blip, like moving the cursor in a command window.
 function blip(hi = false) { if (!audio.on || !ac || document.hidden) return; tone(hi ? 1320 : 990, ac.currentTime, 0.05, 'square', 0.04, sfxGain); }
 
-return { get audio() { return audio; }, get setSound() { return setSound; }, get sfx() { return sfx; }, get prelude() { return prelude; }, get blip() { return blip; }, get resumeSound() { return resumeSound; }, get setTempo() { return setTempo; } };
+return { get audio() { return audio; }, get setSound() { return setSound; }, get sfx() { return sfx; }, get prelude() { return prelude; }, get blip() { return blip; }, get resumeSound() { return resumeSound; }, get setTempo() { return setTempo; }, get setRecord() { return setRecord; } };
 })();
 
 // ---- export.js
@@ -18628,7 +18872,7 @@ const { C, S, T, SH, sprite, avatarURL, drawTile, drawObject } = __mods["sprites
 const { renderArtifact, CASE_PAGES } = __mods["artifacts.js"];
 const { creditName, PHASES: PHASE_NAMES, AWARDS, dowOf, dateOf } = __mods["sim/studio.js"];
 const { createLocalSim, SAVE_KEY } = __mods["local.js"];
-const { setSound, sfx, audio, prelude, blip, resumeSound, setTempo } = __mods["audio.js"];
+const { setSound, sfx, audio, prelude, blip, resumeSound, setTempo, setRecord } = __mods["audio.js"];
 const { downloadDataURL, buildPDF, toJPEG } = __mods["export.js"];
 const { SCENARIOS } = __mods["sim/scenarios.js"];
 const { CHAT_CHOICES } = __mods["sim/brain.js"];
@@ -18675,8 +18919,11 @@ for (let y = 0; y < world.H; y++) for (let x = 0; x < world.W; x++) drawTile(b, 
 const baseRow = o => o.layerRow ?? o.y + o.h - 1;
 const props = [...world.objects].sort((a, c) => baseRow(a) - baseRow(c) || (a.layerRow != null) - (c.layerRow != null) || a.x - c.x); // things resting on furniture draw after it
 const ROW_LAYERS = Array.from({ length: world.H }, () => null);
+// Flat things people walk across (the crit rug and its low table, Pica's bed) go on the floor, under everyone.
+const FLOOR_SPRITES = new Set(['rug_lounge', 'dogbed']);
 for (const o of props) {
   if (o.sprite === 'tree' || o.sprite === 'none') continue;
+  if (FLOOR_SPRITES.has(o.sprite)) { drawObject(b, o); continue; }
   const row = Math.min(world.H - 1, o.layerRow ?? o.y + o.h - 1); // an object sorts by the row its base sits on (or the furniture it rests on)
   if (!ROW_LAYERS[row]) { ROW_LAYERS[row] = document.createElement('canvas'); ROW_LAYERS[row].width = bg.width; ROW_LAYERS[row].height = bg.height; }
   drawObject(ROW_LAYERS[row].getContext('2d'), o);
@@ -18732,6 +18979,7 @@ setTimeout(() => local.subscribe(msg => {
   if (msg.init) { feed = []; feedKey = null; }
   playSfx(snap, msg);
   setTempo(msg.speed, msg.paused && document.getElementById('title')?.hidden !== false); // the title screen keeps its song even though the clock is paused
+  setRecord(document.getElementById('title')?.hidden === false ? null : msg.music?.genre ?? null); // whatever's on the turntable plays; the title keeps the studio's own song
   snap = msg;
   for (const p of world.personas) P[p.id] ??= p;
   if (msg.roles) for (const [id, role] of Object.entries(msg.roles)) if (P[id]) P[id].role = role;
@@ -18883,6 +19131,7 @@ for (let y = world.H - 1; y >= 0; y--) for (let x = 0; x < world.W; x++) {
 const roomFade = Object.fromEntries(ROOMS.map(r => [r, 0]));
 const STICKER_AT = {}, PLANT_AT = {};
 const RECORD = world.objects.find(o => o.id === 'record_player');
+const WEEKEND = __mods["sim/studio.js"].isWeekend;
 const RAMP = world.objects.find(o => o.id === 'skate_ramp');
 const skateTilt = {}, skateMode = {}, skateRow = {}, skateOff = {}, skateTrickNow = {}; // skateRow: extra draw rows while passing in front of furniture
 // Where a skater is at time t (0..1) of a round, relative to where they stand at the end of the lane.
@@ -19100,7 +19349,9 @@ function frame(now) {
   for (let row = 0; row < world.H; row++) {
     if (ROW_LAYERS[row]) { const y0 = Math.max(0, (row - 3) * T), y1 = Math.min(bg.height, (row + 2) * T); ctx.drawImage(ROW_LAYERS[row], 0, y0, bg.width, y1 - y0, 0, y0, bg.width, y1 - y0); }
     if (row === shelfRow) drawTrophies(snap.awards?.length ?? 0);
-    while (next < vis.length && Math.round(drawY(vis[next])) <= row) drawPerson(vis[next++]);
+    if (row % 1 === 0) drawDecor(now, row); // pumpkins sit on the floor of their row, under anyone standing there
+    // someone between two rows is drawn with the lower one, so they're on top of a chair, bench or pumpkin they're stepping onto
+    while (next < vis.length && Math.ceil(drawY(vis[next]) - 0.05) <= row) drawPerson(vis[next++]);
   }
   while (next < vis.length) drawPerson(vis[next++]);
   if (hoverObj) { // highlight what you're pointing at, over everything
@@ -19146,7 +19397,9 @@ function frame(now) {
   emptyFade += ((snap.outage ? 1 : 0) - emptyFade) * 0.04;
   const afterDark = m >= SUNSET || m < SUNRISE;
   const occupied = new Set(snap.agents.filter(a => !a.hidden && !P[a.id]?.look?.dog).map(a => world.areaGrid[Math.round(a.y)]?.[Math.round(a.x)]));
-  for (const r of ROOMS) roomFade[r] += (((afterDark || snap.solo) && !snap.outage && !occupied.has(r) ? 1 : 0) - roomFade[r]) * 0.05; // a lone weekend visitor only switches on their own room
+  // a weekend (or closed holiday) day with nobody in at all: every light off, even in daylight (Pica doesn't count)
+  const emptyWeekend = WEEKEND(snap.t) && occupied.size === 0 && !(snap.visitors ?? []).some(v => !v.hidden);
+  for (const r of ROOMS) roomFade[r] += (((afterDark || snap.solo || emptyWeekend) && !snap.outage && !occupied.has(r) ? 1 : 0) - roomFade[r]) * 0.05; // a lone weekend visitor only switches on their own room
   for (const r of ROOMS) roomLit[r] += ((afterDark && !snap.outage && occupied.has(r) ? 1 : 0) - roomLit[r]) * 0.05;
   const dusk = (m > 1080 && m < 1200) || (m > 360 && m < 450);
   const key = `${night.toFixed(2)}|${emptyFade.toFixed(2)}|${ROOMS.map(r => roomFade[r].toFixed(2)).join(',')}|${ROOMS.map(r => roomLit[r].toFixed(2)).join(',')}|${dusk ? 1 : 0}`;
@@ -19529,13 +19782,15 @@ function drawWeather(now) {
 // Seasonal decorations: pumpkins in late October, string lights in December, hearts in February.
 // Where Tomás puts the pumpkins: [tile x, tile y, size]. Clear of furniture and walkways' edges.
 const PUMPKINS = [[6, 13, 1], [7, 13, 0.75], [13, 15, 1], [16, 15, 0.85], [20, 7, 1]];
-function drawDecor(now) {
+function drawDecor(now, row = null) {
   const k = snap.decor; if (!k) return;
+  if ((k === 'halloween') !== (row != null)) return; // pumpkins draw row by row with the furniture; wall decorations draw over everything
   // Halloween: Tomás' pumpkins (see the news on Oct 20). Round, ribbed, with a curly stem
   // and a leaf; at night their carved faces glow.
   if (k === 'halloween') {
     const m = snap.t % 1440, dark = m >= 18 * 60 || m < 7 * 60;
     for (const [x, y, sz] of PUMPKINS) {
+      if (y !== row) continue;
       const cx = x * T + 8, cy = y * T + 10, rw = 6 * sz, rh = 4.6 * sz;
       ctx.fillStyle = C('shadow'); ctx.beginPath(); ctx.ellipse(cx, cy + rh - 1, rw, 2, 0, 0, 7); ctx.fill();
       ctx.fillStyle = C('outline'); ctx.beginPath(); ctx.ellipse(cx, cy, rw + 1, rh + 1, 0, 0, 7); ctx.fill();
@@ -20827,9 +21082,11 @@ const USE_SKIP = new Set(['breakfast_nook', 'bookshelf', 'corner_desk', 'annuals
 // Each person's Use list: Eli gets only his skateboard; other skaters get the skateboard too; nobody else gets the reception counter.
 const ELI_USE = new Set(['skateboard']);
 const SKATERS = new Set(['junior_designer', 'hire_rohan', 'dog']);
+// Things Pica can't be sent to use: paws can't open post, read books, run a printer or work flippers.
+const DOG_SKIP = new Set(['mailbox', 'design book shelf', 'risograph printer', 'pinball machine']);
 function usePlaces(id) {
   return [...new Set(world.objects.map(useKind).filter(Boolean))].filter(k =>
-    id === 'junior_designer' ? ELI_USE.has(k) : k === 'reception counter' ? false : k === 'skateboard' ? SKATERS.has(id) : true);
+    id === 'junior_designer' ? ELI_USE.has(k) : id === 'dog' && DOG_SKIP.has(k) ? false : k === 'reception counter' ? false : k === 'skateboard' ? SKATERS.has(id) : true);
 }
 function useKind(o) {
   if (o.sprite === 'none' || USE_SKIP.has(o.id) || o.id.startsWith('plant:') || o.id.startsWith('computer:') || o.id.startsWith('door:') || o.id.startsWith('table:') || o.id.startsWith('desk:') || /\b(table|chair|bench|computer|laptop|flag)\b/i.test(o.name)) return null;
