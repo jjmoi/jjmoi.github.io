@@ -17657,7 +17657,11 @@ class Sim {
         const song = pick(['BUTTERFLY (KERNING MIX)', 'DYNAMITE RAVE', 'PARANOIA', 'SANDSTORM', 'END OF THE CENTURY']);
         const ids = [a.id, b.id, ...here.map(x => x.id).filter(x => x !== a.id && x !== b.id)].slice(0, 7);
         if (this.agents.has('dog') && !this.agents.get('dog').hidden) ids.push('dog');
-        for (const id of ids) { const ag = this.agents.get(id); if (!ag || ag.state === 'talking') continue; this.#interrupt(ag); this.#start(ag, { activity: id === a.id || id === b.id ? 'in the Friday dance-off' : 'cheering at the dance machine', emoji: id === a.id || id === b.id ? '🕺' : '🎤', location: 'ddr', duration_min: 30, satisfies: ['fun', 'social'], scripted: true, ritual: 'event' }); ag.action.end = this.t + 35; }
+        // one spot each: the two dancers on the machine's left and right pads, everyone else in a crowd around it
+        const M = OBJ.ddr, pads = [{ x: M.x, y: M.y + 1 }, { x: M.x + 1, y: M.y + 1 }];
+        const crowd = [[-1, 1], [2, 1], [-1, 2], [0, 2], [1, 2], [2, 2], [-2, 2], [3, 2], [-2, 1], [3, 1], [0, 3], [1, 3]].map(([dx, dy]) => ({ x: M.x + dx, y: M.y + dy })).filter(t => walkable(t.x, t.y));
+        let ci = 0;
+        for (const id of ids) { const ag = this.agents.get(id); if (!ag || ag.state === 'talking') continue; const seat = id === a.id ? pads[0] : id === b.id ? pads[1] : crowd[ci++] ?? null; this.#interrupt(ag); this.#start(ag, { seat, activity: id === a.id || id === b.id ? 'in the Friday dance-off' : id === 'dog' ? 'howling along to the karaoke' : ci % 2 ? 'singing the karaoke round' : 'dancing along beside the machine', emoji: id === a.id || id === b.id ? '🕺' : ci % 2 ? '🎤' : '💃', location: 'ddr', duration_min: 30, satisfies: ['fun', 'social'], scripted: true, ritual: 'event' }); ag.action.end = this.t + 35; }
         this.#scene(ids, 'Dance-off & karaoke', 'The Studio', SCENES.danceoff(ids, a.id, b.id, winner.id, song, this));
         this.#useObject('ddr', winner.id, `won the dance-off on ${song}`);
         if (Math.random() < 0.7) { const by = pick(ids.filter(x => x !== a.id && x !== b.id && x !== 'dog')) ?? a.id; this.snapPhoto(by, { subjects: [winner.id, winner === a ? b.id : a.id], caption: `dance-off: ${PERSONA[winner.id].short} wins (${song})`, place: 'The Studio' }); }
@@ -19076,6 +19080,7 @@ setTimeout(() => local.subscribe(msg => {
   setTempo(msg.speed, msg.paused && document.getElementById('title')?.hidden !== false); // the title screen keeps its song even though the clock is paused
   setRecord(document.getElementById('title')?.hidden === false ? null : msg.music?.genre ?? null); // whatever's on the turntable plays; the title keeps the studio's own song
   snap = msg;
+  { const k = `${eventOff('weekend')}|${eventOff('rite')}|${eventOff('security')}`; if (k !== lastEventOff) { lastEventOff = k; if (typeof god !== 'undefined' && god && tab === 'events') renderEvents(); } } // keep the Events buttons' enabled state current
   for (const p of world.personas) P[p.id] ??= p;
   if (msg.roles) for (const [id, role] of Object.entries(msg.roles)) if (P[id]) P[id].role = role;
   for (const v of msg.visitors ?? []) P[v.id] ??= { id: v.id, name: v.name, short: v.short, role: v.title, look: v.look, visitor: true };
@@ -19133,7 +19138,7 @@ function renderYearbook(y, ended) {
     <div class="win"><h2>The small things</h2><div class="yb-row"><span>🕹️ ${y.pinball} games of pinball</span><span>🕺 ${y.ddr} songs on the dance machine</span><span>☕ ${y.coffee} espressos</span><span>🐶 ${y.picaMoments} moments at Pica's bed</span><span>🔍 ${y.trinkets} things found</span></div></div>
     <div class="win"><h2>The money</h2><div class="yb-row"><span>In: ${money(y.lifetimeIn)}</span><span>Out: ${money(y.lifetimeOut)}</span><span>Left in the bank: <b class="${y.cash < 0 ? 'former' : ''}">${money(y.cash)}</b></span></div></div>
     <div class="win"><h2>${esc(END_COPY[ended.kind]?.head ?? 'The end')}</h2><p>${esc(ended.text)}</p></div>
-    <div class="ending-actions"><button class="btn" data-end="credits">🎬 Roll the credits</button><button class="btn" data-end="new">🌅 Start a new simulation</button></div>
+    <div class="ending-actions"><button class="btn" data-end="credits">🎬 Roll the credits</button><button class="btn" data-end="new">🌅 Start a new simulation</button><button class="btn" data-end="stay">👀 Look around the empty studio</button></div>
   </div>`;
   inner.scrollTop = 0;
 }
@@ -19154,7 +19159,7 @@ function rollCredits(y, ended) {
     <div class="big">A simulacra where generative agents collaborate on design projects while questioning their own existence</div>
     <p class="sub">No sticky notes were harmed. Nobody worked a weekend unless they wanted to.</p>
   </div></div>
-  <div class="ending-actions"><button class="btn" data-end="yearbook">📖 Back to the yearbook</button><button class="btn" data-end="new">🌅 Start a new simulation</button></div>`;
+  <div class="ending-actions"><button class="btn" data-end="yearbook">📖 Back to the yearbook</button><button class="btn" data-end="new">🌅 Start a new simulation</button><button class="btn" data-end="stay">👀 Look around the empty studio</button></div>`;
   inner.scrollTop = 0;
 }
 // the same starfield as the title screen, drawn small and scaled up
@@ -19409,7 +19414,8 @@ function frame(now) {
     skateRow[a.id] = 0; skateOff[a.id] = null; skateTrickNow[a.id] = null;
     let lie = false;
     const ph = (now + a.id.length * 397) % 100000;
-    if (idle === 'dance') { const beat = Math.floor(now / 170); f = beat % 2 + 1; oy = beat % 2 ? -2 : 0; ox = [0, 1, 0, -1][beat % 4]; } // hopping on the pad, feet going
+    if (idle === 'sing') { oy = (ph % 900) < 450 ? -1 : 0; } // belting it out to the room, bobbing
+    else if (idle === 'dance') { const beat = Math.floor(now / 170); f = beat % 2 + 1; oy = beat % 2 ? -2 : 0; ox = [0, 1, 0, -1][beat % 4]; } // hopping on the pad, feet going
     else if (idle === 'pinball') { if ((ph % 2600) < 140) ox = 1; if ((ph % 2600) > 1300 && (ph % 2600) < 1400) ox = -1; } // nudging the table, almost a tilt
     else if (idle === 'dummy') { if ((ph % 640) < 160) ox = FUN_OBJ.wing_chun && FUN_OBJ.wing_chun.x < d.x ? -1 : 1; } // leaning into each strike
     else if (idle === 'nod') { if ((ph % 2600) < 220) oy = 1; } // a nod now and then
@@ -19429,7 +19435,7 @@ function frame(now) {
     else if (idle === 'sniff') { oy = (ph % 500) < 250 ? 1 : 0; ox = (ph % 1600) < 800 ? 0 : 1; } // nose to the ground
     else if (idle === 'chew') { oy = (ph % 360) < 180 ? 1 : 0; } // chomp
     // face the thing you're using: machines are played from the front, the dummy from the side
-    const dir = skateDir ?? (idle === 'pinball' || idle === 'dance' ? 'up' : idle === 'dummy' && FUN_OBJ.wing_chun ? (FUN_OBJ.wing_chun.x > d.x ? 'right' : 'left') : a.dir);
+    const dir = skateDir ?? (idle === 'sing' ? 'down' : idle === 'pinball' || idle === 'dance' ? 'up' : idle === 'dummy' && FUN_OBJ.wing_chun ? (FUN_OBJ.wing_chun.x > d.x ? 'right' : 'left') : a.dir);
     d.ox = lie ? ox - 6 : ox; d.oy = lie ? oy + 10 : oy; // the emoji, bubble, selection bracket and possess marker ride along (down to the floor in a bail)
     if (a.id === selected || a.id === hover) {
       const sx = px + ox, sy = py + oy;
@@ -19494,7 +19500,7 @@ function frame(now) {
   // A power cut darkens everything; otherwise, after sunset, only empty rooms go dark.
   emptyFade += ((snap.outage ? 1 : 0) - emptyFade) * 0.04;
   const afterDark = m >= SUNSET || m < SUNRISE;
-  const occupied = new Set(snap.agents.filter(a => !a.hidden && !P[a.id]?.look?.dog).map(a => world.areaGrid[Math.round(a.y)]?.[Math.round(a.x)]));
+  const occupied = new Set([...snap.agents, ...(snap.visitors ?? [])].filter(a => !a.hidden && !P[a.id]?.look?.dog).map(a => world.areaGrid[Math.round(a.y)]?.[Math.round(a.x)])); // staff and visitors both switch the lights on
   // a weekend (or closed holiday) day with nobody in at all: every light off, even in daylight (Pica doesn't count)
   const emptyWeekend = WEEKEND(snap.t) && occupied.size === 0 && !(snap.visitors ?? []).some(v => !v.hidden);
   for (const r of ROOMS) roomFade[r] += (((afterDark || snap.solo || emptyWeekend) && !snap.outage && !occupied.has(r) ? 1 : 0) - roomFade[r]) * 0.05; // a lone weekend visitor only switches on their own room
@@ -19578,7 +19584,7 @@ function idleOf(a) {
   }
   if (/nap/i.test(desc)) return 'doze';
   if (loc === 'pinball' || loc === 'pinball2') return 'pinball';
-  if (loc === 'ddr') return 'dance';
+  if (loc === 'ddr') return /singing|howling/.test(desc) ? 'sing' : 'dance';
   if (loc === 'wing_chun') return 'dummy';
   if (loc === 'polaroid' || /polaroid/i.test(desc)) return 'snap';
   if (loc === 'skate_ramp' && SKATERS.has(a.id)) return RAMP && Math.abs(a.x - (RAMP.spot.x)) + Math.abs(a.y - RAMP.spot.y) <= 1 ? 'skate' : null; // only once they're at the lane
@@ -21134,18 +21140,30 @@ function renderSummary() {
   if (god && tab === 'events') renderEvents();
 }
 let eventMsg = { text: '', until: 0 };
+let lastEventOff = '';
 // The Events tab (God Mode only): every event you can set off, grouped so it reads at a glance.
 const EVENT_GROUPS = [
-  ['Everyday studio life', 'Small things that happen in any week.', [['client', '🚪 Client visit'], ['brief', '📨 New brief'], ['birthday', '🎂 Surprise birthday'], ['dog', '🐕 Pica eats a prototype'], ['hire', '👋 New hire'], ['fridge', '🥡 Fridge war'], ['danceoff', '🎤 Karaoke & dance-off'], ['rite', '🎖️ Rite of passage'], ['weekend', '🔦 Weekend alone']]],
+  ['Everyday studio life', 'Small things that happen in any week.', [['client', '🚪 Client visit'], ['birthday', '🎂 Birthday'], ['dog', '🐕 Pica eats prototype'], ['hire', '👋 New hire'], ['fridge', '🥡 Fridge war'], ['danceoff', '🎤 Karaoke & dance-off'], ['rite', '🎖️ Rite of passage'], ['weekend', '🔦 Weekend alone']]],
   ['Trouble', 'Bad days, and the odd bad week.', [['outage', '🔌 Power outage'], ['earthquake', '🫨 Earthquake'], ['security', '🎣 Phishing scare'], ['breakup', '💔 Breakup'], ['poached', '🧲 Talent poached'], ['layoff', '📦 Layoff'], ['leak', '🕵️ The leak']]],
   ['Old friends', 'People who used to work here.', [['lola', '🫂 Lola comes back'], ['alumni', '🍝 Old friend drops by']]],
   ['Milestones', 'Rare, and some of them end the game.', [['book', '📚 Hannah\'s book is out'], ['museum', '🏛️ The museum calls · ending'], ['sold', '📝 Sell to Ditto · ending'], ['closed', '🕯️ Close the studio · ending']]],
 ];
+// Events that can't happen right now say why, instead of failing after you press them.
+function eventOff(k) {
+  if (!snap) return null;
+  if (k === 'weekend' && !WEEKEND(snap.t)) return 'Only on a weekend.';
+  if (k === 'security' && !snap.agents.some(a => a.id === 'cos' && !a.hidden)) return 'Tomás isn\'t in the office.';
+  if (k === 'rite') {
+    const newcomer = snap.agents.some(a => !a.hidden && (a.id.startsWith('intern_') || a.id.startsWith('hire_') || a.id === 'pt_wren') && !snap.stickers?.[a.id]);
+    if (!newcomer) return 'None of the newcomers without a sticker are in the office.';
+  }
+  return null;
+}
 function godEvents() {
   const running = snap?.scenario?.status === 'running';
   return `<div class="god-events">
       ${EVENT_GROUPS.map(([title, sub, list]) => `<div class="section-title">${esc(title)}</div><div class="hint">${esc(sub)}</div>
-      <div class="btnrow">${list.map(([k, l]) => `<button class="btn small" data-event="${k}" title="${esc(STORIES[k]?.premise ?? '')}">${l}</button>`).join('')}</div>`).join('')}
+      <div class="btnrow">${list.map(([k, l]) => { const off = eventOff(k); return `<button class="btn small" data-event="${k}" title="${esc(off ?? STORIES[k]?.premise ?? '')}"${off ? ' disabled' : ''}>${l}</button>`; }).join('')}</div>`).join('')}
       <div class="section-title">Scenarios</div><div class="hint">Timed challenges with goals and a score. One at a time.</div>
       <div class="btnrow">${SCENARIOS.map(sc => `<button class="btn small" data-scenario="${sc.id}" title="${esc(sc.blurb)} Best score: ${best()[sc.id] ?? 'none yet'}." ${running ? 'disabled' : ''}>${sc.icon} ${esc(sc.name)}</button>`).join('')}</div>
       <div class="god-msg" id="event-msg" role="status">${performance.now() < eventMsg.until ? esc(eventMsg.text) : ''}</div></div>`;

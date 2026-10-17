@@ -415,6 +415,7 @@ details.task summary::-webkit-details-marker { display: none; }
 .btn.god[aria-pressed="true"] { background: var(--ui-accent); color: var(--ui-accent-ink); box-shadow: 0 0 var(--space-3) var(--ui-glow); }
 .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 .god-msg { font-size: var(--text-sm); color: var(--ui-accent); min-height: var(--space-4); margin-top: var(--space-1); }
+.god-msg:not(:empty) { padding-top: var(--space-3); }
 
 /* God Mode panel */
 .godbox { border: 1px solid var(--ui-accent); border-radius: var(--radius-2); padding: var(--space-2) var(--space-3); margin-bottom: var(--space-3); background: var(--ui-win-flat); }
