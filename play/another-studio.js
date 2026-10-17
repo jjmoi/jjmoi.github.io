@@ -21131,7 +21131,7 @@ $('#summary').addEventListener('click', e => { if (e.target.closest('[data-endsc
   const snapNow = local.sim().snapshot();
   const items = [
     ...(hadSave ? [{ act: 'continue', label: 'Continue', meta: snapNow.clock.replace(/^(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)(?:, )?/, '') }] : []),
-    { act: hadSave ? 'new' : 'continue', label: hadSave ? 'New Simulation' : 'Start', meta: hadSave ? 'Start over on Day 100' : `${snapNow.clock} · a fresh studio` },
+    { act: hadSave ? 'new' : 'continue', label: hadSave ? 'New Simulation' : 'Start', meta: hadSave ? 'Start on Day 100' : `${snapNow.clock}` },
   ];
   let sel = 0;
   const drawMenu = () => {
