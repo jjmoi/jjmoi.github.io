@@ -12758,6 +12758,9 @@ obj('desk:ceo', 'chair', 'meeting', 27, 5, 1, 1, 'chair', [27, 5], { blocking: f
 obj('computer:ceo', 'computer', 'meeting', 28, 5, 1, 1, 'blank', [27, 5], { blocking: false, view: 'computer', of: 'desk:ceo', noGo: true, story: 'Forty open tabs, all of them important. One is a recipe.' });
 // The crit rug: a big woven rug with floor cushions and a low table, for sketching on the floor
 // and quick crits away from the screens. A floor lamp stands beside it.
+// The two floor cushions on the crit rug (drawn with the rug) are real seats: one person each.
+obj('beanbag_l', 'mustard beanbag', 'studio', 4, 9, 1, 1, 'none', [4, 9], { blocking: false, seat: true, story: 'The mustard one. It has a dent in it shaped exactly like Eli.' });
+obj('beanbag_r', 'plum beanbag', 'studio', 7, 9, 1, 1, 'none', [7, 9], { blocking: false, seat: true, story: 'The plum one. Sofia\'s, unofficially. Nobody fights her for it.' });
 obj('crit_rug', 'crit rug', 'studio', 3, 8, 6, 2, 'rug_lounge', [5, 9], { blocking: false, view: 'rug', story: 'A huge woven rug Sofia brought back from Oaxaca. Floor cushions, a low table covered in markers, and a rule: no laptops on the rug.' });
 obj('altar', 'little altar', 'studio', 10, 8, 1, 1, 'altar', [10, 9], { story: 'A low shelf Hannah set up after the layoffs: a beeswax candle, a stick of sandalwood, a smooth stone from every person who has left, and a bowl where people drop folded notes. Nobody reads them. That is the point.' });
 obj('research_wall', 'research wall', 'studio', 6, 1, 4, 1, 'stickywall', [8, 2], { view: 'researchwall', story: 'Hannah\'s wall: every interview, every survey, every half-formed insight, in sticky notes. The colors mean something. Only Hannah and Dev know what.' });
@@ -12933,7 +12936,7 @@ function walkable(x, y) {
 }
 function areaAt(x, y) { return areaGrid[y]?.[x] ?? 'outside'; }
 
-function findPath(sx, sy, tx, ty) {
+function findPath(sx, sy, tx, ty, avoid = null) { // avoid(x, y): tiles to route around if possible (an occupied seat)
   if (sx === tx && sy === ty) return [];
   const key = (x, y) => y * W + x;
   const prev = new Map([[key(sx, sy), -1]]);
@@ -12942,7 +12945,7 @@ function findPath(sx, sy, tx, ty) {
     const [x, y] = q[i];
     for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
       const nx = x + dx, ny = y + dy, k = key(nx, ny);
-      if (prev.has(k) || !walkable(nx, ny)) continue;
+      if (prev.has(k) || !walkable(nx, ny) || avoid && !(nx === tx && ny === ty) && avoid(nx, ny)) continue;
       prev.set(k, key(x, y));
       if (nx === tx && ny === ty) {
         const path = [];
@@ -13583,6 +13586,7 @@ __mods["sim/brain.js"] = (function () {
 
 const { PERSONA, PERSONAS } = __mods["sim/personas.js"];
 const { OBJECTS, AREAS, HOME_OBJECTS, areaAt, deskOf } = __mods["sim/world.js"];
+const OBJ_BY_ID = Object.fromEntries(OBJECTS.map(o => [o.id, o]));
 const { PHASES, isWeekend, FONTS, MOTIFS, PALETTES, creditName, dowOf, weatherOf, HELIX_BRIEF } = __mods["sim/studio.js"];
 const { LIVES, SMALL_TALK } = __mods["sim/lives.js"];
 const { LIBRARY } = __mods["sim/library/index.js"];
@@ -13921,6 +13925,8 @@ function decide(agent, sim) {
     C({ kind: 'coffee', activity: 'making an espresso', emoji: '☕', location: 'coffee_machine', dur: [8, 15], needs: { energy: 28, social: 6 }, tags: [] });
     C({ kind: 'rest', activity: 'lying on the sofa for a minute', emoji: '🛋️', location: 'sofa', dur: [15, 25], needs: { energy: 22, fun: 10 }, tags: [] });
     if (!p.isDog) C({ kind: 'rest', activity: 'a power nap in the phone booth', emoji: '😴', location: 'phone_booth', dur: [20, 35], needs: { energy: 45 }, tags: [], bonus: Math.max(0, (35 - agent.needs.energy) / 25) - 0.3 });
+    { const free = ['beanbag_l', 'beanbag_r'].filter(b => { const o = OBJ_BY_ID[b]; return o && ![...sim.agents.values()].some(x => x !== agent && !x.hidden && x.x === o.x && x.y === o.y); }); const bag = free.length ? pick(free) : null;
+      if (bag) C({ kind: 'rest', activity: p.isDog ? 'curled up on a beanbag' : pick(['sinking into a beanbag', 'reading on a beanbag', 'a beanbag break', 'thinking on a beanbag']), emoji: p.isDog ? '💤' : '🫘', location: bag, dur: [12, 25], needs: { energy: 16, fun: 14 }, tags: [], bonus: p.isDog ? 0.3 : 0 }); }
     if (!p.isDog) C({ kind: 'fun', activity: 'sketching on the crit rug', emoji: '🖍️', location: 'crit_rug', dur: [20, 40], needs: { fun: 25, fulfillment: 15 }, tags: ['fun'], bonus: tr.O - 0.4 });
     C({ kind: 'fun', activity: 'a round of pinball', emoji: '🕹️', location: pick(['pinball', 'pinball2']), dur: [10, 20], needs: { fun: 45 }, tags: ['fun'], bonus: (tr.O - 0.5) });
     // The dance machine: a song or two, more likely late on a Friday and for the extroverts.
@@ -15770,11 +15776,35 @@ class Sim {
     return true;
   }
 
+  // Seats: chairs, benches, the beanbags. Someone sitting in one owns that tile until they get up.
+  static SEATS = null;
+  #seatAt(x, y) {
+    Sim.SEATS ??= new Set(Object.values(OBJ).filter(o => o.seat || o.id.startsWith('desk:') || o.id.startsWith('chair:') || o.id.startsWith('bench:') || /chair|bench|sofa|stool/.test(o.sprite ?? '')).flatMap(o => { const t = []; for (let yy = o.y; yy < o.y + o.h; yy++) for (let xx = o.x; xx < o.x + o.w; xx++) t.push(yy * 1000 + xx); return t; }));
+    return Sim.SEATS.has(y * 1000 + x);
+  }
+  #sitterAt(x, y, self) {
+    if (!this.#seatAt(x, y)) return null;
+    for (const o of this.agents.values()) if (o !== self && !o.hidden && o.state !== 'walking' && o.x === x && o.y === y) return o;
+    return null;
+  }
   #moveStep() {
     if (this.step % 2 === 0) this.#moveVisitors();
     for (const a of this.agents.values()) {
       if (a.state !== 'walking') continue;
       const nxt = a.path.shift();
+      const sitter = nxt && this.#sitterAt(nxt.x, nxt.y, a);
+      if (sitter) {
+        // someone's sitting there: go around if it's on the way, otherwise wait for them to get up
+        const goal = a.path.length ? a.path[a.path.length - 1] : null;
+        const around = goal && findPath(a.x, a.y, goal.x, goal.y, (x, y) => !!this.#sitterAt(x, y, a));
+        if (around?.length) { a.path = around; a.blocked = 0; continue; }
+        a.path.unshift(nxt);
+        a.blocked = (a.blocked ?? 0) + 1;
+        if (a.blocked === 1) a.thought = `Waiting for ${PERSONA[sitter.id]?.short ?? 'them'} to get up.`;
+        if (a.blocked > STEPS_PER_MIN * 20) { a.blocked = 0; a.path = []; this.#arrive(a); } // gave up waiting: does it from here
+        continue;
+      }
+      a.blocked = 0;
       if (nxt) {
         a.dir = nxt.x > a.x ? 'right' : nxt.x < a.x ? 'left' : nxt.y > a.y ? 'down' : 'up';
         a.x = nxt.x; a.y = nxt.y;
@@ -18040,7 +18070,13 @@ class Sim {
       if (near.trinket && Math.random() < 0.35) this.findTrinket(id, 'dog');
       return `*sniffs* ${line}`;
     }
-    if (id.startsWith('door:')) { if (!possessed) return null; a.hidden = true; a.atHome = true; this.release(); return `${p.short} went home.`; }
+    if (id.startsWith('door:')) { // opening the door is just opening the door: a look outside, then back to it
+      if (!possessed) return null;
+      bump('energy', 3); bump('fun', 2);
+      const wx = this.today?.kind ?? 'sunny', line = { rain: 'Still raining.', storm: 'Nope. Closing that.', snow: 'Snow! Okay, back inside.', fog: 'Can\'t see the street.', cloudy: 'Grey out there.' }[wx] ?? 'Nice out.';
+      a.thought = line; // the door swings open on its own while they stand at it
+      return `${p.short} opened the front door and looked outside. ${line}`;
+    }
     if (p.isDog && mode === 'play') { bump('fun', 30); did = `played with the ${near.name}`; }
     else if (p.isDog && mode !== 'use') { // anything Pica is sent to use, she pees on
       bump('fun', 15); did = `peed on the ${near.name}`;
@@ -19342,6 +19378,7 @@ function frame(now) {
   ctx.setTransform(zs, 0, 0, zs, -cam.ox * zs + shake * SCALE, -cam.oy * zs + (Math.random() - 0.5) * (quaking ? 2 : 0) * SCALE);
   ctx.imageSmoothingEnabled = false;
   ctx.drawImage(bg, 0, 0);
+  drawWeather(now, true); // rain on the window glass, behind anything standing in front of a window
 
   const everyone = [...snap.agents, ...(snap.visitors ?? [])];
   const vis = everyone.filter(a => !a.hidden);
@@ -19387,6 +19424,7 @@ function frame(now) {
       if (pose.lie && !snap.paused && skateBailed[a.id] !== round) { skateBailed[a.id] = round; local.sim().skateBail?.(a.id, skateTrick(a.id, round).trick); } // goes on Tomás' tally skateDir = pose.dir; skateMode[a.id] = pose.board;
     }
     else if (idle === 'lounge') { oy = (ph % 2400) < 1200 ? 1 : 0; } // slow breathing
+    else if (idle === 'beanbag') { oy = 3 + ((ph % 2600) < 1300 ? 0 : 1); ox = a.x === 4 ? -5 : 6; } // sunk into the middle of the beanbag, breathing
     else if (idle === 'breathe' || idle === 'eat' || idle === 'drink' || idle === 'browse' || idle === 'candle' || idle === 'box') { if ((ph % 3200) < 260) oy = 1; } // shifting their weight
     else if (idle === 'sniff') { oy = (ph % 500) < 250 ? 1 : 0; ox = (ph % 1600) < 800 ? 0 : 1; } // nose to the ground
     else if (idle === 'chew') { oy = (ph % 360) < 180 ? 1 : 0; } // chomp
@@ -19553,6 +19591,7 @@ function idleOf(a) {
   if (/candle|power cut/i.test(desc)) return 'candle';
   if (/packing|box of|carrying/i.test(desc)) return 'box';
   if (/sketch|drawing|doodl|comic|storyboard|red pen|big idea|illustrat|lettering|logo explor/i.test(desc) || loc === 'crit_rug') return 'sketch';
+  if ((loc === 'beanbag_l' || loc === 'beanbag_r') && a.x === (loc === 'beanbag_l' ? 4 : 7) && a.y === 9) return 'beanbag'; // only once they're actually on it
   if (loc === 'sofa' || /lying|zoning/i.test(desc)) return 'lounge';
   if (/drink|wine|beer|cheers|celebrat/i.test(desc)) return 'drink';
   if (/lunch|dinner|toast|snack|sandwich|cake|pasta|leftover|breakfast|cookie|pizza|party|birthday/i.test(desc) || loc === 'dining_table' && /eat|lunch|snack/i.test(desc) || loc === 'breakfast_nook' || loc === 'snack_shelf') return 'eat';
@@ -19811,10 +19850,13 @@ function drawSteam(now) {
   ctx.restore();
 }
 // Weather on the windows (rain streaks, snowflakes, fog) and in the room's light.
-function drawWeather(now) {
+// Rain and snow on the window glass draw with the walls, before any furniture, so a plant in front of
+// a window hides them; the overcast tint and lightning flash draw over everything later (panes = false).
+function drawWeather(now, panes = false) {
   const w = snap.weather?.kind;
   if (!w || w === 'sunny') return;
   ctx.save();
+  if (panes) {
   // rain and snow only fall on the glass of each window pane (the sprite's 8×7 pane at 4,2), never into the room
   ctx.beginPath();
   for (const x of WINDOWS) ctx.rect(x * T + 4, 2, 8, 7);
@@ -19832,6 +19874,8 @@ function drawWeather(now) {
     for (const x of WINDOWS) for (let i = 0; i < 4; i++) { const yy = ((now / 900 + i * 0.27 + x * 0.17) % 1) * 8; ctx.fillRect(x * T + 4 + ((i * 29 + x * 7) % 8) + Math.sin(now / 400 + i) , 2 + yy, 1, 1); }
   }
   ctx.restore(); // end of the glass clip
+  ctx.restore(); return;
+  }
   if (w === 'storm' && Math.floor(now / 97) % 61 === 0) { ctx.globalAlpha = 0.25; ctx.fillStyle = C('white'); ctx.fillRect(0, 0, bg.width, bg.height); ctx.globalAlpha = 1; }
   if (w === 'fog' || w === 'cloudy' || w === 'rain' || w === 'storm' || w === 'snow') {
     ctx.globalAlpha = 1; ctx.fillStyle = C(w === 'fog' ? 'fog' : 'overcast'); ctx.fillRect(0, 0, bg.width, bg.height);
