@@ -44,6 +44,7 @@
       <div class="tooltip win" id="tooltip" hidden></div>
       <div class="hud win" id="hud" hidden></div>
       <div class="toasts" id="toasts" aria-live="polite"></div>
+      <button class="ticker" id="ticker" type="button" aria-label="Latest event. Open the feed"><span class="tk-text" id="ticker-text"></span><span class="tk-when" id="ticker-when"></span><span class="tk-go">Feed ›</span></button>
       <div class="dpad" id="dpad" hidden aria-label="Possession controls">
         <div class="pad">
           <button class="btn" data-key="ArrowUp" aria-label="Up">▲</button>
@@ -59,7 +60,10 @@
       </div>
     </section>
 
+    <button class="drawer-tab" id="drawer-tab" type="button" aria-controls="panel" aria-expanded="false">Feed · Projects · Team</button>
     <aside class="panel win" id="panel">
+      <button class="drawer-x" id="drawer-x" type="button" aria-label="Close the panel">✕</button>
+      <button class="panel-hide" id="panel-hide" type="button">Hide panel ⇥</button>
       <button class="sheet-handle" id="sheet-handle" aria-label="Resize the panel"><span></span></button>
       <section class="summary" id="summary" aria-label="Studio at a glance"></section>
       <nav class="tabs" role="tablist">

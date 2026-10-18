@@ -171,7 +171,7 @@ function paint(g, dog) {
 
 const spriteCache = new Map();
 function sprite(persona, dir, frame) {
-  const key = `${persona.id}:${dir}:${frame}`;
+  const key = `${persona.id}:${persona.look.shirt ?? ''}:${persona.look.pants ?? ''}:${dir}:${frame}`; // outfits change day to day
   if (!spriteCache.has(key)) {
     const dog = !!persona.look.dog;
     const g = dog ? dogGrid(dir === 'left' ? 'left' : 'right', frame) : charGrid(persona.look, dir, frame);
@@ -696,7 +696,7 @@ const PERSONAS = [
     ideas: 'A studio-funded fellowship for designers from places with no design schools.',
     personal_life: 'Married to Felix, a cellist. Two teenagers (Chidi, 16, and Ada, 14). Swims laps every Sunday. Calls her mother in Enugu on Saturdays.',
     quirks: 'Carries a battered Moleskine. Says "lovely, now break it."',
-    look: { skin: 'skin5', hair: 'hair-black', style: 'curly', shirt: 'plum', pants: 'ink' },
+    look: { skin: 'skin5', hair: 'hair-black', style: 'curly', shirt: 'white', pants: 'denim-light' },
     skills: { design: 0.8, research: 0.5, writing: 0.6, client: 0.9, ops: 0.5, product: 0.6 },
     relationships: { cos: 'Her right hand; she trusts him with everything except taste.', head_design: 'Her first hire. Old friend; they argue like siblings.' },
   },
@@ -726,7 +726,7 @@ const PERSONAS = [
     ideas: 'A studio typeface family released for free.',
     personal_life: 'Divorced, co-parents his daughter Hana (10) week-on, week-off. Woodworker: building a cedar canoe in his garage.',
     quirks: 'Sharpens his pencils with a knife. Notices kerning on restaurant menus.',
-    look: { skin: 'skin2', hair: 'hair-grey', style: 'short', shirt: 'ink', pants: 'ink' },
+    look: { skin: 'skin2', hair: 'hair-grey', style: 'short', shirt: 'black', pants: 'black' },
     skills: { design: 1.0, research: 0.5, writing: 0.5, client: 0.6, ops: 0.4, product: 0.5 },
     relationships: { ceo: 'Old friend; they argue like siblings.', senior_designer: 'Sees himself in Noor.', junior_designer: 'Wants to mentor Eli but struggles to show warmth.' },
   },
@@ -801,7 +801,7 @@ const PERSONAS = [
     ideas: 'A studio "voice lab" that tests brand names on real people.',
     personal_life: 'Hosts an open-mic night across town on Thursdays. Mentors teens at a youth writing program. Lives alone with too many plants.',
     quirks: 'Writes on index cards. Hums gospel.',
-    look: { skin: 'skin6', hair: 'hair-black', style: 'bald', shirt: 'mustard', pants: 'denim' },
+    look: { skin: 'skin6', hair: 'hair-black', style: 'bald', shirt: 'white', pants: 'denim' },
     skills: { design: 0.3, research: 0.5, writing: 1.0, client: 0.6, ops: 0.3, product: 0.4 },
     relationships: { ux_researcher: 'Hannah is his favorite reader.', junior_designer: 'Eli makes him laugh on the hard days.' },
   },
@@ -974,7 +974,7 @@ const HIRE_POOL = [
     ideas: 'Every brief should start with a sentence a twelve-year-old would understand.',
     personal_life: 'Runs a supper club once a month. Wears a hijab. Calls her mum in Lagos every evening.',
     quirks: 'Collects vintage magazines. Underlines everything.',
-    look: { skin: 'skin6', hair: 'scarf-teal', style: 'hijab', shirt: 'mustard', pants: 'ink' },
+    look: { skin: 'skin6', hair: 'scarf-teal', style: 'hijab', shirt: 'black', pants: 'ink' },
     skills: { design: 0.4, research: 0.9, writing: 0.9, client: 0.7, ops: 0.5, product: 0.6 },
     relationships: {}, drive: 'Wants every project to stand for something real.',
   },
@@ -19011,7 +19011,7 @@ window.anotherStudio = local; // handy for poking at the sim from the console
 world = local.world;
 for (const p of world.personas) P[p.id] = p;
 const avatarCache = {};
-const avatars = new Proxy({}, { get: (_, id) => avatarCache[id] ??= (P[id] ? avatarURL(P[id]) : '') });
+const avatars = new Proxy({}, { get: (_, id) => { const p = P[id] ? wornBy(id) ?? P[id] : null; if (!p) return ''; return avatarCache[`${id}:${p.look?.shirt ?? ''}:${p.look?.pants ?? ''}`] ??= avatarURL(p); } }); // pictures show today's clothes
 const FONT = cssVar('--font-ui');
 
 const canvas = $('#map');
@@ -19096,7 +19096,7 @@ setTimeout(() => local.subscribe(msg => {
   for (const p of world.personas) P[p.id] ??= p;
   if (msg.roles) for (const [id, role] of Object.entries(msg.roles)) if (P[id]) P[id].role = role;
   for (const v of msg.visitors ?? []) P[v.id] ??= { id: v.id, name: v.name, short: v.short, role: v.title, look: v.look, visitor: true };
-  if (msg.feed?.length) { feed.push(...msg.feed); if (feed.length > 400) feed = feed.slice(-400); renderFeed(); if (!msg.init) for (const it of msg.feed) if (it.toast) toast(it); }
+  if (msg.feed?.length) { feed.push(...msg.feed); if (feed.length > 400) feed = feed.slice(-400); renderFeed(); renderTicker(); if (!msg.init) for (const it of msg.feed) if (it.toast) toast(it); }
   else if (msg.init) renderFeed();
   renderTop();
   if (tab === 'team' && !selected) renderTeam();
@@ -19243,6 +19243,34 @@ for (let y = world.H - 1; y >= 0; y--) for (let x = 0; x < world.W; x++) {
 const roomFade = Object.fromEntries(ROOMS.map(r => [r, 0]));
 const STICKER_AT = {}, PLANT_AT = {};
 const RECORD = world.objects.find(o => o.id === 'record_player');
+// Today's outfit. Everyone has a favourite shirt colour (their look) and wears it three days in four; on
+// the other days they pull another from the studio's wardrobe of colours. Pants have no favourite: any
+// colour, any day. The same all day, every time you look, on the map and in their picture. Kenji wears
+// black, head to toe, every day, forever.
+const WARDROBE = {
+  shirt: ['black', 'green', 'ink', 'khaki', 'mustard', 'navy', 'orange', 'plum', 'purple', 'red', 'sky', 'teal', 'white'],
+  pants: ['black', 'denim', 'denim-light', 'ink', 'khaki'],
+};
+const ALWAYS_SAME = new Set(['head_design']);
+const outfits = new Map();
+function wornBy(id) {
+  const p = P[id];
+  if (!p || !snap || p.look?.dog || p.visitor || ALWAYS_SAME.has(id)) return p;
+  const day = Math.floor(snap.t / 1440), key = `${id}:${day}`;
+  let o = outfits.get(key);
+  if (!o) {
+    let h = 2166136261; for (const ch of key) h = Math.imul(h ^ ch.charCodeAt(0), 16777619) >>> 0;
+    const roll = n => { h = Math.imul(h ^ (h >>> 13), 2246822519) >>> 0; return h % n; };
+    // shirts: their favourite three days in four; pants: whatever's clean, no favourite
+    const shirts = WARDROBE.shirt.filter(c => c !== p.look.shirt);
+    const shirt = roll(100) < 75 ? p.look.shirt : shirts[roll(shirts.length)];
+    const pants = WARDROBE.pants[roll(WARDROBE.pants.length)];
+    o = shirt === p.look.shirt && pants === p.look.pants ? p : { ...p, look: { ...p.look, shirt, pants } };
+    if (outfits.size > 400) outfits.clear();
+    outfits.set(key, o);
+  }
+  return o;
+}
 const BEANBAG_IDS = new Set(['beanbag_l', 'beanbag_r', 'reading_chair', 'reading_chair2']);
 const BEANBAG_AT = new Set(world.objects.filter(o => BEANBAG_IDS.has(o.id)).map(o => `${o.x},${o.y}`));
 // whoever sits on a cushion or beanbag turns toward the low table beside it
@@ -19462,8 +19490,8 @@ function frame(now) {
       ctx.fillRect(sx + 3, sy + SH - 1, 10, 1); ctx.fillRect(sx + 2, sy + SH - 2, 1, 1); ctx.fillRect(sx + 13, sy + SH - 2, 1, 1);
     }
     if (lie) { // bailed: flat on the floor, head toward the far end of the lane
-      ctx.save(); ctx.translate(px + ox + 8, py + oy + SH - 6); ctx.rotate(-Math.PI / 2); ctx.drawImage(sprite(P[a.id], 'right', 0), -8, -SH + 2); ctx.restore();
-    } else ctx.drawImage(sprite(P[a.id], dir, f), px + ox, py + oy);
+      ctx.save(); ctx.translate(px + ox + 8, py + oy + SH - 6); ctx.rotate(-Math.PI / 2); ctx.drawImage(sprite(wornBy(a.id), 'right', 0), -8, -SH + 2); ctx.restore();
+    } else ctx.drawImage(sprite(wornBy(a.id), dir, f), px + ox, py + oy);
     // with their back to us, whatever they're holding shows above the head instead of on their back
     const lift = dir === 'up' && HANDHELD.has(idle) ? -20 : 0;
     if (idle) drawIdle(idle, { ...a, dir }, px + ox, py + oy + lift, now);
@@ -20104,12 +20132,75 @@ canvas.addEventListener('click', ev => {
   const bub = bubbleAt(ev);
   if (bub) return openConversation(bub.a.id);
   const a = agentAt(ev);
-  if (a) return a.visitor ? openVisitor(a.id) : inspect(a.id);
+  if (a) { openDrawer(); return a.visitor ? openVisitor(a.id) : inspect(a.id); }
   if (god) return; // God Mode: objects aren't clickable, only people
   const o = viewAt(ev);
-  if (o) openObject(o);
+  if (o) { openDrawer(); openObject(o); }
 });
 const cap = s => s[0].toUpperCase() + s.slice(1);
+
+// ------------------------------------------------------------------ drawer layout
+// Squarish landscape screens (tablets, 4:3 windows) give the map the full width and turn the panel
+// into a drawer over it; wider screens keep the side panel unless you choose "Hide panel" (remembered
+// on this device). Picking someone or something opens the drawer to them; only ✕ or the edge tab
+// close it. While it's closed, a one-line ticker under the map shows the latest event.
+const DRAWER_PREF = 'anotherStudio.panelHidden';
+const prefHidden = () => { try { return localStorage.getItem(DRAWER_PREF) === '1'; } catch { return false; } };
+function applyLayout() {
+  const w = innerWidth, h = innerHeight, big = w > 700 && h > 500;
+  const tablet = big && w > h && w / h < 1.5;
+  const drawer = tablet || big && prefHidden();
+  const was = document.body.classList.contains('drawer-mode');
+  document.body.classList.toggle('drawer-mode', drawer);
+  document.body.classList.toggle('drawer-tablet', tablet);
+  if (!drawer) document.body.classList.remove('drawer-open');
+  else if (!was) document.body.classList.remove('drawer-open'); // entering the drawer layout starts with the full map
+  $('#panel-hide').textContent = drawer ? 'Pin panel ⇤' : 'Hide panel ⇥';
+  $('#panel-hide').title = drawer ? 'Keep the panel open beside the map' : 'Give the map the whole width; the panel becomes a drawer';
+  syncDrawer();
+}
+function syncDrawer() {
+  const open = document.body.classList.contains('drawer-open') || !document.body.classList.contains('drawer-mode');
+  $('#drawer-tab').setAttribute('aria-expanded', String(open));
+  $('#drawer-tab').textContent = document.body.classList.contains('drawer-open') ? 'Close ›' : 'Feed · Projects · Team';
+  if (document.body.classList.contains('drawer-mode') && !document.body.classList.contains('drawer-open')) renderTicker(true);
+}
+function openDrawer() { if (!document.body.classList.contains('drawer-mode') || document.body.classList.contains('drawer-open')) return; document.body.classList.add('drawer-open'); syncDrawer(); }
+function closeDrawer() { document.body.classList.remove('drawer-open'); syncDrawer(); }
+$('#drawer-x').onclick = closeDrawer;
+$('#drawer-tab').onclick = () => document.body.classList.contains('drawer-open') ? closeDrawer() : openDrawer();
+$('#panel-hide').onclick = () => {
+  const hide = !document.body.classList.contains('drawer-mode');
+  try { localStorage.setItem(DRAWER_PREF, hide ? '1' : '0'); } catch {}
+  applyLayout();
+};
+$('#ticker').onclick = () => { setTab('feed'); openDrawer(); };
+// The ticker: the newest thing in the feed, said in one line. It follows the feed as it happens.
+let tickerKey = '';
+function tickerLine(f) {
+  if (!f) return '';
+  if (f.type === 'chat') {
+    const names = (f.agents ?? []).filter(id => P[id] && !P[id].look?.dog).map(id => P[id].short);
+    const who = names.length > 2 ? `${names.slice(0, -1).join(', ')} and ${names.at(-1)}` : names.join(' and ');
+    const about = f.topic && !/notices|small talk/i.test(f.topic) ? ` about ${f.topic.replace(/^work:.*/, 'work').replace(/^(.)/, c => c.toLowerCase())}` : '';
+    return `${f.ritual ? '🗣️' : '💬'} ${who || 'Someone'} ${f.ritual ? 'met' : 'talked'}${about}`;
+  }
+  if (f.text) return `${f.icon ?? '📣'} ${f.agent && P[f.agent] && !f.text.includes(P[f.agent].short) ? `${P[f.agent].short}: ` : ''}${f.text}`;
+  if (f.agent && P[f.agent]) return `${f.icon ?? '•'} ${P[f.agent].short} ${f.title ?? f.summary ?? ''}`.trim();
+  return '';
+}
+function renderTicker(force = false) {
+  if (!document.body.classList.contains('drawer-mode') || document.body.classList.contains('drawer-open')) return;
+  const f = [...feed].reverse().find(x => tickerLine(x)) ?? null;
+  const key = f ? `${f.id ?? f.t}|${f.type}` : '';
+  if (!force && key === tickerKey) return;
+  tickerKey = key;
+  $('#ticker-text').textContent = f ? tickerLine(f) : 'The studio is quiet.';
+  $('#ticker-when').textContent = f ? hhmmOf(f.t) : '';
+}
+const hhmmOf = t => `${String(Math.floor((t % 1440) / 60)).padStart(2, '0')}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
+addEventListener('resize', applyLayout);
+applyLayout();
 
 // ------------------------------------------------------------------ phone & touch
 // Phones get a bottom sheet for the panel, a compact top bar, long-press for the
@@ -20165,7 +20256,7 @@ let suppressClick = false;
       suppressClick = true; tipTimer = setTimeout(() => { $('#tooltip').hidden = true; }, 2500);
       // a long press on a person opens them, the same as a tap
       const a = agentAt(press.ev);
-      if (a) { $('#tooltip').hidden = true; if (a.visitor) openVisitor(a.id); else inspect(a.id); }
+      if (a) { $('#tooltip').hidden = true; openDrawer(); if (a.visitor) openVisitor(a.id); else inspect(a.id); }
     }
     press = null;
   };
@@ -21148,10 +21239,10 @@ function renderSummary() {
   ].filter(Boolean).slice(0, 4);
   $('#summary').innerHTML = `
     <div class="stats">
-      <div><b>${live.length}</b><span>active projects</span></div>
-      <div><b>${awaiting.length}</b><span>in review</span></div>
-      <div><b>${made}</b><span>artifacts today</span></div>
-      <div><b>${snap.awards.length}</b><span>awards</span></div>
+      <div><b>${live.length}</b><span data-short="projects">active projects</span></div>
+      <div><b>${awaiting.length}</b><span data-short="in review">in review</span></div>
+      <div><b>${made}</b><span data-short="made today">artifacts today</span></div>
+      <div><b>${snap.awards.length}</b><span data-short="awards">awards</span></div>
     </div>
     ${scenarioBlock()}
     <div class="today">${snap.music ? `${snap.music.icon} ${esc(cap(snap.music.label))} on the record player (${esc(P[snap.music.by]?.short ?? 'someone')}'s pick) · ` : ''}${snap.weather ? `${snap.weather.icon} ${snap.weather.temp}°C · ` : ''}${snap.holiday ? `${snap.holiday.emoji} ${esc(snap.holiday.name)} · ` : ''}Today: ${chats} conversations, ${reviews.length} client decision${reviews.length === 1 ? '' : 's'}, ${made} new artifact${made === 1 ? '' : 's'}.${snap.cash != null ? ` <span class="${snap.runway < 2 ? 'former' : 'k'}">💰 ${snap.cash < 0 ? '-' : ''}$${Math.abs(Math.round(snap.cash / 1000))}k · ${snap.runway < 0 ? 'in the red' : `${snap.runway} months of runway`}</span>` : ''}</div>
