@@ -323,14 +323,19 @@ function drawObject(ctx, o) {
     });
   };
   switch (o.sprite) {
-    case 'rug_lounge': { // woven rug with a striped border, two floor cushions and a low table of markers
-      f('outline', 0, 2, w, h - 2); f('khaki', 1, 3, w - 2, h - 4);
-      for (let i = 0; i < w - 4; i += 6) { f('red', 2 + i, 4, 3, 1); f('teal', 2 + i, h - 4, 3, 1); }
-      f(S('khaki', 0.85), 3, 6, w - 6, h - 12);
-      ctx.fillStyle = C('outline'); ctx.beginPath(); ctx.ellipse(px + 18, py + 17, 9, 6, 0, 0, 7); ctx.fill(); ctx.fillStyle = C('mustard'); ctx.beginPath(); ctx.ellipse(px + 18, py + 16, 8, 5, 0, 0, 7); ctx.fill();
-      ctx.fillStyle = C('outline'); ctx.beginPath(); ctx.ellipse(px + w - 18, py + 17, 9, 6, 0, 0, 7); ctx.fill(); ctx.fillStyle = C('plum'); ctx.beginPath(); ctx.ellipse(px + w - 18, py + 16, 8, 5, 0, 0, 7); ctx.fill();
-      f('outline', w / 2 - 14, 10, 28, 12); f('desk', w / 2 - 13, 11, 26, 8); f('desk-top', w / 2 - 13, 11, 26, 3);
-      f('white', w / 2 - 10, 12, 8, 5); f('red', w / 2 + 1, 13, 5, 1); f('sky', w / 2 + 2, 15, 5, 1); f('mustard', w / 2 + 7, 12, 2, 2);
+    case 'rug_lounge': { // woven rug with a striped border; a low table of markers between two light-brown floor cushions, all in one line
+      // the rug is one tile row deep on the map but drawn a little taller, centred on that row, so the cushions and table sit in its middle
+      f('outline', 0, -6, w, 28); f('khaki', 1, -5, w - 2, 26);
+      for (let i = 0; i < w - 4; i += 6) { f('red', 2 + i, -4, 3, 1); f('teal', 2 + i, 18, 3, 1); }
+      f(S('khaki', 0.85), 3, -2, w - 6, 18);
+      for (const cx of [24, w - 24]) { // the cushions, centred on the second and fifth tiles: the seats
+        ctx.fillStyle = C('outline'); ctx.beginPath(); ctx.ellipse(px + cx, py + 9, 9, 6.5, 0, 0, 7); ctx.fill();
+        ctx.fillStyle = C('desk-top'); ctx.beginPath(); ctx.ellipse(px + cx, py + 8.5, 8, 5.5, 0, 0, 7); ctx.fill();
+        ctx.fillStyle = S('desk-top', 0.86); ctx.beginPath(); ctx.ellipse(px + cx + 1, py + 10, 5, 2.5, 0, 0, 7); ctx.fill();
+        ctx.fillStyle = S('desk-top', 1.15); ctx.beginPath(); ctx.ellipse(px + cx - 3, py + 6.5, 3, 1.5, -0.3, 0, 7); ctx.fill();
+      }
+      f('outline', w / 2 - 14, 2, 28, 12); f('desk', w / 2 - 13, 3, 26, 8); f('desk-top', w / 2 - 13, 3, 26, 3); f('outline', w / 2 - 13, 13, 2, 2); f('outline', w / 2 + 11, 13, 2, 2);
+      f('white', w / 2 - 10, 4, 8, 5); f('red', w / 2 + 1, 5, 5, 1); f('sky', w / 2 + 2, 7, 5, 1); f('mustard', w / 2 + 7, 4, 2, 2);
       break;
     }
     case 'altar': // a low shelf with a candle, incense, stones and a bowl of folded notes
@@ -551,6 +556,11 @@ function drawObject(ctx, o) {
       ctx.fillStyle = S(k, 0.82); ctx.beginPath(); ctx.ellipse(px + 9, py + 10, 3.5, 2.2, 0, 0, 7); ctx.fill();
       break;
     }
+    case 'magazines_lounge': // the library corner as one piece: mustard beanbag, magazine table, teal beanbag
+      drawObject(ctx, { ...o, sprite: 'beanbag', x: o.x, w: 1 });
+      drawObject(ctx, { ...o, sprite: 'magazines', x: o.x + 1, w: o.w - 2 });
+      drawObject(ctx, { ...o, sprite: 'beanbag_teal', x: o.x + o.w - 1, w: 1 });
+      break;
     case 'magazines': // a low wooden table with stacked magazines and a mug
       shadow(1, 12, 15, 3);
       // stretches to its width: legs at the ends, two magazine stacks, a mug, a book
@@ -12759,9 +12769,10 @@ obj('computer:ceo', 'computer', 'meeting', 28, 5, 1, 1, 'blank', [27, 5], { bloc
 // The crit rug: a big woven rug with floor cushions and a low table, for sketching on the floor
 // and quick crits away from the screens. A floor lamp stands beside it.
 // The two floor cushions on the crit rug (drawn with the rug) are real seats: one person each.
-obj('beanbag_l', 'mustard beanbag', 'studio', 4, 9, 1, 1, 'none', [4, 9], { blocking: false, seat: true, story: 'The mustard one. It has a dent in it shaped exactly like Eli.' });
-obj('beanbag_r', 'plum beanbag', 'studio', 7, 9, 1, 1, 'none', [7, 9], { blocking: false, seat: true, story: 'The plum one. Sofia\'s, unofficially. Nobody fights her for it.' });
-obj('crit_rug', 'crit rug', 'studio', 3, 8, 6, 2, 'rug_lounge', [5, 9], { blocking: false, view: 'rug', story: 'A huge woven rug Sofia brought back from Oaxaca. Floor cushions, a low table covered in markers, and a rule: no laptops on the rug.' });
+obj('beanbag_l', 'floor cushion', 'studio', 4, 9, 1, 1, 'none', [4, 9], { blocking: false, seat: true, story: 'The left floor cushion. Sofia sits here for crit and nowhere else.' });
+obj('beanbag_r', 'floor cushion', 'studio', 7, 9, 1, 1, 'none', [7, 9], { blocking: false, seat: true, story: 'The right floor cushion. Whoever is presenting gets this one, and the low table between you.' });
+obj('crit_table', 'crit table', 'studio', 5, 9, 2, 1, 'none', [5, 10], { blocking: true, decor: true }); // the low table on the rug: nobody walks over it
+obj('crit_rug', 'crit rug', 'studio', 3, 9, 6, 1, 'rug_lounge', [3, 9], { blocking: false, view: 'rug', story: 'A huge woven rug Sofia brought back from Oaxaca. Floor cushions, a low table covered in markers, and a rule: no laptops on the rug.' });
 obj('altar', 'little altar', 'studio', 10, 8, 1, 1, 'altar', [10, 9], { story: 'A low shelf Hannah set up after the layoffs: a beeswax candle, a stick of sandalwood, a smooth stone from every person who has left, and a bowl where people drop folded notes. Nobody reads them. That is the point.' });
 obj('research_wall', 'research wall', 'studio', 6, 1, 4, 1, 'stickywall', [8, 2], { view: 'researchwall', story: 'Hannah\'s wall: every interview, every survey, every half-formed insight, in sticky notes. The colors mean something. Only Hannah and Dev know what.' });
 obj('pinup_wall', 'pin-up wall', 'studio', 12, 1, 3, 1, 'pinup', [13, 2], { view: 'pinup', story: 'Cork tiles salvaged from the old studio. Every active project gets pinned here; the rule is nothing comes down until it\'s been argued about.' });
@@ -12785,9 +12796,10 @@ obj('projector', 'presentation screen', 'meeting', 24, 1, 4, 1, 'screen', [25, 2
 
 obj('bookshelf', 'case study shelf', 'library', 20, 9, 4, 1, 'shelf', [21, 10], { view: 'casestudies', story: 'Bound copies of every finished case study, one per delivered project, including the work of everyone who used to be here. Adaeze reads one before every pitch.' });
 obj('annuals_shelf', 'design annuals shelf', 'library', 25, 9, 4, 1, 'shelf', [26, 10], { view: 'annuals', story: 'Forty years of design annuals, type specimens, and the studio\'s own award books. Kenji reshelves them by color when he\'s stressed.' });
-obj('reading_chair', 'mustard beanbag', 'library', 21, 14, 1, 1, 'beanbag', [21, 15], { story: 'A huge mustard beanbag that replaced the velvet reading chair. Hannah claimed it in the first hour and does synthesis in it, horizontally.' });
-obj('reading_chair2', 'teal beanbag', 'library', 24, 14, 1, 1, 'beanbag_teal', [24, 15], { story: 'Its teal twin. Slightly flatter. Pica prefers this one and leaves it dog-shaped.' });
-obj('magazine_table', 'magazine table', 'library', 22, 14, 2, 1, 'magazines', [22, 15], { story: 'A low table stacked with Eye, Baseline, Slanted and one very old IKEA catalog that nobody will throw out.' });
+obj('reading_chair', 'mustard beanbag', 'library', 21, 14, 1, 1, 'none', [21, 14], { blocking: false, seat: true, story: 'A huge mustard beanbag that replaced the velvet reading chair. Hannah claimed it in the first hour and does synthesis in it, horizontally.' });
+obj('reading_chair2', 'teal beanbag', 'library', 24, 14, 1, 1, 'none', [24, 14], { blocking: false, seat: true, story: 'Its teal twin. Slightly flatter. Pica prefers this one and leaves it dog-shaped.' });
+obj('magazine_top', 'magazine table', 'library', 22, 14, 2, 1, 'none', [22, 15], { blocking: true, decor: true }); // the table itself: nobody walks over it
+obj('magazine_table', 'magazine table', 'library', 21, 14, 4, 1, 'magazines_lounge', [22, 15], { blocking: false, story: 'A low table stacked with Eye, Baseline, Slanted and one very old IKEA catalog that nobody will throw out. Two beanbags flank it: the mustard one is Hannah\'s for synthesis, and Pica leaves the flatter teal one dog-shaped.' });
 obj('skate_ramp', 'skateboard', 'library', 28, 13, 1, 1, 'board', [26, 13], { story: 'Eli\'s skateboard, stood on its tail against the east wall. He skates the lane the length of reception, and boardslides the front of the reception counter, which Tomás says is "the one place clients stand." Rohan has a board here too. Nobody else is allowed, by Tomás, and nobody else wants to.' });
 obj('skate_sign', 'Tomás\' sign', 'library', 28, 11, 1, 1, 'skatesign', [27, 11], { blocking: false, noGo: true, story: 'A yellow sandwich board in Tomás\' handwriting: NO SKATING DURING CLIENT HOURS. THIS MEANS YOU, ELI. There is a tally of falls on the back. It keeps going up.' });
 obj('phone_booth', 'phone booth', 'library', 27, 15, 2, 2, 'booth', [28, 16], { blocking: false, story: 'Soundproof-ish, with a padded bench. Used for client calls, family calls, power naps and occasionally crying.' });
@@ -12817,6 +12829,7 @@ const PLANTS = [
   [1, 1, 'Gerald', 'a monstera', 'Survived the move in the back of Kenji\'s car. Has outlived two office managers.'],
   [10, 1, 'Fig Newton', 'a fiddle-leaf fig', 'Dramatic. Drops a leaf whenever anyone moves it an inch.'],
   [1, 10, 'Big Steve', 'a rubber plant', 'Tomás\' favorite. He wipes its leaves every Monday.'],
+  [1, 9, 'Little Steve', 'a dracaena', 'Bought to keep Big Steve company. Already taller than him, which nobody mentions in front of Tomás.'],
   [18, 10, 'Ms. Kerning', 'a snake plant', 'Named by Eli. Thrives on neglect, which is convenient.'],
   [28, 1, 'Client Fern', 'a Boston fern', 'Adaeze insists clients feel calmer near ferns. Nobody has tested this.'],
   [20, 16, 'Archie', 'an olive tree', 'Lives beside the archive. Hannah talks to it during synthesis.'],
@@ -17036,8 +17049,8 @@ class Sim {
     (this.flags.returned ??= []).push(v.former);
     for (const id of v.attendees) { const a = this.agents.get(id); if (a?.action?.ritual === `client:${v.id}`) a.action.end = this.t; }
     const door = OBJ['door:home_maple'].spot;
-    v.state = 'leaving'; v.bubble = null;
-    v.path = findPath(v.x, v.y, door.x, door.y) ?? [];
+    if (this.possessed === v.id) { v.wasLeaving = true; v.bubble = null; } // still yours: they leave when you let go
+    else { v.state = 'leaving'; v.bubble = null; v.path = findPath(v.x, v.y, door.x, door.y) ?? []; }
     this.#useObject(spec.spot, 'cos', `${spec.short} sat here, visiting`);
   }
 
@@ -17097,8 +17110,8 @@ class Sim {
     }
     for (const id of v.attendees) { const a = this.agents.get(id); if (a?.action?.ritual === `client:${v.project}`) a.action.end = this.t; }
     const door = OBJ['door:home_maple'].spot;
-    v.state = 'leaving'; v.bubble = null;
-    v.path = findPath(v.x, v.y, door.x, door.y) ?? [];
+    if (this.possessed === v.id) { v.wasLeaving = true; v.bubble = null; } // still yours: they leave when you let go
+    else { v.state = 'leaving'; v.bubble = null; v.path = findPath(v.x, v.y, door.x, door.y) ?? []; }
     this.#useObject('meeting_table', 'ceo', `client meeting with ${v.name}`);
   }
 
@@ -17936,7 +17949,6 @@ class Sim {
   possess(id) {
     const v = this.visitor(id);
     if (v) { // a guest: they walk, look around and leave; the meeting waits for them
-      if (v.meeting) return `${v.short} is in the middle of the meeting.`;
       if (this.possessed) this.release();
       v.wasLeaving = v.state === 'leaving'; v.path = []; v.state = 'possessed'; v.act = 'wandering around the studio';
       v.needs ??= { energy: 70, hunger: 55, social: 60, fun: 50, fulfillment: 60 }; v.mood ??= 'curious';
@@ -19231,6 +19243,13 @@ for (let y = world.H - 1; y >= 0; y--) for (let x = 0; x < world.W; x++) {
 const roomFade = Object.fromEntries(ROOMS.map(r => [r, 0]));
 const STICKER_AT = {}, PLANT_AT = {};
 const RECORD = world.objects.find(o => o.id === 'record_player');
+const BEANBAG_IDS = new Set(['beanbag_l', 'beanbag_r', 'reading_chair', 'reading_chair2']);
+const BEANBAG_AT = new Set(world.objects.filter(o => BEANBAG_IDS.has(o.id)).map(o => `${o.x},${o.y}`));
+// whoever sits on a cushion or beanbag turns toward the low table beside it
+const BAG_FACE = Object.fromEntries(world.objects.filter(o => BEANBAG_IDS.has(o.id)).map(o => {
+  const t = world.objects.find(x => (x.id === 'crit_table' || x.id === 'magazine_top') && x.y === o.y && (x.x === o.x + 1 || x.x + x.w === o.x));
+  return [`${o.x},${o.y}`, t ? (t.x > o.x ? 'right' : 'left') : 'down'];
+}));
 const WEEKEND = __mods["sim/studio.js"].isWeekend;
 const RAMP = world.objects.find(o => o.id === 'skate_ramp');
 const skateTilt = {}, skateMode = {}, skateRow = {}, skateOff = {}, skateTrickNow = {}, skateBailed = {}; // skateRow: extra draw rows while passing in front of furniture
@@ -19430,12 +19449,12 @@ function frame(now) {
       if (pose.lie && !snap.paused && skateBailed[a.id] !== round) { skateBailed[a.id] = round; local.sim().skateBail?.(a.id, skateTrick(a.id, round).trick); } // goes on Tomás' tally skateDir = pose.dir; skateMode[a.id] = pose.board;
     }
     else if (idle === 'lounge') { oy = (ph % 2400) < 1200 ? 1 : 0; } // slow breathing
-    else if (idle === 'beanbag') { oy = 3 + ((ph % 2600) < 1300 ? 0 : 1); ox = a.x === 4 ? -5 : 6; } // sunk into the middle of the beanbag, breathing
+    else if (idle === 'beanbag') { oy = 3 + ((ph % 2600) < 1300 ? 0 : 1); } // sunk into the beanbag, breathing
     else if (idle === 'breathe' || idle === 'eat' || idle === 'drink' || idle === 'browse' || idle === 'candle' || idle === 'box') { if ((ph % 3200) < 260) oy = 1; } // shifting their weight
     else if (idle === 'sniff') { oy = (ph % 500) < 250 ? 1 : 0; ox = (ph % 1600) < 800 ? 0 : 1; } // nose to the ground
     else if (idle === 'chew') { oy = (ph % 360) < 180 ? 1 : 0; } // chomp
     // face the thing you're using: machines are played from the front, the dummy from the side
-    const dir = skateDir ?? (idle === 'sing' ? 'down' : idle === 'pinball' || idle === 'dance' ? 'up' : idle === 'dummy' && FUN_OBJ.wing_chun ? (FUN_OBJ.wing_chun.x > d.x ? 'right' : 'left') : a.dir);
+    const dir = skateDir ?? (idle === 'beanbag' ? BAG_FACE[`${Math.round(d.x)},${Math.round(d.y)}`] ?? 'down' : idle === 'sing' ? 'down' : idle === 'pinball' || idle === 'dance' ? 'up' : idle === 'dummy' && FUN_OBJ.wing_chun ? (FUN_OBJ.wing_chun.x > d.x ? 'right' : 'left') : a.dir);
     d.ox = lie ? ox - 6 : ox; d.oy = lie ? oy + 10 : oy; // the emoji, bubble, selection bracket and possess marker ride along (down to the floor in a bail)
     if (a.id === selected || a.id === hover) {
       const sx = px + ox, sy = py + oy;
@@ -19575,6 +19594,7 @@ function idleOf(a) {
   if (act && a.state === 'walking' && act.loc === 'skate_ramp' && SKATERS.has(a.id) && DESK && Math.round(a.y) === DESK.y && a.x >= DESK.x && a.x < DESK.x + DESK.w) return 'grind'; // riding the rail
   if (!act || a.state === 'talking' || a.state === 'sleeping' || a.state === 'walking') return null; // never mid-walk: between tiles the easing pauses for a frame
   const loc = act.loc ?? '', desc = act.desc ?? '';
+  if (BEANBAG_AT.has(`${Math.round(a.x)},${Math.round(a.y)}`) && BEANBAG_IDS.has(loc)) return 'beanbag'; // only once they're actually on it
   if (loc === 'skate_ramp' && SKATERS.has(a.id)) return RAMP && Math.abs(a.x - RAMP.spot.x) + Math.abs(a.y - RAMP.spot.y) <= 1 ? 'skate' : null; // Pica skates too
   if (P[a.id]?.look?.dog) {
     if (/nap|sleep|curl|snooz|bed/i.test(desc) || loc === 'dog_bed') return 'dognap';
@@ -19597,7 +19617,6 @@ function idleOf(a) {
   if (/candle|power cut/i.test(desc)) return 'candle';
   if (/packing|box of|carrying/i.test(desc)) return 'box';
   if (/sketch|drawing|doodl|comic|storyboard|red pen|big idea|illustrat|lettering|logo explor/i.test(desc) || loc === 'crit_rug') return 'sketch';
-  if ((loc === 'beanbag_l' || loc === 'beanbag_r') && a.x === (loc === 'beanbag_l' ? 4 : 7) && a.y === 9) return 'beanbag'; // only once they're actually on it
   if (loc === 'sofa' || /lying|zoning/i.test(desc)) return 'lounge';
   if (/drink|wine|beer|cheers|celebrat/i.test(desc)) return 'drink';
   if (/lunch|dinner|toast|snack|sandwich|cake|pasta|leftover|breakfast|cookie|pizza|party|birthday/i.test(desc) || loc === 'dining_table' && /eat|lunch|snack/i.test(desc) || loc === 'breakfast_nook' || loc === 'snack_shelf') return 'eat';
@@ -20860,7 +20879,7 @@ function visitorGodBox(id) {
   const people = world.personas.filter(o => sim.agents.has(o.id) && !sim.agents.get(o.id).hidden && !o.look?.dog).map(o => `<option value="${o.id}">${esc(o.short)}</option>`).join('');
   const needs = Object.entries(v.needs ?? {}).map(([k, n]) => `<label class="slider"><span>${k}</span><input type="range" min="0" max="100" value="${Math.round(n)}" data-need="${k}" aria-label="${k}"><output>${Math.round(n)}</output></label>`).join('');
   return `<div class="godbox">
-    <button class="btn wide" data-possess aria-pressed="${mine}" ${v.meeting ? 'disabled title="In the middle of the meeting."' : ''}>🎮 ${mine ? 'Let go' : 'Possess'}${v.meeting ? ' · in the meeting' : ''}</button>
+    <button class="btn wide" data-possess aria-pressed="${mine}">🎮 ${mine ? 'Let go' : 'Possess'}${v.meeting && !mine ? ' · mid-meeting' : ''}</button>
     <p class="hint">${mine ? `You are ${short}. Arrow keys or WASD walk, U uses what's next to you, T talks, Esc lets go. Or pick a task below.` : `Take over ${short} for a bit: walk them around, let them poke at things, talk to the team, or send them home. The meeting waits until you let go.`}</p>
     ${mine ? `<div class="section-title">Quick actions</div><div class="btnrow">${quick.map(([k, l]) => `<button class="btn small" data-g="${k}">${l}</button>`).join('')}</div>
     <div class="section-title">Tasks</div>
@@ -21340,12 +21359,12 @@ function hudMsg(t) { hudText = t; clearTimeout(hudTimer); if (t) hudTimer = setT
 setInterval(() => {
   const hud = $('#hud');
   if (!snap?.possessed) { hud.hidden = true; return; }
-  const p = P[snap.possessed], near = local.sim().possessTargets();
+  const near = local.sim().possessTargets();
   hud.hidden = false;
   const touchPad = !$('#dpad').hidden; // on a touch screen the d-pad does the talking
   const pd = snap.picaDay;
-  hud.innerHTML = pd ? (touchPad ? `<b>🐶 Pica's day</b> · ${pd.sniffed} sniffed, ${pd.greeted} greeted${near.length ? ` · ${near.map(id => esc(P[id].short)).join(', ')} nearby` : ''}${hudText ? `<div class="hud-msg">${esc(hudText)}</div>` : ''}` : `<b>🐶 Pica's day</b> · the puffs are smells · <kbd>U</kbd> sniff what's next to you · <kbd>T</kbd> say hi${near.length ? ` (${near.map(id => esc(P[id].short)).join(', ')})` : ''} · <kbd>Esc</kbd> end the day and write it up · ${pd.sniffed} sniffed${hudText ? `<div class="hud-msg">${esc(hudText)}</div>` : ''}`)
-    : touchPad ? `<b>🎮 Playing as ${esc(p.short)}</b>${near.length ? ` · ${near.map(id => esc(P[id].short)).join(', ')} nearby` : ''}` : `<b>🎮 Playing as ${esc(p.short)}</b> · arrows or WASD to move · <kbd>U</kbd> use what's next to you · <kbd>T</kbd> talk${near.length ? ` (${near.map(id => esc(P[id].short)).join(', ')} nearby)` : ''} · <kbd>Esc</kbd> let go${hudText ? `<div class="hud-msg">${esc(hudText)}</div>` : ''}`;
+  hud.innerHTML = pd ? (touchPad ? `<b>🐶 Pica's day</b> · ${pd.sniffed} sniffed, ${pd.greeted} greeted${near.length ? ` · ${near.map(id => esc(P[id].short)).join(', ')} nearby` : ''}${hudText ? `<div class="hud-msg">${esc(hudText)}</div>` : ''}` : `<b>🐶 Pica's day</b> · The puffs are smells · <kbd>U</kbd> Sniff nearby object · <kbd>T</kbd> Say hi${near.length ? ` (${near.map(id => esc(P[id].short)).join(', ')})` : ''} · <kbd>Esc</kbd> End the day and write it up · ${pd.sniffed} sniffed${hudText ? `<div class="hud-msg">${esc(hudText)}</div>` : ''}`)
+    : touchPad ? `${near.length ? `${near.map(id => esc(P[id].short)).join(', ')} nearby` : 'Use the pad to move'}${hudText ? `<div class="hud-msg">${esc(hudText)}</div>` : ''}` : `Arrows or WASD to move · <kbd>U</kbd> Use nearby object · <kbd>T</kbd> Talk${near.length ? ` (${near.map(id => esc(P[id].short)).join(', ')} nearby)` : ''} · <kbd>Esc</kbd> Let go${hudText ? `<div class="hud-msg">${esc(hudText)}</div>` : ''}`;
 }, 250);
 
 let talkPending = null;
