@@ -182,8 +182,10 @@
   .desk .song { color: var(--color-ink-soft); }
   .desk .song:hover:not([aria-checked="true"]) { color: var(--color-ink); background: var(--color-ink-ghost); }
   .desk .song[aria-checked="true"] { color: var(--color-parchment); background: transparent; }
-  .desk .songs { position: relative; isolation: isolate; justify-self: center; justify-content: center; min-width: 0; max-width: 100%; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: thin; }
+  .desk .songs { position: relative; isolation: isolate; justify-self: center; justify-content: flex-start; min-width: 0; max-width: 100%; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: thin; }
   .desk .song { position: relative; z-index: 1; flex: 0 0 auto; padding: var(--space-1) 20px; transition: color 280ms ease, background var(--dur-fast); }
+  .desk .songs .song:first-of-type { margin-left: auto; }
+  .desk .songs .song:last-of-type { margin-right: auto; }
   .song-indicator {
     position: absolute; top: 0; left: 0; z-index: 0; pointer-events: none;
     border-radius: var(--radius-pill); background: var(--color-ink);
@@ -426,7 +428,7 @@
   }
   .paper :focus-visible { outline-color: var(--color-focus-ink); }
 
-  .desk { flex: none; padding: var(--space-5) var(--space-6); display: grid; grid-template-rows: auto var(--size-score-h) var(--status-height); gap: var(--space-3); } /* fixed status row prevents message length from resizing the programme */
+  .desk { flex: none; padding: var(--space-5) var(--space-6); display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto var(--size-score-h) var(--status-height); gap: var(--space-3); } /* fixed status row prevents message length from resizing the programme */
   .staff { display: block; width: 100%; height: var(--size-score-h); }
   .staff-wrap {
     position: relative;
@@ -468,7 +470,7 @@
   .staff .paperbg { fill: var(--color-parchment); }
   .staff .playhead { stroke: var(--color-oxblood); stroke-width: 1.2; stroke-dasharray: 2 3; }
 
-  .desk-row { --control-height: calc(var(--text-md) * 1.15 + var(--space-4) + 2px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, auto) minmax(0, 1fr); align-items: center; gap: var(--space-3); }
+  .desk-row { --control-height: calc(var(--text-md) * 1.15 + var(--space-4) + 2px); display: grid; grid-template-columns: minmax(max-content, 1fr) minmax(0, auto) minmax(max-content, 1fr); align-items: center; gap: var(--space-3); }
   .desk-row > .btn, .desk .song { height: var(--control-height); }
   #playBtn { justify-self: start; }
   #resetBtn { justify-self: end; margin-left: 0; }
@@ -496,12 +498,6 @@
     #overlayIntro {margin-left: 20px; margin-right: 20px;}
   }
 
-  @media (min-width: 721px) and (max-width: 1100px) {
-    .desk-row { grid-template-columns: 1fr 1fr; }
-    .desk .songs { grid-row: 1; grid-column: 1 / -1; justify-self: center; }
-    #playBtn { grid-row: 2; grid-column: 1; }
-    #resetBtn { grid-row: 2; grid-column: 2; }
-  }
   @media (max-width: 720px) {
     main { padding-left: var(--space-4); padding-right: var(--space-4); }
     .curtain { display: none; }
@@ -509,9 +505,23 @@
     #nowVerse { display: none; }
     .now span:last-child { max-width: none; margin-left: auto; }
     .desk .song { padding: var(--space-1) var(--space-3); }
-    .desk-row { display: flex; flex-wrap: wrap; }
-    .desk .songs { order: -1; flex: 0 0 100%; justify-content: flex-start; flex-wrap: nowrap; }
-    #resetBtn { margin-left: auto; }
+    .desk { padding: var(--space-5) var(--space-5); }
+    .desk-row { gap: var(--space-2); }
+  }
+  #resetBtn { width: var(--control-height); min-width: var(--control-height); padding: 0; }
+  #resetBtn .restore-icon { display: block; width: 1em; height: 1em; flex: none; }
+  @media (min-width: 721px) and (max-width: 920px) {
+    .desk .song { padding: var(--space-1) var(--space-3); }
+  }
+  @media (max-width: 500px) {
+    .desk { padding: var(--space-4); }
+    .desk .song { padding: var(--space-1) 6px; }
+    .desk .song .t { font-size: var(--text-xs); }
+    .desk-row { gap: var(--space-1); }
+  }
+  @media (max-width: 400px) {
+    main { padding-left: var(--space-2); padding-right: var(--space-2); }
+    .desk { padding: var(--space-4) var(--space-3); }
   }
 </style>
 </head>
@@ -558,7 +568,7 @@
         <svg class="transport-icon pause-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="3.4" y="2.8" width="2" height="10.4"/><rect x="10.6" y="2.8" width="2" height="10.4"/></svg>
       </button>
       <div class="songs" role="radiogroup" aria-label="Choose a piece" id="songPicker"></div>
-      <button class="btn" id="resetBtn" title="Restore original tempo, dynamics, and instrument balance.">Restore</button>
+      <button class="btn" id="resetBtn" aria-label="Restore" title="Restore original tempo, dynamics, and instrument balance."><svg class="restore-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3.2 8a4.8 4.8 0 1 0 1.5-3.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M4.2 1.9v2.9h2.9" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     </div>
     <div class="staff staff-wrap" id="staff" aria-hidden="true"><svg class="staff-layer" id="staffBack"></svg><div class="score-window"><div class="roll" id="roll"><svg id="rollSvg"></svg></div></div><svg class="staff-layer" id="staffFront"></svg></div>
     <div class="status-row">
@@ -710,53 +720,7 @@ const CLAIR = (() => {
   };
 })();
 
-/* ---- Aquarium, Le Carnaval des animaux (Saint-Saëns), adapted orchestral theme ---- */
-const AQUARIUM = (() => {
-  // The original melody's E–D#–E–D#–E–A figure remains audible under piano/harp ripples.
-  // Each passage is a sixteen-bar adaptation for the interactive orchestra's score system.
-  const phraseA = [
-    [[76,.75],[75,.25],[76,.75],[75,.25],[76,1],[69,1]],
-    [[76,.75],[75,.25],[76,.5],[79,.5],[76,1],[69,1]],
-    [[76,1],[74,.5],[72,.5],[71,1],[69,1]],
-    [[72,.5],[71,.5],[69,1],[68,.5],[69,.5],[76,1]],
-  ];
-  const phraseB = [
-    [[76,.75],[75,.25],[76,.75],[75,.25],[76,1],[69,1]],
-    [[79,.5],[76,.5],[75,.5],[76,.5],[81,1],[76,1]],
-    [[74,1],[72,.5],[71,.5],[69,1],[68,1]],
-    [[69,1.5],[72,.5],[71,1],[69,1]],
-  ];
-  const phraseC = [
-    [[69,.75],[68,.25],[69,.75],[68,.25],[69,1],[62,1]],
-    [[69,.75],[68,.25],[69,.5],[72,.5],[69,1],[62,1]],
-    [[72,.5],[74,.5],[76,1],[79,1],[76,1]],
-    [[75,.5],[76,.5],[79,.5],[76,.5],[72,1],[69,1]],
-  ];
-  const phraseD = [
-    [[76,.75],[75,.25],[76,.75],[75,.25],[76,1],[81,1]],
-    [[79,.5],[76,.5],[75,.5],[76,.5],[74,1],[72,1]],
-    [[71,1],[72,1],[68,1],[71,1]],
-    [[69,2],[76,1],[69,1]],
-  ];
-  const harmony = words('Am E7 Am E7 F C Dm E7 Am E7 F C Dm Am E7 Am');
-  const verse = { melody: barsMelody([...phraseA, ...phraseB, ...phraseC, ...phraseD], 4), harmony };
-  return {
-    id: 'aquarium', no: 'No. 5', title: 'Aquarium', short: 'Saint-Saëns', composer: 'Camille Saint-Saëns',
-    work: 'Le Carnaval des animaux — VII. Aquarium (theme adapted for the interactive orchestra)', cartouche: 'Saint-Saëns',
-    bpb: 4, slot: 4, tempo: 72, tonicPc: 9, tonic: 'Am', tonicLabel: 'A', minorKey: true,
-    codaMel: 69, codaWritten: 69, shift: 0, sharps: 0, pxb: 35,
-    transpose: [0, 0, 0, 0], verses: [verse, verse, verse],
-    overrides: { // preserve the movement's watery texture, with percussion mostly resting
-      'Bass drum': [null, null, null], 'Snare': [null, null, null],
-      'Timpani II': [null, null, null], 'Timpani I': [null, null, 'timp1'],
-      'Trombone I': [null, null, null], 'Trombone II': [null, null, null],
-    },
-    captions: ['<i>Andantino</i> — crystalline piano and flute', '<i>Fluide</i> — shimmering strings and harp', '<i>Dolcissimo</i> — the floating melody returns', '<i>Coda, morendo</i>'],
-    marks: ['andantino', 'fluide', 'dolcissimo', 'morendo'], dyn: ['pp', 'p', 'mp', 'pp'],
-  };
-})();
-
-const SONGS = [ODE, CANON, CLAIR, AQUARIUM, MINUET];
+const SONGS = [ODE, CANON, CLAIR, MINUET];
 const REHEARSAL = 'ABCDEFGHIJKLM';
 const TEMPO_TERMS = [[60, 'Largo'], [66, 'Larghetto'], [76, 'Adagio'], [108, 'Andante'], [120, 'Moderato'], [156, 'Allegro'], [176, 'Vivace'], [999, 'Presto']];
 const tempoTerm = bpm => TEMPO_TERMS.find(([x]) => bpm < x)[1];

@@ -85,7 +85,7 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body)
 @media (max-width:720px){
   .history{right:16px;width:184px;max-height:calc(100% - 40px);z-index:3}
 }
-@media (max-width:520px){.mark{left:16px;top:calc(18px + env(safe-area-inset-top,0px))}.mark h1{font-size:18px}.history{top:calc(14px + env(safe-area-inset-top,0px))}}
+@media (max-width:520px){.mark{left:16px;top:calc(18px + env(safe-area-inset-top,0px))}.history{top:calc(14px + env(safe-area-inset-top,0px))}#logToggle{display:none}}
 /* keyboard + screen-reader control card: invisible until something inside it has focus */
 .kbd{position:fixed;left:50%;bottom:calc(76px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);width:min(700px,calc(100% - 32px));box-sizing:border-box;background:var(--paper);border-radius:24px;box-shadow:0 12px 40px rgba(29,23,48,.10),0 1px 3px rgba(29,23,48,.06);padding:16px;display:grid;gap:12px}
 .kbd:not(:focus-within){clip-path:inset(50%);width:1px;height:1px;overflow:hidden;padding:0;white-space:nowrap}
@@ -97,7 +97,7 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body)
 .hist-links{display:flex;align-items:center;gap:11px}
 #manual{border:0;padding:0;margin:auto;width:min(760px,calc(100% - 32px));max-height:calc(100% - 48px);border-radius:28px;background:var(--paper);color:var(--ink);text-transform:none;box-shadow:0 24px 80px rgba(29,23,48,.16),0 2px 6px rgba(29,23,48,.06);overflow:hidden}
 #manual[open]{display:flex;flex-direction:column;animation:manIn .28s cubic-bezier(.2,.8,.2,1)}
-#manual::backdrop{background:rgba(243,241,248,.55);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+#manual::backdrop{background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 @keyframes manIn{from{opacity:0;transform:translateY(10px) scale(.985)}}
 @media (prefers-reduced-motion:reduce){#manual[open]{animation:none}}
 .man-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 16px 12px 32px}
@@ -125,7 +125,7 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body)
 /* changelog: a smaller sibling of the manual */
 #changelog{border:0;padding:0;margin:auto;width:min(760px,calc(100% - 32px));max-height:calc(100% - 48px);border-radius:28px;background:var(--paper);color:var(--ink);text-transform:none;box-shadow:0 24px 80px rgba(29,23,48,.16),0 2px 6px rgba(29,23,48,.06);overflow:hidden}
 #changelog[open]{display:flex;flex-direction:column;animation:manIn .28s cubic-bezier(.2,.8,.2,1)}
-#changelog::backdrop{background:rgba(243,241,248,.55);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+#changelog::backdrop{background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 @media (prefers-reduced-motion:reduce){#changelog[open]{animation:none}}
 #logScroll{padding:64px 56px 56px}
 .rel + .rel{margin-top:44px}
@@ -3876,6 +3876,7 @@ function resize(){
   const tanH = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
   baseDist = Math.max(11.4 / 2 / tanH, 10.2 / 2 / (tanH * camera.aspect));
   camera.updateProjectionMatrix();
+  if (document.querySelector('dialog[open]')) renderer.render(scene, camera);   // the loop is paused behind a dialog; resizing wiped the canvas, so redraw it once
 }
 addEventListener('resize', resize); resize();
 
