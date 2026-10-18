@@ -101,6 +101,31 @@ function charGrid(look, dir, frame) {
     if (dir === 'up') { rect(4, 3, 8, 8, skin); rect(10, 3, 2, 8, skin, 0.88); }
     set(6, 4, skin, 1.2); set(7, 4, skin, 1.2);
   }
+  // a hat, if today's outfit has one: caps (forwards or backwards), beanies, cowboy hats, fedoras, straw hats
+  const hat = look.hat;
+  if (hat && s !== 'hijab' && s !== 'bald') {
+    const c = hat.color === 'ink' ? 'ink-shirt' : hat.color === 'purple' ? 'purple-shirt' : hat.color;
+    const Ht = (x, y, w, h, k = 1) => rect(x, y, w, h, c, k);
+    const front = dir === 'right' ? 1 : dir === 'left' ? -1 : 0; // which way the face points, sideways
+    if (hat.kind === 'cap' || hat.kind === 'capback') {
+      Ht(4, 0, 8, 3); Ht(5, 0, 4, 1, 1.25); Ht(10, 0, 2, 3, 0.82); set(7, 0, c, 0.7); // crown, highlight, shade, button
+      const back = hat.kind === 'capback';
+      if (dir === 'down') { if (back) { Ht(6, 3, 4, 1, 0.75); } else { Ht(3, 3, 10, 1, 0.7); Ht(4, 3, 8, 1, 0.78); } }
+      else if (dir === 'up') { if (back) { Ht(3, 3, 10, 1, 0.7); Ht(4, 3, 8, 1, 0.78); } else Ht(6, 3, 4, 1, 0.75); }
+      else { const toward = back ? -front : front; Ht(toward > 0 ? 10 : 2, 3, 4, 1, 0.72); Ht(4, 3, 8, 1, 0.85); }
+    } else if (hat.kind === 'beanie') {
+      Ht(4, 0, 8, 4); Ht(5, 0, 4, 1, 1.2); Ht(10, 0, 2, 4, 0.82);
+      Ht(3, 3, 10, 2, 0.78); for (let x = 4; x < 12; x += 2) set(x, 3, c, 0.68); // the folded cuff, ribbed
+    } else { // brimmed hats, always brown
+      const brim = hat.kind === 'fedora' ? 10 : 12, bx = 8 - brim / 2;
+      for (let y = 0; y < 3; y++) for (let x = 0; x < 16; x++) if (x < 5 || x > 10) set(x, y, null); // the brim hides the top of the hair
+      Ht(5, 0, 6, 3); Ht(6, 0, 3, 1, 1.2); Ht(10, 0, 1, 3, 0.8);
+      if (hat.kind === 'fedora') { set(7, 0, c, 0.75); set(8, 0, c, 0.75); Ht(5, 2, 6, 1, 0.55); } // pinched crown, dark band
+      if (hat.kind === 'cowboy') { Ht(5, 2, 6, 1, 0.65); set(bx, 2, c); set(bx + brim - 1, 2, c, 0.85); } // band, brim edges curl up
+      if (hat.kind === 'straw') { Ht(5, 2, 6, 1, 0.7); for (let x = 6; x < 11; x += 2) set(x, 1, c, 1.25); } // band, weave
+      Ht(bx, 3, brim, 1, 0.9); Ht(bx, 3, 2, 1, 0.75); Ht(bx + brim - 2, 3, 2, 1, 0.75);
+    }
+  }
   // face
   if (dir === 'down') {
     rect(6, 6, 1, 2, 'outline'); rect(9, 6, 1, 2, 'outline');
@@ -171,7 +196,7 @@ function paint(g, dog) {
 
 const spriteCache = new Map();
 function sprite(persona, dir, frame) {
-  const key = `${persona.id}:${persona.look.shirt ?? ''}:${persona.look.pants ?? ''}:${dir}:${frame}`; // outfits change day to day
+  const key = `${persona.id}:${persona.look.shirt ?? ''}:${persona.look.pants ?? ''}:${persona.look.hair ?? ''}:${persona.look.hat ? `${persona.look.hat.kind}-${persona.look.hat.color}` : ''}:${dir}:${frame}`; // outfits change day to day
   if (!spriteCache.has(key)) {
     const dog = !!persona.look.dog;
     const g = dog ? dogGrid(dir === 'left' ? 'left' : 'right', frame) : charGrid(persona.look, dir, frame);
@@ -13934,6 +13959,10 @@ function decide(agent, sim) {
     C({ kind: 'eat', activity: 'team lunch at the dining table', emoji: '🍝', location: 'dining_table', dur: [30, 50], needs: { hunger: 70, social: 25, fun: 10 }, tags: ['eat'], bonus: tr.E - 0.4 });
     C({ kind: 'eat', activity: 'lunch with a book in the library', emoji: '🥪', location: pick(['reading_chair', 'reading_chair2']), dur: [25, 45], needs: { hunger: 70, fun: 12 }, tags: ['eat'], bonus: 0.4 - tr.E });
     C({ kind: 'eat', activity: 'grabbing lunch from the place downstairs', emoji: '🥡', location: 'home:out', dur: [30, 45], needs: { hunger: 70, fun: 10 }, tags: ['eat'], bonus: -0.6 });
+    if (sim.treats && sim.treats.left > 0 && sim.treats.day === day && atStudio && !p.isDog && !(sim.treats.took ?? []).includes(id)) {
+      const T = sim.treats, what = { cookies: 'a cookie', buns: 'a cardamom bun', focaccia: 'some focaccia', donuts: 'a donut', burgers: 'a slider' }[T.kind] ?? 'a treat';
+      C({ kind: 'snack', activity: `grabbing ${what}${T.by !== agent.id ? ` (thanks, ${short(T.by)})` : ''}`, emoji: T.icon, location: 'dining_table', dur: [6, 12], needs: { hunger: 25, fun: 10 }, tags: [], treat: true, bonus: 3.4 });
+    }
     C({ kind: 'snack', activity: 'raiding the snack shelf', emoji: '🍪', location: 'snack_shelf', dur: [5, 10], needs: { hunger: 20, fun: 5 }, tags: [] });
     C({ kind: 'coffee', activity: 'making an espresso', emoji: '☕', location: 'coffee_machine', dur: [8, 15], needs: { energy: 28, social: 6 }, tags: [] });
     C({ kind: 'rest', activity: 'lying on the sofa for a minute', emoji: '🛋️', location: 'sofa', dur: [15, 25], needs: { energy: 22, fun: 10 }, tags: [] });
@@ -14015,7 +14044,7 @@ function decide(agent, sim) {
     project_id: c.project?.id ?? null,
     contribution: c.project && chance(0.8) ? contribution(id, c.project, c.task) : null,
     talk_to: c.talk_to ?? null, talk_about: c.talk_about ?? null,
-    satisfies: Object.keys(c.needs), mood: moodOf(agent),
+    satisfies: Object.keys(c.needs), mood: moodOf(agent), treat: !!c.treat,
   };
 }
 
@@ -15950,6 +15979,7 @@ class Sim {
   // Start an action: validate the place, route there, set state.
   #start(a, d) {
     const p = PERSONA[a.id];
+    if (d.treat && !this.takeTreat(a.id)) return this.#start(a, { ...d, treat: false, activity: 'finding the treat box empty', location: 'dining_table', duration_min: 4 });
     a.next = null;
     let loc = d.location;
     if (!a.allowed.has(loc) && !(d.scripted && loc.startsWith('home:')) && !((d.god || d.anywhere) && OBJ[loc])) {
@@ -16326,6 +16356,7 @@ class Sim {
     const post = (icon, text, imp = 5, val = 0) => { this.studio.addNews(this.t, text, icon); this.#post({ type: 'news', icon, text }); for (const id of this.staff) this.agents.get(id)?.memory.add(this.t, 'event', text, imp, { valence: val }); };
     if (kind === 'danceoffStart') { this.godEvent('danceoff'); return; }
     if (kind === 'skateFall') { this.#skateFall(data.id, data.clients); return; }
+    if (kind === 'treatVerdict') { this.#treatVerdict(data.kind); return; }
     if (kind === 'rethink') { this.#rethinkHuddle(data.project, data.client); return; }
     if (kind === 'standupStory') { this.#standupStory(); return; }
     if (kind === 'leakStart') { this.godEvent('leak', data); return; }
@@ -16389,6 +16420,48 @@ class Sim {
     const pending = Object.entries(R).filter(([id, r]) => !r.done && this.agents.has(id) && !this.agents.get(id).hidden);
     if (pending.length && Math.random() < 0.5) this.#attemptRite(pick(pending)[0]);
   }
+  // Thursdays: Wren (a pastry chef before design) brings treats, and asks for brutal feedback if she baked
+  // them. Some weeks she picks something up instead. If she's off, Tomás covers with donuts.
+  static TREATS = {
+    cookies: { label: 'brown-butter cookies', icon: '🍪', baked: true },
+    buns: { label: 'cardamom buns', icon: '🥐', baked: true },
+    focaccia: { label: 'a tray of focaccia', icon: '🍞', baked: true },
+    donuts: { label: 'a box of donuts', icon: '🍩', baked: false },
+    burgers: { label: 'a bag of sliders from the burger place downstairs', icon: '🍔', baked: false },
+  };
+  #thursdayTreats(day) {
+    if (this.treats?.day === day) return;
+    const here = id => { const a = this.agents.get(id); return a && !a.hidden && !a.leaving; };
+    const by = here('pt_wren') ? 'pt_wren' : here('cos') ? 'cos' : null;
+    if (!by) return;
+    const kind = by === 'pt_wren' ? pick(['cookies', 'cookies', 'buns', 'focaccia', 'donuts', 'burgers']) : 'donuts';
+    const T = Sim.TREATS[kind], name = PERSONA[by].short;
+    this.treats = { day, kind, by, left: 9, label: T.label, icon: T.icon, took: [] };
+    this.#post({ type: 'news', icon: T.icon, text: `Thursday treats: ${name} brought ${T.label}. They're on the dining table${T.baked ? `. ${by === 'pt_wren' ? 'Test bake. She wants brutal feedback' : ''}` : ''}.`.replace(/\. \./, '.') });
+    this.agents.get(by)?.memory.add(this.t, 'action', `I brought ${T.label} in for Thursday.`, 3, { valence: 1 });
+    if (by === 'pt_wren' && T.baked) this.#later(35, 'treatVerdict', { kind });
+  }
+  #treatVerdict(kind) {
+    const w = this.agents.get('pt_wren'); if (!w || w.hidden || w.state === 'talking' || w.state === 'sleeping') return;
+    const critic = pick([...this.agents.values()].filter(a => a.id !== 'pt_wren' && !a.hidden && !PERSONA[a.id].isDog && a.state !== 'talking' && a.state !== 'sleeping'));
+    if (!critic) return;
+    const T = Sim.TREATS[kind], c = critic.id;
+    const lines = [
+      { speaker: 'pt_wren', text: pick([`Okay. ${cap(T.label)}. Brutal feedback, please.`, 'Be honest. I can take it. I worked dinner service for ten years.', 'Tell me what\'s wrong with them. Something is.']) },
+      { speaker: c, text: pick(['Honestly? Perfect. Maybe a pinch more salt.', 'The edges are better than the middles. That\'s my one note.', 'I had three. That\'s my feedback.', 'Too good. It\'s distracting. Bring more next week.', 'A little sweet for me. I still ate two.']) },
+      { speaker: 'pt_wren', text: pick(['Noted. More salt next week.', 'Edges. Writing that down.', 'Three is a data point. I\'ll take it.', 'Okay. That\'s useful. Thank you.']) },
+    ];
+    this.#scene(['pt_wren', c], 'Thursday test bake', this.placeLabel(w), { lines, outcomes: [{ agent_id: 'pt_wren', memory: `${PERSONA[c].short} gave me honest notes on the ${T.label}.`, importance: 3, closeness_changes: [{ other_id: c, delta: 1, note: 'tells me the truth about my baking' }], mood: 'pleased', learned: [] }, { agent_id: c, memory: `Wren's ${T.label} were great. I told her so, with one note.`, importance: 3, closeness_changes: [{ other_id: 'pt_wren', delta: 1, note: 'brings treats every Thursday' }], mood: 'content', learned: [] }] });
+  }
+  // someone grabbing a treat from the box on the dining table
+  takeTreat(id) {
+    const t = this.treats; if (!t || t.left <= 0) return false;
+    t.left--; (t.took ??= []).push(id);
+    const a = this.agents.get(id);
+    if (a) { a.needs.hunger = clamp(a.needs.hunger + 25); a.needs.fun = clamp(a.needs.fun + 10); if (t.left === 0) this.#post({ type: 'news', icon: t.icon, text: `${PERSONA[id].short} took the last of the ${t.kind === 'burgers' ? 'sliders' : t.label.replace(/^(a box of|a tray of|a bag of) /, '')}. The box is empty.` }); }
+    return true;
+  }
+
   // Weekends: now and then one person comes in alone.
   #weekendSolo(force = false) {
     const day = Math.floor(this.t / 1440);
@@ -16611,6 +16684,8 @@ class Sim {
     this.#fate(m, dow, day);
     this.#timers();
     this.#rites(m, dow);
+    if (dow === 3 && m >= 9 * 60 + 40 && m <= 12 * 60 && m % 10 === 0 && !isWeekend(this.t)) this.#thursdayTreats(day); // whoever's bringing them, once they're in
+    if (this.treats && (this.treats.day !== day || this.treats.left <= 0) && m % 30 === 0) this.treats = this.treats.left <= 0 && this.treats.day === day ? this.treats : null; // yesterday's box goes in the recycling
     if (isWeekend(this.t) && m === 10 * 60 + 20 && !this.ended && this.flags.solo?.day !== day && Math.random() < 0.18) this.#weekendSolo();
     // October 20: Tomás brings in pumpkins (the decoration the map draws until November)
     if (m === 8 * 60 + 30 && decorOf(day) === 'halloween' && !this.studio.firedRituals[`pumpkins:${Math.floor(day / 365)}`] && this.agents.has('cos')) {
@@ -18347,7 +18422,7 @@ class Sim {
       visitors: this.visitors.map(v => ({ id: v.id, x: v.x, y: v.y, dir: v.dir, state: v.state, hidden: false, visitor: true, name: v.name, short: v.short, title: v.title, look: v.look, emoji: v.state === 'waiting' && !v.bubble ? '🗂️' : null, act: v.act, bubble: v.bubble?.text ?? null, mood: v.mood ?? (v.kind === 'review' ? 'expectant' : 'curious') })),
       projects: this.studio.projects.map(p => ({ id: p.id, name: p.name, client: p.client, type: p.type, phase: PHASES[p.phase], phaseIdx: p.phase, progress: Math.round(p.progress), quality: Math.round(p.quality), team: p.team, dueDay: p.dueDay + 1, submittedTo: p.submittedTo, archived: !!p.archived, awaitingReview: p.awaitingReview, workstreams: p.workstreams, contact: p.contact?.name ?? null })),
       awards: this.studio.awardsWon,
-      cash: this.ledger ? Math.round(this.ledger.cash) : null, runway: this.ledger ? Math.round(this.runwayMonths * 10) / 10 : null, ended: this.ended, mail: this.unreadMail, roles: this.flags.roles ?? null, solo: this.flags.solo && this.flags.solo.day === Math.floor(this.t / 1440) ? this.flags.solo.id : null, stickers: this.flags.stickers ?? null, music: this.musicState, photos: (this.flags.photos ?? []).length, plants: this.plantsBrief,
+      cash: this.ledger ? Math.round(this.ledger.cash) : null, runway: this.ledger ? Math.round(this.runwayMonths * 10) / 10 : null, ended: this.ended, mail: this.unreadMail, roles: this.flags.roles ?? null, solo: this.flags.solo && this.flags.solo.day === Math.floor(this.t / 1440) ? this.flags.solo.id : null, stickers: this.flags.stickers ?? null, music: this.musicState, treats: this.treats && this.treats.left > 0 && this.treats.day === Math.floor(this.t / 1440) ? { kind: this.treats.kind, left: this.treats.left, by: this.treats.by, label: this.treats.label } : null, photos: (this.flags.photos ?? []).length, plants: this.plantsBrief,
       picaDay: this.picaDay ? { day: this.picaDay.day, sniffed: this.picaDay.sniffed.length, greeted: this.picaDay.greeted.length, smells: this.smells() } : null,
     };
   }
@@ -19011,7 +19086,7 @@ window.anotherStudio = local; // handy for poking at the sim from the console
 world = local.world;
 for (const p of world.personas) P[p.id] = p;
 const avatarCache = {};
-const avatars = new Proxy({}, { get: (_, id) => { const p = P[id] ? wornBy(id) ?? P[id] : null; if (!p) return ''; return avatarCache[`${id}:${p.look?.shirt ?? ''}:${p.look?.pants ?? ''}`] ??= avatarURL(p); } }); // pictures show today's clothes
+const avatars = new Proxy({}, { get: (_, id) => { const p = P[id] ? wornBy(id) ?? P[id] : null; if (!p) return ''; return avatarCache[`${id}:${p.look?.shirt ?? ''}:${p.look?.pants ?? ''}:${p.look?.hair ?? ''}:${p.look?.hat ? `${p.look.hat.kind}-${p.look.hat.color}` : ''}`] ??= avatarURL(p); } }); // pictures show today's clothes
 const FONT = cssVar('--font-ui');
 
 const canvas = $('#map');
@@ -19252,10 +19327,21 @@ const WARDROBE = {
   pants: ['black', 'denim', 'denim-light', 'ink', 'khaki'],
 };
 const ALWAYS_SAME = new Set(['head_design']);
+// Hats. Eli: a backwards cap nine days in ten, in whatever colour. Rohan: a beanie one day in three.
+// Kenji: a black cap one day in eleven. Everyone else: one day in fifteen, a cap or beanie in a wardrobe
+// colour, or a cowboy hat, fedora or straw hat (those only come in brown). Rain and snow bring beanies out.
+// Some people never wear one, rain, snow or shine.
+const NEVER_HAT = new Set(['ceo', 'ux_researcher', 'hire_mira', 'cos']);
+const HIJAB_COLOURS = ['scarf-teal', 'black', 'white', 'red', 'mustard'];
 const outfits = new Map();
 function wornBy(id) {
   const p = P[id];
-  if (!p || !snap || p.look?.dog || p.visitor || ALWAYS_SAME.has(id)) return p;
+  if (!p || !snap || p.look?.dog || p.visitor) return p;
+  if (ALWAYS_SAME.has(id)) { // Kenji: black, head to toe; a black cap one day in eleven
+    const day = Math.floor(snap.t / 1440), key = `${id}:${day}`;
+    if (!outfits.has(key)) { let h = 2166136261; for (const ch of key) h = Math.imul(h ^ ch.charCodeAt(0), 16777619) >>> 0; outfits.set(key, h % 11 === 0 ? { ...p, look: { ...p.look, hat: { kind: 'cap', color: 'black' } } } : p); }
+    return outfits.get(key);
+  }
   const day = Math.floor(snap.t / 1440), key = `${id}:${day}`;
   let o = outfits.get(key);
   if (!o) {
@@ -19265,7 +19351,18 @@ function wornBy(id) {
     const shirts = WARDROBE.shirt.filter(c => c !== p.look.shirt);
     const shirt = roll(100) < 75 ? p.look.shirt : shirts[roll(shirts.length)];
     const pants = WARDROBE.pants[roll(WARDROBE.pants.length)];
-    o = shirt === p.look.shirt && pants === p.look.pants ? p : { ...p, look: { ...p.look, shirt, pants } };
+    const wet = ['rain', 'storm', 'snow'].includes(snap.weather?.kind);
+    const colour = () => WARDROBE.shirt[roll(WARDROBE.shirt.length)];
+    let hat = null;
+    if (p.look.style === 'bald' || p.look.style === 'hijab' || NEVER_HAT.has(id)) hat = null;
+    else if (id === 'junior_designer') hat = roll(10) < 9 ? { kind: 'capback', color: colour() } : null;
+    else if (id === 'hire_rohan') hat = roll(wet ? 2 : 3) === 0 ? { kind: 'beanie', color: colour() } : null;
+    else if (roll(wet ? 5 : 15) === 0) {
+      const kind = wet && roll(10) < 7 ? 'beanie' : ['cap', 'beanie', 'cowboy', 'fedora', 'straw'][roll(5)];
+      hat = { kind, color: kind === 'cap' || kind === 'beanie' ? colour() : 'desk' };
+    }
+    const hair = p.look.style === 'hijab' ? HIJAB_COLOURS[(day % HIJAB_COLOURS.length + HIJAB_COLOURS.length) % HIJAB_COLOURS.length] : p.look.hair;
+    o = shirt === p.look.shirt && pants === p.look.pants && !hat && hair === p.look.hair ? p : { ...p, look: { ...p.look, shirt, pants, hat, hair } };
     if (outfits.size > 400) outfits.clear();
     outfits.set(key, o);
   }
@@ -19501,6 +19598,7 @@ function frame(now) {
     if (ROW_LAYERS[row]) { const y0 = Math.max(0, (row - 3) * T), y1 = Math.min(bg.height, (row + 2) * T); ctx.drawImage(ROW_LAYERS[row], 0, y0, bg.width, y1 - y0, 0, y0, bg.width, y1 - y0); }
     if (row === shelfRow) drawTrophies(snap.awards?.length ?? 0);
     if (row % 1 === 0) drawDecor(now, row); // pumpkins sit on the floor of their row, under anyone standing there
+    if (TREAT_TABLE && row === TREAT_TABLE.y + TREAT_TABLE.h - 1 && snap.treats) drawTreats(snap.treats);
     // someone between two rows is drawn with the lower one, so they're on top of a chair, bench or pumpkin they're stepping onto
     while (next < vis.length && Math.ceil(drawY(vis[next]) - 0.05) <= row) drawPerson(vis[next++]);
   }
@@ -19934,6 +20032,23 @@ function drawWeather(now, panes = false) {
     ctx.globalAlpha = 1; ctx.fillStyle = C(w === 'fog' ? 'fog' : 'overcast'); ctx.fillRect(0, 0, bg.width, bg.height);
   }
   ctx.restore();
+}
+
+// Thursday treats on the dining table: an open box (or plate) that empties as people help themselves.
+const TREAT_TABLE = world.objects.find(o => o.id === 'dining_table');
+function drawTreats(t) {
+  const x0 = TREAT_TABLE.x * T + 13, y0 = TREAT_TABLE.y * T + 11, n = Math.max(0, Math.min(6, Math.ceil(t.left * 6 / 9)));
+  const r = (c, x, y, w, h) => { ctx.fillStyle = C(c); ctx.fillRect(x0 + x, y0 + y, w, h); };
+  if (t.kind === 'donuts' || t.kind === 'burgers') { // a cardboard box, lid flipped open behind it
+    r('outline', -1, -4, 22, 4); r(t.kind === 'donuts' ? 'pink' : 'white', 0, -3, 20, 2);
+    r('outline', -1, 0, 22, 10); r('white', 0, 1, 20, 8);
+  } else { r('outline', -1, 1, 22, 9); r('white', 0, 2, 20, 7); r(S('white', 0.9), 0, 7, 20, 2); } // a plate
+  for (let i = 0; i < n; i++) {
+    const cx = x0 + 3 + (i % 3) * 7, cy = y0 + 3 + Math.floor(i / 3) * 4;
+    if (t.kind === 'donuts') { ctx.fillStyle = C('outline'); ctx.fillRect(cx - 1, cy - 1, 6, 4); ctx.fillStyle = C(['pink', 'orange', 'desk'][i % 3]); ctx.fillRect(cx, cy, 4, 2); ctx.fillStyle = C('desk-top'); ctx.fillRect(cx + 1, cy + 1, 2, 1); }
+    else if (t.kind === 'burgers') { ctx.fillStyle = C('outline'); ctx.fillRect(cx - 1, cy - 1, 6, 4); ctx.fillStyle = C('desk-top'); ctx.fillRect(cx, cy, 4, 1); ctx.fillStyle = C('green'); ctx.fillRect(cx, cy + 1, 4, 1); ctx.fillStyle = C('desk'); ctx.fillRect(cx, cy + 1, 4, 1); ctx.fillStyle = C('desk-top'); ctx.fillRect(cx, cy + 2, 4, 1); }
+    else { ctx.fillStyle = C('outline'); ctx.fillRect(cx - 1, cy - 1, 5, 4); ctx.fillStyle = C(t.kind === 'focaccia' ? 'mustard' : 'desk-top'); ctx.fillRect(cx, cy, 3, 2); ctx.fillStyle = C(t.kind === 'cookies' ? 'desk' : 'white'); ctx.fillRect(cx + 1, cy, 1, 1); }
+  }
 }
 
 // Seasonal decorations: pumpkins in late October, string lights in December, hearts in February.
