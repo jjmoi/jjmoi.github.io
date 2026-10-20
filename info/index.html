@@ -40,13 +40,13 @@
 	<div class="container nav desktop">
 		<div class="row">
 			<div class="col-5">
-				<a href="/folio">JJ</a>
+				<a href="/">JJ</a>
 			</div>
 			<div class="col-2">
-				<a href="/folio">-1 → 0</a>
+				<a href="/">-1 → 0</a>
 			</div>
 			<div class="col-1 right">
-				<a href="https://www.google.com/maps/place/Portland,+OR/@45.5161077,-122.7368012,12z">45°N 122°W</a>
+				<a href="https://www.google.com/maps/place/Mt+Hood/@45.373615,-122.0255409,10z">45°N 122°W</a>
 			</div>
 			<div class="col-1 right">
 				<a href="/play">Play</a>
@@ -60,7 +60,7 @@
 	<div class="container nav rwd">
 		<div class="row">
 			<div class="col-9-sm">
-				<a href="/folio">JJ</a>
+				<a href="/">JJ</a>
 			</div>
 			<div class="col-1-sm right">
 				<a href="/info">Info</a>
@@ -84,7 +84,7 @@
 			<div class="col-1"></div>
 		</div>
 	</div>
-	<!-- FOOTER DESKTOP+RWD -->
+	<!-- FOOTER ALL-DEVICES -->
 	<div class="container parasection all-device" id="footer-all-devices">
 		<div class="row">
 			<div class="col-1-sm">
@@ -96,10 +96,29 @@
 			<div class="col-1-sm">
 				<a href="https://www.instagram.com/goodnightjj" target="_blank">IG</a>
 			</div>
-			<div class="col-7-sm right">
+			<div class="col-5-sm right">
+				<p id="time"></p>
+			</div>
+			<div class="col-2-sm right">
 				<p><span id="copyrights">©</span> 2046</p>
 			</div>
 		</div>
 	</div>
+	<!-- Time GMT -8 PT -->
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			function updateTime() {
+				document.getElementById("time").textContent =
+					new Date().toLocaleTimeString("en-US", {
+						timeZone: "America/Los_Angeles",
+						hour: "numeric",
+						minute: "2-digit",
+						hour12: false
+					});
+			}
+			updateTime();
+			setInterval(updateTime, 1000);
+		});
+	</script>
 </body>
 </html>
