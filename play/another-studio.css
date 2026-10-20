@@ -781,7 +781,7 @@ body.drawer-portrait.drawer-open .panel { width: 100%; flex: 1; min-height: 0; }
 #sound:hover, #god:hover, #feed-btn:hover, #sound[aria-pressed="true"], #god[aria-pressed="true"], #feed-btn[aria-pressed="true"] { color: var(--ui-accent) !important; }
 #god[aria-pressed="true"] { box-shadow: none; }
 @media (min-width: 1001px) and (min-height: 501px) {
-  body.drawer-open:not(.drawer-portrait) .actions { width: var(--panel-w); justify-content: space-between; gap: 0; flex: none; }
+  body:not(.drawer-portrait) .actions { width: var(--panel-w); justify-content: space-between; gap: 0; flex: none; } /* same spot whether the panel is open or closed */
   /* the panel steps in by the top bar's padding and border, so the two line up exactly */
   body.drawer-open:not(.drawer-portrait) .panel { margin-right: calc(var(--space-4) + var(--border-w)); }
 }
@@ -799,3 +799,8 @@ body.drawer-portrait.drawer-open .panel { width: 100%; flex: 1; min-height: 0; }
 button:not(:disabled), a[href], summary, select, label[for], [role="button"], [role="tab"] { cursor: var(--cursor-pointer); }
 .topbar .actions #pause { padding-left: 1px; }
 .topbar .actions #feed-btn { padding-right: 1px; }
+/* Pause and Play take the same width: both words sit in one grid cell and only one is visible */
+#pause { display: inline-grid; align-items: center; justify-items: start; }
+#pause > span { grid-area: 1 / 1; }
+#pause .pp-play, #pause.is-paused .pp-pause { visibility: hidden; }
+#pause.is-paused .pp-play { visibility: visible; }

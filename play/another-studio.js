@@ -20640,7 +20640,7 @@ function renderTop() {
     renderTop.ctl = ctl;
     for (const btn of document.querySelectorAll('.speed')) btn.setAttribute('aria-pressed', String(Number(btn.dataset.speed) === snap.speed));
     if (snap.speed === 10 || snap.speed === 100) control({ speed: 1 }); // fast-forward is gone from the top bar; older saves drop back to normal speed
-    $('#pause').textContent = snap.paused ? 'Play' : 'Pause';
+    $('#pause').classList.toggle('is-paused', snap.paused); $('#pause').setAttribute('aria-label', snap.paused ? 'Play' : 'Pause'); // both words share one slot, so the bar doesn't shift
     $('#pause').title = snap.paused ? 'Play (space)' : 'Pause (space)';
   }
   if (!renderTop.last || performance.now() - renderTop.last > 1000) { renderTop.last = performance.now(); renderSummary(); }
