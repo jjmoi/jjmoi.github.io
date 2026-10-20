@@ -1,429 +1,128 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-	<!-- v0.790118 -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-122843739-1"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
-		gtag('config', 'UA-122843739-1');
-	</script>
-	<meta name="robots" content="noindex"> <!-- No bots indexing -->
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><text y=%2214%22 font-size=%2214%22>💫</text></svg>">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Geist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="/css/grid.css">
-	<title>JJ -1 → 0</title>
-	<style>
-		/* BACKGROUND */
-		html {background-color: black;}
-		body {height: auto; background-color: white;}
-		::-moz-selection {background: black; color: #001;}
-		::selection {background: black; color: #001;}
-
-		/* TEMP */
-		.desktop {padding-bottom: 60px; bottom: 0;}
-		.parasection {margin-top: 75px; margin-bottom: 75px; padding-bottom: 42px;}
-		.parasection.rwd {margin-top: 60px; margin-bottom: -15px; padding-bottom: 0;}
-		.parasection p {padding-top: 6px;}
-		#desktop-lastcase {padding-bottom: 818px;}
-		#rwd-lastcase {padding-bottom: 350px;}
-		#last {margin-bottom: 0;}
-
-		@media only screen and (max-width: 1111px) {
-			.parasection p {padding-top: 2px;}
-			#rwd-lastcase {padding-bottom: 560px;}
-		}
-	</style>
+<title>JJ</title>
+<style>
+	@font-face {font-family: "another-sans"; src: url("/fonts/another-sans.woff2") format("woff2"), url("/fonts/another-sans.woff") format("woff"); font-style: normal; font-weight: 500;}
+	* {margin: 0; box-sizing: border-box;}
+	html, body {width: 100%; height: 100%;}
+	body {overflow-y: scroll; scroll-snap-type: y mandatory;}
+	::-moz-selection {background: black; color: #001;}
+	::selection {background: black; color: #001;}
+	#txt, #footer {width: 100%; height: 100vh; scroll-snap-align: start; overflow: hidden;}
+	p {font-family: "another-sans", sans-serif; line-height: 1;}
+	#images {margin-top: 50vw;}
+	img {display: block; width: 100%; transform: scale(1); transform-origin: top center; margin: 0 0 -3% 0;}
+	#footer {margin-top: 50vw; margin-bottom: 0; padding-bottom: 0;}
+	@media (max-width: 768px) {
+		body {scroll-snap-type: none;}
+		#txt, #footer {scroll-snap-align: none;}
+	}
+</style>
 </head>
 <body>
-	<!-- NAV DESKTOP -->
-	<div class="container nav desktop">
-		<div class="row">
-			<div class="col-5">
-				<a href="/">JJ</a>
-			</div>
-			<div class="col-2">
-				<a href="/">-1 → 0</a>
-			</div>
-			<div class="col-1 right">
-				<a href="https://www.google.com/maps/place/Mt+Hood/@45.373615,-122.0255409,10z">45°N 122°W</a>
-			</div>
-			<div class="col-1 right">
-				<a href="/play">Play</a>
-			</div>
-			<div class="col-1 right">
-				<a href="/info">Info</a>
-			</div>
-		</div>
+	<div id="txt">
+		<p>Design partner to ambitious founders and brands to create experiences and craft narratives that shift perceptions and move worlds.</p>
 	</div>
-	<!-- NAV RWD -->
-	<div class="container nav rwd">
-		<div class="row">
-			<div class="col-9-sm">
-				<a href="/">JJ</a>
-			</div>
-			<div class="col-1-sm right">
-				<a href="/info">Info</a>
-			</div>
-		</div>
+	<div id="images">
+		<img src="https://jjmoi.com/primemovers/primemovers-cover.webp">
+		<img src="https://jjmoi.com/branding/brand-14.webp">
+		<img src="https://jjmoi.com/primemovers/primemovers-27.webp">
+		<img src="https://jjmoi.com/primemovers/primemovers-21.webp">
+		<img src="https://jjmoi.com/primemovers/primemovers-23.webp">
+		<img src="https://jjmoi.com/primemovers/primemovers-36.webp">
+		<img src="https://jjmoi.com/branding/brand-01.webp">
+		<img src="https://jjmoi.com/branding/brand-02.webp">
+		<img src="https://jjmoi.com/lumi/lumi-04.webp">
+		<img src="https://jjmoi.com/lumi/lumi-05.webp">
+		<img src="https://jjmoi.com/spring/spring-cover.webp">
+		<img src="https://jjmoi.com/spring/spring-01.webp">
+		<img src="https://jjmoi.com/spring/spring-06.webp">
+		<img src="https://jjmoi.com/spring/spring-08.webp">
+		<img src="https://jjmoi.com/branding/brand-05.webp">
+		<img src="https://jjmoi.com/branding/brand-06.webp">
+		<img src="https://jjmoi.com/branding/brand-07.webp">
+		<img src="https://jjmoi.com/branding/brand-20.webp">
+		<img src="https://jjmoi.com/branding/brand-12.webp">
+		<img src="https://jjmoi.com/branding/brand-18.webp">
+		<img src="https://jjmoi.com/branding/brand-22.webp">
+		<img src="https://jjmoi.com/branding/brand-09.webp">
+		<img src="https://jjmoi.com/branding/brand-19.webp">
+		<img src="https://jjmoi.com/primemovers/primemovers-39.webp">
+		<img src="https://jjmoi.com/primemovers/primemovers-34.webp">
+		<img src="https://jjmoi.com/primemovers/primemovers-41b.webp">
+		<img src="https://jjmoi.com/primemovers/primemovers-44b.webp">
+		<img src="https://jjmoi.com/primemovers/primemovers-25.webp">
+		<img src="https://jjmoi.com/primemovers/primemovers-26.webp">
+		<img src="https://jjmoi.com/primemovers/primemovers-37.webp">
+		<img src="https://jjmoi.com/primemovers/primemovers-28.webp">
+		<img src="https://jjmoi.com/rtx/rtx-01.webp">
+		<img src="https://jjmoi.com/rtx/rtx-03.webp">
+		<img src="https://jjmoi.com/primemovers/primemovers-32.webp">
 	</div>
-	<!-- CASE DESKTOP -->
-	<div class="container parasection home desktop">
-		<a href="/cerebras" class="row">
-			<div class="col-10 resize">
-				<img src="/cerebras/cerebras-99.webp">
-			</div>
-		</a>
-		<a href="/cerebras" class="row" id="cerebras">
-			<div class="col-5">
-				<p>Cerebras</p>
-			</div>
-			<div class="col-4">
-				<p>Building the world’s fastest AI</p>
-			</div>
-			<div class="col-1 right">
-				<p>→</p>
-			</div>
-		</a>
+	<div id="footer">
+		<p>© 2046</p>
 	</div>
-	<div class="container parasection home desktop">
-		<a href="/primemovers" class="row">
-			<div class="col-10 resize">
-				<img src="/primemovers/primemovers-99.webp">
-			</div>
-		</a>
-		<a href="/primemovers" class="row" id="primemovers">
-			<div class="col-5">
-				<p>Prime Movers</p>
-			</div>
-			<div class="col-4">
-				<p>Designing breakthrough science</p>
-			</div>
-			<div class="col-1 right">
-				<p>→</p>
-			</div>
-		</a>
-	</div>
-	<div class="container parasection home desktop">
-		<a href="/lumi" class="row">
-			<div class="col-10 resize">
-				<img src="/lumi/lumi-99.webp">
-			</div>
-		</a>
-		<a href="/lumi" class="row" id="lumi">
-			<div class="col-5">
-				<p>Lumi</p>
-			</div>
-			<div class="col-4">
-				<p>Making sense of human-AI interaction mess</p>
-			</div>
-			<div class="col-1 right">
-				<p>→</p>
-			</div>
-		</a>
-	</div>
-	<div class="container parasection home desktop">
-		<a href="/spring" class="row">
-			<div class="col-10 resize">
-				<img src="/spring/spring-99.webp">
-			</div>
-		</a>
-		<a href="/spring" class="row" id="spring">
-			<div class="col-5">
-				<p>Spring</p>
-			</div>
-			<div class="col-4">
-				<p>Accelerating drug discovery with AI</p>
-			</div>
-			<div class="col-1 right">
-				<p>→</p>
-			</div>
-		</a>
-	</div>
-	<div class="container parasection home desktop">
-		<a href="/tachyus" class="row">
-			<div class="col-10 resize">
-				<img src="/tachyus/tachyus-99.webp">
-			</div>
-		</a>
-		<a href="/tachyus" class="row" id="tachyus">
-			<div class="col-5">
-				<p>Tachyus</p>
-			</div>
-			<div class="col-4">
-				<p>Optimizing oil and gas production</p>
-			</div>
-			<div class="col-1 right">
-				<p>→</p>
-			</div>
-		</a>
-	</div>
-	<div class="container parasection home desktop">
-		<a href="/usds18f" class="row">
-			<div class="col-10 resize">
-				<img src="/usds18f/usds18f-99.webp">
-			</div>
-		</a>
-		<a href="/usds18f" class="row" id="usds18f">
-			<div class="col-5">
-				<p>USDS/18F</p>
-			</div>
-			<div class="col-4">
-				<p>Scaling design systems for the people</p>
-			</div>
-			<div class="col-1 right">
-				<p>→</p>
-			</div>
-		</a>
-	</div>
-	<div class="container parasection home desktop">
-		<a href="/rtx" class="row">
-			<div class="col-10 resize">
-				<img src="/rtx/rtx-99.webp">
-			</div>
-		</a>
-		<a href="/rtx" class="row" id="rtx">
-			<div class="col-5">
-				<p>Raytheon</p>
-			</div>
-			<div class="col-4">
-				<p>Advancing aerospace and defense</p>
-			</div>
-			<div class="col-1 right">
-				<p>→</p>
-			</div>
-		</a>
-	</div>
-	<div class="container parasection home desktop">
-		<a href="/intersection" class="row">
-			<div class="col-10 resize">
-				<img src="/intersection/intersection-99.webp">
-			</div>
-		</a>
-		<a href="/intersection" class="row" id="intersection">
-			<div class="col-5">
-				<p>Intersection</p>
-			</div>
-			<div class="col-4">
-				<p>Helping students design dreams</p>
-			</div>
-			<div class="col-1 right">
-				<p>→</p>
-			</div>
-		</a>
-	</div>
-	<div class="container parasection home desktop" id="desktop-lastcase">
-		<a href="/opengov" class="row">
-			<div class="col-10 resize">
-				<img src="/opengov/opengov-99.webp">
-			</div>
-		</a>
-		<a href="/opengov" class="row" id="opengov">
-			<div class="col-5">
-				<p>OpenGov</p>
-			</div>
-			<div class="col-4">
-				<p>Rebuilding public trust in open data</p>
-			</div>
-			<div class="col-1 right">
-				<p>→</p>
-			</div>
-		</a>
-	</div>
-	<!-- CASE RWD -->
-	<div class="container parasection home rwd">
-		<a href="/cerebras" class="row">
-			<div class="col-10-sm">
-				<img src="/cerebras/cerebras-cover.webp">
-			</div>
-		</a>
-		<a href="/cerebras" class="row" id="cerebras">
-			<div class="col-9-sm">
-				<p>Cerebras<br>
-					Building the world’s fastest AI
-				</p>
-			</div>
-			<div class="col-1-sm right">
-				<p>→</p>
-			</div>
-		</a>
-	</div>
-	<div class="container parasection home rwd">
-		<a href="/primemovers" class="row">
-			<div class="col-10-sm">
-				<img src="/primemovers/primemovers-cover.webp">
-			</div>
-		</a>
-		<a href="/primemovers" class="row" id="primemovers">
-			<div class="col-9-sm">
-				<p>Prime Movers<br>
-					Designing breakthrough science
-				</p>
-			</div>
-			<div class="col-1-sm right">
-				<p>→</p>
-			</div>
-		</a>
-	</div>
-	<div class="container parasection home rwd">
-		<a href="/lumi" class="row">
-			<div class="col-10-sm">
-				<img src="/lumi/lumi-cover.webp">
-			</div>
-		</a>
-		<a href="/lumi" class="row" id="lumi">
-			<div class="col-9-sm">
-				<p>Lumi<br>
-					Making sense of human-AI interaction mess
-				</p>
-			</div>
-			<div class="col-1-sm right">
-				<p>→</p>
-			</div>
-		</a>
-	</div>
-	<div class="container parasection home rwd">
-		<a href="/spring" class="row">
-			<div class="col-10-sm">
-				<img src="/spring/spring-cover.webp">
-			</div>
-		</a>
-		<a href="/spring" class="row" id="spring">
-			<div class="col-9-sm">
-				<p>Spring<br>
-					Accelerating drug discovery with AI
-				</p>
-			</div>
-			<div class="col-1-sm right">
-				<p>→</p>
-			</div>
-		</a>
-	</div>
-	<div class="container parasection home rwd">
-		<a href="/tachyus" class="row">
-			<div class="col-10-sm">
-				<img src="/tachyus/tachyus-cover.webp">
-			</div>
-		</a>
-		<a href="/tachyus" class="row" id="tachyus">
-			<div class="col-9-sm">
-				<p>Tachyus<br>
-					Optimizing oil and gas production
-				</p>
-			</div>
-			<div class="col-1-sm right">
-				<p>→</p>
-			</div>
-		</a>
-	</div>
-	<div class="container parasection home rwd">
-		<a href="/usds18f" class="row">
-			<div class="col-10-sm">
-				<img src="/usds18f/usds18f-cover.webp">
-			</div>
-		</a>
-		<a href="/usds18f" class="row" id="usds18f">
-			<div class="col-9-sm">
-				<p>USDS/18F<br>
-					Scaling design systems for the people
-				</p>
-			</div>
-			<div class="col-1-sm right">
-				<p>→</p>
-			</div>
-		</a>
-	</div>
-	<div class="container parasection home rwd">
-		<a href="/rtx" class="row">
-			<div class="col-10-sm">
-				<img src="/rtx/rtx-cover.webp">
-			</div>
-		</a>
-		<a href="/rtx" class="row" id="rtx">
-			<div class="col-9-sm">
-				<p>Raytheon<br>
-					Advancing aerospace and defense
-				</p>
-			</div>
-			<div class="col-1-sm right">
-				<p>→</p>
-			</div>
-		</a>
-	</div>
-	<div class="container parasection home rwd">
-		<a href="/intersection" class="row">
-			<div class="col-10-sm">
-				<img src="/intersection/intersection-cover.webp">
-			</div>
-		</a>
-		<a href="/intersection" class="row" id="intersection">
-			<div class="col-9-sm">
-				<p>Intersection<br>
-					Helping students design dreams
-				</p>
-			</div>
-			<div class="col-1-sm right">
-				<p>→</p>
-			</div>
-		</a>
-	</div>
-	<div class="container parasection home rwd" id="rwd-lastcase">
-		<a href="/opengov" class="row">
-			<div class="col-10-sm">
-				<img src="/opengov/opengov-cover.webp">
-			</div>
-		</a>
-		<a href="/opengov" class="row" id="opengov">
-			<div class="col-9-sm">
-				<p>OpenGov<br>
-					Rebuilding public trust in open data
-				</p>
-			</div>
-			<div class="col-1-sm right">
-				<p>→</p>
-			</div>
-		</a>
-	</div>
-	<!-- FOOTER ALL-DEVICES -->
-	<div class="container parasection all-device" id="footer-all-devices">
-		<div class="row">
-			<div class="col-1-sm">
-				<a href="https://www.linkedin.com/in/jjmoi" target="_blank">LI</a>
-			</div>
-			<div class="col-1-sm">
-				<a href="https://x.com/goodnightjj" target="_blank">X</a>
-			</div>
-			<div class="col-1-sm">
-				<a href="https://www.instagram.com/goodnightjj" target="_blank">IG</a>
-			</div>
-			<div class="col-5-sm right">
-				<p id="time"></p>
-			</div>
-			<div class="col-2-sm right">
-				<p><span id="copyrights">©</span> 2046</p>
-			</div>
-		</div>
-	</div>
-	<!-- Time GMT -8 PT -->
-	<script>
-		document.addEventListener("DOMContentLoaded", function () {
-			function updateTime() {
-				document.getElementById("time").textContent =
-					new Date().toLocaleTimeString("en-US", {
-						timeZone: "America/Los_Angeles",
-						hour: "numeric",
-						minute: "2-digit",
-						hour12: false
-					});
-			}
-			updateTime();
-			setInterval(updateTime, 1000);
-		});
-	</script>
 </body>
+<script>
+	const txt = document.getElementById('txt');
+	const footer = document.getElementById('footer');
+	const p = txt.querySelector('p');
+	const fp = footer.querySelector('p');
+	let vh = window.innerHeight;
+
+	function search(textEl, W, containerH) {
+		let lo = 1, hi = 500;
+		for (let i = 0; i < 20; i++) {
+			const mid = (lo + hi) / 2;
+			textEl.style.fontSize = mid + 'px';
+			if (textEl.scrollWidth <= W && textEl.scrollHeight <= containerH) lo = mid;
+			else hi = mid;
+		}
+		return lo;
+	}
+
+	function fitText(textEl, containerH) {
+		const W = document.body.clientWidth;
+		textEl.style.width = W + 'px';
+		textEl.style.lineHeight = '1';
+		let size = search(textEl, W, containerH);
+		if (size > 250) {
+			textEl.style.lineHeight = '0.85';
+			size = search(textEl, W, containerH);
+		}
+		textEl.style.fontSize = size + 'px';
+	}
+
+	function fit() {
+		vh = window.innerHeight;
+		fitText(p, vh);
+		fitText(fp, vh);
+	}
+
+	function scaleImages() {
+		const imgs = document.querySelectorAll('img');
+		imgs.forEach(img => {
+			const rect = img.getBoundingClientRect();
+			if (rect.top <= 0) {
+				img.style.transform = 'scale(1)';
+				return;
+			}
+			if (rect.top >= vh) {
+				img.style.transform = 'scale(0.8)';
+				return;
+			}
+			const progress = 1 - (rect.top / vh);
+			const scale = 0.8 + 0.2 * progress;
+			img.style.transform = `scale(${scale})`;
+		});
+		requestAnimationFrame(scaleImages);
+	}
+
+	new ResizeObserver(fit).observe(document.body);
+	window.addEventListener('resize', () => vh = window.innerHeight);
+	fit();
+	requestAnimationFrame(scaleImages);
+</script>
 </html>
