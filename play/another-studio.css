@@ -8,10 +8,6 @@
   --radar-w: 340px;
   --logo-baseline-shift: calc(var(--space-1) * -0.6);
   --tap: 44px;
-  --sheet-peek: 30vh;
-  --sheet-half: 52vh;
-  --sheet-full: 88vh;
-  --sheet-move: 240ms;
   --toast-in: 260ms;
   /* ---- Game palette: refined 16-bit (read by the canvas as --pal-*) ---- */
   --pal-outline: #1d1a2c;
@@ -254,7 +250,16 @@ button:focus-visible, [tabindex]:focus-visible { outline: var(--border-w) solid 
 /* ===== Top bar =========================================================== */
 .topbar { height: var(--topbar-h); display: flex; align-items: center; gap: var(--space-5); padding: 0 var(--space-4); margin: var(--space-2); }
 .logo { font-family: var(--font-ui); font-size: var(--text-lg); font-weight: 700; margin: 0; letter-spacing: var(--tracking-logo); color: var(--ui-text); display: flex; gap: var(--space-2); white-space: nowrap; }
-.clock { font-family: var(--font-ui); font-size: var(--text-md); color: var(--ui-text); flex: 1; min-width: 0; }
+.clock { font-family: var(--font-ui); font-size: var(--text-md); color: var(--ui-text); flex: 1; min-width: 0; display: flex; align-items: baseline; white-space: nowrap; overflow: hidden; }
+.clock > span { white-space: pre; }
+.clk-date { overflow: hidden; text-overflow: ellipsis; min-width: 0; flex-shrink: 1; }
+.clk-day, .clk-time { flex: none; }
+.clk-time { font-variant-numeric: tabular-nums; }
+.clock i { font-style: normal; font-size: var(--text-xs); color: var(--ui-accent); letter-spacing: 0.08em; text-transform: uppercase; margin-left: var(--space-2); flex: none; }
+@media (max-width: 480px) { .clk-day { display: none; } }
+.logo-short { display: none; }
+/* not enough room for the full name beside the controls: the monogram instead */
+@media (max-width: 1180px) { .logo-full { display: none; } .logo-short { display: inline; } .topbar { gap: var(--space-3); } }
 /* the larger logo sits ~2.4px lower than the date; lift it onto the same baseline */
 .topbar .logo { position: relative; top: var(--logo-baseline-shift); }
 .controls { display: flex; gap: var(--space-1); }
@@ -560,8 +565,7 @@ kbd { font-family: var(--font-ui); border: 1px solid var(--ui-win-border); borde
   .topbar { position: relative; gap: var(--space-2); padding: 0 var(--space-2); margin: var(--space-1); }
   .logo { font-size: var(--text-md); }
   .clock { flex: 1; min-width: 0; font-size: var(--text-xs); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .controls .speed { display: none; }
-  .menu, .speed-cycle { display: inline-flex; align-items: center; justify-content: center; }
+  .menu { display: inline-flex; align-items: center; justify-content: center; }
   .btn { min-height: var(--tap); min-width: var(--tap); }
   .tab { min-height: var(--tap); }
   .chip { min-height: calc(var(--tap) - var(--space-2)); }
@@ -575,19 +579,19 @@ kbd { font-family: var(--font-ui); border: 1px solid var(--ui-win-border); borde
   #lightbox .cs-scroll { max-height: calc(100vh - 7rem); }
   .hud { bottom: auto; top: var(--space-2); max-width: 60%; }
 }
-/* Phones held upright: the map on top, the panel as a bottom sheet you can drag. */
+/* Phones held upright: one scrolling page, the office on top and the panel below it at the height of
+   the screen. The panel can't be dragged over the office; scroll past it and the panel snaps up. */
 @media (max-width: 700px) {
-  .logo { display: none; }
-  .layout { flex-direction: column; height: calc(100% - var(--topbar-h) - var(--space-2)); gap: var(--space-1); padding: 0 var(--space-1); }
-  .stage { flex: 1; min-height: 0; }
-  #map { border-radius: var(--radius-1); }
-  .panel { width: 100%; flex: none; height: var(--sheet-half); transition: height var(--sheet-move) ease; border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
-  body[data-sheet="peek"] .panel { height: var(--sheet-peek); }
-  body[data-sheet="full"] .panel { height: var(--sheet-full); }
-  .sheet-handle { display: flex; justify-content: center; align-items: center; flex: none; height: var(--space-5); width: 100%; background: none; border: 0; cursor: grab; touch-action: none; }
+  html, body { height: auto; min-height: 100%; }
+  body { overflow-x: hidden; overflow-y: auto; overscroll-behavior-y: none; }
+  .logo { font-size: var(--text-sm); }
+  .layout { display: block; height: auto; padding: 0 var(--space-1) var(--space-1); }
+  .stage { display: block; }
+  #map { display: block; width: 100%; height: auto; max-height: none; border-radius: var(--radius-1); }
+  .panel { width: 100%; height: calc(100dvh - var(--space-2)); margin-top: var(--space-1); }
+  .sheet-handle { display: flex; justify-content: center; align-items: center; flex: none; height: var(--space-5); width: 100%; background: none; border: 0; cursor: pointer; }
   .sheet-handle span { width: calc(var(--tap) + var(--space-2)); height: var(--space-1); border-radius: var(--space-1); background: var(--ui-muted); }
-  /* the summary shows just the numbers unless the sheet is pulled all the way up */
-  body:not([data-sheet="full"]) .summary .today, body:not([data-sheet="full"]) .summary .happening { display: none; }
+  .summary .today, .summary .happening { display: none; }
   .summary { max-height: 40%; overflow-y: auto; }
   .feed-tools { flex-wrap: wrap; }
 }
@@ -713,39 +717,18 @@ kbd { font-family: var(--font-ui); border: 1px solid var(--ui-win-border); borde
 @media (prefers-reduced-motion: reduce) { .credits-roll { animation-duration: 1s; } }
 
 /* ===== Drawer layout =====================================================
-   Squarish landscape screens (tablets, 4:3 windows) give the map the whole width; the
-   panel becomes a drawer that slides over it. Desktop can opt in with "Hide panel".
-   body.drawer-mode turns it on, body.drawer-open shows the drawer, body.drawer-tablet
-   adds the slim, condensed tablet styling. */
-.drawer-tab, .drawer-x, .ticker, .panel-hide { display: none; }
-.panel-hide { position: absolute; top: var(--space-1); right: var(--space-1); z-index: 3; background: none; border: 0; color: var(--ui-muted); font: inherit; font-size: var(--text-xs); padding: var(--space-1) var(--space-2); cursor: pointer; }
-.panel-hide:hover { color: var(--ui-text); }
-@media (min-width: 701px) and (min-height: 501px) { .panel { position: relative; } .panel-hide { display: block; } }
+   Everywhere but upright phones the panel sits beside the map, and the map scales down to make
+   room for it. The 👩‍🍼 Feed button opens and closes it. body.drawer-mode turns this on,
+   body.drawer-open shows the panel, body.drawer-tablet adds the slim, condensed styling for
+   tablets and mid-size windows, and body.drawer-portrait stacks the panel under the map. */
+.ticker { display: none; }
 body.drawer-mode .layout { position: relative; flex-direction: row; }
-body.drawer-mode .stage { width: 100%; }
-body.drawer-mode .panel {
-  position: absolute; z-index: 12; right: var(--space-2); top: 0; bottom: var(--space-2); height: auto; width: var(--panel-w);
-  box-shadow: calc(-1 * var(--space-3)) 0 var(--space-6, 32px) var(--ui-scrim);
-  transform: translateX(calc(100% + var(--space-4))); visibility: hidden;
-  transition: transform var(--drawer-move, 220ms) ease, visibility 0s linear var(--drawer-move, 220ms);
-}
-body.drawer-mode.drawer-open .panel { transform: none; visibility: visible; transition: transform var(--drawer-move, 220ms) ease; }
-body.drawer-mode .drawer-x { display: block; position: absolute; top: var(--space-1); right: var(--space-1); z-index: 3; background: none; border: 0; color: var(--ui-muted); font-size: var(--text-md); line-height: 1; padding: var(--space-1) var(--space-2); cursor: pointer; }
-body.drawer-mode .drawer-x:hover { color: var(--ui-text); }
-body.drawer-mode .panel-hide { right: calc(var(--space-6, 32px) + var(--space-1)); }
-body.drawer-tablet .panel-hide { display: none; } /* tablets always use the drawer */
-/* the edge tab: on the screen's edge when closed, on the drawer's edge when open */
-body.drawer-mode .drawer-tab {
-  display: block; position: absolute; z-index: 13; top: 50%; right: 0; transform: translateY(-50%);
-  writing-mode: vertical-rl; padding: var(--space-3) var(--space-1); min-width: var(--tap, 40px);
-  font: inherit; font-size: var(--text-xs); color: var(--ui-text);
-  background: var(--ui-win-bottom); border: var(--border-w) solid var(--ui-win-border); border-right: 0; border-radius: var(--radius-2) 0 0 var(--radius-2);
-  transition: right var(--drawer-move, 220ms) ease; cursor: pointer;
-}
-body.drawer-mode.drawer-open .drawer-tab { right: calc(var(--panel-w) + var(--space-2)); }
-/* the latest-event line along the bottom of the map, while the drawer is closed */
-body.drawer-mode:not(.drawer-open) .ticker {
-  display: flex; align-items: center; gap: var(--space-2); position: absolute; z-index: 7; left: 50%; bottom: var(--space-3); transform: translateX(-50%);
+body.drawer-mode .stage { flex: 1; }
+body.drawer-mode .panel { position: relative; flex: none; width: var(--panel-w); height: auto; }
+body.drawer-mode:not(.drawer-open) .panel { display: none; }
+/* the latest-event line along the bottom of the map, while the panel is closed */
+body.drawer-mode:not(.drawer-open) .ticker { /* off for now: the map stands alone when the panel is closed */
+  display: none; align-items: center; gap: var(--space-2); position: absolute; z-index: 7; left: 50%; bottom: var(--space-3); transform: translateX(-50%);
   width: min(78%, 860px); padding: var(--space-2) var(--space-3);
   font: inherit; font-size: var(--text-sm); color: var(--ui-text); text-align: left; cursor: pointer;
   background: linear-gradient(var(--ui-win-top), var(--ui-win-bottom)); border: var(--border-w) solid var(--ui-win-border); border-radius: var(--radius-2);
@@ -755,7 +738,7 @@ body.drawer-mode:not(.drawer-open) .ticker {
 .ticker .tk-when { color: var(--ui-muted); font-size: var(--text-xs); white-space: nowrap; }
 .ticker .tk-go { color: var(--ui-accent); font-size: var(--text-xs); white-space: nowrap; }
 body.drawer-mode:not(.drawer-open) #hud:not([hidden]) ~ .ticker { bottom: auto; top: var(--space-3); } /* while you're possessing someone the hint bar owns the bottom edge */
-/* tablets: a slimmer drawer, smaller type, condensed feed cards, and a one-line header */
+/* tablets: a slimmer panel, smaller type, condensed feed cards, and a one-line header */
 body.drawer-tablet { --panel-w: 300px; }
 body.drawer-tablet .panel { font-size: var(--text-xs); }
 body.drawer-tablet .panel .tab { padding: var(--space-2); font-size: var(--text-xs); }
@@ -763,11 +746,51 @@ body.drawer-tablet .panel .filters { padding: var(--space-1) var(--space-2); }
 body.drawer-tablet .panel .view { padding: var(--space-2); }
 body.drawer-tablet .panel .item { padding: var(--space-1) 0; }
 body.drawer-tablet .panel .item .meta { font-size: var(--text-xs); }
-body.drawer-tablet .summary { padding: var(--space-1) calc(var(--space-6) + var(--space-3)) var(--space-1) var(--space-2); }
+body.drawer-tablet .summary { padding: var(--space-1) var(--space-2); }
 body.drawer-tablet .summary .today, body.drawer-tablet .summary .happening, body.drawer-tablet .summary .scen { display: none; }
 body.drawer-tablet .summary .stats { display: flex; justify-content: space-between; gap: var(--space-2); text-align: left; }
 body.drawer-tablet .summary .stats > div { display: flex; align-items: baseline; gap: var(--space-1); white-space: nowrap; }
 body.drawer-tablet .summary .stats b { display: inline; font-size: var(--text-sm); }
 body.drawer-tablet .summary .stats span { display: inline; font-size: 0; }
 body.drawer-tablet .summary .stats span::after { content: attr(data-short); font-size: var(--text-xs); }
-@media (prefers-reduced-motion: reduce) { body.drawer-mode .panel, body.drawer-mode .drawer-tab { transition: none; } }
+/* upright tablets: the map at full width on top, the panel in the space below it */
+body.drawer-portrait { --map-h: calc((100vw - 2 * var(--space-2)) * 0.5 + 2 * var(--border-w)); } /* the map is 36 × 18 tiles: 2:1 */
+body.drawer-portrait .layout { flex-direction: column; }
+body.drawer-portrait .stage { flex: none; height: var(--map-h); align-items: flex-start; }
+body.drawer-portrait.drawer-open .panel { width: 100%; flex: 1; min-height: 0; }
+/* the ☰ menu opens across the whole width of the top bar */
+@media (max-width: 1000px), (max-height: 500px) {
+  #more { left: 0; right: 0; }
+  #more .btn { width: 100%; justify-content: flex-start; }
+}
+
+/* top bar groups: time (pause, speeds, next day) ⎯ Sound ⎯ God Mode · Feed */
+/* segmented groups: buttons share edges, only the ends are rounded */
+.seg { gap: 0; }
+.seg > .btn { border-radius: 0; margin: 0; }
+.seg > .btn + .btn { border-left-width: 0; }
+.seg > .btn:first-child { border-radius: var(--radius-2) 0 0 var(--radius-2); }
+.seg > .btn:last-child { border-radius: 0 var(--radius-2) var(--radius-2) 0; }
+/* under ☰ the second group is a dropdown list again, not a segmented bar */
+@media (max-width: 1000px), (max-height: 500px) {
+  #more.seg { gap: var(--space-1); }
+  #more.seg > .btn { border-radius: var(--radius-1); border-left-width: var(--border-w); }
+  #sound { margin-bottom: var(--space-2); }
+}
+
+/* the second group is icons only; the words come back in the ☰ list */
+#more .lbl { display: none; }
+@media (max-width: 1000px), (max-height: 500px) { #more .lbl { display: inline; } }
+/* top bar buttons: the same 44px touch size at every width, square-ish corners */
+.topbar .btn { min-height: var(--tap); min-width: var(--tap); border-radius: var(--border-w); }
+.topbar .seg > .btn { display: inline-flex; align-items: center; justify-content: center; }
+.seg > .btn:first-child { border-radius: var(--border-w) 0 0 var(--border-w); }
+.seg > .btn:last-child { border-radius: 0 var(--border-w) var(--border-w) 0; }
+.topbar { --bar-gap: var(--space-5); gap: var(--bar-gap); }
+@media (max-width: 1180px) { .topbar { --bar-gap: var(--space-3); } }
+@media (max-width: 1000px), (max-height: 500px) { .topbar { --bar-gap: var(--space-3); } }
+#more { margin-left: calc(var(--space-3) - var(--bar-gap)); } /* 12px between the two segmented groups */
+@media (max-width: 1000px), (max-height: 500px) {
+  #more { margin-left: 0; }
+  #more.seg > .btn { border-radius: var(--border-w); display: block; text-align: center; } /* the ☰ list keeps its centred rows */
+}

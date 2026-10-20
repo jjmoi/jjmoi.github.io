@@ -348,16 +348,16 @@ function drawObject(ctx, o) {
     });
   };
   switch (o.sprite) {
-    case 'rug_lounge': { // woven rug with a striped border; a low table of markers between two light-brown floor cushions, all in one line
+    case 'rug_lounge': { // woven rug with a striped border; a low table of markers between two light-green floor cushions, all in one line
       // the rug is one tile row deep on the map but drawn a little taller, centred on that row, so the cushions and table sit in its middle
       f('outline', 0, -6, w, 28); f('khaki', 1, -5, w - 2, 26);
       for (let i = 0; i < w - 4; i += 6) { f('red', 2 + i, -4, 3, 1); f('teal', 2 + i, 18, 3, 1); }
       f(S('khaki', 0.85), 3, -2, w - 6, 18);
       for (const cx of [24, w - 24]) { // the cushions, centred on the second and fifth tiles: the seats
         ctx.fillStyle = C('outline'); ctx.beginPath(); ctx.ellipse(px + cx, py + 9, 9, 6.5, 0, 0, 7); ctx.fill();
-        ctx.fillStyle = C('desk-top'); ctx.beginPath(); ctx.ellipse(px + cx, py + 8.5, 8, 5.5, 0, 0, 7); ctx.fill();
-        ctx.fillStyle = S('desk-top', 0.86); ctx.beginPath(); ctx.ellipse(px + cx + 1, py + 10, 5, 2.5, 0, 0, 7); ctx.fill();
-        ctx.fillStyle = S('desk-top', 1.15); ctx.beginPath(); ctx.ellipse(px + cx - 3, py + 6.5, 3, 1.5, -0.3, 0, 7); ctx.fill();
+        ctx.fillStyle = S('green', 1.45); ctx.beginPath(); ctx.ellipse(px + cx, py + 8.5, 8, 5.5, 0, 0, 7); ctx.fill();
+        ctx.fillStyle = S('green', 1.25); ctx.beginPath(); ctx.ellipse(px + cx + 1, py + 10, 5, 2.5, 0, 0, 7); ctx.fill();
+        ctx.fillStyle = S('green', 1.7); ctx.beginPath(); ctx.ellipse(px + cx - 3, py + 6.5, 3, 1.5, -0.3, 0, 7); ctx.fill();
       }
       f('outline', w / 2 - 14, 2, 28, 12); f('desk', w / 2 - 13, 3, 26, 8); f('desk-top', w / 2 - 13, 3, 26, 3); f('outline', w / 2 - 13, 13, 2, 2); f('outline', w / 2 + 11, 13, 2, 2);
       f('white', w / 2 - 10, 4, 8, 5); f('red', w / 2 + 1, 5, 5, 1); f('sky', w / 2 + 2, 7, 5, 1); f('mustard', w / 2 + 7, 4, 2, 2);
@@ -570,6 +570,7 @@ function drawObject(ctx, o) {
       f('outline', 0, 0, w, 15); f(`${k}-dark`, 1, 1, w - 2, 13); f(k, 2, 2, w - 4, 5); f(S(k, 1.2), 2, 2, w - 4, 1);
       f(k, 2, 8, w - 4, 4); f(`${k}-dark`, 1, 12, w - 2, 1);
       for (let i = 1; i < o.w; i++) f(`${k}-dark`, i * 16, 8, 1, 4);
+      if (o.id === 'sofa') for (const x of [36, w - 14]) { f('outline', x, 1, 10, 8); f('mustard', x + 1, 2, 8, 6); f(S('mustard', 1.25), x + 1, 2, 8, 1); f(S('mustard', 0.82), x + 1, 7, 8, 1); f(S('mustard', 0.82), x + 4, 4, 2, 1); } // two mustard throw pillows
       break;
     }
     case 'beanbag': case 'beanbag_teal': { // a slouchy beanbag with a dent where someone sat
@@ -613,7 +614,9 @@ function drawObject(ctx, o) {
     case 'table': case 'table_big': case 'table_low':
       shadow(3, 4, w - 2, h - 1);
       f('outline', 0, 1, w - 1, h - 3); f('desk-top', 1, 2, w - 3, h - 6); f(S('desk-top', 1.15), 1, 2, w - 3, 1); f('desk-edge', 1, h - 4, w - 3, 2);
-      if (o.sprite === 'table_big') { f('white', 10, 7, 10, 7); f('white', 44, 13, 12, 8); f('sky', 64, 6, 8, 8); f('mustard', 28, 16, 6, 6); } // everything stays on the tabletop
+      if (o.sprite === 'table_big') { f('white', 10, 7, 10, 7); f('white', 44, 13, 12, 8); f('sky', 64, 6, 8, 8);
+        f('outline', 76, 12, 13, 8); f('metal', 77, 13, 11, 6); f('screen', 78, 13, 9, 3); f(S('metal', 0.85), 77, 17, 11, 2); // an open laptop
+        f('outline', 22, 4, 19, 19); f('white', 23, 5, 17, 17); f('red', 24, 6, 15, 6); f('outline', 26, 14, 9, 1); f('outline', 26, 16, 12, 1); f('outline', 26, 18, 7, 1); f('mustard', 34, 7, 4, 4); } // a printed poster laid out for review // everything stays on the tabletop
       if (o.sprite === 'table' ) { f('white', 6, 6, 6, 5); f('white', w - 16, 10, 6, 5); f('leaf', w / 2 - 2, 4, 4, 4); }
       if (o.sprite === 'table_low') { f('gold', 8, 4, 4, 4); f('white', 22, 5, 10, 4); }
       break;
@@ -625,17 +628,30 @@ function drawObject(ctx, o) {
       shadow(2, 13, 13, 3);
       f('outline', 2, -8, 12, 23); f('white', 3, -7, 10, 21); f(S('white', 0.85), 11, -7, 2, 21); f('metal', 3, 1, 10, 1); f('metal-dark', 10, -4, 1, 4); f('metal-dark', 10, 4, 1, 5);
       break;
+    case 'avtable': // a small table beside the screen: the clicker, the HDMI adapter box and a tangle of cable
+      shadow(2, 12, 12, 3);
+      f('outline', 2, 3, 12, 11); f('desk', 3, 6, 10, 7); f('desk-top', 3, 4, 10, 2); f(S('desk-top', 1.15), 3, 4, 10, 1);
+      f('outline', 4, 1, 6, 4); f('metal', 5, 2, 4, 2); f('outline', 11, 2, 2, 3); f('red', 11, 2, 1, 1); f('metal-dark', 8, 6, 1, 6);
+      break;
+    case 'sidetable': // a little round-topped side table: a lamp, a mug and a record sleeve leaning on it
+      shadow(3, 12, 11, 3);
+      f('outline', 3, 5, 10, 9); f('desk', 4, 8, 8, 5); f('desk-top', 4, 6, 8, 2); f(S('desk-top', 1.15), 4, 6, 8, 1);
+      f('outline', 5, -4, 4, 10); f('mustard', 5, -5, 4, 3); f(S('mustard', 1.3), 6, -5, 2, 1); f('metal-dark', 6, -2, 2, 7);
+      f('outline', 9, 3, 3, 3); f('white', 9, 3, 2, 2); f('red', 12, 8, 1, 5);
+      break;
     case 'counter':
       shadow(1, 12, w, 4);
       f('outline', 0, 0, w, 15); f('desk', 1, 5, w - 2, 9); f('desk-top', 1, 1, w - 2, 4); f(S('desk-top', 1.15), 1, 1, w - 2, 1);
       // the monitor faces whoever sits behind the counter, so visitors see its back
-      f('outline', 19, -5, 11, 7); f('monitor', 20, -4, 9, 5); f(S('monitor', 1.2), 20, -4, 9, 1); f('white', 24, -2, 1, 1); f('outline', 23, 1, 3, 1);
+      { const m = w - 29; f('outline', m, -5, 11, 7); f('monitor', m + 1, -4, 9, 5); f(S('monitor', 1.2), m + 1, -4, 9, 1); f('white', m + 5, -2, 1, 1); f('outline', m + 4, 1, 3, 1); }
       f('white', w - 12, -1, 5, 3);
+      f('outline', 6, -3, 7, 5); f('gold', 7, -2, 5, 3); f(S('gold', 1.3), 8, -2, 2, 1); f('outline', 9, -4, 1, 1); // the bell nobody rings
+      f('outline', 15, -1, 9, 4); f('white', 16, 0, 7, 2); f('orange', 17, -1, 2, 1); f('mustard', 20, -1, 2, 1); // the ginger candy
       break;
     case 'bar_cart':
       shadow(2, 12, w - 2, 4);
       f('outline', 0, 2, w, 12); f('gold', 1, 3, w - 2, 2); f('frame', 1, 5, w - 2, 7); f('gold', 1, 11, w - 2, 1);
-      for (let i = 0; i < 5; i++) { const k = ['green', 'red', 'mustard', 'plum', 'sky'][i]; f('outline', 5 + i * 8, -6, 4, 9); f(k, 6 + i * 8, -5, 2, 7); f(S(k, 1.4), 6 + i * 8, -5, 1, 2); }
+      for (let i = 0; i < Math.min(2, Math.floor((w - 6) / 8)); i++) { const k = ['green', 'sky'][i]; f('outline', 5 + i * 8, -6, 4, 9); f(k, 6 + i * 8, -5, 2, 7); f(S(k, 1.4), 6 + i * 8, -5, 1, 2); }
       break;
     case 'nook':
       shadow(2, 12, w - 2, 4);
@@ -645,6 +661,7 @@ function drawObject(ctx, o) {
       f('outline', 15, 5, 7, 5); f('white', 16, 6, 5, 3); f('orange', 17, 6, 3, 2);
       f('outline', w - 22, 5, 7, 5); f('white', w - 21, 6, 5, 3); f('red', w - 20, 7, 2, 1);
       f('outline', w / 2 - 2, 4, 5, 5); f('teal', w / 2 - 1, 5, 3, 3);
+      f('outline', w / 2 + 10, 1, 5, 8); f('white', w / 2 + 11, 4, 3, 4); f('leaf', w / 2 + 12, 0, 1, 4); f('pink', w / 2 + 10, -2, 2, 2); f('mustard', w / 2 + 13, -1, 2, 2); f('red', w / 2 + 11, -3, 2, 1); // a jar of flowers
       break;
     case 'printer':
       shadow(1, 12, 15, 4);
@@ -660,6 +677,13 @@ function drawObject(ctx, o) {
     case 'bench_work':
       shadow(2, 12, w - 2, 4);
       f('outline', 0, 1, w, 13); f('desk', 1, 2, w - 2, 11); f('desk-top', 1, 2, w - 2, 3); f('metal', 6, 4, 6, 3); f('white', 20, 5, 8, 5); f('red', 34, 5, 4, 4);
+      if (w >= 64) { // the rest of the bench: a green cutting mat with a box mid-fold, a glue gun, a stack of card, tape and a little cardboard model
+        f('outline', 42, 2, 20, 9); f('green', 43, 3, 18, 7); f(S('green', 1.2), 43, 3, 18, 1); for (let i = 0; i < 4; i++) f(S('green', 0.8), 45 + i * 4, 3, 1, 7);
+        f('outline', 47, -3, 9, 8); f('khaki', 48, -2, 7, 6); f(S('khaki', 0.8), 48, 1, 7, 1); f(S('khaki', 1.25), 48, -2, 7, 1);
+        f('outline', 64, 4, 9, 4); f('orange', 65, 5, 6, 2); f('metal', 71, 5, 2, 1);
+        f('outline', 76, 2, 10, 7); f('white', 77, 3, 8, 1); f('sky', 77, 4, 8, 1); f('pink', 77, 5, 8, 1); f('mustard', 77, 6, 8, 2);
+      }
+      if (w >= 96) { f('outline', 88, 4, 6, 6); f('mustard', 89, 5, 4, 4); f('outline', 90, 6, 2, 2); f('outline', 80, -5, 8, 8); f('white', 81, -4, 6, 6); f('outline', 83, -6, 2, 2); }
       break;
     case 'booth':
       // the back: padded interior, acoustic panels, a bench and a little lamp
@@ -12022,6 +12046,188 @@ K.snacks = (ctx, d, c) => {
   grain(ctx, c.x, c.y, c.w, c.h, 0.06);
 };
 
+// The bar cart: two brass shelves, the bottles, a lemon, a shaker, and the client's unopened Christmas bottle.
+K.barcart = (ctx, d, c) => {
+  const D = d.a.data ?? {};
+  illBg(ctx, c, '#e9e1d2', '#d9cdb8');
+  box(ctx, c.x, c.y + c.h * 0.78, c.w, c.h * 0.22, '#cfc2a8'); line(ctx, c.x, c.y + c.h * 0.78, c.x + c.w, c.y + c.h * 0.78, alpha(IL.ink, 0.15), 2); // floor tiles meet the wall
+  const x0 = c.x + c.w * 0.14, x1 = c.x + c.w * 0.86, top = c.y + c.h * 0.4, low = c.y + c.h * 0.7;
+  ctx.filter = 'blur(12px)'; box(ctx, x0 + 10, low + 40, x1 - x0, 24, alpha(IL.ink, 0.25), 12); ctx.filter = 'none';
+  // frame: four brass legs, two shelves, a handle
+  for (const x of [x0, x1 - 10]) box(ctx, x, top - 30, 10, low - top + 100, IL.gold, 4);
+  line(ctx, x1 - 5, top - 30, x1 + 30, top - 70, IL.gold, 8); disc(ctx, x1 + 30, top - 70, 8, IL.goldHi);
+  for (const y of [top, low]) { box(ctx, x0, y, x1 - x0, 14, IL.goldLo, 4); box(ctx, x0, y - 4, x1 - x0, 8, IL.gold, 4); box(ctx, x0 + 6, y - 3, x1 - x0 - 12, 2, IL.goldHi); }
+  for (const x of [x0 + 20, x1 - 40]) { disc(ctx, x + 10, low + 100, 16, IL.black); disc(ctx, x + 10, low + 100, 6, IL.gold); } // casters
+  // top shelf: olive oil, hot sauce, three bitters, the client's bottle with its gift tag
+  const bottle = (x, w, h, body, cap, label, lab) => { box(ctx, x, top - h, w, h, body, 8); box(ctx, x + w * 0.32, top - h - 26, w * 0.36, 30, body, 4); box(ctx, x + w * 0.3, top - h - 34, w * 0.4, 10, cap, 3); if (label) { box(ctx, x + 4, top - h * 0.62, w - 8, h * 0.36, label, 3); if (lab) text(ctx, lab, x + w / 2, top - h * 0.38, 11, '"Avenir Next", Avenir, sans-serif', IL.ink, { align: 'center', weight: '700' }); } box(ctx, x + 6, top - h + 8, 4, h - 20, alpha(IL.white, 0.35), 2); };
+  let x = x0 + 30;
+  bottle(x, 46, 150, '#9fae4a', IL.black, IL.cream, 'OLIO'); x += 66;
+  bottle(x, 30, 90, '#c4483e', IL.white, IL.white, 'HOT'); x += 48;
+  for (const [k, n] of [['#5b3a24', 'A'], ['#3d2a1e', 'P'], ['#7a3b2a', 'O']]) { bottle(x, 24, 70, k, IL.gold, IL.cream, n); x += 34; }
+  x += 16;
+  bottle(x, 56, 170, '#2d3b6b', IL.gold, IL.goldHi, 'RESERVE');
+  ctx.save(); ctx.translate(x + 56, top - 120); ctx.rotate(0.25); box(ctx, 0, 0, 92, 46, IL.white, 4); line(ctx, -14, -6, 2, 6, IL.red, 2); text(ctx, 'Merry Christmas!', 8, 20, 12, HAND, IL.ink); text(ctx, '— a client', 8, 38, 11, HAND, IL.muted); ctx.restore();
+  // lower shelf: a shaker, two coupes, a lemon, a stack of napkins
+  let lx = x0 + 40;
+  box(ctx, lx, low - 110, 44, 110, IL.chrome, 10); box(ctx, lx + 8, low - 128, 28, 22, IL.silver, 6); box(ctx, lx + 6, low - 100, 6, 80, alpha(IL.white, 0.6), 3); lx += 80;
+  for (let i = 0; i < 2; i++) { ell(ctx, lx + 30, low - 64, 30, 12, alpha(IL.glass, 0.8)); line(ctx, lx + 30, low - 54, lx + 30, low - 10, alpha(IL.glass, 0.95), 4); ell(ctx, lx + 30, low - 6, 18, 5, alpha(IL.glass, 0.95)); lx += 74; }
+  ell(ctx, lx + 34, low - 26, 34, 26, IL.mustard); ell(ctx, lx + 24, low - 34, 10, 6, lighten(IL.mustard, 0.4)); disc(ctx, lx + 66, low - 26, 5, darken(IL.mustard, 0.3)); lx += 90;
+  box(ctx, lx, low - 30, 70, 30, IL.white, 3); for (let i = 1; i < 4; i++) line(ctx, lx, low - 30 + i * 7.5, lx + 70, low - 30 + i * 7.5, alpha(IL.ink, 0.1), 1);
+  illCard(ctx, c.x + c.w - 250, c.y + 24, 220, ['Bar cart rules:', 'Fridays after six.', D.last ?? 'Nobody has had a drink yet.'], 0.04);
+  grain(ctx, c.x, c.y, c.w, c.h, 0.06);
+};
+// The side table at the end of the kitchen sofa: a lamp, a mug and its ring, the last record sleeve.
+K.sidetable = (ctx, d, c) => {
+  const D = d.a.data ?? {};
+  illBg(ctx, c, '#e6dccb', '#d6c8b0');
+  box(ctx, c.x + c.w * 0.62, c.y + c.h * 0.45, c.w * 0.38, c.h * 0.4, IL.wool, 18); box(ctx, c.x + c.w * 0.62, c.y + c.h * 0.45, c.w * 0.38, 24, lighten(IL.wool, 0.15), 12); // the sofa's arm
+  ell(ctx, c.x + c.w * 0.76, c.y + c.h * 0.52, 44, 26, IL.mustard); ell(ctx, c.x + c.w * 0.74, c.y + c.h * 0.5, 20, 9, lighten(IL.mustard, 0.35)); // a mustard pillow
+  const cx = c.x + c.w * 0.38, cy = c.y + c.h * 0.6;
+  ctx.filter = 'blur(10px)'; ell(ctx, cx + 14, cy + 30, 200, 70, alpha(IL.ink, 0.28)); ctx.filter = 'none';
+  const g = ctx.createRadialGradient(cx - 60, cy - 30, 10, cx, cy, 220); g.addColorStop(0, lighten(IL.tan, 0.25)); g.addColorStop(1, darken(IL.tan, 0.18));
+  ell(ctx, cx, cy, 200, 70, g);
+  ctx.strokeStyle = alpha(darken(IL.tan, 0.5), 0.25); ctx.lineWidth = 1.5; for (let i = 1; i < 5; i++) { ctx.beginPath(); ctx.ellipse(cx, cy, 200 * i / 5, 70 * i / 5, 0, 0, Math.PI * 2); ctx.stroke(); }
+  ring(ctx, cx + 70, cy + 18, 20, alpha('#7a4a2a', 0.35), 3); // the mug ring that will never come out
+  // the lamp: a brass stem and a mustard shade, glowing
+  const glow = ctx.createRadialGradient(cx - 80, cy - 200, 10, cx - 80, cy - 200, 260); glow.addColorStop(0, alpha(IL.goldHi, 0.55)); glow.addColorStop(1, alpha(IL.goldHi, 0)); box(ctx, c.x, c.y, c.w, c.h, glow);
+  ell(ctx, cx - 80, cy - 10, 44, 14, IL.goldLo); box(ctx, cx - 84, cy - 170, 8, 160, IL.gold, 3);
+  ctx.fillStyle = IL.mustard; ctx.beginPath(); ctx.moveTo(cx - 150, cy - 160); ctx.lineTo(cx - 10, cy - 160); ctx.lineTo(cx - 40, cy - 260); ctx.lineTo(cx - 120, cy - 260); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = lighten(IL.mustard, 0.3); ctx.beginPath(); ctx.moveTo(cx - 120, cy - 258); ctx.lineTo(cx - 100, cy - 258); ctx.lineTo(cx - 120, cy - 162); ctx.lineTo(cx - 140, cy - 162); ctx.closePath(); ctx.fill();
+  // a mug of something, steam if someone was just here
+  box(ctx, cx + 30, cy - 46, 40, 44, IL.white, 6); ring(ctx, cx + 76, cy - 26, 11, IL.white, 6); ell(ctx, cx + 50, cy - 46, 20, 6, '#5b3a24');
+  if (D.warm) for (let i = 0; i < 3; i++) { ctx.strokeStyle = alpha(IL.white, 0.6); ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(cx + 40 + i * 10, cy - 56); ctx.bezierCurveTo(cx + 30 + i * 10, cy - 76, cx + 50 + i * 10, cy - 86, cx + 40 + i * 10, cy - 106); ctx.stroke(); }
+  // the record sleeve leaning against the table
+  ctx.save(); ctx.translate(cx + 110, cy - 30); ctx.rotate(0.18);
+  box(ctx, 0, 0, 130, 130, D.sleeve ?? IL.teal, 2); disc(ctx, 65, 65, 40, alpha(IL.white, 0.25)); disc(ctx, 92, 50, 44, IL.black); disc(ctx, 92, 50, 14, IL.red);
+  text(ctx, (D.genre ?? 'jazz').toUpperCase(), 10, 120, 12, '"Avenir Next", Avenir, sans-serif', IL.white, { weight: '800' });
+  ctx.restore();
+  illCard(ctx, c.x + 30, c.y + 26, 230, ['Coasters exist.', 'Please use them.', '— Tomás'], -0.04);
+  grain(ctx, c.x, c.y, c.w, c.h, 0.06);
+};
+// The AV table beside the presentation screen: the clicker, the adapter box, the cables nobody labels.
+K.avtable = (ctx, d, c) => {
+  const D = d.a.data ?? {};
+  illWood(ctx, c, '#8f6a4a');
+  const S0 = (x, y, w, h, fill, r) => { ctx.filter = 'blur(8px)'; box(ctx, x + 8, y + 12, w, h, alpha(IL.ink, 0.3), r); ctx.filter = 'none'; box(ctx, x, y, w, h, fill, r); };
+  // the cable tangle, under everything
+  ctx.lineCap = 'round';
+  for (let i = 0; i < 6; i++) { ctx.strokeStyle = [IL.black, '#3a3946', IL.white, IL.black, '#58566a', IL.black][i]; ctx.lineWidth = 9; ctx.beginPath(); ctx.moveTo(c.x - 20, c.y + c.h * (0.5 + i * 0.05)); ctx.bezierCurveTo(c.x + c.w * 0.3, c.y + c.h * (0.2 + i * 0.1), c.x + c.w * 0.6, c.y + c.h * (0.95 - i * 0.06), c.x + c.w + 20, c.y + c.h * (0.45 + (i % 3) * 0.08)); ctx.stroke(); }
+  // the adapter box: empty, labelled, guarded
+  S0(c.x + c.w * 0.12, c.y + 70, 220, 140, IL.white, 8); box(ctx, c.x + c.w * 0.12, c.y + 70, 220, 34, IL.navy, 8);
+  text(ctx, 'HDMI ⇄ USB-C', c.x + c.w * 0.12 + 110, c.y + 94, 15, '"Avenir Next", Avenir, sans-serif', IL.white, { align: 'center', weight: '800' });
+  text(ctx, D.adapter ? 'adapter: in the box' : 'adapter: in Tomás\' pocket', c.x + c.w * 0.12 + 110, c.y + 150, 15, HAND, IL.ink, { align: 'center' });
+  box(ctx, c.x + c.w * 0.12 + 40, c.y + 170, 140, 22, IL.mustard, 3); text(ctx, 'PROPERTY OF TOMÁS', c.x + c.w * 0.12 + 110, c.y + 186, 11, '"Avenir Next", Avenir, sans-serif', IL.ink, { align: 'center', weight: '800' });
+  // the clicker
+  const kx = c.x + c.w * 0.58, ky = c.y + c.h * 0.32;
+  ctx.save(); ctx.translate(kx, ky); ctx.rotate(-0.3); S0(0, 0, 70, 190, IL.black, 30); disc(ctx, 35, 50, 16, '#3a3946'); disc(ctx, 35, 50, 6, IL.red); box(ctx, 18, 92, 34, 20, '#3a3946', 6); box(ctx, 18, 122, 34, 20, '#3a3946', 6); text(ctx, '▶', 35, 137, 12, 'sans-serif', IL.white, { align: 'center' }); ctx.restore();
+  // a sticky note and a roll of gaffer tape
+  ctx.save(); ctx.translate(c.x + c.w * 0.74, c.y + c.h * 0.62); ctx.rotate(0.08); S0(0, 0, 150, 120, '#f3e07a', 2); text(ctx, 'Slide 1 is', 14, 40, 16, HAND, IL.ink); text(ctx, 'ALWAYS the', 14, 64, 16, HAND, IL.ink); text(ctx, 'agenda. — A', 14, 88, 16, HAND, IL.ink); ctx.restore();
+  ring(ctx, c.x + c.w * 0.86, c.y + c.h * 0.24, 46, '#3a3946', 26); ring(ctx, c.x + c.w * 0.86, c.y + c.h * 0.24, 46, alpha(IL.white, 0.08), 2);
+  // a bag of gummy bears, spilling, and two packs of gum
+  const gbx = c.x + c.w * 0.4, gby = c.y + c.h * 0.7;
+  ctx.save(); ctx.translate(gbx, gby); ctx.rotate(-0.15); S0(0, 0, 130, 90, '#e8e4ee', 8); box(ctx, 0, 0, 130, 20, IL.red, 8); text(ctx, 'GUMMY BEARS', 65, 56, 12, '"Avenir Next", Avenir, sans-serif', IL.red, { align: 'center', weight: '800' }); ctx.restore();
+  const bear = (x, y, k) => { disc(ctx, x, y - 9, 6, k); disc(ctx, x - 5, y - 13, 2.5, k); disc(ctx, x + 5, y - 13, 2.5, k); ell(ctx, x, y + 3, 7, 9, k); disc(ctx, x - 7, y + 10, 3, k); disc(ctx, x + 7, y + 10, 3, k); ell(ctx, x - 2, y - 11, 2, 1.5, alpha(IL.white, 0.5)); };
+  const BEARS = ['#e0483e', '#f0b432', '#4f9a52', '#e8792a', '#f4e4a0', '#c4384e'];
+  [[0.52, 0.12], [0.08, 0.22], [0.92, 0.44], [0.3, 0.4], [0.66, 0.9]].forEach(([fx, fy], i) => {
+    ctx.save(); ctx.translate(c.x + 30 + fx * (c.w - 60), c.y + 24 + fy * (c.h - 48)); ctx.rotate((i * 1.7) % 6.28); bear(0, 0, alpha(BEARS[i % BEARS.length], 0.92)); ctx.restore();
+  });
+  for (const [dx, dy, rot, k, n] of [[-20, -150, 0.1, IL.teal, 'MINT'], [70, -170, -0.2, '#4f8ad6', 'SPEARMINT']]) { ctx.save(); ctx.translate(c.x + c.w * 0.3 + dx, c.y + c.h * 0.95 + dy); ctx.rotate(rot); S0(0, 0, 110, 40, k, 5); box(ctx, 0, 0, 110, 10, lighten(k, 0.3), 5); text(ctx, n, 55, 30, 11, '"Avenir Next", Avenir, sans-serif', IL.white, { align: 'center', weight: '800' }); ctx.restore(); }
+  illCard(ctx, c.x + 30, c.y + c.h - 120, 250, ['Clicker battery:', D.battery ?? 'probably fine'], -0.03);
+  grain(ctx, c.x, c.y, c.w, c.h, 0.05);
+};
+
+// The little altar: a low shelf, a beeswax candle, sandalwood smoke, a stone for everyone who has left, a bowl of folded notes.
+K.altar = (ctx, d, c) => {
+  const D = d.a.data ?? {};
+  illBg(ctx, c, '#2a2633', '#1d1b24');
+  const glow = ctx.createRadialGradient(c.x + c.w * 0.3, c.y + c.h * 0.42, 10, c.x + c.w * 0.3, c.y + c.h * 0.42, c.w * 0.6); glow.addColorStop(0, alpha(IL.goldHi, 0.42)); glow.addColorStop(1, alpha(IL.goldHi, 0)); box(ctx, c.x, c.y, c.w, c.h, glow);
+  const sy = c.y + c.h * 0.66;
+  box(ctx, c.x + 40, sy, c.w - 80, 26, IL.woodHi, 4); box(ctx, c.x + 40, sy + 26, c.w - 80, 60, IL.wood, 2); box(ctx, c.x + 40, sy, c.w - 80, 5, lighten(IL.woodHi, 0.25), 3);
+  // the candle and its flame
+  const cx = c.x + c.w * 0.3;
+  box(ctx, cx - 26, sy - 120, 52, 120, '#e8c56a', 6); box(ctx, cx - 26, sy - 120, 52, 10, lighten('#e8c56a', 0.3), 6); for (let i = 1; i < 6; i++) line(ctx, cx - 26, sy - 120 + i * 20, cx + 26, sy - 120 + i * 20, alpha('#a07a2a', 0.3), 2);
+  line(ctx, cx, sy - 120, cx, sy - 132, IL.black, 3);
+  ell(ctx, cx, sy - 150, 12, 24, alpha(IL.orange, 0.9)); ell(ctx, cx, sy - 145, 6, 14, IL.goldHi);
+  // the incense, and its smoke
+  const ix = c.x + c.w * 0.45; box(ctx, ix - 18, sy - 18, 36, 18, IL.brown, 4); line(ctx, ix, sy - 18, ix + 26, sy - 120, '#7a4a2a', 3); disc(ctx, ix + 26, sy - 120, 3, IL.orange);
+  ctx.strokeStyle = alpha(IL.white, 0.35); ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(ix + 26, sy - 124); ctx.bezierCurveTo(ix + 10, sy - 170, ix + 50, sy - 210, ix + 24, sy - 260); ctx.bezierCurveTo(ix + 4, sy - 300, ix + 40, sy - 330, ix + 30, sy - 370); ctx.stroke();
+  // the stones: one for every person who has left
+  // the stones, stacked into little cairns, biggest at the bottom: one stone for every person who has left
+  // one cairn in no particular order: sizes and shapes come from a seeded shuffle (the same stack every time
+  // for the same number of stones), and each stone sits a little off-centre in a way that keeps the whole pile balanced
+  const n = D.stones ?? 9, px = c.x + c.w * 0.66, tones = ['#8a8794', '#b8b2a7', '#6f6b78', '#c9c2b4', '#9aa0ae', '#a59a8a'];
+  let seed = 977 + n * 131; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+  const stones = Array.from({ length: n }, () => ({ rx: 16 + rnd() * 44, flat: 0.3 + rnd() * 0.22, tone: tones[Math.floor(rnd() * tones.length)], dx: (rnd() - 0.5) * 16 }));
+  { const b = stones.reduce((m, st, i) => st.rx > stones[m].rx ? i : m, 0); [stones[0], stones[b]] = [stones[b], stones[0]]; stones[0].dx = 0; } // the biggest stone is the base
+  for (const st of [...stones].sort((p, q) => q.rx - p.rx).slice(0, 3)) st.flat /= 3; // the three biggest are slabs, three times flatter
+  for (const st of stones) if (st.flat > 0.2 && rnd() < 0.75) st.flat /= 2.2; // most of the rest are flat river stones too; a few stay round
+  const mean = stones.reduce((t, st) => t + st.dx * st.rx, 0) / stones.reduce((t, st) => t + st.rx, 0); // centre of mass over the base
+  let y = sy;
+  for (let j = 0; j < n; j++) {
+    const st = stones[j], rx = st.rx, ry = Math.max(4, rx * st.flat), x = px + st.dx - mean;
+    y -= ry; ell(ctx, x + 2, y + ry * 0.5, rx, ry * 0.6, alpha(IL.ink, 0.35)); ell(ctx, x, y, rx, ry, st.tone); ell(ctx, x - rx * 0.3, y - ry * 0.4, rx * 0.35, ry * 0.25, alpha(IL.white, 0.25));
+    y -= ry * 0.85;
+  }
+  // the bowl of folded notes
+  const bx = c.x + c.w * 0.86; ell(ctx, bx, sy - 30, 54, 16, '#c9c2b4'); box(ctx, bx - 54, sy - 30, 108, 30, '#c9c2b4', 14); ell(ctx, bx, sy - 30, 48, 12, '#6f6b78');
+  for (let i = 0; i < 7; i++) { ctx.save(); ctx.translate(bx - 36 + i * 12, sy - 34 - (i % 3) * 5); ctx.rotate((i % 4 - 1.5) * 0.4); box(ctx, -8, -5, 16, 10, IL.white, 1); line(ctx, -8, 0, 8, 0, alpha(IL.ink, 0.15), 1); ctx.restore(); }
+  text(ctx, D.notes ? `${D.notes} notes. Nobody reads them.` : 'Nobody reads them. That is the point.', c.x + c.w / 2, c.y + c.h - 30, 16, HAND, alpha(IL.white, 0.7), { align: 'center' });
+  grain(ctx, c.x, c.y, c.w, c.h, 0.07);
+};
+// The reception counter, seen from where clients stand: the bell, the ginger candy, the sign-in book, the monitor's back.
+K.counter = (ctx, d, c) => {
+  const D = d.a.data ?? {};
+  illBg(ctx, c, '#d9d4c8', '#c6bfb0');
+  const ty = c.y + c.h * 0.5;
+  box(ctx, c.x, ty, c.w, c.h * 0.5, IL.wood); box(ctx, c.x, ty, c.w, 30, IL.woodHi); box(ctx, c.x, ty, c.w, 5, lighten(IL.woodHi, 0.3));
+  for (let i = 0; i < 8; i++) line(ctx, c.x + c.w * i / 8, ty + 30, c.x + c.w * i / 8, c.y + c.h, alpha(IL.woodLo, 0.4), 2);
+  // the monitor, back to us, with a sticker
+  const mx = c.x + c.w * 0.62; box(ctx, mx, ty - 210, 230, 160, '#2b2a33', 10); box(ctx, mx + 95, ty - 50, 40, 50, '#3a3946', 4); disc(ctx, mx + 60, ty - 150, 22, IL.mustard); text(ctx, '☺', mx + 60, ty - 142, 22, 'sans-serif', IL.ink, { align: 'center' });
+  ctx.save(); ctx.translate(mx + 150, ty - 110); ctx.rotate(-0.12); box(ctx, -42, -18, 84, 36, IL.white, 4); box(ctx, -38, -14, 76, 28, IL.black, 3); for (let i = 0; i < 6; i++) box(ctx, -38, -14 + i * 4.6, 76, 2.3, ['#61bb46', '#fdb827', '#f5821f', '#e03a3e', '#963d97', '#009ddc'][i]); box(ctx, -30, -10, 60, 20, alpha(IL.black, 0.75), 2); text(ctx, '1984', 0, 7, 17, '"Avenir Next", Avenir, sans-serif', IL.white, { align: 'center', weight: '800' }); ctx.restore(); // a 1984 sticker
+  // the bell nobody rings
+  const bx = c.x + c.w * 0.18; ell(ctx, bx, ty - 4, 60, 12, IL.goldLo); ctx.fillStyle = IL.gold; ctx.beginPath(); ctx.ellipse(bx, ty - 10, 50, 50, 0, Math.PI, 0); ctx.fill(); ell(ctx, bx - 16, ty - 40, 12, 6, alpha(IL.goldHi, 0.8)); box(ctx, bx - 4, ty - 70, 8, 12, IL.goldLo, 2); disc(ctx, bx, ty - 72, 7, IL.gold);
+  // the ginger candy bowl
+  const gx = c.x + c.w * 0.38; ell(ctx, gx, ty - 6, 74, 16, alpha(IL.glass, 0.9)); box(ctx, gx - 74, ty - 50, 148, 44, alpha(IL.glass, 0.7), 30);
+  for (let i = 0; i < 9; i++) { const x = gx - 52 + (i % 5) * 26, y = ty - 40 + Math.floor(i / 5) * 16; box(ctx, x - 12, y - 7, 24, 14, i % 3 ? IL.orange : IL.mustard, 6); line(ctx, x - 18, y - 4, x - 12, y, IL.white, 2); line(ctx, x + 12, y, x + 18, y - 4, IL.white, 2); }
+  text(ctx, 'ginger', gx, ty + 40, 13, HAND, IL.cream, { align: 'center' });
+  illCard(ctx, c.x + c.w - 260, ty + 70, 220, ['Please ring for help.', '(Nobody rings.)', D.who ? `— ${D.who}` : '— Tomás'], 0.04);
+  grain(ctx, c.x, c.y, c.w, c.h, 0.06);
+};
+// The dining table from the front: an open laptop showing someone's confidential document, plates and a bowl side-on,
+// the folded paper under the wobbly leg. Thursday's treat box sits closed on the table when there is one.
+K.dining = (ctx, d, c) => {
+  const D = d.a.data ?? {};
+  illBg(ctx, c, '#ece4d4', '#ddd1bb');
+  box(ctx, c.x, c.y + c.h * 0.86, c.w, c.h * 0.14, '#cfc2a8'); // the floor
+  const top = c.y + c.h * 0.6, tx = c.x + 60, tw = c.w - 120;
+  ctx.filter = 'blur(14px)'; box(ctx, tx + 20, c.y + c.h * 0.86 - 10, tw - 40, 20, alpha(IL.ink, 0.3), 10); ctx.filter = 'none';
+  // legs, then the top seen edge-on
+  for (const x of [tx + 30, tx + tw - 54]) box(ctx, x, top + 30, 24, c.y + c.h * 0.86 - top - 30, darken(IL.tan, 0.25), 3);
+  box(ctx, tx, top, tw, 34, IL.tan, 6); box(ctx, tx, top, tw, 8, lighten(IL.tan, 0.25), 6); box(ctx, tx, top + 26, tw, 8, darken(IL.tan, 0.2), 3);
+  // the folded paper under the wobbly leg
+  box(ctx, tx + 24, c.y + c.h * 0.86 - 8, 36, 8, IL.white, 1);
+  // the open laptop, facing us
+  const lw = 340, lh = 220, lx = tx + tw * 0.5 - lw / 2 + 40, ly = top - lh - 14;
+  box(ctx, lx - 30, top - 14, lw + 60, 14, darken(IL.silver, 0.15), 4); // the base, edge-on
+  box(ctx, lx, ly, lw, lh, IL.silver, 12); box(ctx, lx + 12, ly + 12, lw - 24, lh - 24, IL.white, 4);
+  const doc = D.doc ?? { title: 'PROJECT KESTREL', lines: ['Rebrand of a company you have heard of.', 'Not announced until spring.'], stamp: 'TOP SECRET' };
+  const px = lx + 30, py = ly + 30;
+  text(ctx, 'CONFIDENTIAL · DO NOT FORWARD', px, py + 6, 10, '"Avenir Next", Avenir, sans-serif', IL.red, { weight: '800' });
+  text(ctx, doc.title, px, py + 34, 18, '"Avenir Next", Avenir, sans-serif', IL.ink, { weight: '800' });
+  doc.lines.forEach((l, i) => text(ctx, l, px, py + 62 + i * 20, 12, 'Georgia, serif', IL.muted));
+  for (let i = 0; i < 3; i++) box(ctx, px, py + 112 + i * 14, [220, 180, 240][i], 6, alpha(IL.ink, 0.85), 1); // redacted
+  ctx.save(); ctx.translate(lx + lw - 90, ly + lh - 60); ctx.rotate(-0.22); ctx.strokeStyle = IL.red; ctx.lineWidth = 4; ctx.strokeRect(-70, -20, 140, 40); text(ctx, doc.stamp, 0, 8, 18, '"Avenir Next", Avenir, sans-serif', IL.red, { align: 'center', weight: '900' }); ctx.restore();
+  // plates and a bowl, side-on: just their rims
+  const plateSide = x => { ell(ctx, x, top - 4, 56, 7, IL.white); box(ctx, x - 40, top - 4, 80, 5, darken(IL.white, 0.08), 2); };
+  plateSide(tx + 110); plateSide(tx + 125); // two stacked
+  const bx = tx + tw - 110; ctx.fillStyle = IL.white; ctx.beginPath(); ctx.moveTo(bx - 60, top - 60); ctx.bezierCurveTo(bx - 56, top - 6, bx + 56, top - 6, bx + 60, top - 60); ctx.closePath(); ctx.fill(); ell(ctx, bx, top - 60, 60, 8, '#e8e2d6'); box(ctx, bx - 22, top - 8, 44, 8, darken(IL.white, 0.1), 2);
+  // a mug
+  box(ctx, tx + 200, top - 56, 46, 56, IL.teal, 6); ring(ctx, tx + 252, top - 30, 13, IL.teal, 7); box(ctx, tx + 200, top - 56, 46, 6, lighten(IL.teal, 0.3), 3);
+  // Thursday: the treat box, closed, with its label
+  if (D.treats) { const k = D.treats.kind; box(ctx, tx + tw - 260, top - 70, 120, 70, k === 'donuts' ? IL.pink : k === 'burgers' ? IL.cream : IL.white, 4); box(ctx, tx + tw - 260, top - 70, 120, 10, alpha(IL.ink, 0.12), 4); text(ctx, k.toUpperCase(), tx + tw - 200, top - 26, 14, '"Avenir Next", Avenir, sans-serif', IL.ink, { align: 'center', weight: '800' }); text(ctx, `${D.treats.left} left`, tx + tw - 200, top - 8, 11, HAND, IL.muted, { align: 'center' }); }
+  grain(ctx, c.x, c.y, c.w, c.h, 0.06);
+};
+
 // The breakfast nook: the round table, the bench, whatever was eaten most recently.
 K.nook = (ctx, d, c) => {
   const D = d.a.data ?? {};
@@ -12684,9 +12890,11 @@ return { get W() { return W; }, get brandName() { return brandName; }, get BOARD
 __mods["sim/world.js"] = (function () {
 // The world: a tile grid plus a tree of Areas > Objects, the same
 // environment structure Generative Agents uses (World > Sector > Arena > Object).
-// After the layoffs the studio moved into a smaller single-floor space.
+// After the layoffs the studio moved into a smaller single-floor space (36 × 18 tiles).
+// Coordinates from the older, narrower 30-wide plan map across with REMAP (old saves use it).
+const REMAP = (x, y) => x + (x >= 11 || (y >= 12 && y <= 16 && x >= 6) ? 4 : 0) + (x >= 20 ? 2 : 0);
 
-const W = 30;
+const W = 36;
 const H = 18;
 
 const TILES = {
@@ -12714,26 +12922,26 @@ function vline(x, y0, y1) { for (let y = y0; y <= y1; y++) grid[y][x] = 'wall'; 
 function door(x, y) { grid[y][x] = 'door'; }
 
 box(0, 0, W - 1, H - 1);
-fill(1, 1, 18, 10, 'wood', 'studio');
-fill(20, 1, 28, 7, 'oak', 'meeting');
-fill(20, 9, 28, 16, 'concrete', 'library');
-fill(1, 12, 10, 16, 'tile', 'kitchen');
-fill(12, 12, 18, 16, 'concrete', 'library'); // open plan: reception + library are one room
-hline(0, 19, 11);
-vline(11, 11, 17);
-vline(19, 0, 11); grid[17][19] = 'wall';
-fill(19, 12, 19, 16, 'concrete', 'library');
-hline(19, 29, 8);
+fill(1, 1, 22, 10, 'wood', 'studio');
+fill(24, 1, 34, 7, 'oak', 'meeting');
+fill(24, 9, 34, 16, 'concrete', 'library');
+fill(1, 12, 14, 16, 'tile', 'kitchen');
+fill(16, 12, 22, 16, 'concrete', 'library'); // open plan: reception + library are one room
+hline(0, 23, 11);
+vline(15, 11, 17);
+vline(23, 0, 11); grid[17][23] = 'wall';
+fill(23, 12, 23, 16, 'concrete', 'library');
+hline(23, 35, 8);
 // Open doorways (no door): studio ↔ kitchen, studio ↔ reception, kitchen ↔ reception.
 // The gap takes the floor of the room it opens into, so people can still walk through.
 function gap(x, y, t, area) { grid[y][x] = t; areaGrid[y][x] = area; }
-gap(6, 11, 'wood', 'kitchen'); gap(15, 11, 'wood', 'library'); // the opening behind reception keeps the studio's planks
-gap(11, 14, 'concrete', 'kitchen');    // the kitchen's side door onto reception is poured like the lobby
-door(19, 4);                  // studio ↔ meeting room
-door(24, 8);                  // meeting room ↔ library
-door(15, 17); door(16, 17);   // front door
-areaGrid[17][15] = 'home_maple';
-areaGrid[17][16] = 'home_harbor';
+gap(6, 11, 'wood', 'kitchen'); gap(19, 11, 'wood', 'library'); // the opening behind reception keeps the studio's planks
+gap(15, 14, 'concrete', 'kitchen');    // the kitchen's side door onto reception is poured like the lobby
+door(23, 4);                  // studio ↔ meeting room
+door(30, 8);                  // meeting room ↔ library
+door(19, 17); door(20, 17);   // front door
+areaGrid[17][19] = 'home_maple';
+areaGrid[17][20] = 'home_harbor';
 
 const AREAS = {
   studio:      'The Studio',
@@ -12767,7 +12975,7 @@ const LAPTOP_AT = { B: 2 };                       // Hannah's station at the end
 for (const [k, [x, y]] of Object.entries(TABLES)) {
   // Table A seats its people on the far side, facing the room; table B on the near side.
   const flip = k === 'A';
-  obj(`table:${k}`, `long table ${k}`, 'studio', x, y, 9, 1, flip ? 'longdesk_flip' : 'longdesk', [x + 1, flip ? y - 1 : y + 1], { view: 'table', seed: k === 'A' ? 26 : 7, laptopAt: LAPTOP_AT[k] ?? -1,
+  obj(`table:${k}`, `long table ${k}`, 'studio', x, y, 10, 1, flip ? 'longdesk_flip' : 'longdesk', [x + 1, flip ? y - 1 : y + 1], { view: 'table', seed: k === 'A' ? 26 : 7, laptopAt: LAPTOP_AT[k] ?? -1,
     story: k === 'A' ? 'Kenji built both tables from reclaimed gym flooring the week they moved in. The free-throw line still shows through the varnish.' : 'The second of Kenji\'s gym-floor tables. Someone carved a tiny Pica into the underside.' });
   SEATING[k].forEach((owner, i) => {
     const sx = x + STATION_X[i], sy = flip ? y - 1 : y + 1;
@@ -12778,7 +12986,7 @@ for (const [k, [x, y]] of Object.entries(TABLES)) {
 }
 // The library hot-desk: a third long table for the interns and Wren (part-time).
 {
-  const x = 21, y = 11, stations = [1, 3, 5], owners = ['intern_bea', 'intern_dev', 'pt_wren'];
+  const x = 26, y = 11, stations = [1, 3, 5], owners = ['intern_bea', 'intern_dev', 'pt_wren'];
   obj('table:C', 'hot-desk table', 'library', x, y, 7, 1, 'longdesk', [x + 1, y + 1], { view: 'table', seed: 11, stations, laptopAt: 0, story: 'The newest table, built from the offcuts of the other two. The interns call it "the kids\' table." Wren calls it "my Monday, Tuesday and Thursday."' });
   owners.forEach((owner, i) => {
     const sx = x + stations[i], sy = y + 1;
@@ -12786,90 +12994,93 @@ for (const [k, [x, y]] of Object.entries(TABLES)) {
     obj(`computer:${owner}`, i === 0 ? 'laptop' : 'computer', 'library', sx, y, 1, 1, 'blank', [sx, sy], { blocking: false, view: 'computer', of: `desk:${owner}`, noGo: true, story: i === 0 ? 'A borrowed studio laptop with a sticker that says PROPERTY OF ANOTHER STUDIO, PLEASE RETURN.' : 'A hand-me-down monitor with one dead pixel everyone has named.' });
   });
 }
-obj('desk:cos', 'chair', 'library', 14, 12, 1, 1, 'none', [14, 12], { blocking: false, owner: 'cos', face: 'down' });
-obj('computer:cos', 'computer', 'library', 14, 13, 1, 1, 'blank', [14, 12], { blocking: false, view: 'computer', of: 'desk:cos', noGo: true, story: 'The reception computer. Tomás runs the whole studio from it: calendars, invoices and the snack order.' });
-obj('corner_desk', 'corner desk', 'meeting', 28, 5, 1, 1, 'cornerdesk', [27, 5], { decor: true, story: 'Adaeze gave her seat at the long tables to the designers and took this corner. She says it keeps her close to clients. It also keeps her close to the snacks for clients.' });
-obj('desk:ceo', 'chair', 'meeting', 27, 5, 1, 1, 'chair', [27, 5], { blocking: false, owner: 'ceo', face: 'right' });
-obj('computer:ceo', 'computer', 'meeting', 28, 5, 1, 1, 'blank', [27, 5], { blocking: false, view: 'computer', of: 'desk:ceo', noGo: true, story: 'Forty open tabs, all of them important. One is a recipe.' });
+obj('desk:cos', 'chair', 'library', 18, 12, 1, 1, 'none', [18, 12], { blocking: false, owner: 'cos', face: 'down' });
+obj('computer:cos', 'computer', 'library', 18, 13, 1, 1, 'blank', [18, 12], { blocking: false, view: 'computer', of: 'desk:cos', noGo: true, story: 'The reception computer. Tomás runs the whole studio from it: calendars, invoices and the snack order.' });
+obj('corner_desk', 'corner desk', 'meeting', 34, 5, 1, 1, 'cornerdesk', [33, 5], { decor: true, story: 'Adaeze gave her seat at the long tables to the designers and took this corner. She says it keeps her close to clients. It also keeps her close to the snacks for clients.' });
+obj('desk:ceo', 'chair', 'meeting', 33, 5, 1, 1, 'chair', [33, 5], { blocking: false, owner: 'ceo', face: 'right' });
+obj('computer:ceo', 'computer', 'meeting', 34, 5, 1, 1, 'blank', [33, 5], { blocking: false, view: 'computer', of: 'desk:ceo', noGo: true, story: 'Forty open tabs, all of them important. One is a recipe.' });
 // The crit rug: a big woven rug with floor cushions and a low table, for sketching on the floor
 // and quick crits away from the screens. A floor lamp stands beside it.
 // The two floor cushions on the crit rug (drawn with the rug) are real seats: one person each.
-obj('beanbag_l', 'floor cushion', 'studio', 4, 9, 1, 1, 'none', [4, 9], { blocking: false, seat: true, story: 'The left floor cushion. Sofia sits here for crit and nowhere else.' });
-obj('beanbag_r', 'floor cushion', 'studio', 7, 9, 1, 1, 'none', [7, 9], { blocking: false, seat: true, story: 'The right floor cushion. Whoever is presenting gets this one, and the low table between you.' });
-obj('crit_table', 'crit table', 'studio', 5, 9, 2, 1, 'none', [5, 10], { blocking: true, decor: true }); // the low table on the rug: nobody walks over it
-obj('crit_rug', 'crit rug', 'studio', 3, 9, 6, 1, 'rug_lounge', [3, 9], { blocking: false, view: 'rug', story: 'A huge woven rug Sofia brought back from Oaxaca. Floor cushions, a low table covered in markers, and a rule: no laptops on the rug.' });
-obj('altar', 'little altar', 'studio', 10, 8, 1, 1, 'altar', [10, 9], { story: 'A low shelf Hannah set up after the layoffs: a beeswax candle, a stick of sandalwood, a smooth stone from every person who has left, and a bowl where people drop folded notes. Nobody reads them. That is the point.' });
-obj('research_wall', 'research wall', 'studio', 6, 1, 4, 1, 'stickywall', [8, 2], { view: 'researchwall', story: 'Hannah\'s wall: every interview, every survey, every half-formed insight, in sticky notes. The colors mean something. Only Hannah and Dev know what.' });
-obj('pinup_wall', 'pin-up wall', 'studio', 12, 1, 3, 1, 'pinup', [13, 2], { view: 'pinup', story: 'Cork tiles salvaged from the old studio. Every active project gets pinned here; the rule is nothing comes down until it\'s been argued about.' });
-obj('moodboard', 'moodboard', 'studio', 2, 1, 4, 1, 'moodboard', [4, 2], { view: 'moodboard', story: 'Sofia\'s board. She clears it every Monday and it is full again by Wednesday.' });
-obj('design_books', 'design book shelf', 'studio', 15, 1, 2, 1, 'bookcase', [15, 2], { view: 'designbooks', story: 'The reference shelf: Rams, Müller-Brockmann, Bringhurst, Frutiger, the Bell Labs annual reports, and whatever Kenji is currently quoting. Books leave; most come back. Hannah keeps a gap on the second shelf and won\'t say what for.' });
-obj('riso', 'risograph printer', 'studio', 17, 1, 1, 1, 'printer', [17, 2], { view: 'riso', story: 'A temperamental RZ390 that only Eli can unjam. Prints in fluorescent pink and federal blue.' });
-obj('material_wall', 'material & swatch wall', 'studio', 13, 7, 4, 1, 'swatches', [15, 8], { view: 'moodboard', story: 'Paper stocks, fabric swatches, foil samples. Noor alphabetized it. Nobody has dared to un-alphabetize it.' });
-obj('proto_bench', 'prototyping bench', 'studio', 13, 9, 3, 1, 'bench_work', [14, 8], { view: 'bench', story: 'Cutting mats, a bone folder, three X-Acto knives and one bandage box that is always empty. Taped above it, in Kenji\'s handwriting: "Measure once, cut twice." Nobody has corrected it. Nobody wants to.' });
+obj('beanbag_l', 'floor cushion', 'studio', 5, 8, 1, 1, 'none', [5, 8], { blocking: false, seat: true, story: 'The left floor cushion. Sofia sits here for crit and nowhere else.' });
+obj('beanbag_r', 'floor cushion', 'studio', 8, 8, 1, 1, 'none', [8, 8], { blocking: false, seat: true, story: 'The right floor cushion. Whoever is presenting gets this one, and the low table between you.' });
+obj('crit_table', 'crit table', 'studio', 6, 8, 2, 1, 'none', [6, 9], { blocking: true, decor: true }); // the low table on the rug: nobody walks over it
+obj('crit_rug', 'crit rug', 'studio', 4, 8, 6, 1, 'rug_lounge', [4, 8], { blocking: false, view: 'rug', story: 'A huge woven rug Sofia brought back from Oaxaca. Floor cushions, a low table covered in markers, and a rule: no laptops on the rug.' });
+obj('altar', 'little altar', 'studio', 11, 8, 1, 1, 'altar', [11, 9], { story: 'A low shelf Hannah set up after the layoffs: a beeswax candle, a stick of sandalwood, a smooth stone from every person who has left, and a bowl where people drop folded notes. Nobody reads them. That is the point.' });
+obj('research_wall', 'research wall', 'studio', 7, 1, 4, 1, 'stickywall', [9, 2], { view: 'researchwall', story: 'Hannah\'s wall: every interview, every survey, every half-formed insight, in sticky notes. The colors mean something. Only Hannah and Dev know what.' });
+obj('pinup_wall', 'pin-up wall', 'studio', 13, 1, 4, 1, 'pinup', [15, 2], { view: 'pinup', story: 'Cork tiles salvaged from the old studio. Every active project gets pinned here; the rule is nothing comes down until it\'s been argued about.' });
+obj('moodboard', 'moodboard', 'studio', 3, 1, 4, 1, 'moodboard', [5, 2], { view: 'moodboard', story: 'Sofia\'s board. She clears it every Monday and it is full again by Wednesday.' });
+obj('design_books', 'design book shelf', 'studio', 17, 1, 3, 1, 'bookcase', [18, 2], { view: 'designbooks', story: 'The reference shelf: Rams, Müller-Brockmann, Bringhurst, Frutiger, the Bell Labs annual reports, and whatever Kenji is currently quoting. Books leave; most come back. Hannah keeps a gap on the second shelf and won\'t say what for.' });
+obj('riso', 'risograph printer', 'studio', 20, 1, 1, 1, 'printer', [20, 2], { view: 'riso', story: 'A temperamental RZ390 that only Eli can unjam. Prints in fluorescent pink and federal blue.' });
+obj('material_wall', 'material & swatch wall', 'studio', 15, 7, 6, 1, 'swatches', [18, 8], { view: 'moodboard', story: 'Paper stocks, fabric swatches, foil samples. Noor alphabetized it. Nobody has dared to un-alphabetize it.' });
+obj('proto_bench', 'prototyping bench', 'studio', 15, 9, 6, 1, 'bench_work', [17, 8], { view: 'bench', story: 'Cutting mats, a bone folder, three X-Acto knives and one bandage box that is always empty. Taped above it, in Kenji\'s handwriting: "Measure once, cut twice." Nobody has corrected it. Nobody wants to.' });
 
 // Long benches either side of the meeting table: decor people sit on during meetings.
-obj('bench:meeting_top', 'meeting bench', 'meeting', 22, 2, 5, 1, 'mbench', [22, 2], { blocking: false, decor: true });
-obj('bench:meeting_bottom', 'meeting bench', 'meeting', 22, 5, 5, 1, 'mbench', [22, 5], { blocking: false, decor: true });
-obj('meeting_table', 'meeting table', 'meeting', 22, 3, 5, 2, 'table_big', [21, 4], { view: 'projector', story: 'Where clients sit, on two long oak benches Kenji built to match the table. Everyone faces the screen so nobody has to look at the bad coffee rings.' });
-obj('wing_chun', 'wooden dummy', 'meeting', 28, 3, 1, 1, 'dummy', [27, 3], { story: 'A Wing Chun wooden dummy, Kenji\'s. He does his forms on it at seven in the morning before anyone is in, and anyone is welcome to hit it at any time, including, and this is studio policy, during meetings. Clients find it either alarming or wonderful. Adaeze says that tells her what she needs to know about the client.' });
-obj('or_flag', 'Oregon flag', 'meeting', 26, 0, 1, 1, 'orflag', [26, 1], { blocking: false, noGo: true, story: 'The Oregon flag, next to the bear. Hannah put it up the week after the bear flag appeared, "for balance". It is the only state flag with a different design on the back, a beaver, which Hannah will tell you about whether or not you ask.' });
-obj('poster_mot', 'motivational poster', 'library', 14, 11, 1, 1, 'poster_mot', [14, 12], { blocking: false, noGo: true, story: 'A motivational poster behind reception: a mountain at dawn and the word DEADLINES. Tomás bought it as a joke. It stopped being a joke around the third all-nighter.' });
+obj('bench:meeting_top', 'meeting bench', 'meeting', 26, 3, 6, 1, 'mbench', [26, 3], { blocking: false, decor: true });
+obj('bench:meeting_bottom', 'meeting bench', 'meeting', 26, 6, 6, 1, 'mbench', [26, 6], { blocking: false, decor: true });
+obj('meeting_table', 'meeting table', 'meeting', 26, 4, 6, 2, 'table_big', [25, 5], { view: 'projector', story: 'Where clients sit, on two long oak benches Kenji built to match the table. Everyone faces the screen so nobody has to look at the bad coffee rings.' });
+obj('wing_chun', 'wooden dummy', 'meeting', 34, 3, 1, 1, 'dummy', [33, 3], { story: 'A Wing Chun wooden dummy, Kenji\'s. He does his forms on it at seven in the morning before anyone is in, and anyone is welcome to hit it at any time, including, and this is studio policy, during meetings. Clients find it either alarming or wonderful. Adaeze says that tells her what she needs to know about the client.' });
+obj('or_flag', 'Oregon flag', 'meeting', 32, 0, 1, 1, 'orflag', [32, 1], { blocking: false, noGo: true, story: 'The Oregon flag, next to the bear. Hannah put it up the week after the bear flag appeared, "for balance". It is the only state flag with a different design on the back, a beaver, which Hannah will tell you about whether or not you ask.' });
+obj('poster_mot', 'motivational poster', 'library', 17, 11, 1, 1, 'poster_mot', [17, 12], { blocking: false, noGo: true, story: 'A motivational poster behind reception: a mountain at dawn and the word DEADLINES. Tomás bought it as a joke. It stopped being a joke around the third all-nighter.' });
 obj('poster_law', 'labor law poster', 'kitchen', 5, 11, 1, 1, 'poster_law', [5, 12], { blocking: false, noGo: true, story: 'The state-mandated labor law poster, by law in a place where everyone eats. Someone has annotated the section on rest breaks in pencil. The handwriting is Eli\'s. The breaks are not.' });
-obj('bear_flag', 'California bear flag', 'meeting', 25, 0, 1, 1, 'bearflag', [25, 1], { blocking: false, noGo: true, coversWindow: true, story: 'A California bear flag, tacked over the window. It arrived in a tube with no note the week the studio won its biggest West Coast project. Marcus says it\'s from a client. Eli says it\'s from Marcus. Adaeze refuses to take it down until someone confesses, so it has been up for two years.' });
-obj('whiteboard', 'whiteboard', 'meeting', 21, 1, 2, 1, 'whiteboard', [21, 2], { view: 'whiteboard', story: 'Never fully erased. There is a ghost of a 2021 org chart in the corner that everyone pretends not to see.' });
-obj('projector', 'presentation screen', 'meeting', 24, 1, 4, 1, 'screen', [25, 2], { view: 'projector', story: 'Where every pitch, crit and client review happens. The HDMI adapter lives in Tomás\' pocket.' });
+obj('bear_flag', 'California bear flag', 'meeting', 31, 0, 1, 1, 'bearflag', [31, 1], { blocking: false, noGo: true, coversWindow: true, story: 'A California bear flag, tacked over the window. It arrived in a tube with no note the week the studio won its biggest West Coast project. Marcus says it\'s from a client. Eli says it\'s from Marcus. Adaeze refuses to take it down until someone confesses, so it has been up for two years.' });
+obj('whiteboard', 'whiteboard', 'meeting', 25, 1, 2, 1, 'whiteboard', [25, 2], { view: 'whiteboard', story: 'Never fully erased. There is a ghost of a 2021 org chart in the corner that everyone pretends not to see.' });
+obj('projector', 'presentation screen', 'meeting', 28, 1, 4, 1, 'screen', [29, 2], { view: 'projector', story: 'Where every pitch, crit and client review happens. The HDMI adapter lives in Tomás\' pocket.' });
+obj('av_table', 'AV table', 'meeting', 32, 1, 1, 1, 'avtable', [32, 2], { story: 'A little table beside the screen for the clicker, the HDMI adapter (when Tomás lets go of it) and a tangle of cables nobody will label.' });
 
-obj('bookshelf', 'case study shelf', 'library', 20, 9, 4, 1, 'shelf', [21, 10], { view: 'casestudies', story: 'Bound copies of every finished case study, one per delivered project, including the work of everyone who used to be here. Adaeze reads one before every pitch.' });
-obj('annuals_shelf', 'design annuals shelf', 'library', 25, 9, 4, 1, 'shelf', [26, 10], { view: 'annuals', story: 'Forty years of design annuals, type specimens, and the studio\'s own award books. Kenji reshelves them by color when he\'s stressed.' });
-obj('reading_chair', 'mustard beanbag', 'library', 21, 14, 1, 1, 'none', [21, 14], { blocking: false, seat: true, story: 'A huge mustard beanbag that replaced the velvet reading chair. Hannah claimed it in the first hour and does synthesis in it, horizontally.' });
-obj('reading_chair2', 'teal beanbag', 'library', 24, 14, 1, 1, 'none', [24, 14], { blocking: false, seat: true, story: 'Its teal twin. Slightly flatter. Pica prefers this one and leaves it dog-shaped.' });
-obj('magazine_top', 'magazine table', 'library', 22, 14, 2, 1, 'none', [22, 15], { blocking: true, decor: true }); // the table itself: nobody walks over it
-obj('magazine_table', 'magazine table', 'library', 21, 14, 4, 1, 'magazines_lounge', [22, 15], { blocking: false, story: 'A low table stacked with Eye, Baseline, Slanted and one very old IKEA catalog that nobody will throw out. Two beanbags flank it: the mustard one is Hannah\'s for synthesis, and Pica leaves the flatter teal one dog-shaped.' });
-obj('skate_ramp', 'skateboard', 'library', 28, 13, 1, 1, 'board', [26, 13], { story: 'Eli\'s skateboard, stood on its tail against the east wall. He skates the lane the length of reception, and boardslides the front of the reception counter, which Tomás says is "the one place clients stand." Rohan has a board here too. Nobody else is allowed, by Tomás, and nobody else wants to.' });
-obj('skate_sign', 'Tomás\' sign', 'library', 28, 11, 1, 1, 'skatesign', [27, 11], { blocking: false, noGo: true, story: 'A yellow sandwich board in Tomás\' handwriting: NO SKATING DURING CLIENT HOURS. THIS MEANS YOU, ELI. There is a tally of falls on the back. It keeps going up.' });
-obj('phone_booth', 'phone booth', 'library', 27, 15, 2, 2, 'booth', [28, 16], { blocking: false, story: 'Soundproof-ish, with a padded bench. Used for client calls, family calls, power naps and occasionally crying.' });
+obj('bookshelf', 'case study shelf', 'library', 24, 9, 6, 1, 'shelf', [26, 10], { view: 'casestudies', story: 'Bound copies of every finished case study, one per delivered project, including the work of everyone who used to be here. Adaeze reads one before every pitch.' });
+obj('annuals_shelf', 'design annuals shelf', 'library', 31, 9, 4, 1, 'shelf', [32, 10], { view: 'annuals', story: 'Forty years of design annuals, type specimens, and the studio\'s own award books. Kenji reshelves them by color when he\'s stressed.' });
+obj('reading_chair', 'mustard beanbag', 'library', 26, 14, 1, 1, 'none', [26, 14], { blocking: false, seat: true, story: 'A huge mustard beanbag that replaced the velvet reading chair. Hannah claimed it in the first hour and does synthesis in it, horizontally.' });
+obj('reading_chair2', 'teal beanbag', 'library', 29, 14, 1, 1, 'none', [29, 14], { blocking: false, seat: true, story: 'Its teal twin. Slightly flatter. Pica prefers this one and leaves it dog-shaped.' });
+obj('magazine_top', 'magazine table', 'library', 27, 14, 2, 1, 'none', [27, 15], { blocking: true, decor: true }); // the table itself: nobody walks over it
+obj('magazine_table', 'magazine table', 'library', 26, 14, 4, 1, 'magazines_lounge', [27, 15], { blocking: false, story: 'A low table stacked with Eye, Baseline, Slanted and one very old IKEA catalog that nobody will throw out. Two beanbags flank it: the mustard one is Hannah\'s for synthesis, and Pica leaves the flatter teal one dog-shaped.' });
+obj('skate_ramp', 'skateboard', 'library', 34, 13, 1, 1, 'board', [32, 13], { story: 'Eli\'s skateboard, stood on its tail against the east wall. He skates the lane the length of reception, and boardslides the front of the reception counter, which Tomás says is "the one place clients stand." Rohan has a board here too. Nobody else is allowed, by Tomás, and nobody else wants to.' });
+obj('skate_sign', 'Tomás\' sign', 'library', 34, 11, 1, 1, 'skatesign', [33, 11], { blocking: false, noGo: true, story: 'A yellow sandwich board in Tomás\' handwriting: NO SKATING DURING CLIENT HOURS. THIS MEANS YOU, ELI. There is a tally of falls on the back. It keeps going up.' });
+obj('phone_booth', 'phone booth', 'library', 33, 15, 2, 2, 'booth', [34, 16], { blocking: false, story: 'Soundproof-ish, with a padded bench. Used for client calls, family calls, power naps and occasionally crying.' });
 
 obj('coffee_machine', 'espresso machine', 'kitchen', 1, 12, 1, 1, 'coffee', [1, 13], { story: 'An Italian lever machine older than Eli. Tomás descales it every Friday and talks to it gently.' });
 obj('fridge', 'fridge', 'kitchen', 2, 12, 1, 1, 'fridge', [2, 13], { story: 'Labelled shelves, enforced by Tomás. The bottom drawer is always mysteriously full of oat milk.' });
 obj('snack_shelf', 'snack shelf', 'kitchen', 3, 12, 2, 1, 'shelf', [4, 13], { story: 'Stocked weekly. The good crackers disappear by Tuesday.' });
-obj('dining_table', 'dining table', 'kitchen', 2, 14, 3, 2, 'table', [5, 15], { story: 'Seats six if nobody minds elbows. Team lunch happens here most days now that the team is small enough to fit.' });
+obj('dining_table', 'dining table', 'kitchen', 3, 14, 3, 2, 'table', [6, 15], { story: 'Seats six if nobody minds elbows. Team lunch happens here most days now that the team is small enough to fit.' });
 // Chairs around the dining table: decor people sit on at lunch, not places to go.
-for (const [i, x, y, face, red] of [[1, 1, 14, 'right'], [2, 1, 15, 'right', true], [3, 5, 14, 'left'], [4, 5, 15, 'left']]) obj(`chair:dining${i}`, 'dining chair', 'kitchen', x, y, 1, 1, `dchair_${face}${red ? '_red' : ''}`, [x, y], { blocking: false, decor: true });
-obj('laptop:dining', 'someone\'s laptop', 'kitchen', 4, 14, 1, 1, 'laptop_right', [5, 14], { blocking: false, noGo: true, layerRow: 15, view: 'computer', mystery: true, story: 'A client left it on the dining table after a review three weeks ago. Nobody remembers which client. It\'s always charged, and it\'s always open to the same deck.' });
-obj('breakfast_nook', 'breakfast nook', 'kitchen', 8, 12, 3, 1, 'nook', [9, 13], { story: 'A corner bench, a round table and a toaster that only works on setting four. Tomás stocks it with good bread on Mondays; it is gone by Tuesday.' });
-obj('pinball2', 'pinball machine', 'studio', 14, 4, 1, 1, 'pinball2', [14, 5], { story: 'A 1983 "Grid Systems" table Kenji found on the curb and rebuilt over three weekends. It tilts if you look at it wrong. Eli and Marcus have a standing rivalry here.' });
-obj('pinball', 'pinball machine', 'studio', 13, 4, 1, 1, 'pinball', [13, 5], { story: 'A 1979 "Space Kerning" table Adaeze won in a bet with a client. The left flipper sticks. Marcus holds the high score and will tell you about it.' });
-obj('ddr', 'dance machine', 'studio', 16, 4, 2, 1, 'ddr', [16, 5], { story: 'A Dance Dance Revolution cabinet Noor bought at a bowling alley liquidation and had delivered without telling anyone. Friday happy hour ends here. The left arrow is a little sticky, which everyone blames for everything.' });
+for (const [i, x, y, face, red] of [[1, 2, 14, 'right'], [2, 2, 15, 'right', true], [3, 6, 14, 'left'], [4, 6, 15, 'left']]) obj(`chair:dining${i}`, 'dining chair', 'kitchen', x, y, 1, 1, `dchair_${face}${red ? '_red' : ''}`, [x, y], { blocking: false, decor: true });
+obj('laptop:dining', 'someone\'s laptop', 'kitchen', 5, 14, 1, 1, 'laptop_right', [6, 14], { blocking: false, noGo: true, layerRow: 15, view: 'computer', mystery: true, story: 'A client left it on the dining table after a review three weeks ago. Nobody remembers which client. It\'s always charged, and it\'s always open to the same deck.' });
+obj('breakfast_nook', 'breakfast nook', 'kitchen', 10, 12, 5, 1, 'nook', [12, 13], { story: 'A corner bench, a round table and a toaster that only works on setting four. Tomás stocks it with good bread on Mondays; it is gone by Tuesday.' });
+obj('pinball2', 'pinball machine', 'studio', 16, 4, 1, 1, 'pinball2', [16, 5], { story: 'A 1983 "Grid Systems" table Kenji found on the curb and rebuilt over three weekends. It tilts if you look at it wrong. Eli and Marcus have a standing rivalry here.' });
+obj('pinball', 'pinball machine', 'studio', 15, 4, 1, 1, 'pinball', [15, 5], { story: 'A 1979 "Space Kerning" table Adaeze won in a bet with a client. The left flipper sticks. Marcus holds the high score and will tell you about it.' });
+obj('ddr', 'dance machine', 'studio', 18, 4, 2, 1, 'ddr', [18, 5], { story: 'A Dance Dance Revolution cabinet Noor bought at a bowling alley liquidation and had delivered without telling anyone. Friday happy hour ends here. The left arrow is a little sticky, which everyone blames for everything.' });
 obj('record_player', 'record player', 'kitchen', 7, 12, 1, 1, 'turntable', [7, 13], { story: 'A Technics turntable on a milk crate of records, next to the breakfast nook. Whoever gets to it first picks the music for the room, which is the single biggest source of conflict at Another Studio.' });
-obj('polaroid', 'Polaroid camera', 'library', 18, 12, 1, 1, 'polaroid', [18, 13], { blocking: false, noGo: false, story: 'An old Polaroid SX-70 on the award shelf. Anyone can take a picture of anyone. The pictures go on the wall of us, and nobody is allowed to take one down.' });
-obj('sofa', 'sofa', 'kitchen', 7, 16, 3, 1, 'couch', [8, 15], { story: 'A rust-red three-seater from the old studio. The only furniture that survived the move intact.' });
+obj('bar_cart', 'bar cart', 'kitchen', 8, 12, 2, 1, 'bar_cart', [8, 13], { story: 'A brass bar cart between the records and the breakfast nook: olive oil, hot sauce, three kinds of bitters and a bottle of something a client sent at Christmas that nobody has opened.' });
+obj('polaroid', 'Polaroid camera', 'library', 22, 12, 1, 1, 'polaroid', [22, 13], { blocking: false, noGo: false, story: 'An old Polaroid SX-70 on the award shelf. Anyone can take a picture of anyone. The pictures go on the wall of us, and nobody is allowed to take one down.' });
+obj('sofa', 'sofa', 'kitchen', 10, 16, 4, 1, 'couch', [12, 15], { story: 'A long rust-red sofa from the old studio, with a little side table for mugs and records. The only furniture that survived the move intact.' });
+obj('side_table', 'side table', 'kitchen', 9, 16, 1, 1, 'sidetable', [9, 15], { story: 'A side table at the end of the sofa with a lamp, a mug ring that will never come out, and whichever record sleeve was playing last.' });
 
-obj('reception_desk', 'reception counter', 'library', 13, 13, 3, 1, 'counter', [14, 12], { story: 'Unstaffed since Lola left. A bowl of ginger candy and a bell nobody rings. Clients wait here.' });
-obj('mailbox', 'mailbox', 'library', 13, 16, 1, 1, 'mailbox', [13, 15], { view: 'mail', story: 'A red post box on legs, rescued from the old building\'s lobby. Real post still arrives: award results, thank-you notes, the occasional rejection, and, once in a while, something personal. Tomás sorts it at 9:15. Nobody else is allowed to.' });
-obj('dog_bed', "Pica's bed", 'library', 12, 16, 1, 1, 'dogbed', [12, 16], { blocking: false, owner: 'dog', story: 'A plaid bed with Lola\'s old cardigan inside. Pica still sleeps on the cardigan.' });
-obj('award_shelf', 'award shelf', 'library', 17, 12, 2, 1, 'trophies', [17, 13], { story: 'Every trophy the studio has won. There is a gap where the ones nobody won yet will go.' });
-obj('waiting_bench', 'waiting bench', 'library', 17, 16, 2, 1, 'bench', [17, 15], { story: 'Where clients sit before meetings. Pica considers it her receiving line.' });
+obj('reception_desk', 'reception counter', 'library', 16, 13, 4, 1, 'counter', [18, 12], { story: 'Unstaffed since Lola left. A bowl of ginger candy and a bell nobody rings. Clients wait here.' });
+obj('mailbox', 'mailbox', 'library', 17, 16, 1, 1, 'mailbox', [17, 15], { view: 'mail', story: 'A red post box on legs, rescued from the old building\'s lobby. Real post still arrives: award results, thank-you notes, the occasional rejection, and, once in a while, something personal. Tomás sorts it at 9:15. Nobody else is allowed to.' });
+obj('dog_bed', "Pica's bed", 'library', 16, 16, 1, 1, 'dogbed', [16, 16], { blocking: false, owner: 'dog', story: 'A plaid bed with Lola\'s old cardigan inside. Pica still sleeps on the cardigan.' });
+obj('award_shelf', 'award shelf', 'library', 21, 12, 2, 1, 'trophies', [21, 13], { story: 'Every trophy the studio has won. There is a gap where the ones nobody won yet will go.' });
+obj('waiting_bench', 'waiting bench', 'library', 22, 16, 3, 1, 'bench', [23, 15], { story: 'Where clients sit before meetings. Pica considers it her receiving line.' });
 
 const PLANTS = [
   [1, 1, 'Gerald', 'a monstera', 'Survived the move in the back of Kenji\'s car. Has outlived two office managers.'],
-  [10, 1, 'Fig Newton', 'a fiddle-leaf fig', 'Dramatic. Drops a leaf whenever anyone moves it an inch.'],
+  [11, 1, 'Fig Newton', 'a fiddle-leaf fig', 'Dramatic. Drops a leaf whenever anyone moves it an inch.'],
   [1, 10, 'Big Steve', 'a rubber plant', 'Tomás\' favorite. He wipes its leaves every Monday.'],
   [1, 9, 'Little Steve', 'a dracaena', 'Bought to keep Big Steve company. Already taller than him, which nobody mentions in front of Tomás.'],
-  [18, 10, 'Ms. Kerning', 'a snake plant', 'Named by Eli. Thrives on neglect, which is convenient.'],
-  [28, 1, 'Client Fern', 'a Boston fern', 'Adaeze insists clients feel calmer near ferns. Nobody has tested this.'],
-  [20, 16, 'Archie', 'an olive tree', 'Lives beside the archive. Hannah talks to it during synthesis.'],
-  [10, 16, 'Pothos Malone', 'a trailing pothos', 'Trails from the kitchen shelf toward the coffee machine every week.'],
-  [21, 16, 'Lola\'s Peace Lily', 'a peace lily', 'A goodbye gift from Lola. Tomás waters it first, every time.'],
-  [18, 1, 'Sir Fronds-a-Lot', 'a bird of paradise', 'Taller than Eli. Leans toward whoever is talking.'],
-  [28, 7, 'Philodendra', 'a heartleaf philodendron', 'Survived three reorgs and one layoff. Considered a good omen.'],
-  [24, 16, 'Old Faithful', 'a jade plant', 'Older than the studio. Adaeze\'s grandmother\'s cutting.'],
-  [19, 12, 'Spike', 'a cactus', 'Do not hug Spike.'],
+  [22, 10, 'Ms. Kerning', 'a snake plant', 'Named by Eli. Thrives on neglect, which is convenient.'],
+  [34, 1, 'Client Fern', 'a Boston fern', 'Adaeze insists clients feel calmer near ferns. Nobody has tested this.'],
+  [26, 16, 'Archie', 'an olive tree', 'Lives beside the archive. Hannah talks to it during synthesis.'],
+  [14, 16, 'Pothos Malone', 'a trailing pothos', 'Trails from the kitchen shelf toward the coffee machine every week.'],
+  [27, 16, 'Lola\'s Peace Lily', 'a peace lily', 'A goodbye gift from Lola. Tomás waters it first, every time.'],
+  [22, 1, 'Sir Fronds-a-Lot', 'a bird of paradise', 'Taller than Eli. Leans toward whoever is talking.'],
+  [34, 7, 'Philodendra', 'a heartleaf philodendron', 'Survived three reorgs and one layoff. Considered a good omen.'],
+  [30, 16, 'Old Faithful', 'a jade plant', 'Older than the studio. Adaeze\'s grandmother\'s cutting.'],
+  [23, 12, 'Spike', 'a cactus', 'Do not hug Spike.'],
 ];
 for (const [x, y, name, kind, story] of PLANTS) obj(`plant:${name}`, name, areaGrid[y][x], x, y, 1, 1, (x + y) % 2 ? 'plant' : 'plant_tall', [x, y], { kind, story: `${cap(kind)}. ${story}` });
 function cap(s) { return s[0].toUpperCase() + s.slice(1); }
 
-obj('door:home_maple', 'front door', 'home_maple', 15, 17, 1, 1, 'none', [15, 17], { blocking: false });
-obj('door:home_harbor', 'front door', 'home_harbor', 16, 17, 1, 1, 'none', [16, 17], { blocking: false });
+obj('door:home_maple', 'front door', 'home_maple', 19, 17, 1, 1, 'none', [19, 17], { blocking: false });
+obj('door:home_harbor', 'front door', 'home_harbor', 20, 17, 1, 1, 'none', [20, 17], { blocking: false });
 
 const HOME_OBJECTS = [
   { id: 'home:bed', name: 'bed (home)' },
@@ -12999,17 +13210,17 @@ function findPath(sx, sy, tx, ty, avoid = null) { // avoid(x, y): tiles to route
 
 // Seats around the meeting table: crit, standup, all-hands, client meetings.
 const CRIT_SEATS = [
-  ...[22, 23, 24, 25, 26].map(x => ({ x, y: 2 })),
-  ...[22, 23, 24, 25, 26].map(x => ({ x, y: 5 })),
-  { x: 21, y: 3 }, { x: 21, y: 4 }, { x: 27, y: 3 }, { x: 27, y: 4 },
-  { x: 21, y: 6 }, { x: 27, y: 6 },
+  ...[26, 27, 28, 29, 30, 31].map(x => ({ x, y: 3 })),
+  ...[26, 27, 28, 29, 30, 31].map(x => ({ x, y: 6 })),
+  { x: 25, y: 4 }, { x: 25, y: 5 }, { x: 32, y: 4 }, { x: 32, y: 5 },
+  { x: 25, y: 7 }, { x: 32, y: 7 },
 ];
 // Happy hour gathers in the kitchen.
 const GALLERY_SPOTS = [
-  [2, 13], [4, 13], [6, 13], [9, 14], [6, 14], [6, 15], [1, 15], [1, 16], [3, 16], [5, 16], [9, 15], [10, 14],
+  [2, 13], [4, 13], [10, 13], [13, 14], [10, 14], [10, 15], [2, 16], [1, 16], [3, 16], [5, 16], [13, 15], [14, 14],
 ].map(([x, y]) => ({ x, y }));
 
-return { get W() { return W; }, get H() { return H; }, get TILES() { return TILES; }, get AREAS() { return AREAS; }, get OBJECTS() { return OBJECTS; }, get SEATING() { return SEATING; }, get STATION_X() { return STATION_X; }, get HOME_OBJECTS() { return HOME_OBJECTS; }, get trinketFor() { return trinketFor; }, get OBJ() { return OBJ; }, get deskOf() { return deskOf; }, get freeDesk() { return freeDesk; }, get GRID() { return GRID; }, get AREA_GRID() { return AREA_GRID; }, get walkable() { return walkable; }, get areaAt() { return areaAt; }, get findPath() { return findPath; }, get CRIT_SEATS() { return CRIT_SEATS; }, get GALLERY_SPOTS() { return GALLERY_SPOTS; } };
+return { get REMAP() { return REMAP; }, get W() { return W; }, get H() { return H; }, get TILES() { return TILES; }, get AREAS() { return AREAS; }, get OBJECTS() { return OBJECTS; }, get SEATING() { return SEATING; }, get STATION_X() { return STATION_X; }, get HOME_OBJECTS() { return HOME_OBJECTS; }, get trinketFor() { return trinketFor; }, get OBJ() { return OBJ; }, get deskOf() { return deskOf; }, get freeDesk() { return freeDesk; }, get GRID() { return GRID; }, get AREA_GRID() { return AREA_GRID; }, get walkable() { return walkable; }, get areaAt() { return areaAt; }, get findPath() { return findPath; }, get CRIT_SEATS() { return CRIT_SEATS; }, get GALLERY_SPOTS() { return GALLERY_SPOTS; } };
 })();
 
 // ---- sim/memory.js
@@ -15601,7 +15812,7 @@ __mods["sim/sim.js"] = (function () {
 // conversations, rituals and studio events. Runs authoritatively on the server.
 
 const { PERSONAS, PERSONA, HIRE_POOL, LADDERS, CAREER_START, ROMANCE, PARTNERS, genderOf } = __mods["sim/personas.js"];
-const { OBJ, AREAS, trinketFor, findPath, walkable, areaAt, CRIT_SEATS, GALLERY_SPOTS, deskOf, freeDesk } = __mods["sim/world.js"];
+const { OBJ, AREAS, trinketFor, findPath, walkable, areaAt, CRIT_SEATS, GALLERY_SPOTS, deskOf, freeDesk, REMAP } = __mods["sim/world.js"];
 const { MemoryStream } = __mods["sim/memory.js"];
 const { Studio, CLIENT_POOL, INTERNAL_POOL, RETURNS, HELIX_BRIEF, AWARDS, RITUALS, PHASES, LAYOFF, FORMER, clockLabel, isWeekend, creditName, setCalendar, dowOf, dateOf, weatherOf, holidayOf, decorOf } = __mods["sim/studio.js"];
 const { allowedPlaces, planJob, decideJob, converseJob, reflectJob, clientMeetingJob, contribution, birthdayScene, outageScene, dogScene, earthquakeScene, farewellScene, welcomeScene, reviewScene, confessionScene, holidayScene, SCENES, moodOf, playerChat, NEED_KEYS, setExes } = __mods["sim/brain.js"];
@@ -15678,6 +15889,9 @@ class Sim {
     if (!this.ledger) this.#openLedger();
     if (data?.fate) this.fate = data.fate;
     if (data?.meta) this.meta = data.meta;
+    // saves from the 30-wide floor plan: move everyone to the same spot on the 36-wide one
+    if (data && !this.flags.map36) for (const a of this.agents.values()) { a.x = REMAP(Math.round(a.x), Math.round(a.y)); a.path = []; }
+    this.flags.map36 = true;
     for (const a of this.agents.values()) if (!a.hidden && !walkable(a.x, a.y)) { const t = this.#freeNear(a.x, a.y, a); if (t) { a.x = t.x; a.y = t.y; a.path = []; } } // the furniture moved
   }
 
@@ -18051,11 +18265,12 @@ class Sim {
     }
     const a = this.agents.get(this.possessed);
     this.possessed = null;
-    if (a && a.state === 'possessed') { a.state = 'thinking'; a.epoch++; }
+    if (a && a.state === 'possessed') { if (a.action?.possessPose) a.action = null; a.state = 'thinking'; a.epoch++; }
   }
   possessMove(dx, dy) {
     const a = this.agents.get(this.possessed) ?? this.visitor(this.possessed);
     if (!a || a.state === 'talking') return;
+    if (a.action?.possessPose) a.action = null; // walking away stops whatever they were doing
     a.dir = dx > 0 ? 'right' : dx < 0 ? 'left' : dy > 0 ? 'down' : 'up';
     if (walkable(a.x + dx, a.y + dy)) { a.x += dx; a.y += dy; }
   }
@@ -18210,6 +18425,7 @@ class Sim {
     if (near.trinket && Math.random() < 0.2) this.findTrinket(id, a.id);
     a.memory.add(this.t, 'action', `I ${did}.`, 2);
     a.thought = `I ${did}.`;
+    if (possessed && a.state === 'possessed') a.action = { loc: id, desc: did, emoji: '🎮', start: this.t, end: this.t + 30, possessPose: true }; // so the map shows them dancing, playing, sketching… until you move them
     return possessed ? `${p.short} ${did}.` : did;
   }
   possessTargets() {
@@ -18397,7 +18613,7 @@ class Sim {
       const name = by && PERSONA[by]?.short;
       // "in Big Steve's pot", "in Marcus' desk", "under long table A", "in the sofa"
       const where = id.startsWith('plant:') ? `in ${o.name}'s pot` : id.startsWith('desk:') ? `under ${o.owner === by ? 'their own' : `${PERSONA[o.owner]?.short ?? 'an empty'}'s`} chair` : id.startsWith('table:') ? `under ${o.name}` : `in the ${o.name}`;
-      this.#post({ type: 'news', icon: '🔍', text: `${name ? `${name} found something ${where}` : `Found ${where}`}: ${/[.!?]["”]?$/.test(item) ? item : `${item}.`}`, toast: 'found' });
+      this.#post({ type: 'news', icon: '🔍', text: `${name ? `${name} found something ${where}` : `Found ${where}`}: ${/[.!?]["”]?$/.test(item) ? item : `${item}.`}` }); // in the feed only: no pop-up
       if (by) this.agents.get(by)?.memory.add(this.t, 'event', `I found ${bare} ${where.replace('their own', 'my own')}. Of course I did.`, 5, { valence: 1, fact: `trinket:${id}:${u.gen ?? 0}`, third: `${name} found ${bare} ${where}`, owner: by });
     }
     return text;
@@ -18569,18 +18785,19 @@ function createLocalSim() {
       if ([1, 10, 100].includes(speed)) sim.speed = speed;
       if (typeof paused === 'boolean') sim.paused = paused;
     },
-    // Fast-forward through the simulation until 7:00 tomorrow. Yields to the
-    // event loop so the procedural brain's promises resolve as it goes.
-    async skipDay(onProgress) {
+    // Fast-forward through the simulation to 11:30 some days from now (tomorrow by default).
+    // Yields to the event loop so the procedural brain's promises resolve as it goes.
+    async skipDay(onProgress, days = 1) {
       if (skipping) return;
       skipping = true;
-      const target = (Math.floor(sim.t / 1440) + 1) * 1440 + 11 * 60 + 30; // tomorrow, 11:30
+      const start = sim.t, target = (Math.floor(sim.t / 1440) + days) * 1440 + 11 * 60 + 30;
+      const yieldNow = () => new Promise(r => { const ch = new MessageChannel(); ch.port1.onmessage = () => r(); ch.port2.postMessage(0); }); // no 4ms timer clamp
       const speed = sim.speed, paused = sim.paused;
       sim.speed = 8; sim.paused = false;
       let i = 0;
       while (sim.t < target) {
         if (!sim.tick() && sim.ended) break; // the story has ended; the clock won't move
-        if (++i % 30 === 0) { onProgress?.(1 - (target - sim.t) / 1500); await new Promise(r => setTimeout(r, 0)); }
+        if (++i % 30 === 0) { onProgress?.((sim.t - start) / (target - start)); await yieldNow(); }
       }
       sim.speed = speed; sim.paused = paused;
       skipping = false;
@@ -19121,7 +19338,7 @@ for (const o of props) if (o.sprite === 'booth') drawObject(bgTop.getContext('2d
 
 const SIGNS = [];
 // Every visible object is clickable; doors and off-map objects are not.
-const VIEWS = world.objects.filter(o => o.sprite !== 'none' && !o.decor);
+const VIEWS = world.objects.filter(o => o.sprite !== 'none' && !o.decor && !(o.id.startsWith('desk:') && o.sprite === 'chair')); // desk chairs aren't things to open
 // Each object's real outline on the map, measured from the pixels its sprite draws (a tall plant,
 // a pinball backglass or a monitor on a desk all reach above their floor tile). Computers draw
 // nothing themselves: their monitor belongs to the table, counter or desk they sit on, so they
@@ -20053,7 +20270,7 @@ function drawTreats(t) {
 
 // Seasonal decorations: pumpkins in late October, string lights in December, hearts in February.
 // Where Tomás puts the pumpkins: [tile x, tile y, size]. Clear of furniture and walkways' edges.
-const PUMPKINS = [[6, 13, 1], [7, 13, 0.75], [13, 15, 1], [16, 15, 0.85], [20, 7, 1]];
+const PUMPKINS = [[10, 13, 1], [11, 13, 0.75], [17, 15, 1], [20, 15, 0.85], [26, 7, 1]];
 function drawDecor(now, row = null) {
   const k = snap.decor; if (!k) return;
   if ((k === 'halloween') !== (row != null)) return; // pumpkins draw row by row with the furniture; wall decorations draw over everything
@@ -20084,7 +20301,7 @@ function drawDecor(now, row = null) {
     }
   }
   if (k === 'winter') { const cols = ['red', 'gold', 'green', 'sky']; for (let x = 1; x < world.W - 1; x += 1) { const y = 3 + (x % 2); if (world.grid[1][x]?.startsWith('wall')) continue; ctx.fillStyle = C(cols[(x + Math.floor(now / 500)) % 4]); ctx.fillRect(x * T + 6, y, 2, 2); } }
-  if (k === 'valentine') for (const [x, y] of [[13, 1], [15, 1], [3, 1]]) { ctx.fillStyle = C('pink'); const px = x * T + 5, py = y * T + 2; ctx.fillRect(px, py, 2, 2); ctx.fillRect(px + 3, py, 2, 2); ctx.fillRect(px, py + 1, 5, 2); ctx.fillRect(px + 1, py + 3, 3, 1); ctx.fillRect(px + 2, py + 4, 1, 1); }
+  if (k === 'valentine') for (const [x, y] of [[17, 1], [19, 1], [3, 1]]) { ctx.fillStyle = C('pink'); const px = x * T + 5, py = y * T + 2; ctx.fillRect(px, py, 2, 2); ctx.fillRect(px + 3, py, 2, 2); ctx.fillRect(px, py + 1, 5, 2); ctx.fillRect(px + 1, py + 3, 3, 1); ctx.fillRect(px + 2, py + 4, 1, 1); }
 }
 
 // Trophies on the award shelf: one per award won.
@@ -20255,40 +20472,40 @@ canvas.addEventListener('click', ev => {
 const cap = s => s[0].toUpperCase() + s.slice(1);
 
 // ------------------------------------------------------------------ drawer layout
-// Squarish landscape screens (tablets, 4:3 windows) give the map the full width and turn the panel
-// into a drawer over it; wider screens keep the side panel unless you choose "Hide panel" (remembered
-// on this device). Picking someone or something opens the drawer to them; only ✕ or the edge tab
-// close it. While it's closed, a one-line ticker under the map shows the latest event.
+// Everywhere but upright phones, the panel sits beside the map and the map makes room for it.
+// The 👩‍🍼 Feed button (in the top bar, or under ☰ on smaller screens) opens and closes it, and
+// it stays the way you left it (remembered on this device). Picking someone or something on the
+// map opens it to them. While it's closed, a one-line ticker over the map shows the latest event.
+// Upright phones: the map on top, the panel below it; scroll past the office and the panel snaps up.
 const DRAWER_PREF = 'anotherStudio.panelHidden';
-const prefHidden = () => { try { return localStorage.getItem(DRAWER_PREF) === '1'; } catch { return false; } };
+const storedOpen = () => { try { const v = localStorage.getItem(DRAWER_PREF); return v === null ? null : v !== '1'; } catch { return null; } };
+let feedOpen = null;
+const phoneLayout = () => innerWidth <= 700;
 function applyLayout() {
-  const w = innerWidth, h = innerHeight, big = w > 700 && h > 500;
-  const tablet = big && w > h && w / h < 1.5;
-  const drawer = tablet || big && prefHidden();
-  const was = document.body.classList.contains('drawer-mode');
-  document.body.classList.toggle('drawer-mode', drawer);
-  document.body.classList.toggle('drawer-tablet', tablet);
-  if (!drawer) document.body.classList.remove('drawer-open');
-  else if (!was) document.body.classList.remove('drawer-open'); // entering the drawer layout starts with the full map
-  $('#panel-hide').textContent = drawer ? 'Pin panel ⇤' : 'Hide panel ⇥';
-  $('#panel-hide').title = drawer ? 'Keep the panel open beside the map' : 'Give the map the whole width; the panel becomes a drawer';
+  const w = innerWidth, h = innerHeight, phone = phoneLayout();
+  const roomy = w > 1000 && h > 500 && w / h >= 1.5;
+  if (feedOpen === null) feedOpen = storedOpen() ?? roomy; // first visit: open on wide screens, closed on tablets
+  document.body.classList.toggle('drawer-mode', !phone);
+  document.body.classList.toggle('drawer-tablet', !phone && !roomy);
+  document.body.classList.toggle('drawer-portrait', !phone && h > w);
+  document.body.classList.toggle('drawer-open', !phone && feedOpen);
   syncDrawer();
 }
 function syncDrawer() {
-  const open = document.body.classList.contains('drawer-open') || !document.body.classList.contains('drawer-mode');
-  $('#drawer-tab').setAttribute('aria-expanded', String(open));
-  $('#drawer-tab').textContent = document.body.classList.contains('drawer-open') ? 'Close ›' : 'Feed · Projects · Team';
-  if (document.body.classList.contains('drawer-mode') && !document.body.classList.contains('drawer-open')) renderTicker(true);
+  const open = phoneLayout() || feedOpen;
+  if (phoneLayout()) $('#feed-btn').removeAttribute('aria-pressed'); // on phones it just scrolls to the feed
+  else $('#feed-btn').setAttribute('aria-pressed', String(!!open));
+  $('#feed-btn').setAttribute('aria-expanded', String(!!open));
+  if (!phoneLayout() && !feedOpen) renderTicker(true);
 }
-function openDrawer() { if (!document.body.classList.contains('drawer-mode') || document.body.classList.contains('drawer-open')) return; document.body.classList.add('drawer-open'); syncDrawer(); }
-function closeDrawer() { document.body.classList.remove('drawer-open'); syncDrawer(); }
-$('#drawer-x').onclick = closeDrawer;
-$('#drawer-tab').onclick = () => document.body.classList.contains('drawer-open') ? closeDrawer() : openDrawer();
-$('#panel-hide').onclick = () => {
-  const hide = !document.body.classList.contains('drawer-mode');
-  try { localStorage.setItem(DRAWER_PREF, hide ? '1' : '0'); } catch {}
+function setFeed(open) {
+  feedOpen = open;
+  try { localStorage.setItem(DRAWER_PREF, open ? '0' : '1'); } catch {}
   applyLayout();
-};
+}
+function openDrawer() { if (!phoneLayout() && !feedOpen) setFeed(true); }
+function closeDrawer() { if (feedOpen) setFeed(false); }
+$('#feed-btn').onclick = () => phoneLayout() ? snapTo('feed') : setFeed(!feedOpen);
 $('#ticker').onclick = () => { setTab('feed'); openDrawer(); };
 // The ticker: the newest thing in the feed, said in one line. It follows the feed as it happens.
 let tickerKey = '';
@@ -20323,27 +20540,38 @@ applyLayout();
 const PHONE = matchMedia('(max-width: 700px)');
 const COARSE = matchMedia('(pointer: coarse)');
 const isPhone = () => PHONE.matches;
-const SHEETS = ['peek', 'half', 'full'];
-function setSheet(state) { document.body.dataset.sheet = state; }
-// The sheet handle: tap to step through peek → half → full, or drag it.
+// Upright phones scroll as one page: the office, then the panel. Let go part-way and it settles on
+// whichever is nearer: past about a third of the office (or after a flick) the panel snaps to the top.
+let snapTo = () => {};
 {
-  const handle = $('#sheet-handle'), panel = $('#panel');
-  let drag = null;
-  handle.addEventListener('pointerdown', ev => { drag = { y: ev.clientY, h: panel.getBoundingClientRect().height, moved: false }; handle.setPointerCapture(ev.pointerId); });
-  handle.addEventListener('pointermove', ev => {
-    if (!drag) return;
-    const dy = drag.y - ev.clientY;
-    if (Math.abs(dy) > 6) drag.moved = true;
-    if (drag.moved) panel.style.height = `${Math.max(80, Math.min(innerHeight * 0.92, drag.h + dy))}px`;
-  });
-  handle.addEventListener('pointerup', () => {
-    if (!drag) return;
-    const frac = panel.getBoundingClientRect().height / innerHeight;
-    panel.style.height = '';
-    const cur = SHEETS.indexOf(document.body.dataset.sheet);
-    setSheet(drag.moved ? (frac < 0.38 ? 'peek' : frac < 0.72 ? 'half' : 'full') : SHEETS[(cur + 1) % SHEETS.length]);
-    drag = null;
-  });
+  const panel = $('#panel'), handle = $('#sheet-handle');
+  let anchor = 'map', touching = false, snapping = false, timer = 0, lastY = scrollY, lastT = performance.now(), vel = 0;
+  const feedTop = () => panel.getBoundingClientRect().top + scrollY - 4;
+  const mapH = () => $('#stage').getBoundingClientRect().height;
+  snapTo = where => {
+    if (!phoneLayout()) return;
+    anchor = where; snapping = true;
+    scrollTo({ top: where === 'feed' ? feedTop() : 0, behavior: 'smooth' });
+    clearTimeout(timer); timer = setTimeout(() => { snapping = false; }, 600);
+  };
+  const settle = () => {
+    if (!phoneLayout() || touching || snapping) return;
+    const y = scrollY, top = feedTop();
+    if (y <= 1) { anchor = 'map'; return; }
+    if (y >= top - 1) { anchor = 'feed'; return; }
+    const third = mapH() * 0.35;
+    const toFeed = anchor === 'map' ? (y > third || vel > 0.5) : !(top - y > third || vel < -0.5);
+    snapTo(toFeed ? 'feed' : 'map');
+  };
+  addEventListener('scroll', () => {
+    const now = performance.now(), dt = Math.max(1, now - lastT);
+    vel = vel * 0.6 + ((scrollY - lastY) / dt) * 0.4; lastY = scrollY; lastT = now;
+    if (snapping) { clearTimeout(timer); timer = setTimeout(() => { snapping = false; }, 150); return; }
+    clearTimeout(timer); timer = setTimeout(settle, 140);
+  }, { passive: true });
+  addEventListener('touchstart', () => { touching = true; }, { passive: true });
+  addEventListener('touchend', () => { touching = false; clearTimeout(timer); timer = setTimeout(settle, 140); }, { passive: true });
+  handle.addEventListener('click', () => snapTo(anchor === 'feed' ? 'map' : 'feed'));
 }
 // The ☰ menu holds Next day, Sound, God Mode and Reset on a phone.
 $('#menu').onclick = e => { e.stopPropagation(); const open = !$('#more').classList.contains('open'); $('#more').classList.toggle('open', open); $('#menu').setAttribute('aria-expanded', String(open)); };
@@ -20351,7 +20579,6 @@ document.addEventListener('click', e => { if (!e.target.closest('#more, #menu'))
 const COMPACT = matchMedia('(max-width: 1000px), (max-height: 500px)');
 $('#more').addEventListener('click', e => { if (e.target.closest('button') && COMPACT.matches) setTimeout(() => { $('#more').classList.remove('open'); $('#menu').setAttribute('aria-expanded', 'false'); }, 0); });
 // One button cycles through the speeds on a phone.
-$('#speed-cycle').onclick = () => { const order = [1, 10, 100]; control({ speed: order[(order.indexOf(snap?.speed ?? 1) + 1) % order.length] }); };
 // Long-press anyone or anything on the map for its preview (touch screens have no hover).
 let suppressClick = false;
 {
@@ -20396,14 +20623,21 @@ let suppressClick = false;
 function renderTop() {
   if (!snap) return;
   const clock = snap.clock + (snap.paused ? ' · PAUSED' : '');
-  if (renderTop.clock !== clock) { renderTop.clock = clock; $('#clock').textContent = clock; }
+  if (renderTop.clock !== clock) {
+    renderTop.clock = clock;
+    // one line: "Thu, Oct 22 · Day 105 · 19:11"; the day number drops first when space is short
+    const m = /^(\w+), (.+?) \(Day (\d+)\) (\d{1,2}:\d{2})$/.exec(snap.clock);
+    if (m) $('#clock').innerHTML = `<span class="clk-date">${m[1].slice(0, 3)}, ${m[2]}</span><span class="clk-day"> · Day ${m[3]}</span><span class="clk-time"> · ${m[4]}</span>${snap.paused ? '<i>Paused</i>' : ''}`;
+    else $('#clock').textContent = clock;
+    $('#clock').title = snap.clock;
+  }
   const ctl = `${snap.speed}|${snap.paused}`;
   if (renderTop.ctl !== ctl) {
     renderTop.ctl = ctl;
     for (const btn of document.querySelectorAll('.speed')) btn.setAttribute('aria-pressed', String(Number(btn.dataset.speed) === snap.speed));
-    $('#speed-cycle').textContent = `${snap.speed}×`;
-    $('#pause').setAttribute('aria-pressed', String(snap.paused));
-    $('#pause').textContent = snap.paused ? '▶' : '❚❚';
+    if (snap.speed === 10 || snap.speed === 100) control({ speed: 1 }); // fast-forward is gone from the top bar; older saves drop back to normal speed
+    $('#pause').textContent = snap.paused ? '▶️' : '⏸️';
+    $('#pause').setAttribute('aria-label', snap.paused ? 'Play' : 'Pause'); $('#pause').title = snap.paused ? 'Play (space)' : 'Pause (space)';
   }
   if (!renderTop.last || performance.now() - renderTop.last > 1000) { renderTop.last = performance.now(); renderSummary(); }
   if (snap.saveError) showBanner('error', esc(snap.saveError)); else hideBanner();
@@ -20412,17 +20646,17 @@ function showBanner(kind, html) { const el = $('#banner'); el.className = `banne
 function hideBanner() { $('#banner').hidden = true; }
 
 function control(body) { local.control(body); }
-$('#reset').onclick = () => {
+function resetWorld() {
   if ($('#toasts .toast.warn')) return; // already asking
   showToast({ icon: '🧨', label: 'Reset the world?', kind: 'warn', text: 'Everyone forgets everything, and the studio starts over on Day 100 at your local time. This can\'t be undone.', actions: [
     { label: 'Reset world', primary: true, run: () => { closeInspect(true); local.reset(); setTab(tab); } },
     { label: 'Keep playing' },
   ] });
-};
-for (const btn of document.querySelectorAll('.speed')) btn.onclick = () => control({ speed: Number(btn.dataset.speed) });
+}
+for (const btn of document.querySelectorAll('.speed')) btn.onclick = () => control({ speed: snap?.speed === 100 ? 1 : 100 }); // ⏩ toggles fast-forward on and off
 const syncSoundControl = () => {
   $('#sound').setAttribute('aria-pressed', String(audio.on));
-  $('#sound').textContent = audio.on ? '🔊 Sound' : '🔇 Sound';
+  $('#sound').innerHTML = `${audio.on ? '🔊' : '🔇'}<span class="lbl"> Sound</span>`; // the word only shows under ☰
 };
 $('#sound').onclick = () => { setSound(!audio.on); syncSoundControl(); };
 const muteWhenAway = () => { if (audio.on) { setSound(false); syncSoundControl(); } };
@@ -20440,13 +20674,15 @@ function playSfx(prev, msg) {
   if (msg.quake && !prev.quake) sfx.rumble();
   if ((msg.feed ?? []).some(f => f.type === 'news' && /🥇|✅|👋|🎉/.test(f.icon))) sfx.chime();
 }
-$('#skip').onclick = async () => {
-  const ov = $('#skipping'); ov.hidden = false;
+async function skipAhead(days, label) {
+  const ov = $('#skipping'); if (!ov.hidden) return;
+  ov.hidden = false; ov.firstElementChild.textContent = `${label}…`;
   $('#skip').disabled = true;
-  await local.skipDay(p => { ov.firstElementChild.textContent = `Skipping to tomorrow… ${Math.round(Math.max(0, Math.min(1, p)) * 100)}%`; });
+  await local.skipDay(p => { ov.firstElementChild.textContent = `${label}… ${Math.round(Math.max(0, Math.min(1, p)) * 100)}%`; }, days);
   ov.hidden = true; $('#skip').disabled = false;
-  renderFeed();
-};
+  renderFeed(); renderSummary();
+}
+$('#skip').onclick = () => skipAhead(1, 'Skipping to tomorrow');
 let god = false;
 const GOD_TABS = ['events', 'team'];
 // Older copies of the HTML don't have the Events tab; add it so God Mode still works.
@@ -20458,6 +20694,7 @@ $('#god').onclick = () => {
   if (!god && local.sim().possessed) { local.sim().release(); hudMsg(''); letGo(); } // leaving God Mode lets go of whoever you were
   // God Mode shows the Team and Events tabs; turning it off brings Feed and Projects back.
   for (const t of document.querySelectorAll('.tab')) t.hidden = god ? !GOD_TABS.includes(t.dataset.tab) : t.dataset.tab === 'events';
+  if (god) openDrawer(); // God Mode lives in the panel: open it if it was closed
   if (god && !selected) setTab('events'); // God Mode always opens on Events
   if (!god && !selected) setTab(tab === 'events' ? 'feed' : tab);
   if (!god && tab === 'events') tab = 'feed';
@@ -20871,7 +21108,7 @@ const WALL_COPY = {
 let objTimer = null;
 // A close look at one of the studio's non-work objects: what's on it right now, drawn as a still life.
 // Returns { heading, art, extra? } or null for objects without one.
-const STILL_IDS = new Set(['skate_ramp', 'skate_sign', 'record_player', 'polaroid', 'pinball', 'pinball2', 'ddr', 'coffee_machine', 'snack_shelf', 'breakfast_nook', 'magazine_table', 'dog_bed', 'fridge', 'award_shelf', 'design_books', 'bear_flag', 'or_flag', 'poster_mot', 'poster_law', 'wing_chun']);
+const STILL_IDS = new Set(['altar', 'reception_desk', 'dining_table', 'bar_cart', 'side_table', 'av_table', 'skate_ramp', 'skate_sign', 'record_player', 'polaroid', 'pinball', 'pinball2', 'ddr', 'coffee_machine', 'snack_shelf', 'breakfast_nook', 'magazine_table', 'dog_bed', 'fridge', 'award_shelf', 'design_books', 'bear_flag', 'or_flag', 'poster_mot', 'poster_law', 'wing_chun']);
 function stillOf(o, d) {
   const sim = local.sim(), t = sim.t, day = Math.floor(t / 1440), dow = dowOf(day), last = d.moments[0];
   if (o.id.startsWith('plant:')) {
@@ -20907,6 +21144,37 @@ function stillOf(o, d) {
     case 'snack_shelf': {
       const gone = dow >= 1 && dow < 5;
       return { heading: 'On the shelf today', art: stillLife('snacks', 'snacks', gone ? 'The shelf, post-crackers' : 'The shelf, freshly stocked', { crackersGone: gone, cake: d.uses % 3 === 0 && d.uses > 0, day: ['Monday: everything is here.', 'Tuesday: the good crackers are gone.', 'Wednesday: rice cakes and regret.', 'Thursday: someone restocked the decoy.', 'Friday: the beer shelf is the snack shelf.', 'Saturday.', 'Sunday.'][dow] }, gone ? 'The good crackers went on Tuesday, as they do.' : 'Stocked this morning. Give it a day.', 'Supply run on Mondays') };
+    }
+    case 'altar': {
+      const stones = 9 + (sim.roster?.departed?.length ?? 0);
+      return { heading: 'On the shelf', art: stillLife('altar', 'altar', 'The little altar', { stones, notes: 12 + d.uses }, last ? `${last.name} was here ${last.when}.` : 'A candle, sandalwood, a stone for everyone who has left.', `${stones} stones`) };
+    }
+    case 'reception_desk': {
+      const visitors = d.moments.filter(m => !P[m.who]).map(m => m.name).filter((n, i, a) => a.indexOf(n) === i).slice(0, 5);
+      return { heading: 'At reception', art: stillLife('reception', 'counter', 'The reception counter', { visitors, who: last && P[last.who] ? last.name : null }, visitors.length ? `Signed in lately: ${visitors.join(', ')}.` : 'The bell, the ginger candy and an empty sign-in page.', 'Unstaffed since Lola left') };
+    }
+    case 'dining_table': {
+      const tr = snap?.treats;
+      const DOCS = [
+        { title: 'PROJECT KESTREL', lines: ['Rebrand of a company you have heard of.', 'Not announced until spring.'], stamp: 'TOP SECRET' },
+        { title: 'Q3 VISION (FINAL)', lines: ['Slide 14: "rightsizing", in 40pt.', 'Speaker notes: "smile here".'], stamp: 'CONFIDENTIAL' },
+        { title: 'Letter of intent: Studio Ditto', lines: ['Ditto proposes to acquire a "boutique', 'design partner". Names not listed.'], stamp: 'EYES ONLY' },
+        { title: 'Pricing v7 (do not share)', lines: ['Everything goes up 30% in January.', 'Customers to be told "it\'s better now".'], stamp: 'TOP SECRET' },
+        { title: 'Board minutes, March', lines: ['Item 4: the mascot. Vote: 3–3.', 'Item 5: see item 4.'], stamp: 'CONFIDENTIAL' },
+      ];
+      return { heading: 'On the table', art: stillLife('dining', 'dining', tr ? `${tr.label}, ${tr.left} left` : 'The dining table', { treats: tr ? { kind: tr.kind, left: tr.left, label: cap(tr.label) } : null, doc: DOCS[day % DOCS.length] }, tr ? `Thursday treats from ${P[tr.by]?.short ?? 'someone'}.` : last ? `${last.name} ${last.text}, ${last.when}.` : 'Plates, the fruit bowl, and a laptop nobody claims.', 'Seats six if nobody minds elbows') };
+    }
+    case 'bar_cart': {
+      const fri = dow === 4 && t % 1440 >= 18 * 60;
+      return { heading: 'On the cart', art: stillLife('bar_cart', 'barcart', 'The bar cart', { last: last ? `Last: ${last.name}, ${last.when}.` : fri ? 'It\'s Friday after six.' : null }, last ? `${last.name} ${last.text}, ${last.when}.` : 'Olive oil, hot sauce, three bitters and one unopened bottle from a client.', 'Brass, from the old studio') };
+    }
+    case 'side_table': {
+      const g = sim.musicState;
+      return { heading: 'At the end of the sofa', art: stillLife('side_table', 'sidetable', 'The side table', { warm: !!(last && t - last.t < 60), genre: g?.label ?? 'jazz', sleeve: ['#2f8f8f', '#c4483e', '#6b3fa0', '#d9b24a', '#2d3b6b'][(g?.label ?? 'jazz').length % 5] }, g ? `The sleeve of whatever's on: ${g.label}.` : 'The lamp, a mug, and the last record someone played.', 'Lamp on, coaster ignored') };
+    }
+    case 'av_table': {
+      const meeting = d.moments.length && t - d.moments[0].t < 90;
+      return { heading: 'Beside the screen', art: stillLife('av_table', 'avtable', 'The AV table', { adapter: meeting, battery: ['probably fine', 'one bar', 'changed Monday', 'nobody knows'][day % 4] }, meeting ? 'A meeting just ended. The adapter made it back into the box, for once.' : 'The adapter is in Tomás\' pocket, as usual.', 'Clicker, adapter box, cables') };
     }
     case 'breakfast_nook': {
       const prev = d.moments.find(m => m.name !== last?.name);
@@ -21140,7 +21408,6 @@ function inspect(id) {
   if (selected !== id) { godFor = null; inspBuilt = null; }
   if (!selected) inspectFrom = { tab, wall: !$('#view-wall').hidden ? wallOpen : null };
   selected = id;
-  if (isPhone() && document.body.dataset.sheet === 'peek') setSheet('half');
   for (const v of ['feed', 'team', 'projects', 'events', 'wall']) $(`#view-${v}`).hidden = true;
   // a person's page belongs under Team: light that tab while it's open (in God Mode, where Team is the people tab)
   if (god) for (const t of document.querySelectorAll('.tab')) t.setAttribute('aria-selected', String(t.dataset.tab === 'team'));
@@ -21367,6 +21634,7 @@ function renderSummary() {
 let eventMsg = { text: '', until: 0 };
 let lastEventOff = '';
 // The Events tab (God Mode only): every event you can set off, grouped so it reads at a glance.
+const STONES = [['month', '📅 Next month'], ['year', '🗓️ Next year'], ['reset', '🧨 Reset']];
 const EVENT_GROUPS = [
   ['Everyday studio life', 'Small things that happen in any week.', [['client', '🚪 Client visit'], ['birthday', '🎂 Birthday'], ['dog', '🐕 Pica eats prototype'], ['hire', '👋 New hire'], ['fridge', '🥡 Fridge war'], ['danceoff', '🎤 Karaoke & dance-off'], ['rite', '🎖️ Rite of passage'], ['weekend', '🔦 Weekend alone']]],
   ['Trouble', 'Bad days, and the odd bad week.', [['outage', '🔌 Power outage'], ['earthquake', '🫨 Earthquake'], ['security', '🎣 Phishing scare'], ['breakup', '💔 Breakup'], ['poached', '🧲 Talent poached'], ['layoff', '📦 Layoff'], ['leak', '🕵️ The leak']]],
@@ -21387,6 +21655,8 @@ function eventOff(k) {
 function godEvents() {
   const running = snap?.scenario?.status === 'running';
   return `<div class="god-events">
+      <div class="section-title">Infinity Stones</div><div class="hint">Bend time, or snap it all away.</div>
+      <div class="btnrow">${STONES.map(([k, l]) => `<button class="btn small" data-stone="${k}" title="${k === 'month' ? 'Fast-forward 30 days, to 11:30' : k === 'year' ? 'Fast-forward 365 days, to 11:30. Takes a minute or two.' : 'Wipe the saved world and start over on Day 100'}">${l}</button>`).join('')}</div>
       ${EVENT_GROUPS.map(([title, sub, list]) => `<div class="section-title">${esc(title)}</div><div class="hint">${esc(sub)}</div>
       <div class="btnrow">${list.map(([k, l]) => { const off = eventOff(k); return `<button class="btn small" data-event="${k}" title="${esc(off ?? STORIES[k]?.premise ?? '')}"${off ? ' disabled' : ''}>${l}</button>`; }).join('')}</div>`).join('')}
       <div class="section-title">Scenarios</div><div class="hint">Timed challenges with goals and a score. One at a time.</div>
@@ -21399,6 +21669,11 @@ function renderEvents() {
   bindEvents(el);
 }
 function bindEvents(root = $('#view-events')) {
+  for (const b of root.querySelectorAll('[data-stone]')) b.onclick = () => {
+    const k = b.dataset.stone;
+    if (k === 'reset') return resetWorld();
+    skipAhead(k === 'month' ? 30 : 365, k === 'month' ? 'Skipping a month' : 'Skipping a year');
+  };
   for (const b of root.querySelectorAll('[data-scenario]')) b.onclick = () => {
     const err = local.sim().startScenario(b.dataset.scenario);
     eventMsg = { text: err ?? 'Scenario started. Goals and the clock are at the top of the panel.', until: performance.now() + 30000 };
