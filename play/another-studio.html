@@ -20,16 +20,18 @@
   <header class="topbar win">
     <h1 class="logo" aria-label="Another Studio"><span class="logo-full">Another Studio</span><span class="logo-short" aria-hidden="true">A•S</span></h1>
     <div class="clock" id="clock" aria-live="polite">—</div>
-    <div class="controls seg" role="group" aria-label="Time">
-      <button id="pause" class="btn" title="Pause (space)" aria-label="Pause">⏸️</button>
-      <button id="skip" class="btn" title="Next day: fast-forward to 11:30 tomorrow" aria-label="Next day">⏭️</button>
-    </div>
-    <button id="menu" class="btn menu" aria-expanded="false" aria-controls="more" aria-label="More">☰</button>
-    <div class="controls more seg" id="more" role="group" aria-label="Sound, God Mode and Feed">
-      <button id="sound" class="btn" aria-pressed="false" title="Sound: lo-fi music and sound effects" aria-label="Sound">🔇<span class="lbl"> Sound</span></button>
-      <button id="god" class="btn god" aria-pressed="false" title="God Mode: Bend anyone's will and command their soul" aria-label="God Mode">😇<span class="lbl"> God Mode</span></button>
-      <button id="feed-btn" class="btn" aria-pressed="true" aria-controls="panel" title="Feed: Conversations, projects, team" aria-label="Feed">👩‍🍼<span class="lbl"> Feed</span></button>
-    </div>
+    <nav class="actions" aria-label="Controls">
+      <div class="controls seg" role="group" aria-label="Time">
+        <button id="pause" class="btn" title="Pause (space)">Pause</button>
+        <button id="skip" class="btn" title="Fast-forward to 11:30 tomorrow">Next day</button>
+      </div>
+      <button id="menu" class="btn menu" aria-expanded="false" aria-controls="more">Menu</button>
+      <div class="controls more seg" id="more" role="group" aria-label="Sound, God Mode and Feed">
+        <button id="sound" class="btn" aria-pressed="false" title="Lo-fi music and sound effects">Sound</button>
+        <button id="god" class="btn god" aria-pressed="false" title="God Mode: Bend anyone's will and command their soul">God Mode</button>
+        <button id="feed-btn" class="btn" aria-pressed="true" aria-controls="panel" title="Feed: Conversations, projects, team">Feed</button>
+      </div>
+    </nav>
   </header>
 
   <div class="banner" id="banner" role="status" hidden></div>

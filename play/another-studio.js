@@ -651,7 +651,11 @@ function drawObject(ctx, o) {
     case 'bar_cart':
       shadow(2, 12, w - 2, 4);
       f('outline', 0, 2, w, 12); f('gold', 1, 3, w - 2, 2); f('frame', 1, 5, w - 2, 7); f('gold', 1, 11, w - 2, 1);
-      for (let i = 0; i < Math.min(2, Math.floor((w - 6) / 8)); i++) { const k = ['green', 'sky'][i]; f('outline', 5 + i * 8, -6, 4, 9); f(k, 6 + i * 8, -5, 2, 7); f(S(k, 1.4), 6 + i * 8, -5, 1, 2); }
+      for (let i = 0; i < 2; i++) { const k = ['green', 'sky'][i]; f('outline', 5 + i * 5, -6, 4, 9); f(k, 6 + i * 5, -5, 2, 7); f(S(k, 1.4), 6 + i * 5, -5, 1, 2); } // two bottles, shoulder to shoulder
+      // to their right: a silver cocktail shaker, a coupe glass and a lemon
+      f('outline', 16, -5, 5, 8); f('metal', 17, -4, 3, 6); f(S('metal', 1.3), 17, -4, 1, 5); f('outline', 17, -6, 3, 2);
+      f('outline', 22, -2, 5, 3); f(S('sky', 1.5), 23, -1, 3, 1); f('outline', 24, 1, 1, 2);
+      f('outline', 27, 0, 4, 3); f('mustard', 28, 1, 2, 1);
       break;
     case 'nook':
       shadow(2, 12, w - 2, 4);
@@ -11400,7 +11404,7 @@ K.doc = (ctx, d, c) => {
     (D.body ?? []).forEach((l, i) => {
       text(ctx, String(i + 1).padStart(2, ' '), 14, yy, 10.5, MONO, '#4b505a');
       const col = /^#/.test(l) ? '#e3b45c' : /^(-|\*)/.test(l) ? '#9fd3a8' : /^>/.test(l) ? '#8fb8ff' : '#d7dae0';
-      wrap(ctx, l, pw - 56, 11, MONO).slice(0, 3).forEach((w2, k) => { text(ctx, w2, 40, yy, 11, MONO, col); yy += k ? 16 : 0; });
+      wrap(ctx, l, pw - 56, 11, MONO).slice(0, 3).forEach((w2, k) => { if (k) yy += 16; text(ctx, w2, 40, yy, 11, MONO, col); }); // a wrapped line continues on the next row
       yy += 18;
     });
   } else if (st === 'sheet') {
@@ -20447,7 +20451,7 @@ function showTip(ev) {
   hover = a?.id ?? null;
   hoverObj = a || god ? null : viewAt(ev) ?? null; // in God Mode only people are selectable
   const tip = $('#tooltip');
-  canvas.style.cursor = a || hoverObj ? 'pointer' : 'default';
+  canvas.style.cursor = a || hoverObj ? 'var(--cursor-pointer)' : 'default';
   const sr = $('#stage').getBoundingClientRect();
   if (a) tip.innerHTML = a.visitor ? `<b>${esc(a.name)} · client</b>${esc(a.title)}<br>${esc(a.act)}` : personTip(a);
   else if (hoverObj) tip.innerHTML = objectTip(hoverObj);
@@ -20636,8 +20640,8 @@ function renderTop() {
     renderTop.ctl = ctl;
     for (const btn of document.querySelectorAll('.speed')) btn.setAttribute('aria-pressed', String(Number(btn.dataset.speed) === snap.speed));
     if (snap.speed === 10 || snap.speed === 100) control({ speed: 1 }); // fast-forward is gone from the top bar; older saves drop back to normal speed
-    $('#pause').textContent = snap.paused ? '▶️' : '⏸️';
-    $('#pause').setAttribute('aria-label', snap.paused ? 'Play' : 'Pause'); $('#pause').title = snap.paused ? 'Play (space)' : 'Pause (space)';
+    $('#pause').textContent = snap.paused ? 'Play' : 'Pause';
+    $('#pause').title = snap.paused ? 'Play (space)' : 'Pause (space)';
   }
   if (!renderTop.last || performance.now() - renderTop.last > 1000) { renderTop.last = performance.now(); renderSummary(); }
   if (snap.saveError) showBanner('error', esc(snap.saveError)); else hideBanner();
@@ -20656,7 +20660,7 @@ function resetWorld() {
 for (const btn of document.querySelectorAll('.speed')) btn.onclick = () => control({ speed: snap?.speed === 100 ? 1 : 100 }); // ⏩ toggles fast-forward on and off
 const syncSoundControl = () => {
   $('#sound').setAttribute('aria-pressed', String(audio.on));
-  $('#sound').innerHTML = `${audio.on ? '🔊' : '🔇'}<span class="lbl"> Sound</span>`; // the word only shows under ☰
+  // the word stays; whether it's on shows as gold text (aria-pressed)
 };
 $('#sound').onclick = () => { setSound(!audio.on); syncSoundControl(); };
 const muteWhenAway = () => { if (audio.on) { setSound(false); syncSoundControl(); } };

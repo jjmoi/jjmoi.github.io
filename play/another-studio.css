@@ -1,5 +1,6 @@
 /* ===== Tokens ============================================================ */
 :root {
+  --cursor-pointer: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAkCAYAAADo6zjiAAAA9UlEQVR4nGNkIBKICMn8R+a/efeEkVi9+AATNQyhBBD0BcznL17cQBGXkNBgYGCgPCQGPARYSNVw4tQdqjpgwENg1AEkpwF0QGn5MPRDAFY+wHJHgJ/Pf2zqcIXM0A8BXIBQyMBCZPCEAK1qO3SwYdMWBgYGRIgMfAjgqe2wpmYLMxUGbOoJieMCAx8C6AKwVAvzCazepxSg5woYGPgQgKV2WJyjuxQ9TqkNBj4EYAxcIUFrMHhCgNYAqU5gYGAYjHUBDFA7LRBqRQ++EIABaocEetzDwOANAUoBsT2ooRMCNU0LSDL43r0hEgJEjw9QCwy6XAAAFlV69cFvU80AAAAASUVORK5CYII=") 11 1, pointer; /* a pixel pointing hand, fingertip as the hotspot */
   --away-opacity: 0.55;
   --toast-w: 420px;
   --tooltip-w: 300px;
@@ -234,7 +235,7 @@
 * { box-sizing: border-box; }
 html, body { margin: 0; height: 100%; background: var(--ui-bg); color: var(--ui-text); }
 body { font-family: var(--font-body); font-size: var(--text-md); line-height: var(--leading); overflow: hidden; }
-button { font: inherit; color: inherit; cursor: pointer; }
+button { font: inherit; color: inherit; cursor: var(--cursor-pointer); }
 button:focus-visible, [tabindex]:focus-visible { outline: var(--border-w) solid var(--ui-accent); outline-offset: var(--border-w); }
 [hidden] { display: none !important; }
 
@@ -302,7 +303,7 @@ button:focus-visible, [tabindex]:focus-visible { outline: var(--border-w) solid 
 .item { padding: var(--space-2) 0; border-bottom: 1px solid var(--ui-win-border-dark); }
 .item .meta { color: var(--ui-muted); display: flex; gap: var(--space-2); align-items: baseline; flex-wrap: wrap; font-size: var(--text-sm); }
 .item .meta b { color: var(--ui-text); font-weight: normal; }
-.who { cursor: pointer; color: var(--ui-accent); }
+.who { cursor: var(--cursor-pointer); color: var(--ui-accent); }
 .who:hover { text-decoration: underline; }
 .item .text { margin-top: var(--space-1); }
 .item .detail { color: var(--ui-muted); margin-top: var(--space-1); font-size: var(--text-sm); }
@@ -324,7 +325,7 @@ button:focus-visible, [tabindex]:focus-visible { outline: var(--border-w) solid 
 .grid figcaption { font-size: var(--text-xs); color: var(--ui-muted); margin-top: var(--space-1); line-height: 1.2; }
 
 /* Team */
-.member { display: flex; gap: var(--space-3); align-items: center; padding: var(--space-2); border-radius: var(--radius-2); cursor: pointer; }
+.member { display: flex; gap: var(--space-3); align-items: center; padding: var(--space-2); border-radius: var(--radius-2); cursor: var(--cursor-pointer); }
 .member:hover { background: var(--ui-win-hover); }
 .member img { width: var(--avatar); height: calc(var(--avatar) * 1.5); image-rendering: pixelated; flex: none; }
 .member .name { font-family: var(--font-ui); }
@@ -338,7 +339,7 @@ button:focus-visible, [tabindex]:focus-visible { outline: var(--border-w) solid 
 .member .role { color: var(--ui-muted); }
 
 /* Projects */
-.project { background: var(--ui-win-flat); border: 1px solid var(--ui-win-border); border-radius: var(--radius-2); padding: var(--space-3); margin-bottom: var(--space-3); cursor: pointer; }
+.project { background: var(--ui-win-flat); border: 1px solid var(--ui-win-border); border-radius: var(--radius-2); padding: var(--space-3); margin-bottom: var(--space-3); cursor: var(--cursor-pointer); }
 .project:hover { border-color: var(--ui-accent); }
 .project.static { cursor: default; }
 .project.static:hover { border-color: var(--ui-win-border); }
@@ -391,7 +392,7 @@ button:focus-visible, [tabindex]:focus-visible { outline: var(--border-w) solid 
 
 /* Tasks, reviews, objects */
 details.task { display: block; }
-details.task summary { display: grid; grid-template-columns: 1fr auto; gap: var(--space-2); cursor: pointer; list-style: none; }
+details.task summary { display: grid; grid-template-columns: 1fr auto; gap: var(--space-2); cursor: var(--cursor-pointer); list-style: none; }
 details.task summary::-webkit-details-marker { display: none; }
 .subtasks { margin: var(--space-1) 0 var(--space-2); padding-left: var(--space-3); list-style: none; color: var(--ui-muted); font-size: var(--text-sm); }
 .subtasks li.done { color: var(--ui-good); }
@@ -446,7 +447,7 @@ details.task summary::-webkit-details-marker { display: none; }
 .god-head .back { margin: 0; }
 .god-title { flex: 1; font-family: var(--font-ui); font-size: var(--text-sm); color: var(--ui-accent); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 details.more { border-top: 1px solid var(--ui-win-border-dark); padding-top: var(--space-2); }
-details.more > summary { cursor: pointer; font-family: var(--font-ui); font-size: var(--text-xs); color: var(--ui-muted); text-transform: uppercase; letter-spacing: 0.1em; padding: var(--space-1) 0; }
+details.more > summary { cursor: var(--cursor-pointer); font-family: var(--font-ui); font-size: var(--text-xs); color: var(--ui-muted); text-transform: uppercase; letter-spacing: 0.1em; padding: var(--space-1) 0; }
 details.more > summary:hover, details.more[open] > summary { color: var(--ui-accent); }
 .godrow input[type="range"] { flex: 1; accent-color: var(--ui-accent); }
 .slider { display: grid; grid-template-columns: 90px 1fr 30px; gap: var(--space-2); align-items: center; font-size: var(--text-sm); }
@@ -505,7 +506,7 @@ kbd { font-family: var(--font-ui); border: 1px solid var(--ui-win-border); borde
 .toast { pointer-events: auto; display: flex; gap: var(--space-3); align-items: flex-start; text-align: left; padding: var(--space-2) var(--space-3); font: inherit; font-size: var(--text-sm); color: var(--ui-text); border-left: var(--space-1) solid var(--ui-accent); animation: toast-in var(--toast-in) ease-out; transition: opacity var(--toast-in), transform var(--toast-in); }
 .toast .icon { font-size: var(--text-lg); line-height: 1; }
 .toast .body { flex: 1; min-width: 0; }
-.toast .close { flex: none; background: none; border: 0; padding: 0 var(--space-1); font: inherit; font-size: var(--text-sm); line-height: 1; color: var(--ui-muted); cursor: pointer; border-radius: var(--radius-1); }
+.toast .close { flex: none; background: none; border: 0; padding: 0 var(--space-1); font: inherit; font-size: var(--text-sm); line-height: 1; color: var(--ui-muted); cursor: var(--cursor-pointer); border-radius: var(--radius-1); }
 .toast .close:hover, .toast .close:focus-visible { color: var(--ui-accent); }
 .toast b { display: block; font-family: var(--font-ui); font-size: var(--text-xs); color: var(--ui-accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: var(--space-1); }
 .toast.departure { border-left-color: var(--ui-muted); }
@@ -589,7 +590,7 @@ kbd { font-family: var(--font-ui); border: 1px solid var(--ui-win-border); borde
   .stage { display: block; }
   #map { display: block; width: 100%; height: auto; max-height: none; border-radius: var(--radius-1); }
   .panel { width: 100%; height: calc(100dvh - var(--space-2)); margin-top: var(--space-1); }
-  .sheet-handle { display: flex; justify-content: center; align-items: center; flex: none; height: var(--space-5); width: 100%; background: none; border: 0; cursor: pointer; }
+  .sheet-handle { display: flex; justify-content: center; align-items: center; flex: none; height: var(--space-5); width: 100%; background: none; border: 0; cursor: var(--cursor-pointer); }
   .sheet-handle span { width: calc(var(--tap) + var(--space-2)); height: var(--space-1); border-radius: var(--space-1); background: var(--ui-muted); }
   .summary .today, .summary .happening { display: none; }
   .summary { max-height: 40%; overflow-y: auto; }
@@ -730,7 +731,7 @@ body.drawer-mode:not(.drawer-open) .panel { display: none; }
 body.drawer-mode:not(.drawer-open) .ticker { /* off for now: the map stands alone when the panel is closed */
   display: none; align-items: center; gap: var(--space-2); position: absolute; z-index: 7; left: 50%; bottom: var(--space-3); transform: translateX(-50%);
   width: min(78%, 860px); padding: var(--space-2) var(--space-3);
-  font: inherit; font-size: var(--text-sm); color: var(--ui-text); text-align: left; cursor: pointer;
+  font: inherit; font-size: var(--text-sm); color: var(--ui-text); text-align: left; cursor: var(--cursor-pointer);
   background: linear-gradient(var(--ui-win-top), var(--ui-win-bottom)); border: var(--border-w) solid var(--ui-win-border); border-radius: var(--radius-2);
   box-shadow: 0 var(--space-1) var(--space-4) var(--ui-scrim);
 }
@@ -764,33 +765,37 @@ body.drawer-portrait.drawer-open .panel { width: 100%; flex: 1; min-height: 0; }
   #more .btn { width: 100%; justify-content: flex-start; }
 }
 
-/* top bar groups: time (pause, speeds, next day) ⎯ Sound ⎯ God Mode · Feed */
-/* segmented groups: buttons share edges, only the ends are rounded */
-.seg { gap: 0; }
-.seg > .btn { border-radius: 0; margin: 0; }
-.seg > .btn + .btn { border-left-width: 0; }
-.seg > .btn:first-child { border-radius: var(--radius-2) 0 0 var(--radius-2); }
-.seg > .btn:last-child { border-radius: 0 var(--radius-2) var(--radius-2) 0; }
-/* under ☰ the second group is a dropdown list again, not a segmented bar */
+/* ===== Top bar actions =====================================================
+   Text-only buttons, no borders: Pause/Play · Next day ⎯ Sound · God Mode · Feed.
+   Sound, God Mode and Feed turn gold on hover and while they're on.
+   With the panel open on a desktop, the five words spread evenly across exactly the panel's width,
+   the first starting at its left border and the last ending at its right border. */
+.actions { display: flex; align-items: center; gap: var(--space-5); }
+.actions .seg { display: contents; }
+.topbar .actions .btn, .topbar .menu {
+  border: 0; background: none; box-shadow: none; border-radius: 0; padding: 0; margin: 0;
+  min-height: var(--tap); min-width: 0; color: var(--ui-text); white-space: nowrap;
+}
+.topbar .actions .btn:hover, .topbar .menu:hover { background: none; }
+.topbar .actions .btn[aria-pressed="true"] { background: none; color: var(--ui-text); text-shadow: 1px 1px 0 var(--ui-text-shadow); }
+#sound:hover, #god:hover, #feed-btn:hover, #sound[aria-pressed="true"], #god[aria-pressed="true"], #feed-btn[aria-pressed="true"] { color: var(--ui-accent) !important; }
+#god[aria-pressed="true"] { box-shadow: none; }
+@media (min-width: 1001px) and (min-height: 501px) {
+  body.drawer-open:not(.drawer-portrait) .actions { width: var(--panel-w); justify-content: space-between; gap: 0; flex: none; }
+  /* the panel steps in by the top bar's padding and border, so the two line up exactly */
+  body.drawer-open:not(.drawer-portrait) .panel { margin-right: calc(var(--space-4) + var(--border-w)); }
+}
+/* small screens: Pause/Play · Next day · Menu, and the rest drops down under Menu, right-aligned like it */
 @media (max-width: 1000px), (max-height: 500px) {
-  #more.seg { gap: var(--space-1); }
-  #more.seg > .btn { border-radius: var(--radius-1); border-left-width: var(--border-w); }
-  #sound { margin-bottom: var(--space-2); }
+  .actions { gap: var(--space-4); }
+  .topbar .menu { display: inline-flex; align-items: center; }
+  .topbar .menu[aria-expanded="true"] { color: var(--ui-accent); }
+  #more { gap: 0; padding: var(--space-1) calc(var(--space-2) - var(--border-w)); align-items: flex-end; } /* the words end where "Menu" ends */
+  #more.open { display: flex; }
+  #more .btn { width: auto; text-align: right; justify-content: flex-end; }
 }
 
-/* the second group is icons only; the words come back in the ☰ list */
-#more .lbl { display: none; }
-@media (max-width: 1000px), (max-height: 500px) { #more .lbl { display: inline; } }
-/* top bar buttons: the same 44px touch size at every width, square-ish corners */
-.topbar .btn { min-height: var(--tap); min-width: var(--tap); border-radius: var(--border-w); }
-.topbar .seg > .btn { display: inline-flex; align-items: center; justify-content: center; }
-.seg > .btn:first-child { border-radius: var(--border-w) 0 0 var(--border-w); }
-.seg > .btn:last-child { border-radius: 0 var(--border-w) var(--border-w) 0; }
-.topbar { --bar-gap: var(--space-5); gap: var(--bar-gap); }
-@media (max-width: 1180px) { .topbar { --bar-gap: var(--space-3); } }
-@media (max-width: 1000px), (max-height: 500px) { .topbar { --bar-gap: var(--space-3); } }
-#more { margin-left: calc(var(--space-3) - var(--bar-gap)); } /* 12px between the two segmented groups */
-@media (max-width: 1000px), (max-height: 500px) {
-  #more { margin-left: 0; }
-  #more.seg > .btn { border-radius: var(--border-w); display: block; text-align: center; } /* the ☰ list keeps its centred rows */
-}
+/* everything you can click points with the pixel hand */
+button:not(:disabled), a[href], summary, select, label[for], [role="button"], [role="tab"] { cursor: var(--cursor-pointer); }
+.topbar .actions #pause { padding-left: 1px; }
+.topbar .actions #feed-btn { padding-right: 1px; }
