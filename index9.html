@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>JJ</title>
+<style>
+	@font-face {font-family: "another-sans"; src: url("/fonts/another-sans.woff2") format("woff2"), url("/fonts/another-sans.woff") format("woff"); font-style: normal; font-weight: 500;}
+	* {margin: 0; box-sizing: border-box;}
+	html, body {width: 100%; height: 100%;}
+	body {overflow-y: scroll; scroll-snap-type: y mandatory;}
+	::-moz-selection {background: black; color: #001;}
+	::selection {background: black; color: #001;}
+	#txt, #footer {width: 100%; height: 100vh; scroll-snap-align: start; overflow: hidden;}
+	p {font-family: "another-sans", sans-serif; line-height: 1;}
+	#images {margin-top: 50vw;}
+	img {display: block; width: 100%; transform: scale(1); transform-origin: top center; margin: 0 0 -3% 0;}
+	#footer {margin-top: 50vw; margin-bottom: 0; padding-bottom: 0;}
+	@media (max-width: 768px) {
+		body {scroll-snap-type: none;}
+		#txt, #footer {scroll-snap-align: none;}
+	}
+</style>
+</head>
+<body>
+	<div id="txt">
+		<p>Design partner to ambitious founders and brands to create experiences and craft narratives that shift perceptions and move worlds.</p>
+	</div>
+	<div id="images">
+		<img src="https://jjmoi.com/primemovers/primemovers-cover.webp">
+		<img src="https://jjmoi.com/branding/brand-14.webp">
+		<img src="https://jjmoi.com/primemovers/primemovers-27.webp">
+		<img src="https://jjmoi.com/primemovers/primemovers-21.webp">
+		<img src="https://jjmoi.com/primemovers/primemovers-23.webp">
+		<img src="https://jjmoi.com/primemovers/primemovers-36.webp">
+		<img src="https://jjmoi.com/branding/brand-01.webp">
+		<img src="https://jjmoi.com/branding/brand-02.webp">
+		<img src="https://jjmoi.com/lumi/lumi-04.webp">
+		<img src="https://jjmoi.com/lumi/lumi-05.webp">
+		<img src="https://jjmoi.com/spring/spring-cover.webp">
+		<img src="https://jjmoi.com/spring/spring-01.webp">
+		<img src="https://jjmoi.com/spring/spring-06.webp">
+		<img src="https://jjmoi.com/spring/spring-08.webp">
+		<img src="https://jjmoi.com/branding/brand-05.webp">
+		<img src="https://jjmoi.com/branding/brand-06.webp">
+		<img src="https://jjmoi.com/branding/brand-07.webp">
+		<img src="https://jjmoi.com/branding/brand-20.webp">
+		<img src="https://jjmoi.com/branding/brand-12.webp">
+		<img src="https://jjmoi.com/branding/brand-18.webp">
+		<img src="https://jjmoi.com/branding/brand-22.webp">
+		<img src="https://jjmoi.com/branding/brand-09.webp">
+		<img src="https://jjmoi.com/branding/brand-19.webp">
+		<img src="https://jjmoi.com/primemovers/primemovers-39.webp">
+		<img src="https://jjmoi.com/primemovers/primemovers-34.webp">
+		<img src="https://jjmoi.com/primemovers/primemovers-41b.webp">
+		<img src="https://jjmoi.com/primemovers/primemovers-44b.webp">
+		<img src="https://jjmoi.com/primemovers/primemovers-25.webp">
+		<img src="https://jjmoi.com/primemovers/primemovers-26.webp">
+		<img src="https://jjmoi.com/primemovers/primemovers-37.webp">
+		<img src="https://jjmoi.com/primemovers/primemovers-28.webp">
+		<img src="https://jjmoi.com/rtx/rtx-01.webp">
+		<img src="https://jjmoi.com/rtx/rtx-03.webp">
+		<img src="https://jjmoi.com/primemovers/primemovers-32.webp">
+	</div>
+	<div id="footer">
+		<p>© 2046</p>
+	</div>
+</body>
+<script>
+	const txt = document.getElementById('txt');
+	const footer = document.getElementById('footer');
+	const p = txt.querySelector('p');
+	const fp = footer.querySelector('p');
+	let vh = window.innerHeight;
+
+	function search(textEl, W, containerH) {
+		let lo = 1, hi = 500;
+		for (let i = 0; i < 20; i++) {
+			const mid = (lo + hi) / 2;
+			textEl.style.fontSize = mid + 'px';
+			if (textEl.scrollWidth <= W && textEl.scrollHeight <= containerH) lo = mid;
+			else hi = mid;
+		}
+		return lo;
+	}
+
+	function fitText(textEl, containerH) {
+		const W = document.body.clientWidth;
+		textEl.style.width = W + 'px';
+		textEl.style.lineHeight = '1';
+		let size = search(textEl, W, containerH);
+		if (size > 250) {
+			textEl.style.lineHeight = '0.85';
+			size = search(textEl, W, containerH);
+		}
+		textEl.style.fontSize = size + 'px';
+	}
+
+	function fit() {
+		vh = window.innerHeight;
+		fitText(p, vh);
+		fitText(fp, vh);
+	}
+
+	function scaleImages() {
+		const imgs = document.querySelectorAll('img');
+		imgs.forEach(img => {
+			const rect = img.getBoundingClientRect();
+			if (rect.top <= 0) {
+				img.style.transform = 'scale(1)';
+				return;
+			}
+			if (rect.top >= vh) {
+				img.style.transform = 'scale(0.8)';
+				return;
+			}
+			const progress = 1 - (rect.top / vh);
+			const scale = 0.8 + 0.2 * progress;
+			img.style.transform = `scale(${scale})`;
+		});
+		requestAnimationFrame(scaleImages);
+	}
+
+	new ResizeObserver(fit).observe(document.body);
+	window.addEventListener('resize', () => vh = window.innerHeight);
+	fit();
+	requestAnimationFrame(scaleImages);
+</script>
+</html>
